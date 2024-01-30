@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "bundle": "yarn build && gulp bundle"
+    "bundle": "npm run build && gulp bundle"
   },
   "devDependencies": {
     "del": "^7.1.0",
