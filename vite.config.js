@@ -44,6 +44,8 @@ export default defineConfig({
         main: "./src/index.html",
         "experience-template":
           "./src/experiences/experience-template/index.html",
+          "1-batiment":
+          "./src/experiences/1-batiment/index.html",
       },
     },
   },
