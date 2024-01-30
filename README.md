@@ -20,6 +20,7 @@ C'est le hub qui amène aux expériences (accessible sur http://localhost/).
 
 Les expériences, chacune dans son dossier.
 Vous avez un exemple dans `experience-template` pour voir comment s'architecture une expérience (accessible sur http://localhost/experiences/experience-template/index.html).
+**Pensez à ajouter votre dossier dans le fichier `vite.config.js`**
 
 ### À la racine `/`
 
