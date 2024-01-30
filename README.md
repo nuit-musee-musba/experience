@@ -3,6 +3,9 @@
 ## Dévelopment
 
 ```bash
+# Installer yarn, un meilleur package manager que npm
+npm i -g yarn
+
 # Installer les dépendances (à faire régulièrement car les packages peuvent êtres mis à jour)
 yarn
 
@@ -30,7 +33,7 @@ Les fichiers de config
 
 Pour développer une fonctionnalité, un fix etc, créez une branche depuis `develop`, faites des commits dessus, puis mergez la branche dans `develop`.
 
-Pour envoyer en production, mergez develop dans `main`. Ça lancera le build du bundle, et déploira sur les serveur.
+Pour envoyer en production, créez une PR de `develop` vers `main`. Ça lancera le build du bundle, et déploira sur les serveur.
 
 ## Tester le bundle en local
 
