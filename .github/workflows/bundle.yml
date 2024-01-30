@@ -14,12 +14,7 @@ jobs:
       - name: Build bundle
         run: |
           npm install
-          npm run build
-          mkdir bundle
-          cp -ar dist/ bundle/
-          cp -ar .bundle_files/. bundle/
-          zip -r bundle.zip bundle
-          rm -rf bundle
+          npm run bundle
 
       - name: Get build date
         run: |
