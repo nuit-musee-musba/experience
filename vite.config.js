@@ -46,6 +46,8 @@ export default defineConfig({
           "./src/experiences/experience-template/index.html",
         "2-arts-graphiques":
           "./src/experiences/2-arts-graphiques/index.html",
+        "6-peinture":
+          "./src/experiences/6-peinture/index.html",
       },
     },
   },
