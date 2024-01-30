@@ -33,6 +33,7 @@ Pour envoyer en production, mergez develop dans `main`. Ça lancera le build du 
 
 ## Tester le bundle en local
 
-1. Récupérez le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
-2. Unzipez le fichier
-3. Dans le dossier, éxécutez le script de démarrage correspondant à votre OS.
+1. Récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
+2. Unziper le fichier
+3. Dans le dossier, éxécuter le script de démarrage correspondant à l'OS.
+4. Aller sur http://localhost:8080
