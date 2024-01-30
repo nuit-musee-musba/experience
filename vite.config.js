@@ -10,5 +10,12 @@ export default {
     outDir: "../dist", // Output in the dist/ folder
     emptyOutDir: true, // Empty the folder first
     sourcemap: true, // Add sourcemap
+    rollupOptions: {
+      input: {
+        main: "./src/index.html",
+        "experience-template":
+          "./src/experiences/experience-template/index.html",
+      },
+    },
   },
 };
