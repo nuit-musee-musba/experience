@@ -21,7 +21,9 @@ Les expériences, chacune dans son dossier (vous avez le `experience-template`) 
 Les fichiers de config
 
 ## Comment travailler
-Pour développer une fonctionnalité, un fix etc, créez une branche depuis `main`, faites des commits dessus, puis mergez la branche dans `main`.
+Pour développer une fonctionnalité, un fix etc, créez une branche depuis `develop`, faites des commits dessus, puis mergez la branche dans `develop`.
+
+Pour envoyer en production, mergez develop dans main. Ça lancera le build du bundle, et déploira sur les serveur.
 
 ## Tester le bundle en local
 1. Récupérez le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
