@@ -58,10 +58,14 @@ const gltfLoader = new GLTFLoader();
 
 
 gltfLoader.load('./assets/ANCIEN_MUSEE.glb', (gltf) => {
-  scene.add(gltf.scene)
-  gltf.scene.rotation.y = -1.25
-  }
-)
+    gltf.scene.traverse((child) => {
+      if (child.isMesh) {
+        // child.material = new THREE.MeshBasicMaterial({ color: 'red', wireframe: true });
+      }
+    });
+    scene.add(gltf.scene);
+    gltf.scene.rotation.y = -1.25;
+  });
 
 
 
