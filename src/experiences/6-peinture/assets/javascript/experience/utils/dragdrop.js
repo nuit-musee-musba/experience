@@ -1,7 +1,8 @@
-function handleDragInteraction(dragElementId, placedEl, isCorrect, padLeft, targetZoneId, successPosX = null, successPosY = null) {
+function handleDragInteraction(dragElementId, isMultiple, placedEl, isCorrect, padLeft, targetZoneId, successPosX = null, successPosY = null) {
     const dragElement = document.getElementById(dragElementId);
     const targetZone = document.getElementById(targetZoneId);
     let initialX, initialY;
+    let howManyDrags = 0;
     //let success = false;
 
     let parentElement = document.getElementById('ingredients-container') // parent
@@ -54,8 +55,17 @@ function handleDragInteraction(dragElementId, placedEl, isCorrect, padLeft, targ
             // }
 
             if(isCorrect){
-                console.log(placedEl)
-                placedEl.style.display = "block";
+
+                if(isMultiple){
+                    if(howManyDrags <= placedEl.length-1){
+                        placedEl[howManyDrags].style.display = "block";
+                    }else{
+                        alert('tu as mis tout les elements requis pour cet aliment')
+                    }
+                }else{
+                    console.log(placedEl)
+                    placedEl.style.display = "block";
+                }
     
                 dragElement.style.left = realInitialX + 'px';
                 dragElement.style.top = realInitialY + 'px';
@@ -69,6 +79,8 @@ function handleDragInteraction(dragElementId, placedEl, isCorrect, padLeft, targ
                 dragElement.style.top = realInitialY + 'px'; //l'utilisateur n'a pas selectionné le bon aliment
                 alert("Chef : ce n'est pas le bon aliment !")
             }
+
+            howManyDrags++;
 
         } else {
             dragElement.style.left = realInitialX + 'px';
@@ -86,6 +98,10 @@ var dragableElementList = ["1","2","3","4","5","6","7","8","9"]
 let i = 1;
 dragableElementList.forEach(element => {
     let placedEl = document.getElementById(element+"-placed")
+    var elementsWithId = document.querySelectorAll('.multiple-'+element);
+
+    console.log(elementsWithId)
+    
     let ElementList = document.getElementById(element)
 
     ElementList.style.top = "90px";
@@ -98,10 +114,19 @@ dragableElementList.forEach(element => {
         i++;
     }
 
-    if(placedEl){
-        handleDragInteraction(element, placedEl, true, leftPosition, 'targetCraftZone');
-    }else{
-        handleDragInteraction(element, placedEl, false, leftPosition, 'targetCraftZone');
+    if(elementsWithId.length == 0){
+
+        if(placedEl){
+            handleDragInteraction(element, false, placedEl, true, leftPosition, 'targetCraftZone');
+        }else{
+            handleDragInteraction(element, false, placedEl, false, leftPosition, 'targetCraftZone');
+        }
+
+    }else if(elementsWithId.length > 0){
+
+        handleDragInteraction(element, true, elementsWithId, true, leftPosition, 'targetCraftZone');
+
     }
+
 
 });
