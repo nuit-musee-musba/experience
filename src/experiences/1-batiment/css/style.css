@@ -1,0 +1,82 @@
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+.component {
+  bottom: 20%;
+  right: 0;
+  width: 30%;
+  position: absolute;
+  background-color: black;
+  color: white;
+}
+
+.buttons {
+  z-index: 7;
+  bottom: 20%;
+  right: 0;
+  width: 30%;
+  position: absolute;
+  background-color: black;
+  color: white;
+}
+
+.chronology {
+  z-index: 7;
+  top: 20vh;
+  left: 6vw;
+  position: absolute;
+}
+.chronology-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.chronology-style img {
+  z-index: 7;
+  position: absolute;
+  top: -1.5vh;
+  left: -2vw;
+}
+
+.chronology-line {
+  z-index: 7;
+  position: absolute;
+  top: -1.5vh;
+  left: -2vw;
+  background-color: white;
+  width: 1px;
+  height: 120%;
+}
+
+.chronology-small-lines {
+  z-index: 8;
+  position: absolute;
+  top: 0vh;
+  left: -2.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+.chronology-small-line {
+  background-color: white;
+  margin: 0.8vh 0;
+  height: 1px;
+  width: 1vw;
+}
+.chronology-buttons button {
+  background-color: transparent;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+/* canvas {
+  margin: 10vh;
+} */
