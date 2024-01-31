@@ -114,13 +114,24 @@ const getCameraPositionForTarget = (position) => {
 }
 
 let index = 0;
+const endMenu = document.getElementById('end-menu');
+
+const restart = () => {
+    index = 0;
+    handleFocusPeriod(period[index]);
+    endMenu.style.position = "relative";
+}
+
+document.getElementById('restart-button').addEventListener('click', restart);
 
 const nextStep = () => {
-    if (index >= period.length) {
-        return;
+    if ((index + 1) < period.length) {
+        index++;
+        handleFocusPeriod(period[index]);
+        console.log(index);
+    } else {
+        endMenu.style.position = "absolute";
     }
-    index++;
-    handleFocusPeriod(period[index]);
 };
 
 const prevStep = () => {
@@ -131,6 +142,7 @@ const prevStep = () => {
     handleFocusPeriod(period[index]);
 };
 
+endMenu.addEventListener('click', nextStep);
 document.getElementById('prevButton').addEventListener('click', prevStep);
 document.getElementById('nextButton').addEventListener('click', nextStep);
 
