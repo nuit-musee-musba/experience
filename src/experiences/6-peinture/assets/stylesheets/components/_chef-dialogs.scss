@@ -1,0 +1,13 @@
+.game-chef {
+    align-items: center;
+    display: flex;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    top: 20%;
+    &__speech {
+        background: white;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+}

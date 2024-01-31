@@ -13,6 +13,7 @@
     "gulp": "^4.0.2",
     "gulp-zip": "^6.0.0",
     "prettier": "^3.2.4",
+    "sass": "^1.70.0",
     "vite": "^4.5.0"
   },
   "dependencies": {
