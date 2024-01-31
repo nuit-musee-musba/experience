@@ -17,12 +17,17 @@ yarn dev
 
 Pour développer une fonctionnalité, un fix etc, créez une branche depuis `develop`, faites des commits dessus, puis mergez la branche dans `develop`.
 
-Pour envoyer en production, créez une PR pour merger `develop` dans `main`. Une fois mergé, la ci lancera
+Pour envoyer en production, créez une PR pour merger `develop` dans `main`. Une fois mergé, la ci lancera :
 
 - le build du bundle
 - le déploiement sur Netlify
 
 **Ce qui est sur `develop` n'est pas en production, ce qui est sur `main` oui !**
+
+### Pourquoi travailler sur develop puis merger sur main ?
+
+- on a une branche de travail et de test (`develop`), et une branche de production (`main`)
+- à chaque commit sur `main` un build se lance pour déployer le nouveau bundle et le nouveau site, c'est bien de ne pas lancer un build à chaque commit
 
 ## Architecture des dossiers
 
