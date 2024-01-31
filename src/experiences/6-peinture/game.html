@@ -16,8 +16,22 @@
         </div>
         <div class="game-chef__speech">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
       </div>
-      <div class="composition">
-        ici l'objectif
+      <div class="composition" id="targetCraftZone">
+        
+        <div class="item" id="1-placed">
+          <img src="assets/images/ingredients/food/grape.png" alt="raisin">
+          <span>Raisin</span>
+        </div>
+        <div class="item" id="5-placed">
+          <img src="assets/images/ingredients/objects/mummy.png" alt="momie">
+          <span>Momie</span>
+        </div>
+        <div class="item" id="9-placed"> <!-- les elements sont deja placés mais montrés quand validés -->
+          <img src="assets/images/ingredients/animals/dolphin.png" alt="dauphin">
+          <span>Dauphin</span>
+        </div>
+
+
       </div>
       <div class="utensils">
         <button>Couper</button>
@@ -50,7 +64,7 @@
         </li>
         </ul>
         
-      <div class="ingredients-container">
+      <div class="ingredients-container" id="ingredients-container">
         <div class="category-items" id="food">
           <div class="item" id="1">
             <img src="assets/images/ingredients/food/grape.png" alt="raisin">
@@ -108,4 +122,5 @@
   </main>
 </body>
 <script type="module" src="./assets/javascript/main.js"></script>
+<script src="./assets/javascript/experience/utils/dragdrop.js"></script>
 </html>
