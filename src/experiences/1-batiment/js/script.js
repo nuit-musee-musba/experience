@@ -165,8 +165,7 @@ function handleFocusPeriod(step){
 
 
     document.getElementById("title-component").textContent = step.title;
-    document.getElementById("text-component").textContent = step.description;
-
+    document.getElementById("text-component").innerHTML = step.description.map(paragraph => `<p>${paragraph}</p>`).join('');
    
 
 
