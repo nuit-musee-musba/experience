@@ -1,3 +1,3 @@
-import './components/Tab';
-import './components/bookPage';
-import './components/dialog';
+import "./components/bookPage";
+import "./components/dialog";
+import "./components/tab";
