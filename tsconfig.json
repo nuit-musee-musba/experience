@@ -6,6 +6,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "strictPropertyInitialization": false,
   }
 }
