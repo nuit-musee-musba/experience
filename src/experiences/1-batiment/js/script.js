@@ -119,7 +119,7 @@ const endMenu = document.getElementById('end-menu');
 const restart = () => {
     index = 0;
     handleFocusPeriod(period[index]);
-    endMenu.style.position = "relative";
+    endMenu.style.display = "none";
 }
 
 document.getElementById('restart-button').addEventListener('click', restart);
@@ -130,7 +130,7 @@ const nextStep = () => {
         handleFocusPeriod(period[index]);
         console.log(index);
     } else {
-        endMenu.style.position = "absolute";
+        endMenu.style.display = "flex";
     }
 };
 
@@ -142,7 +142,6 @@ const prevStep = () => {
     handleFocusPeriod(period[index]);
 };
 
-endMenu.addEventListener('click', nextStep);
 document.getElementById('prevButton').addEventListener('click', prevStep);
 document.getElementById('nextButton').addEventListener('click', nextStep);
 
@@ -165,8 +164,7 @@ function handleFocusPeriod(step){
 
 
     document.getElementById("title-component").textContent = step.title;
-    document.getElementById("text-component").textContent = step.description;
-
+    document.getElementById("text-component").innerHTML = step.description.map(paragraph => `<p>${paragraph}</p>`).join('');
    
 
 
