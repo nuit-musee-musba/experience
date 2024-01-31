@@ -4,21 +4,22 @@ html {
   padding: 0;
 }
 
-.webgl {
+/* .webgl {
   position: fixed;
   top: 0;
   left: 0;
   outline: none;
-}
+} */
 
-html,
+/* html,
 body {
   overflow: hidden;
-}
-
+} */
+/* 
 body {
   position: relative;
-}
+} */
+
 .component {
   bottom: 20%;
   right: 0;
