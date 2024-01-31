@@ -1,9 +1,15 @@
+var craftCont = document.querySelectorAll('#targetCraftZone > div')
+console.log(craftCont)
+var winConditions = craftCont.length;
+var howManyDone = 0;
+
+
 function handleDragInteraction(dragElementId, isMultiple, placedEl, isCorrect, padLeft, targetZoneId, successPosX = null, successPosY = null) {
     const dragElement = document.getElementById(dragElementId);
     const targetZone = document.getElementById(targetZoneId);
     let initialX, initialY;
     let howManyDrags = 0;
-    //let success = false;
+    let success = false;
 
     let parentElement = document.getElementById('ingredients-container') // parent
 
@@ -59,12 +65,21 @@ function handleDragInteraction(dragElementId, isMultiple, placedEl, isCorrect, p
                 if(isMultiple){
                     if(howManyDrags <= placedEl.length-1){
                         placedEl[howManyDrags].style.display = "block";
+                        howManyDone++;
+                        alert("Chef : parfait !")
                     }else{
                         alert('tu as mis tout les elements requis pour cet aliment')
                     }
                 }else{
-                    console.log(placedEl)
-                    placedEl.style.display = "block";
+                    if(!success){
+                        console.log(placedEl)
+                        placedEl.style.display = "block";
+                        alert("Chef : parfait !")
+                        howManyDone++;
+                    }else{
+                        alert('tu as mis tout les elements requis pour cet aliment')
+                    }
+
                 }
     
                 dragElement.style.left = realInitialX + 'px';
@@ -73,7 +88,15 @@ function handleDragInteraction(dragElementId, isMultiple, placedEl, isCorrect, p
                 console.log("true")
     
                 success = true;
-                alert("Chef : parfait !")
+
+
+                // -- win --
+
+                if(howManyDone >= winConditions){
+                    alert("Chef : Tu as gagné !")
+                }
+
+
             }else{
                 dragElement.style.left = realInitialX + 'px';
                 dragElement.style.top = realInitialY + 'px'; //l'utilisateur n'a pas selectionné le bon aliment
