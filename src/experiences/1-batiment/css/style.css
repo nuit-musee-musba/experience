@@ -28,7 +28,7 @@ body {
 
 .chronology {
   z-index: 7;
-  top: 20vh;
+  top: 40vh;
   left: 6vw;
   position: absolute;
 }
@@ -41,8 +41,8 @@ body {
 .chronology-style img {
   z-index: 7;
   position: absolute;
-  top: -1.5vh;
-  left: -2vw;
+  top: -8.6vh;
+  left: -2.1vw;
 }
 
 .chronology-line {
@@ -70,9 +70,19 @@ body {
   height: 1px;
   width: 1vw;
 }
+
+.chronology-circle {
+  width: 1.5vw;
+  height: 1.5vw;
+  border-radius: 100%;
+  border: 1px solid white;
+  position: absolute;
+  top: 14vh;
+  left: -2.8vw;
+}
 .chronology-buttons button {
   background-color: transparent;
-  color: black;
+  color: white;
   border: none;
   cursor: pointer;
 }

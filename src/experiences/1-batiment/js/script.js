@@ -11,10 +11,12 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 
-const ambientLight = new THREE.AmbientLight('#ffffff', 2)
+const ambientLight = new THREE.AmbientLight('#ffffff', 0.8)
 
-const directionalLight = new THREE.DirectionalLight('#FFE7AF', 2)
-
+const directionalLight = new THREE.DirectionalLight('#EBF5F6', 3)
+// const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+directionalLight.position.set(1, 3, 4)
+directionalLight.lookAt(4, 2, 4)
 
 scene.add(ambientLight, directionalLight)
 
@@ -132,7 +134,7 @@ const prevStep = () => {
 document.getElementById('prevButton').addEventListener('click', prevStep);
 document.getElementById('nextButton').addEventListener('click', nextStep);
 
-for (let i = 1; i <= 5; i++) {
+for (let i = 1; i <= 4; i++) {
     document.getElementById(`period${i}`).addEventListener('click', () => {
       handleFocusPeriod(period[i - 1]); 
       index = i - 1;
@@ -179,7 +181,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor('#CECDC9')
+renderer.setClearColor('#808E90')
 
 let previousTime = 0
 
