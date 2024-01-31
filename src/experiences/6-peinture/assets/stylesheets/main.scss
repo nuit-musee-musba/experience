@@ -9,6 +9,7 @@
 // COMPONENTS
 @import "components/tabs";
 @import "components/chef-dialogs";
+@import "components/dialogs";
 
 // PAGES
 @import "pages/home";
@@ -60,4 +61,28 @@ ul{
     display: flex;
 
 
+}
+
+.category-items{
+    .item{
+        position: absolute;
+        top: 90px;
+        left: 0;
+    }
+}
+
+.composition{
+    .item{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 50px;
+
+        display: none;
+
+        img{
+            width: 100%;
+        }
+    }
 }
