@@ -1,6 +1,7 @@
 .game-top {
     position: relative;
     overflow: hidden;
+    
     .composition {
         background-color: aqua;
         flex: 1;
@@ -13,11 +14,28 @@
 }
 
 .recipe {
-    .list-item {
+
+    .list-items {
+
         .item {
-            span {
+            display: flex;
+            gap: 0.5vw;
+            align-items: center;
+
+            &::before{
+                content: '';
+                display: block;
+                background-color: orange;
+                width: 2vh;
+                height: 2vh;
+                
+            }
+
+            span{
                 display: block;
             }
         }
+            
+
     }
 }
