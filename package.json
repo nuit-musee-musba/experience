@@ -9,10 +9,13 @@
     "bundle": "npm run build && gulp bundle"
   },
   "devDependencies": {
+    "@types/three": "^0.160.0",
     "del": "^7.1.0",
     "gulp": "^4.0.2",
     "gulp-zip": "^6.0.0",
     "prettier": "^3.2.4",
+    "sass": "^1.70.0",
+    "typescript": "^5.3.3",
     "vite": "^4.5.0"
   },
   "dependencies": {
