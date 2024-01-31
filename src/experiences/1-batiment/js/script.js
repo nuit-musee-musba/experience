@@ -145,6 +145,21 @@ const prevStep = () => {
 document.getElementById('prevButton').addEventListener('click', prevStep);
 document.getElementById('nextButton').addEventListener('click', nextStep);
 
+const audioContent = document.getElementById('audio-content');
+const audio = document.getElementById('audio');
+
+let isAudioPlaying = false;
+
+audioContent.addEventListener('click', () => {
+    if (isAudioPlaying) {
+        audio.src = "./assets/icons/audio.svg";
+    } else {
+        audio.src = "./assets/icons/audioNone.svg";
+    }
+
+    isAudioPlaying = !isAudioPlaying;
+});
+
 for (let i = 1; i <= 4; i++) {
     document.getElementById(`period${i}`).addEventListener('click', () => {
       handleFocusPeriod(period[i - 1]); 

@@ -129,3 +129,19 @@ body {
   font-family: helvetica;
   font-weight: 100;
 }
+
+.audio-content {
+    position: absolute;
+    bottom: 2vh;
+    right: 2vh;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.audio {
+    width: 30px;
+}
