@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import { period } from './period';
 
 
 
@@ -11,10 +11,12 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 
-const ambientLight = new THREE.AmbientLight('#ffffff', 2)
+const ambientLight = new THREE.AmbientLight('#ffffff', 0.8)
 
-const directionalLight = new THREE.DirectionalLight('#FFE7AF', 2)
-
+const directionalLight = new THREE.DirectionalLight('#EBF5F6', 3)
+// const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+directionalLight.position.set(1, 3, 4)
+directionalLight.lookAt(4, 2, 4)
 
 scene.add(ambientLight, directionalLight)
 
@@ -73,8 +75,7 @@ gltfLoader.load('./assets/ANCIEN_MUSEE.glb', (gltf) => {
 
 
 
-const step = [{position: {x: 0, y: 0, z: 2} , name: '1'}, {position: {x: 4, y: 1, z: 2}, name: '2'}, {position: {x: 9, y: 2, z: 9}, name: '3'}];
-
+// const periodCameraPosition = period.map((step) => {return step.position});
 
 
 // SIZES
@@ -115,11 +116,11 @@ const getCameraPositionForTarget = (position) => {
 let index = 0;
 
 const nextStep = () => {
-    if (index >= step.length) {
+    if (index >= period.length) {
         return;
     }
     index++;
-    lookAtStep(step[index]);
+    handleFocusPeriod(period[index]);
 };
 
 const prevStep = () => {
@@ -127,13 +128,21 @@ const prevStep = () => {
         return;
     }
     index--;
-    lookAtStep(step[index]);
+    handleFocusPeriod(period[index]);
 };
 
 document.getElementById('prevButton').addEventListener('click', prevStep);
 document.getElementById('nextButton').addEventListener('click', nextStep);
 
-function lookAtStep(step){
+for (let i = 1; i <= 4; i++) {
+    document.getElementById(`period${i}`).addEventListener('click', () => {
+      handleFocusPeriod(period[i - 1]); 
+      index = i - 1;
+    });
+  }
+
+
+function handleFocusPeriod(step){
     if (!step) {
         return;
     }
@@ -143,7 +152,11 @@ function lookAtStep(step){
     const cameraPosition = getCameraPositionForTarget(targetPosition);
 
 
+    document.getElementById("title-component").textContent = step.title;
+    document.getElementById("text-component").textContent = step.description;
+
    
+
 
     gsap.to(controls.step, {
         duration: 1,
@@ -159,9 +172,8 @@ function lookAtStep(step){
         z: cameraPosition.z
     });
 }
+handleFocusPeriod(period[index])
 
-console.log(step[index])
-console.log(index)
 
 
 const renderer = new THREE.WebGLRenderer({
@@ -169,7 +181,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor('#ffffff')
+renderer.setClearColor('#808E90')
 
 let previousTime = 0
 
