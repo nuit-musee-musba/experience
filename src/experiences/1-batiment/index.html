@@ -16,11 +16,47 @@
     ></script>
   </head>
   <body>
-    Batiment
-    <div>
+    
+    <canvas class="webgl"></canvas>
+    <div id="end-menu">
+      <div class="end-menu-content">
+        <h1>Fin de l'expérience</h1>
+        <p>Vous avez terminé l'expérience, vous pouvez retourner à l'accueil ou recommencer l'expérience</p>
+        <div class="end-menu-buttons">
+          <a href="/index.html" id="end-button"><button>Accueil</button></a>
+          <a href="/experiences/1-batiment/index.html" id="restart-button"><button>Recommencer</button></a>
+        </div>
+      </div>
+    </div>
+    <article id="component" class="component">
+      <h2 id="title-component"></h2>
+      <p id="text-component">
+      </p>
+    </article>
+    <div class="buttons">
       <button id="prevButton">avant</button>
       <button id="nextButton">apres</button>
     </div>
-    <canvas class="webgl"></canvas>
+    <section class="chronology">
+      <div class="chronology-style">
+        <img src="./assets/icons/Vector.svg" alt="">
+        <div class="chronology-line"></div>
+        <div class="chronology-small-lines">
+          <div class="chronology-small-line"></div>
+          <div class="chronology-small-line"></div>
+          <div class="chronology-small-line"></div>
+          <div class="chronology-small-line"></div>
+        </div>
+        <div class="chronology-circle"></div>
+      </div>
+        <div class="chronology-buttons">
+          <button id="period1">1959</button>
+          <button id="period2">1960</button>
+          <button id="period3">1961</button>
+          <button id="period4">1962</button>
+          <!-- <button id="period5">1963</button> -->
+        </div>
+    </section>
+    
   </body>
 </html>
