@@ -1,0 +1,23 @@
+.game-top {
+    position: relative;
+    overflow: hidden;
+    .composition {
+        background-color: aqua;
+        flex: 1;
+    }
+}
+
+.ingredients-container {
+    flex: 1;
+    position: relative;
+}
+
+.recipe {
+    .list-item {
+        .item {
+            span {
+                display: block;
+            }
+        }
+    }
+}

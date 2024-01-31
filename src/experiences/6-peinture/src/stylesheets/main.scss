@@ -1,0 +1,63 @@
+// UTILS
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+// BASE
+@import "base/reset";
+@import "base/typography";
+
+// COMPONENTS
+@import "components/tabs";
+@import "components/chef-dialogs";
+
+// PAGES
+@import "pages/home";
+@import "pages/game";
+
+
+// BROUILLON PABÔ : 
+
+ul{
+    list-style: none;
+}
+
+.game-top{
+    height: 60vh;
+    min-width: 100%;
+    background-color: blueviolet;
+    display: flex;
+
+    .utensils{
+        display: block;
+    }
+
+    .recipe{
+
+        .list-item{
+
+            li{
+                background-color: aqua;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+
+                .category{
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 100%;
+                    background-color: orange;
+                }
+            }
+        }
+    }
+}
+
+.game-bottom{
+    height: 40vh;
+    min-width: 100%;
+    background-color: red;
+    display: flex;
+
+
+}
