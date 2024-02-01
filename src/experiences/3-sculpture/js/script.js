@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import IntroPopup from "./IntroPopup.js";
 
 const sizes = {
   width: window.innerWidth,
@@ -9,6 +10,8 @@ const sizes = {
 //
 // INITIALIZATION
 //
+
+IntroPopup();
 
 const canvas = document.querySelector("canvas.webgl");
 
