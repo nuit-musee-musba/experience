@@ -5,6 +5,12 @@ interface TCallbacks {
   };
 }
 
+type Name = {
+  original: string;
+  value: string;
+  namespace: string;
+};
+
 export default class EventEmitter {
   callbacks: TCallbacks;
   constructor() {
@@ -187,9 +193,3 @@ export default class EventEmitter {
     return newName;
   }
 }
-
-type Name = {
-  original: string;
-  value: string;
-  namespace: string;
-};

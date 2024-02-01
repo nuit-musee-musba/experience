@@ -6,6 +6,9 @@ if (!canvas) {
   console.error(
     "Canvas with a class of 'webgl' is required in order for the experience to work"
   );
-} else {
-  const experience = new Experience(canvas);
+  throw new Error(
+    "Canvas with a class of 'webgl' is required in order for the experience to work"
+  );
 }
+
+const experience = new Experience(canvas);
