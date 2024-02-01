@@ -26,11 +26,12 @@ const paint: Paint = {
 
   paint(canvas, event) {
     const bounding = canvas.getBoundingClientRect();
-    console.log(event.touches[0].clientX - bounding.left);
 
-    const x = event.touches[0].clientX - bounding.left;
-    const y = event.touches[0].clientY - bounding.top;
-    this.brush(x, y, 90);
+    for (let i = 0; i < event.touches.length; i++) {
+      const x = event.touches[i].clientX - bounding.left;
+      const y = event.touches[i].clientY - bounding.top;
+      this.brush(x, y, 90);
+    }
   },
 
   brush(x, y, diameter) {
