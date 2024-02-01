@@ -49,6 +49,10 @@
         display: block;
       }
     }
+    .checked {
+      color: grey;
+      text-decoration: line-through;
+    }
   }
 }
 

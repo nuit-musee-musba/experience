@@ -49,7 +49,7 @@ Les fichiers de config
 
 ### Sur le build en production
 
-- hébergement distant : aller sur nuitmusee2024.mmibordeaux.com
+- hébergement distant : aller sur https://magical-horse-1ab328.netlify.app/
 - hébergement local : récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
 
 ### Sur votre propre build
@@ -60,8 +60,11 @@ Pas besoin de merger sur main et d'attendre que la ci se termine pour tester vot
 # Build le dossier dist pour l'hébergement distant
 yarn build
 
-# Build le fichier bundle.zip pour l'hébergement local
+# Build le dossier bundle/ pour l'hébergement local
 yarn bundle
+
+# Ou build le fichier bundle.zip pour l'hébergement local
+yarn bundle:zip
 ```
 
 ### Démarrer le bundle d'hébergement local
