@@ -2,8 +2,9 @@
 class Dialog {
     constructor(element) {    
     this.element = element;
-    
     this.dialogs = this.element.querySelectorAll(".dialog-content");
+
+
     this.buttonNext = this.element.querySelector(".btn-next");
     this.buttonPrev = this.element.querySelector(".btn-prev");
 
@@ -51,6 +52,8 @@ class Dialog {
 
 (function () {
     const dialogContainer = document.querySelector(".dialog");
-    new Dialog(dialogContainer);
+    if (dialogContainer) {
+        new Dialog(dialogContainer);
+    }
     
 })();
