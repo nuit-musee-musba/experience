@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clair-obscur - Lumière | MusBA x MMI</title>
+  <link rel="stylesheet" href="/global/style.css" />
+  <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
+  <script defer type="module" src="/experiences/4-lumiere/js/first-painting.js"></script>
+</head>
+
+<body>
+  <canvas class="webgl"></canvas>
+  <a href="./index.html?home-popin=false" class="btn-temp-bottom-right btn-temp-color">Back to index</a>
+
+  <div class="consignes">
+    <p>Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur le cercle.</p>
+  </div>
+  <button class="popin-btn popin-open btn-temp-color hidden" data-target="#popin-first-painting">Valider la
+    position</button>
+
+  <div class="popin hidden" id="popin-first-painting">
+    <div class="popin-body">
+      <h1>Bravo !</h1>
+      <p>Vous avez réussi à replacer la lanterne du tableau Saint Sébastien soigné par Irène, du Maître à la
+        Chandelle !</p>
+      <p>Dans le caravagisme, les peintres représentent le sujet avec un fort contraste entre les zones de lumières et
+        les zones d’ombres : c’est le clair-obscur !</p>
+      <p>Cela permet d’accentuer le message du peintre en guidant l'œil du spectateur sur l’essentiel, tout en donnant
+        un côté dramatique à l'œuvre.</p>
+      <p>Découvrez ce chef-d'œuvre dans l’Aile Lacour-Sud du musée !</p>
+      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+    </div>
+  </div>
+  <div class="popin-overlay hidden"></div>
+
+</body>
+
+</html>
