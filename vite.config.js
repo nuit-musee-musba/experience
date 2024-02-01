@@ -49,6 +49,7 @@ export default defineConfig({
         "6-peinture": "./src/experiences/6-peinture/index.html",
         "6-peinture/game": "./src/experiences/6-peinture/game.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
+        "4-lumiere": "./src/experiences/4-lumiere/index.html",
       },
     },
   },
