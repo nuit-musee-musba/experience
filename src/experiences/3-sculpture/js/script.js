@@ -11,7 +11,7 @@ const sizes = {
 // INITIALIZATION
 //
 
-// IntroPopup();
+IntroPopup();
 
 const canvas = document.querySelector("canvas.webgl");
 
