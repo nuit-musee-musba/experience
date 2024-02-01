@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2 arts graphiques</title>
     <link rel="stylesheet" href="/global/style.css" />
-    <link
-      rel="stylesheet"
-      href="/experiences/2-arts-graphiques/css/style.css"
-    />
-    <script
-      defer
-      type="module"
-      src="/experiences/2-arts-graphiques/ts/script.ts"
-    ></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer type="module" src="./ts/script.ts"></script>
   </head>
   <body>
-    <canvas class="webgl"></canvas>
-    <p>Groupe 2</p>
+    <p id="title">Groupe 2</p>
+    <button id="button">Commencer l'experience</button>
+    <button class="btn">réparer l'oeuvre</button>
+
+    <div class="canvas__container">
+      <img class="canvas__img" src="/2-arts-graphiques/canvas/canvas1.png" alt="">
+      <canvas id="canvas" width="500px" height="400px"></canvas>
+    </div>
+
+    <section id="section-1" class="section">
+      <p>Section 1</p>
+    </section>
+
+    <section id="section-2">
+      <p>Section 2</p>
+    </section>
+
+    <section id="section-3">
+      <p>Section 3</p>
+    </section>
   </body>
 </html>

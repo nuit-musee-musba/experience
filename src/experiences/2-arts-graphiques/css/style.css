@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.btn {
+  position: absolute;
+  z-index: 20;
+  bottom: 20%;
+  left: 50%;
+  border: 1px solid rgb(255, 196, 0);
+  background-color: black;
+  color: white;
+  padding: 14px 10px;
+  border-radius: 24px;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.canvas__container{
+  position: relative;
+  height: fit-content;
+}
+
+.canvas__img{
+  width: 500px;
+  height: 400px;
+}
+
+canvas{
+  position: absolute;
+  border: 5px solid red;
+  top: 0;
+  left: 0;
+}

@@ -14,7 +14,7 @@ jobs:
       - name: Build bundle
         run: |
           npm install
-          npm run bundle
+          npm run bundle:zip
 
       - name: Get build date
         run: |

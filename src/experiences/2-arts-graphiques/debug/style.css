@@ -1,0 +1,19 @@
+.square {
+  height: 180px;
+  width: 180px;
+  background-color: #aaaaaa;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+}
+
+p {
+  margin: 0;
+}
+
+body {
+  position: relative;
+  margin: 0;
+}
