@@ -59,7 +59,7 @@ const gltfLoader = new GLTFLoader();
 //MATERIALS
 
 
-gltfLoader.load('./assets/ANCIEN_MUSEE.glb', (gltf) => {
+gltfLoader.load('/1-batiment/assets/ANCIEN_MUSEE.glb', (gltf) => {
     gltf.scene.traverse((child) => {
       if (child.isMesh) {
         // child.material = new THREE.MeshBasicMaterial({ color: 'red', wireframe: true });
