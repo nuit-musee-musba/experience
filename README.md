@@ -49,7 +49,7 @@ Les fichiers de config
 
 ### Sur le build en production
 
-- hébergement distant : aller sur nuitmusee2024.mmibordeaux.com
+- hébergement distant : aller sur https://magical-horse-1ab328.netlify.app/
 - hébergement local : récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
 
 ### Sur votre propre build
