@@ -7,15 +7,14 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   const dragElement = document.getElementById(dragElementId);
   const targetZone = document.getElementById(targetZoneId);
   const dragElementImg = dragElement.querySelector("img");
+  const targetImage = targetZone.querySelector("img");
 
   let initialX, initialY;
   let horizontalTraversals = 0;
-  // let verticalTraversals = 0;
   let isHorizontalCollision = false;
 
   let parentElement = document.querySelector(".utensils"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
 
-  console.log(parentElement);
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
 
@@ -52,12 +51,21 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
           horizontalTraversals++;
           isHorizontalCollision = true;
           console.log(horizontalTraversals);
+          if (horizontalTraversals == 1) {
+            targetImage.src =
+              "./assets/images/ingredients/animals/dolphin-2.png";
+          } else if (horizontalTraversals == 2) {
+            targetImage.src =
+              "./assets/images/ingredients/animals/dolphin-3.png";
+          }
         }
       } else {
         isHorizontalCollision = false;
       }
     } else {
-      alert("C'est gagnééééééééé !");
+      alert("Tu as peléééé le citroooon !");
+      // dragElement.style.left = realInitialX + "px"; //TO DO : faire revenir le couteau à sa position initiale
+      // dragElement.style.top = realInitialY + "px";
     }
 
     //comportement quand le couteau est en train de bouger
@@ -67,7 +75,7 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   });
 
   dragElement.addEventListener("touchend", (e) => {
-    //compportement quand il est relaché
+    //comportement quand il est relaché
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
     dragElementImg.style.transform = `rotate(0deg)`;

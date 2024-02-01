@@ -1,58 +1,60 @@
 {
-    "items":[
-        {
-            "id": "1",
-            "name": "Raisin",
-            "image": "assets/images/ingredients/food/grape.png",
-            "description": "Lorem ipsum le raisin ça fait du vin"
-        }, 
-        {
-            "id": "2",
-            "name": "Citron",
-            "image": "assets/images/ingredients/food/lemon.png",
-            "description": "Lorem ipsum la pomme c d'la tarte"
-        }, 
-        {
-            "id": "3",
-            "name": "Fromage",
-            "image": "assets/images/ingredients/food/cheese.png",
-            "description": "Lorem ipsum la poire c nul berk"
-        }, 
-        {
-            "id": "4",
-            "name": "Poussière",
-            "image": "assets/images/ingredients/objects/dust.png",
-            "description": "atchoum c sale"
-        }, 
-        {
-            "id": "5",
-            "name": "Momie",
-            "image": "assets/images/ingredients/objects/mummy.png",
-            "description": "OULALA FUYEZ PAUVRES FOUS"
-        }, 
-        {
-            "id": "6",
-            "name": "Crâne",
-            "image": "assets/images/ingredients/objects/skull.png",
-            "description": "brr c dark"
-        }, 
-        {
-            "id": "7",
-            "name": "Chat",
-            "image": "assets/images/ingredients/animals/cat.png",
-            "description": "miaou"
-        }, 
-        {
-            "id": "8",
-            "name": "Chien",
-            "image": "assets/images/ingredients/animals/dog.png",
-            "description": "ouaf"
-        }, 
-        {
-            "id": "9",
-            "name": "Dolphin",
-            "image": "assets/images/ingredients/animals/dolphin.png",
-            "description": "[insérer ondes marines]"
-        }
-    ]
+  "items": [
+    {
+      "id": "1",
+      "name": "Raisin",
+      "image": "assets/images/ingredients/food/grape.png",
+      "description": "Lorem ipsum le raisin ça fait du vin"
+    },
+    {
+      "id": "2",
+      "name": "Citron",
+      "image": "assets/images/ingredients/food/lemon.png",
+      "description": "Lorem ipsum la pomme c d'la tarte"
+    },
+    {
+      "id": "3",
+      "name": "Fromage",
+      "image": "assets/images/ingredients/food/cheese.png",
+      "description": "Lorem ipsum la poire c nul berk"
+    },
+    {
+      "id": "4",
+      "name": "Poussière",
+      "image": "assets/images/ingredients/objects/dust.png",
+      "description": "atchoum c sale"
+    },
+    {
+      "id": "5",
+      "name": "Momie",
+      "image": "assets/images/ingredients/objects/mummy.png",
+      "description": "OULALA FUYEZ PAUVRES FOUS"
+    },
+    {
+      "id": "6",
+      "name": "Crâne",
+      "image": "assets/images/ingredients/objects/skull.png",
+      "description": "brr c dark"
+    },
+    {
+      "id": "7",
+      "name": "Chat",
+      "image": "assets/images/ingredients/animals/cat.png",
+      "description": "miaou"
+    },
+    {
+      "id": "8",
+      "name": "Chien",
+      "image": "assets/images/ingredients/animals/dog.png",
+      "description": "ouaf"
+    },
+    {
+      "id": "9",
+      "name": "Dolphin",
+      "image": "assets/images/ingredients/animals/dolphin-1.png",
+      "image-1": "assets/images/ingredients/animals/dolphin-2.png",
+      "image-2": "assets/images/ingredients/animals/dolphin-3.png",
+      "description": "[insérer ondes marines]"
+    }
+  ]
 }
