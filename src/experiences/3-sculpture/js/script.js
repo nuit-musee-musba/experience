@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import IntroPopup from "./IntroPopup.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import IntroPopup from "./IntroPopup";
 
 const sizes = {
   width: window.innerWidth,
@@ -41,7 +41,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(5, 5, 5);
+camera.position.set(0, 0, 5);
 scene.add(camera);
 
 //
@@ -49,12 +49,17 @@ scene.add(camera);
 //
 
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: "blue" });
-const cube = new THREE.Mesh(cubeGeometry, material);
-
+const cubeMaterial = new THREE.MeshBasicMaterial({ color: "blue" });
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 cube.position.set(0, 0, 0);
-
 scene.add(cube);
+
+const planeGeometry = new THREE.PlaneGeometry(1, 1);
+const planeMaterial = new THREE.MeshBasicMaterial({ color: "red" });
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+plane.position.set(0, 0, -4);
+plane.scale.set(5, 5, 5);
+scene.add(plane);
 
 //
 // EVENT
@@ -78,8 +83,23 @@ let touchBefore = 0;
 let currentTouch = 0;
 
 window.addEventListener("touchmove", (event) => {
-  currentTouch = event.touches[0].clientX;
+  currentTouch = event.touches[0].clientX / 100;
 });
+
+window.addEventListener("touchstart", (event) => {
+  currentTouch = event.touches[0].clientX / 100;
+  touchBefore = currentTouch;
+});
+//
+// CONTROL
+//
+
+const controls = new OrbitControls(camera, canvas);
+
+controls.maxDistance = 6;
+controls.minDistance = 3;
+controls.minPolarAngle = Math.PI / 2;
+controls.maxPolarAngle = Math.PI / 2;
 
 //
 // ANIMATE
@@ -88,6 +108,13 @@ window.addEventListener("touchmove", (event) => {
 const clock = new THREE.Clock();
 let previousTime = 0;
 
+const diminue = -1;
+
+camera.position.z = 5 - diminue;
+plane.position.z = -8 + diminue;
+
+const dampingFactor = 0.02;
+
 const tick = () => {
   //Time
   const elapsedTime = clock.getElapsedTime();
@@ -95,9 +122,16 @@ const tick = () => {
   previousTime = elapsedTime;
 
   //Animate in tick
-  camera.lookAt(cube.position);
 
-  const touchX = currentTouch - touchBefore;
+  const rotateSpeed = currentTouch - touchBefore;
+
+  cube.rotation.y =
+    THREE.MathUtils.lerp(
+      cube.rotation.y,
+      cube.rotation.y + rotateSpeed * 5,
+      dampingFactor
+    ) +
+    rotateSpeed * 0.3;
 
   touchBefore = currentTouch;
 
@@ -109,4 +143,3 @@ const tick = () => {
 };
 
 tick();
-
