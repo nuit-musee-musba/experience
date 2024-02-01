@@ -139,18 +139,9 @@
   integrity sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==
 
 "@types/node@*":
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> develop
-  version "20.11.10"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.11.10.tgz"
-  integrity sha512-rZEfe/hJSGYmdfX9tvcPMYeYPW2sNl50nsw4jZmRcaG0HIAb0WYEpsB05GOb53vjqpyE9GUhlDQ4jLSoB5q9kg==
-=======
   version "20.11.15"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.15.tgz#b853a86cfedbc768360c552b4653302b4e7417bf"
   integrity sha512-gscmuADZfvNULx1eyirVbr3kVOVZtpQtzKMCZpeSZcN6MfbkRXAR4s9/gsQ4CzxLHw6EStDtKLNtSDL3vbq05A==
->>>>>>> 52c436d8fbab697ab0d24d3369cf5970fac74f72
   dependencies:
     undici-types "~5.26.4"
 
