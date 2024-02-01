@@ -55,6 +55,13 @@ export default class Experience {
       this.resize();
     });
 
+    const btn = document.querySelector(".btn");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        this.world.painting.animate();
+      });
+    }
+
     // Time tick event
     this.time.on("tick", () => {
       this.update();
@@ -68,6 +75,7 @@ export default class Experience {
 
   update() {
     // this.camera.update()
+
     this.renderer.update();
   }
 }
