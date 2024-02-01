@@ -3,13 +3,16 @@
 //et gérer les info bulles du chef dans ces deux conditions
 //pour faire ça tu peux par exemple faire un array des id des fruits qui peuvent être coupés
 
-function knifeHandleDragInteraction(dragElementId, targetZoneId) {
+function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   const dragElement = document.getElementById(dragElementId);
   const targetZone = document.getElementById(targetZoneId);
+  const dragElementImg = dragElement.querySelector("img");
+
   let initialX, initialY;
 
-  let parentElement = document.getElementById("ingredients-container"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
+  let parentElement = document.querySelector(".utensils"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
 
+  console.log(parentElement);
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
 
@@ -26,7 +29,12 @@ function knifeHandleDragInteraction(dragElementId, targetZoneId) {
   dragElement.addEventListener("touchmove", (e) => {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + padLeft; //comportement quand le couteau est en train de bouger
+    const currentX = touch.clientX - initialX;
+    let rotationValue = Math.max(Math.min(currentX * 0.2, 0), -90);
+
+    dragElementImg.style.transform = `rotate(${rotationValue}deg)`;
+
+    //comportement quand le couteau est en train de bouger
     const currentY = touch.clientY - initialY;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
@@ -36,6 +44,7 @@ function knifeHandleDragInteraction(dragElementId, targetZoneId) {
     //compportement quand il est relaché
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
+    dragElementImg.style.transform = `rotate(0deg)`;
 
     if (
       dragElementRect.right >= targetZoneRect.left && //condition : drag est il dans target ?
@@ -44,6 +53,12 @@ function knifeHandleDragInteraction(dragElementId, targetZoneId) {
       dragElementRect.top <= targetZoneRect.bottom
     ) {
       console.log("element dans la zone");
+      if (dragElementId == "knife") {
+        alert("tu coupes citron");
+        targetImage.src = "./assets/images/ingredients/animals/cat.png";
+      } else if (dragElementId == "carafe") {
+        alert("tu verses water");
+      }
 
       dragElement.style.left = realInitialX + "px"; //permet de faire revenir le couteau à sa position initiale
       dragElement.style.top = realInitialY + "px";
@@ -56,5 +71,5 @@ function knifeHandleDragInteraction(dragElementId, targetZoneId) {
   });
 }
 
-knifeHandleDragInteraction("knife", "citron-placed"); //permet de handle l'intéraction entre ces deux objects
-//syntaxe appel knifeHandleDragInteraction(  dragElementId,targetZoneId )
+utensilsHandleDragInteraction("knife", "9-1-placed");
+utensilsHandleDragInteraction("carafe", "5-placed");

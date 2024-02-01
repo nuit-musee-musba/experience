@@ -30,9 +30,6 @@ function handleDragInteraction(
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
-  console.log("initialX: " + initialX);
-  console.log("initialY: " + initialY);
-
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
   });
