@@ -10,17 +10,20 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlOrigin = urlParams.get("home-popin");
 const popin = document.querySelector("#popin-home");
+let events = true;
 
 const popinHide = (targetPopin) => {
   targetPopin.classList.add("hidden");
   document.querySelector("body").classList.add("popin-visible");
   document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
 };
 
 const popinShow = (targetPopin) => {
   targetPopin.classList.remove("hidden");
   document.querySelector("body").classList.remove("popin-visible");
   document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -164,12 +167,12 @@ window.addEventListener("resize", () => {
  */
 const mouse = new THREE.Vector2();
 
-window.addEventListener("mousemove", (event) => {
+canvas.addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / sizes.width) * 2 - 1;
   mouse.y = -(event.clientY / sizes.height) * 2 + 1;
 });
 
-window.addEventListener("click", () => {
+canvas.addEventListener("click", () => {
   // Cast a ray
   raycaster.setFromCamera(mouse, camera);
 
