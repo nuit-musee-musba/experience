@@ -8,6 +8,7 @@ import World from "./World/World";
 import Renderer from "./Renderer";
 import Animation from "./Animation";
 import Resources from "./Utils/Resources";
+import Transition from "./Utils/Transitions";
 
 let instance: Experience | null = null;
 
@@ -24,6 +25,7 @@ export default class Experience {
   time: Time;
   animation: Animation;
   window: TWindow = window;
+  transition: Transition;
 
   constructor(canvas?: HTMLCanvasElement) {
     if (instance) {
@@ -49,6 +51,7 @@ export default class Experience {
     this.world = new World();
     this.time = new Time();
     this.animation = new Animation();
+    this.transition = new Transition();
 
     // Sizes resize event
     this.sizes.on("resize", () => {
