@@ -12,16 +12,19 @@ import GUI from "lil-gui";
  * Popins
  */
 
+// Hide popin
 const popinHide = (targetPopin) => {
   targetPopin.classList.add("hidden");
   document.querySelector(".popin-overlay").classList.add("hidden");
 };
 
+// Show popin
 const popinShow = (targetPopin) => {
   targetPopin.classList.remove("hidden");
   document.querySelector(".popin-overlay").classList.remove("hidden");
 };
 
+// Popin close buttons
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
   const targetPopin = document.querySelector(popinBtn.dataset.target);
@@ -31,6 +34,7 @@ for (const popinBtn of popinBtns) {
   });
 }
 
+// Popin open buttons
 const popinOpenBtns = document.querySelectorAll(".popin-btn.popin-open");
 for (const popinOpenBtn of popinOpenBtns) {
   const targetPopin = document.querySelector(popinOpenBtn.dataset.target);
@@ -41,8 +45,9 @@ for (const popinOpenBtn of popinOpenBtns) {
 }
 
 /**
- * Base
+ * Threejs
  */
+
 // Debug
 const gui = new GUI({
   width: 300,
@@ -81,17 +86,18 @@ loadingManager.onError = (error) => {
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const colorTexture = textureLoader.load(
-  "/4-lumieres/first-painting/caravage-color.jpg"
+  "/4-lumiere/first-painting/caravage-color.jpg"
 );
 const heightTexture = textureLoader.load(
-  "/4-lumieres/first-painting/caravage-height.jpg"
+  "/4-lumiere/first-painting/caravage-height.jpg"
 );
 
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 
 /**
- * Object
+ * Scene objects
  */
+
 // Caravage painting
 const planeGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
 const caravageMaterial = new THREE.MeshStandardMaterial({
@@ -119,17 +125,20 @@ paintingTweaks
   .step(0.001)
   .name("Painting metalness");
 
-// Caravage ellipse geometry
+// ellipse
 
-var ellipseGeometry = new THREE.CircleGeometry(
-  globalParameters.lightRadius,
-  32
+var ellipseGeometry = new THREE.TorusGeometry(
+  globalParameters.lightRadius, // Radius
+  0.005, // tube
+  12, // radialSegments
+  48, // tubularSegments
+  Math.PI * 2 // arc
 );
 var ellipseMaterial = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
+  color: 0xffffff,
   transparent: true,
   // opacity: 0,
-  wireframe: true,
+  // wireframe: true,
 });
 var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
 ellipse.position.z = 0.5;
@@ -150,7 +159,7 @@ ambientLightTweaks.add(ambientLight, "visible");
 ambientLightTweaks.addColor(ambientLight, "color");
 ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
-// Point light | Caravage
+// Caravage point light
 const pointLight = new THREE.PointLight(
   "#ffCC70", // color
   10, // intensity
@@ -238,12 +247,13 @@ scene.add(camera);
  */
 const pointer = new THREE.Vector2();
 
-window.addEventListener("touchmove", (event) => {
+// Update pointer position
+canvas.addEventListener("touchmove", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 });
 
-// Function to calculate the angle between Z rotation and cursor position
+// Calculate pointer angle
 function calculateAngle() {
   const relativeCursorPosition = new THREE.Vector3(pointer.x, pointer.y, 0).sub(
     ellipse.position
@@ -253,27 +263,36 @@ function calculateAngle() {
   return normalizedAngle;
 }
 
-// Function to update rotation when cursor position changes
+// Result button
+const resultBtn = document.querySelector("#btn-validate");
+let resultState = false;
+const valudResultPopin = document.querySelector("#popin-result-true");
+
+// Update ellipse rotation
 function updateRotation() {
   const angle = calculateAngle();
   ellipse.rotation.z = angle;
 
-  // If response ok
+  // Check result
   if (angle > 1.5 && angle < 1.8) {
     console.log("angle ok");
-
-    for (const popinOpenBtn of popinOpenBtns) {
-      if (popinOpenBtn.classList.contains("hidden")) {
-        popinOpenBtn.classList.remove("hidden");
-      }
+    resultState = true;
+    if (resultBtn.classList.contains("hidden")) {
+      resultBtn.classList.remove("hidden");
     }
+  } else {
+    resultState = false;
   }
 }
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = caravagePainting.position;
-// controls.enableDamping = true;
+// Check result on click
+resultBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (resultState == true) {
+    popinShow(valudResultPopin);
+  } else {
+  }
+});
 
 /**
  * Renderer
@@ -287,24 +306,14 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 /**
  * Animate
  */
-const clock = new THREE.Clock();
-let previousTime = 0;
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
-  const deltaTime = elapsedTime - previousTime;
-  previousTime = elapsedTime;
-
-  const lightAngle = elapsedTime * globalParameters.lightAngleStrength;
-
   // Update caravage light position
   updateRotation();
 
   // Light controls
   pointLightHelper.update();
 
-  // Update controls
-  // controls.update();
   // Render
   renderer.render(scene, camera);
 
