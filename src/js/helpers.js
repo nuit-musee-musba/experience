@@ -7,7 +7,7 @@ export async function createIsland(i, count) {
   // For a loaded GLTF model
   try {
     const island = await createGLTFModel(
-      "./assets/painting.glb", // url
+      "../assets/painting.glb", // url
       [0, 0, 0], // position
       [0, (i * count + Math.PI * 5) / 2, 0], // rotation to set the plane upright
       [0.07, 0.07, 0.07] // scale
