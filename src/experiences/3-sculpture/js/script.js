@@ -51,7 +51,7 @@ scene.add(camera);
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
 const cubeMaterial = new THREE.MeshBasicMaterial({ color: "blue" });
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-cube.position.set(0, 0, 0);
+cube.position.set(1.5, 0, 0);
 scene.add(cube);
 
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
