@@ -113,6 +113,7 @@ body
 .end-menu-buttons {
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
 .end-menu-buttons div{
@@ -149,7 +150,7 @@ body
 
 .interest-component img {
   position: absolute;
-  top: -7.1vh;
+  top: -63.5px;
   left: -0.15vw;
 }
 
