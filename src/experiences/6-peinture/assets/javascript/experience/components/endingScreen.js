@@ -3,7 +3,8 @@ import lottie from 'lottie-web';
 class EndingScreen {
     constructor(element) {    
     this.element = element;
-    this.button = this.element.querySelector(".ending-trigger");
+    this.button = this.element.querySelector('.ending-trigger-anim');
+    this.links = this.element.querySelector('.ending-links')
 
     const animEnding = '/experiences/6-peinture/assets/javascript/experience/animations/anim-evil-dialog.json';
 
@@ -11,20 +12,26 @@ class EndingScreen {
         container: document.querySelector('.ending-animation'),
         path: animEnding,
         renderer: 'svg',
-        loop: true, // CE SERA PEUT ÊTRE PAS UNE LOOP
+        loop: false,
         autoplay: false
     });
     
     this.listen();
-        
     }
 
     listen(){
         this.button.addEventListener('click', () => {
             this.animationEnd.play();
         });
+        this.animationEnd.addEventListener('complete', () => {
+            this.displayEndingLinks();
+        });
+
     }
 
+    displayEndingLinks() {
+        this.links.classList.add('visible');
+    }
 
 }
 

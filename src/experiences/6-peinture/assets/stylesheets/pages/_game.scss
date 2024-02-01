@@ -37,10 +37,23 @@
 }
 
 .has-ending-opened {
-    .game-chef {
+    .game-top .game-chef {
         display: none;
     }
     .ending-screen {
         display: block;
+    }
+}
+.ending-screen {
+    .ending-links {
+        opacity: 0;
+        pointer-events: none;
+        a {
+            background: red;
+        }
+        &.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 }
