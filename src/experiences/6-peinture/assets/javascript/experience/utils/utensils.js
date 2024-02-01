@@ -9,6 +9,9 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   const dragElementImg = dragElement.querySelector("img");
 
   let initialX, initialY;
+  let horizontalTraversals = 0;
+  // let verticalTraversals = 0;
+  let isHorizontalCollision = false;
 
   let parentElement = document.querySelector(".utensils"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
 
@@ -30,9 +33,32 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
     e.preventDefault();
     const touch = e.touches[0];
     const currentX = touch.clientX - initialX;
-    let rotationValue = Math.max(Math.min(currentX * 0.2, 0), -90);
+    const dragElementRect = dragElement.getBoundingClientRect();
+    const targetZoneRect = targetZone.getBoundingClientRect();
 
-    dragElementImg.style.transform = `rotate(${rotationValue}deg)`;
+    if (dragElementId == "carafe") {
+      let rotationValue = Math.max(Math.min(currentX * 0.2, 0), -90);
+      dragElementImg.style.transform = `rotate(${rotationValue}deg)`;
+    }
+
+    if (horizontalTraversals < 3) {
+      // Vérification de la traversée horizontale
+      if (
+        dragElementId == "knife" &&
+        dragElementRect.right >= targetZoneRect.left &&
+        dragElementRect.left <= targetZoneRect.right
+      ) {
+        if (!isHorizontalCollision) {
+          horizontalTraversals++;
+          isHorizontalCollision = true;
+          console.log(horizontalTraversals);
+        }
+      } else {
+        isHorizontalCollision = false;
+      }
+    } else {
+      alert("C'est gagnééééééééé !");
+    }
 
     //comportement quand le couteau est en train de bouger
     const currentY = touch.clientY - initialY;
@@ -47,7 +73,8 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
     dragElementImg.style.transform = `rotate(0deg)`;
 
     if (
-      dragElementRect.right >= targetZoneRect.left && //condition : drag est il dans target ?
+      dragElementId == "carafe" &&
+      dragElementRect.right >= targetZoneRect.left &&
       dragElementRect.left <= targetZoneRect.right &&
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom

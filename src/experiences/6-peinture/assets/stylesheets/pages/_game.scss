@@ -5,6 +5,10 @@
   .composition {
     background-color: aqua;
     flex: 1;
+    .item:nth-child(3) {
+      top: 10vh;
+      left: 10vw;
+    }
   }
 }
 
