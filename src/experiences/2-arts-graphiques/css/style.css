@@ -8,6 +8,7 @@ html,
 body {
   overflow: hidden;
   height: 100%;
+  position: relative;
 }
 
 .webgl {
@@ -37,8 +38,8 @@ body {
 }
 
 .canvas__img{
-  width: 500px;
-  height: 400px;
+  width: 1200px;
+  height: 1000px;
 }
 
 canvas{
@@ -46,4 +47,15 @@ canvas{
   border: 5px solid red;
   top: 0;
   left: 0;
+}
+
+.square {
+  height: 180px;
+  width: 180px;
+  background-color: #aaaaaa;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
 }

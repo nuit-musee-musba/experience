@@ -4,7 +4,7 @@ interface Paint {
 
   init(): void;
   draw(): void;
-  paint(canvas: HTMLCanvasElement, event: MouseEvent | TouchEvent): void;
+  paint(canvas: HTMLCanvasElement, event: TouchEvent): void;
   brush(x: number, y: number, diameter: number): void;
 }
 
@@ -14,7 +14,7 @@ const paint: Paint = {
 
   init() {
     this.draw()
-    this.canvas.addEventListener("mousemove", (event) => this.paint(this.canvas, event));
+    // this.canvas.addEventListener("mousemove", (event) => this.paint(this.canvas, event));
     this.canvas.addEventListener("touchmove", (event) => this.paint(this.canvas, event));
   },
 
@@ -26,9 +26,12 @@ const paint: Paint = {
 
   paint(canvas, event) {
     const bounding = canvas.getBoundingClientRect();
-    const x = event.clientX - bounding.left;
-    const y = event.clientY - bounding.top;
-    this.brush(x, y, 90);
+
+    for (let i = 0; i < event.touches.length; i++) {
+      const x = event.touches[i].clientX - bounding.left;
+      const y = event.touches[i].clientY - bounding.top;
+      this.brush(x, y, 90);
+    }
   },
 
   brush(x, y, diameter) {

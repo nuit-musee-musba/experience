@@ -1,3 +1,6 @@
+import items from "../data/items.json" assert { type: "json" };
+import { recipeResolve } from "./recipeManager";
+
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 console.log(craftCont);
 var winConditions = craftCont.length;
@@ -29,9 +32,6 @@ function handleDragInteraction(
 
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
-
-  console.log("initialX: " + initialX);
-  console.log("initialY: " + initialY);
 
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
@@ -67,23 +67,38 @@ function handleDragInteraction(
       //     dragElement.style.top = targetZoneRect.top + 'px';
       // }
 
+      let dialog = items.items.find((item) => item.id === dragElementId);
+      console.log("drag " + dragElementId);
+      console.log(dialog);
+
       if (isCorrect) {
         if (isMultiple) {
           if (howManyDrags <= placedEl.length - 1) {
             placedEl[howManyDrags].style.display = "block";
             howManyDone++;
-            alert("Chef : parfait !");
+
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            recipeResolve(dialog.id);
+            //alert("Chef : " + dialog.dialog);
           } else {
-            alert("tu as mis tout les elements requis pour cet aliment");
+            print_chef_speech(
+              "Tu as mis tout les elements requis pour cet aliment"
+            ); //definie dans speechBehavior.js
+            //alert("tu as mis tout les elements requis pour cet aliment");
           }
         } else {
           if (!success) {
             console.log(placedEl);
             placedEl.style.display = "block";
-            alert("Chef : parfait !");
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            recipeResolve(dialog.id);
+            //alert("Chef : " + dialog.dialog);
             howManyDone++;
           } else {
-            alert("tu as mis tout les elements requis pour cet aliment");
+            print_chef_speech(
+              "Tu as mis tout les elements requis pour cet aliment"
+            ); //definie dans speechBehavior.js
+            //alert("tu as mis tout les elements requis pour cet aliment");
           }
         }
 
@@ -102,7 +117,8 @@ function handleDragInteraction(
       } else {
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px"; //l'utilisateur n'a pas selectionné le bon aliment
-        alert("Chef : ce n'est pas le bon aliment !");
+        print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+        //alert("Chef : " + dialog.dialog);
       }
 
       howManyDrags++;
