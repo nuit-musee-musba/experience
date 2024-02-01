@@ -9,6 +9,12 @@ Lancer le serveur sur mac:
 2. Une invite de commande doit s'ouvrir avec des infos dedans.
 3. Aller sur http://localhost:8080 
 
+Problème sur windows:
+- La fenêtre se ferme instantannément
+    Vérifiez que vous êtes bien dans le dossier DÉZIPPÉ
+
 Problème sur mac:
+- "Impossible d'ouvrir "start_mac.command" car le développeur ne peut pas être vérifié"
+    Faire clic droit sur le fichier, puis "Ouvrir", et éxécuter
 - "Impossible d'ouvrir "caddy_darwin_amd64" car le développeur ne peut pas être vérifié"
-    Voir https://www.igeeksblog.com/how-to-open-app-from-unidentified-developer-on-mac/
+    Aller dans le dossier caddy, faire clic droit sur le fichier "caddy_darwin_amd64", puis "Ouvrir", et éxécuter, fermer la fenêtre
