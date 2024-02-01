@@ -1,22 +1,28 @@
-// import Experience from "./Experience/Experience";
-//
-// const canvas = document.querySelector<HTMLCanvasElement>("canvas.webgl");
-//
-// if (!canvas) {
-//   console.error(
-//     "Canvas with a class of 'webgl' is required in order for the experience to work"
-//   );
-//   throw new Error(
-//     "Canvas with a class of 'webgl' is required in order for the experience to work"
-//   );
-// }
-//
-// const experience = new Experience(canvas);
+import Transition from './transition'
 
 import paint from "./interactive/paint";
 
 window.addEventListener("load", () => {
   paint.init()
 })
+const transition = new Transition();
 
-console.log('no more 3D');
+const button = document.getElementById('button')
+const section1 = document.getElementById('section-1')
+const section2 = document.getElementById('section-2')
+const section3 = document.getElementById('section-3')
+
+if(button){
+    button.addEventListener('click', () => transition.handleTransition())
+}
+if(section1){
+    section1.style.display = 'none'
+}
+
+if(section2){
+    section2.style.display = 'none'
+}
+
+if(section3){
+    section3.style.display = 'none'
+}
