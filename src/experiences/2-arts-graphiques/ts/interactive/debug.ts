@@ -22,6 +22,9 @@ class Square {
 
     this.square.appendChild(this.positionText);
 
+    this.square.style.top = `${this.top}px`;
+    this.square.style.left = `${this.left}px`;
+
     parent.appendChild(this.square);
 
     this.square.addEventListener("touchstart", (e) => {
@@ -51,7 +54,7 @@ class Square {
       this.top = e.touches[0].clientY - elementHeight / 2;
       this.left = e.touches[0].clientX - elementWidth / 2;
 
-      this.positionText.innerText = `x:${this.left} ; y:${this.top}`;
+      this.positionText.innerHTML = `x:${this.left} <br/> y:${this.top}`;
 
       this.square.style.top = `${this.top}px`;
       this.square.style.left = `${this.left}px`;
@@ -62,8 +65,30 @@ class Square {
     this.square.style.backgroundColor = color;
   }
 }
-const section2 = document.getElementById('section-2')
-if(section2){
-  const square1 = new Square(section2, "square1");
-  const square2 = new Square(section2, "square2");
+const section2 = document.getElementById("section-2");
+
+let count: number = 0;
+if (section2) {
+  const square1 = new Square(section2, "square1", { top: 400, left: 400 });
+  const square2 = new Square(section2, "square2", { top: 400, left: 1000 });
+
+  const clicker = document.querySelector<HTMLButtonElement>(".cliker-count");
+
+  clicker?.addEventListener("touchstart", (e) => {
+    count++;
+    console.log("heu");
+
+    clicker.innerText = String(count);
+  });
+
+  const clickZone = document.querySelector<HTMLDivElement>(".pressingZone");
+  const clickZoneTitle =
+    document.querySelector<HTMLParagraphElement>(".pressingZoneTitle");
+
+  clickZone?.addEventListener("touchmove", (e) => {
+    console.log("pressing zone : ", e);
+    if (clickZoneTitle) {
+      clickZoneTitle.innerText = String(e.touches.length);
+    }
+  });
 }
