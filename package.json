@@ -1,12 +1,12 @@
 {
-  "name": "threejs-journey-exercise",
+  "name": "nuit-au-musba",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "bundle": "npm run build && gulp bundle"
+    "bundle": "npm run build && gulp bundle",
+    "bundle:zip": "npm run build && gulp bundleZipped"
   },
   "devDependencies": {
     "@types/three": "^0.160.0",
@@ -21,6 +21,7 @@
   "dependencies": {
     "gsap": "^3.12.5",
     "lil-gui": "^0.19.1",
+    "lottie-web": "^5.12.2",
     "three": "^0.158.0"
   }
 }

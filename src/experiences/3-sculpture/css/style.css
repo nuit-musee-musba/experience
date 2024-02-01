@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: white;
+  overflow: hidden;
+}
+
+.introContent {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.popupContainer {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.introContainer {
+  display: flex;
+  height: 100%;
+}
+.introCharacter {
+  width: 15%;
+  background-color: aquamarine;
+  margin-right: 2%;
+}
+
+.popupContent {
+  background-color: white;
+  margin: 25% 0 0;
+  padding: 20px;
+  width: 100%;
+}
+
+#buttonPopup {
+  display: block;
+  width: 100px;
+  margin-top: 2%;
+  align-self: flex-end;
+  transform: translateX(40px);
+}
+.show {
+  display: block;
+}
+
+.introSketch {
+  width: 25%;
+  background-color: lawngreen;
+  position: absolute;
+  right: 5%;
+  top: 25%;
+}
+
+.introModel {
+  width: 25%;
+  background-color: lightcoral;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: 50%;
+}

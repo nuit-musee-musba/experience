@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template experience</title>
+    <link rel="stylesheet" href="/global/style.css" />
+    <link rel="stylesheet" href="/experiences/3-sculpture/css/style.css" />
+    <script
+      defer
+      type="module"
+      src="/experiences/3-sculpture/js/script.js"
+    ></script>
+  </head>
+  <body>
+    <div id="myPopup" class="introContent show">
+      <div class="introContainer">
+        <div class="introCharacter">Personnage</div>
+        <div class="popupContainer">
+          <div class="popupContent">
+            <p id="popupText">
+              Bienvenue dans mon atelier où je sculpte depuis 1883 ! Votre
+              mission est de tailler dans l’intégralité ma sculpture “Mozart
+              expirant” à partir d’un bloc de marbre. Avant votre arrivée, j’ai
+              déjà réalisé le croquis et la petite maquette de la sculpture.
+              <br /><br />Maintenant, c’est à vous de reprendre le relais !
+            </p>
+          </div>
+          <button id="buttonPopup"></button>
+        </div>
+      </div>
+      <div class="introSketch">Croquis</div>
+      <div class="introModel">Maquette</div>
+    </div>
+    <canvas class="webgl"></canvas>
+  </body>
+</html>
