@@ -24,8 +24,6 @@ class EndingScreen {
             this.animationEnd.play();
         });
     }
-
-
 }
 
 (function () {
@@ -33,5 +31,4 @@ class EndingScreen {
     if (endingContainer) {
         new EndingScreen(endingContainer);
     }
-    
 })();
