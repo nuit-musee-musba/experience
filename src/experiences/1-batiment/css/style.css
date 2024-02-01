@@ -9,8 +9,16 @@ html {
   padding: 0;
 }
 
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+html,
 body {
-  position: relative;
+  overflow: hidden;
 }
 
 .buttons {
@@ -131,17 +139,17 @@ body {
 }
 
 .audio-content {
-    position: absolute;
-    bottom: 2vh;
-    right: 2vh;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0.5rem 1rem;
-    background-color: white;
-    cursor: pointer;
+  position: absolute;
+  bottom: 2vh;
+  right: 2vh;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  cursor: pointer;
 }
 
 .audio {
-    width: 30px;
+  width: 30px;
 }
