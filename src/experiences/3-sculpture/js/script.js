@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import IntroPopup from "./IntroPopup.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import IntroPopup from "./IntroPopup";
 
 const sizes = {
   width: window.innerWidth,
@@ -11,7 +11,7 @@ const sizes = {
 // INITIALIZATION
 //
 
-IntroPopup();
+// IntroPopup();
 
 const canvas = document.querySelector("canvas.webgl");
 
@@ -41,7 +41,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.set(5, 5, 5);
+camera.position.set(0, 0, 5);
 scene.add(camera);
 
 //
@@ -49,12 +49,35 @@ scene.add(camera);
 //
 
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: "blue" });
-const cube = new THREE.Mesh(cubeGeometry, material);
-
+const cubeMaterial = new THREE.MeshBasicMaterial({ color: "blue" });
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 cube.position.set(0, 0, 0);
-
 scene.add(cube);
+
+const planeGeometry = new THREE.PlaneGeometry(1, 1);
+const planeMaterial = new THREE.MeshBasicMaterial({ color: "red" });
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+plane.position.set(0, 0, -4);
+plane.scale.set(5, 5, 5);
+scene.add(plane);
+
+//
+// CONTROL
+//
+
+const controls = new OrbitControls(camera, canvas);
+
+controls.maxDistance = 6;
+controls.minDistance = 3;
+controls.enablePan = false;
+
+controls.minPolarAngle = Math.PI / 3.5;
+controls.maxPolarAngle = Math.PI / 2;
+
+controls.minAzimuthAngle = 0;
+controls.maxAzimuthAngle = 0;
+
+controls.rotateSpeed = 0.1;
 
 //
 // EVENT
@@ -78,8 +101,15 @@ let touchBefore = 0;
 let currentTouch = 0;
 
 window.addEventListener("touchmove", (event) => {
-  currentTouch = event.touches[0].clientX;
+  currentTouch = event.touches[0].clientX / 100;
 });
+
+window.addEventListener("touchstart", (event) => {
+  currentTouch = event.touches[0].clientX / 100;
+  touchBefore = currentTouch;
+});
+
+window.addEventListener("touchcancel", () => {});
 
 //
 // ANIMATE
@@ -94,10 +124,12 @@ const tick = () => {
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
 
+  controls.update();
   //Animate in tick
-  camera.lookAt(cube.position);
 
-  const touchX = currentTouch - touchBefore;
+  const rotateSpeed = currentTouch - touchBefore;
+
+  cube.rotation.y = cube.rotation.y + rotateSpeed * 0.5;
 
   touchBefore = currentTouch;
 

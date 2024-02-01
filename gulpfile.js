@@ -2,7 +2,7 @@ import { deleteSync } from "del";
 import gulp from "gulp";
 import zip from "gulp-zip";
 
-gulp.task("copyBundleFiles", () => {
+gulp.task("createBundleBase", () => {
   return gulp.src(".bundle_files/**/*").pipe(gulp.dest("./bundle/"));
 });
 
@@ -21,12 +21,5 @@ gulp.task("cleanBundle", async () => {
   return deleteSync("bundle");
 });
 
-gulp.task(
-  "bundle",
-  gulp.series(
-    "copyBundleFiles",
-    "copyDistInBundle",
-    "zipBundle",
-    "cleanBundle",
-  ),
-);
+gulp.task("bundle", gulp.series("createBundleBase", "copyDistInBundle"));
+gulp.task("bundleZipped", gulp.series("bundle", "zipBundle", "cleanBundle"));
