@@ -1,3 +1,8 @@
+@font-face {
+  font-family: musba;
+  src: url(./assets/MusBA-Regular.otf);
+}
+
 *,
 html {
   margin: 0;
@@ -8,18 +13,9 @@ body {
   position: relative;
 }
 
-.component {
-  bottom: 20%;
-  right: 0;
-  width: 30%;
-  position: absolute;
-  background-color: black;
-  color: white;
-}
-
 .buttons {
   z-index: 7;
-  bottom: 20%;
+  bottom: 10%;
   right: 0;
   width: 30%;
   position: absolute;
@@ -89,14 +85,47 @@ body {
 }
 
 #end-menu {
-  position: relative;
+  position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: rgb(245, 245, 220, 0.75);
   z-index: 10;
+}
+
+.interest-component {
+  position: absolute;
+  bottom: 20%;
+  right: 0;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  background: linear-gradient(0.25turn, #00000060, #00000060, #ebf8e100);
+  color: white;
+  padding: 2vh 8vw 4vh 3vw;
+  border-left: 1px solid white;
+}
+
+.interest-component img {
+  position: absolute;
+  top: -7.1vh;
+  left: -0.15vw;
+}
+#title-component {
+  font-family: musba;
+  font-size: 2rem;
+}
+
+#text-component {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  font-size: 1rem;
+  font-family: helvetica;
+  font-weight: 100;
 }
