@@ -49,6 +49,7 @@ export default defineConfig({
         "2-arts-graphiques/debug":
           "./src/experiences/2-arts-graphiques/debug/index.html",
         "6-peinture": "./src/experiences/6-peinture/index.html",
+        "6-peinture/game": "./src/experiences/6-peinture/game.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
       },
     },
