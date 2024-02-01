@@ -15,74 +15,55 @@
 @import "pages/home";
 @import "pages/game";
 
+// BROUILLON PABÔ :
 
-// BROUILLON PABÔ : 
-
-ul{
-    list-style: none;
+ul {
+  list-style: none;
 }
 
-.game-top{
-    height: 60vh;
-    min-width: 100%;
-    background-color: blueviolet;
-    display: flex;
+.game-top {
+  height: 60vh;
+  min-width: 100%;
+  background-color: blueviolet;
+  display: flex;
 
-    .utensils{
-        display: block;
+  .utensils {
+    display: block;
+
+    img {
+      width: 8vw;
+      height: 15vh;
     }
-
-    .recipe{
-
-        .list-item{
-
-            li{
-                background-color: aqua;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 10px;
-
-                .category{
-                    height: 30px;
-                    width: 30px;
-                    border-radius: 100%;
-                    background-color: orange;
-                }
-            }
-        }
-    }
+  }
 }
 
-.game-bottom{
-    height: 40vh;
-    min-width: 100%;
-    background-color: red;
-    display: flex;
-
-
+.game-bottom {
+  height: 40vh;
+  min-width: 100%;
+  background-color: red;
+  display: flex;
 }
 
-.category-items{
-    .item{
-        position: absolute;
-        top: 90px;
-        left: 0;
-    }
+.category-items {
+  .item {
+    position: absolute;
+    top: 10vh;
+    left: 0;
+  }
 }
 
-.composition{
-    .item{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50px;
-        height: 50px;
+.composition {
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10vw;
+    height: 10vh;
 
-        display: none;
+    display: none;
 
-        img{
-            width: 100%;
-        }
+    img {
+      width: 100%;
     }
+  }
 }
