@@ -13,14 +13,27 @@ body {
   position: relative;
 }
 
-.buttons {
-  z-index: 7;
-  bottom: 10%;
-  right: 0;
-  width: 30%;
+#nextButton {
+  z-index: 0;
   position: absolute;
-  background-color: black;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 50%;
+  padding-bottom: 2vh;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
   color: white;
+  font-family: helvetica;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+#nextButton img {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
 }
 
 .chronology {
@@ -105,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2vh;
-  background: linear-gradient(0.25turn, #00000060, #00000060, #ebf8e100);
+  background: linear-gradient(0.25turn, #00000060, #00000030, #ebf8e100);
   color: white;
   padding: 2vh 8vw 4vh 3vw;
   border-left: 1px solid white;
