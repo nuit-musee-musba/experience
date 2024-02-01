@@ -1,46 +1,50 @@
 .game-top {
-    position: relative;
-    overflow: hidden;
-    .composition {
-        background-color: aqua;
-        flex: 1;
-    }
+  position: relative;
+  overflow: hidden;
+  .composition {
+    background-color: aqua;
+    flex: 1;
+  }
 }
 
 .ingredients-container {
-    flex: 1;
-    position: relative;
+  flex: 1;
+  position: relative;
 }
 
 .recipe {
-    .list-item {
-        .item {
-            span {
-                display: block;
-            }
-        }
+  .list-item {
+    .item {
+      span {
+        display: block;
+      }
     }
+    .checked {
+      color: grey;
+      text-decoration: line-through;
+    }
+  }
 }
 
 // ENDING
 .ending-screen {
-    display: none;
-    position: fixed;
-    background: rgba(0,0,0,0.9);
-    left: 0;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    .ending-animation {
-        height: 50vh;
-    }
+  display: none;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  .ending-animation {
+    height: 50vh;
+  }
 }
 
 .has-ending-opened {
-    .game-chef {
-        display: none;
-    }
-    .ending-screen {
-        display: block;
-    }
+  .game-chef {
+    display: none;
+  }
+  .ending-screen {
+    display: block;
+  }
 }
