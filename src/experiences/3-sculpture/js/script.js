@@ -11,7 +11,7 @@ const sizes = {
 // INITIALIZATION
 //
 
-IntroPopup();
+// IntroPopup();
 
 const canvas = document.querySelector("canvas.webgl");
 
@@ -62,6 +62,24 @@ plane.scale.set(5, 5, 5);
 scene.add(plane);
 
 //
+// CONTROL
+//
+
+const controls = new OrbitControls(camera, canvas);
+
+controls.maxDistance = 6;
+controls.minDistance = 3;
+controls.enablePan = false;
+
+controls.minPolarAngle = Math.PI / 3.5;
+controls.maxPolarAngle = Math.PI / 2;
+
+controls.minAzimuthAngle = 0;
+controls.maxAzimuthAngle = 0;
+
+controls.rotateSpeed = 0.1;
+
+//
 // EVENT
 //
 
@@ -90,16 +108,8 @@ window.addEventListener("touchstart", (event) => {
   currentTouch = event.touches[0].clientX / 100;
   touchBefore = currentTouch;
 });
-//
-// CONTROL
-//
 
-const controls = new OrbitControls(camera, canvas);
-
-controls.maxDistance = 6;
-controls.minDistance = 3;
-controls.minPolarAngle = Math.PI / 2;
-controls.maxPolarAngle = Math.PI / 2;
+window.addEventListener("touchcancel", () => {});
 
 //
 // ANIMATE
@@ -108,30 +118,18 @@ controls.maxPolarAngle = Math.PI / 2;
 const clock = new THREE.Clock();
 let previousTime = 0;
 
-const diminue = -1;
-
-camera.position.z = 5 - diminue;
-plane.position.z = -8 + diminue;
-
-const dampingFactor = 0.02;
-
 const tick = () => {
   //Time
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
 
+  controls.update();
   //Animate in tick
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  cube.rotation.y =
-    THREE.MathUtils.lerp(
-      cube.rotation.y,
-      cube.rotation.y + rotateSpeed * 5,
-      dampingFactor
-    ) +
-    rotateSpeed * 0.3;
+  cube.rotation.y = cube.rotation.y + rotateSpeed * 0.5;
 
   touchBefore = currentTouch;
 
