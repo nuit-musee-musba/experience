@@ -62,6 +62,8 @@ class Square {
     this.square.style.backgroundColor = color;
   }
 }
-
-const square1 = new Square(document.body, "square1");
-const square2 = new Square(document.body, "square2");
+const section2 = document.getElementById('section-2')
+if(section2){
+  const square1 = new Square(section2, "square1");
+  const square2 = new Square(section2, "square2");
+}
