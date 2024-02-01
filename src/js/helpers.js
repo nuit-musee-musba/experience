@@ -10,7 +10,7 @@ export async function createIsland(i, count) {
       "/assets/hub/painting.glb", // url
       [0, 0, 0], // position
       [0, (i * count + Math.PI * 5) / 2, 0], // rotation to set the plane upright
-      [0.069, 0.069, 0.069] // scale
+      [0.065, 0.065, 0.065] // scale
     );
     // set unique id
     console.log("island scene", island.scene);
