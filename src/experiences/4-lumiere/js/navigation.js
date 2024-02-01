@@ -82,7 +82,7 @@ loadingManager.onError = (error) => {
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const colorTexture = textureLoader.load(
-  "./assets/first-painting/caravage-color.jpg"
+  "/4-lumiere/first-painting/caravage-color.jpg"
 );
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 
