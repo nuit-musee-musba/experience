@@ -60,8 +60,11 @@ Pas besoin de merger sur main et d'attendre que la ci se termine pour tester vot
 # Build le dossier dist pour l'hébergement distant
 yarn build
 
-# Build le fichier bundle.zip pour l'hébergement local
+# Build le dossier bundle/ pour l'hébergement local
 yarn bundle
+
+# Ou build le fichier bundle.zip pour l'hébergement local
+yarn bundle:zip
 ```
 
 ### Démarrer le bundle d'hébergement local
