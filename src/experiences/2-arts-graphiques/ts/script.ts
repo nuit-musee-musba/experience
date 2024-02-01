@@ -13,5 +13,10 @@
 //
 // const experience = new Experience(canvas);
 
+import paint from "./interactive/paint";
+
+window.addEventListener("load", () => {
+  paint.init()
+})
 
 console.log('no more 3D');
