@@ -91,7 +91,7 @@ const Paint = () => {
     }
 
     function percentage() {
-      const pixels = app.renderer.plugins.extract.pixels(renderTexture);
+      const pixels = app.renderer.extract.pixels(renderTexture);
       remainingPixels = pixels.reduce(
         (count : any, value : any, index: any) => (index % 4 === 3 && value !== 0 ? count + 1 : count),
         0
