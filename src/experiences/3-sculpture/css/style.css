@@ -7,7 +7,10 @@ html,
 body {
   background-color: white;
   overflow: hidden;
+  font-size: 40px;
 }
+
+/* Intro */
 
 .introContent {
   position: absolute;
@@ -25,6 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 30%;
+  font-size: 100%;
 }
 
 .introContainer {
@@ -49,18 +53,16 @@ body {
 
 #buttonPopup {
   display: block;
-  width: 100px;
+  padding: 2% 5%;
   margin-top: 2%;
   align-self: flex-end;
   transform: translateX(40px);
   font-size: 50px;
 }
-.show {
-  display: block;
-}
 
 .introSketch {
   width: 25%;
+  height: 20%;
   background-color: lawngreen;
   position: absolute;
   right: 5%;
@@ -69,9 +71,26 @@ body {
 
 .introModel {
   width: 25%;
+  height: 20%;
   background-color: lightcoral;
   position: absolute;
   right: 50%;
   transform: translateX(50%);
   top: 50%;
+}
+
+/* RoughHewing */
+
+.roughPart {
+  position: absolute;
+  z-index: 1;
+  left: 5%;
+  top: 10%;
+  width: 50%;
+  height: 70%;
+  background-color: azure;
+  display: none;
+}
+.show {
+  display: block;
 }
