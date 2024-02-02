@@ -41,10 +41,10 @@ class Square {
       console.log("handleCancel");
     });
     this.square.addEventListener("touchmove", (e) => {
-      console.log("%c handleMove", "background-color: #AA3DAA;");
       e.preventDefault();
       e.stopPropagation();
       this.changeColor("#AA3DAA");
+      console.log("%c handleMove", "background-color: #AA3DAA;");
 
       const elementBounding = this.square.getBoundingClientRect();
 
@@ -75,6 +75,7 @@ if (section2) {
   const clicker = document.querySelector<HTMLButtonElement>(".cliker-count");
 
   clicker?.addEventListener("touchstart", (e) => {
+    e.preventDefault();
     count++;
     console.log("clicker-count: touch");
 
@@ -93,6 +94,7 @@ if (section2) {
     document.querySelector<HTMLParagraphElement>(".pressingZoneTitle");
 
   clickZone?.addEventListener("touchmove", (e) => {
+    e.preventDefault();
     console.log("pressing zone : ", e);
     if (clickZoneTitle) {
       clickZoneTitle.innerText = String(e.touches.length);
