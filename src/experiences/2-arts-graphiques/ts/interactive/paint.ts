@@ -13,14 +13,15 @@ const Paint = () => {
 
   document.body.appendChild(app.view);
 
-  // prepare circle texture, that will be our brush
   const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
 
-  // Create a line that will interpolate the drawn points
   const line = new PIXI.Graphics();
 
   PIXI.Assets.add("t2", "/2-arts-graphiques/canvas/canvas1.png");
   PIXI.Assets.load(["t2"]).then(setup);
+
+  let totalPixels: number;
+  let remainingPixels: number;
 
   function setup() {
     console.log(app.screen);
@@ -50,6 +51,8 @@ const Paint = () => {
 
     let dragging = false;
     let lastDrawnPoint: PIXI.Point | null = null;
+
+    totalPixels = background.width * background.height;
 
     function pointerMove({
       global: { x, y },
@@ -82,6 +85,17 @@ const Paint = () => {
       }
     }
 
+    function percentage() {
+      const pixels = app.renderer.plugins.extract.pixels(renderTexture);
+      remainingPixels = pixels.reduce(
+        (count : any, value : any, index: any) => (index % 4 === 3 && value !== 0 ? count + 1 : count),
+        0
+      );
+
+      const percentageRemaining = (remainingPixels / totalPixels) * 100;
+      console.log(`Pourcentage de pixel transparent: ${percentageRemaining.toFixed(2)}%`);
+    }
+
     function pointerDown(event: any) {
       dragging = true;
       pointerMove(event);
@@ -90,6 +104,8 @@ const Paint = () => {
     function pointerUp(event: any) {
       dragging = false;
       lastDrawnPoint = null;
+
+      percentage()
     }
   }
 
