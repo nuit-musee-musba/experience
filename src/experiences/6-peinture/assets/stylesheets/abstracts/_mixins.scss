@@ -4,3 +4,38 @@
     margin-bottom: 0;
     margin-top: 0;
 }
+
+@mixin icon($icon-name: '', $pseudo-element: before) {
+    &::#{$pseudo-element} {
+        content: map-get($icons, $icon-name);
+        display: inline-block;
+        font-family: 'Icon';
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1;
+        speak: never;
+        text-transform: none;
+        vertical-align: middle;
+    }
+}
+
+@mixin global-btn($bg-color: white, $color: black, $text: false) {
+    align-items: center;
+    background: $bg-color;
+    border-radius: 21px;
+    color: $color;
+    display: flex;
+    padding: $global-btn-padding;
+    &::before {
+        font-size: 3.188rem;
+    }
+    span {
+        font-size: 0;
+    }
+    @if $text {
+        span {
+            font-size: inherit;
+        }
+    }
+}
