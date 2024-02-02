@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import gsap from "gsap";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { period } from "./period";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 let index = 0;
 let previousTime = 0;
@@ -11,19 +12,25 @@ const clock = new THREE.Clock();
 const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 const gltfLoader = new GLTFLoader();
+const dracoLoader = new DRACOLoader();
 let mixer = null;
+let isShowingText = false;
+
+dracoLoader.setDecoderPath("/1-batiment/draco/");
+dracoLoader.preload();
+gltfLoader.setDRACOLoader(dracoLoader);
 
 //MATERIALS
 
-gltfLoader.load("/1-batiment/assets/ANCIEN_MUSEE.glb", (gltf) => {
-  gltf.scene.traverse((child) => {
-    if (child.isMesh) {
-      // child.material = new THREE.MeshBasicMaterial({ color: 'red', wireframe: true });
-    }
-  });
-  scene.add(gltf.scene);
-  gltf.scene.rotation.y = -1.25;
-});
+// gltfLoader.load("/1-batiment/assets/museeV2anime.glb", (gltf) => {
+//   gltf.scene.traverse((child) => {
+//     if (child.isMesh) {
+//       // child.material = new THREE.MeshBasicMaterial({ color: 'red', wireframe: true });
+//     }
+//   });
+//   scene.add(gltf.scene);
+//   gltf.scene.rotation.y = -1.25;
+// });
 
 // LIGHTS
 
@@ -35,27 +42,24 @@ directionalLight.lookAt(4, 2, 4);
 
 scene.add(ambientLight, directionalLight);
 
-// gltfLoader.load("./assets/blockout.glb", (gltf) => {
-//   scene.add(gltf.scene);
+gltfLoader.load("/1-batiment/assets/museeV2anime.glb", (gltf) => {
+  scene.add(gltf.scene);
 
-//   mixer = new THREE.AnimationMixer(gltf.scene);
+  mixer = new THREE.AnimationMixer(gltf.scene);
 
-//   gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
+  gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
 
-//   gltf.animations.forEach((animation, index) => {
-//     const action = mixer.clipAction(animation);
+  gltf.animations.forEach((animation, index) => {
+    const action = mixer.clipAction(animation);
 
-//     const delay =
-//       animation.timestamp !== undefined ? animation.timestamp : index * 1000;
-
-//     action.setEffectiveTimeScale(1);
-//     action.setEffectiveWeight(1);
-//     action.clampWhenFinished = true;
-//     action.loop = THREE.LoopOnce;
-//     action.startAt(delay / 1000);
-//     action.play();
-//   });
-// });
+    action.setEffectiveTimeScale(1);
+    action.setEffectiveWeight(1);
+    action.clampWhenFinished = true;
+    action.loop = THREE.LoopOnce;
+    action.startAt(0);
+    action.play();
+  });
+});
 
 // SIZES
 const sizes = {
@@ -117,13 +121,25 @@ const tick = () => {
 tick();
 
 const endMenu = document.getElementById("end-menu");
-document.getElementById("restart-button").addEventListener("click", restart);
-document.getElementById("nextButton").addEventListener("click", nextStep);
+const component = document.getElementById("component");
 
 const restart = () => {
   index = 0;
   handleFocusPeriod(period[index]);
   endMenu.style.display = "none";
+};
+
+const displayInfo = () => {
+  if (!isShowingText) {
+    isShowingText = true;
+    component.style.display = "flex";
+    return;
+  }
+  if (isShowingText) {
+    isShowingText = false;
+    component.style.display = "none";
+    return;
+  }
 };
 
 const nextStep = () => {
@@ -172,3 +188,9 @@ function handleFocusPeriod(step) {
   });
 }
 handleFocusPeriod(period[index]);
+
+document.getElementById("restart-button").addEventListener("click", restart);
+document.getElementById("nextButton").addEventListener("click", nextStep);
+document
+  .getElementById("interestButton")
+  .addEventListener("click", displayInfo);
