@@ -34,7 +34,6 @@ function handleDragInteraction(
 
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
-    console.log("touchstart");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
