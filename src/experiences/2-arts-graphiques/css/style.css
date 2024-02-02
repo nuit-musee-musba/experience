@@ -53,3 +53,47 @@ canvas {
   bottom: 100px;
   border: 1px solid black;
 }
+
+/* end debug page*/
+
+/* section 1 */
+.section-1 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.sec1-painting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60%;
+  aspect-ratio: 2/3;
+  background-color: #aaaaaa;
+}
+
+.sec1-dragable {
+  position: absolute;
+  background-color: #c3c3c3;
+  width: 400px;
+  height: 500px;
+}
+
+#one {
+  left: 1330px;
+  top: 300px;
+}
+
+#two {
+  left: 2160px;
+  top: 500px;
+}
+#three {
+  left: 1418px;
+  top: 917px;
+}
+#four {
+  left: 1980px;
+  top: 1290px;
+}

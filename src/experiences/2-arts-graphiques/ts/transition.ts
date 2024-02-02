@@ -1,3 +1,6 @@
+import { Section } from "./section";
+import { Section1 } from "./section1";
+
 export default class Transition{
     currentSection: HTMLElement | null
     section1: HTMLElement | null
@@ -5,13 +8,20 @@ export default class Transition{
     section3: HTMLElement | null
     currentSectionNumber: number
 
-    constructor() {
-        this.currentSectionNumber = 1
-        this.currentSection = document.getElementById(`section-1`)
-        this.section1 = document.getElementById(`section-1`)
-        this.section2 = document.getElementById(`section-2`)
-        this.section3 = document.getElementById(`section-3`)
 
+
+  constructor() {
+    this.currentSectionNumber = 1;
+    this.section1 = new Section1(`section-1`);
+    this.section2 = new Section(`section-2`);
+    this.section3 = new Section(`section-3`);
+
+    const button = document.querySelector<HTMLButtonElement>(".button");
+
+    if (!button) {
+      throw new Error(
+        "transition/construcor: Elelement with a class of 'button' must be present"
+      );
     }
 
     handleTransition(){
