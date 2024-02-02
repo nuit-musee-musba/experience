@@ -1,3 +1,13 @@
+:root {
+  font-size: 16px;
+}
+
+@media (min-width: 2000px) {
+  :root {
+    font-size: 64px;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +28,6 @@ body {
 
 body {
   line-height: 120%;
-  font-size: 3rem;
 }
 
 p {
@@ -36,7 +45,7 @@ p {
 .btn-temp-color {
   background-color: white;
   color: black;
-  font-size: 3rem;
+  font-size: 1rem;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
 }
@@ -79,7 +88,7 @@ p {
 }
 
 .popin-body {
-  width: 80rem;
+  width: 30rem;
   color: white;
   box-sizing: border-box;
 }
