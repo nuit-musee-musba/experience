@@ -18,8 +18,8 @@ export async function createIsland(i, count) {
     // Create and add text to the island scene
     const islandText = createTextGeometry(
       "Island " + (i + 1),
-      [0, 1.5, (i * count + Math.PI * 5) / 2],
-      0.02
+      [0, 1.5, 3],
+      0.2
     );
     island.scene.add(islandText);
     // set unique id
@@ -54,27 +54,25 @@ function createGLTFModel(i, url, position, rotation, scale) {
 
 // Function to create text geometry
 function createTextGeometry(text, position, size) {
+  // TODO: fix path load
   const loader = new FontLoader();
-  const fontUrl = "/assets/hub/font.json"; // Specify the path to your font file
+  const fontUrl = "./assets/hub/font.json"; // Specify the path to your font file
   const font = loader.load(fontUrl);
+  console.log("font", font);
 
   const textGeometry = new TextGeometry(text, {
     font: font,
-    // size: size,
-    // height: 0.2,
-    size: 80,
-    height: 5,
-    curveSegments: 12,
-    bevelEnabled: true,
-    bevelThickness: 10,
-    bevelSize: 8,
-    bevelOffset: 0,
-    bevelSegments: 5,
+    size: size,
+    height: 0.2,
+    // size: 80,
+    // height: 5,
   });
+  console.log("Text", text);
 
-  const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   textMesh.position.set(...position);
+  console.log("textmesh position", textMesh.position);
 
   return textMesh;
 }
