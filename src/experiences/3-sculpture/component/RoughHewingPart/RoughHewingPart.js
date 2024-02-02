@@ -1,3 +1,5 @@
+import "./RoughHewingPart.scss";
+
 const RoughHewingPart = () => {
   const roughPart = document.getElementById("RoughHewingPart");
 
