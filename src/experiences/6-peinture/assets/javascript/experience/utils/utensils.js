@@ -17,7 +17,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
 
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
-
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
@@ -50,7 +49,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
         if (!isHorizontalCollision) {
           horizontalTraversals++;
           isHorizontalCollision = true;
-          console.log(horizontalTraversals);
           if (horizontalTraversals == 1) {
             targetImage.src =
               "./assets/images/ingredients/animals/dolphin-2.png";
@@ -63,9 +61,9 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
         isHorizontalCollision = false;
       }
     } else {
-      alert("Tu as peléééé le citroooon !");
-      // dragElement.style.left = realInitialX + "px"; //TO DO : faire revenir le couteau à sa position initiale
-      // dragElement.style.top = realInitialY + "px";
+      console.log("coupé");
+      dragElement.style.left = realInitialX + "px";
+      dragElement.style.top = realInitialY + "px";
     }
 
     //comportement quand le couteau est en train de bouger

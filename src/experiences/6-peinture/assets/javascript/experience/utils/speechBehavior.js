@@ -36,7 +36,6 @@ function animateText(speech, thisLoopId) {
       active_bulle = false;
       isAnimating = false;
     }
-    console.log("Traitement effectué #" + isAnimating);
   }
 }
 
@@ -49,7 +48,6 @@ function init(text) {
 
 function print_chef_speech(text) {
   speech_area.style.opacity = 1;
-  console.log(speech_area);
   old_text = text;
   init(text);
   active_bulle = true;
