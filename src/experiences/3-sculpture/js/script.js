@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import IntroPopup from "./IntroPopup";
+import RoughHewingPart from "./RoughHewingPart";
 
 const sizes = {
   width: window.innerWidth,
@@ -10,9 +11,7 @@ const sizes = {
 //
 // INITIALIZATION
 //
-
 IntroPopup();
-
 const canvas = document.querySelector("canvas.webgl");
 
 // Scene

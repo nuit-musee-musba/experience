@@ -10,6 +10,8 @@ body {
   font-size: 40px;
 }
 
+/* Intro */
+
 .introContent {
   position: absolute;
   z-index: 1;
@@ -53,9 +55,6 @@ body {
   align-self: flex-end;
   transform: translateX(40px);
 }
-.show {
-  display: block;
-}
 
 .introSketch {
   width: 25%;
@@ -74,4 +73,20 @@ body {
   right: 50%;
   transform: translateX(50%);
   top: 50%;
+}
+
+/* RoughHewing */
+
+.roughPart {
+  position: absolute;
+  z-index: 1;
+  left: 5%;
+  top: 10%;
+  width: 50%;
+  height: 70%;
+  background-color: azure;
+  display: none;
+}
+.show {
+  display: block;
 }
