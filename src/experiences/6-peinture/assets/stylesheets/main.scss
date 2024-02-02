@@ -7,6 +7,7 @@
 @import "base/typography";
 
 // COMPONENTS
+@import "components/nav";
 @import "components/tabs";
 @import "components/chef-dialogs";
 @import "components/dialogs";
@@ -66,8 +67,4 @@ ul {
       width: 100%;
     }
   }
-}
-
-* {
-  font-size: 70px;
 }
