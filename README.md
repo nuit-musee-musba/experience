@@ -41,6 +41,11 @@ Les expériences, chacune dans son dossier.
 Vous avez un exemple dans `experience-template` pour voir comment s'architecture une expérience (accessible sur http://localhost:5173/experiences/experience-template).
 **Pensez à ajouter votre dossier dans le fichier `vite.config.js`**
 
+### Dans `/static`
+
+Les fichiers qui ne sont pas traités par vite (donc autre que js et css en gros)
+Exemple : image, fichier 3D
+
 ### À la racine `/`
 
 Les fichiers de config
