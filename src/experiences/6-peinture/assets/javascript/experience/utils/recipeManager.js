@@ -30,8 +30,6 @@ function countDuplicates(strings) {
   return resultArray;
 }
 
-console.log(elements);
-
 elements.forEach((element) => {
   if (element.className.includes("multiple")) {
     let preElId = element.id.split("-");
@@ -41,13 +39,11 @@ elements.forEach((element) => {
     let preElId = element.id.split("-");
     let ElId = preElId[0];
     accArray.push(ElId);
-    console.log("elid : " + ElId);
   }
 });
 
 const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
-console.log(result);
 
 result.forEach((element) => {
   let thisItem = items.items.find((item) => item.id === element.name);
@@ -67,13 +63,10 @@ result.forEach((element) => {
 export function recipeResolve(id) {
   let thisItem = resultToVerify.find((el) => el.name === id);
   const indexOfItem = resultToVerify.indexOf(thisItem);
-  console.log(thisItem);
   resultToVerify[indexOfItem].count--;
 
   if (resultToVerify[indexOfItem].count <= 0) {
     var this_object = document.getElementById("recipe-" + id);
     this_object.classList.add("checked");
   }
-
-  console.log(resultToVerify[indexOfItem].count);
 }
