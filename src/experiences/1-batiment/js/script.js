@@ -124,6 +124,21 @@ tick();
 const endMenu = document.getElementById("end-menu");
 const component = document.getElementById("component");
 
+const audioContent = document.getElementById("audio-content");
+const audio = document.getElementById("audio");
+
+let isAudioPlaying = false;
+
+audioContent.addEventListener("click", () => {
+  if (isAudioPlaying) {
+    audio.src = "./assets/icons/audio.svg";
+  } else {
+    audio.src = "./assets/icons/audioNone.svg";
+  }
+
+  isAudioPlaying = !isAudioPlaying;
+});
+
 const restart = () => {
   index = 0;
   handleFocusPeriod(period[index]);
