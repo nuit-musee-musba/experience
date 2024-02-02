@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import IntroPopup from "./IntroPopup";
 import RoughHewingPart from "./RoughHewingPart";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const sizes = {
   width: window.innerWidth,
@@ -17,6 +18,10 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
+
+// GLTFLoader
+
+const gltfLoader = new GLTFLoader();
 
 //
 // OBJET
@@ -59,6 +64,18 @@ const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 plane.position.set(0, 0, -4);
 plane.scale.set(5, 5, 5);
 scene.add(plane);
+
+let statueV1;
+
+gltfLoader.load("/3-sculpture/MozartV1.glb", (gltf) => {
+  gltf.scene.scale.set(0.38, 0.38, 0.38);
+  gltf.scene.position.set(0.8, -0.75, 0);
+  gltf.scene.rotation.y = Math.PI / 2;
+  statueV1 = gltf.scene;
+});
+
+const light = new THREE.AmbientLight(0x404040);
+scene.add(light);
 
 //
 // EVENT
@@ -113,6 +130,7 @@ document.addEventListener("click", onClick, false);
 function onClick() {
   if (currentPart1) {
     alert("test");
+    scene.add(statueV1);
   }
   if (currentPart2) {
     alert("test2");
