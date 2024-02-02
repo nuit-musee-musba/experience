@@ -7,8 +7,7 @@
     src: url('../../static/fonts/IconFont/IconFont.ttf') format("ttf"), url('../../static/fonts/IconFont/IconFont.woff') format("woff"), url('../../static/fonts/IconFont/IconFont.woff2') format("woff2");
 }
 
-
-// TYPO
+// MONTSERRAT
 @font-face {
     font-display: swap;
     font-family: 'Montserrat';
@@ -38,5 +37,20 @@
     src: url('../../static/fonts/Montserrat/Montserrat-BoldItalic.ttf') format("ttf"), url('../../static/fonts/Montserrat/Montserrat-BoldItalic.woff') format("woff");
 }
 
+// MUSBA
+@font-face {
+    font-display: swap;
+    font-family: 'Musba';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../../static/fonts/MusBa/MusBA-Regular.woff2') format("ttf"), url('../../static/fonts/MusBa/MusBA-Regular.woff') format("woff");
+}
 
-
+h1 {
+    font-family: $font-family;
+    font-size: $h2-font-size;
+}
+h2 {
+    font-family: $font-heading;
+    font-size: $h2-font-size;
+}
