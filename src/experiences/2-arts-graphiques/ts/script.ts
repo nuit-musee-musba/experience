@@ -1,14 +1,29 @@
-import Experience from "./Experience/Experience";
+import Transition from './transition'
 
-const canvas = document.querySelector<HTMLCanvasElement>("canvas.webgl");
+import paint from "./interactive/paint";
 
-if (!canvas) {
-  console.error(
-    "Canvas with a class of 'webgl' is required in order for the experience to work"
-  );
-  throw new Error(
-    "Canvas with a class of 'webgl' is required in order for the experience to work"
-  );
+window.addEventListener("load", () => {
+  paint();
+})
+
+const transition = new Transition();
+
+const button = document.getElementById('button')
+const section1 = document.getElementById('section-1')
+const section2 = document.getElementById('section-2')
+const section3 = document.getElementById('section-3')
+
+if(button){
+    button.addEventListener('click', () => transition.handleTransition())
+}
+if(section1){
+    section1.style.display = 'none'
 }
 
-const experience = new Experience(canvas);
+if(section2){
+    section2.style.display = 'none'
+}
+
+if(section3){
+    section3.style.display = 'none'
+}

@@ -1,5 +1,7 @@
+import items from "../data/items.json" assert { type: "json" };
+import { recipeResolve } from "./recipeManager.js";
+
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
-console.log(craftCont);
 var winConditions = craftCont.length;
 var howManyDone = 0;
 
@@ -30,11 +32,9 @@ function handleDragInteraction(
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
-  console.log("initialX: " + initialX);
-  console.log("initialY: " + initialY);
-
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
+    console.log("touchstart");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
@@ -58,7 +58,6 @@ function handleDragInteraction(
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      //console.log('element dans la zone');
       // if(successPosX && successPosY){
       //     dragElement.style.left = successPosX + 'px';
       //     dragElement.style.top = successPosY + 'px';
@@ -67,30 +66,40 @@ function handleDragInteraction(
       //     dragElement.style.top = targetZoneRect.top + 'px';
       // }
 
+      let dialog = items.items.find((item) => item.id === dragElementId);
+
       if (isCorrect) {
         if (isMultiple) {
           if (howManyDrags <= placedEl.length - 1) {
             placedEl[howManyDrags].style.display = "block";
             howManyDone++;
-            alert("Chef : parfait !");
+
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            recipeResolve(dialog.id);
+            //alert("Chef : " + dialog.dialog);
           } else {
-            alert("tu as mis tout les elements requis pour cet aliment");
+            print_chef_speech(
+              "Tu as mis tout les elements requis pour cet aliment"
+            ); //definie dans speechBehavior.js
+            //alert("tu as mis tout les elements requis pour cet aliment");
           }
         } else {
           if (!success) {
-            console.log(placedEl);
             placedEl.style.display = "block";
-            alert("Chef : parfait !");
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            recipeResolve(dialog.id);
+            //alert("Chef : " + dialog.dialog);
             howManyDone++;
           } else {
-            alert("tu as mis tout les elements requis pour cet aliment");
+            print_chef_speech(
+              "Tu as mis tout les elements requis pour cet aliment"
+            ); //definie dans speechBehavior.js
+            //alert("tu as mis tout les elements requis pour cet aliment");
           }
         }
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
-
-        console.log("true");
 
         success = true;
 
@@ -102,7 +111,8 @@ function handleDragInteraction(
       } else {
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px"; //l'utilisateur n'a pas selectionné le bon aliment
-        alert("Chef : ce n'est pas le bon aliment !");
+        print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+        //alert("Chef : " + dialog.dialog);
       }
 
       howManyDrags++;
@@ -123,8 +133,6 @@ let i = 1;
 dragableElementList.forEach((element) => {
   let placedEl = document.getElementById(element + "-placed");
   var elementsWithId = document.querySelectorAll(".multiple-" + element);
-
-  console.log(elementsWithId);
 
   let ElementList = document.getElementById(element);
 

@@ -47,7 +47,13 @@ export default defineConfig({
         "1-batiment": "./src/experiences/1-batiment/index.html",
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
         "6-peinture": "./src/experiences/6-peinture/index.html",
+        "6-peinture/game": "./src/experiences/6-peinture/game.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
+        "4-lumiere": "./src/experiences/4-lumiere/index.html",
+        "4-lumiere/first-painting":
+          "./src/experiences/4-lumiere/first-painting.html",
+        "4-lumiere/second-painting":
+          "./src/experiences/4-lumiere/second-painting.html",
       },
     },
   },

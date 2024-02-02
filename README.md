@@ -41,6 +41,11 @@ Les expériences, chacune dans son dossier.
 Vous avez un exemple dans `experience-template` pour voir comment s'architecture une expérience (accessible sur http://localhost:5173/experiences/experience-template).
 **Pensez à ajouter votre dossier dans le fichier `vite.config.js`**
 
+### Dans `/static`
+
+Les fichiers qui ne sont pas traités par vite (donc autre que js et css en gros)
+Exemple : image, fichier 3D
+
 ### À la racine `/`
 
 Les fichiers de config
@@ -60,8 +65,11 @@ Pas besoin de merger sur main et d'attendre que la ci se termine pour tester vot
 # Build le dossier dist pour l'hébergement distant
 yarn build
 
-# Build le fichier bundle.zip pour l'hébergement local
+# Build le dossier bundle/ pour l'hébergement local
 yarn bundle
+
+# Ou build le fichier bundle.zip pour l'hébergement local
+yarn bundle:zip
 ```
 
 ### Démarrer le bundle d'hébergement local
