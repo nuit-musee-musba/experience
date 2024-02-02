@@ -76,9 +76,16 @@ if (section2) {
 
   clicker?.addEventListener("touchstart", (e) => {
     count++;
-    console.log("heu");
+    console.log("clicker-count: touch");
 
-    clicker.innerText = String(count);
+    clicker.innerText = `touch ${String(count)}`;
+  });
+
+  clicker?.addEventListener("click", (e) => {
+    count++;
+    console.log("clicker-count: click");
+
+    clicker.innerText = `click ${String(count)}`;
   });
 
   const clickZone = document.querySelector<HTMLDivElement>(".pressingZone");
