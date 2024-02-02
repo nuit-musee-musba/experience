@@ -3,23 +3,8 @@ nav {
     position: fixed;
     left: $nav-position;
     z-index: 99;
-    ul {
-        display: flex;
-        flex-direction: column;
-        gap: 4.25rem;
-        li {
-            a {
-                @include global-btn;
-            }
-            .link-hub {
-                @include icon(home);
-            }
-            .link-settings {
-                @include icon(settings);
-            }
-            .link-rollback {
-                @include icon(rollback);
-            }
-        }
+    .link-hub {
+        @include global-btn;
+        @include icon(home);
     }
 }
