@@ -5,7 +5,7 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
 // World creation
-export async function createIsland(i, count) {
+export async function createIsland(i, count, color) {
   // For a loaded GLTF model
   try {
     const island = await createGLTFModel(
@@ -13,7 +13,8 @@ export async function createIsland(i, count) {
       "/assets/hub/reserve.glb", // url
       [0, 0, 0], // position
       [0, (i * count + Math.PI * 5) / 2, 0], // rotation to set the plane upright
-      [0.065, 0.065, 0.065] // scale
+      [0.065, 0.065, 0.065], // scale
+      color
     );
     // Create and add text to the island scene
     const islandText = createTextGeometry(
@@ -30,7 +31,7 @@ export async function createIsland(i, count) {
   }
 }
 
-function createGLTFModel(i, url, position, rotation, scale) {
+function createGLTFModel(i, url, position, rotation, scale, color) {
   // Instantiate a loader
   const gltfLoader = new GLTFLoader();
   console.info("LOADIG 3D OBJECT ");
@@ -44,6 +45,20 @@ function createGLTFModel(i, url, position, rotation, scale) {
         gltf.scene.rotation.set(...rotation);
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
         // If you need to perform additional actions after loading, resolve the promise
+        // Traverse through the scene to update materials
+        gltf.scene.traverse((child) => {
+          if (child.isMesh) {
+            // Check if the material has a color property (for Lambert or Phong materials)
+            if (child.material.color) {
+              child.material.color.set(color);
+            }
+            // Check if the material has an emissive property (for Standard materials)
+            if (child.material.emissive) {
+              child.material.emissive.set(color);
+            }
+            // You may need to add more checks based on the material type used in your model
+          }
+        });
         resolve(gltf);
       },
       undefined,

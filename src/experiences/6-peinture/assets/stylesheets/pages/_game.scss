@@ -12,6 +12,10 @@
   }
 }
 
+#dialog {
+  font-size: 60px;
+}
+
 .utensils {
   position: relative;
   width: 20vw;
@@ -48,10 +52,11 @@
       span {
         display: block;
       }
-    }
-    .checked {
-      color: grey;
-      text-decoration: line-through;
+
+      &.checked {
+        color: grey;
+        text-decoration: line-through;
+      }
     }
   }
 }

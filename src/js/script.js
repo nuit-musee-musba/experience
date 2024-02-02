@@ -61,7 +61,8 @@ const islandPromises = [];
 
 // Create worlds
 for (let i = 0; i < 5; i++) {
-  const islandPromise = createIsland(i, 5)
+  const color = router[i].color;
+  const islandPromise = createIsland(i, 5, color)
     .then((island) => {
       // Add each world to the carousel
       carousel.add(island);
