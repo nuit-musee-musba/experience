@@ -90,6 +90,7 @@ scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
+controls.enableZoom = false;
 
 const getCameraPositionForTarget = (position) => {
   return { x: position.x + 0, y: position.y + 1, z: position.z + 1 };
@@ -122,6 +123,21 @@ tick();
 
 const endMenu = document.getElementById("end-menu");
 const component = document.getElementById("component");
+
+const audioContent = document.getElementById("audio-content");
+const audio = document.getElementById("audio");
+
+let isAudioPlaying = false;
+
+audioContent.addEventListener("click", () => {
+  if (isAudioPlaying) {
+    audio.src = "./assets/icons/audio.svg";
+  } else {
+    audio.src = "./assets/icons/audioNone.svg";
+  }
+
+  isAudioPlaying = !isAudioPlaying;
+});
 
 const restart = () => {
   index = 0;
