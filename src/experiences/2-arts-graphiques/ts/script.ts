@@ -3,8 +3,9 @@ import Transition from './transition'
 import paint from "./interactive/paint";
 
 window.addEventListener("load", () => {
-  paint.init()
+  paint();
 })
+
 const transition = new Transition();
 
 const button = document.getElementById('button')

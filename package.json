@@ -19,7 +19,10 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
+    "@pixi/app": "^7.4.0",
+    "@types/pixi.js": "^5.0.0",
     "gsap": "^3.12.5",
+    "lil-gui": "^0.19.1",
     "lottie-web": "^5.12.2",
     "three": "^0.158.0"
   }

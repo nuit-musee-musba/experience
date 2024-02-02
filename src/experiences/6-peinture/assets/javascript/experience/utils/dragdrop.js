@@ -1,8 +1,7 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager";
+import { recipeResolve } from "./recipeManager.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
-console.log(craftCont);
 var winConditions = craftCont.length;
 var howManyDone = 0;
 
@@ -35,6 +34,7 @@ function handleDragInteraction(
 
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
+    console.log("touchstart");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
@@ -58,7 +58,6 @@ function handleDragInteraction(
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      //console.log('element dans la zone');
       // if(successPosX && successPosY){
       //     dragElement.style.left = successPosX + 'px';
       //     dragElement.style.top = successPosY + 'px';
@@ -68,8 +67,6 @@ function handleDragInteraction(
       // }
 
       let dialog = items.items.find((item) => item.id === dragElementId);
-      console.log("drag " + dragElementId);
-      console.log(dialog);
 
       if (isCorrect) {
         if (isMultiple) {
@@ -88,7 +85,6 @@ function handleDragInteraction(
           }
         } else {
           if (!success) {
-            console.log(placedEl);
             placedEl.style.display = "block";
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             recipeResolve(dialog.id);
@@ -104,8 +100,6 @@ function handleDragInteraction(
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
-
-        console.log("true");
 
         success = true;
 
@@ -139,8 +133,6 @@ let i = 1;
 dragableElementList.forEach((element) => {
   let placedEl = document.getElementById(element + "-placed");
   var elementsWithId = document.querySelectorAll(".multiple-" + element);
-
-  console.log(elementsWithId);
 
   let ElementList = document.getElementById(element);
 

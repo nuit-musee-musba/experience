@@ -22,7 +22,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   2000
 );
-camera.position.set(0, 7, 8);
+camera.position.set(0, 3, 8);
 camera.lookAt(0, 0, 0);
 
 // Create Renderer
@@ -39,8 +39,13 @@ document.body.appendChild(renderer.domElement);
 // const axesHelper = new THREE.AxesHelper( 5 );
 // scene.add( axesHelper );
 
+// Add light
+const light = new THREE.DirectionalLight(0xffffff, 4);
+light.position.set(0, 3, 3);
+scene.add(light);
+
 // Fog
-scene.fog = new THREE.Fog("#a79", 8.5, 12);
+// scene.fog = new THREE.Fog("#a79", 8.5, 12);
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
@@ -56,7 +61,8 @@ const islandPromises = [];
 
 // Create worlds
 for (let i = 0; i < 5; i++) {
-  const islandPromise = createIsland(i, 5)
+  const color = router[i].color;
+  const islandPromise = createIsland(i, 5, color)
     .then((island) => {
       // Add each world to the carousel
       carousel.add(island);
