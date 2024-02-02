@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import IntroPopup from "./IntroPopup";
-import RoughHewingPart from "./RoughHewingPart";
+import IntroPopup from "./component/IntroPart/IntroPopup";
+import RoughHewingPart from "./component/RoughHewingPart/RoughHewingPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const sizes = {
