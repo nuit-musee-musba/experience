@@ -85,7 +85,7 @@ function handleDragInteraction(
         } else {
           if (!success) {
             placedEl.style.display = "block";
-            speechBehavior.print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             recipeResolve(dialog.id);
             //alert("Chef : " + dialog.dialog);
             howManyDone++;
