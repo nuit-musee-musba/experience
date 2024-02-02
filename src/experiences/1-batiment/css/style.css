@@ -103,7 +103,7 @@ body {
   bottom: 20%;
   right: 0;
   width: 30vw;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 2vh;
   background: linear-gradient(0.25turn, #00000060, #00000030, #ebf8e100);
