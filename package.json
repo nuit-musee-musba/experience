@@ -1,0 +1,28 @@
+{
+  "name": "nuit-au-musba",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "bundle": "npm run build && gulp bundle",
+    "bundle:zip": "npm run build && gulp bundleZipped"
+  },
+  "devDependencies": {
+    "@types/three": "^0.160.0",
+    "del": "^7.1.0",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^6.0.0",
+    "prettier": "^3.2.4",
+    "sass": "^1.70.0",
+    "typescript": "^5.3.3",
+    "vite": "^4.5.0"
+  },
+  "dependencies": {
+    "@pixi/app": "^7.4.0",
+    "gsap": "^3.12.5",
+    "lil-gui": "^0.19.1",
+    "lottie-web": "^5.12.2",
+    "three": "^0.158.0"
+  }
+}

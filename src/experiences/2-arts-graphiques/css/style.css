@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+#button {
+  font-size: 6rem;
+  padding: 3rem 2rem;
+  background-color: rgb(241, 241, 241);
+  border: 1px solid black;
+  border-radius: 110px;
+}
+
+canvas {
+  border: 5px solid red;
+}
+
+.square {
+  height: 320px;
+  width: 320px;
+  background-color: #aaaaaa;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.cliker-count {
+  top: 1000px;
+  left: 400px;
+}
+
+.pressingZoneTitle {
+  position: absolute;
+  right: 1600px;
+  bottom: 1050px;
+  font-size: 3rem;
+}
+.pressingZone {
+  width: 1600px;
+  height: 900px;
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+  border: 1px solid black;
+}

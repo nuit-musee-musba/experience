@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Raisin",
+      "category": "Aliments",
+      "image": "assets/images/ingredients/food/grape.png",
+      "description": "Lorem ipsum le raisin ça fait du vin",
+      "dialog": "Ah, du raisin ! Excellent choix, c'est l'ingrédient parfait pour sublimer nos saveurs. Bien joué !"
+    },
+    {
+      "id": "2",
+      "name": "Carotte",
+      "category": "Aliments",
+      "image": "assets/images/ingredients/food/carrot.png",
+      "description": "Lorem ipsum la carotte c d'la tarte",
+      "dialog": "Hmm, la carotte n'est pas exactement ce que je cherchais. Ce n'est pas le bon aliment, mais ne vous découragez pas, continuez à chercher."
+    },
+    {
+      "id": "3",
+      "name": "Citron",
+      "category": "Aliments",
+      "image": "assets/images/ingredients/food/lemon.png",
+      "description": "Lorem ipsum le citron c nul berk",
+      "dialog": "Oh non, le citron n'est pas ce que je voulais pour cette recette. Essayez quelque chose d'autre, s'il vous plaît."
+    },
+    {
+      "id": "4",
+      "name": "Crâne",
+      "category": "Objets",
+      "image": "assets/images/ingredients/objects/skull.png",
+      "description": "brr c dark",
+      "dialog": "Un crâne ? C'est... créatif, mais ce n'est pas ce dont j'ai besoin pour notre recette. Essayez autre chose, s'il vous plaît."
+    },
+    {
+      "id": "5",
+      "name": "Momie",
+      "category": "Objets",
+      "image": "assets/images/ingredients/objects/mummy.png",
+      "description": "OULALA FUYEZ PAUVRES FOUS",
+      "dialog": "Une momie ? Haha, vous avez de l'imagination, mais pour la cuisine, optez plutôt pour des ingrédients appétissants. Continuez à chercher !"
+    },
+    {
+      "id": "6",
+      "name": "Poussière",
+      "category": "Objets",
+      "image": "assets/images/ingredients/objects/dust.png",
+      "description": "jackie à encore oublié de passer l'aspirateur",
+      "dialog": "Poussière ? Non, non, non. Cela n'a rien à faire dans ma cuisine. Trouvez quelque chose de comestible, s'il vous plaît."
+    },
+    {
+      "id": "7",
+      "name": "Chat",
+      "category": "Animaux",
+      "image": "assets/images/ingredients/animals/cat.png",
+      "description": "miaou",
+      "dialog": "Oh non, je n'apprécie pas trop l'idée d'utiliser un chat comme ingrédient. Recherchez quelque chose de plus approprié pour la cuisine, s'il vous plaît."
+    },
+    {
+      "id": "8",
+      "name": "Chien",
+      "category": "Animaux",
+      "image": "assets/images/ingredients/animals/dog.png",
+      "description": "ouaf",
+      "dialog": "Utiliser un chien dans une recette ? Certainement pas ! Optez pour des ingrédients plus conventionnels et savoureux."
+    },
+    {
+      "id": "9",
+      "name": "Dolphin",
+      "category": "Animaux",
+      "image": "assets/images/ingredients/animals/dolphin.png",
+      "description": "[insérer ondes marines]",
+      "dialog": "Un dauphin ? Magnifique choix ! Ces créatures majestueuses apporteront une touche spéciale à notre recette. Bravo !"
+    }
+  ]
+}
