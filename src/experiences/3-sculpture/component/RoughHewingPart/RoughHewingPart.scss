@@ -1,12 +1,19 @@
+@import "../../style.scss";
+
 .roughPart {
   position: absolute;
   z-index: 1;
-  left: 5%;
+  left: 10%;
   top: 10%;
-  width: 50%;
-  height: 70%;
-  background-color: azure;
+  padding: 2%;
+  width: $widthBox;
+  background-color: $backgroundBox;
   display: none;
+
+  .topBorder {
+    position: absolute;
+    top: 0;
+  }
 }
 .show {
   display: block;
