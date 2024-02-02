@@ -14,5 +14,5 @@ stop_server() {
 # Intercepter les signaux de fermeture (ex: fermeture de fenêtre) pour arrêter le serveur
 trap 'stop_server' 0 3 6 15
 
-# Lancer le serveur
+# Lancer le serveur 
 ./caddy_darwin_amd64 run
