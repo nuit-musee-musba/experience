@@ -43,6 +43,9 @@ body {
   padding: 20px;
   width: 100%;
 }
+.popupContent p {
+  font-size: 50px;
+}
 
 #buttonPopup {
   display: block;
@@ -50,6 +53,7 @@ body {
   margin-top: 2%;
   align-self: flex-end;
   transform: translateX(40px);
+  font-size: 50px;
 }
 .show {
   display: block;
