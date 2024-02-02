@@ -18,28 +18,8 @@ body {
   border-radius: 110px;
 }
 
-.webgl {
-  position: fixed;
-  top: 0;
-  left: 0;
-  outline: none;
-}
-
-.canvas__container {
-  position: relative;
-  height: fit-content;
-}
-
-.canvas__img {
-  width: 3090px;
-  height: 2000px;
-}
-
 canvas {
-  position: absolute;
   border: 5px solid red;
-  top: 0;
-  left: 0;
 }
 
 .square {
