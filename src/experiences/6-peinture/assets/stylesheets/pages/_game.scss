@@ -56,6 +56,14 @@
       &.checked {
         color: grey;
         text-decoration: line-through;
+
+        &::before {
+          content: "";
+          display: block;
+          background-color: rgb(9, 190, 0);
+          width: 2vh;
+          height: 2vh;
+        }
       }
     }
   }

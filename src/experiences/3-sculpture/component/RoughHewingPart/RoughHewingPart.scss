@@ -1,0 +1,13 @@
+.roughPart {
+  position: absolute;
+  z-index: 1;
+  left: 5%;
+  top: 10%;
+  width: 50%;
+  height: 70%;
+  background-color: azure;
+  display: none;
+}
+.show {
+  display: block;
+}
