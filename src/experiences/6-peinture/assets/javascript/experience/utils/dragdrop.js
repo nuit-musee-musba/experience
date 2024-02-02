@@ -1,5 +1,5 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager";
+import { recipeResolve } from "./recipeManager.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 var winConditions = craftCont.length;
@@ -86,7 +86,7 @@ function handleDragInteraction(
         } else {
           if (!success) {
             placedEl.style.display = "block";
-            speechBehavior.print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             recipeResolve(dialog.id);
             //alert("Chef : " + dialog.dialog);
             howManyDone++;

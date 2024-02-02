@@ -4,7 +4,7 @@ let craftZone = document.getElementById("targetCraftZone");
 
 let elements = document.querySelectorAll("#targetCraftZone > div.item");
 
-let recipe = document.querySelector(".recipe .list-item");
+let recipe = document.querySelector(".recipe .list-items");
 
 let accArray = [];
 
