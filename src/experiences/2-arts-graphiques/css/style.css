@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+p, span{
+  font-size: 5rem;
+}
+
 html,
 body {
   overflow: hidden;
@@ -18,7 +22,19 @@ body {
   border-radius: 110px;
 }
 
+.canvas__container{
+  position: relative;
+  height: fit-content;
+}
+
+.canvas__img{
+  width: 2000px;
+  height: 2500px;
+}
 canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
   border: 5px solid red;
 }
 
