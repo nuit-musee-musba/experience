@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import IntroPopup from "./IntroPopup";
+import RoughHewingPart from "./RoughHewingPart";
 
 const sizes = {
   width: window.innerWidth,
@@ -10,9 +11,7 @@ const sizes = {
 //
 // INITIALIZATION
 //
-
 IntroPopup();
-
 const canvas = document.querySelector("canvas.webgl");
 
 // Scene
@@ -31,21 +30,23 @@ const cubeMaterialGreen = new THREE.MeshBasicMaterial({ color: "green" });
 
 const cube1 = new THREE.Mesh(cubeGeometry, cubeMaterialBlue);
 cube1.scale.set(0.5, 0.5, 0.5);
-cube1.position.set(1.5, 0, 0);
+cube1.position.set(1, 0, 0);
 
 const cube2 = new THREE.Mesh(cubeGeometry, cubeMaterialYellow);
 cube2.scale.set(0.5, 0.5, 0.5);
-cube2.position.set(1, 0, 0);
+cube2.position.set(0.5, 0, 0);
 
 const cube3 = new THREE.Mesh(cubeGeometry, cubeMaterialRed);
 cube3.scale.set(0.5, 0.5, 0.5);
-cube3.position.set(2, 0, 0);
+cube3.position.set(1.5, 0, 0);
 
 const cube4 = new THREE.Mesh(cubeGeometry, cubeMaterialGreen);
 cube4.scale.set(0.5, 0.5, 0.5);
-cube4.position.set(1.5, 0.5, 0);
+cube4.position.set(1, 0.5, 0);
 
 const group = new THREE.Group();
+
+// group.position.set(0, 0, 0);
 
 scene.add(cube1);
 scene.add(cube2);
@@ -115,6 +116,12 @@ function onClick() {
   }
   if (currentPart2) {
     alert("test2");
+  }
+  if (currentPart3) {
+    alert("test3");
+  }
+  if (currentPart4) {
+    alert("test4");
   }
 }
 
@@ -206,7 +213,7 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  group.rotation.y = group.rotation.y + rotateSpeed * 0.5;
+  cube1.rotation.y = cube1.rotation.y + rotateSpeed * 0.3;
 
   touchBefore = currentTouch;
 

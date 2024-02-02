@@ -81,6 +81,40 @@ body {
   }
 }
 
+.list-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style: none;
+  width: 80%;
+  height: fit-content;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+}
+.color-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+}
+.color-list li {
+  flex-basis: auto;
+  height: auto;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
 /* Additional styles for the popup */
 #helpPopup {
   display: none;
