@@ -1,22 +1,31 @@
+import { Section } from "./section";
+
 export default class Transition {
-  currentSection: HTMLElement | null;
-  section0: HTMLElement | null;
-  section1: HTMLElement | null;
-  section2: HTMLElement | null;
-  section3: HTMLElement | null;
-  button: HTMLElement | null;
+  currentSection: Section;
+  section1: Section;
+  section2: Section;
+  section3: Section;
   currentSectionNumber: number;
+  sections: Section[];
+  button: HTMLButtonElement;
 
   constructor() {
     this.currentSectionNumber = 1;
-    this.currentSection = document.getElementById(`section-1`);
+    this.section1 = new Section(`section-1`);
+    this.section2 = new Section(`section-2`);
+    this.section3 = new Section(`section-3`);
 
-    this.section0 = document.getElementById("section-0");
-    this.section1 = document.getElementById(`section-1`);
-    this.section2 = document.getElementById(`section-2`);
-    this.section3 = document.getElementById(`section-3`);
+    const button = document.querySelector<HTMLButtonElement>(".button");
 
-    this.button = document.getElementById("button");
+    if (!button) {
+      throw new Error(
+        "transition/construcor: Elelement with a class of 'button' must be present"
+      );
+    }
+    this.button = button;
+
+    this.sections = [this.section1, this.section2, this.section3];
+    this.currentSection = this.sections[this.currentSectionNumber - 1];
   }
 
   handleTransition() {
@@ -26,35 +35,6 @@ export default class Transition {
     this.handleSection();
     this.handleButtonTitle();
     this.currentSectionNumber = this.currentSectionNumber + 1;
-  }
-
-  handleSection() {
-    this.currentSection = document.getElementById(
-      `section-${this.currentSectionNumber}`
-    );
-
-    if (
-      this.section0 &&
-      this.section1 &&
-      this.section2 &&
-      this.section3 &&
-      this.currentSection
-    ) {
-      this.currentSection.style.display = "block";
-      switch (this.currentSectionNumber) {
-        case 0:
-          this.section3.style.display = "none";
-          break;
-        case 1:
-          this.section0.style.display = "none";
-          break;
-        case 2:
-          this.section1.style.display = "none";
-          break;
-        case 3:
-          this.section2.style.display = "none";
-      }
-    }
   }
 
   handleButtonTitle() {
@@ -68,6 +48,32 @@ export default class Transition {
         return;
       }
       this.button.innerText = `Passer à la section ${this.currentSectionNumber + 1}`;
+    }
+  }
+
+  handleSection() {
+    this.currentSection = this.sections[this.currentSectionNumber - 1];
+
+    if (
+      this.section1 &&
+      this.section2 &&
+      this.currentSection &&
+      this.section3
+    ) {
+      this.currentSection.show();
+      switch (this.currentSectionNumber) {
+        case 1:
+          this.section2.hide();
+          this.section3.hide();
+          break;
+        case 2:
+          this.section1.hide();
+          this.section3.hide();
+          break;
+        case 3:
+          this.section1.hide();
+          this.section2.hide();
+      }
     }
   }
 }

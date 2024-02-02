@@ -32,23 +32,24 @@ body {
   cursor: pointer;
 }
 
-.canvas__container{
+.canvas__container {
   position: relative;
   height: fit-content;
 }
 
-.canvas__img{
+.canvas__img {
   width: 1200px;
   height: 1000px;
 }
 
-canvas{
+canvas {
   position: absolute;
   border: 5px solid red;
   top: 0;
   left: 0;
 }
 
+/* debug page */
 .square {
   height: 180px;
   width: 180px;
@@ -59,3 +60,25 @@ canvas{
   display: grid;
   place-items: center;
 }
+
+.cliker-count {
+  top: 1000px;
+  left: 400px;
+}
+
+.pressingZoneTitle {
+  position: absolute;
+  right: 1600px;
+  bottom: 1050px;
+  font-size: 3rem;
+}
+.pressingZone {
+  width: 1600px;
+  height: 900px;
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+  border: 1px solid black;
+}
+
+/* end debug page*/
