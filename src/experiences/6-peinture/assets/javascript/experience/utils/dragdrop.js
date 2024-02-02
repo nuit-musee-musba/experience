@@ -2,6 +2,7 @@ import items from "../data/items.json" assert { type: "json" };
 import { recipeResolve } from "./recipeManager.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
+let parentElement = document.getElementById("ingredients-container"); // parent
 var winConditions = craftCont.length;
 var howManyDone = 0;
 
@@ -21,13 +22,13 @@ function handleDragInteraction(
   let howManyDrags = 0;
   let success = false;
 
-  let parentElement = document.getElementById("ingredients-container"); // parent
-
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
 
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
+
+  let dragElWidth = dragElement.offsetWidth;
 
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
@@ -41,8 +42,8 @@ function handleDragInteraction(
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + padLeft;
-    const currentY = touch.clientY - initialY;
+    const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
+    const currentY = touch.clientY - initialY - dragElWidth / 2;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -123,28 +124,61 @@ function handleDragInteraction(
     }
   });
 }
+console.log(items);
+function countDuplicates(strings) {
+  //cette fonction permet de compter le nombre d'objets dans chaque catégorie automatiquement
+  const frequency = {};
+
+  strings["items"].forEach((str) => {
+    if (frequency[str["category"]]) {
+      // Si la chaîne existe déjà, augmenter la fréquence
+      frequency[str["category"]]++;
+    } else {
+      // Si la chaîne n'existe pas encore, initialiser la fréquence à 1
+      frequency[str["category"]] = 1;
+    }
+  });
+
+  // Créer un tableau avec les résultats
+  const resultArray = Object.keys(frequency).map((str) => ({
+    name: str,
+    count: frequency[str],
+  }));
+
+  return resultArray;
+}
 
 // ici il faut initialiser les éléments qui vont drag and drop avec leurs identifiants
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
 var dragableElementList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var numberItemsPerCategory = countDuplicates(items);
 
-let i = 1;
+let i = 1; //boucle i
+let category = 0; //0=Aliments, 1=Objets, 2=Animaux
 dragableElementList.forEach((element) => {
   let placedEl = document.getElementById(element + "-placed");
   var elementsWithId = document.querySelectorAll(".multiple-" + element);
 
   let ElementList = document.getElementById(element);
 
-  ElementList.style.top = "90px";
-  let leftPosition = 200 * i;
-  ElementList.style.left = leftPosition + "px";
+  ElementList.style.top = "90px"; //top position
+  let leftPosition = // pour centrer les absolute on va faire ce calcul
+    (parentElement.offsetWidth / //la width du parent divisé par...
+      (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+      324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+    i; //multiplié par le nombre d'occurence en cours
+  ElementList.style.left = leftPosition + "px"; // on applique
 
-  if (i >= 3) {
-    i = 1;
+  if (i >= numberItemsPerCategory[category]["count"]) {
+    //cette boucle permet de savoir si tout les items attendus dans cette catégorie on été modifiés
+    i = 1; //si oui, on remet i à 1
+    category++; //et on ajoute 1 à catégory pour passer à la catégorie suivante
   } else {
-    i++;
+    i++; //sinon, on continue d'incrémenter i
   }
+
+  //ce code implique donc que les items dans items.json soient bien rangés par catégorie
 
   if (elementsWithId.length == 0) {
     if (placedEl) {
