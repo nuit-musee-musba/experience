@@ -1,6 +1,6 @@
 import * as THREE from "three";
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { createIsland } from "./helpers";
+import { createIsland, findClosestIsland } from "./helpers";
 import router from "./router";
 
 const worldLoaded = false;
@@ -18,7 +18,7 @@ var canvas = document.getElementById("webgl");
 // Create camera
 const camera = new THREE.PerspectiveCamera(
   10,
-  window.innerWidth / window.innerHeight,
+  canvas.clientWidth / canvas.clientHeight, // Use canvas dimensions
   0.1,
   2000
 );
@@ -30,7 +30,7 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   canvas: canvas,
 });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensions
 
 // // Add renderer to DOM
 document.body.appendChild(renderer.domElement);
@@ -49,7 +49,10 @@ scene.add(light);
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
-
+carousel.rotation.set(0, Math.PI, 0);
+const axesHelper = new THREE.AxesHelper(30);
+axesHelper.setColors("white", "green", "blue");
+carousel.add(axesHelper);
 // Raycaster : raycasting to detect mouse click or hover on 3D objects
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -59,20 +62,29 @@ const mouse = new THREE.Vector2();
 // Create an array to store promises for each world creation
 const islandPromises = [];
 
+// Define an array of rotation positions for the carousel
+const rotationPositions = [];
+
+// Count of worlds
+const count = 5;
+
 // Create worlds
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < count; i++) {
   const color = router[i].color;
-  const islandPromise = createIsland(i, 5, color)
+  const islandPromise = createIsland(i, count, color)
     .then((island) => {
-      // Add each world to the carousel
+      // Add axes helper to the island
       carousel.add(island);
     })
     .catch((error) => {
       console.error("Error creating world:", error);
     });
 
+  rotationPositions.push(i === 0 ? 0 : (Math.PI * 2) / (count / i));
+
   islandPromises.push(islandPromise);
 }
+console.log("rotationPositions", rotationPositions);
 
 // Show loader while worlds are loading
 const loaderElement = document.getElementById("loader");
@@ -144,31 +156,49 @@ canvas.addEventListener("wheel", (event) => {
 
 // Declare Touch variables
 let touchStartX = 0;
+let touchStartY = 0;
 let touchMoveX = 0;
 let isTouching = false;
 let lastRotationY = 0;
 let deltaX = 0;
-
+// Add a variable to store the current rotation of the carousel
+let currentRotation = 0;
+// Add a variable to store the current rotation index
+let currentRotationIndex = 0;
 // Touch event handlers
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
-  touchStartX = event.touches[0].clientX;
+  touchStartX = event.touches[0].clientX / window.innerWidth;
+  console.log("currentRotationIndex", currentRotationIndex);
+  // console.log("currentRotation", carousel.rotation.y);
+  // console.log("touchStartX", touchStartX);
+  // touchStartY = event.touches[0].clientY / window.innerHeight;
+  // console.log("touchStartY", touchStartY);
 });
 
 // Touch move
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
 
-  touchMoveX = event.touches[0].clientX;
+  touchMoveX = event.touches[0].clientX / window.innerWidth;
   deltaX = touchMoveX - touchStartX;
 
-  const scrollPosition = deltaX % window.innerWidth;
+  const scrollPosition = (deltaX * window.innerWidth) % window.innerWidth;
 
   // This is the actual rotation of the carousel based on the touch movement on the screen
   carousel.rotation.y += (scrollPosition * (Math.PI * 2)) / window.innerWidth;
 
+  // Update the current rotation index based on the carousel's rotation
+  currentRotationIndex = Math.floor(carousel.rotation.y / Math.PI);
+
+  // // Ensure the index stays within the bounds of the array
+  // currentRotationIndex =
+  //   (currentRotationIndex + rotationPositions.length) %
+  //   rotationPositions.length;
+  console.log("currentRotationIndex", currentRotationIndex);
   // Update the touch start position after each move
   touchStartX = touchMoveX;
 });
@@ -176,26 +206,74 @@ canvas.addEventListener("touchmove", (event) => {
 // Touch end
 canvas.addEventListener("touchend", () => {
   isTouching = false;
-  // Continue the rotation smoothly after touch end
-  const continueRotation = () => {
+  currentRotation = carousel.rotation.y - Math.PI;
+  console.log("currentRotation", currentRotation);
+  // Find the closest island to the fixed position
+  // const closestIsland = findClosestIsland(carousel, fixedPosition);
+  // Find the closest rotation position from the predefined array
+  const closestRotation = rotationPositions.reduce((closest, rotation) => {
+    return Math.abs(rotation - currentRotation) <
+      Math.abs(closest - currentRotation)
+      ? rotation
+      : closest;
+  }, rotationPositions[0]);
+  console.log("closestRotation", closestRotation);
+
+  // Set the current rotation index to the index of the closest rotation in the array
+  currentRotationIndex = rotationPositions.indexOf(closestRotation);
+
+  // // // Calculate the rotation needed to bring the closest island to the fixed position
+  // // const targetRotation = currentRotation + closestIsland.rotation.y;
+  // // // Rotate the carousel smoothly to the target rotation
+  // // const rotateToTarget = () => {
+  // //   if (!isTouching) {
+  // //     currentRotation += (targetRotation - currentRotation) * 0.05; // Adjust the smoothing factor as needed
+
+  // //     carousel.rotation.y = currentRotation;
+
+  // //     if (Math.abs(targetRotation - currentRotation) > 0.001) {
+  // //       requestAnimationFrame(rotateToTarget);
+  // //     }
+  // //   }
+  // // };
+
+  // // rotateToTarget();
+
+  // Rotate the carousel smoothly to the closest rotation
+  const rotateToClosest = () => {
     if (!isTouching) {
-      lastRotationY *= 0.989; // Decrease the rotation speed gradually
+      const targetRotation = rotationPositions[currentRotationIndex];
+      carousel.rotation.y +=
+        (targetRotation - carousel.rotation.y + Math.PI) * 0.05; // Adjust the smoothing factor as needed
 
-      if (deltaX > 0) {
-        carousel.rotation.y +=
-          (lastRotationY * (Math.PI * 10)) / window.innerWidth;
-      } else {
-        carousel.rotation.y -=
-          (lastRotationY * (Math.PI * 10)) / window.innerWidth;
-      }
-
-      if (Math.abs(lastRotationY) > 0.1) {
-        requestAnimationFrame(continueRotation);
+      if (Math.abs(targetRotation - carousel.rotation.y) > 0.001) {
+        requestAnimationFrame(rotateToClosest);
       }
     }
   };
-  lastRotationY = (touchStartX % window.innerWidth) / window.innerWidth;
-  continueRotation();
+
+  rotateToClosest();
+  // Continue the rotation smoothly after touch end
+  // const continueRotation = () => {
+  //   if (!isTouching) {
+  //     lastRotationY *= 0.96; // Decrease the rotation speed gradually
+
+  //     // if (deltaX > 0) {
+  //     //   carousel.rotation.y +=
+  //     //     (lastRotationY * window.innerWidth * (Math.PI * 10)) /
+  //     //     window.innerWidth;
+  //     // } else {
+  //     //   carousel.rotation.y -=
+  //     //     (lastRotationY * window.innerWidth * (Math.PI * 10)) /
+  //     //     window.innerWidth;
+  //     // }
+  //     // if (Math.abs(lastRotationY) > 0.00001) {
+  //     //   requestAnimationFrame(continueRotation);
+  //     // }
+  //   }
+  // };
+  // lastRotationY = (touchStartX % window.innerWidth) / window.innerWidth;
+  // continueRotation();
 });
 
 // Touch cancel

@@ -6,25 +6,24 @@ import * as THREE from "three";
 
 // World creation
 export async function createIsland(i, count, color) {
-  // For a loaded GLTF model
   try {
+    let url;
+    // For a loaded GLTF model
+    if (i % 2 !== 0) {
+      url = "/assets/hub/bat.glb";
+    } else {
+      url = "/assets/hub/reserve.glb";
+    }
     const island = await createGLTFModel(
       i,
-      "/assets/hub/reserve.glb", // url
+      url, // url
       [0, 0, 0], // position
-      [0, (i * count + Math.PI * 5) / 2, 0], // rotation to set the plane upright
-      [0.065, 0.065, 0.065], // scale
+      [0, i === 0 ? 0 : (Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
+      [0.03, 0.03, 0.03], // scale
       color
     );
-    // Create and add text to the island scene
-    const islandText = createTextGeometry(
-      "Island " + (i + 1),
-      [0, 1.5, 3],
-      0.2
-    );
-    island.scene.add(islandText);
     // set unique id
-    console.log("island scene", island.scene);
+    // console.log("island scene", island.scene);
     return island.scene;
   } catch (error) {
     console.error("Error creating island:", error);
@@ -34,7 +33,7 @@ export async function createIsland(i, count, color) {
 function createGLTFModel(i, url, position, rotation, scale, color) {
   // Instantiate a loader
   const gltfLoader = new GLTFLoader();
-  console.info("LOADIG 3D OBJECT ");
+  //   console.info("LOADIG 3D OBJECT ");
   // Use a promise to handle the asynchronous loading
   return new Promise((resolve, reject) => {
     gltfLoader.load(
@@ -67,27 +66,19 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
   });
 }
 
-// Function to create text geometry
-function createTextGeometry(text, position, size) {
-  // TODO: fix path load
-  const loader = new FontLoader();
-  const fontUrl = "./assets/hub/font.json"; // Specify the path to your font file
-  const font = loader.load(fontUrl);
-  console.log("font", font);
+// Function to find the closest island to the fixed position
+export function findClosestIsland(carousel, fixedPosition) {
+  let closestDistance = Infinity;
+  let closestIsland;
 
-  const textGeometry = new TextGeometry(text, {
-    font: font,
-    size: size,
-    height: 0.2,
-    // size: 80,
-    // height: 5,
+  carousel.children.forEach((island) => {
+    const distance = island.position.distanceTo(fixedPosition);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIsland = island;
+    }
   });
-  console.log("Text", text);
 
-  const textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(...position);
-  console.log("textmesh position", textMesh.position);
-
-  return textMesh;
+  return closestIsland;
 }
