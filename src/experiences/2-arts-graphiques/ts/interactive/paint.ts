@@ -85,7 +85,7 @@ const Paint = () => {
       }
     }
 
-    function pointerDown(event) {
+    function pointerDown(event : PIXI.InteractionEvent) {
       dragging = true;
       pointerMove(event);
     }
