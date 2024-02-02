@@ -21,6 +21,12 @@ body {
   overflow: hidden;
 }
 
+html,
+body
+{
+    overflow: hidden;
+}
+
 .buttons {
   z-index: 7;
   bottom: 10%;
