@@ -3,6 +3,6 @@ import Transition from "./transition";
 import paint from "./interactive/paint";
 
 window.addEventListener("load", () => {
-  paint.init();
+  paint();
   new Transition();
 });
