@@ -19,6 +19,11 @@
         <!-- Webgl canvas -->
         <div id="scrollBox">
           <canvas id="webgl"></canvas>
+          <div class="controls">
+            <!-- Start Experience Button -->
+            <button id="left" class="control">Left</button>
+            <button id="right" class="control">Right</button>
+          </div>
           <div class="listBox">
             <ul class="colorList">
               <li style="color: red">1 batiment : red</li>
@@ -30,14 +35,10 @@
           </div>
         </div>
         <div id="infoBox">
-          <h1 class="infoTitle">Island Test</h1>
-          <p class="infoText">
-            This is a template for a 3D web application. It includes a WebGL
-            canvas, a help button, and a help popup. You can customize it as
-            needed.
-          </p>
+          <h1 id="infoTitle"></h1>
+          <p id="infoText"></p>
           <!-- Start Experience Button -->
-          <button class="startButton">Start Experience</button>
+          <button id="startButton">Commencer l'éxpérience</button>
         </div>
       </div>
       <!-- Footer -->

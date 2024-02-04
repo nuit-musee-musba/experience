@@ -82,6 +82,30 @@ body {
   z-index: 1;
 }
 
+.controls {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 3;
+}
+
+.control {
+  cursor: pointer;
+  pointer-events: all;
+  margin: 0 1rem;
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 #infoBox {
   flex: 1;
   height: 100%;
@@ -95,11 +119,10 @@ body {
   z-index: 1;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-  .infoTitle {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
+}
+#infoTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 .listBox {
   display: flex;
