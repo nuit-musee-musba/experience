@@ -102,6 +102,8 @@ window.addEventListener("resize", () => {
 let touchBefore = 0;
 let currentTouch = 0;
 
+const mouse = new THREE.Vector2();
+
 window.addEventListener("touchmove", (event) => {
   currentTouch = event.touches[0].clientX / 100;
 });
@@ -117,8 +119,6 @@ window.addEventListener("touchstart", (event) => {
 
 // Mouse Moove
 
-const mouse = new THREE.Vector2();
-
 window.addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / sizes.width) * 2 - 1;
   mouse.y = -((event.clientY / sizes.height) * 2 - 1);
@@ -129,14 +129,26 @@ let currentPart2;
 let currentPart3;
 let currentPart4;
 
-document.addEventListener("click", onClick, false);
+document.addEventListener(
+  "click",
+  (event) => {
+    onClick(event);
+  },
+  false
+);
 
 let roughCube1 = 0;
 let roughCube2 = 0;
 let roughCube3 = 0;
 let roughCube4 = 0;
 
-function onClick() {
+function onClick(event) {
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, camera);
+  const part1 = raycaster.intersectObject(cube1);
+  console.log(part1);
+  currentPart1 = part1[0];
+
   if (currentPart1) {
     roughCube1++;
     if (roughCube1 === 1) {
@@ -243,37 +255,29 @@ const tick = () => {
 
   //Raycaster
 
-  const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(mouse, camera);
+  // if (part1.length) {
+  //   currentPart1 = part1[0];
+  // } else {
+  //   currentPart1 = null;
+  // }
 
-  const part1 = raycaster.intersectObject(cube1);
-  const part2 = raycaster.intersectObject(cube2);
-  const part3 = raycaster.intersectObject(cube3);
-  const part4 = raycaster.intersectObject(cube4);
+  // if (part2.length) {
+  //   currentPart2 = part2[0];
+  // } else {
+  //   currentPart2 = null;
+  // }
 
-  if (part1.length) {
-    currentPart1 = part1[0];
-  } else {
-    currentPart1 = null;
-  }
+  // if (part3.length) {
+  //   currentPart3 = part3[0];
+  // } else {
+  //   currentPart3 = null;
+  // }
 
-  if (part2.length) {
-    currentPart2 = part2[0];
-  } else {
-    currentPart2 = null;
-  }
-
-  if (part3.length) {
-    currentPart3 = part3[0];
-  } else {
-    currentPart3 = null;
-  }
-
-  if (part4.length) {
-    currentPart4 = part4[0];
-  } else {
-    currentPart4 = null;
-  }
+  // if (part4.length) {
+  //   currentPart4 = part4[0];
+  // } else {
+  //   currentPart4 = null;
+  // }
 
   //UpdateControls
 
