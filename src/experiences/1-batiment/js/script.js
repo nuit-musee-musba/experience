@@ -138,16 +138,13 @@ function onMouseClick(event) {
 
   for (let i = 0; i < intersects.length; i++) {
     if (intersects[i].object === cube) {
-      toggleInfo();
+      showText();
       break;
     } else {
-      toggleInfo();
+      hideText();
     }
   }
 }
-
-window.addEventListener("click", onMouseClick, false);
-window.addEventListener("dragover", onMouseClick, false);
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
@@ -189,15 +186,25 @@ const restart = () => {
   endMenu.style.display = "none";
 };
 
+const showText = () => {
+  isShowingText = true;
+  component.style.display = "flex";
+};
+
+const hideText = () => {
+  isShowingText = false;
+  component.style.display = "none";
+};
+window.addEventListener("click", onMouseClick, false);
+window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
+
 const toggleInfo = () => {
   if (!isShowingText) {
-    isShowingText = true;
-    component.style.display = "flex";
+    showText();
     return;
   }
   if (isShowingText) {
-    isShowingText = false;
-    component.style.display = "none";
+    hideText();
     return;
   }
 };
