@@ -13,6 +13,8 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   let horizontalTraversals = 0;
   let isHorizontalCollision = false;
 
+  let dragElWidth = dragElement.offsetWidth;
+
   let parentElement = document.querySelector(".utensils"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
 
   const dragElementRect = dragElement.getBoundingClientRect();
@@ -30,7 +32,7 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   dragElement.addEventListener("touchmove", (e) => {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX;
+    const currentX = touch.clientX - initialX - dragElWidth / 2;
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
 
@@ -67,7 +69,7 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
     }
 
     //comportement quand le couteau est en train de bouger
-    const currentY = touch.clientY - initialY;
+    const currentY = touch.clientY - initialY - dragElWidth / 2;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
   });

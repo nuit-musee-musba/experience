@@ -41,6 +41,11 @@ Les expériences, chacune dans son dossier.
 Vous avez un exemple dans `experience-template` pour voir comment s'architecture une expérience (accessible sur http://localhost:5173/experiences/experience-template).
 **Pensez à ajouter votre dossier dans le fichier `vite.config.js`**
 
+### Dans `/static`
+
+Les fichiers qui ne sont pas traités par vite (donc autre que js et css en gros)
+Exemple : image, fichier 3D
+
 ### À la racine `/`
 
 Les fichiers de config
@@ -49,7 +54,7 @@ Les fichiers de config
 
 ### Sur le build en production
 
-- hébergement distant : aller sur https://magical-horse-1ab328.netlify.app/
+- hébergement distant : aller sur https://nuit-du-musba.mmibordeaux.com/
 - hébergement local : récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
 
 ### Sur votre propre build
@@ -72,7 +77,7 @@ yarn bundle:zip
 1. Récupérer ou build le bundle.zip
 2. Unziper le fichier
 3. Dans le dossier, éxécuter le script de démarrage correspondant à l'OS (double clic par exemple)
-4. Aller sur http://localhost:8080
+4. Aller sur http://localhost:3000
 
 ### Protocoles de tests
 

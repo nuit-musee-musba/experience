@@ -11,10 +11,31 @@
 </head>
 
 <body>
-  <h1>Second painting</h1>
-  <h2>Work in progress</h2>
   <canvas class="webgl"></canvas>
-  <a href="./index.html" class="btn-temp-bottom-right btn-temp-color">Back to index</a>
+
+  <div class="consignes">
+    <p>Retrouvez le bon emplacement de la lumière en déplaçant le soleil devant et derrière le tableau.</p>
+  </div>
+  <button id="btn-validate" class="popin-btn btn-temp-color hidden" data-target="#popin-first-painting">Valider la
+    position</button>
+
+  <div class="popin hidden" id="popin-result-true">
+    <div class="popin-body">
+      <h1>Bravo !</h1>
+      <p>Vous avez réussi à retrouver l’emplacement du soleil sur le tableau La Lyre Immortelle, de Abel-Dominique BOYE
+        !</p>
+      <p>Dans l’académisme (un style dicté par l’Académie des Beaux-Arts de France), les peintres représentent des
+        sujets dits “nobles” comprenant la peinture historique, les sujets religieux et mythologiques, les portraits,
+        les nus et les paysages.</p>
+      <p>L’objectif est de représenter le beau et d’imiter une réalité idéalisée. Les peintres recherchent la perfection
+        des traits, plutôt que le réalisme des couleurs et des ombres. Les scènes sont peintes en atelier, ce qui offre
+        une lumière limitée, plutôt froide et lissante.</p>
+      <p>Découvrez ce chef-d'œuvre dans l’Aile Bonheur du musée du musée !</p>
+
+      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+    </div>
+  </div>
+  <div class="popin-overlay hidden"></div>
 
 </body>
 

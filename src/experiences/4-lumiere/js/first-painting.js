@@ -1,11 +1,16 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 
 /**
  * TO DO LIST
- * Ajouter une variable pour valider la position de la lumière
- * Créer un test : si lumière ok et click sur btn valider, ouvrir modal, sinon, afficher message d'erreur
+ * Ajouter le cadre du tableau
+ * Changer les images avec les versions retravaillées
+ * Mise en forme des éléments (popins, textes, boutons)
+ *
+ * petit fx parallax avec le cursor "light" suivant sa position droite ou gauche :
+ * mouvement delayed inverse de la position pour mettre en avant la lumière
+ *
+ * Trouver le petit détail effet waouw de ce tableau
  */
 
 /**
@@ -86,10 +91,10 @@ loadingManager.onError = (error) => {
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const colorTexture = textureLoader.load(
-  "/4-lumiere/first-painting/caravage-color.jpg"
+  "/4-lumiere/first-painting/first-painting-color.jpg"
 );
 const heightTexture = textureLoader.load(
-  "/4-lumiere/first-painting/caravage-height.jpg"
+  "/4-lumiere/first-painting/first-painting-height.jpg"
 );
 
 colorTexture.colorSpace = THREE.SRGBColorSpace;
@@ -98,9 +103,9 @@ colorTexture.colorSpace = THREE.SRGBColorSpace;
  * Scene objects
  */
 
-// Caravage painting
+// First painting
 const planeGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
-const caravageMaterial = new THREE.MeshStandardMaterial({
+const firstPaintingMaterial = new THREE.MeshStandardMaterial({
   map: colorTexture,
   transparent: true,
   displacementMap: heightTexture,
@@ -108,25 +113,24 @@ const caravageMaterial = new THREE.MeshStandardMaterial({
   roughness: 1,
   metalness: 0.2,
 });
-const caravagePainting = new THREE.Mesh(planeGeometry, caravageMaterial);
-scene.add(caravagePainting);
+const firstPainting = new THREE.Mesh(planeGeometry, firstPaintingMaterial);
+scene.add(firstPainting);
 
 const paintingTweaks = gui.addFolder("Painting parameters");
 paintingTweaks
-  .add(caravagePainting.material, "roughness")
+  .add(firstPainting.material, "roughness")
   .min(0)
   .max(1)
   .step(0.001)
   .name("Painting roughness");
 paintingTweaks
-  .add(caravagePainting.material, "metalness")
+  .add(firstPainting.material, "metalness")
   .min(0)
   .max(1)
   .step(0.001)
   .name("Painting metalness");
 
 // ellipse
-
 var ellipseGeometry = new THREE.TorusGeometry(
   globalParameters.lightRadius, // Radius
   0.005, // tube
@@ -159,7 +163,7 @@ ambientLightTweaks.add(ambientLight, "visible");
 ambientLightTweaks.addColor(ambientLight, "color");
 ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
-// Caravage point light
+// firstPainting point light
 const pointLight = new THREE.PointLight(
   "#ffCC70", // color
   10, // intensity
@@ -248,9 +252,20 @@ scene.add(camera);
 const pointer = new THREE.Vector2();
 
 // Update pointer position
+canvas.addEventListener("touchstart", (event) => {
+  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+
+  // Update firstPainting light position
+  updateRotation();
+});
+
 canvas.addEventListener("touchmove", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+
+  // Update firstPainting light position
+  updateRotation();
 });
 
 // Calculate pointer angle
@@ -308,9 +323,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Update caravage light position
-  updateRotation();
-
   // Light controls
   pointLightHelper.update();
 

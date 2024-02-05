@@ -7,8 +7,14 @@
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
     aspect-ratio: 16/9;
+    font-size: $font-size;
+    font-family: $font-family;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
 }

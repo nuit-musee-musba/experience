@@ -102,13 +102,20 @@ p {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  pointer-events: none;
 }
 
 /* ----- Validation ----- */
 
 .popin-btn {
-  position: relative;
   transition: opacity 0.15s ease-in-out;
+}
+
+#btn-validate {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .popin-btn.hidden {
