@@ -1,9 +1,16 @@
 import * as PIXI from "pixi.js";
 
-const Paint = () => {
+let totalPixels: number;
+let remainingPixels: number;
+
+const Paint = async (
+  target: HTMLElement,
+  backgroundFile: String,
+  imageToRevealFile: String,
+  options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
+
   let width = 2000;
   let height = 2500;
-  const target: Element | null =  document.querySelector('.canvas__container');
   const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
 
   const app: any = new PIXI.Application({
@@ -18,27 +25,18 @@ const Paint = () => {
   const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
   const line = new PIXI.Graphics();
 
-  PIXI.Assets.add("t1", "/2-arts-graphiques/canvas/stains.png");
-  PIXI.Assets.add("t3", "/2-arts-graphiques/canvas/stains_mask.png");
-  PIXI.Assets.add("t2", "/2-arts-graphiques/canvas/canvas1.jpeg");
-  PIXI.Assets.load(["t1", "t2"]).then(setup);
-
-  let totalPixels: number;
-  let remainingPixels: number;
+  let t1 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${backgroundFile}`);
+  let t2 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${imageToRevealFile}`);
+  setup()
 
   function setup() {
-    console.log(app.screen);
+    // console.log(app.screen);
 
     const { width, height } = { width: 2000, height:2500 };
     const stageSize = { width, height };
 
-    const background = Object.assign(PIXI.Sprite.from("t1"), stageSize);
-    // const background = new PIXI.Graphics();
-    // background.beginFill(0xffffff);
-    // background.drawRect(0, 0, stageSize.width, stageSize.height);
-    // background.endFill();
-
-    const imageToReveal = Object.assign(PIXI.Sprite.from("t2"), stageSize);
+    const background = Object.assign(PIXI.Sprite.from(t1), stageSize);
+    const imageToReveal = Object.assign(PIXI.Sprite.from(t2), stageSize);
     const renderTexture = PIXI.RenderTexture.create(stageSize);
     const renderTextureSprite = new PIXI.Sprite(renderTexture);
 
@@ -90,16 +88,20 @@ const Paint = () => {
       }
     }
 
-    function percentage() {
+    function percentage(getPercentageAt: number | any) {
       const pixels = app.renderer.extract.pixels(renderTexture);
       remainingPixels = pixels.reduce(
-        (count : any, value : any, index: any) => (index % 4 === 3 && value !== 0 ? count + 1 : count),
+        (count: any, value: any, index: any) =>
+          index % 4 === 3 && value !== 0 ? count + 1 : count,
         0
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
-      // console.log(`Pourcentage de pixel transparent: ${percentageRemaining.toFixed(2)}%`);
       canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+
+      if (percentageRemaining >= getPercentageAt) {
+        alert("Vous pouvez passer à la suite si vous le souhaitez")
+      }
     }
 
     function pointerDown(event: any) {
@@ -111,7 +113,9 @@ const Paint = () => {
       dragging = false;
       lastDrawnPoint = null;
 
-      percentage()
+      if (options && options!.getPercentage) {
+        percentage(options!.getPercentageAt);
+      }
     }
   }
 

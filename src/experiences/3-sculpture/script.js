@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import IntroPopup from "./component/IntroPart/IntroPopup";
-import RoughHewingPart from "./component/RoughHewingPart/RoughHewingPart";
+import IntroPopup from "./component/1-IntroPart/IntroPart";
+import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const sizes = {
@@ -127,19 +127,59 @@ let currentPart4;
 
 document.addEventListener("click", onClick, false);
 
+let roughCube1 = 0;
+let roughCube2 = 0;
+let roughCube3 = 0;
+let roughCube4 = 0;
+
 function onClick() {
   if (currentPart1) {
-    alert("test");
-    scene.add(statueV1);
+    roughCube1++;
+    if (roughCube1 === 1) {
+      cube1.material.color.set("red");
+    }
+    if (roughCube1 === 2) {
+      cube1.material.color.set("yellow");
+    }
+    if (roughCube1 === 3) {
+      scene.remove(cube1);
+    }
   }
   if (currentPart2) {
-    alert("test2");
+    roughCube2++;
+    if (roughCube2 === 1) {
+      cube2.material.color.set("red");
+    }
+    if (roughCube2 === 2) {
+      cube2.material.color.set("yellow");
+    }
+    if (roughCube2 === 3) {
+      scene.remove(cube2);
+    }
   }
   if (currentPart3) {
-    alert("test3");
+    roughCube3++;
+    if (roughCube3 === 1) {
+      cube3.material.color.set("red");
+    }
+    if (roughCube3 === 2) {
+      cube3.material.color.set("yellow");
+    }
+    if (roughCube3 === 3) {
+      scene.remove(cube3);
+    }
   }
   if (currentPart4) {
-    alert("test4");
+    roughCube4++;
+    if (roughCube4 === 1) {
+      cube4.material.color.set("red");
+    }
+    if (roughCube4 === 2) {
+      cube4.material.color.set("yellow");
+    }
+    if (roughCube4 === 3) {
+      scene.remove(cube4);
+    }
   }
 }
 

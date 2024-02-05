@@ -54,7 +54,7 @@ Les fichiers de config
 
 ### Sur le build en production
 
-- hébergement distant : aller sur https://magical-horse-1ab328.netlify.app/
+- hébergement distant : aller sur https://nuit-du-musba.mmibordeaux.com/
 - hébergement local : récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
 
 ### Sur votre propre build
@@ -77,7 +77,7 @@ yarn bundle:zip
 1. Récupérer ou build le bundle.zip
 2. Unziper le fichier
 3. Dans le dossier, éxécuter le script de démarrage correspondant à l'OS (double clic par exemple)
-4. Aller sur http://localhost:8080
+4. Aller sur http://localhost:3000
 
 ### Protocoles de tests
 
