@@ -235,6 +235,11 @@ function handleFocusPeriod(step) {
     return;
   }
 
+  const dateTitleElement = document.getElementById("date-title");
+  dateTitleElement.textContent = "";
+
+  dateTitleElement.appendChild(document.createTextNode(step.date));
+
   const selectedButtonId = `period${index + 1}`;
   const selectedRoundButtonId = `circle${index + 1}`;
 
