@@ -1,5 +1,4 @@
-import { Dragable } from "./interactive/dragable";
-import { Section } from "./section";
+import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
   dl: {
@@ -21,20 +20,7 @@ const initialPlace = {
 };
 type refId = "dl" | "dr" | "ur" | "ul";
 
-let amountPlaced: string[] = [];
-function hasRepaired(id: string) {
-  if (!amountPlaced.includes(id)) {
-    amountPlaced.push(id);
-    if (amountPlaced.length >= 4) {
-      console.log("weel done");
-
-      return true;
-    }
-    return false;
-  }
-}
-
-class Sec4Dragable extends Dragable {
+export class Sec4Dragable extends Dragable {
   refData: RefData;
   refElmt: HTMLElement;
   isInside: boolean;
@@ -116,65 +102,4 @@ interface RefData {
   avgZoneBottom: number;
   avgZoneLeft: number;
   avgZoneRight: number;
-}
-
-export class Section4 extends Section {
-  dragables: Sec4Dragable[];
-  dragablesElmt: HTMLElement[];
-  canvasContainer: HTMLElement;
-
-  constructor(sectionId: string) {
-    super(sectionId);
-    this.dragablesElmt = Array.from(
-      document.querySelectorAll<HTMLElement>(".sec4-dragable")
-    );
-  }
-
-  handleSuccess(id: string) {
-    const isRepaired = hasRepaired(id);
-
-    if (isRepaired) {
-      const paintingContainer = document.querySelector<HTMLElement>(
-        ".painting-pieces-container"
-      ) as HTMLElement;
-
-      const canvasContainer = document.querySelector<HTMLElement>(
-        "#section-4 .canvas__container"
-      ) as HTMLElement;
-
-      paintingContainer.style.display = "none";
-
-      canvasContainer.style.display = "block";
-    }
-  }
-
-  show() {
-    super.show();
-    this.dragables = this.dragablesElmt.map(
-      (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
-    );
-
-    const canvasContainer = document.querySelector<HTMLElement>(
-      "#section-4 .canvas__container"
-    );
-    const paintingContainer = document.querySelector<HTMLElement>(
-      ".painting-pieces-container"
-    ) as HTMLElement;
-
-    paintingContainer.style.display = "block";
-
-    if (!canvasContainer) {
-      throw new Error("no canvas with a class of '.canvas__container'");
-    }
-    this.canvasContainer = canvasContainer;
-
-    this.canvasContainer.style.display = "none";
-  }
-  hide() {
-    super.hide();
-    amountPlaced = [];
-    if (this.dragables) {
-      this.dragables.forEach((elmt) => elmt.initialise());
-    }
-  }
 }

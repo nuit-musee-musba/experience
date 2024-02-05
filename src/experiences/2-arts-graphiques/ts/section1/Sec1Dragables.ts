@@ -1,5 +1,5 @@
-import { Dragable } from "./interactive/dragable";
-import { Section } from "./section";
+import { handleAmountOutside } from "./utils";
+import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
   one: {
@@ -21,26 +21,7 @@ const initialPlace = {
 };
 type ids = "one" | "two" | "three" | "four";
 
-let amountOutside: string[] = [];
-function handleAmountOutside(action: "add" | "remove", id: string) {
-  if (action === "add" && !amountOutside.includes(id)) {
-    amountOutside.push(id);
-    if (amountOutside.length >= 4) {
-      const button = document.querySelector<HTMLButtonElement>(
-        "#button"
-      ) as HTMLButtonElement;
-
-      button.disabled = false;
-    }
-    return;
-  }
-
-  if (action === "remove" && amountOutside.includes(id)) {
-    amountOutside = amountOutside.filter((value) => id !== value);
-  }
-}
-
-class Sec1Dragables extends Dragable {
+export class Sec1Dragables extends Dragable {
   zone: HTMLElement;
   isOutside?: boolean;
 
@@ -80,33 +61,5 @@ class Sec1Dragables extends Dragable {
     this.element.style.top = `${initialPlace[this.element.id as ids].top}px`;
     this.element.style.left = `${initialPlace[this.element.id as ids].left}px`;
     this.element.style.backgroundColor = "#DDDDDD";
-  }
-}
-
-export class Section1 extends Section {
-  dragables: Sec1Dragables[];
-  button: HTMLButtonElement;
-
-  constructor(sectionId: string) {
-    super(sectionId);
-    this.button = document.querySelector<HTMLButtonElement>(
-      "#button"
-    ) as HTMLButtonElement;
-
-    const dragables = Array.from(
-      document.querySelectorAll<HTMLElement>(".sec1-dragable")
-    );
-
-    this.dragables = dragables.map((elmt) => new Sec1Dragables(elmt));
-  }
-  show() {
-    super.show();
-    this.button.disabled = true;
-  }
-
-  hide() {
-    super.hide();
-    amountOutside = [];
-    this.dragables.forEach((elmt) => elmt.initialise());
   }
 }
