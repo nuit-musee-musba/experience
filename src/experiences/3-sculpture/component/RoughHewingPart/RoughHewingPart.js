@@ -1,5 +1,5 @@
 import "./RoughHewingPart.scss";
-import RefiningPart from "../RefiningPart/RefiningPart";
+import DetailsPart from "../DetailsPart/DetailsPart";
 
 const RoughHewingPart = () => {
   const roughPart = document.getElementById("RoughHewingPart");
@@ -8,7 +8,7 @@ const RoughHewingPart = () => {
 
   roughPart.addEventListener("click", () => {
     roughPart.classList.remove("show");
-    RefiningPart();
+    DetailsPart();
   });
 };
 
