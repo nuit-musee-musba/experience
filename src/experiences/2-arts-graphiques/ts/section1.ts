@@ -1,6 +1,26 @@
 import { Dragable } from "./interactive/dragable";
 import { Section } from "./section";
 
+const initialPlace = {
+  one: {
+    top: 300,
+    left: 1330,
+  },
+  two: {
+    top: 500,
+    left: 2160,
+  },
+  three: {
+    top: 500,
+    left: 1418,
+  },
+  four: {
+    top: 1290,
+    left: 1980,
+  },
+};
+type ids = "one" | "two" | "three" | "four";
+
 let amountOutside: string[] = [];
 function handleAmountOutside(action: "add" | "remove", id: string) {
   if (action === "add" && !amountOutside.includes(id)) {
@@ -51,6 +71,11 @@ class Sec1Dragables extends Dragable {
     handleAmountOutside("remove", this.element.id);
     this.element.style.backgroundColor = "#DDDDDD";
   }
+
+  initialise() {
+    this.element.style.top = `${initialPlace[this.element.id as ids].top}px`;
+    this.element.style.left = `${initialPlace[this.element.id as ids].left}px`;
+  }
 }
 
 export class Section1 extends Section {
@@ -63,5 +88,11 @@ export class Section1 extends Section {
     );
 
     this.dragables = dragables.map((elmt) => new Sec1Dragables(elmt));
+  }
+
+  hide() {
+    super.hide();
+    amountOutside = [];
+    this.dragables.forEach((elmt) => elmt.initialise());
   }
 }

@@ -1,5 +1,6 @@
 import { Section } from "./section";
 import { Section1 } from "./section1";
+import { Section4 } from "./section4";
 
 export default class Transition {
   currentSection: Section;
@@ -22,7 +23,7 @@ export default class Transition {
     this.section1 = new Section1(`section-1`);
     this.section2 = new Section(`section-2`);
     this.section3 = new Section(`section-3`);
-    this.section4 = new Section(`section-4`);
+    this.section4 = new Section4(`section-4`);
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
