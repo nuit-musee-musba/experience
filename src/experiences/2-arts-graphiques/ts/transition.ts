@@ -70,7 +70,21 @@ export default class Transition {
     const canvasContainer = currentSection?.querySelector(".canvas__container");
 
     if (canvasContainer) {
-      paint()
+      const interaction = canvasContainer.getAttribute('data-interaction');
+      console.log(canvasContainer);
+      switch (interaction) {
+        case 'paint':
+          console.log(interaction);
+          paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg')
+          break;
+        case 'cleaning':
+          let imgElement = document.createElement('img');
+          imgElement.src = '/2-arts-graphiques/canvas/canvas1.jpeg';
+          imgElement.classList.add('canvas__img');
+          canvasContainer.appendChild(imgElement);
+          paint(canvasContainer, 'stains.png', 'stains_mask.png')
+          break;
+      }
     }
   }
 

@@ -1,9 +1,9 @@
 import * as PIXI from "pixi.js";
 
-const Paint = () => {
+const Paint = (target : any, backgroundFile : any, imageToRevealFile : any) => {
   let width = 2000;
   let height = 2500;
-  const target: Element | null =  document.querySelector('.canvas__container');
+  // const target: Element | null =  document.querySelector('.canvas__container');
   const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
 
   const app: any = new PIXI.Application({
@@ -18,9 +18,9 @@ const Paint = () => {
   const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
   const line = new PIXI.Graphics();
 
-  PIXI.Assets.add("t1", "/2-arts-graphiques/canvas/stains.png");
-  PIXI.Assets.add("t3", "/2-arts-graphiques/canvas/stains_mask.png");
-  PIXI.Assets.add("t2", "/2-arts-graphiques/canvas/canvas1.jpeg");
+  PIXI.Assets.add("t1", `/2-arts-graphiques/canvas/${backgroundFile}`);
+  // PIXI.Assets.add("t3", "/2-arts-graphiques/canvas/stains_mask.png");
+  PIXI.Assets.add("t2", `/2-arts-graphiques/canvas/${imageToRevealFile}`);
   PIXI.Assets.load(["t1", "t2"]).then(setup);
 
   let totalPixels: number;
@@ -98,7 +98,6 @@ const Paint = () => {
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
-      // console.log(`Pourcentage de pixel transparent: ${percentageRemaining.toFixed(2)}%`);
       canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
     }
 
