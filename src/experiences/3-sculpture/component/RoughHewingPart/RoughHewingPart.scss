@@ -9,11 +9,8 @@
   width: $widthBox;
   background-color: $backgroundBox;
   display: none;
-
-  .topBorder {
-    position: absolute;
-    top: 0;
-  }
+  border: solid 20px;
+  border-image: url("/3-sculpture/assets/boxBorder.svg") 40 stretch;
 }
 .show {
   display: block;
