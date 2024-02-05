@@ -112,6 +112,19 @@ body {
   width: 1.5vw;
   height: 1.5vw;
 }
+.chronology-circles {
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+  justify-content: center;
+}
+.chronology-circles button {
+  width: 1vw;
+  height: 1vw;
+  border: 4px solid white;
+  border-radius: 100%;
+  background-color: #ffffff50;
+}
 
 .chronology-buttons button {
   font-size: 4rem;
