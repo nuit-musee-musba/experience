@@ -76,16 +76,20 @@ export default class Transition {
   DisplayInteractiveCanvas(currentSectionNumber : any){
     this.destroyAllCanvases();
 
-    const currentSection =  document.querySelector(`#section-${currentSectionNumber}`);
-    const canvasContainer = currentSection?.querySelector(".canvas__container");
+    const currentSection : HTMLElement | null =  document.querySelector(`#section-${currentSectionNumber}`);
+    const canvasContainer : HTMLElement | null | undefined = currentSection?.querySelector(".canvas__container");
 
     if (canvasContainer) {
       const interaction = canvasContainer.getAttribute('data-interaction');
       console.log(currentSectionNumber);
+      const options = {
+        getPercentage: true,
+        getPercentageAt: 80,
+      };
       switch (interaction) {
         case 'paint':
           console.log(interaction);
-          paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg')
+          paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg', options)
           break;
         case 'cleaning':
           console.log(interaction);
@@ -93,7 +97,7 @@ export default class Transition {
           imgElement.src = '/2-arts-graphiques/canvas/canvas1.jpeg';
           imgElement.classList.add('canvas__img');
           canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, 'stains.png', 'stains_mask.png')
+          paint(canvasContainer, 'stains.png', 'stains_mask.png', options)
           break;
       }
     }

@@ -3,7 +3,12 @@ import * as PIXI from "pixi.js";
 let totalPixels: number;
 let remainingPixels: number;
 
-const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any) => {
+const Paint = async (
+  target: HTMLElement,
+  backgroundFile: String,
+  imageToRevealFile: String,
+  options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
+
   let width = 2000;
   let height = 2500;
   const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
@@ -83,7 +88,7 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
       }
     }
 
-    function percentage() {
+    function percentage(getPercentageAt: number | any) {
       const pixels = app.renderer.extract.pixels(renderTexture);
       remainingPixels = pixels.reduce(
         (count: any, value: any, index: any) =>
@@ -93,6 +98,10 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
       canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+
+      if (percentageRemaining >= getPercentageAt) {
+        alert("Vous pouvez passer à la suite si vous le souhaitez")
+      }
     }
 
     function pointerDown(event: any) {
@@ -104,7 +113,9 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
       dragging = false;
       lastDrawnPoint = null;
 
-      percentage();
+      if (options && options!.getPercentage) {
+        percentage(options!.getPercentageAt);
+      }
     }
   }
 
