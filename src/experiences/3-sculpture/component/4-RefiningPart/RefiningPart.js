@@ -1,5 +1,5 @@
 import "./RefiningPart.scss";
-import PolishingPart from "../PolishingPart/PolishingPart";
+import PolishingPart from "../5-PolishingPart/PolishingPart";
 
 const RefiningPart = () => {
   const refiningPart = document.getElementById("RefiningPart");
