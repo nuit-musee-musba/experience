@@ -65,39 +65,8 @@ class Square {
     this.square.style.backgroundColor = color;
   }
 }
-const section2 = document.getElementById("section-2");
-
-let count: number = 0;
-if (section2) {
-  const square1 = new Square(section2, "square1", { top: 400, left: 400 });
-  const square2 = new Square(section2, "square2", { top: 400, left: 1000 });
-
-  const clicker = document.querySelector<HTMLButtonElement>(".cliker-count");
-
-  clicker?.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    count++;
-    console.log("clicker-count: touch");
-
-    clicker.innerText = `touch ${String(count)}`;
-  });
-
-  clicker?.addEventListener("click", (e) => {
-    count++;
-    console.log("clicker-count: click");
-
-    clicker.innerText = `click ${String(count)}`;
-  });
-
-  const clickZone = document.querySelector<HTMLDivElement>(".pressingZone");
-  const clickZoneTitle =
-    document.querySelector<HTMLParagraphElement>(".pressingZoneTitle");
-
-  clickZone?.addEventListener("touchmove", (e) => {
-    e.preventDefault();
-    console.log("pressing zone : ", e);
-    if (clickZoneTitle) {
-      clickZoneTitle.innerText = String(e.touches.length);
-    }
-  });
-}
+// const section = document.getElementById("section-1");
+// if (section) {
+//   const square1 = new Square(section, "square1");
+//   const square2 = new Square(section, "square2");
+// }
