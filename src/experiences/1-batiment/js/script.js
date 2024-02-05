@@ -223,6 +223,11 @@ for (let i = 1; i <= 4; i++) {
     index = i - 1;
     handleFocusPeriod(period[i - 1]);
   });
+
+  document.getElementById(`circle${i}`).addEventListener("click", () => {
+    index = i - 1;
+    handleFocusPeriod(period[i - 1]);
+  });
 }
 
 function handleFocusPeriod(step) {
@@ -231,12 +236,16 @@ function handleFocusPeriod(step) {
   }
 
   const selectedButtonId = `period${index + 1}`;
+  const selectedRoundButtonId = `circle${index + 1}`;
 
   document.getElementById(selectedButtonId).style.fontSize = "8rem";
+  document.getElementById(selectedRoundButtonId).style.backgroundColor =
+    "white";
 
   for (let i = 1; i <= period.length; i++) {
     if (i - 1 !== index) {
       document.getElementById(`period${i}`).style.fontSize = "4rem";
+      document.getElementById(`circle${i}`).style.backgroundColor = "#ffffff50";
     }
   }
 
