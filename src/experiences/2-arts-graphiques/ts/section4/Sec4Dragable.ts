@@ -1,5 +1,4 @@
-import { Dragable } from "./interactive/dragable";
-import { Section } from "./section";
+import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
   dl: {
@@ -21,20 +20,7 @@ const initialPlace = {
 };
 type refId = "dl" | "dr" | "ur" | "ul";
 
-let amountPlaced: string[] = [];
-function hasRepaired(id: string) {
-  if (!amountPlaced.includes(id)) {
-    amountPlaced.push(id);
-    if (amountPlaced.length >= 4) {
-      console.log("weel done");
-
-      return true;
-    }
-    return false;
-  }
-}
-
-class Sec4Dragable extends Dragable {
+export class Sec4Dragable extends Dragable {
   refData: RefData;
   refElmt: HTMLElement;
   isInside: boolean;
@@ -58,7 +44,6 @@ class Sec4Dragable extends Dragable {
 
     const { top, left, right, bottom } = elmtBoundindRect;
     const tolerance = 0.1;
-    console.log("sec4 : ", top);
 
     this.refData = {
       top,
@@ -85,7 +70,7 @@ class Sec4Dragable extends Dragable {
     this.refData.top = this.refElmt.getBoundingClientRect().top;
     if (this.isInside) {
       this.refElmt.style.zIndex = "10";
-      this.refElmt.style.stroke = "#FF0000";
+      this.refElmt.style.stroke = "#ff0000";
 
       return;
     }
@@ -97,7 +82,6 @@ class Sec4Dragable extends Dragable {
       this.element.style.top = `${this.refData.top}px`;
       this.element.style.left = ` ${this.refData.left}px`;
       this.onSucceed(this.id);
-      console.log(this.refData.top, this.refData.left);
     }
   }
   initialise() {
@@ -118,60 +102,4 @@ interface RefData {
   avgZoneBottom: number;
   avgZoneLeft: number;
   avgZoneRight: number;
-}
-
-export class Section4 extends Section {
-  dragables: Sec4Dragable[];
-  dragablesElmt: HTMLElement[];
-  canvasContainer: HTMLElement;
-
-  constructor(sectionId: string) {
-    super(sectionId);
-    this.dragablesElmt = Array.from(
-      document.querySelectorAll<HTMLElement>(".sec4-dragable")
-    );
-  }
-
-  handleSuccess(id: string) {
-    const isRepaired = hasRepaired(id);
-
-    if (isRepaired) {
-      const paintingContainer = document.querySelector<HTMLElement>(
-        ".painting-pieces-container"
-      ) as HTMLElement;
-
-      const canvasContainer = document.querySelector<HTMLElement>(
-        "#section-4 .canvas__container"
-      ) as HTMLElement;
-
-      paintingContainer.style.display = "none";
-
-      canvasContainer.style.display = "block";
-    }
-  }
-
-  show() {
-    super.show();
-    this.dragables = this.dragablesElmt.map(
-      (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
-    );
-
-    const canvasContainer = document.querySelector<HTMLElement>(
-      "#section-4 .canvas__container"
-    );
-
-    if (!canvasContainer) {
-      throw new Error("no canvas with a class of '.canvas__container'");
-    }
-    this.canvasContainer = canvasContainer;
-    console.log(this.canvasContainer);
-
-    this.canvasContainer.style.display = "none";
-  }
-  hide() {
-    super.hide();
-    if (this.dragables) {
-      this.dragables.forEach((elmt) => elmt.initialise());
-    }
-  }
 }

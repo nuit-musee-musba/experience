@@ -1,5 +1,5 @@
-import { Dragable } from "./interactive/dragable";
-import { Section } from "./section";
+import { handleAmountOutside } from "./utils";
+import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
   one: {
@@ -11,7 +11,7 @@ const initialPlace = {
     left: 2160,
   },
   three: {
-    top: 500,
+    top: 900,
     left: 1418,
   },
   four: {
@@ -21,22 +21,7 @@ const initialPlace = {
 };
 type ids = "one" | "two" | "three" | "four";
 
-let amountOutside: string[] = [];
-function handleAmountOutside(action: "add" | "remove", id: string) {
-  if (action === "add" && !amountOutside.includes(id)) {
-    amountOutside.push(id);
-    if (amountOutside.length >= 4) {
-      alert("well done");
-    }
-    return;
-  }
-
-  if (action === "remove" && amountOutside.includes(id)) {
-    amountOutside = amountOutside.filter((value) => id !== value);
-  }
-}
-
-class Sec1Dragables extends Dragable {
+export class Sec1Dragables extends Dragable {
   zone: HTMLElement;
   isOutside?: boolean;
 
@@ -75,24 +60,6 @@ class Sec1Dragables extends Dragable {
   initialise() {
     this.element.style.top = `${initialPlace[this.element.id as ids].top}px`;
     this.element.style.left = `${initialPlace[this.element.id as ids].left}px`;
-  }
-}
-
-export class Section1 extends Section {
-  dragables: Sec1Dragables[];
-
-  constructor(sectionId: string) {
-    super(sectionId);
-    const dragables = Array.from(
-      document.querySelectorAll<HTMLElement>(".sec1-dragable")
-    );
-
-    this.dragables = dragables.map((elmt) => new Sec1Dragables(elmt));
-  }
-
-  hide() {
-    super.hide();
-    amountOutside = [];
-    this.dragables.forEach((elmt) => elmt.initialise());
+    this.element.style.backgroundColor = "#DDDDDD";
   }
 }

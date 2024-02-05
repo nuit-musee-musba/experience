@@ -132,7 +132,7 @@ canvas {
 /* section-4 */
 
 .painting-pieces-container {
-  height: 80vh;
+  height: 1728px;
   aspect-ratio: 1/1;
   margin: 0 auto;
   border: 10px solid black;
