@@ -63,8 +63,6 @@ gltfLoader.load("/1-batiment/assets/scenetoutbatiment.glb", (gltf) => {
 
   gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
 
-  console.log(gltf.animations);
-
   gltf.animations.forEach((animation, index) => {
     const action = mixer.clipAction(animation);
 
@@ -215,8 +213,8 @@ const nextStep = () => {
 
 for (let i = 1; i <= 4; i++) {
   document.getElementById(`period${i}`).addEventListener("click", () => {
-    handleFocusPeriod(period[i - 1]);
     index = i - 1;
+    handleFocusPeriod(period[i - 1]);
   });
 }
 
@@ -224,6 +222,17 @@ function handleFocusPeriod(step) {
   if (!step) {
     return;
   }
+
+  const selectedButtonId = `period${index + 1}`;
+
+  document.getElementById(selectedButtonId).style.fontSize = "8rem";
+
+  for (let i = 1; i <= period.length; i++) {
+    if (i - 1 !== index) {
+      document.getElementById(`period${i}`).style.fontSize = "4rem";
+    }
+  }
+
   const targetPosition = step.position;
 
   const cameraPosition = getCameraPositionForTarget(targetPosition);
@@ -238,6 +247,8 @@ function handleFocusPeriod(step) {
     step.cubePosition.y,
     step.cubePosition.z
   );
+
+  // camera.lookAt(cube.position);
 
   cube.cursor = "pointer";
 
@@ -269,3 +280,4 @@ handleFocusPeriod(period[index]);
 document.getElementById("restart-button").addEventListener("click", restart);
 document.getElementById("nextButton").addEventListener("click", nextStep);
 document.getElementById("interestButton").addEventListener("click", toggleInfo);
+// controls.target = cube.position;
