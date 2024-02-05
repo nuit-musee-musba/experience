@@ -1,0 +1,28 @@
+@font-face {
+  font-family: musba;
+  src: url(./assets/MusBA-Regular.otf);
+}
+
+h1 {
+  font-family: Montserrat;
+  font-size: 110px;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: musba;
+  font-size: 75px;
+  font-weight: 400;
+}
+
+p {
+  font-family: Montserrat;
+  font-size: 46px;
+  font-weight: 400;
+}
+
+button {
+  font-family: Montserrat;
+  font-size: 56px;
+  font-weight: 400;
+}
