@@ -1,4 +1,5 @@
 import "./RefiningPart.scss";
+import PolishingPart from "../PolishingPart/PolishingPart";
 
 const RefiningPart = () => {
   const refiningPart = document.getElementById("RefiningPart");
@@ -7,6 +8,7 @@ const RefiningPart = () => {
 
   refiningPart.addEventListener("click", () => {
     refiningPart.classList.remove("show");
+    PolishingPart();
   });
 };
 
