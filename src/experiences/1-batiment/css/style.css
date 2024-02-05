@@ -77,28 +77,56 @@ body {
 
 .chronology {
   z-index: 7;
-  left: 2vw;
-  top: 30vh;
-  position: absolute;
-}
-.chronology-buttons {
-  position: absolute;
+  bottom: 12vh;
+  width: 100%;
   display: flex;
-  align-items: start;
-  flex-direction: column;
-  gap: 2.7vh;
-  padding: 12vh 0 0 4vw;
+  justify-content: center;
+  position: absolute;
 }
+
+.chronology-container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.chronology-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.chronology-title {
+  font-size: 3rem;
+  font-family: helvetica;
+  font-weight: 100;
+  color: white;
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+}
+
+.chronology-title img {
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
 .chronology-buttons button {
-  font-size: 2.5rem;
+  font-size: 4rem;
+  font-weight: 100;
   font-family: helvetica;
   background-color: transparent;
   color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
 }
-.chronology-buttons img {
-  position: absolute;
+
+.chronology-line {
+  width: 100%;
+  height: 4px;
+  background-color: white;
 }
 
 #end-menu {
