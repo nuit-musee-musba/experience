@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-p, span{
+p, span, a, h1{
   font-size: 5rem;
 }
 
@@ -113,4 +113,14 @@ canvas {
 #four {
   left: 1980px;
   top: 1290px;
+}
+
+.frame{
+  height: 500px;
+  width: 400px;
+}
+.frames{
+  display: flex;
+  flex-direction: row;
+  gap: 26px
 }

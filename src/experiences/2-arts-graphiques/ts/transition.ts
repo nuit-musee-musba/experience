@@ -117,16 +117,31 @@ export default class Transition {
   }
 
   handleButtonTitle() {
-    console.log(this.currentSectionNumber);
-    if (this.currentSectionNumber === 0) {
-      this.button.innerText = "Découvrir l'oeuvre";
-      return;
+    switch (this.currentSectionNumber) {
+      case 0:
+        this.button.innerText = "Découvrir l'oeuvre";
+        break;
+      case 1:
+        this.button.innerText = "Aller dans le passé";
+        break;
+      case 2:
+        this.button.innerText = "Retour vers le présent";
+        break;
+      case 3:
+        this.button.innerText = "Aller dans la réserve";
+        break;
+      case 4:
+        this.button.innerText = "Choisir un cadre";
+        break;
+      case 5:
+        this.button.innerText = "Exposer l'oeuvre";
+        break;
+      case 6:
+        this.button.innerText = "Voir les critiques";
+        break;
+      case 7:
+        this.button.innerText = "Recommencer l'expérience";
     }
-    if (this.currentSectionNumber === 7) {
-      this.button.innerText = "Recommencer l'expérience";
-      return;
-    }
-    this.button.innerText = `Passer à la section ${this.currentSectionNumber + 1}`;
   }
 
   init() {
