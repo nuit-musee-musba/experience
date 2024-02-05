@@ -18,6 +18,11 @@
 
 // BROUILLON PABÔ :
 
+body {
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+}
+
 ul {
   list-style: none;
 }
