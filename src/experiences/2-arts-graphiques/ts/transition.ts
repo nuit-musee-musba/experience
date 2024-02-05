@@ -1,5 +1,6 @@
 import { Section } from "./section";
 import { Section1 } from "./section1";
+import paint from "./interactive/paint";
 
 export default class Transition {
   currentSection: Section;
@@ -61,6 +62,16 @@ export default class Transition {
     }
     this.handleSection();
     this.handleButtonTitle();
+    this.DisplayInteractiveCanvas(this.currentSectionNumber)
+  }
+
+  DisplayInteractiveCanvas(currentSectionNumber : any){
+    const currentSection =  document.querySelector(`#section-${currentSectionNumber}`);
+    const canvasContainer = currentSection?.querySelector(".canvas__container");
+
+    if (canvasContainer) {
+      paint()
+    }
   }
 
   handleSection() {
