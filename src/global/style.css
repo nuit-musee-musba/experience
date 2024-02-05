@@ -3,6 +3,16 @@
   src: url(./assets/MusBA-Regular.otf);
 }
 
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url(fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url(fonts/Montserrat-SemiBold.ttf);
+}
+
 h1 {
   font-family: Montserrat;
   font-size: 110px;
