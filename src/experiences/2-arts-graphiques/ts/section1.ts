@@ -11,7 +11,7 @@ const initialPlace = {
     left: 2160,
   },
   three: {
-    top: 500,
+    top: 900,
     left: 1418,
   },
   four: {
@@ -26,7 +26,11 @@ function handleAmountOutside(action: "add" | "remove", id: string) {
   if (action === "add" && !amountOutside.includes(id)) {
     amountOutside.push(id);
     if (amountOutside.length >= 4) {
-      alert("well done");
+      const button = document.querySelector<HTMLButtonElement>(
+        "#button"
+      ) as HTMLButtonElement;
+
+      button.disabled = false;
     }
     return;
   }
@@ -75,19 +79,29 @@ class Sec1Dragables extends Dragable {
   initialise() {
     this.element.style.top = `${initialPlace[this.element.id as ids].top}px`;
     this.element.style.left = `${initialPlace[this.element.id as ids].left}px`;
+    this.element.style.backgroundColor = "#DDDDDD";
   }
 }
 
 export class Section1 extends Section {
   dragables: Sec1Dragables[];
+  button: HTMLButtonElement;
 
   constructor(sectionId: string) {
     super(sectionId);
+    this.button = document.querySelector<HTMLButtonElement>(
+      "#button"
+    ) as HTMLButtonElement;
+
     const dragables = Array.from(
       document.querySelectorAll<HTMLElement>(".sec1-dragable")
     );
 
     this.dragables = dragables.map((elmt) => new Sec1Dragables(elmt));
+  }
+  show() {
+    super.show();
+    this.button.disabled = true;
   }
 
   hide() {

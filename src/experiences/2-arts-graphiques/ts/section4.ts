@@ -58,7 +58,6 @@ class Sec4Dragable extends Dragable {
 
     const { top, left, right, bottom } = elmtBoundindRect;
     const tolerance = 0.1;
-    console.log("sec4 : ", top);
 
     this.refData = {
       top,
@@ -85,7 +84,7 @@ class Sec4Dragable extends Dragable {
     this.refData.top = this.refElmt.getBoundingClientRect().top;
     if (this.isInside) {
       this.refElmt.style.zIndex = "10";
-      this.refElmt.style.stroke = "#FF0000";
+      this.refElmt.style.stroke = "#ff0000";
 
       return;
     }
@@ -97,7 +96,6 @@ class Sec4Dragable extends Dragable {
       this.element.style.top = `${this.refData.top}px`;
       this.element.style.left = ` ${this.refData.left}px`;
       this.onSucceed(this.id);
-      console.log(this.refData.top, this.refData.left);
     }
   }
   initialise() {
@@ -159,17 +157,22 @@ export class Section4 extends Section {
     const canvasContainer = document.querySelector<HTMLElement>(
       "#section-4 .canvas__container"
     );
+    const paintingContainer = document.querySelector<HTMLElement>(
+      ".painting-pieces-container"
+    ) as HTMLElement;
+
+    paintingContainer.style.display = "block";
 
     if (!canvasContainer) {
       throw new Error("no canvas with a class of '.canvas__container'");
     }
     this.canvasContainer = canvasContainer;
-    console.log(this.canvasContainer);
 
     this.canvasContainer.style.display = "none";
   }
   hide() {
     super.hide();
+    amountPlaced = [];
     if (this.dragables) {
       this.dragables.forEach((elmt) => elmt.initialise());
     }
