@@ -4,7 +4,9 @@ import gsap from "gsap";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import GUI from "lil-gui";
 
+const gui = new GUI();
 let index = 0;
 let previousTime = 0;
 let time = 0;
@@ -37,27 +39,31 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
-
-cube.addEventListener("click", function () {
-  alert("Cube Clicked!");
-});
-
 // LIGHTS
 
 const ambientLight = new THREE.AmbientLight("#ffffff", 0.8);
+gui
+  .add(ambientLight, "intensity")
+  .min(0)
+  .max(1)
+  .step(0.001)
+  .name("Ambient Light");
 
 const directionalLight = new THREE.DirectionalLight("#EBF5F6", 3);
+gui.add(directionalLight, "intensity").min(0).max(10).step(0.001).name("Sun");
 directionalLight.position.set(1, 3, 4);
 directionalLight.lookAt(4, 2, 4);
 
 scene.add(ambientLight, directionalLight);
 
-gltfLoader.load("/1-batiment/assets/museeV2anime.glb", (gltf) => {
+gltfLoader.load("/1-batiment/assets/scenetoutbatiment.glb", (gltf) => {
   scene.add(gltf.scene);
 
   mixer = new THREE.AnimationMixer(gltf.scene);
 
   gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
+
+  console.log(gltf.animations);
 
   gltf.animations.forEach((animation, index) => {
     const action = mixer.clipAction(animation);
@@ -93,22 +99,22 @@ const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
   0.2,
-  100
+  500
 );
-const fixedCameraHeight = 2.5;
+const fixedCameraHeight = 6;
 scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
 
 controls.enablePan = false;
-controls.enableZoom = false;
+// controls.enableZoom = false;
 
 // controls.minPolarAngle = Math.PI / 8;
 // controls.maxPolarAngle = Math.PI / 2 - 0.1;
 
 const getCameraPositionForTarget = (position) => {
-  return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
+  return { x: position.x + 0, y: position.y + 6, z: position.z + 1 };
 };
 
 //RENDERER
@@ -143,6 +149,7 @@ function onMouseClick(event) {
 }
 
 window.addEventListener("click", onMouseClick, false);
+window.addEventListener("dragover", onMouseClick, false);
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
@@ -153,8 +160,6 @@ const tick = () => {
   if (mixer) {
     mixer.update(deltaTime);
   }
-
-  camera.position.y = fixedCameraHeight;
 
   controls.update();
   renderer.render(scene, camera);

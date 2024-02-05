@@ -1,7 +1,7 @@
 import Transition from "./transition";
-
+import Frames from "./interactive/paintingFrame";
 
 window.addEventListener("load", () => {
-  // paint();
   new Transition();
+  new Frames();
 });

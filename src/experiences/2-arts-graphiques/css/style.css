@@ -4,7 +4,10 @@
   box-sizing: border-box;
 }
 
-p, span{
+p,
+span,
+a,
+h1 {
   font-size: 5rem;
 }
 
@@ -22,12 +25,12 @@ body {
   border-radius: 110px;
 }
 
-.canvas__container{
+.canvas__container {
   position: relative;
   height: fit-content;
 }
 
-.canvas__img{
+.canvas__img {
   width: 2000px;
   height: 2500px;
 }
@@ -113,4 +116,59 @@ canvas {
 #four {
   left: 1980px;
   top: 1290px;
+}
+
+.frame {
+  height: 500px;
+  width: 400px;
+}
+.frames {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+}
+/* end section-1 */
+
+/* section-4 */
+
+.painting-pieces-container {
+  height: 80vh;
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  border: 10px solid black;
+  //position: relative;
+}
+
+.painting-pieces-container img {
+  position: absolute;
+}
+
+.pieces-ref {
+  position: relative;
+  z-index: 1;
+}
+.Calque_1 {
+  position: absolute;
+}
+
+.sec4-dl {
+  top: 900px;
+  left: 1500px;
+  width: 1222.59px;
+}
+.sec4-dr {
+  top: 1200px;
+  left: 2400px;
+  width: 1400.55px;
+}
+
+.sec4-ur {
+  top: 0;
+  left: 2400px;
+  width: 1263.91px;
+}
+.sec4-ul {
+  top: 0;
+  left: 0;
+  width: 1212.68px;
 }

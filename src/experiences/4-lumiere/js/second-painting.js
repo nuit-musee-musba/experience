@@ -63,7 +63,8 @@ const gui = new GUI({
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 5.2,
-  planDistance: 0.3,
+  planDistance: 0.5,
+  white: "#f5f5f5",
 };
 
 // Canvas
@@ -102,10 +103,13 @@ const secondPlanTexture = textureLoader.load(
 secondPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const thirdPlanTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-3.jpg"
+  "/4-lumiere/second-painting/second-painting-plan-3.png"
 );
 thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
+const thirdPlanNormalTexture = textureLoader.load(
+  "/4-lumiere/second-painting/second-painting-plan-3-normal.png"
+);
 /**
  * Scene objects
  */
@@ -120,6 +124,7 @@ const secondPaintingMaterial1 = new THREE.MeshStandardMaterial({
 });
 const secondPainting1 = new THREE.Mesh(planeGeometry, secondPaintingMaterial1);
 secondPainting1.position.z = globalParameters.planDistance;
+secondPainting1.scale.set(0.968, 0.968, 1);
 
 // Second painting | plan 2
 const secondPaintingMaterial2 = new THREE.MeshStandardMaterial({
@@ -127,11 +132,13 @@ const secondPaintingMaterial2 = new THREE.MeshStandardMaterial({
   transparent: true,
 });
 const secondPainting2 = new THREE.Mesh(planeGeometry, secondPaintingMaterial2);
+secondPainting2.scale.set(0.985, 0.985, 1);
 
 // Second painting | plan 3
 const secondPaintingMaterial3 = new THREE.MeshStandardMaterial({
   map: thirdPlanTexture,
   transparent: true,
+  normal: thirdPlanNormalTexture,
 });
 const secondPainting3 = new THREE.Mesh(planeGeometry, secondPaintingMaterial3);
 secondPainting3.position.z = -globalParameters.planDistance;
@@ -160,7 +167,7 @@ var ellipseGeometry = new THREE.TorusGeometry(
   Math.PI * 2 // arc
 );
 var ellipseMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
+  color: globalParameters.white,
   transparent: true,
   // opacity: 0,
   // wireframe: true,
@@ -282,6 +289,26 @@ cameraTweaks
  * Pointer
  */
 const pointer = new THREE.Vector2();
+
+// 'touchmove' event listener
+window.addEventListener(
+  "touchmove",
+  function (event) {
+    // Prevent touchmove default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+);
+
+// 'wheel' event listener
+window.addEventListener(
+  "wheel",
+  function (event) {
+    // Prevent wheel event default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+); // Use { passive: false } to enable preventDefault
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {

@@ -1,2 +1,0 @@
-start /b "" .\windows_start.cmd 
-start /b "" ..\browsers\chrome-win\chrome.exe --args --disable-pinch --kiosk --incognito --noerrdialogs --disable-features=TranslateUI,Translate,InterestFeedContentSuggestions --no-first-run --overscroll-history-navigation=0 --ash-no-nudges --hide-scrollbars --disable-infobars --disable-translate --kiosk http://localhost:3000

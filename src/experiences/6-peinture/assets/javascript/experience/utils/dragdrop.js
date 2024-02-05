@@ -107,7 +107,7 @@ function handleDragInteraction(
         // -- win --
 
         if (howManyDone >= winConditions) {
-          alert("Chef : Tu as gagné !");
+          document.body.classList.add('has-ending-opened')
         }
       } else {
         dragElement.style.left = realInitialX + "px";

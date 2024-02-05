@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import IntroPopup from "./component/IntroPart/IntroPopup";
-import RoughHewingPart from "./component/RoughHewingPart/RoughHewingPart";
+import IntroPopup from "./component/1-IntroPart/IntroPart";
+import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
+import DetailsPart from "./component/3-DetailsPart/DetailsPart";
+import RefiningPart from "./component/4-RefiningPart/RefiningPart";
+import PolishingPart from "./component/5-PolishingPart/PolishingPart";
+import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const sizes = {
@@ -54,9 +58,9 @@ const group = new THREE.Group();
 // group.position.set(0, 0, 0);
 
 scene.add(cube1);
-scene.add(cube2);
-scene.add(cube3);
-scene.add(cube4);
+// scene.add(cube2);
+// scene.add(cube3);
+// scene.add(cube4);
 
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 const planeMaterial = new THREE.MeshBasicMaterial({ color: "white" });
@@ -98,6 +102,8 @@ window.addEventListener("resize", () => {
 let touchBefore = 0;
 let currentTouch = 0;
 
+const mouse = new THREE.Vector2();
+
 window.addEventListener("touchmove", (event) => {
   currentTouch = event.touches[0].clientX / 100;
 });
@@ -113,8 +119,6 @@ window.addEventListener("touchstart", (event) => {
 
 // Mouse Moove
 
-const mouse = new THREE.Vector2();
-
 window.addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / sizes.width) * 2 - 1;
   mouse.y = -((event.clientY / sizes.height) * 2 - 1);
@@ -125,22 +129,80 @@ let currentPart2;
 let currentPart3;
 let currentPart4;
 
-document.addEventListener("click", onClick, false);
+document.addEventListener(
+  "click",
+  (event) => {
+    onClick(event);
+  },
+  false
+);
 
-function onClick() {
+let roughCube1 = 0;
+let roughCube2 = 0;
+let roughCube3 = 0;
+let roughCube4 = 0;
+
+function onClick(event) {
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, camera);
+  const part1 = raycaster.intersectObject(cube1);
+  currentPart1 = part1[0];
+
   if (currentPart1) {
-    alert("test");
-    scene.add(statueV1);
+    roughCube1++;
+    if (roughCube1 === 1) {
+      cube1.material.color.set("red");
+      DetailsPart();
+    }
+    if (roughCube1 === 2) {
+      cube1.material.color.set("yellow");
+      RefiningPart();
+    }
+    if (roughCube1 === 3) {
+      cube1.material.color.set("green");
+      PolishingPart();
+    }
+    if (roughCube1 === 4) {
+      cube1.material.color.set("blue");
+      OutroPart();
+    }
   }
-  if (currentPart2) {
-    alert("test2");
-  }
-  if (currentPart3) {
-    alert("test3");
-  }
-  if (currentPart4) {
-    alert("test4");
-  }
+  // if (currentPart2) {
+  //   roughCube2++;
+  //   if (roughCube2 === 1) {
+  //     cube2.material.color.set("red");
+  //   }
+  //   if (roughCube2 === 2) {
+  //     cube2.material.color.set("yellow");
+  //   }
+  //   if (roughCube2 === 3) {
+  //     scene.remove(cube2);
+  //   }
+  // }
+  // if (currentPart3) {
+  //   roughCube3++;
+  //   if (roughCube3 === 1) {
+  //     cube3.material.color.set("red");
+  //   }
+  //   if (roughCube3 === 2) {
+  //     cube3.material.color.set("yellow");
+  //   }
+  //   if (roughCube3 === 3) {
+  //     scene.remove(cube3);
+  //   }
+  // }
+  // if (currentPart4) {
+  //   roughCube4++;
+  //   if (roughCube4 === 1) {
+  //     cube4.material.color.set("red");
+  //   }
+  //   if (roughCube4 === 2) {
+  //     cube4.material.color.set("yellow");
+  //   }
+  //   if (roughCube4 === 3) {
+  //     scene.remove(cube4);
+  //   }
+  // }
 }
 
 //Camera
@@ -192,37 +254,29 @@ const tick = () => {
 
   //Raycaster
 
-  const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(mouse, camera);
+  // if (part1.length) {
+  //   currentPart1 = part1[0];
+  // } else {
+  //   currentPart1 = null;
+  // }
 
-  const part1 = raycaster.intersectObject(cube1);
-  const part2 = raycaster.intersectObject(cube2);
-  const part3 = raycaster.intersectObject(cube3);
-  const part4 = raycaster.intersectObject(cube4);
+  // if (part2.length) {
+  //   currentPart2 = part2[0];
+  // } else {
+  //   currentPart2 = null;
+  // }
 
-  if (part1.length) {
-    currentPart1 = part1[0];
-  } else {
-    currentPart1 = null;
-  }
+  // if (part3.length) {
+  //   currentPart3 = part3[0];
+  // } else {
+  //   currentPart3 = null;
+  // }
 
-  if (part2.length) {
-    currentPart2 = part2[0];
-  } else {
-    currentPart2 = null;
-  }
-
-  if (part3.length) {
-    currentPart3 = part3[0];
-  } else {
-    currentPart3 = null;
-  }
-
-  if (part4.length) {
-    currentPart4 = part4[0];
-  } else {
-    currentPart4 = null;
-  }
+  // if (part4.length) {
+  //   currentPart4 = part4[0];
+  // } else {
+  //   currentPart4 = null;
+  // }
 
   //UpdateControls
 
