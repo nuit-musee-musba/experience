@@ -9,8 +9,10 @@ export class Dragable {
     this.top = position?.top ?? 0;
     this.left = position?.left ?? 0;
 
-    this.element.addEventListener("touchend", () => {
+    this.element.addEventListener("touchend", (e) => {
       //console.log("%c handleEnd", "background-color: #AAAAAA;");
+
+      this.drop(e);
     });
     this.element.addEventListener("touchmove", (e) => {
       //console.log("%c handleMove", "background-color: #AA3DAA;");
@@ -32,4 +34,5 @@ export class Dragable {
     });
   }
   isDraging(e?: TouchEvent) {}
+  drop(e?: TouchEvent) {}
 }

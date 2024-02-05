@@ -1,4 +1,5 @@
 import { Frame } from "../frame";
+import { texts } from "../utils/texts";
 
 export default class Frames {
   frames: Frame[];
@@ -14,9 +15,12 @@ export default class Frames {
     frame1.addEventListener(() => this.selectFrame(frame1));
     frame2.addEventListener(() => this.selectFrame(frame2));
     frame3.addEventListener(() => this.selectFrame(frame3));
+
+    this.handleTextAndButton();
   }
   selectFrame(selectedFrame: Frame) {
     this.selectedFrameId = selectedFrame.id;
+    this.handleTextAndButton();
 
     this.frames.forEach((frame) => {
       if (this.selectedFrameId === frame.id) {
@@ -25,5 +29,19 @@ export default class Frames {
         frame.removeBackground();
       }
     });
+  }
+  handleTextAndButton() {
+    const text = document.querySelector<HTMLParagraphElement>(".frame-step");
+    const button = document.querySelector<HTMLButtonElement>("#button");
+    if (!this.selectedFrameId && text && button) {
+      text.innerText = texts.section5.step1;
+      // button.disabled = true;
+      return;
+    }
+    if (this.selectedFrameId && text && button) {
+      text.innerText = texts.section5.step2;
+      // button.disabled = false;:
+      return;
+    }
   }
 }
