@@ -101,20 +101,20 @@ const camera = new THREE.PerspectiveCamera(
   0.2,
   500
 );
-const fixedCameraHeight = 2.5;
+const fixedCameraHeight = 6;
 scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
 
 controls.enablePan = false;
-controls.enableZoom = false;
+// controls.enableZoom = false;
 
 // controls.minPolarAngle = Math.PI / 8;
 // controls.maxPolarAngle = Math.PI / 2 - 0.1;
 
 const getCameraPositionForTarget = (position) => {
-  return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
+  return { x: position.x + 0, y: position.y + 6, z: position.z + 1 };
 };
 
 //RENDERER
@@ -160,8 +160,6 @@ const tick = () => {
   if (mixer) {
     mixer.update(deltaTime);
   }
-
-  camera.position.y = fixedCameraHeight;
 
   controls.update();
   renderer.render(scene, camera);
