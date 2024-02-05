@@ -1,5 +1,7 @@
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
+import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
 
 /**
  * TO DO LIST
@@ -63,7 +65,8 @@ const gui = new GUI({
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 1.3,
-  planDistance: 0.3,
+  planDistance: 0.5,
+  white: "#f5f5f5",
 };
 
 // Canvas
@@ -111,7 +114,7 @@ thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
  */
 
 // Third painting
-const planeGeometry = new THREE.PlaneGeometry(9.23, 4, 150, 100);
+const planeGeometry = new THREE.PlaneGeometry(5.64, 4, 150, 100);
 
 // Third painting | plan 1
 const thirdPaintingMaterial1 = new THREE.MeshStandardMaterial({
@@ -120,6 +123,7 @@ const thirdPaintingMaterial1 = new THREE.MeshStandardMaterial({
 });
 const thirdPainting1 = new THREE.Mesh(planeGeometry, thirdPaintingMaterial1);
 thirdPainting1.position.z = globalParameters.planDistance;
+thirdPainting1.scale.set(0.968, 0.968, 1);
 
 // Third painting | plan 2
 const thirdPaintingMaterial2 = new THREE.MeshStandardMaterial({
@@ -127,7 +131,7 @@ const thirdPaintingMaterial2 = new THREE.MeshStandardMaterial({
   transparent: true,
 });
 const thirdPainting2 = new THREE.Mesh(planeGeometry, thirdPaintingMaterial2);
-
+thirdPainting2.scale.set(0.985, 0.985, 1);
 // Third painting | plan 3
 const thirdPaintingMaterial3 = new THREE.MeshStandardMaterial({
   map: thirdPlanTexture,
@@ -151,33 +155,32 @@ paintingTweaks
     secondPainting3.position.z = -globalParameters.planDistance;
   });
 
-// ellipse
-var ellipseGeometry = new THREE.TorusGeometry(
-  globalParameters.lightRadius, // Radius
-  0.005, // tube
-  12, // radialSegments
-  48, // tubularSegments
-  Math.PI * 2 // arc
+// line
+var lineGeometry = new THREE.CylinderGeometry(
+  0.005, // radiusTop
+  0.005, // radiusBottom
+  3, // height
+  32, // radialSegments
+  1 // heightSegments
 );
-var ellipseMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
+var lineMaterial = new THREE.MeshBasicMaterial({
+  color: globalParameters.white,
   transparent: true,
   // opacity: 0,
   // wireframe: true,
 });
-var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
-ellipse.position.z = 0.5;
-ellipse.rotation.x = -Math.PI * 0.45;
-ellipse.rotation.z = -0.9;
-scene.add(ellipse);
+var line = new THREE.Mesh(lineGeometry, lineMaterial);
+line.position.z = 0.25;
+line.position.y = -0.5;
+scene.add(line);
 
 /**
  * Lights
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  0xffffff, // color
-  1 // intensity
+  "#d1dbff", // color
+  5 // intensity
 );
 scene.add(ambientLight);
 
@@ -187,51 +190,51 @@ ambientLightTweaks.addColor(ambientLight, "color");
 ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
 // Second painting point light
-const pointLight = new THREE.PointLight(
-  "#f09647", // color
-  25, // intensity
-  50, // distance
-  1 // decay
+const rectAreaLight = new THREE.RectAreaLight(
+  "#9FB2FF", // color
+  1, // intensity
+  8, // width
+  2.5 // height
 );
-pointLight.position.x = globalParameters.lightRadius;
-scene.add(pointLight);
-ellipse.add(pointLight);
-const pointLightTweaks = gui.addFolder("Spot light parameters");
-pointLightTweaks.add(pointLight, "visible");
-pointLightTweaks.addColor(pointLight, "color");
-pointLightTweaks.add(pointLight, "intensity").min(0).max(50).step(1);
-pointLightTweaks.add(pointLight, "distance").min(0).max(70).step(1);
-pointLightTweaks.add(pointLight, "decay").min(0).max(1).step(0.01);
-pointLightTweaks
-  .add(pointLight.shadow, "blurSamples")
-  .min(-20)
-  .max(20)
-  .step(0.001);
+// pointLight.position.x = globalParameters.lightRadius;
+scene.add(rectAreaLight);
+line.add(rectAreaLight);
+
+rectAreaLight.position.y = 1.5;
+
+console.log("rectAreaLight: ", rectAreaLight);
+const rectAreaLightTweaks = gui.addFolder("Rectangle area light parameters");
+rectAreaLightTweaks.add(rectAreaLight, "visible");
+rectAreaLightTweaks.addColor(rectAreaLight, "color").onChange((value) => {
+  console.log(value.getHexString());
+});
+rectAreaLightTweaks.add(rectAreaLight, "intensity").min(0).max(15).step(1);
 
 // Helper
-const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-pointLightHelper.visible = true;
-pointLightHelper.color = "#ffffff";
-scene.add(pointLightHelper);
-pointLightTweaks.add(pointLightHelper, "visible").name("Repère visuel");
-pointLightTweaks
-  .add(globalParameters, "lightAngleStrength")
-  .min(0)
-  .max(10)
-  .step(0.01)
-  .name("Light movement strength");
-pointLightTweaks
-  .add(globalParameters, "lightRadius")
-  .min(0)
-  .max(10)
-  .step(0.01)
-  .name("Light circle radius");
+const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
+rectAreaLightHelper.visible = false;
+scene.add(rectAreaLightHelper);
+rectAreaLightTweaks.add(rectAreaLightHelper, "visible").name("Repère visuel");
 
-const pointLightPosition = pointLightTweaks.addFolder("Spot light position");
+const rectAreaLightPosition = rectAreaLightTweaks.addFolder(
+  "Spot light position"
+);
 
-pointLightPosition.add(pointLight.position, "x").min(-10).max(10).step(0.01);
-pointLightPosition.add(pointLight.position, "y").min(-10).max(10).step(0.01);
-pointLightPosition.add(pointLight.position, "z").min(-10).max(10).step(0.01);
+rectAreaLightPosition
+  .add(rectAreaLight.position, "x")
+  .min(-10)
+  .max(10)
+  .step(0.01);
+rectAreaLightPosition
+  .add(rectAreaLight.position, "y")
+  .min(-10)
+  .max(10)
+  .step(0.01);
+rectAreaLightPosition
+  .add(rectAreaLight.position, "z")
+  .min(-10)
+  .max(10)
+  .step(0.01);
 
 /**
  * Sizes
@@ -283,13 +286,33 @@ cameraTweaks
  */
 const pointer = new THREE.Vector2();
 
+// 'touchmove' event listener
+window.addEventListener(
+  "touchmove",
+  function (event) {
+    // Prevent touchmove default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+);
+
+// 'wheel' event listener
+window.addEventListener(
+  "wheel",
+  function (event) {
+    // Prevent wheel event default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+); // Use { passive: false } to enable preventDefault
+
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
   // Update firstPainting light position
-  updateRotation();
+  // updateRotation();
 });
 
 canvas.addEventListener("touchmove", (event) => {
@@ -297,13 +320,13 @@ canvas.addEventListener("touchmove", (event) => {
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
   // Update firstPainting light position
-  updateRotation();
+  // updateRotation();
 });
 
 // Calculate pointer angle
 function calculateAngle() {
   const relativeCursorPosition = new THREE.Vector3(pointer.x, pointer.y, 0).sub(
-    ellipse.position
+    line.position
   );
   const angle = Math.atan2(relativeCursorPosition.y, relativeCursorPosition.x);
   const normalizedAngle = (angle + Math.PI * 2) % (Math.PI * 2);
@@ -315,10 +338,10 @@ const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
 const valudResultPopin = document.querySelector("#popin-result-true");
 
-// Update ellipse rotation
+// Update line rotation
 function updateRotation() {
   const angle = calculateAngle();
-  ellipse.rotation.z = angle;
+  line.rotation.z = angle;
 
   // // Check result
   if (angle > 3.6 && angle < 3.9) {
@@ -341,6 +364,11 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
+// Controls
+const controls = new OrbitControls(camera, canvas);
+controls.target = line.position;
+controls.enableDamping = true;
+
 /**
  * Renderer
  */
@@ -355,8 +383,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Light controls
-  pointLightHelper.update();
+  // Update controls
+  controls.update();
 
   // Render
   renderer.render(scene, camera);
