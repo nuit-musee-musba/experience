@@ -62,42 +62,45 @@ export default class Transition {
     }
     this.handleSection();
     this.handleButtonTitle();
-    this.DisplayInteractiveCanvas(this.currentSectionNumber)
+    this.DisplayInteractiveCanvas(this.currentSectionNumber);
   }
 
   destroyAllCanvases() {
-    const existingCanvases = document.querySelectorAll('canvas');
+    const existingCanvases = document.querySelectorAll("canvas");
 
-    existingCanvases.forEach((canvas : HTMLElement | any) => {
+    existingCanvases.forEach((canvas: HTMLElement | any) => {
       canvas.parentNode.removeChild(canvas);
     });
   }
 
-  DisplayInteractiveCanvas(currentSectionNumber : any){
+  DisplayInteractiveCanvas(currentSectionNumber: number) {
     this.destroyAllCanvases();
 
-    const currentSection : HTMLElement | null =  document.querySelector(`#section-${currentSectionNumber}`);
-    const canvasContainer : HTMLElement | null | undefined = currentSection?.querySelector(".canvas__container");
+    const currentSection: HTMLElement | null = document.querySelector(
+      `#section-${currentSectionNumber}`
+    );
+    const canvasContainer: HTMLElement | null | undefined =
+      currentSection?.querySelector(".canvas__container");
 
     if (canvasContainer) {
-      const interaction = canvasContainer.getAttribute('data-interaction');
+      const interaction = canvasContainer.getAttribute("data-interaction");
       console.log(currentSectionNumber);
       const options = {
         getPercentage: true,
         getPercentageAt: 80,
       };
       switch (interaction) {
-        case 'paint':
+        case "paint":
           console.log(interaction);
-          paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg', options)
+          paint(canvasContainer, "blank-canvas.jpeg", "canvas1.jpeg", options);
           break;
-        case 'cleaning':
+        case "cleaning":
           console.log(interaction);
-          let imgElement = document.createElement('img');
-          imgElement.src = '/2-arts-graphiques/canvas/canvas1.jpeg';
-          imgElement.classList.add('canvas__img');
+          let imgElement = document.createElement("img");
+          imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
+          imgElement.classList.add("canvas__img");
           canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, 'stains.png', 'stains_mask.png', options)
+          paint(canvasContainer, "stains.png", "stains_mask.png", options);
           break;
       }
     }
