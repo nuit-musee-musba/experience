@@ -6,6 +6,9 @@ import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 
+import { inactivityTime } from "../../../lib/inactivity";
+
+inactivityTime();
 const gui = new GUI();
 let index = 0;
 let previousTime = 0;
