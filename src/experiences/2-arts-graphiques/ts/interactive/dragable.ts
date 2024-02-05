@@ -3,11 +3,7 @@ export class Dragable {
   top: number;
   left: number;
 
-  constructor(
-    element: HTMLElement,
-    position?: { top: number; left: number },
-    touchMove?: (e?: TouchEvent) => void
-  ) {
+  constructor(element: HTMLElement, position?: { top: number; left: number }) {
     this.element = element;
 
     this.top = position?.top ?? 0;
