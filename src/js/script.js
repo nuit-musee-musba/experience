@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
   infoTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
   infoButton.addEventListener("click", function () {
-    // const url = data[0].path;
-    // window.location.href = url;
-    camera.position.set(0, 3, 7);
+    const url = data[0].path;
+    window.location.href = url;
+    // camera.position.set(0, 3, 7);
   });
 });
 
@@ -179,6 +179,7 @@ canvas.addEventListener("touchstart", (event) => {
   console.log("First touch at", firstTouch);
   console.log("Initial carousel rotation", carousel.rotation.y);
   console.log("Current island index", currentIslandIndex);
+  console.log("Positions", rotationPositions);
 });
 
 // Touch move
@@ -284,11 +285,14 @@ canvas.addEventListener("touchmove", (event) => {
   } else {
     console.log("Not surpassed yet");
   }
+
+  console.log(carousel.rotation.y);
+  console.log(Math.round(carousel.rotation.y % ((Math.PI * 2) / 5)));
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
-  const arrayLength = rotationPositions.length;
+  const arrayLength = islandPromises.length;
   isTouching = false;
   endTouch = touchMoveX;
   console.log("Last touch at", endTouch);
@@ -309,15 +313,25 @@ canvas.addEventListener("touchend", () => {
   // Change info box data based on the current island index
   // Use timesSurpassed to amount the index will be updated
   if (realDifference < 0) {
+    // If the carousel is rotating to the left
     currentIslandIndex = currentIslandIndex - timesSurpassed;
     if (currentIslandIndex < 0) {
-      currentIslandIndex = 4;
+      currentIslandIndex = currentIslandIndex + arrayLength;
     } else {
       currentIslandIndex = currentIslandIndex;
     }
   } else {
-    currentIslandIndex =
-      currentIslandIndex === 4 ? 0 : currentIslandIndex + timesSurpassed;
+    // If the carousel is rotating to the right
+    // currentIslandIndex =
+    //   currentIslandIndex === 4
+    //     ? 0 + timesSurpassed
+    //     : currentIslandIndex + timesSurpassed;
+    currentIslandIndex = currentIslandIndex + timesSurpassed;
+    if (currentIslandIndex > 4) {
+      currentIslandIndex = currentIslandIndex - arrayLength;
+    } else {
+      currentIslandIndex = currentIslandIndex;
+    }
   }
 
   console.log("New island index", currentIslandIndex);
