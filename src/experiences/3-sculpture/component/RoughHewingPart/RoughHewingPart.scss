@@ -1,12 +1,16 @@
+@import "../../style.scss";
+
 .roughPart {
   position: absolute;
   z-index: 1;
-  left: 5%;
+  left: 10%;
   top: 10%;
-  width: 50%;
-  height: 70%;
-  background-color: azure;
+  padding: 2%;
+  width: $widthBox;
+  background-color: $backgroundBox;
   display: none;
+  border: solid 20px;
+  border-image: url("/3-sculpture/assets/boxBorder.svg") 40 stretch;
 }
 .show {
   display: block;
