@@ -1,7 +1,9 @@
 import { Section } from "./section";
-import { Section1 } from "./section1";
+
 import paint from "./interactive/paint";
-import { Section4 } from "./section4";
+
+import { Section1 } from "./section1/Section1";
+import { Section4 } from "./section4/Section4";
 
 export default class Transition {
   currentSection: Section;
@@ -97,11 +99,11 @@ export default class Transition {
           break;
         case "cleaning":
           console.log(interaction);
-          let imgElement = document.createElement("img");
-          imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
-          imgElement.classList.add("canvas__img");
-          canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, "stains.png", "stains_mask.png", options);
+          // let imgElement = document.createElement("img");
+          // imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
+          // imgElement.classList.add("canvas__img");
+          // canvasContainer.appendChild(imgElement);
+          paint(canvasContainer, "stains_painting.png", "canvas1.jpeg", options);
           break;
       }
     }

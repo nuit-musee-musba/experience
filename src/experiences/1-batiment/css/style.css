@@ -1,8 +1,3 @@
-@font-face {
-  font-family: musba;
-  src: url(./assets/MusBA-Regular.otf);
-}
-
 *,
 html {
   margin: 0;
@@ -24,6 +19,14 @@ body {
 html,
 body {
   overflow: hidden;
+}
+
+.main-title {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  width: calc(100% / 3);
+  color: white;
 }
 
 #nextButton {
@@ -157,17 +160,6 @@ body {
   border: 2px dashed white;
   padding: 5px;
 }
-.end-menu-buttons button {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 2px solid white;
-  height: 50px;
-  width: 150px;
-  cursor: pointer;
-  font-family: Manrope;
-  font-size: 15px;
-  font-weight: 700;
-}
 
 .interest-component {
   position: absolute;
@@ -208,14 +200,12 @@ body {
   right: 2vh;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0.5rem 1rem;
-  background-color: white;
+  gap: 20px;
   cursor: pointer;
 }
 
 .audio {
-  width: 30px;
+  width: 56px;
 }
 
 @media screen and (max-width: 1508px) {

@@ -17,6 +17,7 @@ body {
   height: 100%;
   position: relative;
 }
+
 #button {
   font-size: 6rem;
   padding: 3rem 2rem;
@@ -26,19 +27,15 @@ body {
 }
 
 .canvas__container {
-  position: relative;
   height: fit-content;
 }
 
-.canvas__img {
-  width: 2000px;
-  height: 2500px;
+/* Sections */
+section{
+  display: flex;
 }
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 5px solid red;
+section .left, section .center, section .right{
+  flex: 1;
 }
 
 /* debug page */
@@ -132,7 +129,7 @@ canvas {
 /* section-4 */
 
 .painting-pieces-container {
-  height: 80vh;
+  height: 1728px;
   aspect-ratio: 1/1;
   margin: 0 auto;
   border: 10px solid black;
