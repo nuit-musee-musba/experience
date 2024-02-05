@@ -146,7 +146,6 @@ function onClick(event) {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
   const part1 = raycaster.intersectObject(cube1);
-  console.log(part1);
   currentPart1 = part1[0];
 
   if (currentPart1) {
