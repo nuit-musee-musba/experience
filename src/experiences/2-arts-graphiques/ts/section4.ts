@@ -22,13 +22,15 @@ const initialPlace = {
 type refId = "dl" | "dr" | "ur" | "ul";
 
 let amountPlaced: string[] = [];
-function handleAmountPlaced(id: string) {
+function hasRepaired(id: string) {
   if (!amountPlaced.includes(id)) {
     amountPlaced.push(id);
     if (amountPlaced.length >= 4) {
-      alert("well done");
+      console.log("weel done");
+
+      return true;
     }
-    return;
+    return false;
   }
 }
 
@@ -37,11 +39,13 @@ class Sec4Dragable extends Dragable {
   refElmt: HTMLElement;
   isInside: boolean;
   id: string;
+  onSucceed: (id: string) => void;
 
-  constructor(element: HTMLElement) {
+  constructor(element: HTMLElement, onSucceed: (id: string) => void) {
     super(element);
 
     this.id = element.id.split("-")[1];
+    this.onSucceed = onSucceed;
 
     const refElmt = document.querySelector<HTMLElement>(`#ref-${this.id}`);
 
@@ -92,7 +96,7 @@ class Sec4Dragable extends Dragable {
       this.element.style.transition = "top 0.2s, left 0.2s";
       this.element.style.top = `${this.refData.top}px`;
       this.element.style.left = ` ${this.refData.left}px`;
-      handleAmountPlaced(this.id);
+      this.onSucceed(this.id);
       console.log(this.refData.top, this.refData.left);
     }
   }
@@ -119,6 +123,7 @@ interface RefData {
 export class Section4 extends Section {
   dragables: Sec4Dragable[];
   dragablesElmt: HTMLElement[];
+  canvasContainer: HTMLElement;
 
   constructor(sectionId: string) {
     super(sectionId);
@@ -127,12 +132,46 @@ export class Section4 extends Section {
     );
   }
 
+  handleSuccess(id: string) {
+    const isRepaired = hasRepaired(id);
+
+    if (isRepaired) {
+      const paintingContainer = document.querySelector<HTMLElement>(
+        ".painting-pieces-container"
+      ) as HTMLElement;
+
+      const canvasContainer = document.querySelector<HTMLElement>(
+        "#section-4 .canvas__container"
+      ) as HTMLElement;
+
+      paintingContainer.style.display = "none";
+
+      canvasContainer.style.display = "block";
+    }
+  }
+
   show() {
     super.show();
-    this.dragables = this.dragablesElmt.map((elmt) => new Sec4Dragable(elmt));
+    this.dragables = this.dragablesElmt.map(
+      (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
+    );
+
+    const canvasContainer = document.querySelector<HTMLElement>(
+      "#section-4 .canvas__container"
+    );
+
+    if (!canvasContainer) {
+      throw new Error("no canvas with a class of '.canvas__container'");
+    }
+    this.canvasContainer = canvasContainer;
+    console.log(this.canvasContainer);
+
+    this.canvasContainer.style.display = "none";
   }
   hide() {
     super.hide();
-    this.dragables.forEach((elmt) => elmt.initialise());
+    if (this.dragables) {
+      this.dragables.forEach((elmt) => elmt.initialise());
+    }
   }
 }

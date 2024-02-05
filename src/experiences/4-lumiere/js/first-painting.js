@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import GUI from "lil-gui";
 
 /**
@@ -60,9 +61,11 @@ const gui = new GUI({
   closeFolders: true,
 });
 
+// Global parameters
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 1.3,
+  white: "#f5f5f5",
 };
 
 // Canvas
@@ -94,10 +97,15 @@ const colorTexture = textureLoader.load(
   "/4-lumiere/first-painting/first-painting-color.jpg"
 );
 const heightTexture = textureLoader.load(
-  "/4-lumiere/first-painting/first-painting-height.jpg"
+  "/4-lumiere/first-painting/first-painting-height.png"
 );
 
 colorTexture.colorSpace = THREE.SRGBColorSpace;
+
+/**
+ * Loader
+ */
+const gltfLoader = new GLTFLoader();
 
 /**
  * Scene objects
@@ -130,6 +138,21 @@ paintingTweaks
   .step(0.001)
   .name("Painting metalness");
 
+// Frame
+gltfLoader.load(
+  "/4-lumiere/first-painting/first-painting-frame.glb",
+  (gltf) => {
+    gltf.scene.scale.set(1.75, 1.75, 1.75);
+    scene.add(gltf.scene);
+  },
+  () => {
+    console.log("progress");
+  },
+  () => {
+    console.log("error");
+  }
+);
+
 // ellipse
 var ellipseGeometry = new THREE.TorusGeometry(
   globalParameters.lightRadius, // Radius
@@ -139,7 +162,7 @@ var ellipseGeometry = new THREE.TorusGeometry(
   Math.PI * 2 // arc
 );
 var ellipseMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
+  color: globalParameters.white,
   transparent: true,
   // opacity: 0,
   // wireframe: true,
@@ -153,7 +176,7 @@ scene.add(ellipse);
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  0xffffff, // color
+  globalParameters.white, // color
   1 // intensity
 );
 scene.add(ambientLight);
@@ -250,6 +273,26 @@ scene.add(camera);
  * Pointer
  */
 const pointer = new THREE.Vector2();
+
+// 'touchmove' event listener
+window.addEventListener(
+  "touchmove",
+  function (event) {
+    // Prevent touchmove default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+);
+
+// 'wheel' event listener
+window.addEventListener(
+  "wheel",
+  function (event) {
+    // Prevent wheel event default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+); // Use { passive: false } to enable preventDefault
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
