@@ -351,15 +351,24 @@ canvas.addEventListener("touchend", () => {
 // Touch cancel
 canvas.addEventListener("touchcancel", () => {
   isTouching = false;
-  // Handle touch cancel if needed
 });
-// Get the control buttons
+
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
+const buttonLoaderRight = document.querySelector(".button-loader-right");
+const buttonLoaderLeft = document.querySelector(".button-loader-left");
 let rotate = false;
 
-// Usage example
-rightButton.addEventListener("click", () => {
+let isButtonClickable = true;
+
+function handleRightButtonClick() {
+  if (!isButtonClickable) {
+    return;
+  }
+
+  isButtonClickable = false;
+  buttonLoaderRight.style.display = "flex";
+
   console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
 
@@ -371,9 +380,21 @@ rightButton.addEventListener("click", () => {
     infoDescription,
     infoButton
   );
-});
 
-leftButton.addEventListener("click", () => {
+  setTimeout(() => {
+    isButtonClickable = true;
+    buttonLoaderRight.style.display = "none";
+  }, 300);
+}
+
+function handleLeftButtonClick() {
+  if (!isButtonClickable) {
+    return;
+  }
+
+  isButtonClickable = false;
+  buttonLoaderLeft.style.display = "flex";
+
   console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("left", rotate, carousel);
 
@@ -390,7 +411,15 @@ leftButton.addEventListener("click", () => {
     infoDescription,
     infoButton
   );
-});
+
+  setTimeout(() => {
+    buttonLoaderLeft.style.display = "none";
+    isButtonClickable = true;
+  }, 300);
+}
+
+rightButton.addEventListener("click", handleRightButtonClick);
+leftButton.addEventListener("click", handleLeftButtonClick);
 
 // Render loop
 const animate = () => {
