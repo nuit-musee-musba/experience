@@ -4,7 +4,9 @@ import gsap from "gsap";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import GUI from "lil-gui";
 
+const gui = new GUI();
 let index = 0;
 let previousTime = 0;
 let time = 0;
@@ -40,8 +42,15 @@ scene.add(cube);
 // LIGHTS
 
 const ambientLight = new THREE.AmbientLight("#ffffff", 0.8);
+gui
+  .add(ambientLight, "intensity")
+  .min(0)
+  .max(1)
+  .step(0.001)
+  .name("Ambient Light");
 
 const directionalLight = new THREE.DirectionalLight("#EBF5F6", 3);
+gui.add(directionalLight, "intensity").min(0).max(10).step(0.001).name("Sun");
 directionalLight.position.set(1, 3, 4);
 directionalLight.lookAt(4, 2, 4);
 
