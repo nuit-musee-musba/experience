@@ -20,13 +20,29 @@ html,
 body {
   overflow: hidden;
 }
+.title-component {
+  position: absolute;
+  top: 6rem;
+  left: 6rem;
+  display: flex;
+  gap: 2rem;
+}
+.title-line {
+  width: 4px;
+  height: full;
+  background-color: white;
+}
+#date-title {
+  color: white;
+  font-size: 8rem;
+  font-weight: 100;
+}
 
 .main-title {
-  position: absolute;
-  top: 3rem;
-  left: 3rem;
-  width: calc(100% / 3);
+  width: calc(100% / 2);
   color: white;
+  font-size: 4rem;
+  font-weight: 100;
 }
 
 #nextButton {
