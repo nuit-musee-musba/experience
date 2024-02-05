@@ -22,8 +22,6 @@ export async function createIsland(i, count, color) {
       [0.03, 0.03, 0.03], // scale
       color
     );
-    // set unique id
-    // console.log("island scene", island.scene);
     return island.scene;
   } catch (error) {
     console.error("Error creating island:", error);

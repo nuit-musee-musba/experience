@@ -15,6 +15,7 @@ const gltfLoader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 let mixer = null;
 let isShowingText = false;
+const raycaster = new THREE.Raycaster();
 
 dracoLoader.setDecoderPath("/1-batiment/draco/");
 dracoLoader.preload();
@@ -31,6 +32,15 @@ gltfLoader.setDRACOLoader(dracoLoader);
 //   scene.add(gltf.scene);
 //   gltf.scene.rotation.y = -1.25;
 // });
+
+var geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+cube.addEventListener("click", function () {
+  alert("Cube Clicked!");
+});
 
 // LIGHTS
 
@@ -85,15 +95,20 @@ const camera = new THREE.PerspectiveCamera(
   0.2,
   100
 );
-camera.position.set(2, 6, 2);
+const fixedCameraHeight = 2.5;
 scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
+
+controls.enablePan = false;
 controls.enableZoom = false;
 
+// controls.minPolarAngle = Math.PI / 8;
+// controls.maxPolarAngle = Math.PI / 2 - 0.1;
+
 const getCameraPositionForTarget = (position) => {
-  return { x: position.x + 0, y: position.y + 1, z: position.z + 1 };
+  return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
 };
 
 //RENDERER
@@ -105,6 +120,30 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor("#808E90");
 
+//MOUSE
+
+const mouse = new THREE.Vector2();
+
+function onMouseClick(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(scene.children);
+
+  for (let i = 0; i < intersects.length; i++) {
+    if (intersects[i].object === cube) {
+      toggleInfo();
+      break;
+    } else {
+      toggleInfo();
+    }
+  }
+}
+
+window.addEventListener("click", onMouseClick, false);
+
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
@@ -114,6 +153,8 @@ const tick = () => {
   if (mixer) {
     mixer.update(deltaTime);
   }
+
+  camera.position.y = fixedCameraHeight;
 
   controls.update();
   renderer.render(scene, camera);
@@ -145,7 +186,7 @@ const restart = () => {
   endMenu.style.display = "none";
 };
 
-const displayInfo = () => {
+const toggleInfo = () => {
   if (!isShowingText) {
     isShowingText = true;
     component.style.display = "flex";
@@ -162,7 +203,6 @@ const nextStep = () => {
   if (index + 1 < period.length) {
     index++;
     handleFocusPeriod(period[index]);
-    console.log(index);
   } else {
     endMenu.style.display = "flex";
   }
@@ -179,7 +219,6 @@ function handleFocusPeriod(step) {
   if (!step) {
     return;
   }
-
   const targetPosition = step.position;
 
   const cameraPosition = getCameraPositionForTarget(targetPosition);
@@ -188,6 +227,23 @@ function handleFocusPeriod(step) {
   document.getElementById("text-component").innerHTML = step.description
     .map((paragraph) => `<p>${paragraph}</p>`)
     .join("");
+
+  cube.position.set(
+    step.cubePosition.x,
+    step.cubePosition.y,
+    step.cubePosition.z
+  );
+
+  cube.cursor = "pointer";
+
+  const rayOrigin = new THREE.Vector3(camera.position);
+  const rayDirection = new THREE.Vector3(cube.position);
+  raycaster.set(rayOrigin, rayDirection);
+  rayDirection.normalize();
+
+  raycaster.setFromCamera(mouse, camera);
+
+  cube.material.color.set("#0000ff");
 
   gsap.to(controls.step, {
     duration: 1,
@@ -207,6 +263,4 @@ handleFocusPeriod(period[index]);
 
 document.getElementById("restart-button").addEventListener("click", restart);
 document.getElementById("nextButton").addEventListener("click", nextStep);
-document
-  .getElementById("interestButton")
-  .addEventListener("click", displayInfo);
+document.getElementById("interestButton").addEventListener("click", toggleInfo);
