@@ -65,19 +65,30 @@ export default class Transition {
     this.DisplayInteractiveCanvas(this.currentSectionNumber)
   }
 
+  destroyAllCanvases() {
+    const existingCanvases = document.querySelectorAll('canvas');
+
+    existingCanvases.forEach((canvas : HTMLElement | any) => {
+      canvas.parentNode.removeChild(canvas);
+    });
+  }
+
   DisplayInteractiveCanvas(currentSectionNumber : any){
+    this.destroyAllCanvases();
+
     const currentSection =  document.querySelector(`#section-${currentSectionNumber}`);
     const canvasContainer = currentSection?.querySelector(".canvas__container");
 
     if (canvasContainer) {
       const interaction = canvasContainer.getAttribute('data-interaction');
-      console.log(canvasContainer);
+      console.log(currentSectionNumber);
       switch (interaction) {
         case 'paint':
           console.log(interaction);
           paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg')
           break;
         case 'cleaning':
+          console.log(interaction);
           let imgElement = document.createElement('img');
           imgElement.src = '/2-arts-graphiques/canvas/canvas1.jpeg';
           imgElement.classList.add('canvas__img');
