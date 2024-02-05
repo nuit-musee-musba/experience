@@ -84,7 +84,7 @@ body {
 
 .controls {
   position: absolute;
-  bottom: 5rem;
+  bottom: 10rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -101,7 +101,7 @@ body {
   font-size: 2rem;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 4rem;
+  padding: 1rem 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

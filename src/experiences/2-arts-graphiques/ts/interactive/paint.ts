@@ -9,6 +9,10 @@ const Paint = async (
   imageToRevealFile: String,
   options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
 
+  const btnNext: HTMLButtonElement | null = document.querySelector('#button');
+  btnNext!.disabled = true;
+
+
   let width = 2000;
   let height = 2500;
   const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
@@ -30,8 +34,6 @@ const Paint = async (
   setup()
 
   function setup() {
-    // console.log(app.screen);
-
     const { width, height } = { width: 2000, height:2500 };
     const stageSize = { width, height };
 
@@ -90,6 +92,8 @@ const Paint = async (
 
     function percentage(getPercentageAt: number | any) {
       const pixels = app.renderer.extract.pixels(renderTexture);
+
+
       remainingPixels = pixels.reduce(
         (count: any, value: any, index: any) =>
           index % 4 === 3 && value !== 0 ? count + 1 : count,
@@ -100,7 +104,8 @@ const Paint = async (
       canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
 
       if (percentageRemaining >= getPercentageAt) {
-        alert("Vous pouvez passer à la suite si vous le souhaitez")
+        console.log("Vous pouvez passer à la suite si vous le souhaitez");
+        btnNext!.disabled = false;
       }
     }
 
