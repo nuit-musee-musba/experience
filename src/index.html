@@ -9,14 +9,39 @@
   </head>
   <body>
     <div id="app">
+      <!-- Loader -->
       <div id="loader" class="loader-wrapper">
         <div class="loader"></div>
         <p>Ça tourne :0</p>
       </div>
-      <!-- Webgl canvas -->
-      <div id="scrollBanner">
-        <canvas id="webgl"></canvas>
+      <!-- Hero Wrapper -->
+      <div class="heroWrapper">
+        <!-- Webgl canvas -->
+        <div id="scrollBox">
+          <canvas id="webgl"></canvas>
+          <div class="controls">
+            <!-- Start Experience Button -->
+            <button id="left" class="control">Left</button>
+            <button id="right" class="control">Right</button>
+          </div>
+          <div class="listBox">
+            <ul class="colorList">
+              <li style="color: red">1 batiment : red</li>
+              <li style="color: blue">2 arts-graphiques : blue</li>
+              <li style="color: green">3 sculpture : green</li>
+              <li style="color: black">4 lumiere : yellow</li>
+              <l style="color: purple">6 peinture : purple</l>
+            </ul>
+          </div>
+        </div>
+        <div id="infoBox">
+          <h1 id="infoTitle"></h1>
+          <p id="infoText"></p>
+          <!-- Start Experience Button -->
+          <button id="startButton">Commencer l'éxpérience</button>
+        </div>
       </div>
+      <!-- Footer -->
       <!-- Help button -->
       <button id="helpButton">Help</button>
       <!-- Help popup -->
@@ -24,17 +49,7 @@
         <span id="closeButton">X</span>
         <p>This is your help content. You can customize it as needed.</p>
       </div>
-      <div class="list-box">
-        <ul class="color-list">
-          <li style="color: red">1 batiment : red</li>
-          <li style="color: blue">2 arts-graphiques : blue</li>
-          <li style="color: green">3 sculpture : green</li>
-          <li style="color: black">4 lumiere : yellow</li>
-          <l style="color: purple">6 peinture : purple</l>
-        </ul>
-      </div>
     </div>
-
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/popUp.js"></script>
   </body>
