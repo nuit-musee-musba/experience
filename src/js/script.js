@@ -1,6 +1,11 @@
 import * as THREE from "three";
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { createIsland, findClosestIsland } from "./helpers";
+import {
+  createIsland,
+  closestRotationValue,
+  rotateCarousel,
+  updateIslandInformation,
+} from "./helpers";
 import data from "./data";
 
 /// Starti info box data
@@ -13,8 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
   infoTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
   infoButton.addEventListener("click", function () {
-    const url = data[0].path;
-    window.location.href = url;
+    // const url = data[0].path;
+    // window.location.href = url;
+    camera.position.set(0, 3, 7);
   });
 });
 
@@ -44,21 +50,16 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 // // Add renderer to DOM
 document.body.appendChild(renderer.domElement);
 
-// // Axes Helper
-// const axesHelper = new THREE.AxesHelper( 5 );
-// scene.add( axesHelper );
-
 // Add light
 const light = new THREE.DirectionalLight(0xffffff, 4);
 light.position.set(0, 3, 3);
 scene.add(light);
 
-// Fog
-// scene.fog = new THREE.Fog("#a79", 8.5, 12);
-
 // Carousel : Group of islands
 const carousel = new THREE.Group();
+// Calibrate rotation to set carousel in good position
 carousel.rotation.set(0, Math.PI, 0);
+
 const axesHelper = new THREE.AxesHelper(30);
 axesHelper.setColors("white", "green", "blue");
 carousel.add(axesHelper);
@@ -66,13 +67,12 @@ carousel.add(axesHelper);
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-// Create worlds
-
 // Create an array to store promises for each world creation
 const islandPromises = [];
 
 // Count of worlds
 const count = 5;
+
 let currentIslandIndex = 0;
 // Create worlds
 for (let i = 0; i < count; i++) {
@@ -86,14 +86,8 @@ for (let i = 0; i < count; i++) {
       console.error("Error creating island:", error);
     });
 
-  // Add rotation positions to the array
-  // console.log("rotationPosition", islandPromise.rotation);
-  // rotationPositions.push(i === 0 ? 0 : (Math.PI * 2) / (count / i));
-
   islandPromises.push(islandPromise);
 }
-// console.log("rotationPositions", rotationPositions);
-
 // Show loader while worlds are loading
 const loaderElement = document.getElementById("loader");
 loaderElement.style.display = "flex";
@@ -114,38 +108,6 @@ loaderElement.style.display = "flex";
 // Add carousel to scene once all worlds are added
 scene.add(carousel);
 
-// Mouse Click event
-var onMouseClick = (event) => {
-  // Calculate mouse position in normalized device coordinates
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1; // -1 to 1
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; // -1 to 1
-
-  // Update the picking ray with the camera and mouse position
-  raycaster.setFromCamera(mouse, camera);
-
-  // Calculate objects intersecting the picking ray
-  const intersects = raycaster.intersectObjects(scene.children, true);
-
-  // Loop through the intersections
-  for (const intersect of intersects) {
-    // Check if the intersected object is a mesh
-    if (intersect.object.type === "Mesh") {
-      try {
-        // Get the URL from the intersected mesh parent's userData
-        const url = data.find(
-          (route) => route.id === intersect.object.parent.userData.id
-        ).path;
-        console.log("intersect", intersect.object.parent.userData);
-        console.log("url", url);
-        // Click event > Redirect to the specified URL
-        // window.location.href = url;
-      } catch (error) {
-        console.error("Error in redirection", error);
-      }
-    }
-  }
-};
-
 // Handle window resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -153,8 +115,8 @@ window.addEventListener("resize", () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Chose documet over window as it is more performant
-canvas.addEventListener("click", onMouseClick);
+// // Chose documet over window as it is more performant
+// canvas.addEventListener("click", onMouseClick);
 
 // Handle scroll/wheel event for desktop
 canvas.addEventListener("wheel", (event) => {
@@ -166,97 +128,210 @@ canvas.addEventListener("wheel", (event) => {
 // Handle touch events for mobile
 
 // Declare Touch variables
-let touchStartX = 0;
-let touchStartY = 0;
 let touchMoveX = 0;
 let isTouching = false;
-let lastRotationY = 0;
 let deltaX = 0;
+let firstTouch = 0;
 let startTouch = 0;
 let endTouch = 0;
+// Create the rotationPositions array with both positive and negative values
+// Define the carousel rotation step and the desired number of positions
+const rotationStep = (2 * Math.PI) / 5; // Adjust as needed
+const numberOfPositions = 5; // Adjust as needed
+
+// Calculate the starting rotation value based on the current rotation of the carousel
+const initialRotation = Math.PI; // Adjust as needed
+
+// Generate the rotationPositions array
+let rotationPositions = Array.from(
+  { length: numberOfPositions * 2 },
+  (_, index) => {
+    const position = index % numberOfPositions;
+    return (
+      initialRotation + rotationStep * position * (index % 2 === 0 ? 1 : -1)
+    );
+  }
+);
+rotationPositions = Array.from(new Set(rotationPositions)).sort(
+  (a, b) => a - b
+);
+
+let startRefRotation = carousel.rotation.y;
 // Add a variable to store the current rotation of the carousel
 let currentRotation = 0;
+
+let realDifference = 0;
+
+let closestRotation = 0;
+
+let timesSurpassed = 0;
+
 // Add a variable to store the current rotation index
-let currentRotationIndex = 0;
 // Touch event handlers
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
-  touchStartX = event.touches[0].clientX / canvas.clientWidth;
-  startTouch = touchStartX;
-  console.log("First touch at", startTouch);
-  console.log("carousel.rotation.y", carousel.rotation.y);
-  // console.log("currentRotation", carousel.rotation.y);
-  // console.log("touchStartX", touchStartX);
-  // touchStartY = event.touches[0].clientY / window.innerHeight;
-  // console.log("touchStartY", touchStartY);
+  startTouch = event.touches[0].clientX / canvas.clientWidth;
+  firstTouch = startTouch;
+  closestRotation = startRefRotation;
+  console.log("First touch at", firstTouch);
+  console.log("Initial carousel rotation", carousel.rotation.y);
+  console.log("Current island index", currentIslandIndex);
 });
 
 // Touch move
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
 
+  // Calculate the touch movement on the canvas in normalized device coordinates
   touchMoveX = event.touches[0].clientX / canvas.clientWidth;
-  deltaX = touchMoveX - touchStartX;
-  // console.log("deltaX", deltaX);
 
+  // Calculate the deltaX for the carousel rotation
+  deltaX = touchMoveX - startTouch;
+
+  // Calculate the scroll position based on the touch movement on the canvas
   const scrollPosition = (deltaX * canvas.clientWidth) % canvas.clientWidth;
 
-  // This is the actual rotation of the carousel based on the touch movement on the screen
+  // Update the carousel rotation based on the scroll position
   carousel.rotation.y += (scrollPosition * (Math.PI * 2)) / canvas.clientWidth;
+
+  // Update the currentRotation variable to use it in the touch end event
   currentRotation = carousel.rotation.y;
-  // console.log("currentRotation", currentRotation);
 
-  // Update the current rotation index based on the carousel's rotation
-  currentRotationIndex = Math.floor(carousel.rotation.y / Math.PI);
-
-  // Ensure the index stays within the bounds of the array
-  // currentRotationIndex =
-  //   (currentRotationIndex + rotationPositions.length) %
-  //   rotationPositions.length;
   // Update the touch start position after each move
-  touchStartX = touchMoveX;
-  console.log("touchStartX", touchStartX);
+  startTouch = touchMoveX;
+
+  // Check if the carousel rotation distance surpassed the half of the rotation step
+  const rotationSurpassedStep =
+    Math.abs(currentRotation - startRefRotation) > rotationStep / 2;
+
+  // Calculate the real difference between the current rotation and the start reference rotation
+  realDifference = currentRotation - startRefRotation;
+
+  // If surpassed
+  if (rotationSurpassedStep) {
+    // Update the times surpassed variable
+    timesSurpassed += 1;
+
+    console.log(rotationSurpassedStep);
+
+    // Calculate the smallest and last rotation values
+    const smallestRotation = rotationPositions[0];
+    const lastRotation = rotationPositions[rotationPositions.length - 1];
+
+    // Calculate the newest rotation value to add to the rotationPositions array
+    const newRotation =
+      realDifference > 0
+        ? lastRotation + rotationStep
+        : smallestRotation - rotationStep;
+
+    // Update the rotationPositions array based on the real difference value
+    // This is sennse of the turn : left or right
+    if (realDifference < 0) {
+      // If the carousel is rotating to the left
+      rotationPositions.pop();
+      rotationPositions.unshift(newRotation);
+      // currentIslandIndex =
+      //   currentIslandIndex === 4 ? 0 : currentIslandIndex - 1;
+      // console.log("New island index", currentIslandIndex);
+
+      // updateIslandInformation(
+      //   currentIslandIndex,
+      //   data,
+      //   infoTitle,
+      //   infoDescription,
+      //   infoButton
+      // );
+    } else {
+      // If the carousel is rotating to the right
+      rotationPositions.shift();
+      rotationPositions.push(newRotation);
+      // currentIslandIndex = currentIslandIndex + 1;
+      // if (currentIslandIndex < 0) {
+      //   currentIslandIndex = 4;
+      // } else {
+      //   currentIslandIndex = currentIslandIndex;
+      // }
+      // console.log("New island index", currentIslandIndex);
+
+      // updateIslandInformation(
+      //   currentIslandIndex,
+      //   data,
+      //   infoTitle,
+      //   infoDescription,
+      //   infoButton
+      // );
+    }
+
+    // Remove duplicates and sort the array
+    rotationPositions = Array.from(new Set(rotationPositions)).sort(
+      (a, b) => a - b
+    );
+
+    // Calculate the closest rotation value
+    closestRotation = closestRotationValue(currentRotation, rotationPositions);
+    console.log("Closest rotation", closestRotation);
+
+    // Use the updated rotationPositions array as needed
+    console.log("Updated rotationPositions: ", rotationPositions);
+    // Reset start reference rotation
+    startRefRotation = closestRotation;
+
+    console.log("New start reference rotation", startRefRotation);
+    console.log("Times surpassed", timesSurpassed);
+  } else {
+    console.log("Not surpassed yet");
+  }
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
+  const arrayLength = rotationPositions.length;
   isTouching = false;
   endTouch = touchMoveX;
   console.log("Last touch at", endTouch);
-  console.log("Touch distance", Math.abs(endTouch - startTouch));
+  console.log("Touch distance", Math.abs(endTouch - firstTouch));
 
-  // currentRotation = carousel.rotation.y - Math.PI;
-  // console.log("currentRotation", currentRotation);
-  // console.log("End rotation at", currentRotation);
-  // // Find the closest rotation position from the predefined array
-  // const closestRotation = rotationPositions.reduce((closest, rotation) => {
-  //   return Math.abs(rotation - currentRotation) <
-  //     Math.abs(closest - currentRotation)
-  //     ? rotation
-  //     : closest;
-  // }, rotationPositions[0]);
-  // console.log("closestRotation", closestRotation);
+  currentRotation = carousel.rotation.y;
+  // Rotate to the closest rotation value smoothly
+  const rotateToClosest = () => {
+    const deltaRotation = (closestRotation - carousel.rotation.y) * 0.17; // Adjust the smoothing factor as needed
+    carousel.rotation.y += deltaRotation;
+    const rotationDifference = Math.abs(closestRotation - carousel.rotation.y);
+    if (rotationDifference > 0.00001) {
+      requestAnimationFrame(rotateToClosest);
+    }
+  };
+  rotateToClosest();
 
-  // // Set the current rotation index to the index of the closest rotation in the array
-  // currentRotationIndex = rotationPositions.indexOf(closestRotation);
+  // Change info box data based on the current island index
+  // Use timesSurpassed to amount the index will be updated
+  if (realDifference < 0) {
+    currentIslandIndex = currentIslandIndex - timesSurpassed;
+    if (currentIslandIndex < 0) {
+      currentIslandIndex = 4;
+    } else {
+      currentIslandIndex = currentIslandIndex;
+    }
+  } else {
+    currentIslandIndex =
+      currentIslandIndex === 4 ? 0 : currentIslandIndex + timesSurpassed;
+  }
 
-  // // Rotate the carousel smoothly to the closest rotation
-  // const rotateToClosest = () => {
-  //   if (!isTouching) {
-  //     const targetRotation = rotationPositions[currentRotationIndex];
-  //     carousel.rotation.y +=
-  //       (targetRotation - carousel.rotation.y + Math.PI) * 0.05; // Adjust the smoothing factor as needed
+  console.log("New island index", currentIslandIndex);
 
-  //     if (Math.abs(targetRotation - carousel.rotation.y) > 0.001) {
-  //       requestAnimationFrame(rotateToClosest);
-  //     }
-  //   }
-  // };
+  updateIslandInformation(
+    currentIslandIndex,
+    data,
+    infoTitle,
+    infoDescription,
+    infoButton
+  );
 
-  // rotateToClosest();
+  // Reset the timesSurpassed variable
+  timesSurpassed = 0;
 });
 
 // Touch cancel
@@ -269,54 +344,24 @@ const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
 let rotate = false;
 
-function rotateCarousel(direction) {
-  if (!rotate) {
-    rotate = true;
-    const rotationAmount = (Math.PI * 2) / 5;
-    console.log("rotationAmount", rotationAmount);
-    const targetRotation =
-      direction === "left"
-        ? carousel.rotation.y + rotationAmount
-        : carousel.rotation.y - rotationAmount;
-    console.log("targetRotation", targetRotation);
-    const rotateToTarget = () => {
-      if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.09; // Adjust the smoothing factor as needed
-        carousel.rotation.y += deltaRotation;
-        const rotationDifference = Math.abs(
-          targetRotation - carousel.rotation.y
-        );
-        if (rotationDifference > 0.00001) {
-          requestAnimationFrame(rotateToTarget);
-        } else {
-          rotate = false;
-          console.log("Last Rotation value", carousel.rotation.y);
-        }
-      }
-    };
-
-    rotateToTarget();
-  }
-}
-
 // Usage example
 rightButton.addEventListener("click", () => {
   console.log("Current Rotation", carousel.rotation.y);
-  currentIslandIndex = currentIslandIndex === 4 ? 0 : currentIslandIndex + 1;
-  rotateCarousel("right");
-  console.log("New Rotation", carousel.rotation.y);
+  rotateCarousel("right", rotate, carousel);
 
-  infoTitle.innerHTML = data[currentIslandIndex].title;
-  infoDescription.innerHTML = data[currentIslandIndex].description;
-  console.log("currentIslandIndex", currentIslandIndex);
-  infoButton.addEventListener("click", function () {
-    const url = data[currentIslandIndex].path;
-    window.location.href = url;
-  });
+  currentIslandIndex = currentIslandIndex === 4 ? 0 : currentIslandIndex + 1;
+  updateIslandInformation(
+    currentIslandIndex,
+    data,
+    infoTitle,
+    infoDescription,
+    infoButton
+  );
 });
 
 leftButton.addEventListener("click", () => {
   console.log("Current Rotation", carousel.rotation.y);
+  rotateCarousel("left", rotate, carousel);
 
   currentIslandIndex = currentIslandIndex - 1;
   if (currentIslandIndex < 0) {
@@ -324,14 +369,13 @@ leftButton.addEventListener("click", () => {
   } else {
     currentIslandIndex = currentIslandIndex;
   }
-
-  infoTitle.innerHTML = data[currentIslandIndex].title;
-  infoDescription.innerHTML = data[currentIslandIndex].description;
-  rotateCarousel("left");
-  infoButton.addEventListener("click", function () {
-    const url = data[currentIslandIndex].path;
-    window.location.href = url;
-  });
+  updateIslandInformation(
+    currentIslandIndex,
+    data,
+    infoTitle,
+    infoDescription,
+    infoButton
+  );
 });
 
 // Render loop
