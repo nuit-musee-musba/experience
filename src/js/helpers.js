@@ -143,12 +143,12 @@ export function rotateCarousel(direction, rotate, carousel) {
     console.log("targetRotation", targetRotation);
     const rotateToTarget = () => {
       if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.17; // Adjust the smoothing factor as needed
+        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.2; // Adjust the smoothing factor as needed
         carousel.rotation.y += deltaRotation;
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
         );
-        if (rotationDifference > 0.00001) {
+        if (rotationDifference > 0.0001) {
           requestAnimationFrame(rotateToTarget);
         } else {
           rotate = false;
