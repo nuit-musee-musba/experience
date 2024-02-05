@@ -65,8 +65,4 @@ class Square {
     this.square.style.backgroundColor = color;
   }
 }
-// const section = document.getElementById("section-1");
-// if (section) {
-//   const square1 = new Square(section, "square1");
-//   const square2 = new Square(section, "square2");
-// }
+const section2 = document.getElementById("section-1");
