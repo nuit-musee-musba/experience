@@ -65,7 +65,7 @@ class Square {
     this.square.style.backgroundColor = color;
   }
 }
-const section2 = document.getElementById("section-2");
+const section2 = document.getElementById("section-1");
 
 let count: number = 0;
 if (section2) {

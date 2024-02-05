@@ -24,7 +24,7 @@ const Paint = () => {
   let remainingPixels: number;
 
   function setup() {
-    console.log(app.screen);
+    // console.log(app.screen);
 
     const { width, height } = { width: 3000, height: 2000 };
     const stageSize = { width, height };
@@ -88,7 +88,8 @@ const Paint = () => {
     function percentage() {
       const pixels = app.renderer.plugins.extract.pixels(renderTexture);
       remainingPixels = pixels.reduce(
-        (count : any, value : any, index: any) => (index % 4 === 3 && value !== 0 ? count + 1 : count),
+        (count: any, value: any, index: any) =>
+          index % 4 === 3 && value !== 0 ? count + 1 : count,
         0
       );
 
@@ -105,7 +106,7 @@ const Paint = () => {
       dragging = false;
       lastDrawnPoint = null;
 
-      percentage()
+      percentage();
     }
   }
 
