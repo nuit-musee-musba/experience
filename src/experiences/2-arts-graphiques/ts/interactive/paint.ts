@@ -3,7 +3,16 @@ import * as PIXI from "pixi.js";
 let totalPixels: number;
 let remainingPixels: number;
 
-const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any) => {
+const Paint = async (
+  target: HTMLElement,
+  backgroundFile: String,
+  imageToRevealFile: String,
+  options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
+
+  const btnNext: HTMLButtonElement | null = document.querySelector('#button');
+  btnNext!.disabled = true;
+
+
   let width = 2000;
   let height = 2500;
   const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
@@ -25,8 +34,6 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
   setup()
 
   function setup() {
-    console.log(app.screen);
-
     const { width, height } = { width: 2000, height:2500 };
     const stageSize = { width, height };
 
@@ -83,15 +90,23 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
       }
     }
 
-    function percentage() {
+    function percentage(getPercentageAt: number | any) {
       const pixels = app.renderer.extract.pixels(renderTexture);
+
+
       remainingPixels = pixels.reduce(
-        (count : any, value : any, index: any) => (index % 4 === 3 && value !== 0 ? count + 1 : count),
+        (count: any, value: any, index: any) =>
+          index % 4 === 3 && value !== 0 ? count + 1 : count,
         0
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
       canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+
+      if (percentageRemaining >= getPercentageAt) {
+        console.log("Vous pouvez passer à la suite si vous le souhaitez");
+        btnNext!.disabled = false;
+      }
     }
 
     function pointerDown(event: any) {
@@ -103,7 +118,9 @@ const Paint = async (target : any, backgroundFile : any, imageToRevealFile : any
       dragging = false;
       lastDrawnPoint = null;
 
-      percentage()
+      if (options && options!.getPercentage) {
+        percentage(options!.getPercentageAt);
+      }
     }
   }
 
