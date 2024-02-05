@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import IntroPopup from "./component/IntroPart/IntroPopup";
-import RoughHewingPart from "./component/RoughHewingPart/RoughHewingPart";
+import IntroPopup from "./component/1-IntroPart/IntroPart";
+import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
+import DetailsPart from "./component/3-DetailsPart/DetailsPart";
+import RefiningPart from "./component/4-RefiningPart/RefiningPart";
+import PolishingPart from "./component/5-PolishingPart/PolishingPart";
+import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const sizes = {
@@ -54,9 +58,9 @@ const group = new THREE.Group();
 // group.position.set(0, 0, 0);
 
 scene.add(cube1);
-scene.add(cube2);
-scene.add(cube3);
-scene.add(cube4);
+// scene.add(cube2);
+// scene.add(cube3);
+// scene.add(cube4);
 
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 const planeMaterial = new THREE.MeshBasicMaterial({ color: "white" });
@@ -137,50 +141,57 @@ function onClick() {
     roughCube1++;
     if (roughCube1 === 1) {
       cube1.material.color.set("red");
+      DetailsPart();
     }
     if (roughCube1 === 2) {
       cube1.material.color.set("yellow");
+      RefiningPart();
     }
     if (roughCube1 === 3) {
-      scene.remove(cube1);
+      cube1.material.color.set("green");
+      PolishingPart();
+    }
+    if (roughCube1 === 4) {
+      cube1.material.color.set("blue");
+      OutroPart();
     }
   }
-  if (currentPart2) {
-    roughCube2++;
-    if (roughCube2 === 1) {
-      cube2.material.color.set("red");
-    }
-    if (roughCube2 === 2) {
-      cube2.material.color.set("yellow");
-    }
-    if (roughCube2 === 3) {
-      scene.remove(cube2);
-    }
-  }
-  if (currentPart3) {
-    roughCube3++;
-    if (roughCube3 === 1) {
-      cube3.material.color.set("red");
-    }
-    if (roughCube3 === 2) {
-      cube3.material.color.set("yellow");
-    }
-    if (roughCube3 === 3) {
-      scene.remove(cube3);
-    }
-  }
-  if (currentPart4) {
-    roughCube4++;
-    if (roughCube4 === 1) {
-      cube4.material.color.set("red");
-    }
-    if (roughCube4 === 2) {
-      cube4.material.color.set("yellow");
-    }
-    if (roughCube4 === 3) {
-      scene.remove(cube4);
-    }
-  }
+  // if (currentPart2) {
+  //   roughCube2++;
+  //   if (roughCube2 === 1) {
+  //     cube2.material.color.set("red");
+  //   }
+  //   if (roughCube2 === 2) {
+  //     cube2.material.color.set("yellow");
+  //   }
+  //   if (roughCube2 === 3) {
+  //     scene.remove(cube2);
+  //   }
+  // }
+  // if (currentPart3) {
+  //   roughCube3++;
+  //   if (roughCube3 === 1) {
+  //     cube3.material.color.set("red");
+  //   }
+  //   if (roughCube3 === 2) {
+  //     cube3.material.color.set("yellow");
+  //   }
+  //   if (roughCube3 === 3) {
+  //     scene.remove(cube3);
+  //   }
+  // }
+  // if (currentPart4) {
+  //   roughCube4++;
+  //   if (roughCube4 === 1) {
+  //     cube4.material.color.set("red");
+  //   }
+  //   if (roughCube4 === 2) {
+  //     cube4.material.color.set("yellow");
+  //   }
+  //   if (roughCube4 === 3) {
+  //     scene.remove(cube4);
+  //   }
+  // }
 }
 
 //Camera

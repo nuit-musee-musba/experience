@@ -37,11 +37,6 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
-
-cube.addEventListener("click", function () {
-  alert("Cube Clicked!");
-});
-
 // LIGHTS
 
 const ambientLight = new THREE.AmbientLight("#ffffff", 0.8);
@@ -52,12 +47,14 @@ directionalLight.lookAt(4, 2, 4);
 
 scene.add(ambientLight, directionalLight);
 
-gltfLoader.load("/1-batiment/assets/museeV2anime.glb", (gltf) => {
+gltfLoader.load("/1-batiment/assets/scenetoutbatiment.glb", (gltf) => {
   scene.add(gltf.scene);
 
   mixer = new THREE.AnimationMixer(gltf.scene);
 
   gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
+
+  console.log(gltf.animations);
 
   gltf.animations.forEach((animation, index) => {
     const action = mixer.clipAction(animation);
@@ -93,7 +90,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
   0.2,
-  100
+  500
 );
 const fixedCameraHeight = 2.5;
 scene.add(camera);
@@ -143,6 +140,7 @@ function onMouseClick(event) {
 }
 
 window.addEventListener("click", onMouseClick, false);
+window.addEventListener("dragover", onMouseClick, false);
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();

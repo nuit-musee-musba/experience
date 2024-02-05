@@ -1,6 +1,7 @@
 import { Section } from "./section";
 import { Section1 } from "./section1";
 import paint from "./interactive/paint";
+import { Section4 } from "./section4";
 
 export default class Transition {
   currentSection: Section;
@@ -23,7 +24,7 @@ export default class Transition {
     this.section1 = new Section1(`section-1`);
     this.section2 = new Section(`section-2`);
     this.section3 = new Section(`section-3`);
-    this.section4 = new Section(`section-4`);
+    this.section4 = new Section4(`section-4`);
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
@@ -62,38 +63,45 @@ export default class Transition {
     }
     this.handleSection();
     this.handleButtonTitle();
-    this.DisplayInteractiveCanvas(this.currentSectionNumber)
+    this.DisplayInteractiveCanvas(this.currentSectionNumber);
   }
 
   destroyAllCanvases() {
-    const existingCanvases = document.querySelectorAll('canvas');
+    const existingCanvases = document.querySelectorAll("canvas");
 
-    existingCanvases.forEach((canvas : HTMLElement | any) => {
+    existingCanvases.forEach((canvas: HTMLElement | any) => {
       canvas.parentNode.removeChild(canvas);
     });
   }
 
-  DisplayInteractiveCanvas(currentSectionNumber : any){
+  DisplayInteractiveCanvas(currentSectionNumber: number) {
     this.destroyAllCanvases();
 
-    const currentSection =  document.querySelector(`#section-${currentSectionNumber}`);
-    const canvasContainer = currentSection?.querySelector(".canvas__container");
+    const currentSection: HTMLElement | null = document.querySelector(
+      `#section-${currentSectionNumber}`
+    );
+    const canvasContainer: HTMLElement | null | undefined =
+      currentSection?.querySelector(".canvas__container");
 
     if (canvasContainer) {
-      const interaction = canvasContainer.getAttribute('data-interaction');
+      const interaction = canvasContainer.getAttribute("data-interaction");
       console.log(currentSectionNumber);
+      const options = {
+        getPercentage: true,
+        getPercentageAt: 80,
+      };
       switch (interaction) {
-        case 'paint':
+        case "paint":
           console.log(interaction);
-          paint(canvasContainer, 'blank-canvas.jpeg', 'canvas1.jpeg')
+          paint(canvasContainer, "blank-canvas.jpeg", "canvas1.jpeg", options);
           break;
-        case 'cleaning':
+        case "cleaning":
           console.log(interaction);
-          let imgElement = document.createElement('img');
-          imgElement.src = '/2-arts-graphiques/canvas/canvas1.jpeg';
-          imgElement.classList.add('canvas__img');
+          let imgElement = document.createElement("img");
+          imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
+          imgElement.classList.add("canvas__img");
           canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, 'stains.png', 'stains_mask.png')
+          paint(canvasContainer, "stains.png", "stains_mask.png", options);
           break;
       }
     }
@@ -113,16 +121,31 @@ export default class Transition {
   }
 
   handleButtonTitle() {
-    console.log(this.currentSectionNumber);
-    if (this.currentSectionNumber === 0) {
-      this.button.innerText = "Découvrir l'oeuvre";
-      return;
+    switch (this.currentSectionNumber) {
+      case 0:
+        this.button.innerText = "Découvrir l'oeuvre";
+        break;
+      case 1:
+        this.button.innerText = "Aller dans le passé";
+        break;
+      case 2:
+        this.button.innerText = "Retour vers le présent";
+        break;
+      case 3:
+        this.button.innerText = "Aller dans la réserve";
+        break;
+      case 4:
+        this.button.innerText = "Choisir un cadre";
+        break;
+      case 5:
+        this.button.innerText = "Exposer l'oeuvre";
+        break;
+      case 6:
+        this.button.innerText = "Voir les critiques";
+        break;
+      case 7:
+        this.button.innerText = "Recommencer l'expérience";
     }
-    if (this.currentSectionNumber === 7) {
-      this.button.innerText = "Recommencer l'expérience";
-      return;
-    }
-    this.button.innerText = `Passer à la section ${this.currentSectionNumber + 1}`;
   }
 
   init() {
