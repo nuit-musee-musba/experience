@@ -1,5 +1,5 @@
 import "./DetailsPart.scss";
-import RefiningPart from "../RefiningPart/RefiningPart";
+import RefiningPart from "../4-RefiningPart/RefiningPart";
 
 const DetailsPart = () => {
   const detailsPart = document.getElementById("DetailsPart");

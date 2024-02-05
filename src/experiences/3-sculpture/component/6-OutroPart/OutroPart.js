@@ -5,9 +5,9 @@ const OutroPart = () => {
 
   outroPart.classList.add("show");
 
-  outroPart.addEventListener("click", () => {
-    outroPart.classList.remove("show");
-  });
+  // outroPart.addEventListener("click", () => {
+  //   outroPart.classList.remove("show");
+  // });
 };
 
 export default OutroPart;

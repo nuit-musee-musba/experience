@@ -1,5 +1,5 @@
-import RoughHewingPart from "../RoughHewingPart/RoughHewingPart";
-import "./IntroPopup.scss";
+import RoughHewingPart from "../2-RoughHewingPart/RoughHewingPart";
+import "./IntroPart.scss";
 
 const IntroPopup = () => {
   const myPopup = document.getElementById("myPopup");

@@ -1,5 +1,5 @@
 import "./PolishingPart.scss";
-import OutroPart from "../OutroPart/OutroPart";
+import OutroPart from "../6-OutroPart/OutroPart";
 
 const PolishingPart = () => {
   const polishingPart = document.getElementById("PolishingPart");
