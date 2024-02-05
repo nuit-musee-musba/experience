@@ -15,10 +15,12 @@ export class Frame {
   }
 
   addBackground() {
-    this.frame.style.backgroundColor = "red";
+    this.frame.style.borderColor = "red";
+    this.frame.style.borderWidth = "thick";
+    this.frame.style.borderStyle = "solid";
   }
   removeBackground() {
-    this.frame.style.background = "none";
+    this.frame.style.border = "none";
   }
   addEventListener(callback: () => void) {
     this.frame.addEventListener("click", () => callback());
