@@ -12,7 +12,7 @@ export const period = [
   },
   {
     title: "Déplacements Successifs et Incendies",
-    date: "1809-1870",
+    date: "1870",
     position: { x: 4, y: 1, z: 3 },
     description: [
       "Malgré des ajustements en 1809, les déménagements se succèdent, avec des tentatives d'installation dans divers endroits.",
@@ -32,7 +32,7 @@ export const period = [
   },
   {
     title: "Aujourd'hui",
-    date: "",
+    date: "2024",
     position: { x: 9, y: 5, z: 9 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes dans les ailes construites par Burguet.",
