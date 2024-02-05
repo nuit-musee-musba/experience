@@ -3,6 +3,16 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 
 /**
+ * TO DO LIST
+ * Créer la wheel
+ * Ajouter les cadre aux tableaux
+ * Ajouter les marches 3D
+ * Mise en forme des éléments (popins, textes, boutons)
+ * Ajuster la lumière
+ * Changer les images avec les versions retravaillées
+ */
+
+/**
  * Popins
  */
 
@@ -84,10 +94,20 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
-const colorTexture = textureLoader.load(
-  "/4-lumiere/first-painting/caravage-color.jpg"
+const firstPaintingTexture = textureLoader.load(
+  "/4-lumiere/first-painting/first-painting-color.jpg"
 );
-colorTexture.colorSpace = THREE.SRGBColorSpace;
+firstPaintingTexture.colorSpace = THREE.SRGBColorSpace;
+
+const secondPaintingTexture = textureLoader.load(
+  "/4-lumiere/second-painting/second-painting-plan-3.jpg"
+);
+secondPaintingTexture.colorSpace = THREE.SRGBColorSpace;
+
+const thirdPaintingTexture = textureLoader.load(
+  "/4-lumiere/third-painting/third-painting-plan-3.png"
+);
+thirdPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 
 /**
  * Object
@@ -95,19 +115,44 @@ colorTexture.colorSpace = THREE.SRGBColorSpace;
 // First painting
 const firstPaintingGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
 const firstPaintingMaterial = new THREE.MeshStandardMaterial({
-  map: colorTexture,
+  map: firstPaintingTexture,
 });
 const firstPainting = new THREE.Mesh(
   firstPaintingGeometry,
   firstPaintingMaterial
 );
 
+firstPainting.rotation.y = Math.PI * 0.5;
+firstPainting.position.x = globalParameters.ellipseRadius;
+
+// Second painting
+const secondPaintingGeometry = new THREE.PlaneGeometry(9.23, 4, 150, 100);
+const secondPaintingMaterial = new THREE.MeshStandardMaterial({
+  map: secondPaintingTexture,
+});
 const secondPainting = new THREE.Mesh(
-  firstPaintingGeometry,
-  firstPaintingMaterial
+  secondPaintingGeometry,
+  secondPaintingMaterial
 );
 
-scene.add(firstPainting, secondPainting);
+secondPainting.rotation.y = Math.PI * 0.5;
+secondPainting.position.y = globalParameters.ellipseRadius;
+
+// Third painting
+const thirdPaintingGeometry = new THREE.PlaneGeometry(8.35, 4, 150, 100);
+const thirdPaintingMaterial = new THREE.MeshStandardMaterial({
+  map: thirdPaintingTexture,
+});
+const thirdPainting = new THREE.Mesh(
+  thirdPaintingGeometry,
+  thirdPaintingMaterial
+);
+
+thirdPainting.rotation.y = Math.PI * 0.5;
+thirdPainting.position.x = -globalParameters.ellipseRadius;
+
+// Add paintings to scene
+scene.add(firstPainting, secondPainting, thirdPainting);
 
 // Wheel ellipse
 
@@ -127,13 +172,7 @@ scene.add(ellipse);
 
 // Wheel positions
 ellipse.rotation.y = -Math.PI * 0.5;
-ellipse.add(firstPainting);
-ellipse.add(secondPainting);
-firstPainting.rotation.y = Math.PI * 0.5;
-firstPainting.position.x = globalParameters.ellipseRadius;
-
-secondPainting.rotation.y = Math.PI * 0.5;
-secondPainting.position.x = -globalParameters.ellipseRadius;
+ellipse.add(firstPainting, secondPainting, thirdPainting);
 
 /**
  * Raycaster
@@ -176,7 +215,7 @@ canvas.addEventListener("click", () => {
   // Cast a ray
   raycaster.setFromCamera(mouse, camera);
 
-  const objectsToTest = [firstPainting, secondPainting];
+  const objectsToTest = [firstPainting, secondPainting, thirdPainting];
   const intersects = raycaster.intersectObjects(objectsToTest);
 
   if (intersects.length) {
@@ -204,6 +243,12 @@ canvas.addEventListener("click", () => {
         console.log("click on second painting");
         window.location.replace("./second-painting.html");
         break;
+
+      case thirdPainting:
+        console.log("click on second painting");
+        window.location.replace("./third-painting.html");
+        break;
+
       default:
         console.log("no link");
     }
