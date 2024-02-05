@@ -11,7 +11,7 @@ export class Section {
   }
 
   show() {
-    this.section.style.display = "block";
+    this.section.style.display = "flex";
   }
 
   hide() {
