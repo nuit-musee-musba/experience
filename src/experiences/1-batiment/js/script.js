@@ -122,8 +122,6 @@ const tick = () => {
 
   camera.position.y = fixedCameraHeight;
 
-  console.log(camera.position);
-
   controls.update();
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
