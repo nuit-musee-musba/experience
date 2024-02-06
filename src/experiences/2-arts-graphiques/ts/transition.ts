@@ -131,7 +131,7 @@ export default class Transition {
               canvas,
               currentSectionNumber,
               "blank-canvas.jpeg",
-              "canvas1.jpeg",
+              "painting-clean.webp",
               options
             );
             break;
@@ -139,8 +139,8 @@ export default class Transition {
             paint(
               canvas,
               currentSectionNumber,
-              "stains_painting.png",
-              "canvas1.jpeg",
+              "painting-stain.webp",
+              "painting-clean.webp",
               options
             );
             break;
@@ -152,8 +152,8 @@ export default class Transition {
             paint(
               canvas,
               currentSectionNumber,
-              "seal.webp",
-              "canvas1.jpeg",
+              "painting-cracked.webp",
+              "painting-stain.webp",
               optionsSeal
             );
             break;
