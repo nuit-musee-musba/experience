@@ -14,8 +14,17 @@
 }
 
 :root {
+  --black: #242424;
+  --white: #ffffff;
+  --gray: #a8a8a8;
   /* Override this variable in your custom css */
-  --primary: black;
+  --accent: rgb(40, 119, 164);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 h1,
@@ -71,44 +80,87 @@ button {
   font-size: 56px;
 }
 
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-  padding: 3rem 5rem;
-  border-radius: 21px;
-  border: 5px solid var(--primary);
-}
+/* Buttons */
 
+.btn-primary,
 .btn-small-primary {
-  background-color: var(--primary);
-  color: white;
-  padding: 2rem 4rem;
+  background-color: var(--accent);
+  color: var(--white);
+  border: 5px solid var(--accent);
   border-radius: 21px;
-  border: 5px solid var(--primary);
+}
+.btn-primary:disabled,
+.btn-small-primary:disabled {
+  background-color: var(--gray);
+  border-color: var(--gray);
 }
 
-.btn-secondary {
-  background-color: white;
-  color: var(--primary);
-  padding: 3rem 5rem;
-  border-radius: 21px;
-  border: 5px solid var(--primary);
-}
-
+.btn-secondary,
 .btn-small-secondary {
-  background-color: white;
-  color: var(--primary);
-  padding: 2rem 4rem;
-  border: 5px solid var(--primary);
+  background-color: var(--white);
+  color: var(--accent);
+  border: 5px solid var(--accent);
   border-radius: 21px;
-  backdrop-filter: blur(6.4px);
+}
+.btn-secondary:disabled,
+.btn-small-secondary:disabled {
+  color: var(--gray);
+  border-color: var(--gray);
 }
 
+.btn-primary,
+.btn-secondary {
+  padding: 3rem 5rem;
+}
+.btn-small-primary,
+.btn-small-secondary {
+  padding: 2rem 4rem;
+}
+
+/* Tabs */
+.tab {
+  background-color: var(--accent);
+  color: var(--white);
+  border: 5px solid var(--accent);
+  border-radius: 21px 21px 0 0;
+  padding: 3rem 5rem;
+}
+
+/* Slide points */
+.slide-points {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.slide-point {
+  width: 3.75rem;
+  height: 3.75rem;
+  border: 5px solid var(--white);
+  border-radius: 100%;
+}
+.slide-point.visited {
+  background-color: var(--gray);
+}
+.slide-point.active {
+  background-color: var(--white);
+}
+
+/* Point of interest */
+.poi {
+  height: 10rem;
+  width: 10rem;
+  border: 2rem solid var(--gray);
+  background: var(--white);
+  border-radius: 100%;
+}
+
+/* Layout */
 .bottom-menu {
   z-index: 20;
-  position: absolute;
+  position: fixed;
   left: 4rem;
   bottom: 4rem;
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
