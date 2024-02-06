@@ -16,8 +16,8 @@ const Paint = async (
   canvasPercentage!.innerText = "0%";
   btnNext!.disabled = true;
 
-  let width = 1300;
-  let height = 1900;
+  let width = 1395;
+  let height = 1801;
 
   const app: any = new PIXI.Application({
     width: width,
@@ -36,7 +36,7 @@ const Paint = async (
   setup()
 
   function setup() {
-    const { width, height } = { width: 1300, height: 1900 };
+    const { width, height } = { width: 1395, height: 1801 };
     const stageSize = { width, height };
 
     const background = Object.assign(PIXI.Sprite.from(t1), stageSize);
