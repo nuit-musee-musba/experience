@@ -130,7 +130,7 @@ export default class Transition {
             paint(
               canvas,
               currentSectionNumber,
-              "blank-canvas.jpeg",
+              "painting-blank.webp",
               "painting-clean.webp",
               options
             );
