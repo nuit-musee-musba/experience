@@ -19,3 +19,36 @@ $widthBox: 30%;
 .controlContainer {
   position: absolute;
 }
+
+.loadPart {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: beige;
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid blue;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.show_flex {
+  display: flex;
+}

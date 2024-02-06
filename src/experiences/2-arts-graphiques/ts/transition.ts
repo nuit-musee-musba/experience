@@ -85,15 +85,16 @@ export default class Transition {
     this.displayTimelipse(this.currentSectionNumber);
   }
 
-  displayTimelipse(currentSectionNumber: number){
+  displayTimelipse(currentSectionNumber: number) {
     const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
-    ) as HTMLElement
+    ) as HTMLElement;
 
     const dateElement = currentSection.querySelector("#date-anim__year");
 
     if (dateElement) {
-      date.init()
+      date.init();
+      this.button.disabled = true;
     }
   }
 
@@ -110,10 +111,11 @@ export default class Transition {
 
     const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
-    ) as HTMLElement
+    ) as HTMLElement;
 
-    const canvasContainer =
-      Array.from(currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container"));
+    const canvasContainer = Array.from(
+      currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container")
+    );
 
     if (canvasContainer) {
       const options = {
@@ -121,21 +123,39 @@ export default class Transition {
         getPercentageAt: 80,
       };
 
-      canvasContainer.forEach(canvas => {
+      canvasContainer.forEach((canvas) => {
         let interaction = canvas.getAttribute("data-interaction");
         switch (interaction) {
           case "paint":
-            paint(canvas, currentSectionNumber, "blank-canvas.jpeg", "canvas1.jpeg", options);
+            paint(
+              canvas,
+              currentSectionNumber,
+              "blank-canvas.jpeg",
+              "canvas1.jpeg",
+              options
+            );
             break;
           case "cleaning":
-            paint(canvas, currentSectionNumber, "stains_painting.png", "canvas1.jpeg", options);
+            paint(
+              canvas,
+              currentSectionNumber,
+              "stains_painting.png",
+              "canvas1.jpeg",
+              options
+            );
             break;
           case "seal":
             const optionsSeal = {
               getPercentage: true,
               getPercentageAt: 60,
             };
-            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", optionsSeal);
+            paint(
+              canvas,
+              currentSectionNumber,
+              "seal.webp",
+              "canvas1.jpeg",
+              optionsSeal
+            );
             break;
         }
       });
