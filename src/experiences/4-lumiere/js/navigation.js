@@ -1,15 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
+import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * TO DO LIST
- * Ajouter les cadre aux tableaux
- * Ajouter les marches 3D
- * Mise en forme des éléments (popins, textes, boutons)
- * Ajuster la lumière
- * Changer les images avec les versions retravaillées
+ * Inactivity
  */
+enableInactivityRedirection();
 
 /**
  * Popins
@@ -312,11 +309,11 @@ window.addEventListener(
   function (event) {
     if (isSwiping) {
       // Calculate the vertical distance swiped
-      const deltaY = event.touches[0].clientY - touchStartY;
+      const deltaY = -(event.touches[0].clientY - touchStartY);
 
       // Adjust the rotation of the ellipse based on the swipe distance
       const rotationSpeed = 0.005; // Adjust this value for desired sensitivity
-      ellipse.rotation.z -= deltaY * rotationSpeed;
+      ellipse.rotation.z += deltaY * rotationSpeed;
 
       // Update the starting Y position for the next frame
       touchStartY = event.touches[0].clientY;
