@@ -106,17 +106,18 @@ export default class Transition {
       };
       switch (interaction) {
         case "paint":
-          console.log(interaction);
-          paint(canvasContainer, "blank-canvas.jpeg", "canvas1.jpeg", options);
-          break;
-        case "cleaning":
-          console.log(interaction);
-          // let imgElement = document.createElement("img");
-          // imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
-          // imgElement.classList.add("canvas__img");
-          // canvasContainer.appendChild(imgElement);
           paint(
             canvasContainer,
+            currentSectionNumber,
+            "blank-canvas.jpeg",
+            "canvas1.jpeg",
+            options
+          );
+          break;
+        case "cleaning":
+          paint(
+            canvasContainer,
+            currentSectionNumber,
             "stains_painting.png",
             "canvas1.jpeg",
             options
