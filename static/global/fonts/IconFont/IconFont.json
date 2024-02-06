@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ue900-square-back",
+        "className": "ue900-square-back",
+        "unicode": "ee04"
+    },
+    {
+        "name": "ue901-square-cross",
+        "className": "ue901-square-cross",
+        "unicode": "ee05"
+    },
+    {
+        "name": "ue902-square-information",
+        "className": "ue902-square-information",
+        "unicode": "ee06"
+    },
+    {
+        "name": "ue903-square-check",
+        "className": "ue903-square-check",
+        "unicode": "ee07"
+    },
+    {
+        "name": "ue904-home",
+        "className": "ue904-home",
+        "unicode": "ee01"
+    },
+    {
+        "name": "ue905-sound-off",
+        "className": "ue905-sound-off",
+        "unicode": "ee03"
+    },
+    {
+        "name": "ue906-sound-on",
+        "className": "ue906-sound-on",
+        "unicode": "ee02"
+    }
+]

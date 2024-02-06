@@ -1,71 +1,114 @@
 @font-face {
   font-family: musba;
-  src: url(fonts/MusBA-Regular.otf);
+  src: url(/global/fonts/MusBA-Regular.otf);
 }
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url(fonts/Montserrat-Regular.ttf);
+  src: url(/global/fonts/Montserrat-Regular.ttf);
 }
 
 @font-face {
   font-family: Montserrat-SemiBold;
-  src: url(fonts/Montserrat-SemiBold.ttf);
+  src: url(/global/fonts/Montserrat-SemiBold.ttf);
 }
 
-h1 {
+:root {
+  /* Override this variable in your custom css */
+  --primary: black;
+}
+
+h1,
+.text-h1 {
   font-family: Montserrat-SemiBold;
   font-size: 110px;
+  line-height: 136px;
 }
 
-h2 {
+h2,
+.text-h2 {
   font-family: musba;
   font-size: 75px;
   font-weight: 400;
+  line-height: 80px;
 }
 
-h3 {
+h3,
+.text-h3 {
   font-family: Montserrat-SemiBold;
   font-size: 56px;
 }
 
-p {
+p,
+.text-p-body {
+  font-family: Montserrat-Regular;
+  font-size: 56px;
+  line-height: 72px;
+}
+
+.text-p-small {
   font-family: Montserrat-Regular;
   font-size: 46px;
 }
 
+.text-p-mini {
+  font-family: Montserrat-Regular;
+  font-size: 40px;
+  line-height: 56px;
+}
+
+.text-btn-1 {
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+}
+
 button {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
   font-family: Montserrat-SemiBold;
   font-size: 56px;
 }
 
 .btn-primary {
-  background-color: black;
+  background-color: var(--primary);
   color: white;
   padding: 3rem 5rem;
   border-radius: 21px;
+  border: 5px solid var(--primary);
 }
 
 .btn-small-primary {
-  background-color: black;
+  background-color: var(--primary);
   color: white;
   padding: 2rem 4rem;
   border-radius: 21px;
+  border: 5px solid var(--primary);
 }
 
 .btn-secondary {
   background-color: white;
-  color: black;
+  color: var(--primary);
   padding: 3rem 5rem;
   border-radius: 21px;
-  border: 5px solid black;
+  border: 5px solid var(--primary);
 }
 
 .btn-small-secondary {
   background-color: white;
-  color: black;
+  color: var(--primary);
   padding: 2rem 4rem;
-  border: 5px solid black;
+  border: 5px solid var(--primary);
   border-radius: 21px;
   backdrop-filter: blur(6.4px);
+}
+
+.bottom-menu {
+  z-index: 20;
+  position: absolute;
+  left: 4rem;
+  bottom: 4rem;
+  display: flex;
+  gap: 1.5rem;
 }
