@@ -91,39 +91,35 @@ export default class Transition {
   DisplayInteractiveCanvas(currentSectionNumber: number) {
     this.destroyAllCanvases();
 
-    const currentSection: HTMLElement | null = document.querySelector(
+    const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
-    );
-    const canvasContainer: HTMLElement | null | undefined =
-      currentSection?.querySelector(".canvas__container");
+    ) as HTMLElement
+
+    const canvasContainer =
+      Array.from(currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container"));
 
     if (canvasContainer) {
-      const interaction = canvasContainer.getAttribute("data-interaction");
-      console.log(currentSectionNumber);
       const options = {
         getPercentage: true,
         getPercentageAt: 80,
       };
-      switch (interaction) {
-        case "paint":
-          paint(
-            canvasContainer,
-            currentSectionNumber,
-            "blank-canvas.jpeg",
-            "canvas1.jpeg",
-            options
-          );
-          break;
-        case "cleaning":
-          paint(
-            canvasContainer,
-            currentSectionNumber,
-            "stains_painting.png",
-            "canvas1.jpeg",
-            options
-          );
-          break;
-      }
+
+      canvasContainer.forEach(canvas => {
+        let interaction = canvas.getAttribute("data-interaction");
+        switch (interaction) {
+          case "paint":
+            paint(canvas, currentSectionNumber, "blank-canvas.jpeg", "canvas1.jpeg", options);
+            break;
+          case "cleaning":
+            paint(canvas, currentSectionNumber, "stains_painting.png", "canvas1.jpeg", options);
+            break;
+          case "seal":
+            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", options);
+            break;
+        }
+      });
+
+      console.log(currentSectionNumber);
     }
   }
 

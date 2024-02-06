@@ -28,6 +28,10 @@ body {
 
 .canvas__container {
   height: fit-content;
+  display: none;
+}
+.canvas__container.active{
+  display: block;
 }
 
 /* Sections */

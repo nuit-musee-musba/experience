@@ -28,7 +28,7 @@ export class Section4 extends Section {
 
       paintingContainer.style.display = "none";
 
-      canvasContainer.style.display = "block";
+      canvasContainer.classList.add('active');
     }
   }
 
@@ -38,21 +38,11 @@ export class Section4 extends Section {
       (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
     );
 
-    const canvasContainer = document.querySelector<HTMLElement>(
-      "#section-4 .canvas__container"
-    );
     const paintingContainer = document.querySelector<HTMLElement>(
       ".painting-pieces-container"
     ) as HTMLElement;
 
     paintingContainer.style.display = "block";
-
-    if (!canvasContainer) {
-      throw new Error("no canvas with a class of '.canvas__container'");
-    }
-    this.canvasContainer = canvasContainer;
-
-    this.canvasContainer.style.display = "none";
   }
   hide() {
     super.hide();
