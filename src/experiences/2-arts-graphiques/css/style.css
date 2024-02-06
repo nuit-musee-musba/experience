@@ -1,9 +1,9 @@
-@import url('./utils/variables.css');
-@import url('./utils/reset.css');
+@import url("./utils/variables.css");
+@import url("./utils/reset.css");
 
-@import url('./layout/section.css');
+@import url("./layout/section.css");
 
-@import url('./components/components.css');
+@import url("./components/components.css");
 
 * {
   margin: 0;
@@ -11,18 +11,20 @@
   box-sizing: border-box;
 }
 
-p,
+/* p,
 span,
 a,
 h1 {
   font-size: 5rem;
-}
+} Louis: I removed it, if someone needs it tell me */
 
 html,
 body {
   overflow: hidden;
   height: 100%;
   position: relative;
+  background-color: rgb(55, 55, 55);
+  color: white;
 }
 
 #button {
@@ -37,18 +39,8 @@ body {
   height: fit-content;
   display: none;
 }
-.canvas__container.active{
+.canvas__container.active {
   display: block;
-}
-
-/* Sections */
-section {
-  display: flex;
-}
-section .left,
-section .center,
-section .right {
-  flex: 1;
 }
 
 /* debug page */
