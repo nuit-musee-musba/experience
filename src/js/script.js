@@ -308,6 +308,67 @@ function handleLeftButtonClick() {
     isButtonClickable = true;
   }, 300);
 }
+function scaleModel(model, targetScale, duration) {
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  console.log("Initial scale", initialScale);
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+
+  const startTime = performance.now(); // Get the current time
+
+  // Animation function to update the scale gradually
+  function animateScale() {
+    const currentTime = performance.now(); // Get the current time
+    const elapsedTime = currentTime - startTime; // Calculate elapsed time
+    const newScale = initialScale + scaleIncrement * elapsedTime; // Calculate new scale
+
+    // Update model scale
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    // If duration is not elapsed, request the next frame
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScale);
+    }
+  }
+
+  // Start the animation
+  animateScale();
+}
+
+function findModelInFront(index) {
+  const models = carousel.children;
+  console.log("Models", models);
+  let closestModel = null;
+  let closestDistance = Infinity;
+  const actualModel = models[index];
+  console.log("Index", index);
+  console.log("Actual model", actualModel);
+
+  models.forEach((model) => {
+    model = actualModel;
+    const distance = model.position.distanceTo(camera.position);
+    if (distance < closestDistance) {
+      closestModel = model;
+      closestDistance = distance;
+    }
+  });
+
+  return closestModel;
+}
+
+// Function to handle scaling up the model in front of the camera
+function handleScaleButtonClick(index) {
+  const modelInFront = findModelInFront(index);
+  console.log("clicked");
+  if (modelInFront) {
+    scaleModel(modelInFront, 0.032, 350);
+  }
+}
+
+// Event listener for scaling button
+const scaleButton = document.getElementById("scaleButton");
+scaleButton.addEventListener("click", handleScaleButtonClick(index));
 
 rightButton.addEventListener("click", handleRightButtonClick);
 leftButton.addEventListener("click", handleLeftButtonClick);
