@@ -22,54 +22,6 @@
       "dialog": "RAISIN"
     },
     {
-      "id": "10",
-      "name": "Pomme",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/grape.png",
-      "description": "Lorem ipsum le raisin ça fait du vin",
-      "dialog": "Pomme"
-    },
-    {
-      "id": "11",
-      "name": "Citrouille",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/carrot.png",
-      "description": "Lorem ipsum la carotte c d'la tarte",
-      "dialog": "Citrouille"
-    },
-    {
-      "id": "12",
-      "name": "Aubergine",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/lemon.png",
-      "description": "Lorem ipsum le citron c nul berk",
-      "dialog": "Aubergine"
-    },
-    {
-      "id": "13",
-      "name": "Tomate",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/grape.png",
-      "description": "Lorem ipsum le raisin ça fait du vin",
-      "dialog": "Tomate"
-    },
-    {
-      "id": "14",
-      "name": "Haricot",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/carrot.png",
-      "description": "Lorem ipsum la carotte c d'la tarte",
-      "dialog": "Haricot"
-    },
-    {
-      "id": "15",
-      "name": "Peche",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/lemon.png",
-      "description": "Lorem ipsum le citron c nul berk",
-      "dialog": "Peche"
-    },
-    {
       "id": "4",
       "name": "La carotte",
       "category": "Aliments",
