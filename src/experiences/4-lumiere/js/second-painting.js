@@ -1,17 +1,13 @@
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
+import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * TO DO LIST
- * Ajouter le cadre du tableau
- * Changer les images avec les versions retravaillées
- * Mise en forme des éléments (popins, textes, boutons)
- *
- * petit fx parallax avec le cursor "light" suivant sa position droite ou gauche :
- * mouvement delayed inverse de la position pour mettre en avant la lumière
- *
- * Trouver le petit détail effet waouw de ce tableau
+ * Inactivity
  */
+enableInactivityRedirection();
 
 /**
  * Popins
@@ -62,7 +58,7 @@ const gui = new GUI({
 
 let globalParameters = {
   lightAngleStrength: 0.5,
-  lightRadius: 5.2,
+  lightRadius: 5.6,
   planDistance: 0.5,
   white: "#f5f5f5",
 };
@@ -93,7 +89,7 @@ loadingManager.onError = (error) => {
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const firstPlanTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-1.png"
+  "/4-lumiere/second-painting/second-painting-plan-1-2.png"
 );
 firstPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -110,6 +106,16 @@ thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
 const thirdPlanNormalTexture = textureLoader.load(
   "/4-lumiere/second-painting/second-painting-plan-3-normal.png"
 );
+
+/**
+ * Loader
+ */
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("/4-lumiere//draco/");
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
 /**
  * Scene objects
  */
@@ -157,6 +163,22 @@ paintingTweaks
     secondPainting1.position.z = globalParameters.planDistance;
     secondPainting3.position.z = -globalParameters.planDistance;
   });
+
+// Frame
+gltfLoader.load(
+  "/4-lumiere/second-painting/second-painting-frame.glb",
+  (gltf) => {
+    gltf.scene.scale.set(17.25, 17.0125, 16.75);
+    // gltf.scene.position.z = 0.5;
+    scene.add(gltf.scene);
+  },
+  () => {
+    console.log("progress");
+  },
+  (error) => {
+    console.log("error:", error);
+  }
+);
 
 // ellipse
 var ellipseGeometry = new THREE.TorusGeometry(

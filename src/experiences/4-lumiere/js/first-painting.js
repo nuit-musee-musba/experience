@@ -1,18 +1,13 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
+import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * TO DO LIST
- * Ajouter le cadre du tableau
- * Changer les images avec les versions retravaillées
- * Mise en forme des éléments (popins, textes, boutons)
- *
- * petit fx parallax avec le cursor "light" suivant sa position droite ou gauche :
- * mouvement delayed inverse de la position pour mettre en avant la lumière
- *
- * Trouver le petit détail effet waouw de ce tableau
+ * Inactivity
  */
+enableInactivityRedirection();
 
 /**
  * Popins
@@ -105,7 +100,11 @@ colorTexture.colorSpace = THREE.SRGBColorSpace;
 /**
  * Loader
  */
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("/4-lumiere//draco/");
+
 const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
 
 /**
  * Scene objects
@@ -148,8 +147,8 @@ gltfLoader.load(
   () => {
     console.log("progress");
   },
-  () => {
-    console.log("error");
+  (error) => {
+    console.log("error:", error);
   }
 );
 
