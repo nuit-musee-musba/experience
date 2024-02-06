@@ -37,7 +37,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   2000
 );
-camera.position.set(0, 3, 8);
+camera.position.set(0, 2.5, 6.5);
 camera.lookAt(0, 0, 0);
 
 // Create Renderer
@@ -58,10 +58,12 @@ scene.add(light);
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, Math.PI, 0);
+carousel.rotation.set(0, 0, 0); //Math.PI
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
+
+const islands = [];
 
 // Count of islands
 const count = 5;
@@ -72,6 +74,7 @@ for (let i = 0; i < count; i++) {
     .then((island) => {
       // Add axes helper to the island
       carousel.add(island);
+      islands.push(island);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -119,37 +122,38 @@ canvas.addEventListener("wheel", (event) => {
 
 // Handle touch events for mobile
 
-let currentIslandIndex = 0;
-
 ////// Alexis code
+// Store the interval ID
+
+const pi = Math.PI;
 let rotation = 0;
 let lastX = 0; // last x position or pointer position
 let speed = 0; // speed of the swipe
-let power = 5; // power of the swipe
+let power = 10; // power of the swipe
 let direction = 1; // 1 for right, -1 for left
 let moveX = 0; // move x position or pointer position
 let index = 0;
 const circle = Math.PI * 2;
 const parts = 5;
-const step = circle / parts;
+
 let isTouching = false;
 
 function rotateX(quantity) {
+  if (rotation === 0) {
+    console.log("rotation", rotation);
+  }
   rotation = rotation + quantity;
-  index = ((rotation + (Math.PI * 2) / 5 / 2) / circle) * parts;
+  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
   index = Math.floor(index % parts);
   index = index >= 0 ? index : index + parts;
-
-  carousel.rotation.y = (rotation * Math.PI) / Math.PI;
+  carousel.rotation.y = (rotation * pi) / pi;
 }
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
-  console.log("touchstart");
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
   lastX = event.touches[0].clientX / canvas.clientWidth;
-  console.log("LastX", lastX);
 });
 
 // Touch move
@@ -161,11 +165,9 @@ canvas.addEventListener("touchmove", (event) => {
   direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
 
   moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
-  console.log("MoveX", moveX);
 
   rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
-  console.log("rotation carousel", rotation);
   index = index;
 });
 
@@ -174,70 +176,34 @@ canvas.addEventListener("touchend", () => {
   console.log("TOUCHEND");
   index = direction === 1 ? index : index + parts;
   isTouching = false;
-  rotation = index * ((Math.PI * 2) / 5 / 2);
-  rotateX(rotation);
-
-  // isTouching = false;
-  // endTouch = touchMoveX;
-  // console.log("Last touch at", endTouch);
-  // console.log("Touch distance", Math.abs(endTouch - firstTouch));
-
-  // currentRotation = carousel.rotation.y;
-  // // Rotate to the closest rotation value smoothly
-  // const rotateToClosest = () => {
-  //   const deltaRotation = (closestRotation - carousel.rotation.y) * 0.17; // Adjust the smoothing factor as needed
-  //   carousel.rotation.y += deltaRotation;
-  //   const rotationDifference = Math.abs(closestRotation - carousel.rotation.y);
-  //   if (rotationDifference > 0.00001) {
-  //     requestAnimationFrame(rotateToClosest);
-  //   }
-  // };
-  // rotateToClosest();
-
-  // // Change info box data based on the current island index
-  // // Use timesSurpassed to amount the index will be updated
-  // if (realDifference < 0) {
-  //   // If the carousel is rotating to the left
-  //   currentIslandIndex = currentIslandIndex - timesSurpassed;
-  //   if (currentIslandIndex < 0) {
-  //     currentIslandIndex = currentIslandIndex + arrayLength;
-  //   } else {
-  //     currentIslandIndex = currentIslandIndex;
-  //   }
-  // } else {
-  //   // If the carousel is rotating to the right
-  //   // currentIslandIndex =
-  //   //   currentIslandIndex === 4
-  //   //     ? 0 + timesSurpassed
-  //   //     : currentIslandIndex + timesSurpassed;
-  //   currentIslandIndex = currentIslandIndex + timesSurpassed;
-  //   if (currentIslandIndex > 4) {
-  //     currentIslandIndex = currentIslandIndex - arrayLength;
-  //   } else {
-  //     currentIslandIndex = currentIslandIndex;
-  //   }
-  // }
-
-  // console.log("New island index", currentIslandIndex);
-
-  // updateIslandInformation(
-  //   currentIslandIndex,
-  //   data,
-  //   infoTitle,
-  //   infoDescription,
-  //   infoButton
-  // );
-
-  // // Reset the timesSurpassed variable
-  // timesSurpassed = 0;
+  // Calculate landing rotation based on speed and power
+  const landingRotation = rotation + speed * power * direction;
+  // Find the closest rotation value
+  const closestRotation =
+    Math.round(landingRotation / (circle / parts)) * (circle / parts);
+  // Smoothly rotate to the closest rotation value
+  const rotateToClosest = () => {
+    const deltaRotation = (closestRotation - rotation) * 0.17; // Adjust the smoothing factor as needed
+    rotation += deltaRotation;
+    index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+    index = Math.floor(index % parts);
+    index = index >= 0 ? index : index + parts;
+    carousel.rotation.y = (rotation * pi) / pi;
+    const rotationDifference = Math.abs(closestRotation - rotation);
+    if (rotationDifference > 0.00001) {
+      requestAnimationFrame(rotateToClosest);
+    } else {
+      updateIslandInformation(
+        index,
+        data,
+        infoTitle,
+        infoDescription,
+        infoButton
+      );
+    }
+  };
+  rotateToClosest();
 });
-
-// This is  to continue the rotation after the touch end
-// setInterval(() => {
-//   speed = Math.max(0, speed - 0.001);
-//   console.log("speed", speed);
-//   rotateX(speed * direction);
-// }, 10);
 
 // Touch cancel
 canvas.addEventListener("touchcancel", () => {
@@ -263,19 +229,13 @@ function handleRightButtonClick() {
   console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
 
-  currentIslandIndex = currentIslandIndex === 4 ? 0 : currentIslandIndex + 1;
-  updateIslandInformation(
-    currentIslandIndex,
-    data,
-    infoTitle,
-    infoDescription,
-    infoButton
-  );
+  index = index === 4 ? 0 : index + 1;
+  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
     isButtonClickable = true;
     buttonLoaderRight.style.display = "none";
-  }, 300);
+  }, 1000);
 }
 
 function handleLeftButtonClick() {
@@ -286,27 +246,21 @@ function handleLeftButtonClick() {
   isButtonClickable = false;
   buttonLoaderLeft.style.display = "flex";
 
-  console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("left", rotate, carousel);
+  console.log("Carousel left", carousel.rotation.y);
 
-  currentIslandIndex = currentIslandIndex - 1;
-  if (currentIslandIndex < 0) {
-    currentIslandIndex = 4;
+  index = index - 1;
+  if (index < 0) {
+    index = 4;
   } else {
-    currentIslandIndex = currentIslandIndex;
+    index = index;
   }
-  updateIslandInformation(
-    currentIslandIndex,
-    data,
-    infoTitle,
-    infoDescription,
-    infoButton
-  );
+  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
     buttonLoaderLeft.style.display = "none";
     isButtonClickable = true;
-  }, 300);
+  }, 1000);
 }
 
 rightButton.addEventListener("click", handleRightButtonClick);

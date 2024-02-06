@@ -35,6 +35,34 @@ p {
   margin-bottom: 1.5rem;
 }
 
+/* ----- UI Kit ----- */
+
+.parameter-btn-list {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1050;
+  display: flex;
+}
+.btn-square {
+  width: 112px;
+  height: 111px;
+  border-radius: 21px;
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-square + .btn-square {
+  margin-left: 24px;
+}
+
+.btn-square svg {
+  width: 51px;
+  height: 51px;
+  object-fit: contain;
+}
+
 /* TEMP ELEMENTS */
 .btn-temp-bottom-right {
   position: fixed;

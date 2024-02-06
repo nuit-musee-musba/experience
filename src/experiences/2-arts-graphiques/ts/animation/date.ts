@@ -23,6 +23,10 @@ const Paint = {
         text.innerText = numberFrom.toString().padStart(2, '0');
       }
     }, speed);
+    
+    setTimeout(() => {
+      document.querySelector<HTMLButtonElement>('#button')!.disabled = false
+    }, 3000);
   },
 };
 
