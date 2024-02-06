@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import LoadPart from "./LoadPart";
 import IntroPopup from "./component/1-IntroPart/IntroPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
@@ -7,10 +8,6 @@ import RefiningPart from "./component/4-RefiningPart/RefiningPart";
 import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
-window.addEventListener("load", (event) => {
-  console.log("La page est complètement chargée");
-});
 
 const sizes = {
   width: window.innerWidth,
@@ -20,6 +17,7 @@ const sizes = {
 //
 // INITIALIZATION
 //
+LoadPart();
 IntroPopup();
 const canvas = document.querySelector("canvas.webgl");
 
@@ -137,6 +135,7 @@ function onClick() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
 
+  // RoughHewing Part
   if (statueV1 && statueV1.children) {
     const intersects = raycaster.intersectObjects(statueV1.children);
 
@@ -145,7 +144,7 @@ function onClick() {
       statueV1.remove(clickedBlock);
 
       if (statueV1.children.length === 0) {
-        console.log("Il n'y a plus de blocs à supprimer.");
+        DetailsPart();
       }
     }
   }

@@ -10,6 +10,7 @@ function handleDragInteraction(
   dragElementId,
   isMultiple,
   placedEl,
+  marginTopPlacement,
   isCorrect,
   padLeft,
   targetZoneId,
@@ -151,31 +152,96 @@ function countDuplicates(strings) {
 // ici il faut initialiser les éléments qui vont drag and drop avec leurs identifiants
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
-var dragableElementList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"];
 var numberItemsPerCategory = countDuplicates(items);
 
-let i = 1; //boucle i
+console.log(items);
+
+let i = [1, 1, 1]; //boucle i
+let i_overall = [1, 1, 1]; //boucle i
+let staged = [0, 0, 0]; //"étage"
+let max_item_per_stage = 5;
+let cur_stage;
+let marginTopPlacement;
+
+// ---> ETAGE 1 : 90px
+// ---> ETAGE 0 : 470px
+
 let category = 0; //0=Aliments, 1=Objets, 2=Animaux
-dragableElementList.forEach((element) => {
-  let placedEl = document.getElementById(element + "-placed");
-  var elementsWithId = document.querySelectorAll(".multiple-" + element);
+items.items.forEach((element) => {
+  let placedEl = document.getElementById(element.id + "-placed");
+  var elementsWithId = document.querySelectorAll(".multiple-" + element.id);
 
-  let ElementList = document.getElementById(element);
+  let ElementList = document.getElementById(element.id);
 
-  ElementList.style.top = "90px"; //top position
-  let leftPosition = // pour centrer les absolute on va faire ce calcul
-    (parentElement.offsetWidth / //la width du parent divisé par...
-      (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-      324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-    i; //multiplié par le nombre d'occurence en cours
-  ElementList.style.left = leftPosition + "px"; // on applique
+  let leftPosition;
 
-  if (i >= numberItemsPerCategory[category]["count"]) {
-    //cette boucle permet de savoir si tout les items attendus dans cette catégorie on été modifiés
-    i = 1; //si oui, on remet i à 1
-    category++; //et on ajoute 1 à catégory pour passer à la catégorie suivante
+  if (numberItemsPerCategory[category]["count"] > max_item_per_stage) {
+    staged[category] =
+      numberItemsPerCategory[category]["count"] - max_item_per_stage; //number of items on top (stage 1)
+
+    if (cur_stage != 1) {
+      cur_stage = 0;
+    }
   } else {
-    i++; //sinon, on continue d'incrémenter i
+    staged[category] = 0;
+    cur_stage = -1;
+  }
+
+  if (staged[category] == 0) {
+    leftPosition = // pour centrer les absolute on va faire ce calcul
+      (parentElement.offsetWidth / //la width du parent divisé par...
+        (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+        324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+      i[category]; //multiplié par le nombre d'occurence en cours
+    ElementList.style.left = leftPosition + "px"; // on applique
+  } else {
+    //cur_stage = 0;
+    if (cur_stage == 1) {
+      //stage 1
+
+      leftPosition = // pour centrer les absolute on va faire ce calcul
+        (parentElement.offsetWidth / //la width du parent divisé par...
+          (numberItemsPerCategory[category]["count"] - max_item_per_stage + 2) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+        i[category]; //multiplié par le nombre d'occurence en cours
+      ElementList.style.left = leftPosition + "px"; // on applique
+    } else if (cur_stage == 0) {
+      //stage 0 (forcement égal à max_item_per_stage)
+
+      leftPosition = // pour centrer les absolute on va faire ce calcul
+        (parentElement.offsetWidth / //la width du parent divisé par...
+          (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+        i[category]; //multiplié par le nombre d'occurence en cours
+      ElementList.style.left = leftPosition + "px"; // on applique
+    }
+  }
+
+  console.log(
+    "item:" + element.name + ",i:" + i[category] + "stage:" + cur_stage + ""
+  );
+
+  if (cur_stage == 1) {
+    ElementList.style.top = "90px"; //top position
+  } else if (cur_stage == 0) {
+    ElementList.style.top = "470px"; //bot position
+  } else if (cur_stage == -1) {
+    ElementList.style.top = "250px"; //top position
+  }
+
+  if (
+    i_overall[category] >= numberItemsPerCategory[category]["count"] ||
+    (i[category] == staged[category] && cur_stage == 1)
+  ) {
+    category++;
+    i_overall[category] = 1;
+    cur_stage = -1;
+  } else if (i[category] >= max_item_per_stage) {
+    cur_stage++;
+    i[category] = 1;
+  } else {
+    i[category]++;
+    i_overall[category]++;
   }
 
   //ce code implique donc que les items dans items.json soient bien rangés par catégorie
@@ -183,18 +249,20 @@ dragableElementList.forEach((element) => {
   if (elementsWithId.length == 0) {
     if (placedEl) {
       handleDragInteraction(
-        element,
+        element.id,
         false,
         placedEl,
+        marginTopPlacement,
         true,
         leftPosition,
         "targetCraftZone"
       );
     } else {
       handleDragInteraction(
-        element,
+        element.id,
         false,
         placedEl,
+        marginTopPlacement,
         false,
         leftPosition,
         "targetCraftZone"
@@ -202,9 +270,10 @@ dragableElementList.forEach((element) => {
     }
   } else if (elementsWithId.length > 0) {
     handleDragInteraction(
-      element,
+      element.id,
       true,
       elementsWithId,
+      marginTopPlacement,
       true,
       leftPosition,
       "targetCraftZone"

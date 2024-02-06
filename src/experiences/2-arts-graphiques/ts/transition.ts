@@ -1,6 +1,7 @@
 import { Section } from "./section";
 
 import paint from "./interactive/paint";
+import date from "./animation/date";
 
 import { Section1 } from "./section1/Section1";
 import { Section4 } from "./section4/Section4";
@@ -15,6 +16,7 @@ export default class Transition {
   section5: Section;
   section6: Section;
   section7: Section;
+  section8: Section;
 
   currentSectionNumber: number;
   sections: Section[];
@@ -30,6 +32,7 @@ export default class Transition {
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
+    this.section8 = new Section(`section-8`);
 
     const button = document.querySelector<HTMLButtonElement>("#button");
 
@@ -50,6 +53,7 @@ export default class Transition {
       this.section5,
       this.section6,
       this.section7,
+      this.section8,
     ];
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -70,7 +74,7 @@ export default class Transition {
   }
 
   handleTransition() {
-    if (this.currentSectionNumber === 7) {
+    if (this.currentSectionNumber === 8) {
       this.currentSectionNumber = 0;
     } else {
       this.currentSectionNumber = this.currentSectionNumber + 1;
@@ -78,6 +82,20 @@ export default class Transition {
     this.handleSection();
     this.handleButtonTitle();
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
+    this.displayTimelipse(this.currentSectionNumber);
+  }
+
+  displayTimelipse(currentSectionNumber: number) {
+    const currentSection = document.querySelector(
+      `#section-${currentSectionNumber}`
+    ) as HTMLElement;
+
+    const dateElement = currentSection.querySelector("#date-anim__year");
+
+    if (dateElement) {
+      date.init();
+      this.button.disabled = true;
+    }
   }
 
   destroyAllCanvases() {
@@ -93,10 +111,11 @@ export default class Transition {
 
     const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
-    ) as HTMLElement
+    ) as HTMLElement;
 
-    const canvasContainer =
-      Array.from(currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container"));
+    const canvasContainer = Array.from(
+      currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container")
+    );
 
     if (canvasContainer) {
       const options = {
@@ -104,17 +123,39 @@ export default class Transition {
         getPercentageAt: 80,
       };
 
-      canvasContainer.forEach(canvas => {
+      canvasContainer.forEach((canvas) => {
         let interaction = canvas.getAttribute("data-interaction");
         switch (interaction) {
           case "paint":
-            paint(canvas, currentSectionNumber, "blank-canvas.jpeg", "canvas1.jpeg", options);
+            paint(
+              canvas,
+              currentSectionNumber,
+              "blank-canvas.jpeg",
+              "canvas1.jpeg",
+              options
+            );
             break;
           case "cleaning":
-            paint(canvas, currentSectionNumber, "stains_painting.png", "canvas1.jpeg", options);
+            paint(
+              canvas,
+              currentSectionNumber,
+              "stains_painting.png",
+              "canvas1.jpeg",
+              options
+            );
             break;
           case "seal":
-            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", options);
+            const optionsSeal = {
+              getPercentage: true,
+              getPercentageAt: 60,
+            };
+            paint(
+              canvas,
+              currentSectionNumber,
+              "seal.webp",
+              "canvas1.jpeg",
+              optionsSeal
+            );
             break;
         }
       });
@@ -151,15 +192,18 @@ export default class Transition {
         this.button.innerText = "Aller dans la réserve";
         break;
       case 4:
-        this.button.innerText = "Choisir un cadre";
+        this.button.innerText = "Nettoyer le tableau";
         break;
       case 5:
-        this.button.innerText = "Exposer l'oeuvre";
+        this.button.innerText = "Choisir un cadre";
         break;
       case 6:
-        this.button.innerText = "Voir les critiques";
+        this.button.innerText = "Exposer l'oeuvre";
         break;
       case 7:
+        this.button.innerText = "Voir les critiques";
+        break;
+      case 8:
         this.button.innerText = "Recommencer l'expérience";
     }
   }
@@ -172,5 +216,6 @@ export default class Transition {
     this.section5.hide();
     this.section6.hide();
     this.section7.hide();
+    this.section8.hide();
   }
 }
