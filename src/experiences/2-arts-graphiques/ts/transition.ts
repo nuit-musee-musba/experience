@@ -86,7 +86,6 @@ export default class Transition {
   }
 
   displayTimelipse(currentSectionNumber: number) {
-    this.button.disabled = true;
     const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
     ) as HTMLElement;
@@ -95,6 +94,7 @@ export default class Transition {
 
     if (dateElement) {
       date.init();
+      this.button.disabled = true;
     }
   }
 
