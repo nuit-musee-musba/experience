@@ -117,7 +117,11 @@ export default class Transition {
             paint(canvas, currentSectionNumber, "stains_painting.png", "canvas1.jpeg", options);
             break;
           case "seal":
-            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", options);
+            const optionsSeal = {
+              getPercentage: true,
+              getPercentageAt: 60,
+            };
+            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", optionsSeal);
             break;
         }
       });
