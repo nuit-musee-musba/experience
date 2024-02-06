@@ -1,9 +1,9 @@
 /* Variables file */
 
-root{
-    --primary-1-color: #494677;
-    --primary-2-color: #90A6F3;
-    --secondary-1-color: #F2BB2E;
-    --gray-900: #242424;
-    --white: #FFFFFF;
+:root {
+  --primary-1-color: #494677;
+  --primary-2-color: #90a6f3;
+  --secondary-1-color: #f2bb2e;
+  --gray-900: #242424;
+  --white: #ffffff;
 }

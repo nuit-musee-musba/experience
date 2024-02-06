@@ -1,0 +1,53 @@
+.timeline {
+  height: 24rem;
+  width: 2.4rem;
+  position: relative;
+  margin-top: 4rem;
+}
+.timeline::after,
+.timeline.old::before {
+  content: "";
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: var(--white);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20%;
+}
+.timeline.old::after {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.timeline.old::before {
+  bottom: 92%;
+}
+
+.timeline .timeline-bar {
+  height: 100%;
+  width: 0.4rem;
+  background-color: var(--white);
+  position: relative;
+  margin: 0 auto;
+}
+
+.timeline-bar::after,
+.timeline-bar::before {
+  position: absolute;
+  content: "";
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background-color: var(--white);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-bar::before {
+  top: 0;
+}
+.timeline-bar::after {
+  bottom: 0;
+}
