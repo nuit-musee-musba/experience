@@ -1,16 +1,16 @@
-export const inactivityTime = (element) => {
-  console.log("inactivityTime");
+export const inactivityTime = () => {
   let time;
   const timeInMiliseconds = 10000;
-  window.onload = resetTimer;
-  document.addEventListener("click", resetTimer);
 
-  function goHome() {
+  const goHome = () => {
     window.location.href = "/";
-  }
+  };
 
-  function resetTimer() {
+  const resetTimer = () => {
     clearTimeout(time);
     time = setTimeout(goHome, timeInMiliseconds);
-  }
+  };
+
+  resetTimer();
+  document.addEventListener("click", resetTimer);
 };
