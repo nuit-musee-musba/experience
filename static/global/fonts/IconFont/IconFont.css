@@ -1,8 +1,8 @@
 @font-face {
     font-family: "IconFont";
-    src: url('IconFont.woff2?t=1707236477074') format('woff2'),
-        url('IconFont.woff?t=1707236477074') format('woff'),
-        url('IconFont.ttf?t=1707236477074') format('truetype');
+    src: url('IconFont.woff2?t=1707254562952') format('woff2'),
+        url('IconFont.woff?t=1707254562952') format('woff'),
+        url('IconFont.ttf?t=1707254562952') format('truetype');
 }
 
 .iconfont {
@@ -13,13 +13,13 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.global-icon-ue900-square-back:before { content: "\ee04"; }
-.global-icon-ue901-square-cross:before { content: "\ee05"; }
-.global-icon-ue902-square-information:before { content: "\ee06"; }
-.global-icon-ue903-square-check:before { content: "\ee07"; }
-.global-icon-ue904-home:before { content: "\ee01"; }
-.global-icon-ue905-sound-off:before { content: "\ee03"; }
-.global-icon-ue906-sound-on:before { content: "\ee02"; }
+.icon-home:before { content: "\ee01"; }
+.icon-volume-on:before { content: "\ee02"; }
+.icon-volume-off:before { content: "\ee03"; }
+.icon-left:before { content: "\ee04"; }
+.icon-close:before { content: "\ee05"; }
+.icon-check:before { content: "\ee06"; }
+.icon-info:before { content: "\ee07"; }
 
 
 /**

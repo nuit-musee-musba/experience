@@ -1,4 +1,15 @@
 @font-face {
+  font-display: block;
+  font-family: "GlobalIcon";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("/global/fonts/IconFont/IconFont.ttf") format("ttf"),
+    url("/global/fonts/IconFont/IconFont.woff") format("woff"),
+    url("/global/fonts/IconFont/IconFont.woff2") format("woff2");
+}
+
+@font-face {
   font-family: musba;
   src: url(/global/fonts/MusBA-Regular.otf);
 }
@@ -90,10 +101,6 @@ p,
   border: var(--stroke-width) solid var(--accent);
 }
 
-.btn-icon {
-  border: none;
-}
-
 .btn-primary,
 .btn-small-primary {
   background-color: var(--accent);
@@ -113,9 +120,15 @@ p,
   border-radius: 21px;
 }
 .btn-secondary:disabled,
-.btn-small-secondary:disabled {
+.btn-small-secondary:disabled,
+.btn-icon:disabled {
   color: var(--gray);
   border-color: var(--gray);
+}
+
+.btn-icon {
+  border: none;
+  color: var(--black);
 }
 
 /* Button size */
@@ -131,7 +144,14 @@ p,
 }
 .btn-icon {
   height: 7rem;
-  width: 7rem;
+  min-width: 7rem;
+}
+.btn-icon span {
+  font-family: Montserrat-Regular;
+  font-size: 46px;
+}
+.btn-icon:has(> span) {
+  padding: 0 2rem;
 }
 
 /* Tabs */
@@ -193,4 +213,47 @@ p,
 }
 .bottom-menu > * {
   pointer-events: all;
+}
+
+/* Icons */
+i[class*="i-"] {
+  display: inline-flex;
+  align-items: center;
+}
+i[class*="i-"] span {
+  font-size: 0;
+}
+
+i[class*="i-"]::before {
+  display: inline-block;
+  font-family: "GlobalIcon";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  text-transform: none;
+  vertical-align: middle;
+}
+
+i.i-home::before {
+  content: "\ee01";
+}
+i.i-volume-on::before {
+  content: "\ee02";
+}
+i.i-volume-off::before {
+  content: "\ee03";
+}
+i.i-left::before {
+  content: "\ee04";
+}
+i.i-close::before {
+  content: "\ee05";
+}
+i.i-info::before {
+  content: "\ee06";
+}
+i.i-check::before {
+  content: "\ee07";
 }

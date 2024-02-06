@@ -1,37 +1,37 @@
 [
     {
-        "name": "ue900-square-back",
-        "className": "ue900-square-back",
-        "unicode": "ee04"
-    },
-    {
-        "name": "ue901-square-cross",
-        "className": "ue901-square-cross",
-        "unicode": "ee05"
-    },
-    {
-        "name": "ue902-square-information",
-        "className": "ue902-square-information",
-        "unicode": "ee06"
-    },
-    {
-        "name": "ue903-square-check",
-        "className": "ue903-square-check",
-        "unicode": "ee07"
-    },
-    {
-        "name": "ue904-home",
-        "className": "ue904-home",
+        "name": "home",
+        "className": "home",
         "unicode": "ee01"
     },
     {
-        "name": "ue905-sound-off",
-        "className": "ue905-sound-off",
+        "name": "volume-on",
+        "className": "volume-on",
+        "unicode": "ee02"
+    },
+    {
+        "name": "volume-off",
+        "className": "volume-off",
         "unicode": "ee03"
     },
     {
-        "name": "ue906-sound-on",
-        "className": "ue906-sound-on",
-        "unicode": "ee02"
+        "name": "left",
+        "className": "left",
+        "unicode": "ee04"
+    },
+    {
+        "name": "close",
+        "className": "close",
+        "unicode": "ee05"
+    },
+    {
+        "name": "check",
+        "className": "check",
+        "unicode": "ee06"
+    },
+    {
+        "name": "info",
+        "className": "info",
+        "unicode": "ee07"
     }
 ]

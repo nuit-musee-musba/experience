@@ -30,7 +30,10 @@
       <p class="text-btn-1">Btn1 - Bouton</p>
 
       <div>
-        <button class="btn-primary">Principal</button>
+        <button class="btn-primary">
+          <i class="i-home"></i>
+          Principal
+        </button>
         <button class="btn-primary" disabled>Désactivé</button>
         <button class="btn-secondary">Secondaire</button>
         <button class="btn-secondary" disabled>Désactivé</button>
@@ -62,53 +65,50 @@
         <p>Point d'intérêt</p>
         <div class="poi"></div>
       </div>
+
+      <div>
+        <p>Icônes</p>
+        <p class="text-btn-1">
+          <i class="i-home"></i>
+          <i class="i-volume-off"></i>
+          <i class="i-volume-on"></i>
+          <i class="i-left"></i>
+          <i class="i-close"></i>
+          <i class="i-info"></i>
+          <i class="i-check"></i>
+        </p>
+      </div>
     </article>
 
     <div class="bottom-menu">
-      <a href="/index.html">
-        <img
-          src="/global/svg/btn-icon-home.svg"
-          height="112"
-          width="112"
-          alt="Accueil"
-        />
+      <a href="/" class="btn-icon">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
       </a>
 
-      <button>
-        <img
-          src="/global/svg/btn-icon-no-sound.svg"
-          height="112"
-          width="112"
-          alt="Pas de son disponible"
-        />
+      <button class="btn-icon" disabled>
+        <i class="i-volume-off">
+          <span>Pas de son disponible</span>
+        </i>
       </button>
 
-      <button>
-        <img
-          src="/global/svg/btn-icon-muted.svg"
-          height="112"
-          width="112"
-          alt="Son désactivé"
-        />
+      <button class="btn-icon">
+        <i class="i-volume-off">
+          <span>Son désactivé</span>
+        </i>
       </button>
 
-      <button>
-        <img
-          src="/global/svg/btn-icon-sound.svg"
-          height="112"
-          width="112"
-          alt="Son activé"
-        />
+      <button class="btn-icon">
+        <i class="i-volume-on">
+          <span>Son activé</span>
+        </i>
       </button>
 
-      <a href="/">
-        <img
-          src="/global/svg/btn-home.svg"
-          height="112"
-          width="543"
-          alt="Retour à la galerie"
-        />
-      </a>
+      <button class="btn-icon">
+        <i class="i-left"> </i>
+        <span>Retour à la galerie</span>
+      </button>
 
       <p class="text-p-small">
         Utilisez la classe ".bottom-menu" pour mettre les éléments en bas à
