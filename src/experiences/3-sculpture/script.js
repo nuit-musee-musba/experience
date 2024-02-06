@@ -7,6 +7,7 @@ import RefiningPart from "./component/4-RefiningPart/RefiningPart";
 import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { step } from "three/examples/jsm/nodes/Nodes.js";
 
 window.addEventListener("load", (event) => {
   console.log("La page est complètement chargée");
@@ -58,7 +59,7 @@ let statueV2;
 
 gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(0.5, -1, -0.5);
+  gltf.scene.position.set(1.3, -1, -1.5);
   gltf.scene.rotation.y = Math.PI / 2;
   statueV1 = gltf.scene;
 
@@ -67,7 +68,7 @@ gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
 
 gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(0.5, -1, -0.5);
+  gltf.scene.position.set(1.3, -1, -1.5);
   gltf.scene.rotation.y = Math.PI / 2;
   statueV2 = gltf.scene;
 
@@ -133,23 +134,54 @@ window.addEventListener("mousemove", (event) => {
 
 window.addEventListener("click", onClick);
 
-function onClick() {
+let steps = 1;
+
+function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
 
-  // RoughHewing Part
-  if (statueV1 && statueV1.children) {
-    const intersects = raycaster.intersectObjects(statueV1.children);
+  switch (steps) {
+    case 1:
+      break;
+    case 2:
+      if (statueV1 && statueV1.children) {
+        const intersects = raycaster.intersectObject(statueV1);
+        if (intersects.length > 0) {
+          const clickedBlock = intersects[0].object;
+          statueV1.remove(clickedBlock);
 
-    if (intersects.length > 0) {
-      const clickedBlock = intersects[0].object;
-      statueV1.remove(clickedBlock);
-
-      if (statueV1.children.length === 0) {
-        DetailsPart();
+          if (statueV1.children.length === 0) {
+            mouse.x = -1;
+            mouse.y = -1;
+            DetailsPart();
+            steps++;
+            stepsFunction();
+          }
+        }
       }
-    }
+      break;
+    case 3:
+      if (statueV2) {
+        const intersects = raycaster.intersectObject(statueV2);
+
+        if (intersects.length > 0) {
+          console.log("statut V2", intersects.length);
+          scene.remove(statueV2);
+
+          if (!statueV2) {
+            steps++;
+            stepsFunction();
+          }
+        }
+      }
+      break;
+    case 4:
+      break;
   }
+}
+
+function onClick() {
+  stepsFunction();
 }
 
 //
