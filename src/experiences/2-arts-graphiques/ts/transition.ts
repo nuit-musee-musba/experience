@@ -15,6 +15,7 @@ export default class Transition {
   section5: Section;
   section6: Section;
   section7: Section;
+  section8: Section;
 
   currentSectionNumber: number;
   sections: Section[];
@@ -30,6 +31,7 @@ export default class Transition {
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
+    this.section8 = new Section(`section-8`);
 
     const button = document.querySelector<HTMLButtonElement>("#button");
 
@@ -50,15 +52,28 @@ export default class Transition {
       this.section5,
       this.section6,
       this.section7,
+      this.section8,
     ];
+    const urlParams = new URLSearchParams(window.location.search);
 
     this.currentSection = this.sections[this.currentSectionNumber];
 
     this.init();
+
+    if (urlParams.has("section")) {
+      const sectionId = urlParams.get("section");
+      const section = this.sections[Number(sectionId)];
+
+      if (this.sections[this.currentSectionNumber]) {
+        this.sections[this.currentSectionNumber].hide();
+      }
+      this.currentSectionNumber = Number(sectionId);
+      section.show();
+    }
   }
 
   handleTransition() {
-    if (this.currentSectionNumber === 7) {
+    if (this.currentSectionNumber === 8) {
       this.currentSectionNumber = 0;
     } else {
       this.currentSectionNumber = this.currentSectionNumber + 1;
@@ -142,12 +157,15 @@ export default class Transition {
         this.button.innerText = "Choisir un cadre";
         break;
       case 5:
-        this.button.innerText = "Exposer l'oeuvre";
+        this.button.innerText = "Choisir un cadre";
         break;
       case 6:
-        this.button.innerText = "Voir les critiques";
+        this.button.innerText = "Exposer l'oeuvre";
         break;
       case 7:
+        this.button.innerText = "Voir les critiques";
+        break;
+      case 8:
         this.button.innerText = "Recommencer l'expérience";
     }
   }
@@ -160,5 +178,6 @@ export default class Transition {
     this.section5.hide();
     this.section6.hide();
     this.section7.hide();
+    this.section8.hide();
   }
 }
