@@ -4,27 +4,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clair-obscur - Lumière | MusBA x MMI</title>
+  <title>Bravo - Lumière | MusBA x MMI</title>
   <link rel="stylesheet" href="/global/style.css" />
   <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
-  <script defer type="module" src="/experiences/4-lumiere/js/first-painting.js"></script>
+  <script defer type="module" src="/experiences/4-lumiere/js/results.js"></script>
 </head>
 
-<body>
+<body class="page-results">
   <canvas class="webgl"></canvas>
 
-  <div class="consignes">
-    <p>Les peintres inspirés du Caravage aiment représenter leur sujet avec un fort contraste entre les zones de
-      lumières et les zones d’ombres.</p>
-    <p>Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur le cercle.</p>
-  </div>
-  <div class="legende">
-    <div class="legende-ecriteau">
-      <p><em>Saint Sébastien soigné par Irène</em>, le Maître à la chandelle</p>
+  <div class="wrapper">
+    <div class="wrapper-container">
+      <div class="wrapper-row">
+        <div class="col-demi">
+
+        </div>
+        <div class="col-demi congrats">
+          <h1>Bravo&nbsp;!</h1>
+          <p>Vous avez réussi à retrouver l’emplacement du soleil sur le tableau <em>La Lyre Immortelle</em>,
+            de Abel-Dominique BOYE&nbsp;!</p>
+        </div>
+      </div>
+      <div class="wrapper-row">
+        <div class="col-full description">
+          <p>L’objectif est de représenter le beau et d’imiter une réalité idéalisée. Les scènes sont peintes en
+            atelier,
+            ce qui offre une lumière limitée, plutôt froide et lissante.</p>
+          <p> Dans l’académisme, les peintres représentent des sujets dits nobles comprenant la peinture historique, les
+            sujets religieux et mythologiques, les portraits, les nus et les paysages.</p>
+        </div>
+      </div>
+      <div class="wrapper-row">
+        <div class="col-demi emplacement">
+          <p>Découvrez ce chef-d'œuvre<br />
+            dans l’Aile Bonheur du musée !</p>
+        </div>
+        <div class="col-demi btn-wrapper">
+          <a class="btn btn-secondary" href="/experiences/4-lumiere/index.html?home-popin=false">Choisir un autre
+            tableau</a>
+        </div>
+      </div>
     </div>
   </div>
-  <button id="btn-validate" class="popin-btn btn-temp-color" data-target="#popin-first-painting"
-    disabled>Valider</button>
 
   <!-- Global buttons -->
   <div class="parameter-btn-list">
