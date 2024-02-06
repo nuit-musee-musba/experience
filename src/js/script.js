@@ -30,6 +30,8 @@ const scene = new THREE.Scene();
 // Target canvas
 var canvas = document.getElementById("webgl");
 
+scene.fog = new THREE.Fog(0x000000, 1, 20);
+
 // Create camera
 const camera = new THREE.PerspectiveCamera(
   10,
@@ -37,7 +39,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   2000
 );
-camera.position.set(0, 2.5, 6.5);
+camera.position.set(0, 2.5, -6.5);
 camera.lookAt(0, 0, 0);
 
 // Create Renderer
@@ -58,7 +60,7 @@ scene.add(light);
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, 0, 0); //Math.PI
+carousel.rotation.set(0, 0, 0); //
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
@@ -135,7 +137,7 @@ let moveX = 0; // move x position or pointer position
 let index = 0;
 const circle = Math.PI * 2;
 const parts = 5;
-
+let touchEndProcessing = false; // Flag to indicate if touchend is still processing
 let isTouching = false;
 
 function rotateX(quantity) {
@@ -151,6 +153,7 @@ function rotateX(quantity) {
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  if (touchEndProcessing) return; // Prevent touch start if touch end is still processing
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
   lastX = event.touches[0].clientX / canvas.clientWidth;
@@ -160,8 +163,12 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
   if (!isTouching) return;
+
+  // I set the speed for the touchend part
   speed =
     Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
+
+  // set direction left or right
   direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
 
   moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
@@ -169,11 +176,17 @@ canvas.addEventListener("touchmove", (event) => {
   rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
   index = index;
+  console.log("TouchEnd Processing: ", touchEndProcessing);
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
+  console.log("TouchEnd Processing: ", touchEndProcessing);
+  if (touchEndProcessing) {
+    return;
+  }
   console.log("TOUCHEND");
+  touchEndProcessing = true; // Set touch end processing flag to true
   index = direction === 1 ? index : index + parts;
   isTouching = false;
   // Calculate landing rotation based on speed and power
@@ -200,6 +213,7 @@ canvas.addEventListener("touchend", () => {
         infoDescription,
         infoButton
       );
+      touchEndProcessing = false; // Reset touch end processing flag
     }
   };
   rotateToClosest();
@@ -229,7 +243,12 @@ function handleRightButtonClick() {
   console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
 
-  index = index === 4 ? 0 : index + 1;
+  index = index - 1;
+  if (index < 0) {
+    index = 4;
+  } else {
+    index = index;
+  }
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
@@ -242,19 +261,13 @@ function handleLeftButtonClick() {
   if (!isButtonClickable) {
     return;
   }
-
+  index = index === 4 ? 0 : index + 1;
   isButtonClickable = false;
   buttonLoaderLeft.style.display = "flex";
 
   rotateCarousel("left", rotate, carousel);
   console.log("Carousel left", carousel.rotation.y);
 
-  index = index - 1;
-  if (index < 0) {
-    index = 4;
-  } else {
-    index = index;
-  }
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
