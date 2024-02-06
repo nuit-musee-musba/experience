@@ -6,6 +6,7 @@ import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+import { AnimatedObject } from "/experiences/1-batiment/js/objectLoader";
 
 enableInactivityRedirection();
 
@@ -18,7 +19,6 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 const gltfLoader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
-let mixer = null;
 let isShowingText = false;
 const raycaster = new THREE.Raycaster();
 
@@ -38,13 +38,14 @@ gltfLoader.setDRACOLoader(dracoLoader);
 //   gltf.scene.rotation.y = -1.25;
 // });
 
-var geometry = new THREE.BoxGeometry();
-var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-var cube = new THREE.Mesh(geometry, material);
+const geometry = new THREE.SphereGeometry(0.2, 32, 16);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+
 // LIGHTS
 
-const ambientLight = new THREE.AmbientLight("#ffffff", 0.8);
+const ambientLight = new THREE.AmbientLight("#FFFFFF", 1);
 gui
   .add(ambientLight, "intensity")
   .min(0)
@@ -52,31 +53,52 @@ gui
   .step(0.001)
   .name("Ambient Light");
 
-const directionalLight = new THREE.DirectionalLight("#EBF5F6", 3);
-gui.add(directionalLight, "intensity").min(0).max(10).step(0.001).name("Sun");
-directionalLight.position.set(1, 3, 4);
-directionalLight.lookAt(4, 2, 4);
+const directionalLight1 = new THREE.DirectionalLight("#F5F0E8", 1.5);
+gui.add(directionalLight1, "intensity").min(0).max(10).step(0.001).name("Sun");
+directionalLight1.position.set(1, 3, 4);
+directionalLight1.lookAt(4, 2, 4);
 
-scene.add(ambientLight, directionalLight);
+const directionalLight2 = new THREE.DirectionalLight("#F5F0E8", 1);
+gui.add(directionalLight2, "intensity").min(0).max(10).step(0.001).name("Sun");
+directionalLight2.position.set(-1, 3, -4);
+directionalLight2.lookAt(4, 2, 4);
 
-gltfLoader.load("/1-batiment/assets/scenetoutbatiment.glb", (gltf) => {
-  scene.add(gltf.scene);
+scene.add(ambientLight, directionalLight1, directionalLight2);
 
-  mixer = new THREE.AnimationMixer(gltf.scene);
+// MODELS
 
-  gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
-
-  gltf.animations.forEach((animation, index) => {
-    const action = mixer.clipAction(animation);
-
-    action.setEffectiveTimeScale(1);
-    action.setEffectiveWeight(1);
-    action.clampWhenFinished = true;
-    action.loop = THREE.LoopOnce;
-    action.startAt(0);
-    action.play();
-  });
+const models = [
+  "/1-batiment/assets/gallerieba.glb",
+  "/1-batiment/assets/hotellaland.glb",
+  "/1-batiment/assets/mairie.glb",
+  "/1-batiment/assets/maisondeco.glb",
+  "/1-batiment/assets/musba.glb",
+];
+// let animatedScenes = [];
+// let loadedIndex = 0;
+let animatedScenes = [];
+gltfLoader.load(models[0], (gltf) => {
+  animatedScenes[new AnimatedObject(gltf)];
 });
+
+animatedScenes[0].setup();
+
+// function loadNextAsset(path) {
+//   gltfLoader.load(path, (gltf) => {
+//     animatedScenes[new AnimatedObject(gltf)];
+
+//     loadedIndex += 1;
+//     if (loadedIndex < assets.length) {
+//       loadNextAsset(assets[loadedIndex]);
+//     } else {
+//       onAllIsLoaded();
+//     }
+//   });
+// }
+// loadNextAsset(models[0]);
+
+// function onAllIsLoaded() {
+// }
 
 // SIZES
 const sizes = {
@@ -125,7 +147,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor("#808E90");
+renderer.setClearColor("#FFF6ED");
 
 //MOUSE
 
@@ -155,9 +177,17 @@ const tick = () => {
   previousTime = elapsedTime;
   time += 0.1;
 
-  if (mixer) {
-    mixer.update(deltaTime);
-  }
+  animatedScenes.forEach((animatedScene) => {
+    animatedScene.update();
+  });
+
+  // if ((mixer, mixer2, mixer3, mixer4, mixer5) !== null) {
+  //   mixer.update(deltaTime);
+  //   // mixer2.update(deltaTime);
+  //   mixer3.update(deltaTime);
+  //   mixer4.update(deltaTime);
+  //   mixer5.update(deltaTime);
+  // }
 
   controls.update();
   renderer.render(scene, camera);
@@ -302,6 +332,6 @@ function handleFocusPeriod(step) {
 handleFocusPeriod(period[index]);
 
 document.getElementById("restart-button").addEventListener("click", restart);
-document.getElementById("nextButton").addEventListener("click", nextStep);
-document.getElementById("interestButton").addEventListener("click", toggleInfo);
+// document.getElementById("nextButton").addEventListener("click", nextStep);
+// document.getElementById("interestButton").addEventListener("click", toggleInfo);
 // controls.target = cube.position;

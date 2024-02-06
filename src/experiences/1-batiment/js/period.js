@@ -8,7 +8,7 @@ export const period = [
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
       "Malgré l’aménagement conçu par l’ingénieur de la Ville Richard Bonfin en 1809, la galerie, ouverte le 1er octobre 1810, ne put présenter toutes ses œuvres.",
     ],
-    cubePosition: { x: 0, y: 0, z: 2 },
+    cubePosition: { x: -0, y: 0.3, z: 2.6 },
   },
   {
     title: "Déplacements Successifs et Incendies",
