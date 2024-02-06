@@ -144,7 +144,7 @@ export function rotateCarousel(direction, rotate, carousel) {
         : carousel.rotation.y - rotationAmount;
     const rotateToTarget = () => {
       if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.2; // Adjust the smoothing factor as needed
+        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.5; // Adjust the smoothing factor as needed
         carousel.rotation.y += deltaRotation;
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
