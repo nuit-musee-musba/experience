@@ -8,6 +8,10 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+window.addEventListener("load", (event) => {
+  console.log("La page est complètement chargée");
+});
+
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
