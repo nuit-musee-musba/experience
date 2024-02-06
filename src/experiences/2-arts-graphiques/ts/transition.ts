@@ -145,6 +145,85 @@ export default class Transition {
     }
   }
 
+  displayTimelipse(currentSectionNumber: number) {
+    const currentSection = document.querySelector(
+      `#section-${currentSectionNumber}`
+    ) as HTMLElement;
+
+    const dateElement = currentSection.querySelector("#date-anim__year");
+
+    if (dateElement) {
+      this.button.disabled = true;
+      date.init();
+    }
+  }
+
+  destroyAllCanvases() {
+    const existingCanvases = document.querySelectorAll("canvas");
+
+    existingCanvases.forEach((canvas: HTMLElement | any) => {
+      canvas.parentNode.removeChild(canvas);
+    });
+  }
+
+  DisplayInteractiveCanvas(currentSectionNumber: number) {
+    this.destroyAllCanvases();
+
+    const currentSection = document.querySelector(
+      `#section-${currentSectionNumber}`
+    ) as HTMLElement;
+
+    const canvasContainer = Array.from(
+      currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container")
+    );
+
+    if (canvasContainer) {
+      const options = {
+        getPercentage: true,
+        getPercentageAt: 80,
+      };
+
+      canvasContainer.forEach((canvas) => {
+        let interaction = canvas.getAttribute("data-interaction");
+        switch (interaction) {
+          case "paint":
+            paint(
+              canvas,
+              currentSectionNumber,
+              "blank-canvas.jpeg",
+              "canvas1.jpeg",
+              options
+            );
+            break;
+          case "cleaning":
+            paint(
+              canvas,
+              currentSectionNumber,
+              "stains_painting.png",
+              "canvas1.jpeg",
+              options
+            );
+            break;
+          case "seal":
+            const optionsSeal = {
+              getPercentage: true,
+              getPercentageAt: 60,
+            };
+            paint(
+              canvas,
+              currentSectionNumber,
+              "seal.webp",
+              "canvas1.jpeg",
+              optionsSeal
+            );
+            break;
+        }
+      });
+
+      console.log(currentSectionNumber);
+    }
+  }
+
   handleSection() {
     let previousSection: Section;
     this.currentSection = this.sections[this.currentSectionNumber];
