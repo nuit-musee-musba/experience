@@ -54,15 +54,24 @@ plane.scale.set(5, 5, 5);
 scene.add(plane);
 
 let statueV1;
+let statueV2;
 
 gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
-  const enfants = gltf.scene.children;
   gltf.scene.scale.set(0.38, 0.38, 0.38);
   gltf.scene.position.set(0.5, -1, -0.5);
   gltf.scene.rotation.y = Math.PI / 2;
   statueV1 = gltf.scene;
 
   scene.add(statueV1);
+});
+
+gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
+  gltf.scene.scale.set(0.38, 0.38, 0.38);
+  gltf.scene.position.set(0.5, -1, -0.5);
+  gltf.scene.rotation.y = Math.PI / 2;
+  statueV2 = gltf.scene;
+
+  scene.add(statueV2);
 });
 
 // gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
@@ -76,7 +85,7 @@ gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
 // });
 
 const light = new THREE.AmbientLight(0x404040);
-light.intensity = 1000;
+light.intensity = 100;
 scene.add(light);
 
 //
@@ -185,8 +194,9 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  if (statueV1) {
+  if (statueV1 && statueV2) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
+    statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;
