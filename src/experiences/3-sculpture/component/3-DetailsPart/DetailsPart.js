@@ -9,8 +9,9 @@ const DetailsPart = () => {
 
   detailsPart.classList.add("show");
 
-  detailsPart.addEventListener("click", () => {
-    detailsPart.classList.remove("show");
+  const detailsButton = document.getElementById("DetailsButton");
+
+  detailsButton.addEventListener("click", function () {
     RefiningPart();
   });
 };

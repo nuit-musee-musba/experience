@@ -9,8 +9,9 @@ const RefiningPart = () => {
 
   refiningPart.classList.add("show");
 
-  refiningPart.addEventListener("click", () => {
-    refiningPart.classList.remove("show");
+  const refiningButton = document.getElementById("RefiningButton");
+
+  refiningButton.addEventListener("click", function () {
     PolishingPart();
   });
 };

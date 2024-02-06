@@ -9,8 +9,9 @@ const PolishingPart = () => {
 
   polishingPart.classList.add("show");
 
-  polishingPart.addEventListener("click", () => {
-    polishingPart.classList.remove("show");
+  const polishingButton = document.getElementById("PolishingButton");
+
+  polishingButton.addEventListener("click", function () {
     OutroPart();
   });
 };

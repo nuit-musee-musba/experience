@@ -4,18 +4,20 @@ let totalPixels: number;
 let remainingPixels: number;
 
 const Paint = async (
-  target: HTMLElement,
+  target: HTMLCanvasElement,
+  currentSectionNumber: number,
   backgroundFile: String,
   imageToRevealFile: String,
   options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
-
+  let currentSection : HTMLElement | null = document.querySelector(`#section-${currentSectionNumber}`)
   const btnNext: HTMLButtonElement | null = document.querySelector('#button');
-  btnNext!.disabled = true;
+  let canvasPercentage: HTMLElement | null = currentSection ? currentSection.querySelector('.canvas_percentage') : null;
 
+  canvasPercentage!.innerText = "0%";
+  btnNext!.disabled = true;
 
   let width = 2000;
   let height = 2500;
-  const canvas1Percentage: HTMLElement | null = document.querySelector('#canvas1_percentage')
 
   const app: any = new PIXI.Application({
     width: width,
@@ -101,10 +103,14 @@ const Paint = async (
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
-      canvas1Percentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+      canvasPercentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
 
       if (percentageRemaining >= getPercentageAt) {
         console.log("Vous pouvez passer à la suite si vous le souhaitez");
+        if (target.getAttribute('data-interaction') == "seal") {
+          target.classList.remove('active')
+          currentSection?.querySelector('[data-interaction="cleaning"]')?.classList.add('active');
+        }
         btnNext!.disabled = false;
       }
     }

@@ -1,8 +1,3 @@
-@font-face {
-  font-family: musba;
-  src: url(./assets/MusBA-Regular.otf);
-}
-
 *,
 html {
   margin: 0;
@@ -24,6 +19,30 @@ body {
 html,
 body {
   overflow: hidden;
+}
+.title-component {
+  position: absolute;
+  top: 6rem;
+  left: 6rem;
+  display: flex;
+  gap: 2rem;
+}
+.title-line {
+  width: 4px;
+  height: full;
+  background-color: white;
+}
+#date-title {
+  color: white;
+  font-size: 8rem;
+  font-weight: 100;
+}
+
+.main-title {
+  width: calc(100% / 2);
+  color: white;
+  font-size: 4rem;
+  font-weight: 100;
 }
 
 #nextButton {
@@ -74,28 +93,69 @@ body {
 
 .chronology {
   z-index: 7;
-  left: 2vw;
-  top: 30vh;
-  position: absolute;
-}
-.chronology-buttons {
-  position: absolute;
+  bottom: 12vh;
+  width: 100%;
   display: flex;
-  align-items: start;
-  flex-direction: column;
-  gap: 2.7vh;
-  padding: 12vh 0 0 4vw;
+  justify-content: center;
+  position: absolute;
 }
+
+.chronology-container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.chronology-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.chronology-title {
+  font-size: 3rem;
+  font-family: helvetica;
+  font-weight: 100;
+  color: white;
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+}
+
+.chronology-title img {
+  width: 1.5vw;
+  height: 1.5vw;
+}
+.chronology-circles {
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+  justify-content: center;
+}
+.chronology-circles button {
+  width: 1vw;
+  height: 1vw;
+  border: 4px solid white;
+  border-radius: 100%;
+  background-color: #ffffff50;
+}
+
 .chronology-buttons button {
-  font-size: 2.5rem;
+  font-size: 4rem;
+  font-weight: 100;
   font-family: helvetica;
   background-color: transparent;
   color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
 }
-.chronology-buttons img {
-  position: absolute;
+
+.chronology-line {
+  width: 100%;
+  height: 4px;
+  background-color: white;
 }
 
 #end-menu {
@@ -128,17 +188,6 @@ body {
 .end-menu-buttons div {
   border: 2px dashed white;
   padding: 5px;
-}
-.end-menu-buttons button {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 2px solid white;
-  height: 50px;
-  width: 150px;
-  cursor: pointer;
-  font-family: Manrope;
-  font-size: 15px;
-  font-weight: 700;
 }
 
 .interest-component {
@@ -180,14 +229,12 @@ body {
   right: 2vh;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0.5rem 1rem;
-  background-color: white;
+  gap: 20px;
   cursor: pointer;
 }
 
 .audio {
-  width: 30px;
+  width: 56px;
 }
 
 @media screen and (max-width: 1508px) {
