@@ -18,7 +18,7 @@ export async function createIsland(i, count, color) {
       i,
       url, // url
       [0, 0, 0], // position
-      [0, i === 0 ? 0 : (Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
+      [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
       [0.03, 0.03, 0.03], // scale
       color
     );
@@ -135,16 +135,13 @@ export function updateIslandInformation(
 
 export function rotateCarousel(direction, rotate, carousel) {
   // TODO: remove evetListener for double click bug
-  //rightButton.removeEventListener("click");
   if (!rotate) {
     rotate = true;
     const rotationAmount = (Math.PI * 2) / 5;
-    console.log("rotationAmount", rotationAmount);
     const targetRotation =
       direction === "left"
-        ? carousel.rotation.y + rotationAmount
-        : carousel.rotation.y - rotationAmount;
-    console.log("targetRotation", targetRotation);
+        ? carousel.rotation.y - rotationAmount
+        : carousel.rotation.y + rotationAmount;
     const rotateToTarget = () => {
       if (rotate) {
         const deltaRotation = (targetRotation - carousel.rotation.y) * 0.2; // Adjust the smoothing factor as needed
@@ -156,13 +153,9 @@ export function rotateCarousel(direction, rotate, carousel) {
           requestAnimationFrame(rotateToTarget);
         } else {
           rotate = false;
-          // TODO: reset evetListener
-          // rightButton.addEventListener("click");
-          console.log("New Rotation", carousel.rotation.y);
         }
       }
     };
-
     rotateToTarget();
   }
 }
