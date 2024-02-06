@@ -10,16 +10,16 @@ export async function createIsland(i, count, color) {
     let url;
     // For a loaded GLTF model
     if (i % 2 !== 0) {
-      url = "/assets/hub/bat.glb";
+      url = "/assets/hub/sculpture.glb";
     } else {
-      url = "/assets/hub/reserve.glb";
+      url = "/assets/hub/vanite.glb";
     }
     const island = await createGLTFModel(
       i,
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.03, 0.03, 0.03], // scale
+      [0.05, 0.05, 0.05], // scale
       color
     );
     // if (island.scene.userData.id === 1) {
@@ -144,12 +144,12 @@ export function rotateCarousel(direction, rotate, carousel) {
         : carousel.rotation.y - rotationAmount;
     const rotateToTarget = () => {
       if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.5; // Adjust the smoothing factor as needed
+        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.27; // Adjust the smoothing factor as needed
         carousel.rotation.y += deltaRotation;
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
         );
-        if (rotationDifference > 0.0001) {
+        if (rotationDifference > 0.00001) {
           requestAnimationFrame(rotateToTarget);
         } else {
           rotate = false;

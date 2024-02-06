@@ -30,8 +30,6 @@ const scene = new THREE.Scene();
 // Target canvas
 var canvas = document.getElementById("webgl");
 
-scene.fog = new THREE.Fog(0x000000, 1, 20);
-
 // Create camera
 const camera = new THREE.PerspectiveCamera(
   10,
@@ -141,19 +139,23 @@ let touchEndProcessing = false; // Flag to indicate if touchend is still process
 let isTouching = false;
 
 function rotateX(quantity) {
-  if (rotation === 0) {
-    console.log("rotation", rotation);
-  }
+  console.log("rotation", rotation);
+
   rotation = rotation + quantity;
-  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
-  index = Math.floor(index % parts);
-  index = index >= 0 ? index : index + parts;
-  console.log("index: ", index);
+  // index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+  // console.log("CONTNROL 1 index: ", index);
+
+  // index = Math.floor(index % parts);
+  // console.log("CONTNROL 2 index: ", index);
+
+  // index = index >= 0 ? index : index + parts;
+  // console.log("CONTNROL 3 index: ", index);
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  console.log("index: ", index);
   if (touchEndProcessing) return; // Prevent touch start if touch end is still processing
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
@@ -164,7 +166,7 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
   if (!isTouching) return;
-
+  console.log("MOVING");
   // I set the speed for the touchend part
   speed =
     Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
@@ -176,6 +178,12 @@ canvas.addEventListener("touchmove", (event) => {
 
   rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
+  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+  index = Math.floor(index % parts);
+  index = index >= 0 ? index : index + parts;
+  console.log("index: ", index);
+  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
+  console.log("index: ", index);
 });
 
 // Touch end
@@ -195,7 +203,7 @@ canvas.addEventListener("touchend", () => {
     Math.round(landingRotation / (circle / parts)) * (circle / parts);
   // Smoothly rotate to the closest rotation value
   const rotateToClosest = () => {
-    const deltaRotation = (closestRotation - rotation) * 0.015; // Adjust the smoothing factor as needed
+    const deltaRotation = (closestRotation - rotation) * 0.04; // Adjust the smoothing factor as needed
     rotation += deltaRotation;
     index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
     index = Math.floor(index % parts);
@@ -217,6 +225,7 @@ canvas.addEventListener("touchend", () => {
     }
   };
   rotateToClosest();
+  index = index;
 });
 
 // Touch cancel
@@ -237,10 +246,10 @@ function handleRightButtonClick() {
     return;
   }
 
+  console.log("Rotation value on button: ", rotation);
   isButtonClickable = false;
   buttonLoaderRight.style.display = "flex";
 
-  console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
 
   index = index - 1;
