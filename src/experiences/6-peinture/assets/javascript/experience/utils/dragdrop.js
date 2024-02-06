@@ -151,7 +151,7 @@ function countDuplicates(strings) {
 // ici il faut initialiser les éléments qui vont drag and drop avec leurs identifiants
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
-var dragableElementList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var dragableElementList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"];
 var numberItemsPerCategory = countDuplicates(items);
 
 let i = 1; //boucle i

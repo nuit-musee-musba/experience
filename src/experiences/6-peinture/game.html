@@ -15,47 +15,37 @@
       <div id="game-top" class="game-top">
         <div class="game-chef">
           <div class="game-chef__illustration">
-            <img src="assets/images/chef.png" alt="" />
+            <img src="./static/images/chef.png" alt="" />
           </div>
           <div id="dialog" class="game-chef__speech"></div>
         </div>
         <div class="composition" id="targetCraftZone">
-          <div class="item" id="1-placed">
-            <img src="assets/images/ingredients/food/grape.png" alt="raisin" />
-            <span>Raisin</span>
+          <div class="item item-butterfly" id="13-placed">
+            <img src="./static/images/ingredients/animals/butterfly.svg" alt="papillon" />
           </div>
-          <div class="item" id="5-placed">
-            <img
-              src="assets/images/ingredients/objects/mummy.png"
-              alt="momie"
-            />
-            <span>Momie</span>
+          <div class="item item-crab" id="15-placed">
+            <img src="./static/images/ingredients/animals/crab.svg" alt="crabe" />
           </div>
-          <div class="item multiple-9" id="9-1-placed">
-            <!-- les elements sont deja placés mais montrés quand validés -->
-            <img
-              src="assets/images/ingredients/animals/dolphin.png"
-              alt="dauphin"
-            />
-            <span>Dauphin</span>
+          <div class="item item-plum multiple-7" id="7-1-placed">
+            <img src="./static/images/ingredients/food/plum.svg" alt="prune" />
           </div>
-          <div class="item multiple-9" id="9-2-placed" style="left: 140px">
-            <!-- les elements sont deja placés mais montrés quand validés -->
-            <img
-              src="assets/images/ingredients/animals/dolphin.png"
-              alt="dauphin"
-            />
-            <span>Dauphin</span>
+          <div class="item item-plum multiple-7" id="7-2-placed">
+            <img src="./static/images/ingredients/food/plum.svg" alt="prune" />
           </div>
-        </div>
-        <div class="utensils">
-          <div id="knife" class="utensil">
-            <p>Couper</p>
-            <img src="assets/images/utensils/french-knife.png" alt="" />
+          <div class="item item-grasshopper" id="17-placed">
+            <img src="./static/images/ingredients/animals/grasshopper.svg" alt="sauterelle" />
           </div>
-          <div id="carafe" class="utensil">
-            <p>Remplir</p>
-            <img src="assets/images/utensils/jar.png" alt="" />
+          <div class="item item-vase" id="12-placed">
+            <img src="./static/images/ingredients/objects/vase.svg" alt="vase" />
+          </div>
+          <div class="item item-lemon" id="8-placed">
+            <img src="./static/images/ingredients/food/lemon-2.svg" alt="citron épluché" />
+          </div>
+          <div class="item item-grape multiple-3" id="3-1-placed">
+            <img src="./static/images/ingredients/food/grape.svg" alt="raisin"/>
+          </div>
+          <div class="item item-grape multiple-3" id="3-2-placed">
+            <img src="./static/images/ingredients/food/grape.svg" alt="raisin" />
           </div>
         </div>
         <div class="recipe">
@@ -68,90 +58,138 @@
       <div class="game-bottom">
         <ul class="categories-tabs">
           <li
-            class="tab-btn selected"
+            class="tab-btn"
             data-open-category="animals"
             role="button"
           >
-            <img src="" alt="" />
             <span>Animaux</span>
           </li>
           <li class="tab-btn" data-open-category="objects" role="button">
-            <img src="" alt="" />
             <span>Objets</span>
           </li>
-          <li class="tab-btn" data-open-category="food" role="button">
-            <img src="" alt="" />
+          <li class="tab-btn selected" data-open-category="food" role="button">
             <span>Aliments</span>
           </li>
         </ul>
 
         <div class="ingredients-container" id="ingredients-container">
-          <div class="category-items" id="food">
+          <div class="category-items active" id="food">
             <div class="item" id="1">
               <img
-                src="assets/images/ingredients/food/grape.png"
-                alt="raisin"
+                src="./static/images/ingredients/food/peach.svg"
+                alt="pêche"
               />
-              <span>Raisin</span>
             </div>
             <div class="item" id="2">
               <img
-                src="assets/images/ingredients/food/carrot.png"
-                alt="carotte"
+                src="./static/images/ingredients/food/lemon.svg"
+                alt="citron"
               />
-              <span>Carotte</span>
             </div>
             <div class="item" id="3">
               <img
-                src="assets/images/ingredients/food/lemon.png"
-                alt="citron"
+                src="./static/images/ingredients/food/grape.svg"
+                alt="raisin"
               />
-              <span>Citron</span>
+            </div>
+            <div class="item" id="4">
+              <img
+                src="./static/images/ingredients/food/carrot.svg"
+                alt="carotte"
+              />
+            </div>
+            <div class="item" id="5">
+              <img
+                src="./static/images/ingredients/food/pineapple.svg"
+                alt="ananas"
+              />
+            </div>
+            <div class="item" id="6">
+              <img
+                src="./static/images/ingredients/food/cake.svg"
+                alt="gâteau"
+              />
+            </div>
+            <div class="item" id="7">
+              <img
+                src="./static/images/ingredients/food/plum.svg"
+                alt="prune mauve"
+              />
+            </div>
+            <div class="item" id="8">
+              <img
+                src="./static/images/ingredients/food/lemon-2.svg"
+                alt="citron épluché"
+              />
             </div>
           </div>
 
           <div class="category-items" id="objects">
-            <div class="item" id="4">
+            <div class="item" id="9">
               <img
-                src="assets/images/ingredients/objects/skull.png"
+                src="./static/images/ingredients/objects/hyacinth.svg"
+                alt="jacinthe"
+              />
+            </div>
+            <div class="item" id="10">
+              <img
+                src="./static/images/ingredients/objects/skull.svg"
                 alt="crâne"
               />
-              <span>Crâne</span>
             </div>
-            <div class="item" id="5">
+            <div class="item" id="11">
               <img
-                src="assets/images/ingredients/objects/mummy.png"
-                alt="momie"
+                src="./static/images/ingredients/objects/tulip.svg"
+                alt="tulipe"
               />
-              <span>Momie</span>
             </div>
-            <div class="item" id="6">
+            <div class="item" id="12">
               <img
-                src="assets/images/ingredients/objects/dust.png"
-                alt="poussière"
+                src="./static/images/ingredients/objects/vase.svg"
+                alt="vase"
               />
-              <span>Poussière</span>
             </div>
           </div>
 
-          <div class="category-items active" id="animals">
-            <div class="item" id="7">
-              <img src="assets/images/ingredients/animals/cat.png" alt="chat" />
-              <span>Chat</span>
+          <div class="category-items" id="animals">
+            <div class="item" id="13">
+              <img src="./static/images/ingredients/animals/butterfly.svg" alt="papillon" />
             </div>
-            <div class="item" id="8">
+            <div class="item" id="14">
               <img
-                src="assets/images/ingredients/animals/dog.png"
-                alt="chien"
+                src="./static/images/ingredients/animals/fish.svg"
+                alt="poisson"
               />
-              <span>Chien</span>
             </div>
-            <div class="item" id="9">
+            <div class="item" id="15">
               <img
-                src="assets/images/ingredients/animals/dolphin.png"
-                alt="dauphin"
+                src="./static/images/ingredients/animals/crab.svg"
+                alt="crabe"
               />
-              <span>Dauphin</span>
+            </div>
+            <div class="item" id="16">
+              <img
+                src="./static/images/ingredients/animals/toad.svg"
+                alt="crapeau"
+              />
+            </div>
+            <div class="item" id="17">
+              <img
+                src="./static/images/ingredients/animals/grasshopper.svg"
+                alt="sauterelle"
+              />
+            </div>
+            <div class="item" id="18">
+              <img
+                src="./static/images/ingredients/animals/piggy.svg"
+                alt="porc"
+              />
+            </div>
+            <div class="item" id="19">
+              <img
+                src="./static/images/ingredients/animals/caterpillar.svg"
+                alt="chenille"
+              />
             </div>
           </div>
         </div>
@@ -164,7 +202,7 @@
       <div class="ending-screen">
         <div class="game-chef">
           <div class="game-chef__illustration">
-            <img src="assets/images/chef.png" alt="" />
+            <img src="./static/images/chef.png" alt="" />
           </div>
           <div class="game-chef__speech">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
