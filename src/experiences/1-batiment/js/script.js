@@ -168,20 +168,20 @@ tick();
 const endMenu = document.getElementById("end-menu");
 const component = document.getElementById("component");
 
-const audioContent = document.getElementById("audio-content");
-const audio = document.getElementById("audio");
+// const audioContent = document.getElementById("audio-content");
+// const audio = document.getElementById("audio");
 
-let isAudioPlaying = false;
+// let isAudioPlaying = false;
 
-audioContent.addEventListener("click", () => {
-  if (isAudioPlaying) {
-    audio.src = "./assets/icons/audio.svg";
-  } else {
-    audio.src = "./assets/icons/audioNone.svg";
-  }
+// audioContent.addEventListener("click", () => {
+//   if (isAudioPlaying) {
+//     audio.src = "./assets/icons/audio.svg";
+//   } else {
+//     audio.src = "./assets/icons/audioNone.svg";
+//   }
 
-  isAudioPlaying = !isAudioPlaying;
-});
+//   isAudioPlaying = !isAudioPlaying;
+// });
 
 const restart = () => {
   index = 0;
@@ -226,11 +226,6 @@ for (let i = 1; i <= 4; i++) {
     index = i - 1;
     handleFocusPeriod(period[i - 1]);
   });
-
-  document.getElementById(`circle${i}`).addEventListener("click", () => {
-    index = i - 1;
-    handleFocusPeriod(period[i - 1]);
-  });
 }
 
 function handleFocusPeriod(step) {
@@ -244,16 +239,12 @@ function handleFocusPeriod(step) {
   dateTitleElement.appendChild(document.createTextNode(step.date));
 
   const selectedButtonId = `period${index + 1}`;
-  const selectedRoundButtonId = `circle${index + 1}`;
 
   document.getElementById(selectedButtonId).style.fontSize = "8rem";
-  document.getElementById(selectedRoundButtonId).style.backgroundColor =
-    "white";
 
   for (let i = 1; i <= period.length; i++) {
     if (i - 1 !== index) {
       document.getElementById(`period${i}`).style.fontSize = "4rem";
-      document.getElementById(`circle${i}`).style.backgroundColor = "#ffffff50";
     }
   }
 
