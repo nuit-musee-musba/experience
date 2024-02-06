@@ -22,6 +22,10 @@ export async function createIsland(i, count, color) {
       [0.03, 0.03, 0.03], // scale
       color
     );
+    // if (island.scene.userData.id === 1) {
+    //   island.scene.scale.set(0.05, 0.05, 0.05);
+    //   console.log("island id", island.scene);
+    // }
     return island.scene;
   } catch (error) {
     console.error("Error creating island:", error);
