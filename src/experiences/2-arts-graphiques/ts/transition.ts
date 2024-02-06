@@ -154,7 +154,7 @@ export default class Transition {
         this.button.innerText = "Aller dans la réserve";
         break;
       case 4:
-        this.button.innerText = "Choisir un cadre";
+        this.button.innerText = "Nettoyer le tableau";
         break;
       case 5:
         this.button.innerText = "Choisir un cadre";
