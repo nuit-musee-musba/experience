@@ -17,8 +17,10 @@
   --black: #242424;
   --white: #ffffff;
   --gray: #a8a8a8;
-  /* Override this variable in your custom css */
+  /* Override the accent variable in your custom css to modify accent color */
   --accent: rgb(40, 119, 164);
+
+  --stroke-width: 5px;
 }
 
 * {
@@ -86,7 +88,7 @@ button {
 .btn-small-primary {
   background-color: var(--accent);
   color: var(--white);
-  border: 5px solid var(--accent);
+  border: var(--stroke-width) solid var(--accent);
   border-radius: 21px;
 }
 .btn-primary:disabled,
@@ -99,7 +101,7 @@ button {
 .btn-small-secondary {
   background-color: var(--white);
   color: var(--accent);
-  border: 5px solid var(--accent);
+  border: var(--stroke-width) solid var(--accent);
   border-radius: 21px;
 }
 .btn-secondary:disabled,
@@ -119,29 +121,34 @@ button {
 
 /* Tabs */
 .tab {
-  background-color: var(--accent);
-  color: var(--white);
-  border: 5px solid var(--accent);
+  background-color: var(--white);
+  color: var(--accent);
+  border: var(--stroke-width) solid var(--accent);
+  border-bottom: 0;
   border-radius: 21px 21px 0 0;
   padding: 3rem 5rem;
 }
+.tab.active {
+  background-color: var(--accent);
+  color: var(--white);
+}
 
-/* Slide points */
-.slide-points {
+/* Step indicator */
+.stepper {
   display: flex;
   gap: 2rem;
   align-items: center;
 }
-.slide-point {
+.stepper > .step {
   width: 3.75rem;
   height: 3.75rem;
-  border: 5px solid var(--white);
+  border: var(--stroke-width) solid var(--white);
   border-radius: 100%;
 }
-.slide-point.visited {
+.stepper > .step.visited {
   background-color: var(--gray);
 }
-.slide-point.active {
+.stepper > .step.active {
   background-color: var(--white);
 }
 
@@ -163,4 +170,9 @@ button {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  pointer-events: none;
+}
+.bottom-menu > * {
+  pointer-events: all;
 }
