@@ -6,7 +6,7 @@ import {
   updateIslandInformation,
 } from "./helpers";
 import data from "./data";
-import { cos } from "three/examples/jsm/nodes/Nodes.js";
+import { cos, userData } from "three/examples/jsm/nodes/Nodes.js";
 
 /// Start info box data
 let infoTitle = document.getElementById("infoTitle");
@@ -148,7 +148,6 @@ function rotateX(quantity) {
   index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
   index = Math.floor(index % parts);
   index = index >= 0 ? index : index + parts;
-  console.log("index: ", index);
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
@@ -180,11 +179,11 @@ canvas.addEventListener("touchmove", (event) => {
 
 // Touch end
 canvas.addEventListener("touchend", () => {
-  console.log("TouchEnd Processing: ", touchEndProcessing);
+  //console.log("TouchEnd Processing: ", touchEndProcessing);
   if (touchEndProcessing) {
     return;
   }
-  console.log("TOUCHEND");
+  //console.log("TOUCHEND");
   touchEndProcessing = true; // Set touch end processing flag to true
   index = direction === 1 ? index : index + parts;
   isTouching = false;
@@ -240,7 +239,7 @@ function handleRightButtonClick() {
   isButtonClickable = false;
   buttonLoaderRight.style.display = "flex";
 
-  console.log("Current Rotation", carousel.rotation.y);
+  //console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
 
   index = index - 1;
@@ -249,7 +248,7 @@ function handleRightButtonClick() {
   } else {
     index = index;
   }
-  console.log("New Index", index);
+  //console.log("New Index", index);
 
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
@@ -264,79 +263,51 @@ function handleLeftButtonClick() {
     return;
   }
   index = index === 4 ? 0 : index + 1;
-  console.log("New Index", index);
+  //console.log("New Index", index);
 
   isButtonClickable = false;
   buttonLoaderLeft.style.display = "flex";
   rotateCarousel("left", rotate, carousel);
-  console.log("Carousel left", carousel.rotation.y);
+  //console.log("Carousel left", carousel.rotation.y);
   buttonLoaderLeft.style.display = "none";
   isButtonClickable = true;
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   // setTimeout(() => {}, 300);
 }
+
 function scaleModel(model, targetScale, duration) {
   const initialScale = model.scale.x;
   const initialRotation = model.rotation.clone();
-  console.log("Initial scale", initialScale);
   const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
 
-  const startTime = performance.now(); // Get the current time
-
-  // Animation function to update the scale gradually
   function animateScale() {
-    const currentTime = performance.now(); // Get the current time
-    const elapsedTime = currentTime - startTime; // Calculate elapsed time
-    const newScale = initialScale + scaleIncrement * elapsedTime; // Calculate new scale
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
 
-    // Update model scale
     model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
     model.scale.set(newScale, newScale, newScale);
 
-    // If duration is not elapsed, request the next frame
     if (elapsedTime < duration) {
       requestAnimationFrame(animateScale);
     }
   }
 
-  // Start the animation
   animateScale();
 }
 
-function findModelInFront(index) {
-  const models = carousel.children;
-  console.log("Models", models);
-  let closestModel = null;
-  let closestDistance = Infinity;
-  const actualModel = models[index];
-  console.log("Index", index);
-  console.log("Actual model", actualModel);
-
-  models.forEach((model) => {
-    model = actualModel;
-    const distance = model.position.distanceTo(camera.position);
-    if (distance < closestDistance) {
-      closestModel = model;
-      closestDistance = distance;
-    }
-  });
-
-  return closestModel;
-}
-
-// Function to handle scaling up the model in front of the camera
-function handleScaleButtonClick(index) {
-  const modelInFront = findModelInFront(index);
-  console.log("clicked");
-  if (modelInFront) {
-    scaleModel(modelInFront, 0.032, 350);
-  }
+function handleScaleButtonClick(model) {
+  scaleModel(model, 0.0315, 100);
+  console.log("user data", islands[0].userData.id);
 }
 
 // Event listener for scaling button
 const scaleButton = document.getElementById("scaleButton");
-scaleButton.addEventListener("click", handleScaleButtonClick(index));
+scaleButton.addEventListener("click", () =>
+  handleScaleButtonClick(carousel.children[0])
+);
 
 rightButton.addEventListener("click", handleRightButtonClick);
 leftButton.addEventListener("click", handleLeftButtonClick);
