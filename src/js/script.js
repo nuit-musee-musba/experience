@@ -131,7 +131,7 @@ const pi = Math.PI;
 let rotation = 0;
 let lastX = 0; // last x position or pointer position
 let speed = 0; // speed of the swipe
-let power = 10; // power of the swipe
+let power = 12; // power of the swipe
 let direction = 1; // 1 for right, -1 for left
 let moveX = 0; // move x position or pointer position
 let index = 0;
@@ -148,6 +148,7 @@ function rotateX(quantity) {
   index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
   index = Math.floor(index % parts);
   index = index >= 0 ? index : index + parts;
+  console.log("index: ", index);
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
@@ -175,8 +176,6 @@ canvas.addEventListener("touchmove", (event) => {
 
   rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
-  index = index;
-  console.log("TouchEnd Processing: ", touchEndProcessing);
 });
 
 // Touch end
@@ -196,23 +195,24 @@ canvas.addEventListener("touchend", () => {
     Math.round(landingRotation / (circle / parts)) * (circle / parts);
   // Smoothly rotate to the closest rotation value
   const rotateToClosest = () => {
-    const deltaRotation = (closestRotation - rotation) * 0.17; // Adjust the smoothing factor as needed
+    const deltaRotation = (closestRotation - rotation) * 0.015; // Adjust the smoothing factor as needed
     rotation += deltaRotation;
     index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
     index = Math.floor(index % parts);
     index = index >= 0 ? index : index + parts;
+    console.log("index: ", index);
+    updateIslandInformation(
+      index,
+      data,
+      infoTitle,
+      infoDescription,
+      infoButton
+    );
     carousel.rotation.y = (rotation * pi) / pi;
     const rotationDifference = Math.abs(closestRotation - rotation);
-    if (rotationDifference > 0.00001) {
+    if (rotationDifference > 0.01) {
       requestAnimationFrame(rotateToClosest);
     } else {
-      updateIslandInformation(
-        index,
-        data,
-        infoTitle,
-        infoDescription,
-        infoButton
-      );
       touchEndProcessing = false; // Reset touch end processing flag
     }
   };
@@ -249,12 +249,14 @@ function handleRightButtonClick() {
   } else {
     index = index;
   }
+  console.log("New Index", index);
+
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
     isButtonClickable = true;
     buttonLoaderRight.style.display = "none";
-  }, 1000);
+  }, 300);
 }
 
 function handleLeftButtonClick() {
@@ -262,18 +264,17 @@ function handleLeftButtonClick() {
     return;
   }
   index = index === 4 ? 0 : index + 1;
+  console.log("New Index", index);
+
   isButtonClickable = false;
   buttonLoaderLeft.style.display = "flex";
-
   rotateCarousel("left", rotate, carousel);
   console.log("Carousel left", carousel.rotation.y);
-
+  buttonLoaderLeft.style.display = "none";
+  isButtonClickable = true;
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
-  setTimeout(() => {
-    buttonLoaderLeft.style.display = "none";
-    isButtonClickable = true;
-  }, 1000);
+  // setTimeout(() => {}, 300);
 }
 
 rightButton.addEventListener("click", handleRightButtonClick);
