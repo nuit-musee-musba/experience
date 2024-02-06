@@ -31,10 +31,6 @@ export default defineConfig({
   publicDir: "../static/",
   plugins: [redirectToDir({ root })],
   base: "./",
-  server: {
-    host: true, // Open to local network and display URL
-    open: !("SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env), // Open if it's not a CodeSandbox
-  },
   build: {
     outDir,
     emptyOutDir: true,
@@ -50,6 +46,12 @@ export default defineConfig({
         "6-peinture/game": "./src/experiences/6-peinture/game.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
         "4-lumiere": "./src/experiences/4-lumiere/index.html",
+        "4-lumiere/first-painting":
+          "./src/experiences/4-lumiere/first-painting.html",
+        "4-lumiere/second-painting":
+          "./src/experiences/4-lumiere/second-painting.html",
+        "4-lumiere/third-painting":
+          "./src/experiences/4-lumiere/third-painting.html",
       },
     },
   },

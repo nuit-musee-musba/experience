@@ -13,11 +13,12 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   let horizontalTraversals = 0;
   let isHorizontalCollision = false;
 
+  let dragElWidth = dragElement.offsetWidth;
+
   let parentElement = document.querySelector(".utensils"); // parent du couteau pour déterminer sa position de retour (car il doit etre en absolute)
 
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
-
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
@@ -31,7 +32,7 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   dragElement.addEventListener("touchmove", (e) => {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX;
+    const currentX = touch.clientX - initialX - dragElWidth / 2;
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
 
@@ -50,7 +51,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
         if (!isHorizontalCollision) {
           horizontalTraversals++;
           isHorizontalCollision = true;
-          console.log(horizontalTraversals);
           if (horizontalTraversals == 1) {
             targetImage.src =
               "./assets/images/ingredients/animals/dolphin-2.png";
@@ -63,13 +63,13 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
         isHorizontalCollision = false;
       }
     } else {
-      alert("Tu as peléééé le citroooon !");
-      // dragElement.style.left = realInitialX + "px"; //TO DO : faire revenir le couteau à sa position initiale
-      // dragElement.style.top = realInitialY + "px";
+      console.log("coupé");
+      dragElement.style.left = realInitialX + "px";
+      dragElement.style.top = realInitialY + "px";
     }
 
     //comportement quand le couteau est en train de bouger
-    const currentY = touch.clientY - initialY;
+    const currentY = touch.clientY - initialY - dragElWidth / 2;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
   });

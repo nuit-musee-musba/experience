@@ -1,51 +1,23 @@
 html,
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   top: 0;
   left: 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  padding: 4rem;
+  overflow: hidden;
 }
 
-.landing-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: black;
-  text-align: center;
-  z-index: 2;
-}
-.title-landing {
-  font-size: 2rem;
-}
-.subtitle-landing {
-  font-size: 1.5rem;
-}
-
-#scrollBanner {
+#app {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: relative;
   top: 0;
-  left: -50%;
-  transform: translateX(50%);
-  pointer-events: all;
-  z-index: 1;
-}
-#webgl {
-  overflow-y: hidden;
-  overflow-x: scroll;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  pointer-events: all;
-  z-index: 1;
+  left: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 /* Add this to your CSS file or within a style tag in your HTML */
 .loader-wrapper {
@@ -72,6 +44,16 @@ body {
   animation: spin 1s linear infinite;
 }
 
+.button-loader {
+  display: none;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -79,6 +61,112 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+/* HERO */
+.heroWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+}
+#scrollBox {
+  flex: 2;
+  width: 100%;
+  height: 100%;
+  position: relative; /* Make sure to set it as a positioned element */
+}
+
+#webgl {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  max-width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  pointer-events: all;
+  z-index: 1;
+}
+
+.controls {
+  position: absolute;
+  bottom: 10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 3;
+}
+
+.control {
+  cursor: pointer;
+  pointer-events: all;
+  margin: 0 1rem;
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#infoBox {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 0;
+  pointer-events: all;
+  z-index: 1;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+#infoTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.listBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style: none;
+  width: 80%;
+  height: fit-content;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+}
+.colorList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+}
+.colorList li {
+  flex-basis: auto;
+  height: auto;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  cursor: pointer;
 }
 
 /* Additional styles for the popup */

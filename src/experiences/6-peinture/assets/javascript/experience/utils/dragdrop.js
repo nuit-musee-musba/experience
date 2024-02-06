@@ -1,8 +1,8 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager";
+import { recipeResolve } from "./recipeManager.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
-console.log(craftCont);
+let parentElement = document.getElementById("ingredients-container"); // parent
 var winConditions = craftCont.length;
 var howManyDone = 0;
 
@@ -10,6 +10,7 @@ function handleDragInteraction(
   dragElementId,
   isMultiple,
   placedEl,
+  marginTopPlacement,
   isCorrect,
   padLeft,
   targetZoneId,
@@ -22,27 +23,28 @@ function handleDragInteraction(
   let howManyDrags = 0;
   let success = false;
 
-  let parentElement = document.getElementById("ingredients-container"); // parent
-
   const dragElementRect = dragElement.getBoundingClientRect();
   const parentElementRect = parentElement.getBoundingClientRect();
 
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
+  let dragElWidth = dragElement.offsetWidth;
+
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
   dragElement.addEventListener("touchstart", (e) => {
     const targetZoneRect = targetZone.getBoundingClientRect();
+    console.log("touchstart");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + padLeft;
-    const currentY = touch.clientY - initialY;
+    const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
+    const currentY = touch.clientY - initialY - dragElWidth / 2;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -58,7 +60,6 @@ function handleDragInteraction(
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      //console.log('element dans la zone');
       // if(successPosX && successPosY){
       //     dragElement.style.left = successPosX + 'px';
       //     dragElement.style.top = successPosY + 'px';
@@ -68,8 +69,6 @@ function handleDragInteraction(
       // }
 
       let dialog = items.items.find((item) => item.id === dragElementId);
-      console.log("drag " + dragElementId);
-      console.log(dialog);
 
       if (isCorrect) {
         if (isMultiple) {
@@ -88,7 +87,6 @@ function handleDragInteraction(
           }
         } else {
           if (!success) {
-            console.log(placedEl);
             placedEl.style.display = "block";
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             recipeResolve(dialog.id);
@@ -105,14 +103,12 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        console.log("true");
-
         success = true;
 
         // -- win --
 
         if (howManyDone >= winConditions) {
-          alert("Chef : Tu as gagné !");
+          document.body.classList.add('has-ending-opened')
         }
       } else {
         dragElement.style.left = realInitialX + "px";
@@ -129,46 +125,144 @@ function handleDragInteraction(
     }
   });
 }
+console.log(items);
+function countDuplicates(strings) {
+  //cette fonction permet de compter le nombre d'objets dans chaque catégorie automatiquement
+  const frequency = {};
+
+  strings["items"].forEach((str) => {
+    if (frequency[str["category"]]) {
+      // Si la chaîne existe déjà, augmenter la fréquence
+      frequency[str["category"]]++;
+    } else {
+      // Si la chaîne n'existe pas encore, initialiser la fréquence à 1
+      frequency[str["category"]] = 1;
+    }
+  });
+
+  // Créer un tableau avec les résultats
+  const resultArray = Object.keys(frequency).map((str) => ({
+    name: str,
+    count: frequency[str],
+  }));
+
+  return resultArray;
+}
 
 // ici il faut initialiser les éléments qui vont drag and drop avec leurs identifiants
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
-var dragableElementList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var numberItemsPerCategory = countDuplicates(items);
 
-let i = 1;
-dragableElementList.forEach((element) => {
-  let placedEl = document.getElementById(element + "-placed");
-  var elementsWithId = document.querySelectorAll(".multiple-" + element);
+console.log(items);
 
-  console.log(elementsWithId);
+let i = [1, 1, 1]; //boucle i
+let i_overall = [1, 1, 1]; //boucle i
+let staged = [0, 0, 0]; //"étage"
+let max_item_per_stage = 5;
+let cur_stage;
+let marginTopPlacement;
 
-  let ElementList = document.getElementById(element);
+// ---> ETAGE 1 : 90px
+// ---> ETAGE 0 : 470px
 
-  ElementList.style.top = "90px";
-  let leftPosition = 200 * i;
-  ElementList.style.left = leftPosition + "px";
+let category = 0; //0=Aliments, 1=Objets, 2=Animaux
+items.items.forEach((element) => {
+  let placedEl = document.getElementById(element.id + "-placed");
+  var elementsWithId = document.querySelectorAll(".multiple-" + element.id);
 
-  if (i >= 3) {
-    i = 1;
+  let ElementList = document.getElementById(element.id);
+
+  let leftPosition;
+
+  if (numberItemsPerCategory[category]["count"] > max_item_per_stage) {
+    staged[category] =
+      numberItemsPerCategory[category]["count"] - max_item_per_stage; //number of items on top (stage 1)
+
+    if (cur_stage != 1) {
+      cur_stage = 0;
+    }
   } else {
-    i++;
+    staged[category] = 0;
+    cur_stage = -1;
   }
+
+  if (staged[category] == 0) {
+    leftPosition = // pour centrer les absolute on va faire ce calcul
+      (parentElement.offsetWidth / //la width du parent divisé par...
+        (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+        324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+      i[category]; //multiplié par le nombre d'occurence en cours
+    ElementList.style.left = leftPosition + "px"; // on applique
+  } else {
+    //cur_stage = 0;
+    if (cur_stage == 1) {
+      //stage 1
+
+      leftPosition = // pour centrer les absolute on va faire ce calcul
+        (parentElement.offsetWidth / //la width du parent divisé par...
+          (numberItemsPerCategory[category]["count"] - max_item_per_stage + 2) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+        i[category]; //multiplié par le nombre d'occurence en cours
+      ElementList.style.left = leftPosition + "px"; // on applique
+    } else if (cur_stage == 0) {
+      //stage 0 (forcement égal à max_item_per_stage)
+
+      leftPosition = // pour centrer les absolute on va faire ce calcul
+        (parentElement.offsetWidth / //la width du parent divisé par...
+          (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+        i[category]; //multiplié par le nombre d'occurence en cours
+      ElementList.style.left = leftPosition + "px"; // on applique
+    }
+  }
+
+  console.log(
+    "item:" + element.name + ",i:" + i[category] + "stage:" + cur_stage + ""
+  );
+
+  if (cur_stage == 1) {
+    ElementList.style.top = "90px"; //top position
+  } else if (cur_stage == 0) {
+    ElementList.style.top = "470px"; //bot position
+  } else if (cur_stage == -1) {
+    ElementList.style.top = "250px"; //top position
+  }
+
+  if (
+    i_overall[category] >= numberItemsPerCategory[category]["count"] ||
+    (i[category] == staged[category] && cur_stage == 1)
+  ) {
+    category++;
+    i_overall[category] = 1;
+    cur_stage = -1;
+  } else if (i[category] >= max_item_per_stage) {
+    cur_stage++;
+    i[category] = 1;
+  } else {
+    i[category]++;
+    i_overall[category]++;
+  }
+
+  //ce code implique donc que les items dans items.json soient bien rangés par catégorie
 
   if (elementsWithId.length == 0) {
     if (placedEl) {
       handleDragInteraction(
-        element,
+        element.id,
         false,
         placedEl,
+        marginTopPlacement,
         true,
         leftPosition,
         "targetCraftZone"
       );
     } else {
       handleDragInteraction(
-        element,
+        element.id,
         false,
         placedEl,
+        marginTopPlacement,
         false,
         leftPosition,
         "targetCraftZone"
@@ -176,9 +270,10 @@ dragableElementList.forEach((element) => {
     }
   } else if (elementsWithId.length > 0) {
     handleDragInteraction(
-      element,
+      element.id,
       true,
       elementsWithId,
+      marginTopPlacement,
       true,
       leftPosition,
       "targetCraftZone"

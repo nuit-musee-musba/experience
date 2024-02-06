@@ -4,12 +4,20 @@
   box-sizing: border-box;
 }
 
+p,
+span,
+a,
+h1 {
+  font-size: 5rem;
+}
+
 html,
 body {
   overflow: hidden;
   height: 100%;
   position: relative;
 }
+
 #button {
   font-size: 6rem;
   padding: 3rem 2rem;
@@ -18,30 +26,25 @@ body {
   border-radius: 110px;
 }
 
-.webgl {
-  position: fixed;
-  top: 0;
-  left: 0;
-  outline: none;
-}
-
 .canvas__container {
-  position: relative;
   height: fit-content;
+  display: none;
+}
+.canvas__container.active{
+  display: block;
 }
 
-.canvas__img {
-  width: 3090px;
-  height: 2000px;
+/* Sections */
+section {
+  display: flex;
+}
+section .left,
+section .center,
+section .right {
+  flex: 1;
 }
 
-canvas {
-  position: absolute;
-  border: 5px solid red;
-  top: 0;
-  left: 0;
-}
-
+/* debug page */
 .square {
   height: 320px;
   width: 320px;
@@ -72,4 +75,108 @@ canvas {
   right: 100px;
   bottom: 100px;
   border: 1px solid black;
+}
+
+/* end debug page*/
+
+/* section 1 */
+.section-1 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.sec1-painting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60%;
+  aspect-ratio: 2/3;
+  background-color: #aaaaaa;
+}
+
+.sec1-dragable {
+  position: absolute;
+  background-color: #c3c3c3;
+  width: 400px;
+  height: 500px;
+}
+
+#one {
+  left: 1330px;
+  top: 300px;
+}
+
+#two {
+  left: 2160px;
+  top: 500px;
+}
+#three {
+  left: 1418px;
+  top: 917px;
+}
+#four {
+  left: 1980px;
+  top: 1290px;
+}
+
+.frame {
+  height: 500px;
+  width: 400px;
+}
+.frames {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+}
+/* end section-1 */
+
+/* dragable */
+.drag-unable {
+  pointer-events: none;
+}
+
+/* section-4 */
+
+.painting-pieces-container {
+  height: 1728px;
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  border: 10px solid black;
+  //position: relative;
+}
+
+.painting-pieces-container img {
+  position: absolute;
+}
+
+.pieces-ref {
+  position: relative;
+  z-index: 1;
+}
+.Calque_1 {
+  position: absolute;
+}
+
+.sec4-dl {
+  top: 900px;
+  left: 1500px;
+  width: 1222.59px;
+}
+.sec4-dr {
+  top: 1200px;
+  left: 2400px;
+  width: 1400.55px;
+}
+
+.sec4-ur {
+  top: 0;
+  left: 2400px;
+  width: 1263.91px;
+}
+.sec4-ul {
+  top: 0;
+  left: 0;
+  width: 1212.68px;
 }

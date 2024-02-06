@@ -1,13 +1,28 @@
 import * as THREE from "three";
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { createIsland } from "./helpers";
-import router from "./router";
+import {
+  createIsland,
+  rotateCarousel,
+  updateIslandInformation,
+} from "./helpers";
+import data from "./data";
+import { cos } from "three/examples/jsm/nodes/Nodes.js";
 
-const worldLoaded = false;
+/// Start info box data
+let infoTitle = document.getElementById("infoTitle");
+let infoDescription = document.getElementById("infoText");
+let infoButton = document.getElementById("startButton");
 
-if (worldLoaded) {
-  console.log("world loaded");
-}
+document.addEventListener("DOMContentLoaded", function () {
+  // Set initial info box data
+  infoTitle.innerHTML = data[0].title;
+  infoDescription.innerHTML = data[0].description;
+  infoButton.addEventListener("click", function () {
+    const url = data[0].path;
+    window.location.href = url;
+    // camera.position.set(0, 3, 7);
+  });
+});
 
 // Create scene
 const scene = new THREE.Scene();
@@ -18,7 +33,7 @@ var canvas = document.getElementById("webgl");
 // Create camera
 const camera = new THREE.PerspectiveCamera(
   10,
-  window.innerWidth / window.innerHeight,
+  canvas.clientWidth / canvas.clientHeight, // Use canvas dimensions
   0.1,
   2000
 );
@@ -30,52 +45,45 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   canvas: canvas,
 });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensions
 
 // // Add renderer to DOM
 document.body.appendChild(renderer.domElement);
-
-// // Axes Helper
-// const axesHelper = new THREE.AxesHelper( 5 );
-// scene.add( axesHelper );
 
 // Add light
 const light = new THREE.DirectionalLight(0xffffff, 4);
 light.position.set(0, 3, 3);
 scene.add(light);
 
-// Fog
-// scene.fog = new THREE.Fog("#a79", 8.5, 12);
-
 // Carousel : Group of islands
 const carousel = new THREE.Group();
-
-// Raycaster : raycasting to detect mouse click or hover on 3D objects
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-// Create worlds
+// Calibrate rotation to set carousel in good position
+carousel.rotation.set(0, Math.PI, 0);
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
 
-// Create worlds
-for (let i = 0; i < 5; i++) {
-  const islandPromise = createIsland(i, 5)
+// Count of islands
+const count = 5;
+// Create islands
+for (let i = 0; i < count; i++) {
+  const color = data[i].color;
+  const islandPromise = createIsland(i, count, color)
     .then((island) => {
-      // Add each world to the carousel
+      // Add axes helper to the island
       carousel.add(island);
     })
     .catch((error) => {
-      console.error("Error creating world:", error);
+      console.error("Error creating island:", error);
     });
 
   islandPromises.push(islandPromise);
+  // console.log("island id", islandPromise.userData.id);
 }
-
 // Show loader while worlds are loading
 const loaderElement = document.getElementById("loader");
 loaderElement.style.display = "flex";
+
 // Wait for all promises to resolve
 // Use an IIFE to handle async code without top-level await
 (async () => {
@@ -92,36 +100,6 @@ loaderElement.style.display = "flex";
 // Add carousel to scene once all worlds are added
 scene.add(carousel);
 
-// Mouse Click event
-var onMouseClick = (event) => {
-  // Calculate mouse position in normalized device coordinates
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1; // -1 to 1
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; // -1 to 1
-
-  // Update the picking ray with the camera and mouse position
-  raycaster.setFromCamera(mouse, camera);
-
-  // Calculate objects intersecting the picking ray
-  const intersects = raycaster.intersectObjects(scene.children, true);
-
-  // Loop through the intersections
-  for (const intersect of intersects) {
-    // Check if the intersected object is a mesh
-    if (intersect.object.type === "Mesh") {
-      try {
-        // Get the URL from the intersected mesh parent's userData
-        const url = router.find(
-          (route) => route.id === intersect.object.parent.userData.id
-        ).path;
-        // Click event > Redirect to the specified URL
-        window.location.href = url;
-      } catch (error) {
-        console.error("Error in redirection", error);
-      }
-    }
-  }
-};
-
 // Handle window resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -129,8 +107,8 @@ window.addEventListener("resize", () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Chose documet over window as it is more performant
-document.addEventListener("click", onMouseClick);
+// // Chose documet over window as it is more performant
+// canvas.addEventListener("click", onMouseClick);
 
 // Handle scroll/wheel event for desktop
 canvas.addEventListener("wheel", (event) => {
@@ -141,67 +119,198 @@ canvas.addEventListener("wheel", (event) => {
 
 // Handle touch events for mobile
 
-// Declare Touch variables
-let touchStartX = 0;
-let touchMoveX = 0;
-let isTouching = false;
-let lastRotationY = 0;
-let deltaX = 0;
+let currentIslandIndex = 0;
 
-// Touch event handlers
+////// Alexis code
+let rotation = 0;
+let lastX = 0; // last x position or pointer position
+let speed = 0; // speed of the swipe
+let power = 5; // power of the swipe
+let direction = 1; // 1 for right, -1 for left
+let moveX = 0; // move x position or pointer position
+let index = 0;
+const circle = Math.PI * 2;
+const parts = 5;
+const step = circle / parts;
+let isTouching = false;
+
+function rotateX(quantity) {
+  rotation = rotation + quantity;
+  index = ((rotation + (Math.PI * 2) / 5 / 2) / circle) * parts;
+  index = Math.floor(index % parts);
+  index = index >= 0 ? index : index + parts;
+
+  carousel.rotation.y = (rotation * Math.PI) / Math.PI;
+}
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  console.log("touchstart");
+  // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
-  touchStartX = event.touches[0].clientX;
+  lastX = event.touches[0].clientX / canvas.clientWidth;
+  console.log("LastX", lastX);
 });
 
 // Touch move
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
+  if (!isTouching) return;
+  speed =
+    Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
+  direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
 
-  touchMoveX = event.touches[0].clientX;
-  deltaX = touchMoveX - touchStartX;
+  moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
+  console.log("MoveX", moveX);
 
-  const scrollPosition = deltaX % window.innerWidth;
-
-  // This is the actual rotation of the carousel based on the touch movement on the screen
-  carousel.rotation.y += (scrollPosition * (Math.PI * 2)) / window.innerWidth;
-
-  // Update the touch start position after each move
-  touchStartX = touchMoveX;
+  rotateX(-moveX);
+  lastX = event.touches[0].clientX / canvas.clientWidth;
+  console.log("rotation carousel", rotation);
+  index = index;
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
+  console.log("TOUCHEND");
+  index = direction === 1 ? index : index + parts;
   isTouching = false;
-  // Continue the rotation smoothly after touch end
-  const continueRotation = () => {
-    if (!isTouching) {
-      lastRotationY *= 0.989; // Decrease the rotation speed gradually
+  rotation = index * ((Math.PI * 2) / 5 / 2);
+  rotateX(rotation);
 
-      if (deltaX > 0) {
-        carousel.rotation.y +=
-          (lastRotationY * (Math.PI * 10)) / window.innerWidth;
-      } else {
-        carousel.rotation.y -=
-          (lastRotationY * (Math.PI * 10)) / window.innerWidth;
-      }
+  // isTouching = false;
+  // endTouch = touchMoveX;
+  // console.log("Last touch at", endTouch);
+  // console.log("Touch distance", Math.abs(endTouch - firstTouch));
 
-      if (Math.abs(lastRotationY) > 0.1) {
-        requestAnimationFrame(continueRotation);
-      }
-    }
-  };
-  lastRotationY = (touchStartX % window.innerWidth) / window.innerWidth;
-  continueRotation();
+  // currentRotation = carousel.rotation.y;
+  // // Rotate to the closest rotation value smoothly
+  // const rotateToClosest = () => {
+  //   const deltaRotation = (closestRotation - carousel.rotation.y) * 0.17; // Adjust the smoothing factor as needed
+  //   carousel.rotation.y += deltaRotation;
+  //   const rotationDifference = Math.abs(closestRotation - carousel.rotation.y);
+  //   if (rotationDifference > 0.00001) {
+  //     requestAnimationFrame(rotateToClosest);
+  //   }
+  // };
+  // rotateToClosest();
+
+  // // Change info box data based on the current island index
+  // // Use timesSurpassed to amount the index will be updated
+  // if (realDifference < 0) {
+  //   // If the carousel is rotating to the left
+  //   currentIslandIndex = currentIslandIndex - timesSurpassed;
+  //   if (currentIslandIndex < 0) {
+  //     currentIslandIndex = currentIslandIndex + arrayLength;
+  //   } else {
+  //     currentIslandIndex = currentIslandIndex;
+  //   }
+  // } else {
+  //   // If the carousel is rotating to the right
+  //   // currentIslandIndex =
+  //   //   currentIslandIndex === 4
+  //   //     ? 0 + timesSurpassed
+  //   //     : currentIslandIndex + timesSurpassed;
+  //   currentIslandIndex = currentIslandIndex + timesSurpassed;
+  //   if (currentIslandIndex > 4) {
+  //     currentIslandIndex = currentIslandIndex - arrayLength;
+  //   } else {
+  //     currentIslandIndex = currentIslandIndex;
+  //   }
+  // }
+
+  // console.log("New island index", currentIslandIndex);
+
+  // updateIslandInformation(
+  //   currentIslandIndex,
+  //   data,
+  //   infoTitle,
+  //   infoDescription,
+  //   infoButton
+  // );
+
+  // // Reset the timesSurpassed variable
+  // timesSurpassed = 0;
 });
+
+// This is  to continue the rotation after the touch end
+// setInterval(() => {
+//   speed = Math.max(0, speed - 0.001);
+//   console.log("speed", speed);
+//   rotateX(speed * direction);
+// }, 10);
 
 // Touch cancel
 canvas.addEventListener("touchcancel", () => {
   isTouching = false;
-  // Handle touch cancel if needed
 });
+
+const leftButton = document.getElementById("left");
+const rightButton = document.getElementById("right");
+const buttonLoaderRight = document.querySelector(".button-loader-right");
+const buttonLoaderLeft = document.querySelector(".button-loader-left");
+let rotate = false;
+
+let isButtonClickable = true;
+
+function handleRightButtonClick() {
+  if (!isButtonClickable) {
+    return;
+  }
+
+  isButtonClickable = false;
+  buttonLoaderRight.style.display = "flex";
+
+  console.log("Current Rotation", carousel.rotation.y);
+  rotateCarousel("right", rotate, carousel);
+
+  currentIslandIndex = currentIslandIndex === 4 ? 0 : currentIslandIndex + 1;
+  updateIslandInformation(
+    currentIslandIndex,
+    data,
+    infoTitle,
+    infoDescription,
+    infoButton
+  );
+
+  setTimeout(() => {
+    isButtonClickable = true;
+    buttonLoaderRight.style.display = "none";
+  }, 300);
+}
+
+function handleLeftButtonClick() {
+  if (!isButtonClickable) {
+    return;
+  }
+
+  isButtonClickable = false;
+  buttonLoaderLeft.style.display = "flex";
+
+  console.log("Current Rotation", carousel.rotation.y);
+  rotateCarousel("left", rotate, carousel);
+
+  currentIslandIndex = currentIslandIndex - 1;
+  if (currentIslandIndex < 0) {
+    currentIslandIndex = 4;
+  } else {
+    currentIslandIndex = currentIslandIndex;
+  }
+  updateIslandInformation(
+    currentIslandIndex,
+    data,
+    infoTitle,
+    infoDescription,
+    infoButton
+  );
+
+  setTimeout(() => {
+    buttonLoaderLeft.style.display = "none";
+    isButtonClickable = true;
+  }, 300);
+}
+
+rightButton.addEventListener("click", handleRightButtonClick);
+leftButton.addEventListener("click", handleLeftButtonClick);
 
 // Render loop
 const animate = () => {

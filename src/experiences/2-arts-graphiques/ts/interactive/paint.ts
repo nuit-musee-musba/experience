@@ -1,59 +1,136 @@
-interface Paint {
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D | null;
+import * as PIXI from "pixi.js";
 
-  init(): void;
-  draw(): void;
-  paint(canvas: HTMLCanvasElement, event: TouchEvent): void;
-  brush(x: number, y: number, diameter: number): void;
-}
+let totalPixels: number;
+let remainingPixels: number;
 
-const paint: Paint = {
-  canvas: document.getElementById('canvas') as HTMLCanvasElement,
-  ctx: null,
+const Paint = async (
+  target: HTMLCanvasElement,
+  currentSectionNumber: number,
+  backgroundFile: String,
+  imageToRevealFile: String,
+  options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
+  let currentSection : HTMLElement | null = document.querySelector(`#section-${currentSectionNumber}`)
+  const btnNext: HTMLButtonElement | null = document.querySelector('#button');
+  let canvasPercentage: HTMLElement | null = currentSection ? currentSection.querySelector('.canvas_percentage') : null;
 
-  init() {
-    this.draw()
-    // this.canvas.addEventListener("mousemove", (event) => this.paint(this.canvas, event));
-    this.canvas.addEventListener("touchmove", (event) => this.paint(this.canvas, event));
-  },
+  canvasPercentage!.innerText = "0%";
+  btnNext!.disabled = true;
 
-  draw() {
-    this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
-    this.ctx!.fillStyle = "#FFFFFF";
-    this.ctx!.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  },
+  let width = 2000;
+  let height = 2500;
 
-  paint(canvas, event) {
-    const bounding = canvas.getBoundingClientRect();
+  const app: any = new PIXI.Application({
+    width: width,
+    height: height,
+    backgroundAlpha: 0
+  });
+  app.renderer.background.alpha = 0;
 
-    for (let i = 0; i < event.touches.length; i++) {
-      const x = event.touches[i].clientX - bounding.left;
-      const y = event.touches[i].clientY - bounding.top;
-      this.brush(x, y, 90);
-    }
-  },
+  target!.appendChild(app.view);
 
-  brush(x, y, diameter) {
-    let radius = diameter / 2;
+  const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
+  const line = new PIXI.Graphics();
 
-    for (let dx = -radius; dx <= radius; dx++) {
-      for (let dy = -radius; dy <= radius; dy++) {
+  let t1 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${backgroundFile}`);
+  let t2 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${imageToRevealFile}`);
+  setup()
 
-        if (dx * dx + dy * dy <= radius * radius) {
-          let currentX = x + dx + Math.random() * 2 - 1;
-          let currentY = y + dy + Math.random() * 2 - 1;
+  function setup() {
+    const { width, height } = { width: 2000, height:2500 };
+    const stageSize = { width, height };
 
-          if (currentX >= 0 && currentX < this.canvas.width && currentY >= 0 && currentY < this.canvas.height) {
+    const background = Object.assign(PIXI.Sprite.from(t1), stageSize);
+    const imageToReveal = Object.assign(PIXI.Sprite.from(t2), stageSize);
+    const renderTexture = PIXI.RenderTexture.create(stageSize);
+    const renderTextureSprite = new PIXI.Sprite(renderTexture);
 
-            let pixelData = this.ctx!.getImageData(currentX, currentY, 1, 1);
-            pixelData.data[3] = 0;
-            this.ctx!.putImageData(pixelData, currentX, currentY);
-          }
+    imageToReveal.mask = renderTextureSprite;
+
+    app.stage.addChild(background, imageToReveal, renderTextureSprite);
+
+    app.stage.interactive = true;
+    app.stage.hitArea = app.screen;
+    app.stage
+      .on("pointerdown", pointerDown)
+      .on("pointerup", pointerUp)
+      .on("pointerupoutside", pointerUp)
+      .on("pointermove", pointerMove);
+
+    let dragging = false;
+    let lastDrawnPoint: PIXI.Point | null = null;
+
+    totalPixels = background.width * background.height;
+
+    function pointerMove({
+      global: { x, y },
+    }: {
+      global: { x: number; y: number };
+    }) {
+      if (dragging) {
+        brush.position.set(x, y);
+        app.renderer.render(brush, {
+          renderTexture,
+          clear: false,
+          skipUpdateTransform: false,
+        });
+
+        if (lastDrawnPoint) {
+          line
+            .clear()
+            .lineStyle({ width: 400, color: 0xffffff })
+            .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
+            .lineTo(x, y);
+          app.renderer.render(line, {
+            renderTexture,
+            clear: false,
+            skipUpdateTransform: false,
+          });
         }
+
+        lastDrawnPoint = lastDrawnPoint || new PIXI.Point();
+        lastDrawnPoint.set(x, y);
+      }
+    }
+
+    function percentage(getPercentageAt: number | any) {
+      const pixels = app.renderer.extract.pixels(renderTexture);
+
+
+      remainingPixels = pixels.reduce(
+        (count: any, value: any, index: any) =>
+          index % 4 === 3 && value !== 0 ? count + 1 : count,
+        0
+      );
+
+      const percentageRemaining = (remainingPixels / totalPixels) * 100;
+      canvasPercentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+
+      if (percentageRemaining >= getPercentageAt) {
+        console.log("Vous pouvez passer à la suite si vous le souhaitez");
+        if (target.getAttribute('data-interaction') == "seal") {
+          target.classList.remove('active')
+          currentSection?.querySelector('[data-interaction="cleaning"]')?.classList.add('active');
+        }
+        btnNext!.disabled = false;
+      }
+    }
+
+    function pointerDown(event: any) {
+      dragging = true;
+      pointerMove(event);
+    }
+
+    function pointerUp(event: any) {
+      dragging = false;
+      lastDrawnPoint = null;
+
+      if (options && options!.getPercentage) {
+        percentage(options!.getPercentageAt);
       }
     }
   }
+
+  return app;
 };
 
-export default paint;
+export default Paint;

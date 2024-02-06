@@ -3,6 +3,15 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 
 /**
+ * TO DO LIST
+ * Ajouter les cadre aux tableaux
+ * Ajouter les marches 3D
+ * Mise en forme des éléments (popins, textes, boutons)
+ * Ajuster la lumière
+ * Changer les images avec les versions retravaillées
+ */
+
+/**
  * Popins
  */
 
@@ -57,6 +66,7 @@ const gui = new GUI({
 let globalParameters = {
   lightAngleStrength: 0.5,
   ellipseRadius: 4,
+  white: "#f5f5f5",
 };
 
 // Canvas
@@ -84,10 +94,20 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
-const colorTexture = textureLoader.load(
-  "/4-lumiere/first-painting/caravage-color.jpg"
+const firstPaintingTexture = textureLoader.load(
+  "/4-lumiere/first-painting/first-painting-color.jpg"
 );
-colorTexture.colorSpace = THREE.SRGBColorSpace;
+firstPaintingTexture.colorSpace = THREE.SRGBColorSpace;
+
+const secondPaintingTexture = textureLoader.load(
+  "/4-lumiere/second-painting/second-painting-plan-3.png"
+);
+secondPaintingTexture.colorSpace = THREE.SRGBColorSpace;
+
+const thirdPaintingTexture = textureLoader.load(
+  "/4-lumiere/third-painting/third-painting-plan-3.png"
+);
+thirdPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 
 /**
  * Object
@@ -95,31 +115,52 @@ colorTexture.colorSpace = THREE.SRGBColorSpace;
 // First painting
 const firstPaintingGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
 const firstPaintingMaterial = new THREE.MeshStandardMaterial({
-  map: colorTexture,
+  map: firstPaintingTexture,
 });
 const firstPainting = new THREE.Mesh(
   firstPaintingGeometry,
   firstPaintingMaterial
 );
 
+firstPainting.position.x = globalParameters.ellipseRadius;
+
+// Second painting
+const secondPaintingGeometry = new THREE.PlaneGeometry(9.23, 4, 150, 100);
+const secondPaintingMaterial = new THREE.MeshStandardMaterial({
+  map: secondPaintingTexture,
+});
 const secondPainting = new THREE.Mesh(
-  firstPaintingGeometry,
-  firstPaintingMaterial
+  secondPaintingGeometry,
+  secondPaintingMaterial
 );
 
-scene.add(firstPainting, secondPainting);
+secondPainting.position.y = globalParameters.ellipseRadius;
+
+// Third painting
+const thirdPaintingGeometry = new THREE.PlaneGeometry(5.64, 4, 150, 100);
+const thirdPaintingMaterial = new THREE.MeshStandardMaterial({
+  map: thirdPaintingTexture,
+});
+const thirdPainting = new THREE.Mesh(
+  thirdPaintingGeometry,
+  thirdPaintingMaterial
+);
+
+thirdPainting.position.x = -globalParameters.ellipseRadius;
+
+// Add paintings to scene
+scene.add(firstPainting, secondPainting, thirdPainting);
 
 // Wheel ellipse
-
 var ellipseGeometry = new THREE.CircleGeometry(
   globalParameters.ellipseRadius,
   32
 );
 var ellipseMaterial = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
+  color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
-  wireframe: true,
+  opacity: 0,
+  // wireframe: true,
 });
 var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
 ellipse.position.z = 0.5;
@@ -127,13 +168,7 @@ scene.add(ellipse);
 
 // Wheel positions
 ellipse.rotation.y = -Math.PI * 0.5;
-ellipse.add(firstPainting);
-ellipse.add(secondPainting);
-firstPainting.rotation.y = Math.PI * 0.5;
-firstPainting.position.x = globalParameters.ellipseRadius;
-
-secondPainting.rotation.y = Math.PI * 0.5;
-secondPainting.position.x = -globalParameters.ellipseRadius;
+// ellipse.add(firstPainting, secondPainting, thirdPainting);
 
 /**
  * Raycaster
@@ -172,11 +207,31 @@ canvas.addEventListener("mousemove", (event) => {
   mouse.y = -(event.clientY / sizes.height) * 2 + 1;
 });
 
+// 'touchmove' event listener
+window.addEventListener(
+  "touchmove",
+  function (event) {
+    // Prevent touchmove default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+);
+
+// 'wheel' event listener
+window.addEventListener(
+  "wheel",
+  function (event) {
+    // Prevent wheel event default behavior
+    event.preventDefault();
+  },
+  { passive: false }
+); // Use { passive: false } to enable preventDefault
+
 canvas.addEventListener("click", () => {
   // Cast a ray
   raycaster.setFromCamera(mouse, camera);
 
-  const objectsToTest = [firstPainting, secondPainting];
+  const objectsToTest = [firstPainting, secondPainting, thirdPainting];
   const intersects = raycaster.intersectObjects(objectsToTest);
 
   if (intersects.length) {
@@ -204,6 +259,12 @@ canvas.addEventListener("click", () => {
         console.log("click on second painting");
         window.location.replace("./second-painting.html");
         break;
+
+      case thirdPainting:
+        console.log("click on second painting");
+        window.location.replace("./third-painting.html");
+        break;
+
       default:
         console.log("no link");
     }
@@ -230,15 +291,52 @@ scene.add(camera);
  */
 const pointer = new THREE.Vector2();
 
-window.addEventListener("pointermove", (event) => {
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+canvas.addEventListener("touchmove", (event) => {
+  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+});
+
+// Variables to track touch events
+let touchStartY = 0;
+let isSwiping = false;
+
+// Add event listeners for touch events on the window
+window.addEventListener("touchstart", function (event) {
+  // Record the starting Y position of the touch
+  touchStartY = event.touches[0].clientY;
+  isSwiping = true;
+});
+
+window.addEventListener(
+  "touchmove",
+  function (event) {
+    if (isSwiping) {
+      // Calculate the vertical distance swiped
+      const deltaY = event.touches[0].clientY - touchStartY;
+
+      // Adjust the rotation of the ellipse based on the swipe distance
+      const rotationSpeed = 0.005; // Adjust this value for desired sensitivity
+      ellipse.rotation.z -= deltaY * rotationSpeed;
+
+      // Update the starting Y position for the next frame
+      touchStartY = event.touches[0].clientY;
+
+      // Render
+      renderer.render(scene, camera);
+    }
+  },
+  { passive: false }
+);
+
+window.addEventListener("touchend", function () {
+  // Reset the swipe tracking variables
+  isSwiping = false;
 });
 
 // Controls
-const controls = new OrbitControls(camera, canvas);
-controls.target = ellipse.position;
-controls.enableDamping = true;
+// const controls = new OrbitControls(camera, canvas);
+// controls.target = ellipse.position;
+// controls.enableDamping = true;
 
 /**
  * Renderer
@@ -271,13 +369,37 @@ const clock = new THREE.Clock();
 
 let currentIntersect = null;
 let previousTime = 0;
+let deltaTime = 0;
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+  deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
 
   // Update controls
-  controls.update();
+  // controls.update();
+
+  // ellipse.rotation.z += Math.PI * deltaTime * 0.25;
+
+  // Update paintings positions based on ellipse rotation
+  const angle = ellipse.rotation.z;
+  const radius = globalParameters.ellipseRadius;
+
+  firstPainting.position.set(
+    0,
+    Math.sin(angle) * radius,
+    Math.cos(angle) * radius
+  );
+  secondPainting.position.set(
+    0,
+    Math.sin(angle + (2 * Math.PI) / 3) * radius,
+    Math.cos(angle + (2 * Math.PI) / 3) * radius
+  );
+  thirdPainting.position.set(
+    0,
+    Math.sin(angle - (2 * Math.PI) / 3) * radius,
+    Math.cos(angle - (2 * Math.PI) / 3) * radius
+  );
 
   // Render
   renderer.render(scene, camera);

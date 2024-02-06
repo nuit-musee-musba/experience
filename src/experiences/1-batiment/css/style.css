@@ -1,100 +1,193 @@
-@font-face {
-  font-family: musba;
-  src: url(./assets/MusBA-Regular.otf);
-}
-
 *,
 html {
   margin: 0;
   padding: 0;
 }
 
-body {
-  position: relative;
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
 }
 
-.buttons {
-  z-index: 7;
-  bottom: 10%;
-  right: 0;
-  width: 30%;
+html,
+body {
+  overflow: hidden;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+.title-component {
   position: absolute;
-  background-color: black;
+  top: 6rem;
+  left: 6rem;
+  display: flex;
+  gap: 2rem;
+}
+.title-line {
+  width: 4px;
+  height: full;
+  background-color: white;
+}
+#date-title {
   color: white;
+  font-size: 8rem;
+  font-weight: 100;
+}
+
+.main-title {
+  width: calc(100% / 2);
+  color: white;
+  font-size: 4rem;
+  font-weight: 100;
+}
+
+#nextButton {
+  z-index: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 50%;
+  padding-bottom: 2vh;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-family: helvetica;
+  font-size: 2.5rem;
+  font-weight: 100;
+}
+
+#nextButton img {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+}
+
+#interestButton {
+  z-index: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 30%;
+  padding-bottom: 2vh;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-family: helvetica;
+  font-size: 2.5rem;
+  font-weight: 100;
+}
+
+#interestButton img {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
 }
 
 .chronology {
   z-index: 7;
-  top: 40vh;
-  left: 6vw;
+  bottom: 12vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   position: absolute;
 }
+
+.chronology-container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vh;
+}
+
 .chronology-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 2vh;
+  align-items: center;
+  gap: 1vw;
 }
 
-.chronology-style img {
-  z-index: 7;
-  position: absolute;
-  top: -8.6vh;
-  left: -2.1vw;
-}
-
-.chronology-line {
-  z-index: 7;
-  position: absolute;
-  top: -1.5vh;
-  left: -2vw;
-  background-color: white;
-  width: 1px;
-  height: 120%;
-}
-
-.chronology-small-lines {
-  z-index: 8;
-  position: absolute;
-  top: 0vh;
-  left: -2.5vw;
+.chronology-title {
+  font-size: 3rem;
+  font-family: helvetica;
+  font-weight: 100;
+  color: white;
   display: flex;
-  flex-direction: column;
-  gap: 2vh;
-}
-.chronology-small-line {
-  background-color: white;
-  margin: 0.8vh 0;
-  height: 1px;
-  width: 1vw;
+  gap: 0.5vw;
+  align-items: center;
 }
 
-.chronology-circle {
+.chronology-title img {
   width: 1.5vw;
   height: 1.5vw;
-  border-radius: 100%;
-  border: 1px solid white;
-  position: absolute;
-  top: 14vh;
-  left: -2.8vw;
 }
+.chronology-circles {
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+  justify-content: center;
+}
+.chronology-circles button {
+  width: 1vw;
+  height: 1vw;
+  border: 4px solid white;
+  border-radius: 100%;
+  background-color: #ffffff50;
+}
+
 .chronology-buttons button {
+  font-size: 4rem;
+  font-weight: 100;
+  font-family: helvetica;
   background-color: transparent;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
 }
 
+.chronology-line {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+}
+
 #end-menu {
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
   display: none;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(245, 245, 220, 0.75);
+  background-color: rgb(245, 245, 220, 1);
   z-index: 10;
+}
+
+.end-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.end-menu-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.end-menu-buttons div {
+  border: 2px dashed white;
+  padding: 5px;
 }
 
 .interest-component {
@@ -102,30 +195,61 @@ body {
   bottom: 20%;
   right: 0;
   width: 30vw;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 2vh;
-  background: linear-gradient(0.25turn, #00000060, #00000060, #ebf8e100);
+  background: linear-gradient(0.25turn, #00000060, #00000030, #ebf8e100);
   color: white;
   padding: 2vh 8vw 4vh 3vw;
-  border-left: 1px solid white;
+  border-left: 5px solid white;
 }
 
 .interest-component img {
   position: absolute;
-  top: -7.1vh;
+  top: -177px;
   left: -0.15vw;
 }
 #title-component {
   font-family: musba;
-  font-size: 2rem;
+  font-size: 4rem;
 }
 
 #text-component {
   display: flex;
   flex-direction: column;
   gap: 1vh;
-  font-size: 1rem;
+  font-size: 2.5rem;
   font-family: helvetica;
   font-weight: 100;
+}
+
+.audio-content {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vh;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.audio {
+  width: 56px;
+}
+
+@media screen and (max-width: 1508px) {
+  .chronology-buttons button {
+    font-size: 1rem;
+  }
+
+  #text-component {
+    font-size: 1rem;
+  }
+
+  #title-component {
+    font-size: 2rem;
+  }
+  #nextButton {
+    font-size: 1rem;
+  }
 }

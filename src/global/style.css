@@ -1,0 +1,71 @@
+@font-face {
+  font-family: musba;
+  src: url(fonts/MusBA-Regular.otf);
+}
+
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url(fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url(fonts/Montserrat-SemiBold.ttf);
+}
+
+h1 {
+  font-family: Montserrat-SemiBold;
+  font-size: 110px;
+}
+
+h2 {
+  font-family: musba;
+  font-size: 75px;
+  font-weight: 400;
+}
+
+h3 {
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+}
+
+p {
+  font-family: Montserrat-Regular;
+  font-size: 46px;
+}
+
+button {
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+}
+
+.btn-primary {
+  background-color: black;
+  color: white;
+  padding: 3rem 5rem;
+  border-radius: 21px;
+}
+
+.btn-small-primary {
+  background-color: black;
+  color: white;
+  padding: 2rem 4rem;
+  border-radius: 21px;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: black;
+  padding: 3rem 5rem;
+  border-radius: 21px;
+  border: 5px solid black;
+}
+
+.btn-small-secondary {
+  background-color: white;
+  color: black;
+  padding: 2rem 4rem;
+  border: 5px solid black;
+  border-radius: 21px;
+  backdrop-filter: blur(6.4px);
+}
