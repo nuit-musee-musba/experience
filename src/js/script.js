@@ -135,14 +135,11 @@ const step = circle / parts;
 let isTouching = false;
 
 function rotateX(quantity) {
-  console.log("direction: ", direction);
-
   rotation = rotation + quantity;
   index = ((rotation + (Math.PI * 2) / 5 / 2) / circle) * parts;
   index = Math.floor(index % parts);
   index = index >= 0 ? index : index + parts;
 
-  console.log("index", index);
   carousel.rotation.y = (rotation * Math.PI) / Math.PI;
 }
 
@@ -159,7 +156,6 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
   if (!isTouching) return;
-
   speed =
     Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
   direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
@@ -167,7 +163,7 @@ canvas.addEventListener("touchmove", (event) => {
   moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
   console.log("MoveX", moveX);
 
-  rotateX(moveX);
+  rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
   console.log("rotation carousel", rotation);
   index = index;
@@ -175,15 +171,11 @@ canvas.addEventListener("touchmove", (event) => {
 
 // Touch end
 canvas.addEventListener("touchend", () => {
-  console.log("touchend");
+  console.log("TOUCHEND");
   index = direction === 1 ? index : index + parts;
-  console.log("Good index", index);
-
   isTouching = false;
   rotation = index * ((Math.PI * 2) / 5 / 2);
-  console.log("rotation", rotation);
   rotateX(rotation);
-  console.log("speed: ", speed);
 
   // isTouching = false;
   // endTouch = touchMoveX;
@@ -241,12 +233,11 @@ canvas.addEventListener("touchend", () => {
 });
 
 // This is  to continue the rotation after the touch end
-setInterval(() => {
-  speed = Math.max(0, speed - 0.001);
-  console.log("speed", speed);
-
-  rotateX(speed * direction);
-}, 10);
+// setInterval(() => {
+//   speed = Math.max(0, speed - 0.001);
+//   console.log("speed", speed);
+//   rotateX(speed * direction);
+// }, 10);
 
 // Touch cancel
 canvas.addEventListener("touchcancel", () => {
