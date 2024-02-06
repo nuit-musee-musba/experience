@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import LoadPart from "./LoadPart";
 import IntroPopup from "./component/1-IntroPart/IntroPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
@@ -16,6 +17,7 @@ const sizes = {
 //
 // INITIALIZATION
 //
+LoadPart();
 IntroPopup();
 const canvas = document.querySelector("canvas.webgl");
 
