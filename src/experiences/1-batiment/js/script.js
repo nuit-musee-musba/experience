@@ -5,6 +5,9 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
+import { enableInactivityRedirection } from "/global/js/inactivity";
+
+enableInactivityRedirection();
 
 const gui = new GUI();
 let index = 0;
@@ -62,8 +65,6 @@ gltfLoader.load("/1-batiment/assets/scenetoutbatiment.glb", (gltf) => {
   mixer = new THREE.AnimationMixer(gltf.scene);
 
   gltf.animations.sort((a, b) => a.timestamp - b.timestamp);
-
-  console.log(gltf.animations);
 
   gltf.animations.forEach((animation, index) => {
     const action = mixer.clipAction(animation);
@@ -140,16 +141,13 @@ function onMouseClick(event) {
 
   for (let i = 0; i < intersects.length; i++) {
     if (intersects[i].object === cube) {
-      toggleInfo();
+      showText();
       break;
     } else {
-      toggleInfo();
+      hideText();
     }
   }
 }
-
-window.addEventListener("click", onMouseClick, false);
-window.addEventListener("dragover", onMouseClick, false);
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
@@ -191,15 +189,25 @@ const restart = () => {
   endMenu.style.display = "none";
 };
 
+const showText = () => {
+  isShowingText = true;
+  component.style.display = "flex";
+};
+
+const hideText = () => {
+  isShowingText = false;
+  component.style.display = "none";
+};
+window.addEventListener("click", onMouseClick, false);
+window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
+
 const toggleInfo = () => {
   if (!isShowingText) {
-    isShowingText = true;
-    component.style.display = "flex";
+    showText();
     return;
   }
   if (isShowingText) {
-    isShowingText = false;
-    component.style.display = "none";
+    hideText();
     return;
   }
 };
@@ -215,8 +223,13 @@ const nextStep = () => {
 
 for (let i = 1; i <= 4; i++) {
   document.getElementById(`period${i}`).addEventListener("click", () => {
-    handleFocusPeriod(period[i - 1]);
     index = i - 1;
+    handleFocusPeriod(period[i - 1]);
+  });
+
+  document.getElementById(`circle${i}`).addEventListener("click", () => {
+    index = i - 1;
+    handleFocusPeriod(period[i - 1]);
   });
 }
 
@@ -224,6 +237,26 @@ function handleFocusPeriod(step) {
   if (!step) {
     return;
   }
+
+  const dateTitleElement = document.getElementById("date-title");
+  dateTitleElement.textContent = "";
+
+  dateTitleElement.appendChild(document.createTextNode(step.date));
+
+  const selectedButtonId = `period${index + 1}`;
+  const selectedRoundButtonId = `circle${index + 1}`;
+
+  document.getElementById(selectedButtonId).style.fontSize = "8rem";
+  document.getElementById(selectedRoundButtonId).style.backgroundColor =
+    "white";
+
+  for (let i = 1; i <= period.length; i++) {
+    if (i - 1 !== index) {
+      document.getElementById(`period${i}`).style.fontSize = "4rem";
+      document.getElementById(`circle${i}`).style.backgroundColor = "#ffffff50";
+    }
+  }
+
   const targetPosition = step.position;
 
   const cameraPosition = getCameraPositionForTarget(targetPosition);
@@ -238,6 +271,8 @@ function handleFocusPeriod(step) {
     step.cubePosition.y,
     step.cubePosition.z
   );
+
+  // camera.lookAt(cube.position);
 
   cube.cursor = "pointer";
 
@@ -269,3 +304,4 @@ handleFocusPeriod(period[index]);
 document.getElementById("restart-button").addEventListener("click", restart);
 document.getElementById("nextButton").addEventListener("click", nextStep);
 document.getElementById("interestButton").addEventListener("click", toggleInfo);
+// controls.target = cube.position;

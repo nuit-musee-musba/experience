@@ -15,10 +15,18 @@
   <body>
     <canvas class="webgl"></canvas>
 
-    <h1 class="main-title">Découverte historique du bâtiment du <span>MusBA</span></h1>
+    <section class="title-component">
+      <h1 id="date-title"></h1>
+      <div class="title-line"></div>
+      <p class="main-title">Découverte historique du bâtiment du <span>MusBA</span></p>
+    </section>
+
+
+
+
     <div id="end-menu">
       <div class="end-menu-content">
-        <h1>Fin de l'expérience</h1>
+        <h2>Fin de l'expérience</h2>
         <p>
           Vous avez terminé l'expérience, vous pouvez retourner à l'accueil ou
           recommencer l'expérience
@@ -44,22 +52,31 @@
       <div id="text-component"></div>
     </article>
 
-    <button id="interestButton">
-      Interest <img src="./assets/icons/button-background.svg" alt="" />
-    </button>
-
-    <button id="nextButton">
+    <!-- change style button  -->
+    <!-- <button id="nextButton">
       Skip <img src="./assets/icons/button-background.svg" alt="" />
-    </button>
+    </button> -->
+
     <section class="chronology">
-      <div class="chronology-buttons">
-        <button id="period1">1801</button>
-        <button id="period2">1809</button>
-        <button id="period3">1875</button>
-        <button id="period4">Aujourd'hui</button>
-        <!-- <button id="period5">1963</button> -->
-      </div>
-      <img src="./assets/icons/chronology.svg" alt="" />
+      <div class="chronology-container">
+        <h2 class="chronology-title"><img src="./assets/icons/Calendar.svg" alt="">Chronologie</h2>
+        <div class="chronology-line"> </div>
+        <div class="chronology-buttons">
+          <button id="period1">1801</button>
+          <button id="period2">1870</button>
+          <button id="period3">1875</button>
+          <button id="period4">2024</button>
+          <!-- <button id="period5">1963</button> -->
+        </div>
+        <div class="chronology-line"> </div>
+        <div class="chronology-circles">
+          <button id="circle1"></button>
+          <button id="circle2"></button>
+          <button id="circle3"></button>
+          <button id="circle4"></button>
+        </div>
+
+    </div>
     </section>
     <button class="audio-content btn-small-secondary" id="audio-content">
       <p>Audio immersif</p>

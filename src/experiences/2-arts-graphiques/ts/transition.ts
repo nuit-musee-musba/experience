@@ -1,7 +1,9 @@
 import { Section } from "./section";
-import { Section1 } from "./section1";
+
 import paint from "./interactive/paint";
-import { Section4 } from "./section4";
+
+import { Section1 } from "./section1/Section1";
+import { Section4 } from "./section4/Section4";
 
 export default class Transition {
   currentSection: Section;
@@ -49,10 +51,22 @@ export default class Transition {
       this.section6,
       this.section7,
     ];
+    const urlParams = new URLSearchParams(window.location.search);
 
     this.currentSection = this.sections[this.currentSectionNumber];
 
     this.init();
+
+    if (urlParams.has("section")) {
+      const sectionId = urlParams.get("section");
+      const section = this.sections[Number(sectionId)];
+
+      if (this.sections[this.currentSectionNumber]) {
+        this.sections[this.currentSectionNumber].hide();
+      }
+      this.currentSectionNumber = Number(sectionId);
+      section.show();
+    }
   }
 
   handleTransition() {
@@ -77,33 +91,35 @@ export default class Transition {
   DisplayInteractiveCanvas(currentSectionNumber: number) {
     this.destroyAllCanvases();
 
-    const currentSection: HTMLElement | null = document.querySelector(
+    const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
-    );
-    const canvasContainer: HTMLElement | null | undefined =
-      currentSection?.querySelector(".canvas__container");
+    ) as HTMLElement
+
+    const canvasContainer =
+      Array.from(currentSection.querySelectorAll<HTMLCanvasElement>(".canvas__container"));
 
     if (canvasContainer) {
-      const interaction = canvasContainer.getAttribute("data-interaction");
-      console.log(currentSectionNumber);
       const options = {
         getPercentage: true,
         getPercentageAt: 80,
       };
-      switch (interaction) {
-        case "paint":
-          console.log(interaction);
-          paint(canvasContainer, "blank-canvas.jpeg", "canvas1.jpeg", options);
-          break;
-        case "cleaning":
-          console.log(interaction);
-          let imgElement = document.createElement("img");
-          imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
-          imgElement.classList.add("canvas__img");
-          canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, "stains.png", "stains_mask.png", options);
-          break;
-      }
+
+      canvasContainer.forEach(canvas => {
+        let interaction = canvas.getAttribute("data-interaction");
+        switch (interaction) {
+          case "paint":
+            paint(canvas, currentSectionNumber, "blank-canvas.jpeg", "canvas1.jpeg", options);
+            break;
+          case "cleaning":
+            paint(canvas, currentSectionNumber, "stains_painting.png", "canvas1.jpeg", options);
+            break;
+          case "seal":
+            paint(canvas, currentSectionNumber, "seal.webp", "canvas1.jpeg", options);
+            break;
+        }
+      });
+
+      console.log(currentSectionNumber);
     }
   }
 
