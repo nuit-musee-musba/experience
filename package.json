@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --no-open",
     "build": "vite build",
     "bundle": "npm run build && gulp bundle",
     "bundle:zip": "npm run build && gulp bundleZipped"
