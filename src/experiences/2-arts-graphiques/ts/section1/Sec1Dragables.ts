@@ -38,7 +38,9 @@ export class Sec1Dragables extends Dragable {
     this.zone = zone;
   }
 
-  isDraging() {
+  isDraging(e: TouchEvent) {
+    super.isDraging(e);
+
     const elmtBoundindRect = this.element.getBoundingClientRect();
     const zoneBoundindRect = this.zone.getBoundingClientRect();
 
