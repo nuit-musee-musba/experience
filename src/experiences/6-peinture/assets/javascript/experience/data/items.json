@@ -3,135 +3,135 @@
     {
       "id": "1",
       "name": "Les fruits abîmés",
-      "category": "Aliments",
+      "category": "food",
       "description": "Ils évoquent la corruption du corps.",
-      "dialog": "FRUITS POURRIS"
+      "dialog": "C’est tout à fait jus(te) !"
     },
     {
       "id": "2",
       "name": "Le citron",
-      "category": "Aliments",
+      "category": "food",
       "description": "Il est symbole de fidélité en amour. Il désigne également la divinité, la foi et l’Église. Le citronnier étant l’allégorie du cèdre, le citron peut alors représenter Jésus-Christ car sa croix est faite de bois de cèdre.",
-      "dialog": "CITRON"
+      "dialog": "Ne vous pressez pas, les mots ont leur importance ! On ne confond pas une salade avec un saladier !"
     },
     {
       "id": "3",
       "name": "Le raisin",
-      "category": "Aliments",
+      "category": "food",
       "description": "Le raisin est le symbole de la Passion de Jésus-Christ. En raison de sa couleur rouge, il peut aussi représenter son sang.",
-      "dialog": "RAISIN"
+      "dialog": "Bravo ! Un sang faute !"
     },
     {
       "id": "4",
       "name": "La carotte",
-      "category": "Aliments",
+      "category": "food",
       "description": "Elle est un symbole fort érotique qui cherche à prévenir et à avertir contre tout excès.",
-      "dialog": "CAROTTE"
+      "dialog": "Hop hop hop ! Ne vous précipitez pas, on a le temps. Et rangez-moi ces idées de votre tête… "
     },
     {
       "id": "5",
       "name": "Ananas",
-      "category": "Aliments",
+      "category": "food",
       "description": "Il illustre la perfection car il est beau, bon et odorant.",
-      "dialog": "ANANAS"
+      "dialog": "Attention ! Ne vous faites pas avoir par sa beauté, il n’a pas sa place ici !"
     },
     {
       "id": "6",
       "name": "Les gâteaux",
-      "category": "Aliments",
+      "category": "food",
       "description": "Chez de nombreux peuples les gâteaux marquent les étapes de la vie.",
-      "dialog": "GATEAUX"
+      "dialog": "Il ne veut pas les étapes de la vie, revois plutôt celle de la commande !"
     },
     {
       "id": "7",
       "name": "La prune mauve",
-      "category": "Aliments",
+      "category": "food",
       "description": "Elles représentent la souffrance et la mort du Christ. Cependant, les jaunes symbolisent la chasteté du Christ, les rouges, son amour et les noires son humilité. Elle peut aussi évoquer la fidélité et la sottise.",
-      "dialog": "Prune +1"
+      "dialog": "Vous avez fait un choix mature, tel une prune bien mûre !"
     },
     {
       "id": "8",
       "name": "Le citron pelé",
-      "category": "Aliments",
+      "category": "food",
       "description": "Pelé en spirale, le citron peut représenter le déroulement de la vie terrestre.",
-      "dialog": "CITRON PELE"
+      "dialog": "Vous en avez dans le citron ! Bravo !"
     },
     {
       "id": "9",
       "name": "La jacinthe",
-      "category": "Objets",
+      "category": "objects",
       "description": "Ces fleurs représentent la mort.",
-      "dialog": "jacinthe"
+      "dialog": "Eh non, mauvaise réponse. Recommencez, c’est pas la mort !"
     },
     {
       "id": "10",
       "name": "Le crâne",
-      "category": "Objets",
+      "category": "objects",
       "description": "Support de réflexion sur le passage de la mort à la résurrection, l’abandon de l’enveloppe charnelle et le dépouillement des biens de ce monde. Il signifie le dépassement vers le salut éternel.",
-      "dialog": "crane"
+      "dialog": "Crânez pas, c’est la mauvaise réponse…"
     },
     {
       "id": "11",
       "name": "La tulipe",
-      "category": "Objets",
+      "category": "objects",
       "description": "Éphémère tout comme la richesse des humains, elle reste la figure obsédante de la vanité.",
-      "dialog": "tulip"
+      "dialog": "Vous êtes à côté de la plaque ! Pas de fleurs pour cette œuvre."
     },
     {
       "id": "12",
       "name": "Le vase",
-      "category": "Objets",
+      "category": "objects",
       "description": "Objet de luxe car il ne sert pas aux besoins quotidiens, il représente la vanité des biens de ce monde. Rempli à moitié d’eau, il exprime la vie qui s’écoule inexorablement.",
-      "dialog": "vaso"
+      "dialog": "Oh oui ! Vous êtes amphore(me) !"
     },
     {
       "id": "13",
       "name": "Le papillon",
-      "category": "Animaux",
-      "description": "Un Vulcain Rougeoyant représente l’âme éternelle et flamboyante, tel le feu divin, contrairement à l’éphémère vie terrestre. Le papillon s’envolant représente également l’espoir de la résurrection et du pardon de Jésus Christ.",
-      "dialog": "DIALOG"
+      "category": "animals",
+      "description": "Un vulcain rougeoyant représente l’âme éternelle et flamboyante, tel le feu divin, contrairement à l’éphémère vie terrestre. Le papillon s’envolant représente également l’espoir de la résurrection et du pardon de Jésus-Christ.",
+      "dialog": "Bien ! Vous avez l’âme aiguisée !"
     },
     {
       "id": "14",
       "name": "Le poisson",
-      "category": "Animaux",
-      "description": "Il représente Jésus-Christ mais aussi le baptême car tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême.",
-      "dialog": "poisson"
+      "category": "animals",
+      "description": "Il représente Jésus-Christ mais aussi le baptême car tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême (sacrement réalisé avec de l’eau).",
+      "dialog": "Vous me faites un poisson d’avril là ?"
     },
     {
       "id": "15",
       "name": "Les crustacés",
-      "category": "Animaux",
-      "description": "Symbole de la résurrection, le crustacé perd son enveloppe pour prendre une carapace nouvelle. Par sa démarche, il symbolise l’inconstance et l’instabilité. De ce fait, il évoque la déviance morale.",
-      "dialog": "CRABE"
+      "category": "animals",
+      "description": "Symbole de la résurrection, ils perdent leur enveloppe pour prendre une carapace nouvelle. Par leur démarche, ils symbolisent l’inconstance et l’instabilité. De ce fait, ils évoquent la déviance morale.",
+      "dialog": "Pincez-moi, je rêve ! C’est parfait !"
     },
     {
       "id": "16",
       "name": "Le crapeau",
-      "category": "Animaux",
+      "category": "animals",
       "description": "Il symbolise la sorcellerie.",
-      "dialog": "TOAD"
+      "dialog": "Non observez mieux… c’est pas sorcier !"
     },
     {
       "id": "17",
       "name": "La sauterelle",
-      "category": "Animaux",
+      "category": "animals",
       "description": "Capable de détruire une récolte en un instant, elle rappelle les événements soudains qui peuvent ruiner l'existence humaine.",
-      "dialog": "sauterelle"
+      "dialog": "Bravo vous avez fait un de ces bon(d)s choix !"
     },
     {
       "id": "18",
       "name": "Le porc",
-      "category": "Animaux",
+      "category": "animals",
       "description": "Symbole de la gourmandise, il  peut aussi représenter l’envie, l’avarice (mort, il est très profitable) ainsi que la mort, puisque c’est seulement avec elle que le porc se purifie, tout comme l’homme.",
-      "dialog": "porc"
+      "dialog": "Ne soyez pas trop gourmand... Prenez votre temps !"
     },
     {
       "id": "19",
       "name": "La chenille",
-      "category": "Animaux",
+      "category": "animals",
       "description": "Elle représente la fragilité de la vie.",
-      "dialog": "chenille"
+      "dialog": "Chenille crois pas ! Vous êtes formidable !"
     }
   ]
 }

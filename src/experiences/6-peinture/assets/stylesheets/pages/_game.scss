@@ -1,72 +1,50 @@
+.page__game {
+  background-image: url('../../static/images/scenery/background.svg');
+  background-size: cover;
+}
+
 .game-top {
   position: relative;
   overflow: hidden;
 
   .composition {
-    background-color: aqua;
     flex: 1;
-    .item:nth-child(3) {
-      top: 10vh;
-      left: 10vw;
+  }
+}
+.game-top {
+  height: 60vh;
+  min-width: 100%;
+  display: flex;
+
+  .utensils {
+    display: block;
+
+    img {
+      width: 8vw;
+      height: 15vh;
     }
   }
+}
+.game-bottom {
+  background: $color-bg;
+  border-top: 12px solid $primary;
+  position: relative;
+  height: 40vh;
+  min-width: 100%;
+  display: flex;
+  z-index: 9;
 }
 
 #dialog {
   font-size: 60px;
 }
 
-.utensils {
-  position: relative;
-  width: 20vw;
-  height: 100%;
-
-  .utensil {
-    position: absolute;
-    & + .utensil {
-      margin-top: 10vh;
-    }
-  }
-}
-
 .ingredients-container {
   flex: 1;
   position: relative;
-}
-
-.recipe {
-  .list-items {
-    .item {
-      display: flex;
-      gap: 0.5vw;
-      align-items: center;
-
-      &::before {
-        content: "";
-        display: block;
-        background-color: orange;
-        width: 2vh;
-        height: 2vh;
-      }
-
-      span {
-        display: block;
-      }
-
-      &.checked {
-        color: grey;
-        text-decoration: line-through;
-
-        &::before {
-          content: "";
-          display: block;
-          background-color: rgb(9, 190, 0);
-          width: 2vh;
-          height: 2vh;
-        }
-      }
-    }
-  }
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 // ENDING
@@ -83,16 +61,12 @@
   }
 }
 
-.book {
-  pointer-events: none;
-  width: 30vw;
-}
-
 .has-ending-opened {
   .game-chef {
     display: none;
   }
   .ending-screen {
     display: block;
+    z-index: 99;
   }
 }
