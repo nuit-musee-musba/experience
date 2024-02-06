@@ -57,7 +57,8 @@ export class Sec4Dragable extends Dragable {
     };
   }
 
-  isDraging() {
+  isDraging(e: TouchEvent) {
+    super.isDraging(e);
     const elmtBoundindRect = this.element.getBoundingClientRect();
 
     this.isInside = !(
@@ -81,6 +82,7 @@ export class Sec4Dragable extends Dragable {
       this.element.style.transition = "top 0.2s, left 0.2s";
       this.element.style.top = `${this.refData.top}px`;
       this.element.style.left = ` ${this.refData.left}px`;
+      super.unable();
       this.onSucceed(this.id);
     }
   }

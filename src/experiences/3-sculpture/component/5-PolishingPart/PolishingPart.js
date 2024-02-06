@@ -8,6 +8,12 @@ const PolishingPart = () => {
   const polishingPart = document.getElementById("PolishingPart");
 
   polishingPart.classList.add("show");
+
+  const polishingButton = document.getElementById("PolishingButton");
+
+  polishingButton.addEventListener("click", function () {
+    OutroPart();
+  });
 };
 
 export default PolishingPart;

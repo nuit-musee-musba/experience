@@ -103,14 +103,10 @@ const Paint = async (
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
-      canvasPercentage!.innerText = `Done : ${percentageRemaining.toFixed(2)}%`;
+      canvasPercentage!.innerText = `${percentageRemaining.toFixed(2)}%`;
 
       if (percentageRemaining >= getPercentageAt) {
         console.log("Vous pouvez passer à la suite si vous le souhaitez");
-        if (target.getAttribute('data-interaction') == "seal") {
-          target.classList.remove('active')
-          currentSection?.querySelector('[data-interaction="cleaning"]')?.classList.add('active');
-        }
         btnNext!.disabled = false;
       }
     }

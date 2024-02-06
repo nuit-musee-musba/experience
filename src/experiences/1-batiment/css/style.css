@@ -45,6 +45,24 @@ body {
   font-weight: 100;
 }
 
+.parameter-buttons {
+  position: absolute;
+  left: 4rem;
+  bottom: 4rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.parameter-buttons a {
+  width: 7rem;
+  height: 7rem;
+}
+
+.parameter-buttons a svg {
+  width: 100%;
+  height: 100%;
+}
+
 #nextButton {
   z-index: 0;
   position: absolute;

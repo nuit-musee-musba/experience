@@ -13,9 +13,15 @@
     ></script>
   </head>
   <body>
+    <div id="loadPart" class="loadPart show_flex">
+      <span class="loader"></span>
+    </div>
+    <div class="controlContainer">
+      <a href="/"><button>Retour au hub</button></a>
+    </div>
     <div id="IntroPart" class="introContent show">
       <div class="introContainer">
-        <div class="introCharacter">Personnage</div>
+        <img src="/3-sculpture/assets/Rinaldo.png" class="introCharacter" />
         <div class="popupContainer">
           <div class="popupContent">
             <p id="popupText">
@@ -25,26 +31,26 @@
               déjà réalisé le croquis et la petite maquette de la sculpture.
               <br /><br />Maintenant, c’est à vous de reprendre le relais !
             </p>
+            <img class="introSketch" src="/3-sculpture/assets/croquis.png" />
           </div>
           <button id="buttonIntro">Suivant</button>
         </div>
       </div>
-      <div class="introSketch">Croquis</div>
-      <div class="introModel">Maquette</div>
     </div>
     <div id="RoughHewingPart" class="roughPart">
       <div class="roughContainer">
+        <h2>Étape 1 - Dégrossir le marbre</h2>
         <p>
-          Commençons par l’étape du dégrossissage. Une technique que j'ai
-          apprise en 1870, du temps où j’étais encore élève à l'Académie des
-          Beaux-Arts à Florence. Cette étape consiste à retirer l'excès de
-          marbre pour définir les contours de la sculpture. À présent, c'est à
-          vous de manier le ciseau !
+          Commençons par le dégrossissage. C’est une étape cruciale de la
+          sculpture mais ne vous inquiétez pas,  Costoli m’a tout appris à
+          l'Académie des Beaux-Arts de Florence en 1870.
         </p>
       </div>
+      <div class="roughContainer"></div>
     </div>
     <div id="DetailsPart" class="detailsPart">
       <div class="detailsContainer">
+        <h2>Étape 2 - Sculpter les formes</h2>
         <p>
           Maintenant que vous avez formé la sculpture, concentrez-vous sur les
           détails de l'œuvre. Comme vous le devinerez, la précision est ma
@@ -52,10 +58,13 @@
           détails tels que la couverture, la texture du coussin et les notes du
           Requiem que Mozart tient.
         </p>
+        <button id="DetailsButton">Sculpter</button>
       </div>
     </div>
     <div id="RefiningPart" class="refiningPart">
       <div class="refiningContainer">
+        <h2>Étape 3 - Affiner les détails</h2>
+
         <p>
           On y est presque ! Saviez-vous que cette sculpture a eu des
           difficultés à être exposée à Paris en 1878, car le délégué du
@@ -63,16 +72,19 @@
           la sculpture. Utilisez votre burin, perfectionnez les contours,
           soignez les détails et lissez les surfaces
         </p>
+        <button id="RefiningButton">Affiner</button>
       </div>
     </div>
     <div id="PolishingPart" class="polishingPart">
       <div class="polishingContainer">
+        <h2>Étape 4 - Polir les surfaces</h2>
         <p>
           Après l'affinage et le polissage, revenons à l'histoire. En 1880, le
           gouvernement français a acquis le plâtre de ma sculpture pour
           l'exécuter en marbre. Maintenant, c’est à votre tour d’utiliser le
           polissoir pour rendre la surface lisse et brillante.
         </p>
+        <button id="PolishingButton">Polir</button>
       </div>
     </div>
     <div id="OutroPart" class="outroPart">
