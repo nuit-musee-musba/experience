@@ -1,6 +1,8 @@
-export const inactivityTime = () => {
+export const enableInactivityRedirection = () => {
   let time;
-  const timeInMiliseconds = 10000;
+
+  const minutesInMS = 1000 * 60;
+  const timeInMs = 5 * minutesInMS;
 
   const goHome = () => {
     window.location.href = "/";
@@ -8,7 +10,7 @@ export const inactivityTime = () => {
 
   const resetTimer = () => {
     clearTimeout(time);
-    time = setTimeout(goHome, timeInMiliseconds);
+    time = setTimeout(goHome, timeInMs);
   };
 
   resetTimer();
