@@ -77,6 +77,7 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       islands.push(island);
+      console.log("island", island);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -298,16 +299,54 @@ function scaleModel(model, targetScale, duration) {
   animateScale();
 }
 
-function handleScaleButtonClick(model) {
+function scaleDownModel(model, targetScale, duration) {
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
+
+  function animateScaleDown() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
+
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScaleDown);
+    }
+  }
+
+  animateScaleDown();
+}
+
+function handleScaleDownButtonClick() {
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
+  scaleDownModel(model, 0.03, 100);
+}
+
+function handleScaleButtonClick() {
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
   scaleModel(model, 0.0315, 100);
-  console.log("user data", islands[0].userData.id);
 }
 
 // Event listener for scaling button
 const scaleButton = document.getElementById("scaleButton");
-scaleButton.addEventListener("click", () =>
-  handleScaleButtonClick(carousel.children[0])
-);
+scaleButton.addEventListener("click", handleScaleButtonClick);
+
+const scaleDownButton = document.getElementById("scaleDownButton");
+scaleDownButton.addEventListener("click", handleScaleDownButtonClick);
 
 rightButton.addEventListener("click", handleRightButtonClick);
 leftButton.addEventListener("click", handleLeftButtonClick);
