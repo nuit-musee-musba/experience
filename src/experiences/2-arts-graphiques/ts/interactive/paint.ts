@@ -107,10 +107,6 @@ const Paint = async (
 
       if (percentageRemaining >= getPercentageAt) {
         console.log("Vous pouvez passer à la suite si vous le souhaitez");
-        if (target.getAttribute('data-interaction') == "seal") {
-          target.classList.remove('active')
-          currentSection?.querySelector('[data-interaction="cleaning"]')?.classList.add('active');
-        }
         btnNext!.disabled = false;
       }
     }
