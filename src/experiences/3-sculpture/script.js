@@ -137,6 +137,7 @@ function onClick() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
 
+  // RoughHewing Part
   if (statueV1 && statueV1.children) {
     const intersects = raycaster.intersectObjects(statueV1.children);
 
@@ -145,7 +146,7 @@ function onClick() {
       statueV1.remove(clickedBlock);
 
       if (statueV1.children.length === 0) {
-        console.log("Il n'y a plus de blocs à supprimer.");
+        DetailsPart();
       }
     }
   }
