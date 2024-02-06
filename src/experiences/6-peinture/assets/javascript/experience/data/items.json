@@ -6,7 +6,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/grape.png",
       "description": "Lorem ipsum le raisin ça fait du vin",
-      "dialog": "Ah, du raisin ! Excellent choix, c'est l'ingrédient parfait pour sublimer nos saveurs. Bien joué !"
+      "dialog": "Ah, du raisin ! Excellent choix, c'est l'ingrédient parfait pour sublimer nos saveurs. Bien joué !",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie1",
+      "recipe_step": 1,
+      "number_needed": 1
     },
     {
       "id": "2",
@@ -14,7 +18,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/carrot.png",
       "description": "Lorem ipsum la carotte c d'la tarte",
-      "dialog": "Hmm, la carotte n'est pas exactement ce que je cherchais. Ce n'est pas le bon aliment, mais ne vous découragez pas, continuez à chercher."
+      "dialog": "Hmm, la carotte n'est pas exactement ce que je cherchais. Ce n'est pas le bon aliment, mais ne vous découragez pas, continuez à chercher.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie2",
+      "recipe_step": 1,
+      "number_needed": 1
     },
     {
       "id": "3",
@@ -22,7 +30,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/lemon.png",
       "description": "Lorem ipsum le citron c nul berk",
-      "dialog": "Oh non, le citron n'est pas ce que je voulais pour cette recette. Essayez quelque chose d'autre, s'il vous plaît."
+      "dialog": "Oh non, le citron n'est pas ce que je voulais pour cette recette. Essayez quelque chose d'autre, s'il vous plaît.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie3",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "10",
@@ -30,7 +42,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/grape.png",
       "description": "Lorem ipsum le raisin ça fait du vin",
-      "dialog": "Pomme"
+      "dialog": "Pomme",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie4",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "11",
@@ -38,7 +54,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/carrot.png",
       "description": "Lorem ipsum la carotte c d'la tarte",
-      "dialog": "Citrouille"
+      "dialog": "Citrouille",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie5",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "12",
@@ -46,7 +66,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/lemon.png",
       "description": "Lorem ipsum le citron c nul berk",
-      "dialog": "Aubergine"
+      "dialog": "Aubergine",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie6",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "13",
@@ -54,7 +78,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/grape.png",
       "description": "Lorem ipsum le raisin ça fait du vin",
-      "dialog": "Tomate"
+      "dialog": "Tomate",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie7",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "14",
@@ -62,15 +90,11 @@
       "category": "Aliments",
       "image": "assets/images/ingredients/food/carrot.png",
       "description": "Lorem ipsum la carotte c d'la tarte",
-      "dialog": "Haricot"
-    },
-    {
-      "id": "15",
-      "name": "Peche",
-      "category": "Aliments",
-      "image": "assets/images/ingredients/food/lemon.png",
-      "description": "Lorem ipsum le citron c nul berk",
-      "dialog": "Peche"
+      "dialog": "Haricot",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie8",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "4",
@@ -78,7 +102,11 @@
       "category": "Objets",
       "image": "assets/images/ingredients/objects/skull.png",
       "description": "brr c dark",
-      "dialog": "Un crâne ? C'est... créatif, mais ce n'est pas ce dont j'ai besoin pour notre recette. Essayez autre chose, s'il vous plaît."
+      "dialog": "Un crâne ? C'est... créatif, mais ce n'est pas ce dont j'ai besoin pour notre recette. Essayez autre chose, s'il vous plaît.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie9",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "5",
@@ -86,7 +114,11 @@
       "category": "Objets",
       "image": "assets/images/ingredients/objects/mummy.png",
       "description": "OULALA FUYEZ PAUVRES FOUS",
-      "dialog": "Une momie ? Haha, vous avez de l'imagination, mais pour la cuisine, optez plutôt pour des ingrédients appétissants. Continuez à chercher !"
+      "dialog": "Une momie ? Haha, vous avez de l'imagination, mais pour la cuisine, optez plutôt pour des ingrédients appétissants. Continuez à chercher !",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie10",
+      "recipe_step": 2,
+      "number_needed": 1
     },
     {
       "id": "6",
@@ -94,7 +126,11 @@
       "category": "Objets",
       "image": "assets/images/ingredients/objects/dust.png",
       "description": "jackie à encore oublié de passer l'aspirateur",
-      "dialog": "Poussière ? Non, non, non. Cela n'a rien à faire dans ma cuisine. Trouvez quelque chose de comestible, s'il vous plaît."
+      "dialog": "Poussière ? Non, non, non. Cela n'a rien à faire dans ma cuisine. Trouvez quelque chose de comestible, s'il vous plaît.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie11",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "7",
@@ -102,7 +138,11 @@
       "category": "Animaux",
       "image": "assets/images/ingredients/animals/cat.png",
       "description": "miaou",
-      "dialog": "Oh non, je n'apprécie pas trop l'idée d'utiliser un chat comme ingrédient. Recherchez quelque chose de plus approprié pour la cuisine, s'il vous plaît."
+      "dialog": "Oh non, je n'apprécie pas trop l'idée d'utiliser un chat comme ingrédient. Recherchez quelque chose de plus approprié pour la cuisine, s'il vous plaît.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie12",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "8",
@@ -110,7 +150,11 @@
       "category": "Animaux",
       "image": "assets/images/ingredients/animals/dog.png",
       "description": "ouaf",
-      "dialog": "Utiliser un chien dans une recette ? Certainement pas ! Optez pour des ingrédients plus conventionnels et savoureux."
+      "dialog": "Utiliser un chien dans une recette ? Certainement pas ! Optez pour des ingrédients plus conventionnels et savoureux.",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie13",
+      "recipe_step": 0,
+      "number_needed": 1
     },
     {
       "id": "9",
@@ -118,7 +162,11 @@
       "category": "Animaux",
       "image": "assets/images/ingredients/animals/dolphin.png",
       "description": "[insérer ondes marines]",
-      "dialog": "Un dauphin ? Magnifique choix ! Ces créatures majestueuses apporteront une touche spéciale à notre recette. Bravo !"
+      "dialog": "Un dauphin ? Magnifique choix ! Ces créatures majestueuses apporteront une touche spéciale à notre recette. Bravo !",
+      "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
+      "recipe_text": "L'écoulement inexorable de la vie14",
+      "recipe_step": 3,
+      "number_needed": 2
     }
   ]
 }

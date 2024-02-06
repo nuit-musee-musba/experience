@@ -51,6 +51,7 @@
             <span>Dauphin</span>
           </div>
         </div>
+        <!--
         <div class="utensils">
           <div id="knife" class="utensil">
             <p>Couper</p>
@@ -61,9 +62,11 @@
             <img src="assets/images/utensils/jar.png" alt="" />
           </div>
         </div>
+        -->
         <div class="recipe">
           <img src="" alt="" />
           <h1>Recette du commanditaire</h1>
+          <p>Etape <span id="stepnum"></span>/3</p>
           <ul class="list-items"></ul>
         </div>
       </div>
@@ -148,13 +151,6 @@
               />
               <span>Haricot</span>
             </div>
-            <div class="item" id="15">
-              <img
-                src="assets/images/ingredients/food/lemon.png"
-                alt="citron"
-              />
-              <span>Peche</span>
-            </div>
           </div>
 
           <div class="category-items" id="objects">
@@ -223,7 +219,10 @@
     </main>
   </body>
   <script type="module" src="./assets/javascript/main.js"></script>
-  <script src="./assets/javascript/experience/utils/speechBehavior.js"></script>
+  <script
+    type="module"
+    src="./assets/javascript/experience/utils/speechBehavior.js"
+  ></script>
   <script
     type="module"
     src="./assets/javascript/experience/utils/dragdrop.js"
