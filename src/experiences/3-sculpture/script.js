@@ -25,6 +25,10 @@ const canvas = document.querySelector("canvas.webgl");
 
 const scene = new THREE.Scene();
 
+// TextureLoader
+
+const textureLoader = new THREE.TextureLoader();
+
 // GLTFLoader
 
 const gltfLoader = new GLTFLoader();
@@ -53,23 +57,54 @@ scene.add(plane);
 
 let statueV1;
 let statueV2;
+let statueV3;
 
-gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
+let statueV2Material;
+let statueV3Material;
+
+// gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
+//   gltf.scene.scale.set(0.38, 0.38, 0.38);
+//   gltf.scene.position.set(0.5, -1, -0.5);
+//   gltf.scene.rotation.y = Math.PI / 2;
+//   statueV1 = gltf.scene;
+
+//   scene.add(statueV1);
+// });
+
+// gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
+//   gltf.scene.scale.set(0.38, 0.38, 0.38);
+//   gltf.scene.position.set(0.5, -1, -0.5);
+//   gltf.scene.rotation.y = Math.PI / 2;
+//   statueV2 = gltf.scene;
+
+//   statueV2.traverse((child) => {
+//     if (child.isMesh) {
+//       statueV2Material = child.material;
+//       statueV2Material.color.set(0xff0000);
+//     }
+//   });
+
+//   scene.add(statueV2);
+// });
+
+gltfLoader.load("/3-sculpture/Mozart_Affinage.gltf", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
   gltf.scene.position.set(0.5, -1, -0.5);
   gltf.scene.rotation.y = Math.PI / 2;
-  statueV1 = gltf.scene;
+  statueV3 = gltf.scene;
 
-  scene.add(statueV1);
-});
+  const texture = textureLoader.load(
+    "/3-sculpture/textures/Baked_Affinage.png"
+  );
 
-gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
-  gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(0.5, -1, -0.5);
-  gltf.scene.rotation.y = Math.PI / 2;
-  statueV2 = gltf.scene;
+  statueV3.traverse((child) => {
+    if (child.isMesh) {
+      statueV3Material = child.material;
+      statueV3Material.map = texture;
+    }
+  });
 
-  scene.add(statueV2);
+  scene.add(statueV3);
 });
 
 // gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
@@ -145,6 +180,7 @@ function onClick() {
 
       if (statueV1.children.length === 0) {
         DetailsPart();
+        statueMaterial.color.set(0x00ff00);
       }
     }
   }
