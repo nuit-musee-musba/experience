@@ -1,6 +1,7 @@
 import { Section } from "./section";
 
 import paint from "./interactive/paint";
+import date from "./animation/date";
 
 import { Section1 } from "./section1/Section1";
 import { Section4 } from "./section4/Section4";
@@ -81,6 +82,19 @@ export default class Transition {
     this.handleSection();
     this.handleButtonTitle();
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
+    this.displayTimelipse(this.currentSectionNumber);
+  }
+
+  displayTimelipse(currentSectionNumber: number){
+    const currentSection = document.querySelector(
+      `#section-${currentSectionNumber}`
+    ) as HTMLElement
+
+    const dateElement = currentSection.querySelector("#date-anim__year");
+
+    if (dateElement) {
+      date.init()
+    }
   }
 
   destroyAllCanvases() {
