@@ -51,10 +51,22 @@ export default class Transition {
       this.section6,
       this.section7,
     ];
+    const urlParams = new URLSearchParams(window.location.search);
 
     this.currentSection = this.sections[this.currentSectionNumber];
 
     this.init();
+
+    if (urlParams.has("section")) {
+      const sectionId = urlParams.get("section");
+      const section = this.sections[Number(sectionId)];
+
+      if (this.sections[this.currentSectionNumber]) {
+        this.sections[this.currentSectionNumber].hide();
+      }
+      this.currentSectionNumber = Number(sectionId);
+      section.show();
+    }
   }
 
   handleTransition() {
@@ -103,7 +115,12 @@ export default class Transition {
           // imgElement.src = "/2-arts-graphiques/canvas/canvas1.jpeg";
           // imgElement.classList.add("canvas__img");
           // canvasContainer.appendChild(imgElement);
-          paint(canvasContainer, "stains_painting.png", "canvas1.jpeg", options);
+          paint(
+            canvasContainer,
+            "stains_painting.png",
+            "canvas1.jpeg",
+            options
+          );
           break;
       }
     }
