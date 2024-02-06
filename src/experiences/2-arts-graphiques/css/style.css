@@ -28,13 +28,19 @@ body {
 
 .canvas__container {
   height: fit-content;
+  display: none;
+}
+.canvas__container.active{
+  display: block;
 }
 
 /* Sections */
-section{
+section {
   display: flex;
 }
-section .left, section .center, section .right{
+section .left,
+section .center,
+section .right {
   flex: 1;
 }
 
@@ -125,6 +131,11 @@ section .left, section .center, section .right{
   gap: 26px;
 }
 /* end section-1 */
+
+/* dragable */
+.drag-unable {
+  pointer-events: none;
+}
 
 /* section-4 */
 

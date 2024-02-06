@@ -4,14 +4,14 @@ let totalPixels: number;
 let remainingPixels: number;
 
 const Paint = async (
-  target: HTMLElement,
-  currentSectionNumber: Number,
+  target: HTMLCanvasElement,
+  currentSectionNumber: number,
   backgroundFile: String,
   imageToRevealFile: String,
   options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
   let currentSection : HTMLElement | null = document.querySelector(`#section-${currentSectionNumber}`)
   const btnNext: HTMLButtonElement | null = document.querySelector('#button');
-  let canvasPercentage: HTMLElement | null = currentSection ? currentSection.querySelector('.canvas_percentage') : null
+  let canvasPercentage: HTMLElement | null = currentSection ? currentSection.querySelector('.canvas_percentage') : null;
 
   canvasPercentage!.innerText = "0%";
   btnNext!.disabled = true;
@@ -107,6 +107,10 @@ const Paint = async (
 
       if (percentageRemaining >= getPercentageAt) {
         console.log("Vous pouvez passer à la suite si vous le souhaitez");
+        if (target.getAttribute('data-interaction') == "seal") {
+          target.classList.remove('active')
+          currentSection?.querySelector('[data-interaction="cleaning"]')?.classList.add('active');
+        }
         btnNext!.disabled = false;
       }
     }

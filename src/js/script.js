@@ -78,6 +78,7 @@ for (let i = 0; i < count; i++) {
     });
 
   islandPromises.push(islandPromise);
+  // console.log("island id", islandPromise.userData.id);
 }
 // Show loader while worlds are loading
 const loaderElement = document.getElementById("loader");
@@ -118,44 +119,6 @@ canvas.addEventListener("wheel", (event) => {
 
 // Handle touch events for mobile
 
-// Declare Touch variables
-let touchMoveX = 0;
-let isTouching = false;
-let deltaX = 0;
-let firstTouch = 0;
-let startTouch = 0;
-let endTouch = 0;
-// Define the carousel rotation step and the desired number of positions
-const rotationStep = (2 * Math.PI) / 5; // Adjust as needed
-const numberOfPositions = 5; // Adjust as needed
-
-// Calculate the starting rotation value based on the current rotation of the carousel
-const initialRotation = Math.PI; // Adjust as needed
-
-// Create the rotationPositions array with both positive and negative values
-// let rotationPositions = Array.from(
-//   { length: numberOfPositions * 2 },
-//   (_, index) => {
-//     const position = index % numberOfPositions;
-//     return (
-//       initialRotation + rotationStep * position * (index % 2 === 0 ? 1 : -1)
-//     );
-//   }
-// );
-// rotationPositions = Array.from(new Set(rotationPositions)).sort(
-//   (a, b) => a - b
-// );
-
-let startRefRotation = carousel.rotation.y;
-// Add a variable to store the current rotation of the carousel
-let currentRotation = 0;
-
-let realDifference = 0;
-
-let closestRotation = 0;
-
-let timesSurpassed = 0;
-
 let currentIslandIndex = 0;
 
 ////// Alexis code
@@ -169,25 +132,22 @@ let index = 0;
 const circle = Math.PI * 2;
 const parts = 5;
 const step = circle / parts;
+let isTouching = false;
 
 function rotateX(quantity) {
   rotation = rotation + quantity;
-  // console.log("rotation", rotation);
   index = ((rotation + (Math.PI * 2) / 5 / 2) / circle) * parts;
   index = Math.floor(index % parts);
-  console.log("index", index);
+  index = index >= 0 ? index : index + parts;
+
   carousel.rotation.y = (rotation * Math.PI) / Math.PI;
-  // console.log("carousel.rotation.y", carousel.rotation.y);
 }
-// Add a variable to store the current rotation index
-// Touch event handlers
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
   console.log("touchstart");
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
-  // startTouch = event.touches[0].clientX / canvas.clientWidth;
   lastX = event.touches[0].clientX / canvas.clientWidth;
   console.log("LastX", lastX);
 });
@@ -196,107 +156,26 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
   if (!isTouching) return;
-
   speed =
     Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
   direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
-  // console.log("Speed", speed);
-  // console.log("Direction", direction);
+
   moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
   console.log("MoveX", moveX);
 
-  rotateX(moveX);
+  rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
   console.log("rotation carousel", rotation);
   index = index;
-  // // Calculate the touch movement on the canvas in normalized device coordinates
-  // touchMoveX = event.touches[0].clientX / canvas.clientWidth;
-
-  // // Calculate the deltaX for the carousel rotation
-  // deltaX = touchMoveX - startTouch;
-
-  // // Calculate the scroll position based on the touch movement on the canvas
-  // const scrollPosition = (deltaX * canvas.clientWidth) % canvas.clientWidth;
-
-  // // Update the carousel rotation based on the scroll position
-  // carousel.rotation.y += (scrollPosition * (Math.PI * 2)) / canvas.clientWidth;
-
-  // // Update the currentRotation variable to use it in the touch end event
-  // currentRotation = carousel.rotation.y;
-
-  // // Update the touch start position after each move
-  // startTouch = touchMoveX;
-
-  // // Check if the carousel rotation distance surpassed the half of the rotation step
-  // const rotationSurpassedStep =
-  //   Math.abs(currentRotation - startRefRotation) > rotationStep / 2;
-
-  // // Calculate the real difference between the current rotation and the start reference rotation
-  // realDifference = currentRotation - startRefRotation;
-
-  // // If surpassed
-  // if (rotationSurpassedStep) {
-  //   // Update the times surpassed variable
-  //   timesSurpassed += 1;
-
-  //   console.log(rotationSurpassedStep);
-
-  //   // Calculate the smallest and last rotation values
-  //   const smallestRotation = rotationPositions[0];
-  //   const lastRotation = rotationPositions[rotationPositions.length - 1];
-
-  //   // Calculate the newest rotation value to add to the rotationPositions array
-  //   const newRotation =
-  //     realDifference > 0
-  //       ? lastRotation + rotationStep
-  //       : smallestRotation - rotationStep;
-
-  //   // Update the rotationPositions array based on the real difference value
-  //   // This is sennse of the turn : left or right
-  //   if (realDifference < 0) {
-  //     // If the carousel is rotating to the left
-  //     rotationPositions.pop();
-  //     rotationPositions.unshift(newRotation);
-  //   } else {
-  //     // If the carousel is rotating to the right
-  //     rotationPositions.shift();
-  //     rotationPositions.push(newRotation);
-  //   }
-
-  //   // Remove duplicates and sort the array
-  //   rotationPositions = Array.from(new Set(rotationPositions)).sort(
-  //     (a, b) => a - b
-  //   );
-
-  //   // Calculate the closest rotation value
-  //   closestRotation = closestRotationValue(currentRotation, rotationPositions);
-  //   console.log("Closest rotation", closestRotation);
-
-  //   // Use the updated rotationPositions array as needed
-  //   console.log("Updated rotationPositions: ", rotationPositions);
-  //   // Reset start reference rotation
-  //   startRefRotation = closestRotation;
-
-  //   console.log("New start reference rotation", startRefRotation);
-  //   console.log("Times surpassed", timesSurpassed);
-  // } else {
-  //   console.log("Not surpassed yet");
-  // }
-
-  // console.log(carousel.rotation.y);
-  // console.log(Math.round(carousel.rotation.y % ((Math.PI * 2) / 5)));
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
-  console.log("touchend");
-  console.log("index", index);
+  console.log("TOUCHEND");
+  index = direction === 1 ? index : index + parts;
   isTouching = false;
   rotation = index * ((Math.PI * 2) / 5 / 2);
-  console.log("rotation", rotation);
   rotateX(rotation);
-  console.log("speed: ", speed);
-  // const arrayLength = islandPromises.length;
 
   // isTouching = false;
   // endTouch = touchMoveX;
@@ -354,10 +233,11 @@ canvas.addEventListener("touchend", () => {
 });
 
 // This is  to continue the rotation after the touch end
-setInterval(() => {
-  speed = Math.max(0, speed - 0.001);
-  rotateX(speed * direction);
-}, 10);
+// setInterval(() => {
+//   speed = Math.max(0, speed - 0.001);
+//   console.log("speed", speed);
+//   rotateX(speed * direction);
+// }, 10);
 
 // Touch cancel
 canvas.addEventListener("touchcancel", () => {
