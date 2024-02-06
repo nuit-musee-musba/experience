@@ -217,5 +217,6 @@ export default class Transition {
     this.section6.hide();
     this.section7.hide();
     this.section8.hide();
+    document.querySelector(".loading__container")?.classList.remove('active')
   }
 }

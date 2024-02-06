@@ -11,7 +11,7 @@
   </head>
   <body>
     <button id="button">Découvrir l'oeuvre</button>
-
+    <div class="loading__container active"></div>
     <section id="section-0">
       <div class="left">
         <div class="dots">Dots</div>
@@ -277,5 +277,21 @@
       </div>
       <div class="left"></div>
     </section>
+
+    <style>
+      .loading__container{
+        z-index: 999;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgb(55, 55, 55);
+        display: none;
+      }
+      .loading__container.active{
+        display: block;
+      }
+    </style>
   </body>
 </html>
