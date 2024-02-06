@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@pixi/app": "^7.4.0",
+    "@pmndrs/vanilla": "^1.14.2",
     "@types/pixi.js": "^5.0.0",
     "gsap": "^3.12.5",
     "lil-gui": "^0.19.1",

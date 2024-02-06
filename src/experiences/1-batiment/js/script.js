@@ -6,6 +6,8 @@ import { period } from "./period";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+import { MeshTransmissionMaterial } from "./materials/MeshTransmissionMaterial";
+import FakeGlowMaterial from "./materials/FakeGlowMaterial";
 
 enableInactivityRedirection();
 
@@ -42,6 +44,102 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+
+// Orb
+
+const orbGeometry = new THREE.SphereGeometry(0.25, 30, 30);
+const orbMaterial = new MeshTransmissionMaterial();
+const orbMesh = new THREE.Mesh(orbGeometry, orbMaterial);
+orbMesh.castShadow = true;
+
+scene.add(orbMesh);
+
+const orbGlowGeometry = new THREE.SphereGeometry(0.45, 30, 30);
+
+const orbGlowMaterial = new FakeGlowMaterial({
+  falloff: 1,
+  glowInternalRadius: 4.3,
+  glowColor: new THREE.Color(0x13b1ff),
+  glowSharpness: 0,
+  opacity: 1,
+});
+
+Object.assign(orbMaterial, {
+  clearcoat: 0,
+  clearcoatRoughness: 0.5,
+  _transmission: 1,
+  chromaticAberration: 0,
+  anisotrophicBlur: 0.4,
+  roughness: 0,
+  thickness: 2.15,
+  ior: 1.7,
+  distortion: 1,
+  distortionScale: 0.2,
+  temporalDistortion: 0.9,
+  color: new THREE.Color(0xffffff),
+});
+
+const orbGlowMesh = new THREE.Mesh(orbGlowGeometry, orbGlowMaterial);
+
+scene.add(orbGlowMesh);
+
+const glowFolder = gui.addFolder("Flow");
+
+glowFolder
+  .add(orbGlowMaterial.uniforms.falloff, "value")
+  .min(0)
+  .max(1)
+  .step(0.01)
+  .name("Falloff");
+glowFolder
+  .add(orbGlowMaterial.uniforms.glowInternalRadius, "value")
+  .min(-10)
+  .max(10)
+  .step(0.01)
+  .name("Glow Internal Radius");
+glowFolder
+  .addColor(
+    {
+      GlowColor: orbGlowMaterial.uniforms.glowColor.value.getStyle(),
+    },
+    "GlowColor"
+  )
+  .onChange((color) => {
+    orbGlowMaterial.uniforms.glowColor.value.setStyle(color);
+    orbGlowMaterial.needsUpdate = true;
+  })
+  .name("Glow Color");
+glowFolder
+  .add(orbGlowMaterial.uniforms.glowSharpness, "value")
+  .min(0)
+  .max(1)
+  .step(0.01)
+  .name("Glow Sharpness");
+glowFolder
+  .add(orbGlowMaterial.uniforms.opacity, "value")
+  .min(0)
+  .max(1)
+  .step(0.01)
+  .name("Opacity");
+
+const folderOrb = gui.addFolder("Orb");
+
+folderOrb.addColor(orbMaterial, "color");
+folderOrb.addColor(orbMaterial, "color");
+folderOrb.add(orbMaterial, "clearcoat", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "clearcoatRoughness", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "chromaticAberration", 0, 0.1, 0.001);
+folderOrb.add(orbMaterial, "anisotrophicBlur", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "roughness", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "thickness", 0, 10, 0.01);
+folderOrb.add(orbMaterial, "ior", 1, 3, 0.01);
+folderOrb.add(orbMaterial, "distortion", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "distortionScale", 0, 1, 0.01);
+folderOrb.add(orbMaterial, "temporalDistortion", 0, 1, 0.01);
+
+orbMesh.position.set(1, 2, 3);
+orbGlowMesh.position.set(1, 2, 3);
+
 // LIGHTS
 
 const ambientLight = new THREE.AmbientLight("#ffffff", 0.8);
