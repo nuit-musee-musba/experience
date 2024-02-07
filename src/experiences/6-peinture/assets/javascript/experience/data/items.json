@@ -208,6 +208,17 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0
+    },
+    {
+      "id": "20",
+      "name": "L'ail",
+      "category": "food",
+      "description": "Au Moyen  ge, l'ail était vu comme un talisman contre le diable, symbole de protection. Il incarne la vie austère et, dans la symbolique biblique, la corruption de l'esprit et le péché.",
+      "dialog": "On éloigne le mauvais goût ici, pas le diable !",
+      "wrong_step_dialog": "",
+      "recipe_text": "",
+      "recipe_step": 0,
+      "number_needed": 0
     }
   ]
 }

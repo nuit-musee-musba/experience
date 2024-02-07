@@ -8,10 +8,17 @@
       content="user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
     />
     <title>Document</title>
+    <link rel="stylesheet" href="/global/style.css" />
     <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
   </head>
   <nav>
-    <a href="/" class="link-hub"><span>Retour au Hub</span></a>
+    <div class="bottom-menu">
+      <a href="/" class="btn-icon">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </a>
+    </div>
   </nav>
   <body class="page__game">
     <main>
@@ -39,12 +46,6 @@
           </div>
           <div class="item item-grasshopper" id="17-placed">
             <img src="./static/images/ingredients/painting/placed-grasshopper.svg" alt="sauterelle" />
-        </div>
-        <!--
-        <div class="utensils">
-          <div id="knife" class="utensil">
-            <p>Couper</p>
-            <img src="assets/images/utensils/french-knife.png" alt="" />
           </div>
           <div class="item item-vase" id="12-placed">
             <img src="./static/images/ingredients/painting/placed-vase.svg" alt="vase" />
@@ -79,13 +80,6 @@
           <div class="item item-peach-5 multiple-1" id="1-5-placed">
             <img src="./static/images/ingredients/painting/placed-peach-5.svg" alt="pêche" />
           </div>
-        </div>
-        -->
-        <div class="recipe">
-          <img src="" alt="" />
-          <h1>Recette du commanditaire</h1>
-          <p>Etape <span id="stepnum"></span>/3</p>
-          <ul class="list-items"></ul>
         </div>
       </div>
 
@@ -242,7 +236,7 @@
           <img src="./static/images/scenery/recipe.svg" alt="" />
           <hgroup>
             <h2>Memento mori</h2>
-            <span>Liste 1/3</span>
+            <p>Liste <span id="stepnum"></span>/3</p>
           </hgroup>
           <ul class="list-items"></ul>
         </div>
@@ -254,10 +248,7 @@
     </main>
   </body>
   <script type="module" src="./assets/javascript/main.js"></script>
-  <script
-    type="module"
-    src="./assets/javascript/experience/utils/speechBehavior.js"
-  ></script>
+  <script type="module" src="./assets/javascript/experience/utils/speechBehavior.js"></script>
   <script
     type="module"
     src="./assets/javascript/experience/utils/dragdrop.js"
