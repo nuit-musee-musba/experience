@@ -5,6 +5,11 @@
   padding: 6rem;
 }
 
+.wrapper footer, .wrapper header{
+  display: flex;
+  align-items: center;
+}
+
 .container{
   height: 100%;
 }
