@@ -7,6 +7,10 @@ body {
   overflow: hidden;
 }
 
+:root {
+  --accent: #242424;
+}
+
 #app {
   width: 100vw;
   height: 100vh;
@@ -157,6 +161,7 @@ body {
 }
 
 #infoText {
+  margin-top: 5rem;
   font-size: 45px;
   font-family: montserrat-regular;
 }
@@ -244,26 +249,22 @@ body {
   width: 30%;
   display: none;
   position: fixed;
-  top: 5rem;
-  right: 5rem;
+  bottom: 3rem;
+  right: 3rem;
   background-color: white;
   padding: 5rem;
   border-radius: 21px;
   border: 3px solid #242424;
-  z-index: 100;
   pointer-events: all;
 }
 #helpButton {
-  width: 5rem;
-  height: 5rem;
   height: auto;
   position: absolute;
-  top: 5rem;
+  bottom: 5rem;
   right: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 99;
-  font-size: 2rem;
+  z-index: 100;
 }
 #closeButton {
   position: absolute;
@@ -283,7 +284,7 @@ body {
 
 #backButton {
   position: absolute;
-  top: 5rem;
+  bottom: 5rem;
   left: 5rem;
   cursor: pointer;
   pointer-events: all;

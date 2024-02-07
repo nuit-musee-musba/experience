@@ -9,29 +9,11 @@
   </head>
   <body>
     <div id="app">
-      <button class="btn-primary second-scene" id="backButton">
-        retour
-      </button>
       <div class="second-scene experience-infos">
-        <h1 id="infoTitle"></h1>
+        <h2 id="infoTitle"></h2>
         <div id="infoText"></div>
       </div>
-      <button id="helpButton" class="btn-icon">
-        <i class="i-info"></i>
-      </button>
 
-      <div id="helpPopup">
-        <div class="popup-text">
-          Cette expérience interactive a été réalisée par la promotion 2024 -
-          3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
-          Bordeaux Montaigne.</br></br> Ce projet a vu le jour dans le cadre de la Nuit
-          Européenne des Musées, en partenariat avec le musée des Beaux-Arts de
-          Bordeaux.</br></br> Les quelque 50 étudiants de la promotion se sont liés pour
-          créer une production commune via cinq modules distincts que nous vous
-          invitons à découvrir.
-        </div>
-        <button id="closeButton">Close</button>
-      </div>
       <div id="loader" class="loader-wrapper">
         <div class="loader"></div>
         <img src="/assets/hub/logo_musba.png" />
@@ -44,6 +26,27 @@
           <h2 id="infoTitle"></h2>
         </div>
         <div id="infoBox">
+          <button class="btn-icon second-scene" id="backButton">
+            <i class="i-left"> </i>
+            <span>Retour à la galerie</span>
+          </button>
+          <button id="helpButton" class="btn-icon">
+            <i class="i-info"></i>
+          </button>
+          <div id="helpPopup">
+            <div class="popup-text">
+              Cette expérience interactive a été réalisée par la promotion 2024 -
+              3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
+              Bordeaux Montaigne.</br></br> Ce projet a vu le jour dans le cadre de la Nuit
+              Européenne des Musées, en partenariat avec le musée des Beaux-Arts de
+              Bordeaux.</br></br> Les quelque 50 étudiants de la promotion se sont liés pour
+              créer une production commune via cinq modules distincts que nous vous
+              invitons à découvrir.
+            </div>
+            <button id="closeButton" class="btn-icon">
+              <i class="i-close"></i>
+            </button>
+          </div>
           <div class="flex-col first-scene">
             <div class="hub-title">SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</div>
             <svg
