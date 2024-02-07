@@ -48,7 +48,7 @@ const Paint = async (
 
     app.stage.addChild(background, imageToReveal, renderTextureSprite);
 
-    app.stage.interactive = true;
+    app.stage.eventMode = 'dynamic';
     app.stage.hitArea = app.screen;
     app.stage
       .on("pointerdown", pointerDown)
