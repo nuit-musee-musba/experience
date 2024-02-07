@@ -14,7 +14,9 @@ const sizes = {
   height: window.innerHeight,
 };
 let steps = 0;
-
+let raycasterActive = false;
+const steps1InRoughPart = document.getElementById("steps1InRoughPart");
+const steps2InRoughPart = document.getElementById("steps2InRoughPart");
 //
 // INITIALIZATION
 //
@@ -25,6 +27,7 @@ const IntroPopup = () => {
 
   buttonIntro.addEventListener("click", function () {
     IntroPart.classList.remove("show");
+    steps1InRoughPart.classList.add("show");
     steps++;
     mouse.x = -1;
     mouse.y = -1;
@@ -143,39 +146,58 @@ function onClick() {
   stepsFunction();
 }
 
+function changeTextInSteps(removeText, addText) {
+  removeText.classList.remove("show");
+  addText.classList.add("show");
+  raycasterActive = true;
+}
+
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
 
   switch (steps) {
     case 1:
-      if (statueV1 && statueV1.children) {
-        const intersects = raycaster.intersectObject(statueV1);
+      const intersects = raycaster.intersectObject(statueV1);
+      const nextText = document.getElementById("nextText");
 
-        if (intersects.length > 0) {
-          const clickedBlock = intersects[0].object;
-          // console.log("enfant", clickedBlock.name);
+      nextText.addEventListener("touchstart", function () {
+        changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
+      });
 
-          const clickedBlockParent = intersects[0].object.parent;
-          // console.log("parent", clickedBlockParent.name);
+      if (statueV1.children.length <= 4) {
+        changeTextInSteps(steps2InRoughPart, steps3InRoughPart);
+      }
 
-          statueV1.remove(clickedBlockParent);
+      if (intersects.length > 0 && raycasterActive) {
+        const clickedBlock = intersects[0].object.parent;
 
-          if (statueV1.children.length === 0) {
-            mouse.x = -1;
-            mouse.y = -1;
-            DetailsPart();
-            steps++;
-            stepsFunction();
-          }
+        statueV1.remove(clickedBlock);
+
+        if (statueV1.children.length === 0) {
+          mouse.x = -1;
+          mouse.y = -1;
+          steps++;
+          raycasterActive = false;
+          DetailsPart();
+          stepsFunction();
         }
       }
       break;
     case 2:
       if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
+        const nextText = document.getElementById("nextText");
 
-        if (intersects.length > 0) {
+        nextText.addEventListener("touchstart", function () {
+          changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
+        });
+
+        // if (statueV1.children.length <= 4) {
+        //   changeTextInSteps(steps2InRoughPart, steps3InRoughPart);
+        // }
+
+        if (intersects.length > 0 && raycasterActive) {
           scene.remove(statueV2);
 
           if (!statueV2) {
