@@ -166,7 +166,6 @@ scene.add(ellipse);
 
 // Wheel positions
 ellipse.rotation.y = -Math.PI * 0.5;
-// ellipse.add(firstPainting, secondPainting, thirdPainting);
 
 /**
  * Raycaster
