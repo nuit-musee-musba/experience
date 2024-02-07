@@ -85,10 +85,9 @@ function handleDragInteraction(
       let dialog = items.items.find((item) => item.id === dragElementId);
       let numberUpdater = document.getElementById("actual-" + dialog.id);
 
-      playAnimation(dialog.animation);
-
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
+          playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
             if (howManyDrags < dialog.number_needed) {

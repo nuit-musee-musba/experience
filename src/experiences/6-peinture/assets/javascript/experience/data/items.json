@@ -82,7 +82,7 @@
       "recipe_text": "La souffrance et la mort du Christ",
       "recipe_step": 3,
       "number_needed": 2,
-      "animation": "animJeffHappy"
+      "animation": "animJeffPerfect"
     },
     {
       "id": "8",
@@ -94,7 +94,7 @@
       "recipe_text": "La représentation du déroulement de la vie terrestre",
       "recipe_step": 2,
       "number_needed": 1,
-      "animation": "animJeffHappy"
+      "animation": "animJeffPerfect"
     },
     {
       "id": "9",
@@ -154,7 +154,7 @@
       "recipe_text": "L'âme éternelle et flamboyante",
       "recipe_step": 1,
       "number_needed": 1,
-      "animation": "animJeffHappy"
+      "animation": "animJeffPerfect"
     },
     {
       "id": "14",
