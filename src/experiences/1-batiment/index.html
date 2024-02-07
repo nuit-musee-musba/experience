@@ -12,7 +12,7 @@
       src="/experiences/1-batiment/js/script.js"
     ></script>
   </head>
-  <body>
+  <body onselectstart="return false">
     <canvas class="webgl"></canvas>
 
     <section class="title-component">
@@ -71,18 +71,49 @@
     </button> -->
 
     <section class="chronology">
+      <button class="left-arrow" id="prevButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.83464 0.666992C4.77203 0.666992 0.667969 4.77106 0.667969 9.83367L0.667969 28.167C0.667969 33.2296 4.77203 37.3337 9.83464 37.3337H28.168C33.2306 37.3337 37.3346 33.2296 37.3346 28.167V9.83366C37.3346 4.77105 33.2306 0.666992 28.168 0.666992L9.83464 0.666992ZM17.6033 18.6762C17.4243 18.8552 17.4243 19.1454 17.6033 19.3244L21.8069 23.5281C22.3439 24.065 22.3439 24.9356 21.8069 25.4726C21.2699 26.0096 20.3993 26.0096 19.8624 25.4726L15.6587 21.269C14.4058 20.016 14.4058 17.9846 15.6587 16.7317L19.8624 12.5281C20.3993 11.9911 21.2699 11.9911 21.8069 12.5281C22.3439 13.065 22.3439 13.9356 21.8069 14.4726L17.6033 18.6762Z" fill="white"/>
+        </svg>
+      </button>
       <div class="chronology-container">
-        <div class="chronology-line"> </div>
-        <div class="chronology-buttons">
-          <button id="period1">1801</button>
-          <button id="period2">1870</button>
-          <button id="period3">1875</button>
-          <button id="period4">2024</button>
+        <div class="chronology-timeline">
+          <div class="buttons" id="dashed-border1">
+            <button id="period1" class="date">1801</button>
+            <button id="periodButton1" class="button">
+              <div id="periodActive1"></div>
+            </button>
+          </div>
+          <div class="chronology-line"></div>
+          <div class="buttons" id="dashed-border2">
+            <button id="period2" class="date">1870</button>
+            <button id="periodButton2" class="button">
+              <div id="periodActive2"></div>
+            </button>
+          </div>
+          <div class="chronology-line"></div>
+          <div class="buttons" id="dashed-border3">
+            <button id="period3" class="date">1875</button>
+            <button id="periodButton3" class="button">
+              <div id="periodActive3"></div>
+            </button>
+          </div>
+          <div class="chronology-line"></div>
+          <div class="buttons" id="dashed-border4">
+            <button id="period4" class="date">2024</button>
+            <button id="periodButton4" class="button">
+              <div id="periodActive4"></div>
+            </button>
+          </div>
           <!-- <button id="period5">1963</button> -->
         </div>
-        <div class="chronology-line"> </div>
-
     </div>
+    <button class="right-arrow" id="nextButton">
+      <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M28.875 0.75C34.0527 0.75 38.25 4.94733 38.25 10.125V28.875C38.25 34.0527 34.0527 38.25 28.875 38.25H10.125C4.94733 38.25 0.75 34.0527 0.75 28.875V10.125C0.75 4.94733 4.94733 0.75 10.125 0.75H28.875ZM20.9298 19.1685C21.1129 19.3516 21.1129 19.6484 20.9298 19.8315L16.6306 24.1306C16.0815 24.6798 16.0815 25.5702 16.6306 26.1194C17.1798 26.6685 18.0702 26.6685 18.6194 26.1194L22.9185 21.8202C24.2 20.5388 24.2 18.4612 22.9185 17.1798L18.6194 12.8806C18.0702 12.3315 17.1798 12.3315 16.6306 12.8806C16.0815 13.4298 16.0815 14.3202 16.6306 14.8694L20.9298 19.1685Z" fill="white"/>
+      </svg>
+    </button>
+    <!--  <button class="btn-small-secondary">Passer à l’étape suivante</button>  -->
     </section>
     
   </body>

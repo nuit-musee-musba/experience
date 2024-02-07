@@ -1,0 +1,21 @@
+/* Layout of section */
+
+section {
+  display: flex;
+}
+section .left,
+section .center,
+section .right {
+  flex: 1;
+}
+
+section .left {
+  margin: 2rem 4rem;
+}
+
+.hSeparator {
+  width: 100%;
+  height: 1.4rem;
+  background-color: white;
+  margin: 2rem 0;
+}

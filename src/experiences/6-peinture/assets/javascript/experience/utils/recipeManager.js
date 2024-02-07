@@ -69,21 +69,27 @@ elements.forEach((element) => {
 
 const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
+let actualNumber = 0;
 
 export function recipeGeneration() {
+  recipe.innerHTML = "";
   result.forEach((element) => {
     let thisItem = items.items.find((item) => item.id === element.name);
     //element.count
     if (thisItem.recipe_step == current_step) {
-      recipe.innerHTML = "";
       recipe.innerHTML +=
         '<li class="item" id="recipe-' +
         element.name +
-        '">' +
+        '"><div>' +
         thisItem.recipe_text +
-        ' - <span class="food">' +
-        thisItem.category +
-        "</span></li>";
+        ' <span id="actual-' +
+        element.name +
+        '">' +
+        actualNumber +
+        "</span>/" +
+        thisItem.number_needed +
+        "";
+      ("</div></li>");
     }
   });
 }
