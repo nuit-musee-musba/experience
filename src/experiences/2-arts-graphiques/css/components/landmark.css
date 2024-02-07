@@ -1,6 +1,7 @@
 .landmark{
   display: flex;
   gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .landmark__dot{
