@@ -135,7 +135,7 @@ export default class Transition {
             paint(
               canvas,
               currentSectionNumber,
-              "painting-blank.webp",
+              "painting-sketch.webp",
               "painting-clean.webp",
               this.buttonSection2,
               options
