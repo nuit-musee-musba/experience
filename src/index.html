@@ -9,6 +9,29 @@
   </head>
   <body>
     <div id="app">
+      <button class="btn-primary second-scene" id="backButton">
+        retour
+      </button>
+      <div class="second-scene experience-infos">
+        <h1 id="infoTitle"></h1>
+        <div id="infoText"></div>
+      </div>
+      <button id="helpButton" class="btn-icon">
+        <i class="i-info"></i>
+      </button>
+
+      <div id="helpPopup">
+        <div class="popup-text">
+          Cette expérience interactive a été réalisée par la promotion 2024 -
+          3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
+          Bordeaux Montaigne.</br></br> Ce projet a vu le jour dans le cadre de la Nuit
+          Européenne des Musées, en partenariat avec le musée des Beaux-Arts de
+          Bordeaux.</br></br> Les quelque 50 étudiants de la promotion se sont liés pour
+          créer une production commune via cinq modules distincts que nous vous
+          invitons à découvrir.
+        </div>
+        <button id="closeButton">Close</button>
+      </div>
       <div id="loader" class="loader-wrapper">
         <div class="loader"></div>
         <p>Ça tourne :0</p>
@@ -19,27 +42,9 @@
         </div>
         <div>
           <h2 id="infoTitle"></h2>
-          <p id="infoText"></p>
         </div>
         <div id="infoBox">
-          <div class="buttonContainer">
-            <div id="left" class="buttonBg">
-              <svg
-                width="89"
-                height="89"
-                viewBox="0 0 89 89"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M39.8116 13.7125C38.7028 12.6041 37.1992 11.9814 35.6314 11.9814C34.0637 11.9814 32.5601 12.6041 31.4513 13.7125L4.84506 40.3188C3.73664 41.4276 3.11396 42.9311 3.11396 44.4989C3.11396 46.0667 3.73664 47.5703 4.84506 48.6791L31.4513 75.2853C32.5664 76.3623 34.0599 76.9583 35.6102 76.9448C37.1604 76.9313 38.6433 76.3095 39.7396 75.2133C40.8358 74.1171 41.4576 72.6341 41.4711 71.0839C41.4845 69.5337 40.8886 68.0402 39.8116 66.925L23.8064 50.4114H79.9752C81.5433 50.4114 83.0472 49.7885 84.156 48.6797C85.2648 47.5709 85.8877 46.067 85.8877 44.4989C85.8877 42.9308 85.2648 41.427 84.156 40.3182C83.0472 39.2094 81.5433 38.5864 79.9752 38.5864H23.8064L39.8116 22.0728C40.92 20.9641 41.5427 19.4605 41.5427 17.8927C41.5427 16.3249 40.92 14.8213 39.8116 13.7125Z"
-                  fill="CurrentColor"
-                />
-              </svg>
-            </div>
-            <div class="hub-text">précédent</div>
-          </div>
-          <div class="flex-col">
+          <div class="flex-col first-scene">
             <div class="hub-title">SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</div>
             <svg
               width="63"
@@ -64,26 +69,16 @@
               />
             </svg>
 
+            <button class="btn-primary" id="showButton">
+              Voir l'expérience
+            </button>
+          </div>
+          <div class="flex-col second-scene">
             <button class="btn-primary" id="startButton">
               Commencer l'éxpérience
             </button>
-          </div>
-          <div class="buttonContainer">
-            <div id="right" class="buttonBg">
-              <svg
-                width="81"
-                height="64"
-                viewBox="0 0 81 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M45.0466 2.14544C46.1217 1.0706 47.5798 0.466797 49.1 0.466797C50.6203 0.466797 52.0783 1.0706 53.1535 2.14544L78.9535 27.9454C80.0283 29.0206 80.6321 30.4786 80.6321 31.9989C80.6321 33.5192 80.0283 34.9772 78.9535 36.0524L53.1535 61.8524C52.0722 62.8967 50.6239 63.4746 49.1207 63.4616C47.6174 63.4485 46.1794 62.8455 45.1164 61.7825C44.0534 60.7195 43.4504 59.2815 43.4374 57.7783C43.4243 56.275 44.0022 54.8268 45.0466 53.7454L60.5667 37.7322H6.10003C4.57946 37.7322 3.12116 37.1282 2.04595 36.053C0.970745 34.9778 0.366699 33.5195 0.366699 31.9989C0.366699 30.4783 0.970745 29.02 2.04595 27.9448C3.12116 26.8696 4.57946 26.2656 6.10003 26.2656H60.5667L45.0466 10.2524C43.9717 9.17721 43.3679 7.71918 43.3679 6.19891C43.3679 4.67863 43.9717 3.2206 45.0466 2.14544Z"
-                  fill="CurrentColor"
-                />
-              </svg>
+            <div>
             </div>
-            <div class="hub-text">suivant</div>
           </div>
           <div class="controls">
             <button id="left" class="control">
@@ -101,5 +96,7 @@
       </div>
     </div>
     <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/popUp.js"></script>
+    <script type="module" src="./js/scenes.js"></script>
   </body>
 </html>

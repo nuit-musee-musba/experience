@@ -149,6 +149,11 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+#infoText {
+  font-size: 45px;
+  font-family: montserrat-regular;
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;
@@ -218,28 +223,39 @@ body {
   cursor: pointer;
 }
 
+.popup-text {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-family: Montserrat-Regular;
+  text-transform: uppercase;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
 /* Additional styles for the popup */
 #helpPopup {
+  width: 30%;
   display: none;
   position: fixed;
-  bottom: 5rem;
+  top: 5rem;
   right: 5rem;
-  transform: translate(-5rem, -5rem);
   background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  z-index: 3;
+  padding: 5rem;
+  border-radius: 21px;
+  border: 3px solid #242424;
+  z-index: 100;
   pointer-events: all;
 }
 #helpButton {
+  width: 5rem;
+  height: 5rem;
+  height: auto;
   position: absolute;
-  bottom: 5rem;
+  top: 5rem;
   right: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 3;
-  width: 10rem;
-  height: 10rem;
+  z-index: 99;
   font-size: 2rem;
 }
 #closeButton {
@@ -248,4 +264,29 @@ body {
   right: 10px;
   cursor: pointer;
   pointer-events: all;
+}
+
+.first-scene {
+  display: flex;
+}
+
+.second-scene {
+  display: none;
+}
+
+#backButton {
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 100;
+}
+
+.experience-infos {
+  width: 750px;
+  position: absolute;
+  right: 20rem;
+  flex-direction: column;
+  justify-content: left;
 }
