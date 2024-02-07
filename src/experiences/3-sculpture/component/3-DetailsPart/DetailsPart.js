@@ -9,11 +9,11 @@ const DetailsPart = () => {
 
   detailsPart.classList.add("show");
 
-  const detailsButton = document.getElementById("DetailsButton");
+  // const detailsButton = document.getElementById("DetailsButton");
 
-  detailsButton.addEventListener("click", function () {
-    RefiningPart();
-  });
+  // detailsButton.addEventListener("click", function () {
+  //   RefiningPart();
+  // });
 };
 
 export default DetailsPart;

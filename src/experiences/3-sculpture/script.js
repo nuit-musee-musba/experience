@@ -75,7 +75,8 @@ scene.add(plane);
 
 let statueV1;
 let statueV2;
-let statueV3;
+let statueV4;
+let statueV5;
 
 gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
@@ -83,65 +84,62 @@ gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   statueV1 = gltf.scene;
 
+  scene.add(statueV1);
+});
+
 let statueV2Material;
-let statueV3Material;
+let statueV4Material;
 
 let texturePolissage;
 
-// gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
-//   gltf.scene.scale.set(0.38, 0.38, 0.38);
-//   gltf.scene.position.set(0.5, -1, -0.5);
-//   gltf.scene.rotation.y = Math.PI / 2;
-//   statueV1 = gltf.scene;
+gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
+  statueV2 = gltf.scene.children[0];
+  statueV2.scale.set(0.38, 0.38, 0.38);
+  statueV2.position.set(0.5, -1, -0.5);
+  statueV2.rotation.y = Math.PI / 2;
 
-//   scene.add(statueV1);
-// });
+  scene.add(statueV2);
+});
 
-// gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
-//   gltf.scene.scale.set(0.38, 0.38, 0.38);
-//   gltf.scene.position.set(0.5, -1, -0.5);
-//   gltf.scene.rotation.y = Math.PI / 2;
-//   statueV2 = gltf.scene;
+gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
+  statueV4 = gltf.scene.children[0];
+  statueV4.scale.set(1.4, 1.4, 1.4);
+  statueV4.position.set(0.5, -1, -0.5);
+  statueV4.rotation.y = Math.PI + 0.6;
 
-//   statueV2.traverse((child) => {
-//     if (child.isMesh) {
-//       statueV2Material = child.material;
-//       statueV2Material.color.set(0xff0000);
-//     }
-//   });
+  // scene.add(statueV4);
+  // statueV4 = gltf.scene;
 
-//   scene.add(statueV2);
-// });
+  const loader = new THREE.TextureLoader();
+  loader.load("/3-sculpture/assets/croquis.png", (texture) => {
+    statueV5 = statueV4.clone();
+    statueV5.geometry = statueV4.geometry.clone();
+    statueV5.scale.multiplyScalar(1.002);
+    statueV5.position.z += 0.01;
 
-gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", (gltf) => {
-  gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(1.3, -1, -1.5);
-  gltf.scene.rotation.y = Math.PI / 2;
-  statueV3 = gltf.scene;
+    statueV5.material = statueV5.material.clone();
+    statueV5.material.color = new THREE.Color(0x000000);
+    statueV5.material.opacity = 1;
+    statueV5.material.transparent = true;
 
-  texturePolissage = textureLoader.load(
-    "/3-sculpture/textures/Baked_Polissage.png"
-  );
+    let quantity = 0,
+      lastY = 0;
+    window.addEventListener("mousemove", (event) => {
+      quantity += Math.abs(lastY - event.clientY) * 0.0001;
 
-  // statueV3.traverse((child) => {
-  //   if (child.isMesh) {
-  //     statueV3Material = child.material;
-  //   }
-  // });
+      console.log(quantity);
+      lastY = event.clientY;
+      // ICI
+      // statueV2Copy.geometry.setDrawRange(0, event.clientY * 10)
+      statueV5.material.opacity = 1 - quantity;
 
-  scene.add(statueV3);
-
-  cloneStatueV3 = statueV3.clone();
-
-  cloneStatueV3.scale.set(0.381, 0.381, 0.381);
-  cloneStatueV3.traverse((child) => {
-    if (child.isMesh) {
-      cloneStatueV3Material = child.material;
-      cloneStatueV3Material.
-    }
+      if (quantity <= 0) {
+        console.log("fini !");
+      }
+    });
   });
 
-  scene.add(cloneStatueV3);
+  // statueV2.children[0].material.map = map;
 });
 
 const light = new THREE.AmbientLight(0x404040);
@@ -231,7 +229,10 @@ function stepsFunction() {
 
         if (intersects.length > 0) {
           scene.remove(statueV2);
-
+          if (statueV4) {
+            scene.add(statueV4);
+            scene.add(statueV5);
+          }
           if (!statueV2) {
             steps++;
             stepsFunction();
@@ -243,13 +244,6 @@ function stepsFunction() {
       break;
   }
 }
-
-const roughButton = document.getElementById("RoughButton");
-
-roughButton.addEventListener("click", function () {
-  statueV3Material.map = texturePolissage;
-  PolishingPart();
-});
 
 //
 // CONTROL
@@ -294,10 +288,9 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  if (statueV1 && statueV2 && statueV3) {
+  if (statueV1 && statueV2) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
-    statueV3.rotation.y = statueV3.rotation.y + rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;
@@ -310,5 +303,3 @@ const tick = () => {
 };
 
 tick();
-
-export { steps };
