@@ -1,4 +1,4 @@
-import { Frame } from "../frame";
+import { Frame } from "../class/frame";
 import { texts } from "../utils/texts";
 
 export default class Frames {
