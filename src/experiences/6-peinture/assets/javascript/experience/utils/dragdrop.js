@@ -160,6 +160,7 @@ function handleDragInteraction(
           }
         }
       } else {
+        playAnimation(dialog.animation);
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px"; //l'utilisateur n'a pas selectionné le bon aliment
         print_chef_speech(dialog.dialog); //definie dans speechBehavior.js

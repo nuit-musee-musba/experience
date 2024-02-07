@@ -12,7 +12,8 @@ export function playAnimation(anim) {
     const animationPaths = {
         animJeffHappy: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-happy.json',
         animJeffAdorable: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-adorable.json',
-        animJeffPerfect: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-adorable.json'
+        animJeffPerfect: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-perfect.json',
+        animJeffNope: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-nope.json'
     };
     const animPath = animationPaths[anim];
 
