@@ -87,7 +87,7 @@ export function recipeGeneration() {
       //   }
 
       recipe.innerHTML +=
-        '<li class="item" id="recipe-' +
+        '<li class="item ' + thisItem.category + '" id="recipe-' +
         element.name +
         `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +

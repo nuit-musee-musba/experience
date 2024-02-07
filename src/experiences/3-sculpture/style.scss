@@ -6,7 +6,18 @@
 html,
 body {
   background-color: white;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  max-width: 100%;
+  max-height: 100vh;
+}
+
+.home {
+  position: absolute;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  margin: 100px;
 }
 
 // Color
@@ -51,4 +62,42 @@ $widthBox: 30%;
 
 .show_flex {
   display: flex;
+}
+
+.popupContainer {
+  border-image: url(/3-sculpture/assets/border.png) 84;
+  border-image-outset: 79px;
+  border-image-width: 72px;
+  border-image-repeat: stretch;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  left: 10%;
+  bottom: 20vh;
+
+  max-width: 1199px;
+  min-width: 100px;
+  width: auto;
+  img {
+    top: -20em;
+    left: -15em;
+    position: absolute;
+    width: 35%;
+  }
+}
+
+.popupContent {
+  background-color: white;
+  padding: 53px;
+  border-radius: 21px;
+  margin-bottom: 2em;
+  z-index: 1000;
+  strong {
+    font-family: Montserrat-SemiBold;
+  }
+}
+.popupContent:last-child {
+  margin-bottom: 0em;
 }

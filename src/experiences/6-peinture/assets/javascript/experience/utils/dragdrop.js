@@ -126,12 +126,12 @@ function handleDragInteraction(
           }
         } else if (dialog.recipe_step < current_step) {
           print_chef_speech(
-            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
+            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
           );
         } else {
           if (dialog.wrong_step_dialog == "") {
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
