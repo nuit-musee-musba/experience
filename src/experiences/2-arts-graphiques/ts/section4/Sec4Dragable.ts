@@ -1,24 +1,36 @@
 import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
-  dl: {
-    top: 900,
-    left: 1500,
+  refHautDroite: {
+    top: 1300,
+    left: 3337,
   },
-  dr: {
-    top: 1200,
-    left: 2400,
+  refBasDroite: {
+    top: 1085,
+    left: 820,
   },
-  ur: {
-    top: 0,
-    left: 2400,
+  refBasCentre: {
+    top: 20,
+    left: 2900,
   },
-  ul: {
-    top: 0,
-    left: 0,
+  refBasGauche: {
+    top: 1034,
+    left: 3040,
+  },
+  refCentre: {
+    top: 521.2,
+    left: 5.79,
+  },
+  refHautCentre: {
+    top: 1392,
+    left: -41,
+  },
+  refHautGauche: {
+    top: 10,
+    left: 3153,
   },
 };
-type refId = "dl" | "dr" | "ur" | "ul";
+type refId = keyof typeof initialPlace;
 
 export class Sec4Dragable extends Dragable {
   refData: RefData;
@@ -28,7 +40,7 @@ export class Sec4Dragable extends Dragable {
   onSucceed: (id: string) => void;
 
   constructor(element: HTMLElement, onSucceed: (id: string) => void) {
-    super(element);
+    super(element, undefined, ".ref-click");
 
     this.id = element.id.split("-")[1];
     this.onSucceed = onSucceed;
