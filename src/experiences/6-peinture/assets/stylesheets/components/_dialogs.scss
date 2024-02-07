@@ -1,22 +1,46 @@
 .dialog {
     display: flex;
     flex-direction: column-reverse;
-    max-width: 33vw;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
     gap: 2.813rem;
 }
+
+.dialog-nav, 
+.dialog-content {
+    width: 40%;
+}
+
 .dialog-nav {
     display: flex;
     justify-content: flex-end;
     gap: 1.5rem;
-    button {
+    button,
+    a {
         @include btn-reset;
         @include global-btn($color-bg, $primary);
+        display: flex;
+        gap: 1rem;
         padding: $btn-padding-y $btn-padding-x;
+        white-space: nowrap;
+        font-weight: bold;
+        &::before,
+        &::after {
+            font-size: 2rem;
+        }
         &.btn-prev {
             @include icon(arrow-left);
+            display: none;
         }
         &.btn-next {
             @include icon(arrow-right, after);
+        }
+        &.btn-game {
+            @include global-btn($primary, $color-bg);
+            padding: $btn-padding-y $btn-padding-x;
+            display: none;
         }
     }
 }
