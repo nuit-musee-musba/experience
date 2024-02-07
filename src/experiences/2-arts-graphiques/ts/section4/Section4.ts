@@ -1,4 +1,4 @@
-import { Section } from "../section";
+import { Section } from "../class/section";
 import { Sec4Dragable } from "./Sec4Dragable";
 import { hasRepaired, initialiseAmountPlaced } from "./util";
 
