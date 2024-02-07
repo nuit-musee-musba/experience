@@ -1,5 +1,6 @@
 @import url("./utils/variables.css");
 @import url("./utils/reset.css");
+@import url('./utils/common.css');
 
 @import url("./layout/section.css");
 @import url("./layout/components.css");
@@ -10,7 +11,9 @@
 @import url("./components/frame/frame.css");
 @import url("./components/buttons/btn-primary.css");
 @import url("./components/landmark.css");
-@import url("./components/infoContainer.css");
+@import url("./components/infos/infoContainer.css");
+@import url('./components/infos/infoTimelineContainer.css');
+
 
 * {
   margin: 0;

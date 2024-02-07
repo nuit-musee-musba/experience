@@ -10,22 +10,9 @@ section {
   justify-content: center;
 }
 
-
-section .left {
-  display: grid;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.hSeparator {
-  width: 100%;
-  height: 0.8rem;
-  background-color: white;
-  margin: 2rem 0;
-}
-
-.paintingText {
-  display: flex;
-  gap: 3rem;
-}
+/*section .left {*/
+/*  display: grid;*/
+/*  flex-direction: column;*/
+/*  justify-content: space-between;*/
+/*  height: 100%;*/
+/*}*/

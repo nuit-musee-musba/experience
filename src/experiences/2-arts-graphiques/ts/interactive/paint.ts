@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import Button from "../class/button";
+import Div from "../class/div";
 
 let totalPixels: number;
 let remainingPixels: number;
@@ -58,6 +59,9 @@ const Paint = async (
     const renderTexture = PIXI.RenderTexture.create(stageSize);
     const renderTextureSprite = new PIXI.Sprite(renderTexture);
 
+    const paintingText = new Div("#to-hide");
+    const divToReveal = document.querySelectorAll(".to-reveal");
+
     imageToReveal.mask = renderTextureSprite;
 
     app.stage.addChild(background, imageToReveal, renderTextureSprite);
@@ -80,6 +84,8 @@ const Paint = async (
     }: {
       global: { x: number; y: number };
     }) {
+      paintingText.addClassHide();
+      divToReveal.forEach((element) => element.classList.remove("hide"));
       if (dragging) {
         brush.position.set(x, y);
         app.renderer.render(brush, {
