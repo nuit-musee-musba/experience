@@ -1,4 +1,4 @@
-import { Frame } from "../frame";
+import { Frame } from "../class/frame";
 import { texts } from "../utils/texts";
 
 export default class Frames {
@@ -24,9 +24,9 @@ export default class Frames {
 
     this.frames.forEach((frame) => {
       if (this.selectedFrameId === frame.id) {
-        frame.addBackground();
+        frame.removeOpacity();
       } else {
-        frame.removeBackground();
+        frame.addOpacity();
       }
     });
   }
@@ -35,12 +35,10 @@ export default class Frames {
     const button = document.querySelector<HTMLButtonElement>("#button");
     if (!this.selectedFrameId && text && button) {
       text.innerText = texts.section5.step1;
-      // button.disabled = true;
       return;
     }
     if (this.selectedFrameId && text && button) {
       text.innerText = texts.section5.step2;
-      // button.disabled = false;:
       return;
     }
   }

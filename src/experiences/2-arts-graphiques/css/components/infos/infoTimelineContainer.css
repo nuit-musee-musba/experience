@@ -1,0 +1,21 @@
+.hSeparator {
+    width: 100%;
+    height: 0.8rem;
+    background-color: white;
+    margin: 2rem 0;
+}
+
+.paintingText {
+    display: flex;
+    gap: 3rem;
+}
+
+.paragraph{
+    display: flex;
+    flex-direction: column;
+    gap: 100px
+}
+
+.paragraph > p{
+    text-align: start;
+}

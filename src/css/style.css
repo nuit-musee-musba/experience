@@ -7,9 +7,13 @@ body {
   overflow: hidden;
 }
 
+:root {
+  --accent: #242424;
+}
+
 #app {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: relative;
   top: 0;
   left: 0;
@@ -26,7 +30,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,13 +39,25 @@ body {
   color: white;
 }
 
+.hub-title {
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+}
+
+.hub-text {
+  font-family: Montserrat-Regular;
+  font-size: 46px;
+  text-transform: uppercase;
+}
+
 .loader {
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   animation: spin 1s linear infinite;
+  margin-bottom: 3rem;
 }
 
 .button-loader {
@@ -78,7 +94,7 @@ body {
   align-items: center;
 }
 #scrollBox {
-  flex: 2;
+  flex: 4;
   width: 100%;
   height: 100%;
   position: relative; /* Make sure to set it as a positioned element */
@@ -122,25 +138,68 @@ body {
   display: flex;
 }
 
+#scrollBox {
+  flex: 2;
+  width: 100%;
+  height: 100%;
+  position: relative; /* Make sure to set it as a positioned element */
+}
+
 #infoBox {
   flex: 1;
-  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  top: 0;
+  width: 100vw;
+  pointer-events: all;
+  z-index: 100;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#infoText {
+  margin-top: 5rem;
+  font-size: 45px;
+  font-family: montserrat-regular;
+}
+
+.flex-col {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 0;
-  width: 100%;
+  gap: 2rem;
   pointer-events: all;
-  z-index: 1;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
-#infoTitle {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  margin: 1rem 0;
 }
+
+.buttonBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 165px;
+  width: 165px;
+  background-color: black;
+  color: white;
+  border-radius: 21px;
+  cursor: pointer;
+  pointer-events: all;
+  margin-bottom: 40px;
+}
+
 .listBox {
   display: flex;
   justify-content: space-between;
@@ -176,29 +235,36 @@ body {
   cursor: pointer;
 }
 
+.popup-text {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-family: Montserrat-Regular;
+  text-transform: uppercase;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
 /* Additional styles for the popup */
 #helpPopup {
+  width: 30%;
   display: none;
   position: fixed;
-  bottom: 5rem;
-  right: 5rem;
-  transform: translate(-5rem, -5rem);
+  bottom: 3rem;
+  right: 3rem;
   background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  z-index: 3;
+  padding: 5rem;
+  border-radius: 21px;
+  border: 3px solid #242424;
   pointer-events: all;
 }
 #helpButton {
+  height: auto;
   position: absolute;
   bottom: 5rem;
   right: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 3;
-  width: 10rem;
-  height: 10rem;
-  font-size: 2rem;
+  z-index: 100;
 }
 #closeButton {
   position: absolute;
@@ -206,4 +272,29 @@ body {
   right: 10px;
   cursor: pointer;
   pointer-events: all;
+}
+
+.first-scene {
+  display: flex;
+}
+
+.second-scene {
+  display: none;
+}
+
+#backButton {
+  position: absolute;
+  bottom: 5rem;
+  left: 5rem;
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 100;
+}
+
+.experience-infos {
+  width: 750px;
+  position: absolute;
+  right: 20rem;
+  flex-direction: column;
+  justify-content: left;
 }
