@@ -84,6 +84,8 @@ function handleDragInteraction(
     ) {
       let dialog = items.items.find((item) => item.id === dragElementId);
 
+      let numberUpdater = document.getElementById("actual-" + dialog.id);
+
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
           //l'item doit etre dans le step actuel
@@ -112,6 +114,7 @@ function handleDragInteraction(
               recipeResolve(dialog.id);
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
+              howManyDrags++;
               current_step_done++;
               success = true;
             } else {
@@ -137,6 +140,8 @@ function handleDragInteraction(
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
+
+        numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 

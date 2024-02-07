@@ -69,6 +69,7 @@ elements.forEach((element) => {
 
 const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
+let actualNumber = 0;
 
 export function recipeGeneration() {
   recipe.innerHTML = "";
@@ -79,11 +80,16 @@ export function recipeGeneration() {
       recipe.innerHTML +=
         '<li class="item" id="recipe-' +
         element.name +
-        '">x' +
-        thisItem.number_needed +
-        " - " +
+        '"><div>' +
         thisItem.recipe_text +
-        "</li>";
+        ' <span id="actual-' +
+        element.name +
+        '">' +
+        actualNumber +
+        "</span>/" +
+        thisItem.number_needed +
+        "";
+      ("</div></li>");
     }
   });
 }
