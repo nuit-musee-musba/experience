@@ -2,6 +2,7 @@ import { Section } from "./section";
 
 import paint from "../interactive/paint";
 import date from "../animation/date";
+import landmark from "../animation/landmark";
 
 import { Section1 } from "../section1/Section1";
 import { Section4 } from "../section4/Section4";
@@ -232,5 +233,6 @@ export default class Transition {
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
     this.displayTimelipse(this.currentSectionNumber);
     this.handleHintText();
+    landmark.updadeDot(this.currentSectionNumber)
   }
 }

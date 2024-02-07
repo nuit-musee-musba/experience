@@ -1,3 +1,5 @@
+import { dot } from "three/examples/jsm/nodes/Nodes.js";
+
 const Landmark = {
   landmarkElement: document.querySelector(".landmark"),
 
@@ -18,6 +20,16 @@ const Landmark = {
     } else {
       console.error('Template or landmark div not found');
     }
+  },
+
+  updadeDot(currentSectionNumber : number){
+    const dots = document.querySelectorAll('.landmark__dot');
+
+    dots.forEach(dot => {
+      dot.classList.remove('active')
+    });
+
+    dots[(currentSectionNumber - 1)].classList.add('active');
   }
 };
 
