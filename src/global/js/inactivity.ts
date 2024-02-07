@@ -1,5 +1,5 @@
 export const enableInactivityRedirection = () => {
-  let time;
+  let time: NodeJS.Timeout;
 
   const minutesInMS = 1000 * 60;
   const timeInMs = 5 * minutesInMS;
