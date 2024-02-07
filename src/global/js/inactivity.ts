@@ -15,4 +15,6 @@ export const enableInactivityRedirection = () => {
 
   resetTimer();
   document.addEventListener("click", resetTimer);
+  document.addEventListener("touchstart", resetTimer);
+  document.addEventListener("touchmove", resetTimer);
 };
