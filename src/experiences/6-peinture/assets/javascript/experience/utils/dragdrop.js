@@ -91,9 +91,10 @@ function handleDragInteraction(
             console.log(howManyDrags);
             console.log("<=");
             console.log(placedEl.length - 1);
-            if (howManyDrags <= placedEl.length - 1) {
+            if (howManyDrags < dialog.number_needed) {
               placedEl[howManyDrags].style.display = "block";
               howManyDone++;
+              howManyDrags++;
 
               print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
               recipeResolve(dialog.id);
@@ -120,8 +121,18 @@ function handleDragInteraction(
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
           }
+        } else if (dialog.recipe_step < current_step) {
+          print_chef_speech(
+            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
+          );
         } else {
-          print_chef_speech("c'est bien mais pas mtn");
+          if (dialog.wrong_step_dialog == "") {
+            print_chef_speech(
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+            );
+          } else {
+            print_chef_speech(dialog.wrong_step_dialog);
+          }
         }
 
         dragElement.style.left = realInitialX + "px";
@@ -241,7 +252,9 @@ items.items.forEach((element) => {
 
       leftPosition = // pour centrer les absolute on va faire ce calcul
         (parentElement.offsetWidth / //la width du parent divisé par...
-          (numberItemsPerCategory[category]["count"] - max_item_per_stage + 2) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          (numberItemsPerCategory[category]["count"] -
+            max_item_per_stage +
+            0.5) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
           324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
         i[category]; //multiplié par le nombre d'occurence en cours
       ElementList.style.left = leftPosition + "px"; // on applique
@@ -251,7 +264,7 @@ items.items.forEach((element) => {
       leftPosition = // pour centrer les absolute on va faire ce calcul
         (parentElement.offsetWidth / //la width du parent divisé par...
           (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+          324 / 7) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
         i[category]; //multiplié par le nombre d'occurence en cours
       ElementList.style.left = leftPosition + "px"; // on applique
     }
@@ -265,7 +278,7 @@ items.items.forEach((element) => {
     ElementList.style.top = "90px"; //top position
     marginTopPlacement = 90;
   } else if (cur_stage == 0) {
-    ElementList.style.top = "470px"; //bot position
+    ElementList.style.top = "400px"; //bot position
     marginTopPlacement = 470;
   } else if (cur_stage == -1) {
     ElementList.style.top = "250px"; //top position

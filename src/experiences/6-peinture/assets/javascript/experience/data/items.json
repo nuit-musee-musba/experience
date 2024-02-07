@@ -7,9 +7,9 @@
       "description": "Ils évoquent la corruption du corps.",
       "dialog": "C’est tout à fait jus(te) !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La corruption du corps",
+      "recipe_step": 1,
+      "number_needed": 5
     },
     {
       "id": "2",
@@ -29,9 +29,9 @@
       "description": "Le raisin est le symbole de la Passion de Jésus-Christ. En raison de sa couleur rouge, il peut aussi représenter son sang.",
       "dialog": "Bravo ! Un sang faute !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La passion et le sang du Christ",
+      "recipe_step": 3,
+      "number_needed": 2
     },
     {
       "id": "4",
@@ -73,9 +73,9 @@
       "description": "Elles représentent la souffrance et la mort du Christ. Cependant, les jaunes symbolisent la chasteté du Christ, les rouges, son amour et les noires son humilité. Elle peut aussi évoquer la fidélité et la sottise.",
       "dialog": "Vous avez fait un choix mature, tel une prune bien mûre !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La souffrance et la mort du Christ",
+      "recipe_step": 3,
+      "number_needed": 2
     },
     {
       "id": "8",
@@ -84,9 +84,9 @@
       "description": "Pelé en spirale, le citron peut représenter le déroulement de la vie terrestre.",
       "dialog": "Vous en avez dans le citron ! Bravo !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La représentation du déroulement de la vie terrestre",
+      "recipe_step": 2,
+      "number_needed": 1
     },
     {
       "id": "9",
@@ -128,9 +128,9 @@
       "description": "Objet de luxe car il ne sert pas aux besoins quotidiens, il représente la vanité des biens de ce monde. Rempli à moitié d’eau, il exprime la vie qui s’écoule inexorablement.",
       "dialog": "Oh oui ! Vous êtes amphore(me) !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "Écoulement inexorable de la vie",
+      "recipe_step": 2,
+      "number_needed": 1
     },
     {
       "id": "13",
@@ -139,9 +139,9 @@
       "description": "Un vulcain rougeoyant représente l’âme éternelle et flamboyante, tel le feu divin, contrairement à l’éphémère vie terrestre. Le papillon s’envolant représente également l’espoir de la résurrection et du pardon de Jésus-Christ.",
       "dialog": "Bien ! Vous avez l’âme aiguisée !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "L'âme éternelle et flamboyante",
+      "recipe_step": 1,
+      "number_needed": 1
     },
     {
       "id": "14",
@@ -161,9 +161,9 @@
       "description": "Symbole de la résurrection, ils perdent leur enveloppe pour prendre une carapace nouvelle. Par leur démarche, ils symbolisent l’inconstance et l’instabilité. De ce fait, ils évoquent la déviance morale.",
       "dialog": "Pincez-moi, je rêve ! C’est parfait !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La résurrection",
+      "recipe_step": 3,
+      "number_needed": 1
     },
     {
       "id": "16",
@@ -183,9 +183,9 @@
       "description": "Capable de détruire une récolte en un instant, elle rappelle les événements soudains qui peuvent ruiner l'existence humaine.",
       "dialog": "Bravo vous avez fait un de ces bon(d)s choix !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "Évènements inattendus qui bouleversent la vie humaine",
+      "recipe_step": 2,
+      "number_needed": 1
     },
     {
       "id": "18",
@@ -205,9 +205,9 @@
       "description": "Elle représente la fragilité de la vie.",
       "dialog": "Chenille crois pas ! Vous êtes formidable !",
       "wrong_step_dialog": "",
-      "recipe_text": "",
-      "recipe_step": 0,
-      "number_needed": 0
+      "recipe_text": "La fragilité de la vie",
+      "recipe_step": 1,
+      "number_needed": 2
     },
     {
       "id": "20",
