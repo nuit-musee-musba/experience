@@ -19,7 +19,7 @@ export async function createIsland(i, count, color) {
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.05, 0.05, 0.05], // scale
+      [0.04, 0.04, 0.04], // scale
       color
     );
     // if (island.scene.userData.id === 1) {
@@ -149,14 +149,47 @@ export function rotateCarousel(direction, rotate, carousel) {
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
         );
-        if (rotationDifference > 0.001) {
+        if (rotationDifference > 0.0001) {
           requestAnimationFrame(rotateToTarget);
         } else {
           rotate = false;
-          console.log("Finish");
         }
       }
     };
     rotateToTarget();
   }
+}
+
+function scaleModel(model, targetScale, duration) {
+  console.log("Entered scale function");
+
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
+
+  function animateScale() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
+
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScale);
+    }
+  }
+
+  animateScale();
+}
+export function handleScaleClick(carousel, index) {
+  console.log("Entered function");
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
+  scaleModel(model, 0.0315, 100);
 }
