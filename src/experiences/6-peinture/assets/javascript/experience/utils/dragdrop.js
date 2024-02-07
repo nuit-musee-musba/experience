@@ -103,7 +103,7 @@ function handleDragInteraction(
               //alert("Chef : " + dialog.dialog);
             } else {
               print_chef_speech(
-                "Tu as mis tout les elements requis pour cet aliment multiple"
+                "Vous avez déjà mis tout ce qu'il faut pour cet élément multiple."
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -119,19 +119,19 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Tu as mis tout les elements requis pour cet aliment"
+                "Vous avez déjà placé cet élément."
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
           }
         } else if (dialog.recipe_step < current_step) {
           print_chef_speech(
-            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
+            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
           );
         } else {
           if (dialog.wrong_step_dialog == "") {
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
