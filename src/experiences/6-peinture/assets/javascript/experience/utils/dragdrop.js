@@ -103,7 +103,7 @@ function handleDragInteraction(
               //alert("Chef : " + dialog.dialog);
             } else {
               print_chef_speech(
-                "Vous avez déjà mis tout ce qu'il faut pour cet élément multiple."
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -119,7 +119,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous avez déjà placé cet élément."
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -163,6 +163,7 @@ function handleDragInteraction(
               stepsEl.innerHTML = current_step;
               howManyDone = 0;
               step_success = false;
+              print_chef_speech("Passons à l'étape " + current_step + "/3 !");
             }, 5000);
           }
         }

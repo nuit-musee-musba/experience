@@ -25,13 +25,10 @@ export class ObjectLoader {
   }
 
   play() {
-    // console.log(animation.startAt);
     this.actions.forEach((action) => {
-      console.log(action);
       action.reset();
       action.play();
     });
-    console.log("should have played");
   }
 
   update(time) {

@@ -1,4 +1,3 @@
-// Function to toggle the help popup visibility
 document.addEventListener("DOMContentLoaded", function () {
   const helpButton = document.getElementById("helpButton");
   const helpPopup = document.getElementById("helpPopup");
@@ -7,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (helpButton && closeButton && helpPopup) {
     helpButton.addEventListener("click", toggleHelpPopup);
     closeButton.addEventListener("click", toggleHelpPopup);
+    document.addEventListener("click", closeOnOutsideClick);
   }
 
   function toggleHelpPopup() {
@@ -22,5 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
       computedStyle.display === "none" ? "block" : "none";
 
     console.log("helpPopup.style.display", helpPopup.style.display);
+  }
+
+  function closeOnOutsideClick(event) {
+    if (!helpPopup.contains(event.target) && event.target !== helpButton) {
+      helpPopup.style.display = "none";
+    }
   }
 });
