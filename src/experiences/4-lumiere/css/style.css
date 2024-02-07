@@ -185,6 +185,11 @@ p {
 }
 
 /* ----- Results page ----- */
+
+.page-results {
+  background-color: #000000;
+}
+
 .page-results .wrapper {
   position: relative;
   width: 100dvw;
