@@ -4,12 +4,13 @@
 @import url("./layout/section.css");
 @import url("./layout/components.css");
 
-@import url('./components/modal.css');
+@import url("./components/modal.css");
 @import url("./components/indice.css");
 @import url("./components/timeline.css");
 @import url("./components/frame/frame.css");
 @import url("./components/buttons/btn-primary.css");
 @import url("./components/landmark.css");
+@import url("./components/pieces.css");
 
 * {
   margin: 0;
@@ -152,8 +153,8 @@ body {
 /* section-4 */
 
 .painting-pieces-container {
-  height: 1728px;
-  aspect-ratio: 1/1;
+  width: 1300px;
+
   margin: 0 auto;
   border: 10px solid black;
   //position: relative;

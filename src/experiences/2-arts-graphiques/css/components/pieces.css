@@ -1,0 +1,8 @@
+#top-left {
+  width: 20%;
+}
+
+.piece {
+  width: 20%;
+  position: absolute;
+}
