@@ -51,7 +51,7 @@ export default defineConfig({
           "./src/experiences/4-lumiere/second-painting.html",
         "4-lumiere/third-painting":
           "./src/experiences/4-lumiere/third-painting.html",
-        "4-lumiere/third-painting": "./src/experiences/4-lumiere/results.html",
+        "4-lumiere/results": "./src/experiences/4-lumiere/results.html",
       },
     },
   },
