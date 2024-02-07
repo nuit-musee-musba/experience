@@ -22,9 +22,12 @@ const gui = new GUI({
 
 // Global parameters
 let globalParameters = {
+  lightDistance: 0.6,
   lightAngleStrength: 0.5,
-  lightRadius: 1.3,
+  lightRadius: 1.25,
   white: "#f5f5f5",
+  ellipseDefaultOpacity: 0.5,
+  ellipseTouchOpacity: 0.2,
 };
 
 // Canvas
@@ -59,12 +62,21 @@ const colorTexture = textureLoader.load(
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 
 const heightTexture = textureLoader.load(
-  "/4-lumiere/first-painting/first-painting-height.png"
+  "/4-lumiere/first-painting/first-painting-height-2.png"
+);
+
+const normalTexture = textureLoader.load(
+  "/4-lumiere/first-painting/first-painting-normal.png"
 );
 
 // Wallpaper
 const wallpaperHeightTexture = textureLoader.load(
   "/4-lumiere/first-painting/background-height.png"
+);
+
+// Light object
+const lightObjectTexture = textureLoader.load(
+  "/4-lumiere/first-painting/first-light-object.png"
 );
 
 /**
@@ -134,22 +146,37 @@ gltfLoader.load(
 );
 
 // ellipse
-var ellipseGeometry = new THREE.TorusGeometry(
+const ellipseGeometry = new THREE.TorusGeometry(
   globalParameters.lightRadius, // Radius
   0.005, // tube
   12, // radialSegments
   48, // tubularSegments
   Math.PI * 2 // arc
 );
-var ellipseMaterial = new THREE.MeshBasicMaterial({
+const ellipseMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
+  opacity: globalParameters.ellipseDefaultOpacity,
   // wireframe: true,
 });
-var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
-ellipse.position.z = 0.5;
+const ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
+ellipse.position.z = globalParameters.lightDistance;
 scene.add(ellipse);
+
+// Light object
+const lightObjectGeometry = new THREE.PlaneGeometry(
+  0.6, // width
+  0.6, // height
+  3, //widthSegments
+  3 //heightSegments
+);
+const lightObjectMaterial = new THREE.MeshBasicMaterial({
+  map: lightObjectTexture,
+  transparent: true,
+  opacity: 1,
+});
+const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
+scene.add(lightObject);
 
 /**
  * Lights
@@ -168,14 +195,15 @@ ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
 // firstPainting point light
 const pointLight = new THREE.PointLight(
-  "#ffCC70", // color
-  10, // intensity
-  3, // distance
+  "#e6c15b", // color
+  20, // intensity
+  8, // distance
   1 // decay
 );
 pointLight.position.x = globalParameters.lightRadius;
 scene.add(pointLight);
 ellipse.add(pointLight);
+lightObject.position.z = globalParameters.lightDistance + 0.1;
 const pointLightTweaks = gui.addFolder("Spot light parameters");
 pointLightTweaks.add(pointLight, "visible");
 pointLightTweaks.addColor(pointLight, "color");
@@ -189,7 +217,7 @@ pointLightTweaks
 
 // Helper
 const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-pointLightHelper.visible = true;
+pointLightHelper.visible = false;
 pointLightHelper.color = "#ffffff";
 scene.add(pointLightHelper);
 pointLightTweaks.add(pointLightHelper, "visible").name("Repère visuel");
@@ -278,6 +306,7 @@ window.addEventListener(
 canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  ellipse.material.opacity = globalParameters.ellipseTouchOpacity;
 
   // Update firstPainting light position
   updateRotation();
@@ -286,6 +315,13 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+
+  // Update firstPainting light position
+  updateRotation();
+});
+
+canvas.addEventListener("touchend", (event) => {
+  ellipse.material.opacity = globalParameters.ellipseDefaultOpacity;
 
   // Update firstPainting light position
   updateRotation();
@@ -306,12 +342,21 @@ const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
 
 // Update ellipse rotation
+updateRotation();
 function updateRotation() {
   const angle = calculateAngle();
   ellipse.rotation.z = angle;
+  console.log("angle", angle);
+  const radius = globalParameters.lightRadius;
+
+  lightObject.position.set(
+    Math.cos(angle) * radius,
+    Math.sin(angle) * radius,
+    globalParameters.lightDistance + 0.1
+  );
 
   // Check result
-  if (angle > 1.5 && angle < 1.8) {
+  if (angle > 1.64 && angle < 1.84) {
     resultState = true;
     resultBtn.disabled = false;
   } else {
