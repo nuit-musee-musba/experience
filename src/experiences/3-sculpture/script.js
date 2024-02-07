@@ -59,8 +59,12 @@ let statueV1;
 let statueV2;
 let statueV3;
 
+let cloneStatueV3;
+
 let statueV2Material;
 let statueV3Material;
+
+let texturePolissage;
 
 // gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
 //   gltf.scene.scale.set(0.38, 0.38, 0.38);
@@ -87,24 +91,35 @@ let statueV3Material;
 //   scene.add(statueV2);
 // });
 
-gltfLoader.load("/3-sculpture/Mozart_Affinage.gltf", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
   gltf.scene.position.set(0.5, -1, -0.5);
   gltf.scene.rotation.y = Math.PI / 2;
   statueV3 = gltf.scene;
 
-  const texture = textureLoader.load(
-    "/3-sculpture/textures/Baked_Affinage.png"
+  texturePolissage = textureLoader.load(
+    "/3-sculpture/textures/Baked_Polissage.png"
   );
 
-  statueV3.traverse((child) => {
+  // statueV3.traverse((child) => {
+  //   if (child.isMesh) {
+  //     statueV3Material = child.material;
+  //   }
+  // });
+
+  scene.add(statueV3);
+
+  cloneStatueV3 = statueV3.clone();
+
+  cloneStatueV3.scale.set(0.381, 0.381, 0.381);
+  cloneStatueV3.traverse((child) => {
     if (child.isMesh) {
-      statueV3Material = child.material;
-      statueV3Material.map = texture;
+      cloneStatueV3Material = child.material;
+      cloneStatueV3Material.
     }
   });
 
-  scene.add(statueV3);
+  scene.add(cloneStatueV3);
 });
 
 // gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
@@ -180,11 +195,17 @@ function onClick() {
 
       if (statueV1.children.length === 0) {
         DetailsPart();
-        statueMaterial.color.set(0x00ff00);
       }
     }
   }
 }
+
+const roughButton = document.getElementById("RoughButton");
+
+roughButton.addEventListener("click", function () {
+  statueV3Material.map = texturePolissage;
+  PolishingPart();
+});
 
 //
 // CONTROL
@@ -229,9 +250,10 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  if (statueV1 && statueV2) {
+  if (statueV1 && statueV2 && statueV3) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
+    statueV3.rotation.y = statueV3.rotation.y + rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;
