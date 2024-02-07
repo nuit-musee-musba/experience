@@ -1,0 +1,21 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 6rem;
+}
+
+.container{
+  height: 100%;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.container.row .left,
+.container.row .center,
+.container.row .right {
+  flex: 1;
+}
