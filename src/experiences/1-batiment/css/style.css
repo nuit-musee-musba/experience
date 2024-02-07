@@ -62,28 +62,6 @@ body {
   height: 100%;
 }
 
-#nextButton {
-  z-index: 0;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  bottom: 0;
-  left: 50%;
-  padding-bottom: 2vh;
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 100;
-}
-
-#nextButton img {
-  z-index: -1;
-  position: absolute;
-  bottom: 0;
-}
-
 #interestButton {
   z-index: 0;
   position: absolute;
@@ -107,12 +85,25 @@ body {
 }
 
 .chronology {
-  z-index: 7;
+  position: absolute;
   bottom: 12vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
+  align-items: center;
+  z-index: 7;
+}
+
+.left-arrow,
+.right-arrow {
+  background-color: transparent;
+  border: none;
+}
+
+.left-arrow svg,
+.right-arrow svg {
+  height: 80px;
+  width: 80px;
 }
 
 .chronology-container {
@@ -120,13 +111,51 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0 3vw;
 }
 
-.chronology-buttons {
+.chronology-timeline {
   display: flex;
   align-items: center;
-  gap: 5vw;
-  padding: 0 4vw;
+}
+
+.chronology-timeline .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chronology-timeline .buttons .date {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.chronology-timeline .button {
+  position: relative;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 5px solid white;
+}
+
+.chronology-timeline .button div {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.chronology-line {
+  width: 5vw;
+  height: 5px;
+  background-color: white;
 }
 
 .chronology-title {
@@ -163,12 +192,6 @@ body {
   color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
-}
-
-.chronology-line {
-  width: 100%;
-  height: 5px;
-  background-color: white;
 }
 
 #end-menu {
@@ -261,8 +284,5 @@ body {
 
   #title-component {
     font-size: 2rem;
-  }
-  #nextButton {
-    font-size: 1rem;
   }
 }

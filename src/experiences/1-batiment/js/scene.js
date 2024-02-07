@@ -68,7 +68,6 @@ const loadModels = async () => {
 
 await loadModels();
 
-console.log(animatedScenes);
 // SIZES
 const sizes = {
   width: window.innerWidth,

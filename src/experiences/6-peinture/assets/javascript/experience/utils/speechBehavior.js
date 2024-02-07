@@ -11,10 +11,13 @@ speech_area__parent.addEventListener("touchstart", (e) => {
   textSpeed = 10;
 });
 
-function fadeOut() {
+function fadeOut(thisLoopId) {
   if (!active_bulle) {
-    speech_area.style.opacity = 0;
-    textSpeed = 15;
+    console.log(thisLoopId + "==" + loopId);
+    if (thisLoopId == loopId) {
+      speech_area.style.opacity = 0;
+      textSpeed = 15;
+    }
   }
 }
 
@@ -29,10 +32,10 @@ function animateText(speech, thisLoopId) {
     if (currentIndex < speech.length) {
       speech_area.textContent += speech.charAt(currentIndex);
       currentIndex++;
-      setTimeout(() => animateText(speech), textSpeed); // Délai entre chaque lettre
+      setTimeout(() => animateText(speech, thisLoopId), textSpeed); // Délai entre chaque lettre
     }
     if (currentIndex == speech.length) {
-      setTimeout(fadeOut, 5000);
+      setTimeout(() => fadeOut(thisLoopId), 5000);
       active_bulle = false;
       isAnimating = false;
     }

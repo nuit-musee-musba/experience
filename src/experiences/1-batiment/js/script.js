@@ -119,6 +119,13 @@ const sceneSetUp = async () => {
     }
   };
 
+  const prevStep = () => {
+    if (index - 1 >= 0) {
+      index--;
+      handleFocusPeriod(period[index]);
+    }
+  };
+
   const nextStep = () => {
     if (index + 1 < period.length) {
       index++;
@@ -133,6 +140,12 @@ const sceneSetUp = async () => {
       index = i - 1;
       handleFocusPeriod(period[i - 1]);
     });
+    document
+      .getElementById(`periodButton${i}`)
+      .addEventListener("click", () => {
+        index = i - 1;
+        handleFocusPeriod(period[i - 1]);
+      });
   }
 
   function handleFocusPeriod(step) {
@@ -148,12 +161,29 @@ const sceneSetUp = async () => {
     dateTitleElement.appendChild(document.createTextNode(step.date));
 
     const selectedButtonId = `period${index + 1}`;
+    const selectedPeriodButtonId = `periodButton${index + 1}`;
+    const selectedButtonActive = `periodActive${index + 1}`;
+    const selectedDashedButton = `dashed-border${index + 1}`;
 
     document.getElementById(selectedButtonId).style.fontSize = "8rem";
+    document.getElementById(selectedButtonId).style.top = "-12rem";
+    document.getElementById(selectedPeriodButtonId).style.width = "6rem";
+    document.getElementById(selectedPeriodButtonId).style.height = "6rem";
+    document.getElementById(selectedDashedButton).style.padding = "0.5rem";
+    document.getElementById(selectedDashedButton).style.border =
+      "5px dashed white";
+    document.getElementById(selectedDashedButton).style.borderRadius = "100px";
+    document.getElementById(selectedButtonActive).style.display = "block";
 
     for (let i = 1; i <= period.length; i++) {
       if (i - 1 !== index) {
         document.getElementById(`period${i}`).style.fontSize = "4rem";
+        document.getElementById(`period${i}`).style.top = "-8rem";
+        document.getElementById(`periodButton${i}`).style.width = "5rem";
+        document.getElementById(`periodButton${i}`).style.height = "5rem";
+        document.getElementById(`periodActive${i}`).style.display = "none";
+        document.getElementById(`dashed-border${i}`).style.padding = "0";
+        document.getElementById(`dashed-border${i}`).style.border = "0px";
       }
     }
 
@@ -204,9 +234,11 @@ const sceneSetUp = async () => {
   handleFocusPeriod(period[index]);
 
   document.getElementById("restart-button").addEventListener("click", restart);
-  // document.getElementById("nextButton").addEventListener("click", nextStep);
-  // document.getElementById("interestButton").addEventListener("click", toggleInfo);
-  // controls.target = cube.position;
+  document.getElementById("prevButton").addEventListener("click", prevStep);
+  document.getElementById("nextButton").addEventListener("click", nextStep);
+  document
+    .getElementById("interestButton")
+    .addEventListener("click", toggleInfo);
 };
 
 sceneSetUp();
