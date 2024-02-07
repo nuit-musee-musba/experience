@@ -5,6 +5,7 @@ import date from "../animation/date";
 
 import { Section1 } from "../section1/Section1";
 import { Section4 } from "../section4/Section4";
+import Button from "./button";
 
 export default class Transition {
   currentSection: Section;
@@ -19,32 +20,39 @@ export default class Transition {
   section8: Section;
   section9: Section;
 
+  buttonSection2: Button;
+  buttonSection3: Button;
+  buttonSection4: Button;
+  buttonSection5: Button;
+  buttonSection6: Button;
+  buttonSection7: Button;
+  buttonSection8: Button;
+  buttonSection9: Button;
+
   currentSectionNumber: number;
   sections: Section[];
-  button: HTMLButtonElement;
 
   constructor() {
+    this.buttonSection2 = new Button("sec2-button", () => this.next());
+    this.buttonSection3 = new Button("sec3-button", () => this.next());
+    this.buttonSection4 = new Button("sec4-button", () => this.next());
+    this.buttonSection5 = new Button("sec5-button", () => this.next());
+    this.buttonSection6 = new Button("sec6-button", () => this.next());
+    this.buttonSection7 = new Button("sec7-button", () => this.next());
+    this.buttonSection8 = new Button("sec8-button", () => this.next());
+    this.buttonSection9 = new Button("sec9-button", () => this.next());
+
     this.currentSectionNumber = 0;
     this.section0 = new Section("section-0");
     this.section1 = new Section1(`section-1`, this);
     this.section2 = new Section(`section-2`);
     this.section3 = new Section(`section-3`);
-    this.section4 = new Section4(`section-4`);
+    this.section4 = new Section4(`section-4`, this.buttonSection4);
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
     this.section8 = new Section(`section-8`);
     this.section9 = new Section(`section-9`);
-
-    // const button = document.querySelector<HTMLButtonElement>("#button");
-    //
-    // if (!button) {
-    //   throw new Error(
-    //     "transition/constructor: Element with a class of 'button' must be present"
-    //   );
-    // }
-    // this.button = button;
-    // this.button.addEventListener("click", () => this.handleTransition());
 
     this.sections = [
       this.section0,
@@ -76,18 +84,6 @@ export default class Transition {
     }
   }
 
-  // handleTransition() {
-  //   if (this.currentSectionNumber === 8) {
-  //     this.currentSectionNumber = 0;
-  //   } else {
-  //     this.currentSectionNumber = this.currentSectionNumber + 1;
-  //   }
-  //   this.handleSection();
-  //   this.handleButtonTitle();
-  //   this.DisplayInteractiveCanvas(this.currentSectionNumber);
-  //   this.displayTimelipse(this.currentSectionNumber);
-  // }
-
   displayTimelipse(currentSectionNumber: number) {
     const currentSection = document.querySelector(
       `#section-${currentSectionNumber}`
@@ -96,8 +92,7 @@ export default class Transition {
     const dateElement = currentSection.querySelector("#date-anim__year");
 
     if (dateElement) {
-      this.button.disabled = true;
-      date.init();
+      date.init(this.buttonSection3);
     }
   }
 
@@ -135,6 +130,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-blank.webp",
               "painting-clean.webp",
+              this.buttonSection2,
               options
             );
             break;
@@ -144,6 +140,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-stain.webp",
               "painting-clean.webp",
+              this.buttonSection6,
               options
             );
             break;
@@ -157,6 +154,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-cracked.webp",
               "painting-stain.webp",
+              this.buttonSection5,
               optionsSeal
             );
             break;
@@ -178,37 +176,6 @@ export default class Transition {
     previousSection.hide();
   }
 
-  // handleButtonTitle() {
-  //   switch (this.currentSectionNumber) {
-  //     case 0:
-  //       this.button.innerText = "Découvrir l'oeuvre";
-  //       break;
-  //     case 1:
-  //       this.button.innerText = "Aller dans le passé";
-  //       break;
-  //     case 2:
-  //       this.button.innerText = "Retour vers le présent";
-  //       break;
-  //     case 3:
-  //       this.button.innerText = "Aller dans la réserve";
-  //       break;
-  //     case 4:
-  //       this.button.innerText = "Nettoyer le tableau";
-  //       break;
-  //     case 5:
-  //       this.button.innerText = "Choisir un cadre";
-  //       break;
-  //     case 6:
-  //       this.button.innerText = "Exposer l'oeuvre";
-  //       break;
-  //     case 7:
-  //       this.button.innerText = "Voir les critiques";
-  //       break;
-  //     case 8:
-  //       this.button.innerText = "Recommencer l'expérience";
-  //   }
-  // }
-
   init() {
     this.section1.hide();
     this.section2.hide();
@@ -229,7 +196,6 @@ export default class Transition {
       this.currentSectionNumber = this.currentSectionNumber + 1;
     }
     this.handleSection();
-    // this.handleButtonTitle();
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
     this.displayTimelipse(this.currentSectionNumber);
   }

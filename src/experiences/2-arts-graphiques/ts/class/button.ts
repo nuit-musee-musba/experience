@@ -14,6 +14,8 @@ export default class Button {
     this.id = buttonName;
     this.click = () => onClick();
 
-    this.button.addEventListener("click", () => this.click());
+    this.button.addEventListener("click", () => {
+      this.click();
+    });
   }
 }
