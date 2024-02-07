@@ -6,6 +6,7 @@ import date from "../animation/date";
 import { Section1 } from "../section1/Section1";
 import { Section4 } from "../section4/Section4";
 import Button from "./button";
+import Paragraph from "./paragraph";
 
 export default class Transition {
   currentSection: Section;
@@ -32,6 +33,8 @@ export default class Transition {
   currentSectionNumber: number;
   sections: Section[];
 
+  hintText: Paragraph;
+
   constructor() {
     this.buttonSection2 = new Button("sec2-button", () => this.next());
     this.buttonSection3 = new Button("sec3-button", () => this.next());
@@ -43,6 +46,7 @@ export default class Transition {
     this.buttonSection9 = new Button("sec9-button", () => this.next());
 
     this.currentSectionNumber = 0;
+
     this.section0 = new Section("section-0");
     this.section1 = new Section1(`section-1`, this);
     this.section2 = new Section(`section-2`);
@@ -66,6 +70,9 @@ export default class Transition {
       this.section8,
       this.section9,
     ];
+
+    this.hintText = new Paragraph("hint");
+
     const urlParams = new URLSearchParams(window.location.search);
 
     this.currentSection = this.sections[this.currentSectionNumber];
@@ -176,6 +183,32 @@ export default class Transition {
     previousSection.hide();
   }
 
+  handleHintText() {
+    switch (this.currentSectionNumber) {
+      case 0:
+        this.hintText.changeText("");
+        break;
+      case 1:
+        this.hintText.changeText(
+          "Faites preuve de délicatesse en retirant l'emballage de l'œuvre."
+        );
+        break;
+      case 2:
+        this.hintText.changeText(
+          'Donnez vie au chef-d\'œuvre d’Odilon Redon : "Saint Sébastien".'
+        );
+        break;
+      case 3:
+        this.hintText.changeText("");
+        break;
+      case 7:
+        this.hintText.changeText(
+          "Habillez la peinture  d’un cadre de votre choix"
+        );
+        break;
+    }
+  }
+
   init() {
     this.section1.hide();
     this.section2.hide();
@@ -198,5 +231,6 @@ export default class Transition {
     this.handleSection();
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
     this.displayTimelipse(this.currentSectionNumber);
+    this.handleHintText();
   }
 }
