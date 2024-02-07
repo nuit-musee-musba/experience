@@ -10,6 +10,7 @@ import {
   scene,
   animatedScenes,
   cube,
+  loadModels,
 } from "./scene.js";
 
 const sceneSetUp = async () => {
@@ -148,10 +149,12 @@ const sceneSetUp = async () => {
       });
   }
 
-  function handleFocusPeriod(step) {
+  const handleFocusPeriod = async (step) => {
     if (!step) {
       return;
     }
+
+    await loadModels();
 
     animatedScenes[index].play();
 
@@ -202,8 +205,6 @@ const sceneSetUp = async () => {
       step.cubePosition.z
     );
 
-    // camera.lookAt(cube.position);
-
     cube.cursor = "pointer";
 
     const rayOrigin = new THREE.Vector3(camera.position);
@@ -230,7 +231,7 @@ const sceneSetUp = async () => {
       y: cameraPosition.y,
       z: cameraPosition.z,
     });
-  }
+  };
   handleFocusPeriod(period[index]);
 
   document.getElementById("restart-button").addEventListener("click", restart);
