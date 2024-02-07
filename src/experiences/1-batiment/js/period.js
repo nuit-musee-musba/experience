@@ -12,7 +12,7 @@ export const period = [
   },
   {
     title: "Déplacements Successifs et Incendies",
-    date: "1870",
+    date: "1832",
     position: { x: 0, y: 0, z: 0 },
     description: [
       "Malgré des ajustements en 1809, les déménagements se succèdent, avec des tentatives d'installation dans divers endroits.",
