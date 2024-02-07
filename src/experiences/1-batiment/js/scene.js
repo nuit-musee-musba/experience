@@ -66,7 +66,7 @@ const loadModels = async () => {
   }
 };
 
-await loadModels();
+loadModels();
 
 console.log(animatedScenes);
 // SIZES
