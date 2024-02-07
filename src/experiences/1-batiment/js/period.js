@@ -2,7 +2,7 @@ export const period = [
   {
     title: "La Création du Musée",
     date: "1801",
-    position: { x: 0, y: 0, z: 1 },
+    position: { x: 0, y: 0, z: 0 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -13,7 +13,7 @@ export const period = [
   {
     title: "Déplacements Successifs et Incendies",
     date: "1870",
-    position: { x: 4, y: 1, z: 3 },
+    position: { x: 0, y: 0, z: 0 },
     description: [
       "Malgré des ajustements en 1809, les déménagements se succèdent, avec des tentatives d'installation dans divers endroits.",
       "Incendies en 1862 et 1870 obligent à des travaux de réfection, déplaçant temporairement la collection dans des structures vulnérables.",
@@ -23,7 +23,7 @@ export const period = [
   {
     title: "Construction du Musée Actuel",
     date: "1875",
-    position: { x: 9, y: 2, z: 9 },
+    position: { x: 0, y: 0, z: 0 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -33,7 +33,7 @@ export const period = [
   {
     title: "Aujourd'hui",
     date: "2024",
-    position: { x: 9, y: 5, z: 9 },
+    position: { x: 0, y: 0, z: 0 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes dans les ailes construites par Burguet.",
       "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",

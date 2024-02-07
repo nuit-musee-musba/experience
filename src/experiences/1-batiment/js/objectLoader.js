@@ -18,6 +18,7 @@ export class ObjectLoader {
       action.clampWhenFinished = true;
       action.loop = THREE.LoopOnce;
       action.startAt(0);
+      action.enabled = true;
 
       this.actions.push(action);
     });
@@ -25,8 +26,9 @@ export class ObjectLoader {
 
   play() {
     // console.log(animation.startAt);
-    console.log("try to play");
     this.actions.forEach((action) => {
+      console.log(action);
+      action.reset();
       action.play();
     });
     console.log("should have played");

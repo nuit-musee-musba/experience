@@ -13,6 +13,10 @@ import {
 } from "./scene.js";
 
 const sceneSetUp = async () => {
+  document.oncontextmenu = function () {
+    return false;
+  };
+
   const clock = new THREE.Clock();
   let index = 0;
   let previousTime = 0;
@@ -22,7 +26,7 @@ const sceneSetUp = async () => {
   enableInactivityRedirection();
 
   const getCameraPositionForTarget = (position) => {
-    return { x: position.x + 0, y: position.y + 6, z: position.z + 1 };
+    return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
   };
 
   //MOUSE
@@ -46,6 +50,12 @@ const sceneSetUp = async () => {
       }
     }
   }
+
+  // let restetDeltaTime = false;
+
+  // window.addEventListener("click", (event) => {
+  //   restetDeltaTime = true;
+  // });
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
@@ -191,6 +201,8 @@ const sceneSetUp = async () => {
       y: targetPosition.y,
       z: targetPosition.z,
     });
+
+    // controls.target = cube.position;
 
     gsap.to(controls.object.position, {
       duration: 1,
