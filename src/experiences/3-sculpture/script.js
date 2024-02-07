@@ -1,13 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import IntroPopup from "./component/1-IntroPart/IntroPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
 import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { step } from "three/examples/jsm/nodes/Nodes.js";
+import "./component/1-IntroPart/IntroPart.scss";
 
 window.addEventListener("load", (event) => {
   console.log("La page est complètement chargée");
@@ -17,11 +16,25 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
+let steps = 1;
 
 //
 // INITIALIZATION
 //
+
+const IntroPopup = () => {
+  const IntroPart = document.getElementById("IntroPart");
+  const buttonIntro = document.getElementById("buttonIntro");
+
+  buttonIntro.addEventListener("click", function () {
+    IntroPart.classList.remove("show");
+    RoughHewingPart();
+  });
+};
 IntroPopup();
+
+console.log(steps);
+
 const canvas = document.querySelector("canvas.webgl");
 
 // Scene
@@ -57,7 +70,7 @@ scene.add(plane);
 let statueV1;
 let statueV2;
 
-gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
   gltf.scene.position.set(1.3, -1, -1.5);
   gltf.scene.rotation.y = Math.PI / 2;
@@ -74,16 +87,6 @@ gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
 
   scene.add(statueV2);
 });
-
-// gltfLoader.load("/3-sculpture/Blocs_V1.glb", (gltf) => {
-//   const enfants = gltf.scene.children;
-//   gltf.scene.scale.set(0.38, 0.38, 0.38);
-//   gltf.scene.position.set(0.5, -1, -0.5);
-//   gltf.scene.rotation.y = Math.PI / 2;
-//   statueV1 = gltf.scene;
-
-//   scene.add(statueV1);
-// });
 
 const light = new THREE.AmbientLight(0x404040);
 light.intensity = 100;
@@ -134,21 +137,23 @@ window.addEventListener("mousemove", (event) => {
 
 window.addEventListener("click", onClick);
 
-let steps = 1;
-
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
 
   switch (steps) {
     case 1:
-      break;
-    case 2:
       if (statueV1 && statueV1.children) {
         const intersects = raycaster.intersectObject(statueV1);
+
         if (intersects.length > 0) {
           const clickedBlock = intersects[0].object;
-          statueV1.remove(clickedBlock);
+          console.log("enfant", clickedBlock.name);
+
+          const clickedBlockParent = intersects[0].object.parent;
+          console.log("parent", clickedBlockParent.name);
+
+          statueV1.remove(clickedBlockParent);
 
           if (statueV1.children.length === 0) {
             mouse.x = -1;
@@ -160,12 +165,11 @@ function stepsFunction() {
         }
       }
       break;
-    case 3:
+    case 2:
       if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
 
         if (intersects.length > 0) {
-          console.log("statut V2", intersects.length);
           scene.remove(statueV2);
 
           if (!statueV2) {
@@ -175,7 +179,7 @@ function stepsFunction() {
         }
       }
       break;
-    case 4:
+    case 3:
       break;
   }
 }
@@ -242,3 +246,5 @@ const tick = () => {
 };
 
 tick();
+
+export { steps };
