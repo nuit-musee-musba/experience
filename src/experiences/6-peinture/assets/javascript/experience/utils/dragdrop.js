@@ -26,7 +26,6 @@ function countDuplicatesNbMovesNeeded(strings) {
 }
 
 const movesNeededPerSteps = countDuplicatesNbMovesNeeded(items);
-console.log(movesNeededPerSteps);
 
 function handleDragInteraction(
   dragElementId,
@@ -92,9 +91,6 @@ function handleDragInteraction(
         if (dialog.recipe_step == current_step) {
           //l'item doit etre dans le step actuel
           if (isMultiple) {
-            console.log(howManyDrags);
-            console.log("<=");
-            console.log(placedEl.length - 1);
             if (howManyDrags < dialog.number_needed) {
               placedEl[howManyDrags].style.display = "block";
               howManyDone++;
@@ -147,10 +143,6 @@ function handleDragInteraction(
 
         // -- win a step --
 
-        console.log(howManyDone);
-        console.log(">=");
-        console.log(movesNeededPerSteps[current_step]);
-
         if (howManyDone == movesNeededPerSteps[current_step] && !step_success) {
           //win the game
 
@@ -158,7 +150,6 @@ function handleDragInteraction(
             document.body.classList.add("has-ending-opened");
           } else {
             step_success = true;
-            console.log("next step");
             setTimeout(() => {
               current_step++;
               recipeGeneration();
@@ -179,11 +170,9 @@ function handleDragInteraction(
     } else {
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";
-      console.log("element pas dans la zone");
     }
   });
 }
-console.log(items);
 function countDuplicates(strings) {
   //cette fonction permet de compter le nombre d'objets dans chaque catégorie automatiquement
   const frequency = {};
@@ -211,8 +200,6 @@ function countDuplicates(strings) {
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
 var numberItemsPerCategory = countDuplicates(items);
-
-console.log(items);
 
 let i = [1, 1, 1]; //boucle i
 let i_overall = [1, 1, 1]; //boucle i
@@ -276,10 +263,6 @@ items.items.forEach((element) => {
       ElementList.style.left = leftPosition + "px"; // on applique
     }
   }
-
-  console.log(
-    "item:" + element.name + ",i:" + i[category] + "stage:" + cur_stage + ""
-  );
 
   if (cur_stage == 1) {
     ElementList.style.top = "90px"; //top position

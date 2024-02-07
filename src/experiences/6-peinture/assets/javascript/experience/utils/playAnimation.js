@@ -1,12 +1,16 @@
 import lottie from 'lottie-web';
 
 export function playAnimation(anim) {
-
     let container = document.querySelector('.game-chef__illustration');
+    let animatedElement = container.querySelector('svg');
+    if (animatedElement) {
+        animatedElement.remove();
+    }
     
     // PATH JSON
     const animationPaths = {
         animJeffHappy: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-happy.json',
+        animJeffAdorable: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-adorable.json',
     };
     const animPath = animationPaths[anim];
 
@@ -24,7 +28,9 @@ export function playAnimation(anim) {
 
     animation.addEventListener("complete", () => {
         let animatedElement = container.querySelector('svg');
-        animatedElement.remove();
+        if (animatedElement) {
+            animatedElement.remove();
+        }
         container.classList.remove('is-playing');
     });
 }

@@ -142,7 +142,7 @@
       "recipe_text": "Écoulement inexorable de la vie",
       "recipe_step": 2,
       "number_needed": 1,
-      "animation": "animJeffHappy"
+      "animation": "animJeffAdorable"
     },
     {
       "id": "13",
@@ -178,7 +178,7 @@
       "recipe_text": "La résurrection",
       "recipe_step": 3,
       "number_needed": 1,
-      "animation": "animJeffHappy"
+      "animation": "animJeffAdorable"
     },
     {
       "id": "16",
@@ -226,7 +226,7 @@
       "recipe_text": "La fragilité de la vie",
       "recipe_step": 1,
       "number_needed": 2,
-      "animation": "animJeffHappy"
+      "animation": "animJeffAdorable"
     },
     {
       "id": "20",
