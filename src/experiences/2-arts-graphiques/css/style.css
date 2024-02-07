@@ -2,8 +2,14 @@
 @import url("./utils/reset.css");
 
 @import url("./layout/section.css");
+@import url("./layout/components.css");
 
-@import url("./components/components.css");
+@import url('./components/modal.css');
+@import url("./components/indice.css");
+@import url("./components/timeline.css");
+@import url("./components/frame/frame.css");
+@import url("./components/buttons/btn-primary.css");
+@import url("./components/landmark.css");
 
 * {
   margin: 0;
@@ -30,12 +36,6 @@
   align-self: end;
 }
 
-/* p,
-span,
-a,
-h1 {
-  font-size: 5rem;
-} Louis: I removed it, if someone needs it tell me */
 .italic {
   font-style: italic;
 }

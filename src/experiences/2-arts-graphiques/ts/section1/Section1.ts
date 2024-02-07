@@ -2,27 +2,25 @@ import { Section } from "../class/section";
 import { Sec1Dragables } from "./Sec1Dragables";
 import { initialiseAmountOutside } from "./utils";
 import Transition from "../class/transition";
+import Button from "../class/button";
 
 export class Section1 extends Section {
   dragables: Sec1Dragables[];
-  button: HTMLButtonElement;
+  button: Button;
 
   constructor(sectionId: string, transition: Transition) {
     super(sectionId);
-    this.button = document.querySelector<HTMLButtonElement>(
-      ".sec1-button"
-    ) as HTMLButtonElement;
+    this.button = new Button("sec1-button", () => transition.next());
 
     const dragables = Array.from(
       document.querySelectorAll<HTMLElement>(".sec1-dragable")
     );
 
     this.dragables = dragables.map((elmt) => new Sec1Dragables(elmt));
-    this.button.addEventListener("click", () => transition.next());
   }
   show() {
     super.show();
-    this.button.disabled = true;
+    this.button.button.disabled = true;
   }
 
   hide() {

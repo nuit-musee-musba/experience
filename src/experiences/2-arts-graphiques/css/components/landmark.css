@@ -1,0 +1,15 @@
+.landmark{
+  display: flex;
+  gap: 2rem;
+}
+
+.landmark__dot{
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+.landmark__dot.active{
+  background-color: white;
+}

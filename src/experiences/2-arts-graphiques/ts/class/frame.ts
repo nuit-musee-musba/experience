@@ -14,13 +14,11 @@ export class Frame {
     this.id = frameId;
   }
 
-  addBackground() {
-    this.frame.style.borderColor = "red";
-    this.frame.style.borderWidth = "thick";
-    this.frame.style.borderStyle = "solid";
+  addOpacity() {
+    this.frame.style.opacity = "50%";
   }
-  removeBackground() {
-    this.frame.style.border = "none";
+  removeOpacity() {
+    this.frame.style.opacity = "100%";
   }
   addEventListener(callback: () => void) {
     this.frame.addEventListener("click", () => callback());
