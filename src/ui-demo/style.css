@@ -12,3 +12,15 @@ article {
   flex-flow: column;
   gap: 2rem;
 }
+
+.btn-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.tab-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
