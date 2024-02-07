@@ -1,5 +1,24 @@
+.dialog {
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: 33vw;
+    gap: 2.813rem;
+}
+.dialog-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    button {
+        @include btn-reset;
+        @include global-btn($color-bg, $primary);
+        padding: $btn-padding-y $btn-padding-x;
+    }
+}
 .dialog-content {
+    background: $color-bg;
+    border-radius: $global-btn-padding;
     display: none;
+    padding: 6.25rem 5rem;
 
     &.active{
         display: block;

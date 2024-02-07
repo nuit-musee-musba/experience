@@ -5,14 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/global/style.css" />
   <link rel="stylesheet" href="./assets/stylesheets/main.scss">
 </head>
-<body>
+<body class="page__home">
   <main>
     <h1>Index</h1>
     <div class="dialog">
-      <button class="btn-prev">Prev</button>
-      <button class="btn-next">Next</button>
+      <div class="dialog-nav">
+        <button class="btn-prev">Précédent</button>
+        <button class="btn-next">Suivant</button>
+      </div>
       <div class="dialog-content active">
         <p>Je suis la bulle 1</p>
       </div>
@@ -25,6 +28,15 @@
       </div>
     </div>
   </main>
+  <nav>
+    <div class="bottom-menu">
+      <a href="/" class="btn-icon">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </a>
+    </div>
+  </nav>
 </body>
 <script type="module" src="./assets/javascript/main.js"></script>
 </html>
