@@ -12,6 +12,12 @@
         @include btn-reset;
         @include global-btn($color-bg, $primary);
         padding: $btn-padding-y $btn-padding-x;
+        &.btn-prev {
+            @include icon(arrow-left);
+        }
+        &.btn-next {
+            @include icon(arrow-right, after);
+        }
     }
 }
 .dialog-content {
