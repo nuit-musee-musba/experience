@@ -80,6 +80,12 @@ $widthBox: 30%;
   max-width: 1199px;
   min-width: 100px;
   width: auto;
+  img {
+    top: -20em;
+    left: -15em;
+    position: absolute;
+    width: 35%;
+  }
 }
 
 .popupContent {
@@ -87,6 +93,10 @@ $widthBox: 30%;
   padding: 53px;
   border-radius: 21px;
   margin-bottom: 2em;
+  z-index: 1000;
+  strong {
+    font-family: Montserrat-SemiBold;
+  }
 }
 .popupContent:last-child {
   margin-bottom: 0em;
