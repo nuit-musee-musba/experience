@@ -1,0 +1,98 @@
+.composition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .item {
+        position: absolute;
+        display: none;
+        width: 16vw;
+        &-butterfly {
+            left: 16vw;
+            top: 28vh;
+            width: 7vw; // TODO : REMOVE BC OF NEW PIC
+        }
+        &-crab {
+            right: 15vw;
+            top: 28vh;
+        }
+        &-plum-1 {
+            width: 6vw; // SAME HERE
+            top: 32vh;
+            left: 25vw;
+        }
+        &-plum-2 {
+            width: 6vw; // SAME HERE
+            top: 32vh;
+            left: 28vw;
+        }
+        &-lemon {
+            top: 27.5vh;
+            left: 30.5vw;
+        }
+        &-grape-1 {
+            right: 32vw;
+            top: 18vh;
+            width: 13vw; // SAME
+            z-index: 3;
+        }
+        &-grape-2 {
+            right: 29vw;
+            width: 11vw; // SAME
+            top: 22vh;
+            z-index: 2;
+        }
+        &-catterpillar-1 {
+            top: 24vh;
+            right: 30vw;
+            width: 4vw; //SAME
+            z-index: 4;
+        }
+        &-catterpillar-2 {
+            top: 44vh;
+            right: 40vw;
+            width: 4vw; //SAME
+        }
+        &-grasshopper {
+            left: 23vw;
+            top: 12vh;
+            width: 7vw; // SAME
+        }
+        &-vase {
+            width: 15vw; // SAME
+            top: 7vh;
+            left: 33vw;
+        }
+        &-peach-1 {
+            width: 7vw;
+            top: 25vh;
+            left: 50vw;
+        }
+        &-peach-2 {
+            width: 7vw;
+            top: 26vh;
+            left: 47vw;
+        }
+        &-peach-3 {
+            width: 7vw;
+            top: 28vh;
+            left: 42vw;
+        }
+        &-peach-4 {
+            width: 7vw;
+            top: 30vh;
+            left: 45vw;
+        }
+        &-peach-5 {
+            width: 7vw;
+            top: 42vh;
+            left: 49vw;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.test {
+    position: relative;
+}

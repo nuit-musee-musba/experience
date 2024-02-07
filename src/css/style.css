@@ -73,6 +73,9 @@ body {
   overflow: hidden;
   pointer-events: none;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #scrollBox {
   flex: 2;
@@ -91,11 +94,12 @@ body {
   position: absolute;
   pointer-events: all;
   z-index: 1;
+  width: 100%;
 }
 
 .controls {
   position: absolute;
-  bottom: 10rem;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -127,6 +131,7 @@ body {
   align-items: center;
   position: relative;
   top: 0;
+  width: 100%;
   pointer-events: all;
   z-index: 1;
   border-radius: 10px;

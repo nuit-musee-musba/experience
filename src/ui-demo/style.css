@@ -1,0 +1,14 @@
+:root {
+  --primary: #398384;
+}
+
+body {
+  background: #efefef;
+  padding: 4rem;
+}
+
+article {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
