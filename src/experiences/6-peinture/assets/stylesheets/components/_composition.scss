@@ -1,91 +1,94 @@
 .composition {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    .scene {
+        &-table {
+            margin-bottom: -6vh;
+        }
+        &-accessories {
+            position: absolute;
+            margin-bottom: 3vh;;
+        }
+    }
     .item {
         position: absolute;
         display: none;
-        width: 16vw;
         &-butterfly {
-            left: 16vw;
-            top: 28vh;
-            width: 7vw; // TODO : REMOVE BC OF NEW PIC
+            left: 18vw;
+            top: 26vh;
         }
         &-crab {
             right: 15vw;
-            top: 28vh;
+            top: 31.5vh;
         }
         &-plum-1 {
-            width: 6vw; // SAME HERE
-            top: 32vh;
-            left: 25vw;
+            top: 35vh;
+            left: 24vw;
         }
         &-plum-2 {
-            width: 6vw; // SAME HERE
-            top: 32vh;
-            left: 28vw;
+            top: 35vh;
+            left: 28.5vw;
         }
         &-lemon {
-            top: 27.5vh;
-            left: 30.5vw;
-        }
-        &-grape-1 {
-            right: 32vw;
-            top: 18vh;
-            width: 13vw; // SAME
-            z-index: 3;
+            top: 32.5vh;
+            left: 31.15vw;
         }
         &-grape-2 {
-            right: 29vw;
-            width: 11vw; // SAME
-            top: 22vh;
-            z-index: 2;
+            right: 34.5vw;
+            top: 16vh;
+            z-index: 0;
+        }
+        &-grape-1 {
+            right: 27.5vw;
+            top: 21vh;
+            z-index: 1;
         }
         &-catterpillar-1 {
-            top: 24vh;
-            right: 30vw;
-            width: 4vw; //SAME
+            top: 27vh;
+            right: 31vw;
             z-index: 4;
         }
         &-catterpillar-2 {
-            top: 44vh;
+            top: 45.5vh;
             right: 40vw;
-            width: 4vw; //SAME
+            z-index: 3;
         }
         &-grasshopper {
             left: 23vw;
-            top: 12vh;
-            width: 7vw; // SAME
+            top: 2.5vh;
+            z-index: -1;
         }
         &-vase {
-            width: 15vw; // SAME
-            top: 7vh;
+            top: 18.5vh;
             left: 33vw;
+            z-index: -1;
         }
         &-peach-1 {
-            width: 7vw;
-            top: 25vh;
-            left: 50vw;
+            top: 26vh;
+            left: 43.5vw;
+            z-index: 3;
         }
         &-peach-2 {
-            width: 7vw;
-            top: 26vh;
-            left: 47vw;
+            top: 28.5vh;
+            left: 49vw;
+            z-index: 3;
         }
         &-peach-3 {
-            width: 7vw;
-            top: 28vh;
-            left: 42vw;
+            top: 31.25vh;
+            left: 40.25vw;
         }
         &-peach-4 {
-            width: 7vw;
-            top: 30vh;
-            left: 45vw;
+            top: 33.5vh;
+            left: 43.5vw;
+            z-index: 3;
         }
         &-peach-5 {
-            width: 7vw;
-            top: 42vh;
-            left: 49vw;
+            top: 32vh;
+            left: 44vw;
+            z-index: 1;
         }
         img {
             width: 100%;

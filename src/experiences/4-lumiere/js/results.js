@@ -22,14 +22,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
   switch (paintingOrigin) {
     case "first":
       console.log("first painting");
+      document
+        .querySelector(`#result-first-painting`)
+        .classList.remove("hidden");
       break;
 
     case "second":
       console.log("second painting");
+      document
+        .querySelector(`#result-second-painting`)
+        .classList.remove("hidden");
       break;
 
     case "third":
       console.log("third painting");
+      document
+        .querySelector(`#result-third-painting`)
+        .classList.remove("hidden");
       break;
 
     default:
