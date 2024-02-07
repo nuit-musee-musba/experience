@@ -1,5 +1,6 @@
 import { handleAmountOutside } from "./utils";
 import { Dragable } from "../interactive/dragable";
+import experience from "../script";
 
 const initialPlace = {
   one: {
@@ -51,11 +52,11 @@ export class Sec1Dragables extends Dragable {
       elmtBoundindRect.left > zoneBoundindRect.right;
 
     if (this.isOutside) {
-      handleAmountOutside("add", this.element.id);
+      handleAmountOutside("add", this.element.id, experience);
       this.element.style.backgroundColor = "#BBEEAA";
       return;
     }
-    handleAmountOutside("remove", this.element.id);
+    handleAmountOutside("remove", this.element.id, experience);
     this.element.style.backgroundColor = "#DDDDDD";
   }
 

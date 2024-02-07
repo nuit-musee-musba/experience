@@ -16,8 +16,8 @@ const Paint = async (
   canvasPercentage!.innerText = "0%";
   btnNext!.disabled = true;
 
-  let width = 2000;
-  let height = 2500;
+  let width = 1395;
+  let height = 1801;
 
   const app: any = new PIXI.Application({
     width: width,
@@ -36,7 +36,7 @@ const Paint = async (
   setup()
 
   function setup() {
-    const { width, height } = { width: 2000, height:2500 };
+    const { width, height } = { width: 1395, height: 1801 };
     const stageSize = { width, height };
 
     const background = Object.assign(PIXI.Sprite.from(t1), stageSize);
@@ -48,7 +48,7 @@ const Paint = async (
 
     app.stage.addChild(background, imageToReveal, renderTextureSprite);
 
-    app.stage.interactive = true;
+    app.stage.eventMode = 'dynamic';
     app.stage.hitArea = app.screen;
     app.stage
       .on("pointerdown", pointerDown)
