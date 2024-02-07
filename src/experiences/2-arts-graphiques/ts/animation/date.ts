@@ -1,4 +1,4 @@
-const Paint = {
+const Date = {
   year: document.getElementById('date-anim__year') as HTMLElement,
 
   init() {
@@ -23,11 +23,11 @@ const Paint = {
         text.innerText = numberFrom.toString().padStart(2, '0');
       }
     }, speed);
-    
+
     setTimeout(() => {
       document.querySelector<HTMLButtonElement>('#button')!.disabled = false
     }, 3000);
   },
 };
 
-export default Paint;
+export default Date;
