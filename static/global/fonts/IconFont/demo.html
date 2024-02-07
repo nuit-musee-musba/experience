@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Font Demo</title>
+    <link rel="stylesheet" href="./demo.css"></link>
+    <link rel="stylesheet" href="./IconFont.css"></link>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* font-size: 100px; */
+        }
+        body {
+            padding-top: 48px;
+            font-size: 14px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            /* width: 1200px; */
+            width: 100%;
+            margin: 0 auto;
+        }
+        .iconList {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .iconItem {
+            width: 120px;
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .iconItem i {
+            display: block;
+            font-size: 80px;
+            line-height: 1;
+            outline: 1px dashed #ccc;
+        }
+        .name {
+            margin-top: 12px;
+        }
+        .class {
+            font-size: 12px;
+            color: #888;
+        }
+        .unicode {
+            font-size: 12px;
+            color: #888;
+        }
+        .siteName {
+            text-align: center;
+            font-size: 64px;
+        }
+        .footer {
+            padding-top: 64px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="siteName">Icon font</div>
+            <div class="iconList">
+                <div class="iconItem">
+                    <i class="iconfont icon-home"></i>
+                    <div class="name">home</div>
+                    <div class="class">.icon-home</div>
+                    <div class="unicode">U+EE01</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-volume-on"></i>
+                    <div class="name">volume-on</div>
+                    <div class="class">.icon-volume-on</div>
+                    <div class="unicode">U+EE02</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-volume-off"></i>
+                    <div class="name">volume-off</div>
+                    <div class="class">.icon-volume-off</div>
+                    <div class="unicode">U+EE03</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-left"></i>
+                    <div class="name">left</div>
+                    <div class="class">.icon-left</div>
+                    <div class="unicode">U+EE04</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-close"></i>
+                    <div class="name">close</div>
+                    <div class="class">.icon-close</div>
+                    <div class="unicode">U+EE05</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-check"></i>
+                    <div class="name">check</div>
+                    <div class="class">.icon-check</div>
+                    <div class="unicode">U+EE06</div>
+                </div><div class="iconItem">
+                    <i class="iconfont icon-info"></i>
+                    <div class="name">info</div>
+                    <div class="class">.icon-info</div>
+                    <div class="unicode">U+EE07</div>
+                </div>
+            </div>
+            <article class="article">
+                <h1>How to use</h1>
+                <p>
+                    Step 1: Include CSS.
+                </p>
+                <p>
+                    <div class="code">
+                        <div class="line"><span style="">&lt;</span><span style="color: rgb(0, 136, 85)">link</span><span
+                                style="">&nbsp;rel=</span><span style="color: rgb(170, 17, 17)">&quot;stylesheet&quot;</span><span
+                                style="">&nbsp;href=</span><span style="color: rgb(170, 17, 17)">&quot;./Iconfont.css&quot;</span><span
+                                style="">&gt;</span></div>
+                    </div>
+                </p>
+                <p>
+                    Step 2: Use the icon by class.
+                </p>
+                <p>
+                    <div class="code">
+                        <div class="line"><span style="">&lt;</span><span style="color: rgb(0, 136, 85)">span</span><span
+                                style="">&nbsp;class=</span><span style="color: rgb(170, 17, 17)">&quot;iconfont&nbsp;icon-xxx&quot;</span><span
+                                style="">&gt;&lt;/</span><span style="color: rgb(0, 136, 85)">span</span><span style="">&gt;</span></div>
+                    </div>
+                </p>
+
+            </article>
+            <div class="footer">
+                <div>Make by <a href="https://www.figma.com/community/plugin/1129455674275940478" target="_blank">Icon Font Exporter</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,13 +1,13 @@
 :root {
-  font-size: 16px;
+  /* font-size: 16px; */
   --white: #f5f5f5;
 }
 
-@media (min-width: 2000px) {
+/* @media (min-width: 2000px) {
   :root {
     font-size: 64px;
   }
-}
+} */
 
 * {
   margin: 0;
@@ -28,25 +28,54 @@ body {
 }
 
 body {
-  line-height: 120%;
+  line-height: 1.5;
 }
 
 p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ----- UI Kit ----- */
+
+.parameter-btn-list {
+  position: fixed;
+  bottom: 96px;
+  left: 96px;
+  z-index: 1050;
+  display: flex;
+  align-items: flex-end;
+}
+.btn-square {
+  width: 112px;
+  height: 111px;
+  border-radius: 21px;
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-square + .btn-square {
+  margin-left: 24px;
+}
+
+.btn-square svg {
+  width: 51px;
+  height: 51px;
+  object-fit: contain;
 }
 
 /* TEMP ELEMENTS */
 .btn-temp-bottom-right {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 8rem;
+  right: 8rem;
   z-index: 1020;
 }
 
 .btn-temp-color {
   background-color: var(--white);
   color: black;
-  font-size: 1rem;
+  font-size: 4rem;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
 }
@@ -89,7 +118,7 @@ p {
 }
 
 .popin-body {
-  width: 30rem;
+  width: 120rem;
   color: var(--white);
   box-sizing: border-box;
 }
@@ -97,13 +126,59 @@ p {
 /* ----- Consignes ----- */
 
 .consignes {
+  font-size: 46px;
   padding: 5rem;
+  width: 3036px;
   position: relative;
   color: var(--white);
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   pointer-events: none;
+}
+
+/* Ecriteaux */
+.legende {
+  position: absolute;
+  bottom: 264px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.legende-ecriteau {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #c2ab68;
+  border-radius: 8px;
+  height: 70px;
+  padding: 8px 175px;
+}
+.legende-ecriteau::before,
+.legende-ecriteau::after {
+  content: "";
+  position: absolute;
+  height: 50px;
+  width: 60px;
+  background-color: #c2ab68;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.legende-ecriteau::before {
+  left: -30px;
+}
+
+.legende-ecriteau::after {
+  right: -30px;
+}
+
+.legende-ecriteau p {
+  margin-bottom: 0;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 /* ----- Validation ----- */
@@ -114,12 +189,62 @@ p {
 
 #btn-validate {
   position: fixed;
-  bottom: 1rem;
+  bottom: 96px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.popin-btn.hidden {
-  opacity: 0;
-  visibility: hidden;
+.popin-btn:disabled {
+  opacity: 0.5;
+}
+
+/* ----- Results page ----- */
+.page-results .wrapper {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.page-results .wrapper-container {
+  width: 100%;
+  max-width: 3036px;
+  height: 100%;
+  max-height: 1636px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 20px;
+  padding: 170px 306px;
+  background-color: #000000;
+  color: var(--white);
+}
+
+.page-results .wrapper-row {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% + 136px);
+  margin-left: -68px;
+  margin-right: -68px;
+}
+
+.page-results .col-demi,
+.page-results .col-full {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 68px;
+  padding-right: 68px;
+}
+.page-results .col-demi {
+  max-width: 50%;
+  flex: 1 0 0;
+}
+
+.page-results .col-demi.btn-wrapper {
+  align-items: flex-end;
 }

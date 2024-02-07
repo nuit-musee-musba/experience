@@ -14,29 +14,36 @@
   <canvas class="webgl"></canvas>
 
   <div class="consignes">
+    <p>Dans le style académique (un style dicté par l’Académie Royale de Peinture et Sculpture, en France durant
+      l’Ancien Régime), les peintres recherchent la perfection des traits, plutôt que le réalisme des couleurs et des
+      ombres.</p>
     <p>Retrouvez le bon emplacement de la lumière en déplaçant le soleil devant et derrière le tableau.</p>
   </div>
-  <button id="btn-validate" class="popin-btn btn-temp-color hidden" data-target="#popin-first-painting">Valider la
-    position</button>
-
-  <div class="popin hidden" id="popin-result-true">
-    <div class="popin-body">
-      <h1>Bravo !</h1>
-      <p>Vous avez réussi à retrouver l’emplacement du soleil sur le tableau La Lyre Immortelle, de Abel-Dominique BOYE
-        !</p>
-      <p>Dans l’académisme (un style dicté par l’Académie des Beaux-Arts de France), les peintres représentent des
-        sujets dits “nobles” comprenant la peinture historique, les sujets religieux et mythologiques, les portraits,
-        les nus et les paysages.</p>
-      <p>L’objectif est de représenter le beau et d’imiter une réalité idéalisée. Les peintres recherchent la perfection
-        des traits, plutôt que le réalisme des couleurs et des ombres. Les scènes sont peintes en atelier, ce qui offre
-        une lumière limitée, plutôt froide et lissante.</p>
-      <p>Découvrez ce chef-d'œuvre dans l’Aile Bonheur du musée du musée !</p>
-
-      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+  <div class="legende">
+    <div class="legende-ecriteau">
+      <p><em>La Lyre Immortelle</em>, BOYE Abel-Dominique</p>
     </div>
   </div>
-  <div class="popin-overlay hidden"></div>
+  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider</button>
 
+  <!-- Begin Global buttons -->
+  <div class="bottom-menu">
+    <a href="/" class="btn-icon">
+      <i class="i-home">
+        <span>Accueil</span>
+      </i>
+    </a>
+    <button class="btn-icon" disabled="">
+      <i class="i-volume-off">
+        <span>Pas de son disponible</span>
+      </i>
+    </button>
+    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
+      <i class="i-left"> </i>
+      <span>Retour à la galerie</span>
+    </a>
+  </div>
+  <!-- End Global buttons -->
 </body>
 
 </html>

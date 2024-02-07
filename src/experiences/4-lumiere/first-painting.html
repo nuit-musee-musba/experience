@@ -14,25 +14,35 @@
   <canvas class="webgl"></canvas>
 
   <div class="consignes">
+    <p>Les peintres inspirés du Caravage aiment représenter leur sujet avec un fort contraste entre les zones de
+      lumières et les zones d’ombres.</p>
     <p>Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur le cercle.</p>
   </div>
-  <button id="btn-validate" class="popin-btn btn-temp-color hidden" data-target="#popin-first-painting">Valider la
-    position</button>
-
-  <div class="popin hidden" id="popin-result-true">
-    <div class="popin-body">
-      <h1>Bravo !</h1>
-      <p>Vous avez réussi à replacer la lanterne du tableau Saint Sébastien soigné par Irène, du Maître à la
-        Chandelle !</p>
-      <p>Dans le caravagisme, les peintres représentent le sujet avec un fort contraste entre les zones de lumières et
-        les zones d’ombres : c’est le clair-obscur !</p>
-      <p>Cela permet d’accentuer le message du peintre en guidant l'œil du spectateur sur l’essentiel, tout en donnant
-        un côté dramatique à l'œuvre.</p>
-      <p>Découvrez ce chef-d'œuvre dans l’Aile Lacour-Sud du musée !</p>
-      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+  <div class="legende">
+    <div class="legende-ecriteau">
+      <p><em>Saint Sébastien soigné par Irène</em>, le Maître à la chandelle</p>
     </div>
   </div>
-  <div class="popin-overlay hidden"></div>
+  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider</button>
+
+  <!-- Begin Global buttons -->
+  <div class="bottom-menu">
+    <a href="/" class="btn-icon">
+      <i class="i-home">
+        <span>Accueil</span>
+      </i>
+    </a>
+    <button class="btn-icon" disabled="">
+      <i class="i-volume-off">
+        <span>Pas de son disponible</span>
+      </i>
+    </button>
+    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
+      <i class="i-left"> </i>
+      <span>Retour à la galerie</span>
+    </a>
+  </div>
+  <!-- End Global buttons -->
 
 </body>
 

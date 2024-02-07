@@ -63,6 +63,9 @@ let globalParameters = {
   lightRadius: 1.3,
   planDistance: 0.5,
   white: "#f5f5f5",
+  ambientIntensity: 4.5,
+  rectAreaIntensity: 1,
+  changeValue: 0,
 };
 
 // Canvas
@@ -109,7 +112,7 @@ thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
  * Loader
  */
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/4-lumiere//draco/");
+dracoLoader.setDecoderPath("/4-lumiere/draco/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -161,21 +164,22 @@ paintingTweaks
   });
 
 // Frame
-gltfLoader.load(
-  "/4-lumiere/third-painting/third-painting-frame.glb",
-  (gltf) => {
-    gltf.scene.scale.set(6.0625, 6.0625, 6.0625);
-    gltf.scene.position.z = 0.5;
-    gltf.scene.position.x = -0.05;
-    scene.add(gltf.scene);
-  },
-  () => {
-    console.log("progress");
-  },
-  (error) => {
-    console.log("error:", error);
-  }
-);
+// gltfLoader.load(
+//   "/4-lumiere/third-painting/third-painting-frame.glb",
+//   (gltf) => {
+//     // gltf.scene.scale.set(6.0625, 6.0625, 6.0625);
+//     gltf.scene.position.z = 0.5;
+//     gltf.scene.position.x = -0.05;
+//     // gltf.scene.rotation.z = Math.PI;
+//     scene.add(gltf.scene);
+//   },
+//   () => {
+//     console.log("progress");
+//   },
+//   (error) => {
+//     console.log("error:", error);
+//   }
+// );
 
 // line
 var lineGeometry = new THREE.CylinderGeometry(
@@ -192,7 +196,6 @@ var lineMaterial = new THREE.MeshBasicMaterial({
   // wireframe: true,
 });
 var line = new THREE.Mesh(lineGeometry, lineMaterial);
-// line.position.z = 0.25;
 line.position.z = globalParameters.planDistance;
 line.position.y = -0.5;
 scene.add(line);
@@ -200,10 +203,18 @@ scene.add(line);
 /**
  * Lights
  */
+
+// Light colors
+const lightColors = {
+  blue: new THREE.Color("#9FB2FF"),
+  yellow: new THREE.Color("#FFD79E"),
+  red: new THREE.Color("#FF000C"),
+};
+
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
   "#d1dbff", // color
-  5 // intensity
+  globalParameters.ambientIntensity // intensity
 );
 scene.add(ambientLight);
 
@@ -215,7 +226,7 @@ ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 // Second painting point light
 const rectAreaLight = new THREE.RectAreaLight(
   "#9FB2FF", // color
-  1, // intensity
+  globalParameters.rectAreaIntensity, // intensity
   8, // width
   2.5 // height
 );
@@ -235,6 +246,21 @@ rectAreaLightTweaks.addColor(rectAreaLight, "color").onChange((value) => {
   console.log(value.getHexString());
 });
 rectAreaLightTweaks.add(rectAreaLight, "intensity").min(0).max(15).step(1);
+
+// RectAreaLight color change
+changeMainLightColor();
+
+function changeMainLightColor() {
+  const framePosY = globalParameters.changeValue >= 0.5 ? "top" : "bottom";
+
+  const colorFrom = framePosY === "top" ? lightColors.yellow : lightColors.red;
+  const colorTo = framePosY === "top" ? lightColors.blue : lightColors.yellow;
+  const alphaInterpolation =
+    framePosY === "top"
+      ? globalParameters.changeValue - 0.5
+      : globalParameters.changeValue;
+  rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
+}
 
 // Helper
 const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
@@ -336,6 +362,12 @@ window.addEventListener(
 let touchStartY = 0;
 let touchMoveY = 0;
 let isSwiping = false;
+globalParameters.changeValue =
+  (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
+ambientLight.intensity =
+  globalParameters.ambientIntensity * globalParameters.changeValue + 0.5;
+rectAreaLight.intensity =
+  globalParameters.rectAreaIntensity * globalParameters.changeValue;
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
@@ -358,14 +390,22 @@ canvas.addEventListener(
       touchMoveY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
       const deltaY = touchMoveY - touchStartY;
       // Adjust the rotation of the ellipse based on the swipe distance
-      const movementSpeed = 1; // Adjust this value for desired sensitivity
+      const movementSpeed = 0.5; // Adjust this value for desired sensitivity
       if (rectAreaLight.position.y < lightMaxPos && deltaY > 0) {
         rectAreaLight.position.y += deltaY * movementSpeed;
+        rectAreaLight.position.y > lightMaxPos
+          ? (rectAreaLight.position.y = lightMaxPos)
+          : (rectAreaLight.position.y = rectAreaLight.position.y);
       }
       if (rectAreaLight.position.y > lightMinPos && deltaY < 0) {
         rectAreaLight.position.y += deltaY * movementSpeed;
+        rectAreaLight.position.y < lightMinPos
+          ? (rectAreaLight.position.y = lightMinPos)
+          : (rectAreaLight.position.y = rectAreaLight.position.y);
       }
-      // changeLights();
+      changeLights();
+      changeMainLightColor();
+      checkResult();
       // Update the starting Y position for the next frame
       touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
@@ -382,45 +422,46 @@ window.addEventListener("touchend", function () {
 });
 
 // Change day time
-// function changeLights() {
-//   const relativeCursorPosition = new THREE.Vector3(pointer.x, pointer.y, 0).sub(
-//     line.position
-//   );
-//   const angle = Math.atan2(relativeCursorPosition.y, relativeCursorPosition.x);
-//   const normalizedAngle = (angle + Math.PI * 2) % (Math.PI * 2);
-//   return normalizedAngle;
-// }
+function changeLights() {
+  // Update the change value depending on the light position
+  globalParameters.changeValue =
+    (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
+
+  // Update ambientLight intensity
+  ambientLight.intensity =
+    globalParameters.ambientIntensity * globalParameters.changeValue + 0.5;
+
+  // Update rectAreaLight intensity
+  rectAreaLight.intensity =
+    globalParameters.rectAreaIntensity * globalParameters.changeValue;
+}
 
 // // Result button
-// const resultBtn = document.querySelector("#btn-validate");
-// let resultState = false;
-// const valudResultPopin = document.querySelector("#popin-result-true");
+const resultBtn = document.querySelector("#btn-validate");
+let resultState = false;
 
-// // Update line rotation
-// function updatePosition() {
-//   const angle = calculateAngle();
-//   line.rotation.z = angle;
+// Update line position
+function checkResult() {
+  // // Check result
+  if (
+    globalParameters.changeValue < 0.55 &&
+    globalParameters.changeValue > 0.45
+  ) {
+    resultState = true;
+    resultBtn.disabled = false;
+  } else {
+    resultBtn.disabled = true;
+    resultState = false;
+  }
+}
 
-//   // // Check result
-//   if (angle > 3.6 && angle < 3.9) {
-//     console.log("angle ok");
-//     resultState = true;
-//     if (resultBtn.classList.contains("hidden")) {
-//       resultBtn.classList.remove("hidden");
-//     }
-//   } else {
-//     resultState = false;
-//   }
-// }
-
-// // Check result on click
-// resultBtn.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   if (resultState == true) {
-//     popinShow(valudResultPopin);
-//   } else {
-//   }
-// });
+// Check result on click
+resultBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (resultState == true) {
+    window.location.replace("./results.html?painting=third");
+  }
+});
 
 // Controls
 // const controls = new OrbitControls(camera, canvas);

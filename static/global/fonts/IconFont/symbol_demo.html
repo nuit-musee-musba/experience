@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./demo.css"></link>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+
+            color: #005bcc;
+        }
+        .list {
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 16px;
+        }
+        .item {
+            width: 80px;
+            height: 80px;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            border: 1px dashed #333;
+        }
+        .article {
+            max-width: 400px;
+            padding-left: 16px;
+        }
+    </style>
+    <script src="./Iconfont.js"></script>
+</head>
+<body>
+    <div class="list">
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#fo"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#heck"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#home"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#left"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#lose"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#volume-off"></use>
+            </svg>
+        </div>
+        
+        <div class="item">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#volume-on"></use>
+            </svg>
+        </div>
+        
+    </div>
+    <article class="article">
+        <h1>How to use</h1>
+        <p>
+            Step 1: Include JS.
+        </p>
+        <p>
+            <div class="code">
+                <div class="line"><span style="">&lt;</span><span style="color: rgb(0, 136, 85)">script</span><span style="">&nbsp;src=</span><span style="color: rgb(170, 17, 17)">&quot;./iconfont.js&quot;</span><span style="">&gt;&lt;/</span><span style="color: rgb(0, 136, 85)">script</span><span style="">&gt;</span></div>
+            </div>
+        </p>
+        <p>
+            Step 2: Use CSS.
+        </p>
+        <p>
+            <div class="code">
+                <div class="line"><span style="">&lt;</span><span style="color: rgb(0, 136, 85)">style</span><span style="">&gt;</span></div>
+                    <div class="line"><span style="">.</span><span style="color: rgb(17, 102, 119)">icon</span><span style="">&nbsp;{</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;width:&nbsp;</span><span style="color: rgb(17, 102, 68)">1</span><span style="color: rgb(119, 0, 136)">em</span><span style="">;</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;height:&nbsp;</span><span style="color: rgb(17, 102, 68)">1</span><span style="color: rgb(119, 0, 136)">em</span><span style="">;</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;vertical-align:&nbsp;</span><span style="color: rgb(17, 102, 68)">-0.15</span><span style="color: rgb(119, 0, 136)">em</span><span style="">;</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;fill:&nbsp;</span><span style="color: rgb(34, 17, 153)">currentColor</span><span style="">;</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;overflow:&nbsp;</span><span style="color: rgb(34, 17, 153)">hidden</span><span style="">;</span></div>
+<div class="line"><span style="">}</span></div>
+                    <div class="line"><span style="">&lt;/</span><span style="color: rgb(0, 136, 85)">style</span><span style="">&gt;</span></div>
+            </div>
+        </p>
+        <p>
+            Step 3: Use icon like this.
+            
+        </p>
+        <p>
+            <div class="code">
+                <div class="line"><span style="">&lt;</span><span style="color: rgb(0, 136, 85)">svg</span><span style="">&nbsp;class=</span><span style="color: rgb(170, 17, 17)">&quot;icon&quot;</span><span style="">&nbsp;aria-hidden=</span><span style="color: rgb(170, 17, 17)">&quot;true&quot;</span><span style="">&gt;</span></div>
+<div class="line"><span style="">&nbsp;&nbsp;&lt;</span><span style="color: rgb(0, 136, 85)">use</span><span style="">&nbsp;xlink:href=</span><span style="color: rgb(170, 17, 17)">&quot;#icon-xxx&quot;</span><span style="">&gt;&lt;/</span><span style="color: rgb(0, 136, 85)">use</span><span style="">&gt;</span></div>
+<div class="line"><span style="">&lt;/</span><span style="color: rgb(0, 136, 85)">svg</span><span style="">&gt;</span></div>
+            </div>
+        </p>
+
+    </article>
+</body>
+</html>

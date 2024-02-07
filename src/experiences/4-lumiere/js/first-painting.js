@@ -10,42 +10,6 @@ import { enableInactivityRedirection } from "/global/js/inactivity";
 enableInactivityRedirection();
 
 /**
- * Popins
- */
-
-// Hide popin
-const popinHide = (targetPopin) => {
-  targetPopin.classList.add("hidden");
-  document.querySelector(".popin-overlay").classList.add("hidden");
-};
-
-// Show popin
-const popinShow = (targetPopin) => {
-  targetPopin.classList.remove("hidden");
-  document.querySelector(".popin-overlay").classList.remove("hidden");
-};
-
-// Popin close buttons
-const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
-for (const popinBtn of popinBtns) {
-  const targetPopin = document.querySelector(popinBtn.dataset.target);
-  popinBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinHide(targetPopin);
-  });
-}
-
-// Popin open buttons
-const popinOpenBtns = document.querySelectorAll(".popin-btn.popin-open");
-for (const popinOpenBtn of popinOpenBtns) {
-  const targetPopin = document.querySelector(popinOpenBtn.dataset.target);
-  popinOpenBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinShow(targetPopin);
-  });
-}
-
-/**
  * Threejs
  */
 
@@ -88,20 +52,26 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
+// First painting
 const colorTexture = textureLoader.load(
   "/4-lumiere/first-painting/first-painting-color.jpg"
 );
+colorTexture.colorSpace = THREE.SRGBColorSpace;
+
 const heightTexture = textureLoader.load(
   "/4-lumiere/first-painting/first-painting-height.png"
 );
 
-colorTexture.colorSpace = THREE.SRGBColorSpace;
+// Wallpaper
+const wallpaperHeightTexture = textureLoader.load(
+  "/4-lumiere/first-painting/background-height.png"
+);
 
 /**
  * Loader
  */
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/4-lumiere//draco/");
+dracoLoader.setDecoderPath("/4-lumiere/draco/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -109,6 +79,17 @@ gltfLoader.setDRACOLoader(dracoLoader);
 /**
  * Scene objects
  */
+
+// Wallpaper
+const wallpaperGeometry = new THREE.PlaneGeometry(6, 4, 1, 1);
+const wallpaperMaterial = new THREE.MeshStandardMaterial({
+  color: "#000000",
+  displacementMap: wallpaperHeightTexture,
+  displacementScale: 0.2,
+});
+const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
+scene.add(wallpaper);
+wallpaper.position.z = -0.5;
 
 // First painting
 const planeGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
@@ -265,7 +246,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 4;
+camera.position.z = 5;
 scene.add(camera);
 
 /**
@@ -323,7 +304,6 @@ function calculateAngle() {
 // Result button
 const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
-const valudResultPopin = document.querySelector("#popin-result-true");
 
 // Update ellipse rotation
 function updateRotation() {
@@ -332,12 +312,10 @@ function updateRotation() {
 
   // Check result
   if (angle > 1.5 && angle < 1.8) {
-    console.log("angle ok");
     resultState = true;
-    if (resultBtn.classList.contains("hidden")) {
-      resultBtn.classList.remove("hidden");
-    }
+    resultBtn.disabled = false;
   } else {
+    resultBtn.disabled = true;
     resultState = false;
   }
 }
@@ -346,8 +324,7 @@ function updateRotation() {
 resultBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (resultState == true) {
-    popinShow(valudResultPopin);
-  } else {
+    window.location.replace("./results.html?painting=first");
   }
 });
 

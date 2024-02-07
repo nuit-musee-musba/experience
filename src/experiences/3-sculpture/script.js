@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import LoadPart from "./LoadPart";
+import IntroPopup from "./component/1-IntroPart/IntroPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
@@ -7,10 +9,6 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import "./component/1-IntroPart/IntroPart.scss";
-
-window.addEventListener("load", (event) => {
-  console.log("La page est complètement chargée");
-});
 
 const sizes = {
   width: window.innerWidth,
@@ -31,6 +29,7 @@ const IntroPopup = () => {
     RoughHewingPart();
   });
 };
+LoadPart();
 IntroPopup();
 
 console.log(steps);

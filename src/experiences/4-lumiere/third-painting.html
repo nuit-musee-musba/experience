@@ -14,28 +14,39 @@
   <canvas class="webgl"></canvas>
 
   <div class="consignes">
-    <p>Retrouvez le bon moment de la journée en déplaçant le soleil de bas en haut.</p>
+    <p>Dans le courant impressionniste et pour les peintres qui s’en inspirent ensuite, les artistes représentent une
+      réalité basée sur le moment présent. Ils capturent les vibrations de la lumière et sa manière d’impacter son
+      environnement.</p>
+    <p>Retrouvez l’éclairage adapté au moment de la journée du tableau original, en déplaçant le soleil de bas en haut.
+    </p>
   </div>
-  <button id="btn-validate" class="popin-btn btn-temp-color hidden" data-target="#popin-first-painting">Valider la
-    position</button>
-
-  <div class="popin hidden" id="popin-result-true">
-    <div class="popin-body">
-      <h1>Bravo !</h1>
-      <p>Vous avez réussi à retrouver à quel moment de la journée a été peint Les Quais de Bordeaux, par Alfred SMITH !
-      </p>
-      <p>Dans le post-impressionnisme, les peintres représentent une réalité basée sur le moment présent, et capturent
-        les vibrations de la lumière, sa manière d’impacter son environnement.</p>
-      <p>Ils sont fascinés par les changements de couleurs en fonction des heures de la journée ainsi que des reflets
-        sur l’eau.</p>
-      <p>La peinture apparaît comme fragmentée et vague, grâce à une palette de couleurs claires, symbolisant la
-        lumière, appliquée par des touches dynamiques en forme de virgule.</p>
-      <p>Découvrez ce chef-d'œuvre dans l’Aile Bonheur-nord du musée !</p>
-
-      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+  <div class="legende">
+    <div class="legende-ecriteau">
+      <p><em>Les Quais de Bordeaux</em>, SMITH Alfred</p>
     </div>
   </div>
-  <div class="popin-overlay hidden"></div>
+
+  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider la
+    position</button>
+
+  <!-- Begin Global buttons -->
+  <div class="bottom-menu">
+    <a href="/" class="btn-icon">
+      <i class="i-home">
+        <span>Accueil</span>
+      </i>
+    </a>
+    <button class="btn-icon" disabled="">
+      <i class="i-volume-off">
+        <span>Pas de son disponible</span>
+      </i>
+    </button>
+    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
+      <i class="i-left"> </i>
+      <span>Retour à la galerie</span>
+    </a>
+  </div>
+  <!-- End Global buttons -->
 
 </body>
 

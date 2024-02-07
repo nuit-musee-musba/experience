@@ -64,6 +64,7 @@ let globalParameters = {
   lightAngleStrength: 0.5,
   ellipseRadius: 4,
   white: "#f5f5f5",
+  userInteract: false,
 };
 
 // Canvas
@@ -268,6 +269,16 @@ canvas.addEventListener("click", () => {
   }
 });
 
+// Rotate paintings
+function checkUserInteractions() {
+  if (globalParameters.userInteract) {
+    console.log("stop rotate paintings");
+  } else {
+    console.log("Rotate paintings");
+  }
+  globalParameters.userInteract = false;
+}
+
 /**
  * Camera
  */
@@ -295,28 +306,31 @@ canvas.addEventListener("touchmove", (event) => {
 
 // Variables to track touch events
 let touchStartY = 0;
+let touchMoveY = 0;
 let isSwiping = false;
 
 // Add event listeners for touch events on the window
 window.addEventListener("touchstart", function (event) {
   // Record the starting Y position of the touch
-  touchStartY = event.touches[0].clientY;
+  touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
+  globalParameters.userInteract = true;
 });
 
 window.addEventListener(
   "touchmove",
   function (event) {
     if (isSwiping) {
+      touchMoveY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
       // Calculate the vertical distance swiped
-      const deltaY = -(event.touches[0].clientY - touchStartY);
+      const deltaY = touchMoveY - touchStartY;
 
       // Adjust the rotation of the ellipse based on the swipe distance
-      const rotationSpeed = 0.005; // Adjust this value for desired sensitivity
+      const rotationSpeed = 1; // Adjust this value for desired sensitivity
       ellipse.rotation.z += deltaY * rotationSpeed;
 
       // Update the starting Y position for the next frame
-      touchStartY = event.touches[0].clientY;
+      touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
       // Render
       renderer.render(scene, camera);
@@ -335,6 +349,12 @@ window.addEventListener("touchend", function () {
 // controls.target = ellipse.position;
 // controls.enableDamping = true;
 
+/**
+ * SetInterval
+ */
+
+// Function
+setInterval(checkUserInteractions, 2000);
 /**
  * Renderer
  */

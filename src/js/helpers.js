@@ -10,16 +10,16 @@ export async function createIsland(i, count, color) {
     let url;
     // For a loaded GLTF model
     if (i % 2 !== 0) {
-      url = "/assets/hub/bat.glb";
+      url = "/assets/hub/sculpture.glb";
     } else {
-      url = "/assets/hub/reserve.glb";
+      url = "/assets/hub/vanite.glb";
     }
     const island = await createGLTFModel(
       i,
       url, // url
       [0, 0, 0], // position
-      [0, i === 0 ? 0 : (Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.03, 0.03, 0.03], // scale
+      [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
+      [0.05, 0.05, 0.05], // scale
       color
     );
     // if (island.scene.userData.id === 1) {
@@ -135,34 +135,28 @@ export function updateIslandInformation(
 
 export function rotateCarousel(direction, rotate, carousel) {
   // TODO: remove evetListener for double click bug
-  //rightButton.removeEventListener("click");
   if (!rotate) {
     rotate = true;
     const rotationAmount = (Math.PI * 2) / 5;
-    console.log("rotationAmount", rotationAmount);
     const targetRotation =
       direction === "left"
         ? carousel.rotation.y + rotationAmount
         : carousel.rotation.y - rotationAmount;
-    console.log("targetRotation", targetRotation);
     const rotateToTarget = () => {
       if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.2; // Adjust the smoothing factor as needed
+        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.47; // Adjust the smoothing factor as needed
         carousel.rotation.y += deltaRotation;
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
         );
-        if (rotationDifference > 0.0001) {
+        if (rotationDifference > 0.001) {
           requestAnimationFrame(rotateToTarget);
         } else {
           rotate = false;
-          // TODO: reset evetListener
-          // rightButton.addEventListener("click");
-          console.log("New Rotation", carousel.rotation.y);
+          console.log("Finish");
         }
       }
     };
-
     rotateToTarget();
   }
 }
