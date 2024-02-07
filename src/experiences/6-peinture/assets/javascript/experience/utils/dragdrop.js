@@ -1,6 +1,7 @@
 import items from "../data/items.json" assert { type: "json" };
 import { recipeResolve, recipeGeneration } from "./recipeManager.js";
 import { print_chef_speech } from "./speechBehavior.js";
+import { playAnimation } from './playAnimation.js';
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
@@ -83,8 +84,9 @@ function handleDragInteraction(
       dragElementRect.top <= targetZoneRect.bottom
     ) {
       let dialog = items.items.find((item) => item.id === dragElementId);
-
       let numberUpdater = document.getElementById("actual-" + dialog.id);
+
+      playAnimation(dialog.animation);
 
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {

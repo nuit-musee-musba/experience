@@ -1,10 +1,27 @@
 .game-chef {
   align-items: center;
   display: flex;
-  left: 0;
+  flex-direction: row-reverse;
+  right: -6rem;
   position: absolute;
   pointer-events: none;
-  top: 20%;
+  top: -6rem;
+  .game-chef__illustration {
+    align-items: center;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 1000px;
+    > img {
+      position: absolute;
+    }
+    &.is-playing {
+      img {
+        display: none;
+      }
+    }
+  }
   &__speech {
     background: white;
     border-radius: 15px;
