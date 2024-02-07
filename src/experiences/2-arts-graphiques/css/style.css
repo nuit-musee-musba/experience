@@ -1,9 +1,19 @@
 @import url("./utils/variables.css");
 @import url("./utils/reset.css");
+@import url('./utils/common.css');
 
 @import url("./layout/section.css");
+@import url("./layout/components.css");
 
-@import url("./components/components.css");
+@import url('./components/modal.css');
+@import url("./components/indice.css");
+@import url("./components/timeline.css");
+@import url("./components/frame/frame.css");
+@import url("./components/buttons/btn-primary.css");
+@import url("./components/landmark.css");
+@import url("./components/infos/infoContainer.css");
+@import url('./components/infos/infoTimelineContainer.css');
+
 
 * {
   margin: 0;
@@ -11,13 +21,28 @@
   box-sizing: border-box;
 }
 
-/* p,
-span,
-a,
-h1 {
-  font-size: 5rem;
-} Louis: I removed it, if someone needs it tell me */
+.btn-icon {
+  width: 3rem;
+  height: 3rem;
+}
+.btn-small-icon {
+  background-color: white;
+  color: black;
+  padding: 2rem;
+  width: 8rem;
+  height: 8rem;
+  border: 5px solid black;
+  border-radius: 21px;
+  backdrop-filter: blur(6.4px);
+  display: grid;
+  place-items: center;
 
+  align-self: end;
+}
+
+.italic {
+  font-style: italic;
+}
 html,
 body {
   overflow: hidden;
@@ -33,6 +58,7 @@ body {
   background-color: rgb(241, 241, 241);
   border: 1px solid black;
   border-radius: 110px;
+  position: absolute;
 }
 
 .canvas__container {
