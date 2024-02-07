@@ -160,7 +160,7 @@ p,
   font-size: 56px;
   background-color: var(--accent);
   color: var(--white);
-  border-bottom: 0;
+  border: none;
   border-radius: 21px 21px 0 0;
   height: 8rem;
   padding: 0 5rem;
@@ -195,6 +195,18 @@ p,
   border: 2rem solid var(--gray);
   background: var(--white);
   border-radius: 100%;
+}
+
+/* Action Feedback */
+.btn-primary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-small-primary:active:not(:disabled),
+.btn-small-secondary:active:not(:disabled),
+.btn-icon:active:not(:disabled),
+.tab:active:not(:disabled),
+.step:active:not(:disabled),
+.poi:active:not(:disabled) {
+  filter: brightness(0.8);
 }
 
 /* Layout */
