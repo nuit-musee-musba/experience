@@ -66,8 +66,6 @@ const loadModels = async () => {
   }
 };
 
-await loadModels();
-
 // SIZES
 const sizes = {
   width: window.innerWidth,
@@ -96,8 +94,8 @@ scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
-
 controls.enablePan = false;
+controls.maxPolarAngle = Math.PI * 0.45;
 
 //RENDERER
 
@@ -108,4 +106,4 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor("#FFF6ED");
 
-export { renderer, camera, controls, scene, animatedScenes, cube };
+export { renderer, camera, controls, scene, animatedScenes, cube, loadModels };
