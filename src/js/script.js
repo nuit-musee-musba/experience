@@ -22,11 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box data
   infoTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
-  infoButton.addEventListener("click", function () {
-    const url = data[0].path;
-    window.location.href = url;
-    // camera.position.set(0, 3, 7);
-  });
+  infoButton.href = data[0].path;
 });
 
 // Create scene
