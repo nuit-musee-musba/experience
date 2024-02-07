@@ -14,57 +14,39 @@
   <canvas class="webgl"></canvas>
 
   <div class="consignes">
-    <p>Retrouvez le bon moment de la journée en déplaçant le soleil de bas en haut.</p>
+    <p>Dans le courant impressionniste et pour les peintres qui s’en inspirent ensuite, les artistes représentent une
+      réalité basée sur le moment présent. Ils capturent les vibrations de la lumière et sa manière d’impacter son
+      environnement.</p>
+    <p>Retrouvez l’éclairage adapté au moment de la journée du tableau original, en déplaçant le soleil de bas en haut.
+    </p>
   </div>
-  <button id="btn-validate" class="popin-btn btn-temp-color hidden" data-target="#popin-first-painting">Valider la
-    position</button>
-
-  <div class="popin hidden" id="popin-result-true">
-    <div class="popin-body">
-      <h1>Bravo !</h1>
-      <p>Vous avez réussi à retrouver à quel moment de la journée a été peint Les Quais de Bordeaux, par Alfred SMITH !
-      </p>
-      <p>Dans le post-impressionnisme, les peintres représentent une réalité basée sur le moment présent, et capturent
-        les vibrations de la lumière, sa manière d’impacter son environnement.</p>
-      <p>Ils sont fascinés par les changements de couleurs en fonction des heures de la journée ainsi que des reflets
-        sur l’eau.</p>
-      <p>La peinture apparaît comme fragmentée et vague, grâce à une palette de couleurs claires, symbolisant la
-        lumière, appliquée par des touches dynamiques en forme de virgule.</p>
-      <p>Découvrez ce chef-d'œuvre dans l’Aile Bonheur-nord du musée !</p>
-
-      <a href="./index.html?home-popin=false" class="popin-btn btn-temp-color">Ok</a>
+  <div class="legende">
+    <div class="legende-ecriteau">
+      <p><em>Les Quais de Bordeaux</em>, SMITH Alfred</p>
     </div>
   </div>
-  <div class="popin-overlay hidden"></div>
 
-  <!-- Global buttons -->
-  <div class="parameter-btn-list">
-    <a class="btn-square" href="/index.html">
-      <svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M1 21.125C1 19.866 1.59278 18.6804 2.6 17.925L24.1 1.8C25.5222 0.733333 27.4778 0.733333 28.9 1.8L50.4 17.925C51.4072 18.6804 52 19.866 52 21.125V47C52 49.2091 50.2091 51 48 51H35.5526C35.0003 51 34.5526 50.5523 34.5526 50V37.7C34.5526 36.5954 33.6572 35.7 32.5526 35.7H20.4474C19.3428 35.7 18.4474 36.5954 18.4474 37.7V50C18.4474 50.5523 17.9997 51 17.4474 51H5C2.79086 51 1 49.2091 1 47L1 21.125Z"
-          fill="#242424" stroke="#242424" stroke-width="1.5" />
-      </svg>
+  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider la
+    position</button>
+
+  <!-- Begin Global buttons -->
+  <div class="bottom-menu">
+    <a href="/" class="btn-icon">
+      <i class="i-home">
+        <span>Accueil</span>
+      </i>
     </a>
-    <button class="btn-square disabled" disabled>
-      <svg width="55" height="51" viewBox="0 0 55 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M37.1406 2.07293L17.8038 14.9641C17.4753 15.1831 17.0893 15.3 16.6944 15.3L4.49999 15.3001C3.11928 15.3001 2 16.4194 2 17.8001V33.2001C2 34.5808 3.11929 35.7001 4.5 35.7001H14.1015C14.523 35.7001 14.9338 35.5669 15.2751 35.3195L40.25 17.2194V3.73703C40.25 2.13964 38.4697 1.18686 37.1406 2.07293Z"
-          fill="#A8A8A8" />
-        <path
-          d="M40.25 47.263V30.749V27.0794C40.25 27.0711 40.2404 27.0665 40.2339 27.0715L24.4077 39.2852C24.3582 39.3234 24.3555 39.3972 24.4022 39.4389L28.775 43.35L37.1406 48.9271C38.4697 49.8131 40.25 48.8604 40.25 47.263Z"
-          fill="#A8A8A8" />
-        <path
-          d="M37.1406 2.07293L17.8038 14.9641C17.4753 15.1831 17.0893 15.3 16.6944 15.3L4.49999 15.3001C3.11928 15.3001 2 16.4194 2 17.8001V33.2001C2 34.5808 3.11929 35.7001 4.5 35.7001H14.1015C14.523 35.7001 14.9338 35.5669 15.2751 35.3195L40.25 17.2194V3.73703C40.25 2.13964 38.4697 1.18686 37.1406 2.07293Z"
-          stroke="#A8A8A8" stroke-width="3" />
-        <path
-          d="M40.25 47.263V30.749V27.0794C40.25 27.0711 40.2404 27.0665 40.2339 27.0715L24.4077 39.2852C24.3582 39.3234 24.3555 39.3972 24.4022 39.4389L28.775 43.35L37.1406 48.9271C38.4697 49.8131 40.25 48.8604 40.25 47.263Z"
-          stroke="#A8A8A8" stroke-width="3" />
-        <path d="M53 8.1525L5.1875 45.0513" stroke="#A8A8A8" stroke-width="3" stroke-linecap="round"
-          stroke-linejoin="round" />
-      </svg>
+    <button class="btn-icon" disabled="">
+      <i class="i-volume-off">
+        <span>Pas de son disponible</span>
+      </i>
     </button>
+    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
+      <i class="i-left"> </i>
+      <span>Retour à la galerie</span>
+    </a>
   </div>
+  <!-- End Global buttons -->
 
 </body>
 

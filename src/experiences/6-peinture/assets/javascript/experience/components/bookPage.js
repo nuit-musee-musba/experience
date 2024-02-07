@@ -14,6 +14,7 @@ class BookPage {
 
   listen() {
     this.item.addEventListener("touchstart", () => {
+      this.bookContainer.classList.add('is-opened');
       this.displayData();
     });
   }

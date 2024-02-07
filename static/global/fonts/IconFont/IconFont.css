@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "IconFont";
+    src: url('IconFont.woff2?t=1707254562952') format('woff2'),
+        url('IconFont.woff?t=1707254562952') format('woff'),
+        url('IconFont.ttf?t=1707254562952') format('truetype');
+}
+
+.iconfont {
+    font-family: "IconFont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before { content: "\ee01"; }
+.icon-volume-on:before { content: "\ee02"; }
+.icon-volume-off:before { content: "\ee03"; }
+.icon-left:before { content: "\ee04"; }
+.icon-close:before { content: "\ee05"; }
+.icon-check:before { content: "\ee06"; }
+.icon-info:before { content: "\ee07"; }
+
+
+/**
+ * Make by Icon Font Exporter
+ * https://www.figma.com/community/plugin/1129455674275940478/Icon-Font-Exporter
+ */
