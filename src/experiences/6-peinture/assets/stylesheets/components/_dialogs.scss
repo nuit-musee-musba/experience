@@ -10,7 +10,7 @@
 
 .dialog-nav, 
 .dialog-content {
-    width: 40%;
+    width: 35%;
 }
 
 .dialog-nav {
@@ -49,8 +49,13 @@
     border-radius: $global-btn-padding;
     display: none;
     padding: 6.25rem 5rem;
-
     &.active{
         display: block;
+    }
+    ul {
+        padding: 0 3rem;
+        li {
+            padding-left: 1.5rem;
+        }
     }
 }
