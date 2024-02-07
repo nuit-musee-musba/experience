@@ -2,24 +2,47 @@
 .categories-tabs {
     @include list-reset;
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
     justify-content: space-around;
+    position: relative;
+    gap: 2.563rem;
+    z-index: 9;
     .tab-btn {
-        display: flex;
-        flex-direction: column;
         align-items: center;
-        img {
-            background: orange;
-            border-radius: 100%;
-            flex: 1;
-            height: 10vh;
-            width: 10vh;
-            aspect-ratio: 1;
+        border-radius: $btn-border-radius;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        display: flex;
+        gap: 1rem;
+        padding: $btn-padding-y $btn-padding-x;
+        &.btn-food {
+            @include icon(food);
+            background: rgba($food, 0.3);
+            color: $food;
+            &.selected {
+                background: $food;
+            }
+        }
+        &.btn-animals {
+            @include icon(animals);
+            background: rgba($animals, 0.3);
+            color: $animals;
+            &.selected {
+                background: $animals;
+            }
+        }
+        &.btn-objects {
+            @include icon(objects);
+            background: rgba($objects, 0.3);
+            color: $objects;
+            &.selected {
+                background: $objects;
+            }
         }
         &.selected {
-            img {
-                border: 5px solid white;
-            }
+            padding-top: $btn-selected-padding-y;
+            padding-bottom: $btn-selected-padding-y;
+            color: white;
         }
     }
 }
@@ -29,7 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6vh;
-    padding: 6vh;
+    padding: 0 6vh 6vh;
     position: absolute;
     height: 100%;
     left: 0;
@@ -42,42 +65,12 @@
     gap: 20px;
 
     .item{
-        width: 30%;
-        background-color: antiquewhite;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-
-        img{
-            height: 200px;
-            width: 200px;
-        }
-
+        position: absolute;
     }
 
     // TODO : ANIMATION ACTIVE
     &:not(.active) {
         opacity: 0;
         pointer-events: none;
-    }
-    // TODO : TEJ ÇA
-    &:first-child {
-        background: burlywood;
-    }
-    &:nth-child(2) {
-        background: lightcoral;
-    }
-    &:last-child {
-        background: darkolivegreen;
-    }
-    .item {
-        height: 15vh;
-        width: 15vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: violet;
     }
 }

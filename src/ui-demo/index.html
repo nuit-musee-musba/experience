@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>UI Kit Demo</title>
+    <link rel="stylesheet" href="/global/style.css" />
+    <link rel="stylesheet" href="/ui-demo/style.css" />
+  </head>
+  <body>
+    <article>
+      <h1>H1 - Font size, c’est juste une petit test de taille</h1>
+      <h2>H2 - C'est un petit sous-titre</h2>
+      <h3>H3 - Plus petit sous-titre encore</h3>
+      <p>
+        P body - lorem issou, imagine vendredi les taille match pas du tout,
+        ahah . Enfin bref on verra bien c’est le but
+      </p>
+      <p class="text-p-small">
+        P small - lorem issou, imagine vendredi les taille match pas du tout,
+        ahah . Enfin bref on verra bien c’est le but
+      </p>
+      <p class="text-p-mini">
+        P mini - lorem issou, imagine vendredi les taille match pas du tout,
+        ahah . Enfin bref on verra bien c’est le but
+      </p>
+      <p class="text-btn-1">Btn1 - Bouton</p>
+
+      <div class="btn-row">
+        <button class="btn-primary">
+          <i class="i-home"></i>
+          Principal
+        </button>
+        <button class="btn-primary" disabled>Désactivé</button>
+        <button class="btn-secondary">Secondaire</button>
+        <button class="btn-secondary" disabled>Désactivé</button>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-small-primary">Principal small</button>
+        <button class="btn-small-primary" disabled>Désactivé</button>
+        <button class="btn-small-secondary">Secondaire small</button>
+        <button class="btn-small-secondary" disabled>Désactivé</button>
+      </div>
+
+      <div class="tab-row">
+        <button class="tab">Onglet</button>
+        <button class="tab active">Actif</button>
+      </div>
+
+      <div>
+        <p>Indicateurs d'étapes</p>
+        <div class="stepper">
+          <button class="step visited"></button>
+          <button class="step"></button>
+          <button class="step active"></button>
+          <button class="step"></button>
+        </div>
+      </div>
+
+      <div>
+        <p>Point d'intérêt</p>
+        <div class="poi"></div>
+      </div>
+
+      <div>
+        <p>Icônes</p>
+        <p class="text-btn-1">
+          <i class="i-home"></i>
+          <i class="i-volume-off"></i>
+          <i class="i-volume-on"></i>
+          <i class="i-left"></i>
+          <i class="i-close"></i>
+          <i class="i-info"></i>
+          <i class="i-check"></i>
+        </p>
+      </div>
+
+      <div>
+        <p>Gestes</p>
+        <div class="gestures">
+          <img src="/global/svg/gestures/tap.svg" />
+          <img src="/global/svg/gestures/swipe-horizontally.svg" />
+          <img src="/global/svg/gestures/swipe-left.svg" />
+          <img src="/global/svg/gestures/swipe-right.svg" />
+          <img src="/global/svg/gestures/swipe-up.svg" />
+          <img src="/global/svg/gestures/swipe-down.svg" />
+        </div>
+      </div>
+    </article>
+
+    <div class="bottom-menu">
+      <a href="/" class="btn-icon">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </a>
+
+      <button class="btn-icon" disabled>
+        <i class="i-volume-off">
+          <span>Pas de son disponible</span>
+        </i>
+      </button>
+
+      <button class="btn-icon">
+        <i class="i-volume-off">
+          <span>Son désactivé</span>
+        </i>
+      </button>
+
+      <button class="btn-icon">
+        <i class="i-volume-on">
+          <span>Son activé</span>
+        </i>
+      </button>
+
+      <button class="btn-icon">
+        <i class="i-left"> </i>
+        <span>Retour à la galerie</span>
+      </button>
+
+      <p class="text-p-small">
+        Utilisez la classe ".bottom-menu" pour mettre les éléments en bas à
+        gauche de l'écran
+      </p>
+    </div>
+  </body>
+</html>

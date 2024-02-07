@@ -1,71 +1,269 @@
 @font-face {
+  font-display: block;
+  font-family: "GlobalIcon";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("/global/fonts/IconFont/IconFont.ttf") format("ttf"),
+    url("/global/fonts/IconFont/IconFont.woff") format("woff"),
+    url("/global/fonts/IconFont/IconFont.woff2") format("woff2");
+}
+
+@font-face {
   font-family: musba;
-  src: url(fonts/MusBA-Regular.otf);
+  src: url(/global/fonts/MusBA-Regular.otf);
 }
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url(fonts/Montserrat-Regular.ttf);
+  src: url(/global/fonts/Montserrat-Regular.ttf);
 }
 
 @font-face {
   font-family: Montserrat-SemiBold;
-  src: url(fonts/Montserrat-SemiBold.ttf);
+  src: url(/global/fonts/Montserrat-SemiBold.ttf);
 }
 
-h1 {
+:root {
+  --black: #242424;
+  --white: #ffffff;
+  --gray: #a8a8a8;
+  /* Override the accent variable in your custom css to modify accent color */
+  --accent: rgb(40, 119, 164);
+
+  --stroke-width: 5px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+.text-h1 {
   font-family: Montserrat-SemiBold;
   font-size: 110px;
+  line-height: 136px;
 }
 
-h2 {
+h2,
+.text-h2 {
   font-family: musba;
   font-size: 75px;
   font-weight: 400;
+  line-height: 80px;
 }
 
-h3 {
+h3,
+.text-h3 {
   font-family: Montserrat-SemiBold;
   font-size: 56px;
 }
 
-p {
+p,
+.text-p-body {
+  font-family: Montserrat-Regular;
+  font-size: 56px;
+  line-height: 72px;
+}
+
+.text-p-small {
   font-family: Montserrat-Regular;
   font-size: 46px;
 }
 
-button {
+.text-p-mini {
+  font-family: Montserrat-Regular;
+  font-size: 40px;
+  line-height: 56px;
+}
+
+.text-btn-1 {
   font-family: Montserrat-SemiBold;
   font-size: 56px;
 }
 
-.btn-primary {
-  background-color: black;
-  color: white;
-  padding: 3rem 5rem;
+/* Buttons colors */
+.btn-primary,
+.btn-secondary,
+.btn-small-primary,
+.btn-small-secondary,
+.btn-icon {
+  text-decoration: none;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
   border-radius: 21px;
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+  border: var(--stroke-width) solid var(--accent);
 }
 
+.btn-primary,
 .btn-small-primary {
-  background-color: black;
-  color: white;
-  padding: 2rem 4rem;
-  border-radius: 21px;
+  background-color: var(--accent);
+  color: var(--white);
+}
+.btn-primary:disabled,
+.btn-small-primary:disabled {
+  background-color: var(--gray);
+  border-color: var(--gray);
 }
 
+.btn-secondary,
+.btn-small-secondary,
+.btn-icon {
+  background-color: var(--white);
+  color: var(--accent);
+  border-radius: 21px;
+}
+.btn-secondary:disabled,
+.btn-small-secondary:disabled,
+.btn-icon:disabled {
+  color: var(--gray);
+  border-color: var(--gray);
+}
+
+.btn-icon {
+  border: none;
+  color: var(--black);
+}
+
+/* Button size */
+.btn-primary,
 .btn-secondary {
-  background-color: white;
-  color: black;
+  height: 10rem;
   padding: 3rem 5rem;
-  border-radius: 21px;
-  border: 5px solid black;
+}
+.btn-small-primary,
+.btn-small-secondary {
+  height: 7.5rem;
+  padding: 2rem 4rem;
+}
+.btn-icon {
+  height: 7.5rem;
+  min-width: 7.5rem;
+}
+.btn-icon span {
+  font-family: Montserrat-Regular;
+  font-size: 46px;
+}
+.btn-icon:has(> span) {
+  padding: 0 2rem;
 }
 
-.btn-small-secondary {
-  background-color: white;
-  color: black;
-  padding: 2rem 4rem;
-  border: 5px solid black;
-  border-radius: 21px;
-  backdrop-filter: blur(6.4px);
+/* Tabs */
+.tab {
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+  background-color: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 21px 21px 0 0;
+  height: 8rem;
+  padding: 0 5rem;
+}
+.tab.active {
+  height: 10rem;
+}
+
+/* Step indicator */
+.stepper {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.stepper > .step {
+  width: 3.75rem;
+  height: 3.75rem;
+  border: var(--stroke-width) solid var(--white);
+  border-radius: 100%;
+}
+.stepper > .step.visited {
+  background-color: var(--gray);
+}
+.stepper > .step.active {
+  background-color: var(--white);
+}
+
+/* Point of interest */
+.poi {
+  height: 10rem;
+  width: 10rem;
+  border: 2rem solid var(--gray);
+  background: var(--white);
+  border-radius: 100%;
+}
+
+/* Action Feedback */
+.btn-primary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-small-primary:active:not(:disabled),
+.btn-small-secondary:active:not(:disabled),
+.btn-icon:active:not(:disabled),
+.tab:active:not(:disabled),
+.step:active:not(:disabled),
+.poi:active:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+/* Layout */
+.bottom-menu {
+  z-index: 20;
+  position: fixed;
+  left: 4rem;
+  bottom: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  pointer-events: none;
+}
+.bottom-menu > * {
+  pointer-events: all;
+}
+
+/* Icons */
+i[class*="i-"] {
+  display: inline-flex;
+  align-items: center;
+}
+i[class*="i-"] span {
+  font-size: 0;
+}
+
+i[class*="i-"]::before {
+  display: inline-block;
+  font-family: "GlobalIcon";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  text-transform: none;
+  vertical-align: middle;
+}
+
+i.i-home::before {
+  content: "\ee01";
+}
+i.i-volume-on::before {
+  content: "\ee02";
+}
+i.i-volume-off::before {
+  content: "\ee03";
+}
+i.i-left::before {
+  content: "\ee04";
+}
+i.i-close::before {
+  content: "\ee05";
+}
+i.i-info::before {
+  content: "\ee06";
+}
+i.i-check::before {
+  content: "\ee07";
 }

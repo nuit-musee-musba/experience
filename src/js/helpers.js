@@ -10,16 +10,16 @@ export async function createIsland(i, count, color) {
     let url;
     // For a loaded GLTF model
     if (i % 2 !== 0) {
-      url = "/assets/hub/bat.glb";
+      url = "/assets/hub/sculpture.glb";
     } else {
-      url = "/assets/hub/reserve.glb";
+      url = "/assets/hub/vanite.glb";
     }
     const island = await createGLTFModel(
       i,
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.03, 0.03, 0.03], // scale
+      [0.04, 0.04, 0.04], // scale
       color
     );
     // if (island.scene.userData.id === 1) {
@@ -144,7 +144,7 @@ export function rotateCarousel(direction, rotate, carousel) {
         : carousel.rotation.y - rotationAmount;
     const rotateToTarget = () => {
       if (rotate) {
-        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.5; // Adjust the smoothing factor as needed
+        const deltaRotation = (targetRotation - carousel.rotation.y) * 0.47; // Adjust the smoothing factor as needed
         carousel.rotation.y += deltaRotation;
         const rotationDifference = Math.abs(
           targetRotation - carousel.rotation.y
@@ -158,4 +158,38 @@ export function rotateCarousel(direction, rotate, carousel) {
     };
     rotateToTarget();
   }
+}
+
+function scaleModel(model, targetScale, duration) {
+  console.log("Entered scale function");
+
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
+
+  function animateScale() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
+
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScale);
+    }
+  }
+
+  animateScale();
+}
+export function handleScaleClick(carousel, index) {
+  console.log("Entered function");
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
+  scaleModel(model, 0.0315, 100);
 }

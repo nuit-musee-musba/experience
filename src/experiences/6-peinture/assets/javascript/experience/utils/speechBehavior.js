@@ -1,7 +1,7 @@
 var speech_area = document.getElementById("dialog");
 var speech_area__parent = document.getElementById("game-top");
 let currentIndex = 0;
-let textSpeed = 25;
+let textSpeed = 15;
 let active_bulle = false;
 let isAnimating = false;
 let old_text = "";
@@ -14,7 +14,7 @@ speech_area__parent.addEventListener("touchstart", (e) => {
 function fadeOut() {
   if (!active_bulle) {
     speech_area.style.opacity = 0;
-    textSpeed = 35;
+    textSpeed = 15;
   }
 }
 
@@ -46,7 +46,7 @@ function init(text) {
   animateText(text, loopId);
 }
 
-function print_chef_speech(text) {
+export function print_chef_speech(text) {
   speech_area.style.opacity = 1;
   old_text = text;
   init(text);
