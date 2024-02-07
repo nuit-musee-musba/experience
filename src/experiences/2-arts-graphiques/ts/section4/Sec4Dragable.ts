@@ -59,6 +59,22 @@ export class Sec4Dragable extends Dragable {
 
   isDraging(e: TouchEvent) {
     super.isDraging(e);
+
+    const refDataBoundindRect = this.refElmt.getBoundingClientRect();
+    const tolerance = 0.1;
+
+    const { top, left, right, bottom } = refDataBoundindRect;
+    this.refData = {
+      top,
+      left,
+      right,
+      bottom,
+      avgZoneTop: top - top * tolerance,
+      avgZoneLeft: left - left * tolerance,
+      avgZoneRight: right + right * tolerance,
+      avgZoneBottom: bottom + bottom * tolerance,
+    };
+
     const elmtBoundindRect = this.element.getBoundingClientRect();
 
     this.isInside = !(
@@ -68,7 +84,8 @@ export class Sec4Dragable extends Dragable {
       elmtBoundindRect.left > this.refData.avgZoneRight
     );
 
-    this.refData.top = this.refElmt.getBoundingClientRect().top;
+    console.log("target top : ", this.refData.top, this.refData.avgZoneTop);
+
     if (this.isInside) {
       this.refElmt.style.zIndex = "10";
       this.refElmt.style.stroke = "#ff0000";

@@ -28,21 +28,21 @@ export class Section4 extends Section {
 
       paintingContainer.style.display = "none";
 
-      canvasContainer.classList.add('active');
+      canvasContainer.classList.add("active");
     }
   }
 
   show() {
     super.show();
-    this.dragables = this.dragablesElmt.map(
-      (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
-    );
 
     const paintingContainer = document.querySelector<HTMLElement>(
       ".painting-pieces-container"
     ) as HTMLElement;
-
     paintingContainer.style.display = "block";
+
+    this.dragables = this.dragablesElmt.map(
+      (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
+    );
   }
   hide() {
     super.hide();
