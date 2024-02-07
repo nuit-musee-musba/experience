@@ -82,11 +82,7 @@ export function updateIslandInformation(
 ) {
   infoTitle.innerHTML = data[index].title;
   infoDescription.innerHTML = data[index].description;
-
-  infoButton.addEventListener("click", function () {
-    const url = data[index].path;
-    window.location.href = url;
-  });
+  infoButton.href = data[index].path;
 }
 
 export function rotateCarousel(direction, rotate, carousel) {
