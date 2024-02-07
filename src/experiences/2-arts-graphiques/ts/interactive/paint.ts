@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import Button from "../class/button";
 
 let totalPixels: number;
 let remainingPixels: number;
@@ -8,13 +9,22 @@ const Paint = async (
   currentSectionNumber: number,
   backgroundFile: String,
   imageToRevealFile: String,
-  options?: { getPercentage?: boolean; getPercentageAt?: number }) => {
-  let currentSection : HTMLElement | null = document.querySelector(`#section-${currentSectionNumber}`)
-  const btnNext: HTMLButtonElement | null = document.querySelector('#button');
-  let canvasPercentage: HTMLElement | null = currentSection ? currentSection.querySelector('.canvas_percentage') : null;
+  button: Button,
+  options?: { getPercentage?: boolean; getPercentageAt?: number }
+) => {
+  let currentSection: HTMLElement | null = document.querySelector(
+    `#section-${currentSectionNumber}`
+  );
 
-  canvasPercentage!.innerText = "0%";
-  btnNext!.disabled = true;
+  let canvasPercentage: HTMLElement | null = currentSection
+    ? currentSection.querySelector(".canvas_percentage")
+    : null;
+
+  if (canvasPercentage) {
+    canvasPercentage.innerText = "0%";
+  }
+
+  button.button.disabled = true;
 
   let width = 1395;
   let height = 1801;
@@ -22,7 +32,7 @@ const Paint = async (
   const app: any = new PIXI.Application({
     width: width,
     height: height,
-    backgroundAlpha: 0
+    backgroundAlpha: 0,
   });
   app.renderer.background.alpha = 0;
 
@@ -31,9 +41,13 @@ const Paint = async (
   const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
   const line = new PIXI.Graphics();
 
-  let t1 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${backgroundFile}`);
-  let t2 = await PIXI.Assets.load(`/2-arts-graphiques/canvas/${imageToRevealFile}`);
-  setup()
+  let t1 = await PIXI.Assets.load(
+    `/2-arts-graphiques/canvas/${backgroundFile}`
+  );
+  let t2 = await PIXI.Assets.load(
+    `/2-arts-graphiques/canvas/${imageToRevealFile}`
+  );
+  setup();
 
   function setup() {
     const { width, height } = { width: 1395, height: 1801 };
@@ -48,7 +62,7 @@ const Paint = async (
 
     app.stage.addChild(background, imageToReveal, renderTextureSprite);
 
-    app.stage.eventMode = 'dynamic';
+    app.stage.eventMode = "dynamic";
     app.stage.hitArea = app.screen;
     app.stage
       .on("pointerdown", pointerDown)
@@ -95,7 +109,6 @@ const Paint = async (
     function percentage(getPercentageAt: number | any) {
       const pixels = app.renderer.extract.pixels(renderTexture);
 
-
       remainingPixels = pixels.reduce(
         (count: any, value: any, index: any) =>
           index % 4 === 3 && value !== 0 ? count + 1 : count,
@@ -103,11 +116,13 @@ const Paint = async (
       );
 
       const percentageRemaining = (remainingPixels / totalPixels) * 100;
-      canvasPercentage!.innerText = `${percentageRemaining.toFixed(2)}%`;
+      if (canvasPercentage) {
+        canvasPercentage.innerText = `${percentageRemaining.toFixed(2)}%`;
+      }
 
       if (percentageRemaining >= getPercentageAt) {
         console.log("Vous pouvez passer à la suite si vous le souhaitez");
-        btnNext!.disabled = false;
+        button.button.disabled = false;
       }
     }
 
