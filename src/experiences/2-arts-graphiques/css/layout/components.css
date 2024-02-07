@@ -8,6 +8,7 @@
 .wrapper footer, .wrapper header{
   display: flex;
   align-items: center;
+  gap: 4rem;
 }
 
 .container{
