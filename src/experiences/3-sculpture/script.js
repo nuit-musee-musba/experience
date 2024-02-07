@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import LoadPart from "./LoadPart";
-import IntroPopup from "./component/1-IntroPart/IntroPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
@@ -14,7 +13,7 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
-let steps = 1;
+let steps = 0;
 
 //
 // INITIALIZATION
@@ -26,6 +25,10 @@ const IntroPopup = () => {
 
   buttonIntro.addEventListener("click", function () {
     IntroPart.classList.remove("show");
+    steps++;
+    mouse.x = -1;
+    mouse.y = -1;
+    stepsFunction();
     RoughHewingPart();
   });
 };
@@ -136,6 +139,10 @@ window.addEventListener("mousemove", (event) => {
 
 window.addEventListener("click", onClick);
 
+function onClick() {
+  stepsFunction();
+}
+
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
@@ -147,10 +154,10 @@ function stepsFunction() {
 
         if (intersects.length > 0) {
           const clickedBlock = intersects[0].object;
-          console.log("enfant", clickedBlock.name);
+          // console.log("enfant", clickedBlock.name);
 
           const clickedBlockParent = intersects[0].object.parent;
-          console.log("parent", clickedBlockParent.name);
+          // console.log("parent", clickedBlockParent.name);
 
           statueV1.remove(clickedBlockParent);
 
@@ -181,10 +188,6 @@ function stepsFunction() {
     case 3:
       break;
   }
-}
-
-function onClick() {
-  stepsFunction();
 }
 
 //
