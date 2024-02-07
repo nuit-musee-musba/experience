@@ -78,7 +78,7 @@ export function recipeGeneration() {
     //element.count
     if (thisItem.recipe_step == current_step) {
       recipe.innerHTML +=
-        '<li class="item" id="recipe-' +
+        '<li class="item ' + thisItem.category + '" id="recipe-' +
         element.name +
         '"><div>' +
         thisItem.recipe_text +

@@ -17,14 +17,15 @@
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid $color-border;
-        margin-top: -1vh;
+        margin-top: 2vh;
         margin-bottom: 4rem;
         margin-right: 4rem;
     }
     .list-items {
+        margin-right: 5rem;
         .item {
             display: flex;
-            gap: 0.5vw;
+            gap: 2rem;
             align-items: center;
             + .item {
                 margin-top: 2.5rem;
