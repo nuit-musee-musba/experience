@@ -107,9 +107,6 @@ gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
   statueV4.position.set(0.5, -1, -0.5);
   statueV4.rotation.y = Math.PI + 0.6;
 
-  // scene.add(statueV4);
-  // statueV4 = gltf.scene;
-
   const loader = new THREE.TextureLoader();
   loader.load("/3-sculpture/assets/croquis.png", (texture) => {
     statueV5 = statueV4.clone();
@@ -138,8 +135,6 @@ gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
       }
     });
   });
-
-  // statueV2.children[0].material.map = map;
 });
 
 const light = new THREE.AmbientLight(0x404040);
