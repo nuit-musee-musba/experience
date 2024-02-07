@@ -291,7 +291,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 12;
+camera.position.z = 9;
 scene.add(camera);
 
 /**
@@ -395,8 +395,6 @@ const tick = () => {
 
   // Update controls
   // controls.update();
-
-  // ellipse.rotation.z += Math.PI * deltaTime * 0.25;
 
   // Update paintings positions based on ellipse rotation
   const angle = ellipse.rotation.z;

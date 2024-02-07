@@ -139,12 +139,12 @@ p,
 }
 .btn-small-primary,
 .btn-small-secondary {
-  height: 8.75rem;
+  height: 7.5rem;
   padding: 2rem 4rem;
 }
 .btn-icon {
-  height: 7rem;
-  min-width: 7rem;
+  height: 7.5rem;
+  min-width: 7.5rem;
 }
 .btn-icon span {
   font-family: Montserrat-Regular;
@@ -158,17 +158,15 @@ p,
 .tab {
   font-family: Montserrat-SemiBold;
   font-size: 56px;
-  background-color: var(--white);
-  color: var(--accent);
-  border: var(--stroke-width) solid var(--accent);
-  border-bottom: 0;
-  border-radius: 21px 21px 0 0;
-  height: 10rem;
-  padding: 3rem 5rem;
-}
-.tab.active {
   background-color: var(--accent);
   color: var(--white);
+  border: none;
+  border-radius: 21px 21px 0 0;
+  height: 8rem;
+  padding: 0 5rem;
+}
+.tab.active {
+  height: 10rem;
 }
 
 /* Step indicator */
@@ -197,6 +195,18 @@ p,
   border: 2rem solid var(--gray);
   background: var(--white);
   border-radius: 100%;
+}
+
+/* Action Feedback */
+.btn-primary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-small-primary:active:not(:disabled),
+.btn-small-secondary:active:not(:disabled),
+.btn-icon:active:not(:disabled),
+.tab:active:not(:disabled),
+.step:active:not(:disabled),
+.poi:active:not(:disabled) {
+  filter: brightness(0.8);
 }
 
 /* Layout */
