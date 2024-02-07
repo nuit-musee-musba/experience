@@ -1,10 +1,31 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager.js";
+import { recipeResolve, recipeGeneration } from "./recipeManager.js";
+import { print_chef_speech } from "./speechBehavior.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
+var stepsEl = document.getElementById("stepnum");
 var winConditions = craftCont.length;
 var howManyDone = 0;
+export var current_step = 1;
+var current_step_done = 0;
+var current_step_win = 3;
+stepsEl.innerHTML = current_step;
+var step_success = false;
+
+function countDuplicatesNbMovesNeeded(strings) {
+  //cette fonction permet de compter le nombre d'objets
+  let frequency = [0, 0, 0, 0];
+
+  strings["items"].forEach((str) => {
+    frequency[str["recipe_step"]] += str["number_needed"];
+  });
+
+  return frequency;
+}
+
+const movesNeededPerSteps = countDuplicatesNbMovesNeeded(items);
+console.log(movesNeededPerSteps);
 
 function handleDragInteraction(
   dragElementId,
@@ -44,7 +65,8 @@ function handleDragInteraction(
     e.preventDefault();
     const touch = e.touches[0];
     const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
-    const currentY = touch.clientY - initialY - dragElWidth / 2;
+    const currentY =
+      touch.clientY - initialY - dragElWidth / 2 + marginTopPlacement;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -60,55 +82,73 @@ function handleDragInteraction(
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      // if(successPosX && successPosY){
-      //     dragElement.style.left = successPosX + 'px';
-      //     dragElement.style.top = successPosY + 'px';
-      // }else{
-      //     dragElement.style.left = targetZoneRect.left + 'px';
-      //     dragElement.style.top = targetZoneRect.top + 'px';
-      // }
-
       let dialog = items.items.find((item) => item.id === dragElementId);
 
       if (isCorrect) {
-        if (isMultiple) {
-          if (howManyDrags <= placedEl.length - 1) {
-            placedEl[howManyDrags].style.display = "block";
-            howManyDone++;
+        if (dialog.recipe_step == current_step) {
+          //l'item doit etre dans le step actuel
+          if (isMultiple) {
+            console.log(howManyDrags);
+            console.log("<=");
+            console.log(placedEl.length - 1);
+            if (howManyDrags <= placedEl.length - 1) {
+              placedEl[howManyDrags].style.display = "block";
+              howManyDone++;
 
-            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-            recipeResolve(dialog.id);
-            //alert("Chef : " + dialog.dialog);
+              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+              recipeResolve(dialog.id);
+              //alert("Chef : " + dialog.dialog);
+            } else {
+              print_chef_speech(
+                "Tu as mis tout les elements requis pour cet aliment multiple"
+              ); //definie dans speechBehavior.js
+              //alert("tu as mis tout les elements requis pour cet aliment");
+            }
           } else {
-            print_chef_speech(
-              "Tu as mis tout les elements requis pour cet aliment"
-            ); //definie dans speechBehavior.js
-            //alert("tu as mis tout les elements requis pour cet aliment");
+            if (!success) {
+              placedEl.style.display = "block";
+              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+              recipeResolve(dialog.id);
+              //alert("Chef : " + dialog.dialog);
+              howManyDone++;
+              current_step_done++;
+              success = true;
+            } else {
+              print_chef_speech(
+                "Tu as mis tout les elements requis pour cet aliment"
+              ); //definie dans speechBehavior.js
+              //alert("tu as mis tout les elements requis pour cet aliment");
+            }
           }
         } else {
-          if (!success) {
-            placedEl.style.display = "block";
-            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-            recipeResolve(dialog.id);
-            //alert("Chef : " + dialog.dialog);
-            howManyDone++;
-          } else {
-            print_chef_speech(
-              "Tu as mis tout les elements requis pour cet aliment"
-            ); //definie dans speechBehavior.js
-            //alert("tu as mis tout les elements requis pour cet aliment");
-          }
+          print_chef_speech("c'est bien mais pas mtn");
         }
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        success = true;
+        // -- win a step --
 
-        // -- win --
+        console.log(howManyDone);
+        console.log(">=");
+        console.log(movesNeededPerSteps[current_step]);
 
-        if (howManyDone >= winConditions) {
-          document.body.classList.add('has-ending-opened')
+        if (howManyDone == movesNeededPerSteps[current_step] && !step_success) {
+          //win the game
+
+          if (current_step >= current_step_win) {
+            document.body.classList.add("has-ending-opened");
+          } else {
+            step_success = true;
+            console.log("next step");
+            setTimeout(() => {
+              current_step++;
+              recipeGeneration();
+              stepsEl.innerHTML = current_step;
+              howManyDone = 0;
+              step_success = false;
+            }, 5000);
+          }
         }
       } else {
         dragElement.style.left = realInitialX + "px";
@@ -117,7 +157,7 @@ function handleDragInteraction(
         //alert("Chef : " + dialog.dialog);
       }
 
-      howManyDrags++;
+      //howManyDrags++;
     } else {
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";
@@ -223,10 +263,13 @@ items.items.forEach((element) => {
 
   if (cur_stage == 1) {
     ElementList.style.top = "90px"; //top position
+    marginTopPlacement = 90;
   } else if (cur_stage == 0) {
     ElementList.style.top = "470px"; //bot position
+    marginTopPlacement = 470;
   } else if (cur_stage == -1) {
     ElementList.style.top = "250px"; //top position
+    marginTopPlacement = 250;
   }
 
   if (

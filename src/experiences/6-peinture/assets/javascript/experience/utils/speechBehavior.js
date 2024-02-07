@@ -46,7 +46,7 @@ function init(text) {
   animateText(text, loopId);
 }
 
-function print_chef_speech(text) {
+export function print_chef_speech(text) {
   speech_area.style.opacity = 1;
   old_text = text;
   init(text);
