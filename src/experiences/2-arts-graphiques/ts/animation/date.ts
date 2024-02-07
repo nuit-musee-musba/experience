@@ -1,6 +1,6 @@
 import Button from "../class/button";
 
-const Paint = {
+const Date = {
   year: document.getElementById("date-anim__year") as HTMLElement,
 
   init(button: Button) {
@@ -37,4 +37,4 @@ const Paint = {
   },
 };
 
-export default Paint;
+export default Date;
