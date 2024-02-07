@@ -1,64 +1,127 @@
 .recipe {
-    background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 26vw;
+  img {
+    position: absolute;
+    margin-top: -7.5vh;
+    height: 46vh;
+    right: 0;
+    width: 28vw;
+  }
+  hgroup,
+  ul {
     position: relative;
-    width: 26vw;
-    img {
-        position: absolute;
-        margin-top: -7.5vh;
-        height: 46vh;
-        right: 0;
-        width: 28vw;
-    }
-    hgroup, ul {
-        position: relative;
-    }
-    hgroup {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $color-border;
-        margin-top: -1vh;
-        margin-bottom: 4rem;
-        margin-right: 4rem;
-    }
-    .list-items {
-        .item {
-            display: flex;
-            gap: 0.5vw;
-            align-items: center;
-            + .item {
-                margin-top: 2.5rem;
-            }
-            &.food {
-                @include icon(food);
-                &::before {
-                    color: $food;
-                }
-            }
-            &.animals {
-                @include icon(animals);
-                &::before {
-                    color: $animals;
-                }
-            }
-            &.objects {
-                @include icon(objects);
-                &::before {
-                    color: $objects;
-                }
-            }
-
-            &.checked {
-                color: grey;
-                text-decoration: line-through;
-                &::before {
-                    content: "";
-                    display: block;
-                    background-color: rgb(9, 190, 0);
-                    width: 2vh;
-                    height: 2vh;
-                }
-            }
+  }
+  hgroup {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-border;
+    margin-top: -1vh;
+    margin-bottom: 4rem;
+    margin-right: 4rem;
+  }
+  .list-items {
+    .item {
+      display: flex;
+      gap: 0.5vw;
+      align-items: center;
+      justify-content: space-between;
+      width: 94%;
+      + .item {
+        margin-top: 2.5rem;
+      }
+      &.food {
+        @include icon(food);
+        &::before {
+          color: $food;
         }
+      }
+      &.animals {
+        @include icon(animals);
+        &::before {
+          color: $animals;
+        }
+      }
+      &.objects {
+        @include icon(objects);
+        &::before {
+          color: $objects;
+        }
+      }
+
+      &.checked {
+        color: grey;
+        text-decoration: line-through;
+
+        .item-checkbox {
+          img {
+            display: block;
+          }
+        }
+      }
+
+      .item-category {
+        margin-right: 20px;
+      }
+
+      .item-category::before {
+        display: inline-block;
+        font-family: "Icon";
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1;
+        speak: never;
+        text-transform: none;
+        vertical-align: middle;
+      }
+
+      .item-category.objects::before {
+        color: #e27f2c;
+        display: block;
+        content: "\ee02";
+        width: 2vh;
+        height: 2vh;
+      }
+      .item-category.food::before {
+        display: block;
+        color: #1fab82;
+        content: "\ee04";
+        width: 2vh;
+        height: 2vh;
+      }
+      .item-category.animals::before {
+        display: block;
+        color: #ca3748;
+        content: "\ee03";
+        width: 2vh;
+        height: 2vh;
+      }
+
+      .item-stuff {
+        max-width: 85%;
+      }
+
+      .item-checkbox {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(102, 102, 102, 0.2);
+        border-radius: 10px;
+        position: relative;
+        margin-left: auto;
+        img {
+          display: none;
+          width: 59.213px;
+          height: 57.222px;
+          flex-shrink: 0;
+          fill: #41992b;
+          position: absolute;
+          top: 158px;
+          left: -7px;
+        }
+      }
     }
-    }
+  }
+}
