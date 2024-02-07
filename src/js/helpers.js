@@ -73,50 +73,6 @@ export function findClosestRotation(carousel, scrollDistance) {
   return rotation;
 }
 
-// Mouse Click event
-var onMouseClick = (event) => {
-  // Calculate mouse position in normalized device coordinates
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1; // -1 to 1
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; // -1 to 1
-
-  // Update the picking ray with the camera and mouse position
-  raycaster.setFromCamera(mouse, camera);
-
-  // Calculate objects intersecting the picking ray
-  const intersects = raycaster.intersectObjects(scene.children, true);
-
-  // Loop through the intersections
-  for (const intersect of intersects) {
-    // Check if the intersected object is a mesh
-    if (intersect.object.type === "Mesh") {
-      try {
-        // Get the URL from the intersected mesh parent's userData
-        const url = data.find(
-          (route) => route.id === intersect.object.parent.userData.id
-        ).path;
-        console.log("intersect", intersect.object.parent.userData);
-        console.log("url", url);
-        // Click event > Redirect to the specified URL
-        // window.location.href = url;
-      } catch (error) {
-        console.error("Error in redirection", error);
-      }
-    }
-  }
-};
-
-// Function to dynamically update the rotationPositions array
-export function closestRotationValue(currentRotation, rotationPositions) {
-  // Calculate the closest rotation value
-  const closestRotation = rotationPositions.reduce((prev, curr) =>
-    Math.abs(curr - currentRotation) < Math.abs(prev - currentRotation)
-      ? curr
-      : prev
-  );
-  // Update the rotationPositions array
-  return closestRotation;
-}
-
 export function updateIslandInformation(
   index,
   data,
