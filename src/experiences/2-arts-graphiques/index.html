@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2 arts graphiques</title>
-    <link rel="stylesheet" href="/global/style.css" />
+    <link rel="stylesheet" href="../../global/style.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/utils/reset.css" />
+    <link rel="stylesheet" href="./css/components/components.css" />
+    <link rel="stylesheet" href="./css/utils/common.css"/>
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
   </head>
@@ -13,20 +16,23 @@
     <button id="button">Découvrir l'oeuvre</button>
     <div class="loading__container active"></div>
     <section id="section-0">
-      <div class="left">
-        <div class="dots">Dots</div>
-        <div class="">
-          <h1>Une restautation historique</h1>
-          <p>
-            L’œuvre en pastel Saint Sébastien de Odilon Redon va sortir de la
-            réserve pour la prochaine exposition du MusBA.
-          </p>
-        </div>
-        <a href="/" class="btn-small-icon"
-          ><img class="btn-icon" src="/global/svg/home.svg" alt=""
-        /></a>
+      <div class="dots">Dots</div>
+      <a href="/" class="btn-small-icon">
+        <img class="btn-icon" src="/global/svg/home.svg" alt=""/>
+      </a>
+      <dialog id="modal">
+        <h1>Odysée d'une oeuvre</h1>
+        <div class="line"></div>
+        <p>
+          Au cœur de l'exposition MusBA, un sanctuaire secret se dévoile... Préparez-vous à plonger dans les mystères d'une expérience envoûtante, où les secrets de préservation artistique de l'œuvre
+          <span class="bold">"Saint Sébastien”</span>
+          , d'Odilon Redon sont révélés.
+        </p>
+        <button class="btn-primary close-modal">Entrer dans la réserve</button>
+      </dialog>
+      <div class="left"></div>
+      <div class="center">
       </div>
-      <div class="center"></div>
       <div class="right"></div>
     </section>
     <section id="section-1">
@@ -59,6 +65,7 @@
         <div id="two" class="sec1-dragable"></div>
         <div id="three" class="sec1-dragable"></div>
         <div id="four" class="sec1-dragable"></div>
+        <button class="sec1-button ">Etape suivante</button>
       </div>
       <div class="right"></div>
     </section>
@@ -87,6 +94,7 @@
         /></a>
       </div>
       <div class="center">
+        <button class="sec2-button">Etape suivante</button>
         <div class="canvas__container active" data-interaction="paint"></div>
       </div>
       <div class="right">
@@ -123,7 +131,8 @@
           déchirures (craquelures) en suivant la ligne avec vos doigts.
         </p>
       </div>
-      <div class="center">
+      <div class="center" >
+        <button class="sec4-button">Etape suivante</button>
         <div class="canvas__container" data-interaction="seal"></div>
         <p>Peinture abimé</p>
         <div class="painting-pieces-container">
