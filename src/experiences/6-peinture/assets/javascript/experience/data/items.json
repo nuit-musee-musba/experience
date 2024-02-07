@@ -21,8 +21,8 @@
       "dialog": "Hmm, la carotte n'est pas exactement ce que je cherchais. Ce n'est pas le bon aliment, mais ne vous découragez pas, continuez à chercher.",
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie2",
-      "recipe_step": 1,
-      "number_needed": 1
+      "recipe_step": 0,
+      "number_needed": 0
     },
     {
       "id": "3",
@@ -34,7 +34,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie3",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "10",
@@ -46,7 +46,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie4",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "11",
@@ -58,7 +58,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie5",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "12",
@@ -70,7 +70,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie6",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "13",
@@ -82,7 +82,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie7",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "14",
@@ -94,7 +94,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie8",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "4",
@@ -106,7 +106,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie9",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "5",
@@ -130,7 +130,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie11",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "7",
@@ -142,7 +142,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie12",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "8",
@@ -154,7 +154,7 @@
       "wrong_step_dialog": "Le raisin ? C'est une bonne idée, mais pas pour tout de suite !",
       "recipe_text": "L'écoulement inexorable de la vie13",
       "recipe_step": 0,
-      "number_needed": 1
+      "number_needed": 0
     },
     {
       "id": "9",

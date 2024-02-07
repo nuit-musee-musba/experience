@@ -1,5 +1,5 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager.js";
+import { recipeResolve, recipeGeneration } from "./recipeManager.js";
 import { print_chef_speech } from "./speechBehavior.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
@@ -11,6 +11,7 @@ export var current_step = 1;
 var current_step_done = 0;
 var current_step_win = 3;
 stepsEl.innerHTML = current_step;
+var step_success = false;
 
 function countDuplicatesNbMovesNeeded(strings) {
   //cette fonction permet de compter le nombre d'objets
@@ -87,6 +88,9 @@ function handleDragInteraction(
         if (dialog.recipe_step == current_step) {
           //l'item doit etre dans le step actuel
           if (isMultiple) {
+            console.log(howManyDrags);
+            console.log("<=");
+            console.log(placedEl.length - 1);
             if (howManyDrags <= placedEl.length - 1) {
               placedEl[howManyDrags].style.display = "block";
               howManyDone++;
@@ -96,7 +100,7 @@ function handleDragInteraction(
               //alert("Chef : " + dialog.dialog);
             } else {
               print_chef_speech(
-                "Tu as mis tout les elements requis pour cet aliment"
+                "Tu as mis tout les elements requis pour cet aliment multiple"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -108,6 +112,7 @@ function handleDragInteraction(
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
               current_step_done++;
+              success = true;
             } else {
               print_chef_speech(
                 "Tu as mis tout les elements requis pour cet aliment"
@@ -122,23 +127,28 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        success = true;
-
         // -- win a step --
 
         console.log(howManyDone);
         console.log(">=");
-        console.log(movesNeededPerSteps[current_step - 1]);
+        console.log(movesNeededPerSteps[current_step]);
 
-        if (howManyDone >= movesNeededPerSteps[current_step - 1]["moves"]) {
-          current_step++;
-          console.log("next step");
-        }
+        if (howManyDone == movesNeededPerSteps[current_step] && !step_success) {
+          //win the game
 
-        //win the game
-
-        if (current_step >= current_step_win + 1) {
-          document.body.classList.add("has-ending-opened");
+          if (current_step >= current_step_win) {
+            document.body.classList.add("has-ending-opened");
+          } else {
+            step_success = true;
+            console.log("next step");
+            setTimeout(() => {
+              current_step++;
+              recipeGeneration();
+              stepsEl.innerHTML = current_step;
+              howManyDone = 0;
+              step_success = false;
+            }, 5000);
+          }
         }
       } else {
         dragElement.style.left = realInitialX + "px";
@@ -147,7 +157,7 @@ function handleDragInteraction(
         //alert("Chef : " + dialog.dialog);
       }
 
-      howManyDrags++;
+      //howManyDrags++;
     } else {
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";

@@ -70,20 +70,25 @@ elements.forEach((element) => {
 const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
 
-result.forEach((element) => {
-  let thisItem = items.items.find((item) => item.id === element.name);
-  //element.count
-  if (thisItem.recipe_step == current_step) {
-    recipe.innerHTML +=
-      '<li class="item" id="recipe-' +
-      element.name +
-      '">' +
-      thisItem.recipe_text +
-      ' - <span class="food">' +
-      thisItem.category +
-      "</span></li>";
-  }
-});
+export function recipeGeneration() {
+  result.forEach((element) => {
+    let thisItem = items.items.find((item) => item.id === element.name);
+    //element.count
+    if (thisItem.recipe_step == current_step) {
+      recipe.innerHTML = "";
+      recipe.innerHTML +=
+        '<li class="item" id="recipe-' +
+        element.name +
+        '">' +
+        thisItem.recipe_text +
+        ' - <span class="food">' +
+        thisItem.category +
+        "</span></li>";
+    }
+  });
+}
+
+recipeGeneration();
 
 export function recipeResolve(id) {
   let thisItem = resultToVerify.find((el) => el.name === id);
