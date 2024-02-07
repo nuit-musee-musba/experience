@@ -15,18 +15,12 @@ export default class Modal {
       console.error(`unable to find #${modalId} in the dom`);
       return;
     }
-    if (!button) {
-      console.error("unable to find #close-modal in the dom");
-      return;
-    }
 
     this.modal = modal;
     this.id = modalId;
     if (transition) {
       this.transition = transition;
     }
-
-    // button.addEventListener("click", () => this.close());
   }
 
   open() {
