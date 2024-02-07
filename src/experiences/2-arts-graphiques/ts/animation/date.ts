@@ -1,5 +1,4 @@
 import Button from "../class/button";
-import experience from "../script";
 
 const Paint = {
   year: document.getElementById("date-anim__year") as HTMLElement,
