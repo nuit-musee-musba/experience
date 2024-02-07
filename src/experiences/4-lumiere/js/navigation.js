@@ -64,6 +64,7 @@ let globalParameters = {
   lightAngleStrength: 0.5,
   ellipseRadius: 4,
   white: "#f5f5f5",
+  userInteract: false,
 };
 
 // Canvas
@@ -268,6 +269,16 @@ canvas.addEventListener("click", () => {
   }
 });
 
+// Rotate paintings
+function checkUserInteractions() {
+  if (globalParameters.userInteract) {
+    console.log("stop rotate paintings");
+  } else {
+    console.log("Rotate paintings");
+  }
+  globalParameters.userInteract = false;
+}
+
 /**
  * Camera
  */
@@ -303,6 +314,7 @@ window.addEventListener("touchstart", function (event) {
   // Record the starting Y position of the touch
   touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
+  globalParameters.userInteract = true;
 });
 
 window.addEventListener(
@@ -337,6 +349,12 @@ window.addEventListener("touchend", function () {
 // controls.target = ellipse.position;
 // controls.enableDamping = true;
 
+/**
+ * SetInterval
+ */
+
+// Function
+setInterval(checkUserInteractions, 2000);
 /**
  * Renderer
  */

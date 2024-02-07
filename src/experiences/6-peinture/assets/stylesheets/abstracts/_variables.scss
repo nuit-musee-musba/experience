@@ -1,11 +1,20 @@
 // Icons
 $icons: (
     "home": "\ee01",
-    "check": "\ee05",
-    "rollback": "\ee04",
-    "info": "\ee03",
-    "settings": "\ee02"
+    "objects": "\ee02",
+    "animals": "\ee03",
+    "food": "\ee04",
+    "check": "\ee05"
 );
+
+// COLORS
+$primary: #095103;
+$color-border: #5A8157;
+$color-bg: #EFEFEF;
+$color-text: #053225;
+$food: #1FAB82;
+$animals: #CA3748;
+$objects: #E27F2C;
 
 // TYPO
 $font-size: 3.5rem;
@@ -17,4 +26,10 @@ $h2-font-size: 4.688rem;
 
 // NAV
 $global-btn-padding: 1.875rem;
-$nav-position: 9.375rem;
+$nav-position: 4.188rem;
+
+// TABS
+$btn-border-radius: 21px;
+$btn-padding-x: 4.875rem;
+$btn-padding-y: 2rem;
+$btn-selected-padding-y: 3rem;

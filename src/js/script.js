@@ -6,7 +6,7 @@ import {
   updateIslandInformation,
 } from "./helpers";
 import data from "./data";
-import { cos } from "three/examples/jsm/nodes/Nodes.js";
+import { cos, userData } from "three/examples/jsm/nodes/Nodes.js";
 
 /// Start info box data
 let infoTitle = document.getElementById("infoTitle");
@@ -75,6 +75,7 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       islands.push(island);
+      console.log("island", island);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -142,14 +143,9 @@ function rotateX(quantity) {
   console.log("rotation", rotation);
 
   rotation = rotation + quantity;
-  // index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
-  // console.log("CONTNROL 1 index: ", index);
-
-  // index = Math.floor(index % parts);
-  // console.log("CONTNROL 2 index: ", index);
-
-  // index = index >= 0 ? index : index + parts;
-  // console.log("CONTNROL 3 index: ", index);
+  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+  index = Math.floor(index % parts);
+  index = index >= 0 ? index : index + parts;
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
@@ -188,11 +184,11 @@ canvas.addEventListener("touchmove", (event) => {
 
 // Touch end
 canvas.addEventListener("touchend", () => {
-  console.log("TouchEnd Processing: ", touchEndProcessing);
+  //console.log("TouchEnd Processing: ", touchEndProcessing);
   if (touchEndProcessing) {
     return;
   }
-  console.log("TOUCHEND");
+  //console.log("TOUCHEND");
   touchEndProcessing = true; // Set touch end processing flag to true
   index = direction === 1 ? index : index + parts;
   isTouching = false;
@@ -258,7 +254,7 @@ function handleRightButtonClick() {
   } else {
     index = index;
   }
-  console.log("New Index", index);
+  //console.log("New Index", index);
 
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
@@ -273,18 +269,89 @@ function handleLeftButtonClick() {
     return;
   }
   index = index === 4 ? 0 : index + 1;
-  console.log("New Index", index);
+  //console.log("New Index", index);
 
   isButtonClickable = false;
   buttonLoaderLeft.style.display = "flex";
   rotateCarousel("left", rotate, carousel);
-  console.log("Carousel left", carousel.rotation.y);
+  //console.log("Carousel left", carousel.rotation.y);
   buttonLoaderLeft.style.display = "none";
   isButtonClickable = true;
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   // setTimeout(() => {}, 300);
 }
+
+function scaleModel(model, targetScale, duration) {
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
+
+  function animateScale() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
+
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScale);
+    }
+  }
+
+  animateScale();
+}
+
+function scaleDownModel(model, targetScale, duration) {
+  const initialScale = model.scale.x;
+  const initialRotation = model.rotation.clone();
+  const scaleIncrement = (targetScale - initialScale) / (duration / 10);
+  const startTime = performance.now();
+
+  function animateScaleDown() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const newScale = initialScale + scaleIncrement * elapsedTime;
+
+    model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    model.scale.set(newScale, newScale, newScale);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScaleDown);
+    }
+  }
+
+  animateScaleDown();
+}
+
+function handleScaleDownButtonClick() {
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
+  scaleDownModel(model, 0.03, 100);
+}
+
+function handleScaleButtonClick() {
+  let model = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (carousel.children[i].userData.id === index + 1) {
+      model = carousel.children[i];
+    }
+  }
+  scaleModel(model, 0.0315, 100);
+}
+
+// Event listener for scaling button
+const scaleButton = document.getElementById("scaleButton");
+scaleButton.addEventListener("click", handleScaleButtonClick);
+
+const scaleDownButton = document.getElementById("scaleDownButton");
+scaleDownButton.addEventListener("click", handleScaleDownButtonClick);
 
 rightButton.addEventListener("click", handleRightButtonClick);
 leftButton.addEventListener("click", handleLeftButtonClick);
