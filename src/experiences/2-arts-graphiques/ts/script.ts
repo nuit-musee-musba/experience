@@ -1,6 +1,7 @@
 import Transition from "./class/transition";
 import Frames from "./interactive/paintingFrame";
 import Modal from "./class/modal";
+import landmark from "./animation/landmark"
 
 export type ExperienceType = {
   transition?: Transition;
@@ -14,6 +15,7 @@ window.addEventListener("load", () => {
   experience.frames = new Frames();
   experience.modal = new Modal("modal", experience);
   experience.modal.open();
+  landmark.init(experience.transition.sections.length)
 });
 
 export default experience;
