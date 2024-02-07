@@ -71,19 +71,19 @@ const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
 
 export function recipeGeneration() {
+  recipe.innerHTML = "";
   result.forEach((element) => {
     let thisItem = items.items.find((item) => item.id === element.name);
     //element.count
     if (thisItem.recipe_step == current_step) {
-      recipe.innerHTML = "";
       recipe.innerHTML +=
         '<li class="item" id="recipe-' +
         element.name +
-        '">' +
+        '">x' +
+        thisItem.number_needed +
+        " - " +
         thisItem.recipe_text +
-        ' - <span class="food">' +
-        thisItem.category +
-        "</span></li>";
+        "</li>";
     }
   });
 }
