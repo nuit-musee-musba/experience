@@ -36,12 +36,6 @@
   align-self: end;
 }
 
-/* p,
-span,
-a,
-h1 {
-  font-size: 5rem;
-} Louis: I removed it, if someone needs it tell me */
 .italic {
   font-style: italic;
 }

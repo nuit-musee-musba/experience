@@ -6,6 +6,10 @@ section {
   flex: 1 1 auto;
 }
 
+#section-0{
+  justify-content: center;
+}
+
 
 section .left {
   display: grid;
