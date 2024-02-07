@@ -25,11 +25,10 @@ body {
   top: 6rem;
   left: 6rem;
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 }
 .title-line {
-  width: 4px;
-  height: full;
+  width: 5px;
   background-color: white;
 }
 #date-title {
@@ -75,7 +74,6 @@ body {
   cursor: pointer;
   border: none;
   color: white;
-  font-family: helvetica;
   font-size: 2.5rem;
   font-weight: 100;
 }
@@ -98,7 +96,6 @@ body {
   cursor: pointer;
   border: none;
   color: white;
-  font-family: helvetica;
   font-size: 2.5rem;
   font-weight: 100;
 }
@@ -123,18 +120,17 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2vh;
 }
 
 .chronology-buttons {
   display: flex;
   align-items: center;
-  gap: 1vw;
+  gap: 5vw;
+  padding: 0 4vw;
 }
 
 .chronology-title {
   font-size: 3rem;
-  font-family: helvetica;
   font-weight: 100;
   color: white;
   display: flex;
@@ -161,9 +157,8 @@ body {
 }
 
 .chronology-buttons button {
+  font-family: Montserrat-Regular;
   font-size: 4rem;
-  font-weight: 100;
-  font-family: helvetica;
   background-color: transparent;
   color: rgb(255, 255, 255);
   border: none;
@@ -172,7 +167,7 @@ body {
 
 .chronology-line {
   width: 100%;
-  height: 4px;
+  height: 5px;
   background-color: white;
 }
 
@@ -210,16 +205,17 @@ body {
 
 .interest-component {
   position: absolute;
-  bottom: 20%;
+  bottom: 25%;
   right: 0;
-  width: 30vw;
+  width: 25vw;
   display: none;
   flex-direction: column;
   gap: 2vh;
-  background: linear-gradient(0.25turn, #00000060, #00000030, #ebf8e100);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 2vh 8vw 4vh 3vw;
+  padding: 2vh 3vw 4vh 2vw;
   border-left: 5px solid white;
+  pointer-events: none;
 }
 
 .interest-component img {
@@ -228,8 +224,8 @@ body {
   left: -0.15vw;
 }
 #title-component {
-  font-family: musba;
   font-size: 4rem;
+  pointer-events: none;
 }
 
 #text-component {
@@ -237,7 +233,6 @@ body {
   flex-direction: column;
   gap: 1vh;
   font-size: 2.5rem;
-  font-family: helvetica;
   font-weight: 100;
 }
 

@@ -37,7 +37,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   2000
 );
-camera.position.set(0, 2.5, 6.5);
+camera.position.set(0, 2.5, -6.5);
 camera.lookAt(0, 0, 0);
 
 // Create Renderer
@@ -58,7 +58,7 @@ scene.add(light);
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, 0, 0); //Math.PI
+carousel.rotation.set(0, 0, 0); //
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
@@ -129,28 +129,34 @@ const pi = Math.PI;
 let rotation = 0;
 let lastX = 0; // last x position or pointer position
 let speed = 0; // speed of the swipe
-let power = 10; // power of the swipe
+let power = 12; // power of the swipe
 let direction = 1; // 1 for right, -1 for left
 let moveX = 0; // move x position or pointer position
 let index = 0;
 const circle = Math.PI * 2;
 const parts = 5;
-
+let touchEndProcessing = false; // Flag to indicate if touchend is still processing
 let isTouching = false;
 
 function rotateX(quantity) {
-  if (rotation === 0) {
-    console.log("rotation", rotation);
-  }
+  console.log("rotation", rotation);
+
   rotation = rotation + quantity;
-  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
-  index = Math.floor(index % parts);
-  index = index >= 0 ? index : index + parts;
+  // index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+  // console.log("CONTNROL 1 index: ", index);
+
+  // index = Math.floor(index % parts);
+  // console.log("CONTNROL 2 index: ", index);
+
+  // index = index >= 0 ? index : index + parts;
+  // console.log("CONTNROL 3 index: ", index);
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  console.log("index: ", index);
+  if (touchEndProcessing) return; // Prevent touch start if touch end is still processing
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
   isTouching = true;
   lastX = event.touches[0].clientX / canvas.clientWidth;
@@ -160,20 +166,34 @@ canvas.addEventListener("touchstart", (event) => {
 canvas.addEventListener("touchmove", (event) => {
   event.preventDefault(); // Prevent default touch behavior
   if (!isTouching) return;
+  console.log("MOVING");
+  // I set the speed for the touchend part
   speed =
     Math.abs(lastX - event.touches[0].clientX / canvas.clientWidth) * power;
+
+  // set direction left or right
   direction = lastX < event.touches[0].clientX / canvas.clientWidth ? 1 : -1;
 
   moveX = lastX - event.touches[0].clientX / canvas.clientWidth;
 
   rotateX(-moveX);
   lastX = event.touches[0].clientX / canvas.clientWidth;
-  index = index;
+  index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
+  index = Math.floor(index % parts);
+  index = index >= 0 ? index : index + parts;
+  console.log("index: ", index);
+  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
+  console.log("index: ", index);
 });
 
 // Touch end
 canvas.addEventListener("touchend", () => {
+  console.log("TouchEnd Processing: ", touchEndProcessing);
+  if (touchEndProcessing) {
+    return;
+  }
   console.log("TOUCHEND");
+  touchEndProcessing = true; // Set touch end processing flag to true
   index = direction === 1 ? index : index + parts;
   isTouching = false;
   // Calculate landing rotation based on speed and power
@@ -183,26 +203,29 @@ canvas.addEventListener("touchend", () => {
     Math.round(landingRotation / (circle / parts)) * (circle / parts);
   // Smoothly rotate to the closest rotation value
   const rotateToClosest = () => {
-    const deltaRotation = (closestRotation - rotation) * 0.17; // Adjust the smoothing factor as needed
+    const deltaRotation = (closestRotation - rotation) * 0.04; // Adjust the smoothing factor as needed
     rotation += deltaRotation;
     index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
     index = Math.floor(index % parts);
     index = index >= 0 ? index : index + parts;
+    console.log("index: ", index);
+    updateIslandInformation(
+      index,
+      data,
+      infoTitle,
+      infoDescription,
+      infoButton
+    );
     carousel.rotation.y = (rotation * pi) / pi;
     const rotationDifference = Math.abs(closestRotation - rotation);
-    if (rotationDifference > 0.00001) {
+    if (rotationDifference > 0.01) {
       requestAnimationFrame(rotateToClosest);
     } else {
-      updateIslandInformation(
-        index,
-        data,
-        infoTitle,
-        infoDescription,
-        infoButton
-      );
+      touchEndProcessing = false; // Reset touch end processing flag
     }
   };
   rotateToClosest();
+  index = index;
 });
 
 // Touch cancel
@@ -223,31 +246,11 @@ function handleRightButtonClick() {
     return;
   }
 
+  console.log("Rotation value on button: ", rotation);
   isButtonClickable = false;
   buttonLoaderRight.style.display = "flex";
 
-  console.log("Current Rotation", carousel.rotation.y);
   rotateCarousel("right", rotate, carousel);
-
-  index = index === 4 ? 0 : index + 1;
-  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
-
-  setTimeout(() => {
-    isButtonClickable = true;
-    buttonLoaderRight.style.display = "none";
-  }, 1000);
-}
-
-function handleLeftButtonClick() {
-  if (!isButtonClickable) {
-    return;
-  }
-
-  isButtonClickable = false;
-  buttonLoaderLeft.style.display = "flex";
-
-  rotateCarousel("left", rotate, carousel);
-  console.log("Carousel left", carousel.rotation.y);
 
   index = index - 1;
   if (index < 0) {
@@ -255,12 +258,32 @@ function handleLeftButtonClick() {
   } else {
     index = index;
   }
+  console.log("New Index", index);
+
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
-    buttonLoaderLeft.style.display = "none";
     isButtonClickable = true;
-  }, 1000);
+    buttonLoaderRight.style.display = "none";
+  }, 300);
+}
+
+function handleLeftButtonClick() {
+  if (!isButtonClickable) {
+    return;
+  }
+  index = index === 4 ? 0 : index + 1;
+  console.log("New Index", index);
+
+  isButtonClickable = false;
+  buttonLoaderLeft.style.display = "flex";
+  rotateCarousel("left", rotate, carousel);
+  console.log("Carousel left", carousel.rotation.y);
+  buttonLoaderLeft.style.display = "none";
+  isButtonClickable = true;
+  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
+
+  // setTimeout(() => {}, 300);
 }
 
 rightButton.addEventListener("click", handleRightButtonClick);

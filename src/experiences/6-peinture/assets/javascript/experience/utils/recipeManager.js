@@ -49,15 +49,12 @@ result.forEach((element) => {
   let thisItem = items.items.find((item) => item.id === element.name);
 
   recipe.innerHTML +=
-    '<li class="item" id="recipe-' +
+    '<li class="item ' + thisItem.category + '" id="recipe-' +
     element.name +
     '">x' +
     element.count +
     " " +
-    thisItem.name +
-    ' - <span class="food">' +
-    thisItem.category +
-    "</span></li>";
+    thisItem.name;
 });
 
 export function recipeResolve(id) {
