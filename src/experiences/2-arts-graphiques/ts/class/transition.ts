@@ -17,6 +17,7 @@ export default class Transition {
   section6: Section;
   section7: Section;
   section8: Section;
+  section9: Section;
 
   currentSectionNumber: number;
   sections: Section[];
@@ -33,6 +34,7 @@ export default class Transition {
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
     this.section8 = new Section(`section-8`);
+    this.section9 = new Section(`section-9`);
 
     // const button = document.querySelector<HTMLButtonElement>("#button");
     //
@@ -54,6 +56,7 @@ export default class Transition {
       this.section6,
       this.section7,
       this.section8,
+      this.section9,
     ];
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -215,11 +218,12 @@ export default class Transition {
     this.section6.hide();
     this.section7.hide();
     this.section8.hide();
+    this.section9.hide();
     document.querySelector(".loading__container")?.classList.remove("active");
   }
 
   next() {
-    if (this.currentSectionNumber === 8) {
+    if (this.currentSectionNumber === 9) {
       this.currentSectionNumber = 0;
     } else {
       this.currentSectionNumber = this.currentSectionNumber + 1;
