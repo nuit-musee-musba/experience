@@ -52,7 +52,8 @@ document.body.appendChild(renderer.domElement);
 
 // Add light
 const light = new THREE.DirectionalLight(0xffffff, 4);
-light.position.set(0, 3, 3);
+// const light = new THREE.AmbientLight(0x404040, 3); // soft white light
+light.position.set(0, 1, 1);
 scene.add(light);
 
 // Carousel : Group of islands
@@ -110,9 +111,6 @@ window.addEventListener("resize", () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// // Chose documet over window as it is more performant
-// canvas.addEventListener("click", onMouseClick);
-
 // Handle scroll/wheel event for desktop
 canvas.addEventListener("wheel", (event) => {
   event.preventDefault(); // Prevent default scroll behavior
@@ -142,19 +140,12 @@ function rotateX(quantity) {
   console.log("rotation", rotation);
 
   rotation = rotation + quantity;
-  // index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
-  // console.log("CONTNROL 1 index: ", index);
-
-  // index = Math.floor(index % parts);
-  // console.log("CONTNROL 2 index: ", index);
-
-  // index = index >= 0 ? index : index + parts;
-  // console.log("CONTNROL 3 index: ", index);
   carousel.rotation.y = (rotation * pi) / pi;
 }
 
 // Touch start
 canvas.addEventListener("touchstart", (event) => {
+  isButtonClickable = false;
   console.log("index: ", index);
   if (touchEndProcessing) return; // Prevent touch start if touch end is still processing
   // TODO: Fix scroll bug in the carousel when touching the screen in the upper part of the screen
@@ -192,6 +183,7 @@ canvas.addEventListener("touchend", () => {
   if (touchEndProcessing) {
     return;
   }
+
   console.log("TOUCHEND");
   touchEndProcessing = true; // Set touch end processing flag to true
   index = direction === 1 ? index : index + parts;
@@ -203,7 +195,7 @@ canvas.addEventListener("touchend", () => {
     Math.round(landingRotation / (circle / parts)) * (circle / parts);
   // Smoothly rotate to the closest rotation value
   const rotateToClosest = () => {
-    const deltaRotation = (closestRotation - rotation) * 0.04; // Adjust the smoothing factor as needed
+    const deltaRotation = (closestRotation - rotation) * 0.025; // Adjust the smoothing factor as needed
     rotation += deltaRotation;
     index = ((rotation + (pi * 2) / 5 / 2) / circle) * parts;
     index = Math.floor(index % parts);
@@ -222,6 +214,7 @@ canvas.addEventListener("touchend", () => {
       requestAnimationFrame(rotateToClosest);
     } else {
       touchEndProcessing = false; // Reset touch end processing flag
+      isButtonClickable = true; // Reset buttons
     }
   };
   rotateToClosest();
@@ -241,18 +234,16 @@ let rotate = false;
 
 let isButtonClickable = true;
 
-function handleRightButtonClick() {
+function handleButtonClick(direction) {
   if (!isButtonClickable) {
     return;
   }
 
-  console.log("Rotation value on button: ", rotation);
+  console.log("Current Index", index);
+
   isButtonClickable = false;
-  buttonLoaderRight.style.display = "flex";
 
-  rotateCarousel("right", rotate, carousel);
-
-  index = index - 1;
+  index = direction === "right" ? index - 1 : index === 4 ? 0 : index + 1;
   if (index < 0) {
     index = 4;
   } else {
@@ -260,34 +251,21 @@ function handleRightButtonClick() {
   }
   console.log("New Index", index);
 
+  const buttonLoader =
+    direction === "right" ? buttonLoaderRight : buttonLoaderLeft;
+  buttonLoader.style.display = "flex";
+
+  rotateCarousel(direction, rotate, carousel);
   updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
 
   setTimeout(() => {
     isButtonClickable = true;
-    buttonLoaderRight.style.display = "none";
-  }, 300);
+    buttonLoader.style.display = "none";
+  }, 600);
 }
 
-function handleLeftButtonClick() {
-  if (!isButtonClickable) {
-    return;
-  }
-  index = index === 4 ? 0 : index + 1;
-  console.log("New Index", index);
-
-  isButtonClickable = false;
-  buttonLoaderLeft.style.display = "flex";
-  rotateCarousel("left", rotate, carousel);
-  console.log("Carousel left", carousel.rotation.y);
-  buttonLoaderLeft.style.display = "none";
-  isButtonClickable = true;
-  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
-
-  // setTimeout(() => {}, 300);
-}
-
-rightButton.addEventListener("click", handleRightButtonClick);
-leftButton.addEventListener("click", handleLeftButtonClick);
+rightButton.addEventListener("click", () => handleButtonClick("right"));
+leftButton.addEventListener("click", () => handleButtonClick("left"));
 
 // Render loop
 const animate = () => {
