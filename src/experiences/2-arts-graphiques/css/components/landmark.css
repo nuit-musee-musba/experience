@@ -1,4 +1,7 @@
 .landmark{
+  position: absolute;
+  top: 6rem;
+  left: 6rem;
   display: flex;
   gap: 2rem;
 }

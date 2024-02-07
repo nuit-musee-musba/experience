@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../../global/style.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/utils/reset.css" />
-    <link rel="stylesheet" href="./css/components/components.css" />
     <link rel="stylesheet" href="./css/utils/common.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
@@ -17,7 +16,11 @@
 
     <div class="wrapper">
       <header>
-        <div class="landmark"></div>
+        <div class="landmark">
+          <template id="landmark__dot">
+            <div class="landmark__dot"></div>
+          </template>
+        </div>
       </header>
       <section id="section-0">
         <dialog id="modal">
@@ -63,7 +66,9 @@
             <div id="two" class="sec1-dragable"></div>
             <div id="three" class="sec1-dragable"></div>
             <div id="four" class="sec1-dragable"></div>
-            <button class="btn-next sec1-button">Etape suivante</button>
+            <button class="btn-next sec1-button btn-primary">
+              Etape suivante
+            </button>
           </div>
           <div class="right"></div>
         </div>
@@ -92,22 +97,22 @@
             </div>
           </div>
           <div class="center">
-            <button class="btn-next sec2-button">Etape suivante</button>
+            <button class="btn-next sec2-button btn-primary">
+              Etape suivante
+            </button>
             <div
               class="canvas__container active"
               data-interaction="paint"
             ></div>
           </div>
           <div class="right">
-            <p>Pour une raison inexpliquée, l'artiste est absent.</p>
-            <p>Mais vous, vous êtes là.</p>
-            <p>
-              Donnez vie au chef-d'oeuvre d'Odilon Redon : "Saint Sébastien"
-            </p>
-            <p>Odilon Redon</p>
-            <p>
-              Né à Bordeaux en 1840, Odilon Redon est décédé à Paris en 1916
-            </p>
+            <div class="info">
+              <div>
+                <h2>Odilon Redon</h2>
+                <h2>(1840 - 1916)</h2>
+              </div>
+              <p>Artiste bordelais, appartenant au mouvement du symbolisme.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -123,7 +128,9 @@
             </h2>
           </div>
           <div class="center">
-            <button class="btn-next sec3-button">Etape suivante</button>
+            <button class="btn-next sec3-button btn-primary">
+              Etape suivante
+            </button>
             <p>Peinture qui fond</p>
           </div>
           <div class="right"></div>
@@ -144,8 +151,9 @@
             </p>
           </div>
           <div class="center">
-            <button class="sec4-button">Etape suivante</button>
-
+            <button class="btn-next sec4-button btn-primary">
+              Etape suivante
+            </button>
             <p>Peinture abimé</p>
             <svg
               id="dragable-hautGauche"
@@ -551,7 +559,9 @@
             </p>
           </div>
           <div class="center">
-            <button class="btn-next sec5-button">Etape suivante</button>
+            <button class="btn-next sec5-button btn-primary">
+              Etape suivante
+            </button>
             <div class="canvas__container active" data-interaction="seal"></div>
           </div>
           <div class="right"></div>
@@ -569,7 +579,9 @@
             </p>
           </div>
           <div class="center">
-            <button class="btn-next sec6-button">Etape suivante</button>
+            <button class="btn-next sec6-button btn-primary">
+              Etape suivante
+            </button>
             <div
               class="canvas__container active"
               data-interaction="cleaning"
@@ -597,7 +609,9 @@
             </div>
           </div>
           <div class="center">
-            <button class="btn-next sec7-button">Etape suivant</button>
+            <button class="btn-next sec7-button btn-primary">
+              Etape suivant
+            </button>
             <div class="frame" id="frame-2">
               <img
                 src="/2-arts-graphiques/images/painting-frames/painting-frame-2.webp"
@@ -622,7 +636,9 @@
             <p>Dans la galerie</p>
           </div>
           <div class="center">
-            <button class="btn-next sec8-button">Etape suivante</button>
+            <button class="btn-next sec8-button btn-primary">
+              Etape suivante
+            </button>
             <p>Exposition</p>
           </div>
           <div class="right"></div>
@@ -644,7 +660,9 @@
             </p>
           </div>
           <div class="center">
-            <button class="btn-next sec9-button">Etape suivante</button>
+            <button class="btn-next sec9-button btn-primary">
+              Etape suivante
+            </button>
             <p>Scanez le QR pour récuperer votre oeuvre.</p>
           </div>
           <div class="right"></div>
@@ -658,25 +676,25 @@
           /></a>
         </div>
         <div class="indice">
-          <p>Donnez vie au chef-d'œuvre d’Odilon Redon : "Saint Sébastien".</p>
+          <p id="hint"></p>
         </div>
       </footer>
     </div>
-
-    <style>
-      .loading__container {
-        z-index: 999;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: rgb(55, 55, 55);
-        display: none;
-      }
-      .loading__container.active {
-        display: block;
-      }
-    </style>
   </body>
 </html>
+
+<style>
+  .loading__container {
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(55, 55, 55);
+    display: none;
+  }
+  .loading__container.active {
+    display: block;
+  }
+</style>

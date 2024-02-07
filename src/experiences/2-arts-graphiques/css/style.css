@@ -11,6 +11,7 @@
 @import url("./components/buttons/btn-primary.css");
 @import url("./components/landmark.css");
 @import url("./components/pieces.css");
+@import url("./components/infoContainer.css");
 
 * {
   margin: 0;
