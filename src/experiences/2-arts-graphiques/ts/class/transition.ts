@@ -1,10 +1,10 @@
 import { Section } from "./section";
 
-import paint from "./interactive/paint";
-import date from "./animation/date";
+import paint from "../interactive/paint";
+import date from "../animation/date";
 
-import { Section1 } from "./section1/Section1";
-import { Section4 } from "./section4/Section4";
+import { Section1 } from "../section1/Section1";
+import { Section4 } from "../section4/Section4";
 
 export default class Transition {
   currentSection: Section;
@@ -25,7 +25,7 @@ export default class Transition {
   constructor() {
     this.currentSectionNumber = 0;
     this.section0 = new Section("section-0");
-    this.section1 = new Section1(`section-1`);
+    this.section1 = new Section1(`section-1`, this);
     this.section2 = new Section(`section-2`);
     this.section3 = new Section(`section-3`);
     this.section4 = new Section4(`section-4`);
@@ -34,15 +34,15 @@ export default class Transition {
     this.section7 = new Section(`section-7`);
     this.section8 = new Section(`section-8`);
 
-    const button = document.querySelector<HTMLButtonElement>("#button");
-
-    if (!button) {
-      throw new Error(
-        "transition/constructor: Element with a class of 'button' must be present"
-      );
-    }
-    this.button = button;
-    this.button.addEventListener("click", () => this.handleTransition());
+    // const button = document.querySelector<HTMLButtonElement>("#button");
+    //
+    // if (!button) {
+    //   throw new Error(
+    //     "transition/constructor: Element with a class of 'button' must be present"
+    //   );
+    // }
+    // this.button = button;
+    // this.button.addEventListener("click", () => this.handleTransition());
 
     this.sections = [
       this.section0,
@@ -73,17 +73,17 @@ export default class Transition {
     }
   }
 
-  handleTransition() {
-    if (this.currentSectionNumber === 8) {
-      this.currentSectionNumber = 0;
-    } else {
-      this.currentSectionNumber = this.currentSectionNumber + 1;
-    }
-    this.handleSection();
-    this.handleButtonTitle();
-    this.DisplayInteractiveCanvas(this.currentSectionNumber);
-    this.displayTimelipse(this.currentSectionNumber);
-  }
+  // handleTransition() {
+  //   if (this.currentSectionNumber === 8) {
+  //     this.currentSectionNumber = 0;
+  //   } else {
+  //     this.currentSectionNumber = this.currentSectionNumber + 1;
+  //   }
+  //   this.handleSection();
+  //   this.handleButtonTitle();
+  //   this.DisplayInteractiveCanvas(this.currentSectionNumber);
+  //   this.displayTimelipse(this.currentSectionNumber);
+  // }
 
   displayTimelipse(currentSectionNumber: number) {
     const currentSection = document.querySelector(
@@ -93,8 +93,8 @@ export default class Transition {
     const dateElement = currentSection.querySelector("#date-anim__year");
 
     if (dateElement) {
-      date.init();
       this.button.disabled = true;
+      date.init();
     }
   }
 
@@ -159,8 +159,6 @@ export default class Transition {
             break;
         }
       });
-
-      console.log(currentSectionNumber);
     }
   }
 
@@ -177,36 +175,36 @@ export default class Transition {
     previousSection.hide();
   }
 
-  handleButtonTitle() {
-    switch (this.currentSectionNumber) {
-      case 0:
-        this.button.innerText = "Découvrir l'oeuvre";
-        break;
-      case 1:
-        this.button.innerText = "Aller dans le passé";
-        break;
-      case 2:
-        this.button.innerText = "Retour vers le présent";
-        break;
-      case 3:
-        this.button.innerText = "Aller dans la réserve";
-        break;
-      case 4:
-        this.button.innerText = "Nettoyer le tableau";
-        break;
-      case 5:
-        this.button.innerText = "Choisir un cadre";
-        break;
-      case 6:
-        this.button.innerText = "Exposer l'oeuvre";
-        break;
-      case 7:
-        this.button.innerText = "Voir les critiques";
-        break;
-      case 8:
-        this.button.innerText = "Recommencer l'expérience";
-    }
-  }
+  // handleButtonTitle() {
+  //   switch (this.currentSectionNumber) {
+  //     case 0:
+  //       this.button.innerText = "Découvrir l'oeuvre";
+  //       break;
+  //     case 1:
+  //       this.button.innerText = "Aller dans le passé";
+  //       break;
+  //     case 2:
+  //       this.button.innerText = "Retour vers le présent";
+  //       break;
+  //     case 3:
+  //       this.button.innerText = "Aller dans la réserve";
+  //       break;
+  //     case 4:
+  //       this.button.innerText = "Nettoyer le tableau";
+  //       break;
+  //     case 5:
+  //       this.button.innerText = "Choisir un cadre";
+  //       break;
+  //     case 6:
+  //       this.button.innerText = "Exposer l'oeuvre";
+  //       break;
+  //     case 7:
+  //       this.button.innerText = "Voir les critiques";
+  //       break;
+  //     case 8:
+  //       this.button.innerText = "Recommencer l'expérience";
+  //   }
+  // }
 
   init() {
     this.section1.hide();
@@ -217,6 +215,18 @@ export default class Transition {
     this.section6.hide();
     this.section7.hide();
     this.section8.hide();
-    document.querySelector(".loading__container")?.classList.remove('active')
+    document.querySelector(".loading__container")?.classList.remove("active");
+  }
+
+  next() {
+    if (this.currentSectionNumber === 8) {
+      this.currentSectionNumber = 0;
+    } else {
+      this.currentSectionNumber = this.currentSectionNumber + 1;
+    }
+    this.handleSection();
+    // this.handleButtonTitle();
+    this.DisplayInteractiveCanvas(this.currentSectionNumber);
+    this.displayTimelipse(this.currentSectionNumber);
   }
 }
