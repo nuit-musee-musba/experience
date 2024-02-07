@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -355,6 +355,12 @@ window.addEventListener("touchend", function () {
 
 // Function
 setInterval(checkUserInteractions, 2000);
+
+// Controls
+// const controls = new OrbitControls(camera, canvas);
+// controls.target = ellipse.position;
+// controls.enableDamping = true;
+
 /**
  * Renderer
  */
