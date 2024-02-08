@@ -146,10 +146,7 @@ body {
 
 .painting-pieces-container {
   width: 1300px;
-
   margin: 0 auto;
-  border: 10px solid black;
-  //position: relative;
 }
 
 .painting-pieces-container img {
@@ -195,4 +192,8 @@ body {
 .btn-small-secondary {
   border-color: var(--primary-1-color);
   color: var(--primary-1-color);
+}
+
+.btn-primary:disabled{
+  display: none;
 }
