@@ -1,0 +1,62 @@
+.result{
+  position: relative;
+  width: 2424px;
+  height: fit-content;
+  margin: auto;
+  padding: 7.5rem;
+  padding-bottom: 12.5rem;
+  background-color: var(--white);
+}
+
+.result__painting-frame{
+  height: 1300px;
+  width: 900px;
+}
+
+.result .left{
+  flex: 1;
+  padding: 0;
+}
+
+.result .right{
+  flex: 1;
+  height: fit-content;
+}
+
+.result h2, .result p{
+  text-align: left;
+}
+
+.result h2{
+  font-size: 6.875rem;
+  width: 90%;
+  font-family: 'Montserrat-SemiBold';
+  color: var(--primary-1-color);
+  line-height: 8.5rem;
+}
+
+.result p{
+  color: var(--gray-900);
+}
+
+.result p + p{
+  margin-top: 2rem;
+}
+
+.result .line{
+  margin: 5.5rem 0;
+}
+
+.result .btn-row{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: max-content;
+  transform: translate(-50%, 50%);
+}
+
+.result a.btn-small-secondary{
+  font-family: Montserrat-SemiBold;
+  font-size: 56px;
+  text-decoration: none;
+}
