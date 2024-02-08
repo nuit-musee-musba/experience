@@ -2,11 +2,14 @@ import { updateIslandInformation } from "./helpers";
 import data from "./data";
 
 // Modifiable
-const infoTitle = document.getElementById("infoTitle");
 const infoDescription = document.getElementById("infoText");
 const infoButton = document.getElementById("startButton");
 
 window.experience = window.experience || {};
+
+window.experience.index = 0;
+window.experience.rotation = 0;
+window.experience.isRotating = false;
 
 ////////////////////////////SCROLL LOGIC////////////
 const rotationFactor = 0.001;
@@ -16,14 +19,22 @@ const circle = Math.PI * 2;
 const deceleration = 1;
 const maxVelocity = 100;
 
-let rotation = 0;
-let index = 0;
+// let rotation = 0;
+// let window.experience.index = 0;
 let direction = 1;
 let velocity = 0;
 
 let lastX = 0;
 let moveX = 0;
 let isTouching = false;
+
+function updateRotation(delta) {
+  window.experience.rotation = (window.experience.rotation + delta) % circle;
+  window.experience.index = Math.floor(
+    ((window.experience.rotation + circle / (2 * parts)) / circle) * parts
+  );
+  window.experience.index = (window.experience.index + parts) % parts;
+}
 
 window.addEventListener("touchstart", (event) => {
   const touch = event.touches[0];
@@ -35,6 +46,8 @@ window.addEventListener("touchstart", (event) => {
 
 // Touch move
 window.addEventListener("touchmove", (event) => {
+  isTouching = true;
+  window.experience.isRotating = true;
   const touch = event.touches[0];
   if (!touch) return;
 
@@ -50,31 +63,30 @@ window.addEventListener("touchmove", (event) => {
   updateRotation(-moveX * rotationFactor);
 
   lastX = touch.clientX;
-  isTouching = true;
 });
 
 window.addEventListener("touchend", (event) => {
   isTouching = false;
 });
 
-function updateRotation(delta) {
-  rotation = (rotation + delta) % circle;
-  index = Math.floor(((rotation + circle / (2 * parts)) / circle) * parts);
-  index = (index + parts) % parts;
-}
-
 window.experience.updateCarouselRotation = function () {
   velocity = Math.max(0, velocity - deceleration);
   velocity = Math.min(maxVelocity, velocity);
+  velocity === 0
+    ? (window.experience.isRotating = false)
+    : (window.experience.isRotating = true);
 
   if (!isTouching) {
     updateRotation(velocity * direction * rotationFactor);
   }
 
-  window.experience.carousel.rotation.y = rotation;
-  updateIslandInformation(index, data, infoTitle, infoDescription, infoButton);
+  window.experience.carousel.rotation.y = window.experience.rotation;
+  console.log(window.experience.index);
+  updateIslandInformation(
+    window.experience.index,
+    data,
+    frontTitle,
+    infoDescription,
+    infoButton
+  );
 };
-
-window.addEventListener("click", () => {
-  rotation = index * (circle / parts);
-});

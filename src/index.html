@@ -22,9 +22,6 @@
         <div id="scrollBox">
           <canvas id="webgl"></canvas>
         </div>
-        <div>
-          <h2 id="infoTitle"></h2>
-        </div>
         <div id="infoBox">
           <button class="btn-icon second-scene" id="backButton">
             <i class="i-left"> </i>
@@ -48,6 +45,7 @@
             </button>
           </div>
           <div class="flex-col first-scene">
+            <h2 id="frontTitle"></h2>
             <div class="hub-title">SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</div>
             <svg
               width="63"
@@ -71,15 +69,14 @@
                 stroke-linejoin="round"
               />
             </svg>
-
             <button class="btn-primary" id="showButton">
               Voir l'expérience
             </button>
           </div>
           <div class="flex-col second-scene">
-            <button class="btn-primary" id="startButton">
+            <a class="btn-primary" id="startButton">
               Commencer l'éxpérience
-            </button>
+            </a>
             <div>
             </div>
           </div>
