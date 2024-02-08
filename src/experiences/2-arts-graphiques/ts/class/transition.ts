@@ -47,7 +47,6 @@ export default class Transition {
     this.buttonSection9 = new Button("sec9-button", () => this.next());
 
     this.currentSectionNumber = 0;
-
     this.section0 = new Section("section-0");
     this.section1 = new Section1(`section-1`, this);
     this.section2 = new Section(`section-2`);

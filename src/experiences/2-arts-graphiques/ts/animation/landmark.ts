@@ -1,5 +1,3 @@
-import { dot } from "three/examples/jsm/nodes/Nodes.js";
-
 const Landmark = {
   landmarkElement: document.querySelector(".landmark"),
 
