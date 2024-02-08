@@ -1,8 +1,10 @@
 @import "../../style.scss";
 
 .polishingPart {
- 
   display: none;
+  #PolishRange {
+    height: 800px;
+  }
 }
 
 .show {
