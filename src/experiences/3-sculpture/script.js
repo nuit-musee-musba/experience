@@ -42,6 +42,7 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
+scene.fog = new THREE.Fog( 0x000000, 0, 15 );
 
 // GLTFLoader
 
@@ -62,12 +63,39 @@ scene.add(camera);
 // OBJET
 //
 
-const planeGeometry = new THREE.PlaneGeometry(1, 1);
-const planeMaterial = new THREE.MeshBasicMaterial({ color: "white" });
-const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-plane.position.set(0, 0, -4);
-plane.scale.set(5, 5, 5);
-scene.add(plane);
+let workshop
+
+gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
+  gltf.scene.position.set(0, -1, -1.5);
+  gltf.scene.rotation.y = Math.PI / 2;
+  workshop = gltf.scene;
+
+  for (let i = 0; i < workshop.children.length; i++) {
+    if(workshop.children[i].name === "RSpot"){
+      workshop.children[i].intensity = 20;
+
+    }else if(workshop.children[i].name === "LSpot"){
+      workshop.children[i].intensity = 5;
+
+
+    } else if(workshop.children[i].name === "Area002_1"){
+      workshop.children[i].intensity = 800;
+
+
+    } else if(workshop.children[i].name === "Spot"){
+      workshop.children[i].intensity = 350;
+      workshop.children[i].distance = 6;
+      workshop.children[i].angle = 0.821;
+      workshop.children[i].penumbra = 1;
+      workshop.children[i].decay = 2;
+
+
+    }
+  }
+
+  scene.add(workshop);
+
+});
 
 let statueV1;
 let statueV2;
@@ -91,7 +119,7 @@ gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
 });
 
 const light = new THREE.AmbientLight(0x404040);
-light.intensity = 100;
+light.intensity = 20;
 scene.add(light);
 
 //
@@ -216,6 +244,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 const clock = new THREE.Clock();
 let previousTime = 0;
@@ -227,8 +256,8 @@ const tick = () => {
   previousTime = elapsedTime;
 
   //UpdateControls
+   controls.update();
 
-  controls.update();
   //Animate in tick
 
   const rotateSpeed = currentTouch - touchBefore;
