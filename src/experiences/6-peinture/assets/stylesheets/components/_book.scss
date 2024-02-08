@@ -1,0 +1,23 @@
+.book {
+    pointer-events: none;
+    width: 28vw;
+    background-image: url('../../static/images/scenery/book-cover.svg');
+    background-repeat: no-repeat;
+    margin-top: -4vh;
+    background-size: cover;
+    &.is-opened {
+        background-image: url('../../static/images/scenery/book-content.svg');
+    }
+    &-content {
+        margin: 6rem 8rem 0 11rem;
+        h3 {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .book-description {
+            b {
+                font-weight: 700;
+            }
+        }
+    }
+}

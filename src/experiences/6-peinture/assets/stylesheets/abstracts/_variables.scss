@@ -1,20 +1,41 @@
 // Icons
 $icons: (
     "home": "\ee01",
+    "objects": "\ee02",
+    "animals": "\ee03",
+    "food": "\ee04",
     "check": "\ee05",
-    "rollback": "\ee04",
-    "info": "\ee03",
-    "settings": "\ee02"
+    "arrow-left": "\ee06",
+    "arrow-right": "\ee07"
 );
+
+// COLORS
+$primary: #095103;
+$color-border: #5A8157;
+$color-bg: #F1F1F1;
+$color-text: #053225;
+$food: #1FAB82;
+$animals: #CA3748;
+$objects: #E27F2C;
 
 // TYPO
 $font-size: 3.5rem;
-$font-family: 'Montserrat';
+$font-family: 'Montserrat-Regular';
 $font-heading: 'Musba';
 
 $h1-font-size: 6.875rem;
 $h2-font-size: 4.688rem;
 
 // NAV
-$global-btn-padding: 1.875rem;
-$nav-position: 9.375rem;
+$global-btn-padding: 1.313rem;
+$nav-position: 4.188rem;
+
+// TABS
+$btn-border-radius: 21px;
+$btn-padding-x: 4.875rem;
+$btn-padding-y: 2rem;
+$btn-selected-padding-y: 3rem;
+
+// GLOBAL BTN
+$btn-padding-y: 2.281rem;
+$btn-padding-x: 3.188rem;
