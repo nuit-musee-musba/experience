@@ -66,6 +66,23 @@
 
     .item{
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.selected-item {
+            &::before {
+                aspect-ratio: 1;
+                content: '';
+                position: absolute;
+                height: 160%;
+                width: 160%;
+                background-image: url('/6-peinture/images/ingredients/selection.svg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                z-index: -1;
+            }
+        }
     }
 
     // TODO : ANIMATION ACTIVE
