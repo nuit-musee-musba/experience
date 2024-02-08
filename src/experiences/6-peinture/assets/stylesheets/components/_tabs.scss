@@ -68,60 +68,88 @@
         position: absolute;
         // TAB FOOD
         &-peach {
-            left: 20rem;
-            top: 6rem;
+            left: 320px;
+            top: 95px;
         }
         &-grape {
-            right: 40rem;
-            top: 6rem;
+            right: 657px;
+            top: 95px;
         }
         &-carrot {
-            right: 20rem;
-            top: 6rem;
+            right: 320px;
+            top: 95px;
         }
         &-lemon {
-            left: 37rem;
-            top: 6rem;
+            left: 592px;
+            top: 95px;
         }
         &-pineapple {
             left: 5rem;
-            bottom: 15rem;
+            bottom: 240px;
         }
         &-cake {
-            left: 22rem;
-            bottom: 15rem;
+            left: 350px;
+            bottom: 240px;
         }
         &-plum {
-            right: 34rem;
-            bottom: 15rem;
+            right: 545px;
+            bottom: 240px;
         }
         &-garlic {
-            right: 50%;
-            bottom: 15rem;
+            right: 860px;
+            bottom: 240px;
         }
         &-lemon2 {
-            right: 8rem;
-            bottom: 15rem;
+            right: 130px;
+            bottom: 240px;
         }
         // TAB OBJECTS
         &-tulip,
         &-skull,
         &-hyacinth,
         &-vase {
-            bottom: 50%;
-            transform: translateY(50%);
+            bottom: 260px;
         }
         &-tulip {
-            left: 8%;
+            left: 140px;
         }
         &-skull {
-            left: 25%;
+            left: 460px;
         }
         &-hyacinth {
-            right: 40%;
+            right: 700px;
         }
         &-vase {
-            right: 16%;
+            right: 280px;
+        }
+        // TAB ANIMALS
+        &-toad {
+            right: 10%;
+            bottom: 240px;
+        }
+        &-piggy {
+            bottom: 240px;
+            right: 565px;
+        }
+        &-butterfly {
+            top: 95px;
+            left: 750px;
+        }
+        &-grasshopper {
+            top: 95px;
+            right: 18%;
+        }
+        &-fish {
+            left: 355px;
+            top: 95px;
+        }
+        &-catterpillar {
+            left: 150px;
+            bottom: 240px;
+        }
+        &-crab {
+            left: 500px;
+            bottom: 240px;
         }
     }
 

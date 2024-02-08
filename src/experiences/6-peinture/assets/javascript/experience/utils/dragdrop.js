@@ -1,6 +1,7 @@
 import items from "../data/items.json" assert { type: "json" };
 import { recipeResolve, recipeGeneration } from "./recipeManager.js";
 import { print_chef_speech } from "./speechBehavior.js";
+import { playAnimation } from './playAnimation.js';
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
@@ -25,7 +26,6 @@ function countDuplicatesNbMovesNeeded(strings) {
 }
 
 const movesNeededPerSteps = countDuplicatesNbMovesNeeded(items);
-console.log(movesNeededPerSteps);
 
 function handleDragInteraction(
   dragElementId,
@@ -84,16 +84,13 @@ function handleDragInteraction(
       dragElementRect.top <= targetZoneRect.bottom
     ) {
       let dialog = items.items.find((item) => item.id === dragElementId);
-
       let numberUpdater = document.getElementById("actual-" + dialog.id);
 
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
+          playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
-            console.log(howManyDrags);
-            console.log("<=");
-            console.log(placedEl.length - 1);
             if (howManyDrags < dialog.number_needed) {
               placedEl[howManyDrags].style.display = "block";
               howManyDone++;
@@ -131,6 +128,7 @@ function handleDragInteraction(
           );
         } else {
           if (dialog.wrong_step_dialog == "") {
+            playAnimation("animJeffPensive");
             print_chef_speech(
               "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
@@ -153,7 +151,6 @@ function handleDragInteraction(
             document.body.classList.add("has-ending-opened");
           } else {
             step_success = true;
-            console.log("next step");
             setTimeout(() => {
               current_step++;
               recipeGeneration();
@@ -165,6 +162,7 @@ function handleDragInteraction(
           }
         }
       } else {
+        playAnimation(dialog.animation);
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px"; //l'utilisateur n'a pas selectionné le bon aliment
         print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
@@ -175,11 +173,9 @@ function handleDragInteraction(
     } else {
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";
-      console.log("element pas dans la zone");
     }
   });
 }
-console.log(items);
 function countDuplicates(strings) {
   //cette fonction permet de compter le nombre d'objets dans chaque catégorie automatiquement
   const frequency = {};
@@ -207,8 +203,6 @@ function countDuplicates(strings) {
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
 var numberItemsPerCategory = countDuplicates(items);
-
-console.log(items);
 
 let i = [1, 1, 1]; //boucle i
 let i_overall = [1, 1, 1]; //boucle i

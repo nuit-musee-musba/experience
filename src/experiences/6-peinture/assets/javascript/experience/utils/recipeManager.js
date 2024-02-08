@@ -92,7 +92,7 @@ export function recipeGeneration() {
         thisItem.number_needed +
         "</div><span class='item-checkbox'><img id='img-check-" +
         element.name +
-        "' src='./static/images/misc/checked.svg'></span></li>";
+        "' src='/6-peinture/images/misc/checked.svg'></span></li>";
     }
   });
 }
