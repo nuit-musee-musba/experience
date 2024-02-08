@@ -66,6 +66,7 @@
 
     .item{
         position: absolute;
+        // TAB FOOD
         &-peach {
             left: 20rem;
             top: 6rem;
@@ -101,6 +102,26 @@
         &-lemon2 {
             right: 8rem;
             bottom: 15rem;
+        }
+        // TAB OBJECTS
+        &-tulip,
+        &-skull,
+        &-hyacinth,
+        &-vase {
+            bottom: 50%;
+            transform: translateY(50%);
+        }
+        &-tulip {
+            left: 8%;
+        }
+        &-skull {
+            left: 25%;
+        }
+        &-hyacinth {
+            right: 40%;
+        }
+        &-vase {
+            right: 16%;
         }
     }
 
