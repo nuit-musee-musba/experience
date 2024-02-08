@@ -1,21 +1,22 @@
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding: 6rem;
 }
 
-.wrapper footer, .wrapper header{
+.wrapper footer,
+.wrapper header {
   display: flex;
   align-items: center;
   gap: 4rem;
 }
 
-.container{
+.container {
   flex: 1 1 auto;
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
 }
@@ -26,6 +27,6 @@
   flex: 1;
 }
 
-.container.row .center{
-  position: relative;
+.container.row .center {
+  /* position: relative; */
 }

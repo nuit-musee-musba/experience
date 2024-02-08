@@ -4,20 +4,20 @@ import experience from "../script";
 
 const initialPlace = {
   one: {
-    top: 300,
-    left: 1330,
+    top: 353,
+    left: 1308,
   },
   two: {
-    top: 500,
-    left: 2160,
+    top: 376,
+    left: 1881,
   },
   three: {
-    top: 900,
-    left: 1418,
+    top: 1302,
+    left: 1323,
   },
   four: {
-    top: 1290,
-    left: 1980,
+    top: 1221,
+    left: 1702,
   },
 };
 type ids = "one" | "two" | "three" | "four";
@@ -57,12 +57,12 @@ export class Sec1Dragables extends Dragable {
       return;
     }
     handleAmountOutside("remove", this.element.id, experience);
-    this.element.style.backgroundColor = "#DDDDDD";
+    this.element.style.backgroundColor = "transparent";
   }
 
   initialise() {
     this.element.style.top = `${initialPlace[this.element.id as ids].top}px`;
     this.element.style.left = `${initialPlace[this.element.id as ids].left}px`;
-    this.element.style.backgroundColor = "#DDDDDD";
+    this.element.style.backgroundColor = "transparent";
   }
 }
