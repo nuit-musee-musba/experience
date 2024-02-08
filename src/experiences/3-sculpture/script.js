@@ -1,5 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass.js";
 import LoadPart from "./LoadPart";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
@@ -40,7 +43,6 @@ const IntroPopup = () => {
 LoadPart();
 IntroPopup();
 
-console.log(steps);
 
 const canvas = document.querySelector("canvas.webgl");
 
@@ -84,8 +86,6 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
 
 
   for (let i = 0; i < workshop.children.length; i++) {
-  console.log(workshop.children[i].name);
-
     if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
     } else if (workshop.children[i].name === "LSpot") {
@@ -98,7 +98,7 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
-    } else if(workshop.children[i].name === "Socle") {
+    } else if (workshop.children[i].name === "Socle") {
       socle = workshop.children[i];
 
     }
@@ -333,6 +333,14 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
+let composer = new EffectComposer(renderer);
+
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+let outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
+composer.addPass(outlinePass);
+
 const clock = new THREE.Clock();
 let previousTime = 0;
 
@@ -353,9 +361,12 @@ const tick = () => {
   if (statueV1) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
+
+    outlinePass.selectedObjects = [statueV1, statueV2];
   }
 
-  if(socle){
+
+  if (socle) {
     socle.rotation.y = socle.rotation.y - rotateSpeed * 0.3;
   }
 
