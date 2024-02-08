@@ -6,7 +6,7 @@ import Button from "../class/button";
 export class Section4 extends Section {
   dragables: Sec4Dragable[];
   dragablesElmt: HTMLElement[];
-  canvasContainer: HTMLElement;
+
   button: Button;
 
   constructor(sectionId: string, button: Button) {
@@ -30,29 +30,23 @@ export class Section4 extends Section {
 
   show() {
     super.show();
+    initialiseAmountPlaced();
     this.dragables = this.dragablesElmt.map(
       (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
     );
+    if (this.dragables) {
+      this.dragables.forEach((elmt) => elmt.show());
+    }
 
-    const canvasContainer = document.querySelector<HTMLElement>(
-      "#section-4 .canvas__container"
-    );
     const paintingContainer = document.querySelector<HTMLElement>(
       ".painting-pieces-container"
     ) as HTMLElement;
 
     paintingContainer.style.display = "block";
-
-    if (!canvasContainer) {
-      throw new Error("no canvas with a class of '.canvas__container'");
-    }
-    this.canvasContainer = canvasContainer;
-
-    this.canvasContainer.style.display = "none";
   }
   hide() {
     super.hide();
-    initialiseAmountPlaced;
+
     if (this.dragables) {
       this.dragables.forEach((elmt) => elmt.initialise());
     }

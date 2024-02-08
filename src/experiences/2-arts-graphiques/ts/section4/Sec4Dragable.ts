@@ -1,31 +1,31 @@
 import { Dragable } from "../interactive/dragable";
 
 const initialPlace = {
-  refHautDroite: {
+  hautDroite: {
     top: 1300,
     left: 3337,
   },
-  refBasDroite: {
+  basDroite: {
     top: 1085,
     left: 820,
   },
-  refBasCentre: {
+  basCentre: {
     top: 20,
     left: 2900,
   },
-  refBasGauche: {
+  basGauche: {
     top: 1034,
     left: 3040,
   },
-  refCentre: {
+  centre: {
     top: 521.2,
     left: 5.79,
   },
-  refHautCentre: {
+  hautCentre: {
     top: 1392,
     left: -41,
   },
-  refHautGauche: {
+  hautGauche: {
     top: 10,
     left: 3153,
   },
@@ -88,7 +88,7 @@ export class Sec4Dragable extends Dragable {
     };
 
     const elmtBoundindRect = this.element.getBoundingClientRect();
-
+    this.element.style.zIndex = "10";
     this.isInside = !(
       elmtBoundindRect.top > this.refData.avgZoneBottom ||
       elmtBoundindRect.right < this.refData.avgZoneLeft ||
@@ -107,6 +107,7 @@ export class Sec4Dragable extends Dragable {
     this.refElmt.style.stroke = "#000000";
   }
   drop() {
+    this.element.style.zIndex = "1";
     if (this.isInside) {
       this.element.style.transition = "top 0.2s, left 0.2s";
       this.element.style.top = `${this.refData.top}px`;
@@ -115,10 +116,13 @@ export class Sec4Dragable extends Dragable {
       this.onSucceed(this.id);
     }
   }
-  initialise() {
+  show() {
+    super.enable();
     this.element.style.top = `${initialPlace[this.id as refId].top}px`;
     this.element.style.left = `${initialPlace[this.id as refId].left}px`;
+  }
 
+  initialise() {
     this.element.style.transition = "none";
     this.refElmt.style.stroke = "#000000";
   }

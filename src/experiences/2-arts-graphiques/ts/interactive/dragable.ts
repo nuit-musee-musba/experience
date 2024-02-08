@@ -26,6 +26,7 @@ export class Dragable {
 
     targetEvent.addEventListener("touchend", this.drop.bind(this));
     targetEvent.addEventListener("touchmove", this.isDraging.bind(this));
+
     targetEvent.classList.remove("drag-unable");
   }
   unable() {
