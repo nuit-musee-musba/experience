@@ -121,6 +121,8 @@ gltfLoader.load("/3-sculpture/models/Bloc_Degrossi.glb", (gltf) => {
   gltf.scene.rotation.y = statueRotation;
   statueV1 = gltf.scene;
 
+
+
   scene.add(statueV1);
 });
 
@@ -372,10 +374,24 @@ let outlinePass = new OutlinePass(
 );
 composer.addPass(outlinePass);
 
+const params = {
+  edgeStrength: 10,
+  edgeGlow: 3,
+  edgeThickness: 9,
+};
+
+outlinePass.edgeStrength = params.edgeStrength;
+outlinePass.edgeGlow = params.edgeGlow;
+outlinePass.edgeThickness = params.edgeThickness;
+outlinePass.visibleEdgeColor.set("#dfa62a");
+outlinePass.hiddenEdgeColor.set("#dfa62a");
+
 const clock = new THREE.Clock();
 let previousTime = 0;
 
+
 const tick = () => {
+
   //Time
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
@@ -393,8 +409,44 @@ const tick = () => {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
     statueV3.rotation.y = statueV3.rotation.y + rotateSpeed * 0.3;
-    outlinePass.selectedObjects = [statueV1, statueV2];
+
+    switch (steps) {
+      case 1:
+        console.log("heh1")
+
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV1.children.length > 0) {
+            outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+      case 2:
+        console.log("heh2")
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV2.children.length > 0) {
+            outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+      case 3:
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV3.children.length > 0) {
+            outlinePass.selectedObjects = [statueV3.children[Math.floor(Math.random() * statueV3.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+
+    }
+
   }
+
+
 
   if (socle) {
     socle.rotation.y = socle.rotation.y - rotateSpeed * 0.3;
@@ -403,7 +455,9 @@ const tick = () => {
   touchBefore = currentTouch;
 
   // Render
-  renderer.render(scene, camera);
+  composer.render(scene, camera);
+
+  //renderer.render(scene, camera);
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);
