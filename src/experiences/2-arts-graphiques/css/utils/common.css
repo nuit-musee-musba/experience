@@ -3,9 +3,8 @@
     src: url(fonts/Montserrat-SemiBold.ttf);
 }
 
-
 .bold{
-    font-family: Montserrat-SemiBold;
+    font-weight: bold;
 }
 
 .hide{

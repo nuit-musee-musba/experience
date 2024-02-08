@@ -194,3 +194,7 @@ body {
   border-color: var(--primary-1-color);
   color: var(--primary-1-color)
 }
+
+.btn-primary:disabled{
+  display: none;
+}

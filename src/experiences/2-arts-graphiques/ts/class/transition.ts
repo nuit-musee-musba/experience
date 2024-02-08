@@ -205,7 +205,7 @@ export default class Transition {
         break;
       case 2:
         this.hintText.changeText(
-          'Donnez vie au chef-d\'œuvre d’Odilon Redon : "Saint Sébastien".'
+          "Dessinez l’oeuvre “Saint Sebastien” pour lui donner vie ."
         );
         break;
       case 3:
