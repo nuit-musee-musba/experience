@@ -1,13 +1,16 @@
 // ICONS
 @font-face {
   font-display: block;
-  font-family: 'Icon';
+  font-family: "Icon";
   font-style: normal;
   font-weight: 400;
-  src: url('../../static/fonts/Iconfont/IconFont.ttf') format("ttf"), url('../../static/fonts/Iconfont/IconFont.woff') format("woff"), url('../../static/fonts/Iconfont/IconFont.woff2') format("woff2");
+  src:
+    url("/6-peinture/fonts/Iconfont/IconFont.ttf") format("ttf"),
+    url("/6-peinture/fonts/Iconfont/IconFont.woff") format("woff"),
+    url("/6-peinture/fonts/Iconfont/IconFont.woff2") format("woff2");
 }
 
-h2, 
+h2,
 h3 {
   font-family: $font-heading;
   font-size: $h2-font-size;
