@@ -13,10 +13,15 @@
 <body>
   <canvas class="webgl"></canvas>
 
+  <div class="popin" id="popin-info">
+    <div class="popin-body">
+      <p>Dans le courant impressionniste et pour les peintres qui s’en inspirent ensuite, les artistes représentent une
+        réalité basée sur le moment présent. Ils capturent les vibrations de la lumière et sa manière d’impacter son
+        environnement.</p>
+      <button class="popin-btn popin-close btn-small-primary" data-target="#popin-info">J'ai compris</button>
+    </div>
+  </div>
   <div class="consignes">
-    <p>Dans le courant impressionniste et pour les peintres qui s’en inspirent ensuite, les artistes représentent une
-      réalité basée sur le moment présent. Ils capturent les vibrations de la lumière et sa manière d’impacter son
-      environnement.</p>
     <p>Retrouvez l’éclairage adapté au moment de la journée du tableau original, en déplaçant le soleil <br />de bas en
       haut.
     </p>
@@ -29,6 +34,8 @@
 
   <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider la
     position</button>
+
+  <div class="popin-overlay hidden"></div>
 
   <!-- Begin Global buttons -->
   <div class="bottom-menu">
