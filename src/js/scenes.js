@@ -10,7 +10,7 @@ window.experience = window.experience || {};
 const index = window.experience.index;
 const meshScale = 0.03;
 const biggerScale = 0.035;
-const positionY = 0;
+const positionY = 0.1;
 
 showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
@@ -37,7 +37,7 @@ showButton.addEventListener("click", () => {
     // Position
 
     // Calculate the target rotation based on the current'index'
-    const duration = 1500; // Adjust duration as needed
+    const duration = 1000; // Adjust duration as needed
     const startTime = Date.now();
 
     function animate() {
@@ -102,7 +102,7 @@ showButton.addEventListener("click", () => {
           element.classList.add("transition-opacity");
           element.style.opacity = "1";
         });
-      }, 300);
+      }, 800);
 
       firstSceneElements.forEach((element) => {
         element.classList.remove("transition-opacity");
@@ -110,7 +110,7 @@ showButton.addEventListener("click", () => {
       secondSceneElements.forEach((element) => {
         element.classList.remove("transition-opacity");
       });
-    }, 300);
+    }, 800);
   }
 });
 
@@ -132,8 +132,12 @@ backButton.addEventListener("click", () => {
       const elapsedTime = now - startTime;
       const progress = Math.min(elapsedTime / duration, 1); // Ensure progress is between 0 and 1
       // Interpolate the scale smoothly
-      const interpolatedScale =
+      let interpolatedScale =
         initialScale - (initialScale - targetScale) * progress * 2;
+      if (interpolatedScale <= targetScale) {
+        interpolatedScale = targetScale;
+      }
+
       window.experience.currentIsland.scale.set(
         interpolatedScale,
         interpolatedScale,
