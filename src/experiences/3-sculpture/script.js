@@ -92,6 +92,8 @@ let statueV4Material;
 
 let texturePolissage;
 
+let quantity;
+
 gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
   statueV2 = gltf.scene.children[0];
   statueV2.scale.set(0.38, 0.38, 0.38);
@@ -119,20 +121,11 @@ gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
     statueV5.material.opacity = 1;
     statueV5.material.transparent = true;
 
-    let quantity = 0,
-      lastY = 0;
-    window.addEventListener("mousemove", (event) => {
-      quantity += Math.abs(lastY - event.clientY) * 0.0001;
-
-      console.log(quantity);
-      lastY = event.clientY;
-      // ICI
-      // statueV2Copy.geometry.setDrawRange(0, event.clientY * 10)
-      statueV5.material.opacity = 1 - quantity;
-
-      if (quantity <= 0) {
-        console.log("fini !");
-      }
+    const polishRange = document.getElementById("PolishRange");
+    polishRange.addEventListener("input", (event) => {
+      // Mettez à jour la variable quantity en fonction de la valeur de l'input
+      quantity = 1 - parseFloat(event.target.value);
+      statueV5.material.opacity = quantity;
     });
   });
 });
@@ -227,6 +220,10 @@ function stepsFunction() {
           if (statueV4) {
             scene.add(statueV4);
             scene.add(statueV5);
+
+            const polishRange = document.getElementById("PolishRange");
+
+            console.log(polishRange.value);
           }
           if (!statueV2) {
             steps++;
