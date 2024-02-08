@@ -72,9 +72,9 @@ const sceneSetUp = async () => {
         for (let j = 0; j < allPOI[i].length; j++) {
           allPOI[index][j].visible = true;
           if (intersectedObjectName === (i + j).toString()) {
-            document.getElementById("title-component").textContent =
+            document.getElementById("poi-title-component").textContent =
               period[i].poiText[j].title;
-            document.getElementById("text-component").innerHTML =
+            document.getElementById("poi-text-component").innerHTML =
               period[i].poiText[j].text;
           }
 
@@ -101,7 +101,7 @@ const sceneSetUp = async () => {
   tick();
 
   const endMenu = document.getElementById("end-menu");
-  const component = document.getElementById("component");
+  const component = document.getElementById("poi-component");
 
   // const audioContent = document.getElementById("audio-content");
   // const audio = document.getElementById("audio");

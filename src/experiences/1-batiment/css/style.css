@@ -15,7 +15,7 @@ html,
 body {
   overflow: hidden;
 }
-.title-component {
+.poi-title-component {
   position: absolute;
   top: 6rem;
   left: 6rem;
@@ -224,7 +224,7 @@ body {
   color: black;
 }
 
-.interest-component {
+.point-interest-component {
   position: absolute;
   bottom: 25%;
   right: 0;
@@ -239,17 +239,17 @@ body {
   pointer-events: none;
 }
 
-.interest-component img {
+.point-interest-component img {
   position: absolute;
   top: -177px;
   left: -0.15vw;
 }
-#title-component {
+#poi-title-component {
   font-size: 4rem;
   pointer-events: none;
 }
 
-#text-component {
+#poi-text-component {
   display: flex;
   flex-direction: column;
   gap: 1vh;
@@ -276,11 +276,11 @@ body {
     font-size: 1rem;
   }
 
-  #text-component {
+  #poi-text-component {
     font-size: 1rem;
   }
 
-  #title-component {
+  #poi-title-component {
     font-size: 2rem;
   }
 }

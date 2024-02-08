@@ -41,7 +41,7 @@ export const period = [
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
     ],
     poiPosition: [
-      { x: -2.4, y: 0.2, z: 4.5 },
+      { x: -2.4, y: 0.6, z: 4.5 },
       { x: -0.2, y: 0.6, z: 2.7 },
       { x: 0.1, y: 0.6, z: 2.1 },
     ],
