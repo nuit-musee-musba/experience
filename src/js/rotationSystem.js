@@ -83,9 +83,7 @@ window.addEventListener("touchmove", (event) => {
 
 window.addEventListener("touchend", (event) => {
   isTouching = false;
-  setTimeout(() => {
-    window.experience.autoRotate = true;
-  }, 10000);
+
   // window.experience.autoRotate = false;
 });
 
