@@ -5,8 +5,10 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
 import data from "./data";
+window.experience = window.experience || {};
+window.experience.meshScale = 0.025;
 
-const meshScale = 0.025;
+const meshScale = window.experience.meshScale;
 
 // World creation
 export async function createIsland(i, count, color) {
