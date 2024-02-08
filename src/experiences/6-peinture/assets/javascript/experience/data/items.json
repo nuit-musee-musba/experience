@@ -9,7 +9,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La corruption du corps",
       "recipe_step": 1,
-      "number_needed": 5
+      "number_needed": 5,
+      "animation": "animJeffHappy"
     },
     {
       "id": "2",
@@ -20,7 +21,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffDrama"
     },
     {
       "id": "3",
@@ -31,7 +33,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La passion et le sang du Christ",
       "recipe_step": 3,
-      "number_needed": 2
+      "number_needed": 2,
+      "animation": "animJeffHappy"
     },
     {
       "id": "4",
@@ -42,7 +45,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffNope"
     },
     {
       "id": "5",
@@ -53,7 +57,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffCringe"
     },
     {
       "id": "6",
@@ -64,7 +69,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffCringe"
     },
     {
       "id": "7",
@@ -75,7 +81,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La souffrance et la mort du Christ",
       "recipe_step": 3,
-      "number_needed": 2
+      "number_needed": 2,
+      "animation": "animJeffPerfect"
     },
     {
       "id": "8",
@@ -86,7 +93,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La représentation du déroulement de la vie terrestre",
       "recipe_step": 2,
-      "number_needed": 1
+      "number_needed": 1,
+      "animation": "animJeffPerfect"
     },
     {
       "id": "9",
@@ -97,7 +105,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffNope"
     },
     {
       "id": "10",
@@ -108,7 +117,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffNope"
     },
     {
       "id": "11",
@@ -119,18 +129,20 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffDrama"
     },
     {
       "id": "12",
-      "name": "Le vase",
+      "name": "Le calice",
       "category": "objects",
-      "description": "Objet de luxe car il ne sert pas aux besoins quotidiens, il représente <b>la vanité</b> des biens de ce monde. <b>Rempli à moitié d’eau</b>, il exprime <b>la vie qui s’écoule inexorablement</b>.",
+      "description": "Le calice de vin représente <b>le sang versé par le Christ</b>.",
       "dialog": "Oh oui ! Vous êtes amphore(me) !",
       "wrong_step_dialog": "",
       "recipe_text": "Écoulement inexorable de la vie",
       "recipe_step": 2,
-      "number_needed": 1
+      "number_needed": 1,
+      "animation": "animJeffAdorable"
     },
     {
       "id": "13",
@@ -141,7 +153,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "L'âme éternelle et flamboyante",
       "recipe_step": 1,
-      "number_needed": 1
+      "number_needed": 1,
+      "animation": "animJeffPerfect"
     },
     {
       "id": "14",
@@ -152,7 +165,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffCringe"
     },
     {
       "id": "15",
@@ -163,7 +177,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La résurrection",
       "recipe_step": 3,
-      "number_needed": 1
+      "number_needed": 1,
+      "animation": "animJeffAdorable"
     },
     {
       "id": "16",
@@ -174,7 +189,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffHappy"
     },
     {
       "id": "17",
@@ -185,7 +201,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "Évènements inattendus qui bouleversent la vie humaine",
       "recipe_step": 2,
-      "number_needed": 1
+      "number_needed": 1,
+      "animation": "animJeffHappy"
     },
     {
       "id": "18",
@@ -196,7 +213,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffNope"
     },
     {
       "id": "19",
@@ -207,7 +225,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "La fragilité de la vie",
       "recipe_step": 1,
-      "number_needed": 2
+      "number_needed": 2,
+      "animation": "animJeffAdorable"
     },
     {
       "id": "20",
@@ -218,7 +237,8 @@
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
-      "number_needed": 0
+      "number_needed": 0,
+      "animation": "animJeffDrama"
     }
   ]
 }

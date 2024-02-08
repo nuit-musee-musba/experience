@@ -1,7 +1,62 @@
-.dialog-content {
-    display: none;
+.dialog {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    gap: 2.813rem;
+}
 
+.dialog-nav, 
+.dialog-content {
+    width: 35%;
+    min-width: 1370px;
+}
+
+.dialog-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    button,
+    a {
+        @include btn-reset;
+        @include global-btn($color-bg, $primary);
+        display: flex;
+        gap: 1rem;
+        padding: $btn-padding-y $btn-padding-x;
+        white-space: nowrap;
+        font-weight: bold;
+        &::before,
+        &::after {
+            font-size: 2rem;
+        }
+        &.btn-prev {
+            @include icon(arrow-left);
+            display: none;
+        }
+        &.btn-next {
+            @include icon(arrow-right, after);
+        }
+        &.btn-game {
+            @include global-btn($primary, $color-bg);
+            padding: $btn-padding-y $btn-padding-x;
+            display: none;
+        }
+    }
+}
+.dialog-content {
+    background: $color-bg;
+    border-radius: $global-btn-padding;
+    display: none;
+    padding: 6.25rem 5rem;
     &.active{
         display: block;
+    }
+    ul {
+        padding: 0 3rem;
+        li {
+            padding-left: 1.5rem;
+        }
     }
 }
