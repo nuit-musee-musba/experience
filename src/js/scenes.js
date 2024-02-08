@@ -32,6 +32,7 @@ showButton.addEventListener("click", () => {
 
       setTimeout(() => {
         secondSceneElements.forEach((element) => {
+          element.classList.add("transition-opacity");
           element.style.opacity = "1";
         });
       }, 300);
@@ -64,6 +65,7 @@ backButton.addEventListener("click", () => {
 
     setTimeout(() => {
       firstSceneElements.forEach((element) => {
+        element.classList.add("transition-opacity");
         element.style.opacity = "1";
       });
     }, 500);
