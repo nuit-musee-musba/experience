@@ -35,7 +35,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 5;
   color: white;
 }
 
@@ -58,6 +58,7 @@ body {
   height: 100px;
   animation: spin 1s linear infinite;
   margin-bottom: 3rem;
+  z-index: 5;
 }
 
 .button-loader {
@@ -94,7 +95,7 @@ body {
   align-items: center;
 }
 #scrollBox {
-  flex: 4;
+  flex: 3;
   width: 100%;
   height: 100%;
   position: relative; /* Make sure to set it as a positioned element */
@@ -109,40 +110,7 @@ body {
   height: 100%;
   position: absolute;
   pointer-events: all;
-  z-index: 1;
   width: 100%;
-}
-
-.controls {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  z-index: 3;
-}
-
-.control {
-  cursor: pointer;
-  pointer-events: all;
-  margin: 0 1rem;
-  font-size: 2rem;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  display: flex;
-}
-
-#scrollBox {
-  flex: 2;
-  width: 100%;
-  height: 100%;
-  position: relative; /* Make sure to set it as a positioned element */
 }
 
 #infoBox {
@@ -155,9 +123,9 @@ body {
   top: 0;
   width: 100vw;
   pointer-events: all;
-  z-index: 100;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 3;
 }
 
 #infoText {
@@ -174,7 +142,6 @@ body {
   position: relative;
   gap: 2rem;
   pointer-events: all;
-  z-index: 100;
 }
 
 .buttonContainer {
@@ -244,6 +211,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 /* Additional styles for the popup */
 #helpPopup {
   width: 30%;
@@ -264,7 +232,7 @@ body {
   right: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 100;
+  z-index: 2;
 }
 #closeButton {
   position: absolute;
@@ -288,7 +256,7 @@ body {
   left: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 100;
+  z-index: 2;
 }
 
 .experience-infos {
@@ -297,4 +265,5 @@ body {
   right: 20rem;
   flex-direction: column;
   justify-content: left;
+  z-index: 3;
 }

@@ -6,14 +6,10 @@ const DetailsPart = () => {
   roughPart.classList.remove("show");
 
   const detailsPart = document.getElementById("DetailsPart");
-
   detailsPart.classList.add("show");
 
-  // const detailsButton = document.getElementById("DetailsButton");
-
-  // detailsButton.addEventListener("click", function () {
-  //   RefiningPart();
-  // });
+  const steps1InDetailsPart = document.getElementById("steps1InDetailsPart");
+  steps1InDetailsPart.classList.add("show");
 };
 
 export default DetailsPart;
