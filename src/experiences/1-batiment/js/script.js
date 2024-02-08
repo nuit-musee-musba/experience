@@ -53,12 +53,6 @@ const sceneSetUp = async () => {
     }
   }
 
-  // let restetDeltaTime = false;
-
-  // window.addEventListener("click", (event) => {
-  //   restetDeltaTime = true;
-  // });
-
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
     const deltaTime = elapsedTime - previousTime;
@@ -77,21 +71,7 @@ const sceneSetUp = async () => {
   const endMenu = document.getElementById("end-menu");
   const lastStep = document.getElementById("last-step");
   const component = document.getElementById("component");
-
-  // const audioContent = document.getElementById("audio-content");
-  // const audio = document.getElementById("audio");
-
-  // let isAudioPlaying = false;
-
-  // audioContent.addEventListener("click", () => {
-  //   if (isAudioPlaying) {
-  //     audio.src = "./assets/icons/audio.svg";
-  //   } else {
-  //     audio.src = "./assets/icons/audioNone.svg";
-  //   }
-
-  //   isAudioPlaying = !isAudioPlaying;
-  // });
+  // const containerSubTitle = document.getElementById("container-subTitle");
 
   const restart = () => {
     index = 0;
@@ -101,11 +81,13 @@ const sceneSetUp = async () => {
   const showText = () => {
     isShowingText = true;
     component.style.display = "flex";
+    // containerSubTitle.style.display = "flex";
   };
 
   const hideText = () => {
     isShowingText = false;
     component.style.display = "none";
+    // containerSubTitle.style.display = "none";
   };
   window.addEventListener("click", onMouseClick, false);
   window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
@@ -211,6 +193,7 @@ const sceneSetUp = async () => {
 
     const cameraPosition = getCameraPositionForTarget(targetPosition);
 
+    document.getElementById("subTitle").textContent = step.subTitle;
     document.getElementById("title-component").textContent = step.title;
     document.getElementById("text-component").innerHTML = step.description
       .map((paragraph) => `<p>${paragraph}</p>`)
