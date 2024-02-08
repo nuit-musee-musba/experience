@@ -10,6 +10,7 @@ window.experience = window.experience || {};
 const index = window.experience.index;
 const meshScale = 0.03;
 const biggerScale = 0.035;
+const positionY = 0;
 
 showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
@@ -36,7 +37,7 @@ showButton.addEventListener("click", () => {
     // Position
 
     // Calculate the target rotation based on the current'index'
-    const duration = 1000; // Adjust duration as needed
+    const duration = 1500; // Adjust duration as needed
     const startTime = Date.now();
 
     function animate() {
@@ -61,17 +62,12 @@ showButton.addEventListener("click", () => {
 
       // Move other islands to the back
       window.experience.otherIslands.forEach((island) => {
-        const angle = island.rotation.y;
-        console.log(angle);
         const currenPosition = island.position.y;
-        const targetPosition = currenPosition - 1;
+        const targetPosition = positionY - 1; // initial position = 0
         const interpolatedPosition =
           currenPosition + (targetPosition - currenPosition) * progress * 0.1;
         island.position.y = interpolatedPosition;
       });
-
-      // Scale
-
       if (progress < 1) {
         window.experience.isRotating = true;
 
@@ -137,7 +133,7 @@ backButton.addEventListener("click", () => {
       const progress = Math.min(elapsedTime / duration, 1); // Ensure progress is between 0 and 1
       // Interpolate the scale smoothly
       const interpolatedScale =
-        initialScale - (initialScale - targetScale) * progress;
+        initialScale - (initialScale - targetScale) * progress * 2;
       window.experience.currentIsland.scale.set(
         interpolatedScale,
         interpolatedScale,
@@ -146,12 +142,10 @@ backButton.addEventListener("click", () => {
 
       // Move other islands to the back
       window.experience.otherIslands.forEach((island) => {
-        const angle = island.rotation.y;
-        console.log(angle);
         const currentPosition = island.position.y;
         const targetPosition = 0; // initial position
         const interpolatedPosition =
-          currentPosition - (currentPosition - targetPosition) * progress * 0.1;
+          currentPosition - (currentPosition - targetPosition) * progress * 0.2;
         island.position.y = interpolatedPosition;
       });
       if (progress < 1) {
