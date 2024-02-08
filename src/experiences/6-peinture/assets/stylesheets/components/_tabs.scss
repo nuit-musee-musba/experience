@@ -125,14 +125,34 @@
         }
         // TAB ANIMALS
         &-toad {
-            right: 16%;
+            right: 10%;
             bottom: 15rem;
         }
         &-piggy {
             bottom: 15rem;
-            right: 40%;
+            right: 32%;
         }
-
+        &-butterfly {
+            top: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &-grasshopper {
+            top: 6rem;
+            right: 18%;
+        }
+        &-fish {
+            left: 20%;
+            top: 6rem;
+        }
+        &-catterpillar {
+            left: 6%;
+            bottom: 15rem;
+        }
+        &-crab {
+            left: 28%;
+            bottom: 15rem;
+        }
     }
 
     // TODO : ANIMATION ACTIVE
