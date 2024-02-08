@@ -252,7 +252,7 @@ export default class Transition {
 
   next() {
     if (this.currentSectionNumber === 9) {
-      this.currentSectionNumber = 0;
+      location.reload();
     } else {
       this.currentSectionNumber = this.currentSectionNumber + 1;
     }
