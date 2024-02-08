@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import { join, resolve } from "path";
 import { defineConfig } from "vite";
+import viteTsconfigPaths from "vite-tsconfig-paths";
+
 const root = resolve(__dirname, "src");
 const outDir = resolve(__dirname, "dist");
 
@@ -29,7 +31,7 @@ const redirectToDir = ({ root }) => ({
 export default defineConfig({
   root,
   publicDir: "../static/",
-  plugins: [redirectToDir({ root })],
+  plugins: [redirectToDir({ root }), viteTsconfigPaths()],
   base: "./",
   build: {
     outDir,

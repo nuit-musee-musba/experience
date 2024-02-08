@@ -10,6 +10,17 @@ section {
   justify-content: center;
 }
 
+section.painting-frame .container > *{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section.painting-frame .container > .left{
+  padding-top: 0;
+}
+
 /*section .left {*/
 /*  display: grid;*/
 /*  flex-direction: column;*/

@@ -19,3 +19,7 @@
 .paragraph > p{
     text-align: start;
 }
+
+.text-left > p{
+    text-align: left;
+}

@@ -4,18 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clair-obscur - Lumière | MusBA x MMI</title>
-  <link rel="stylesheet" href="/global/style.css" />
+  <title>Saint Sébastien soigné par Irène, le Maître à la chandelle | MusBA & MMI</title>
   <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
   <script defer type="module" src="/experiences/4-lumiere/js/first-painting.js"></script>
 </head>
 
 <body>
   <canvas class="webgl"></canvas>
-
+  <div class="popin" id="popin-info">
+    <div class="popin-body">
+      <p>Les peintres inspirés du Caravage aiment représenter leur sujet avec un fort contraste entre les zones de
+        lumières et les zones d’ombres.</p>
+      <button class="popin-btn popin-close btn-small-primary" data-target="#popin-info">J'ai compris</button>
+    </div>
+  </div>
   <div class="consignes">
-    <p>Les peintres inspirés du Caravage aiment représenter leur sujet avec un fort contraste entre <br />les zones de
-      lumières et les zones d’ombres.</p>
     <p>Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur le cercle.</p>
   </div>
   <div class="legende">
@@ -23,7 +26,10 @@
       <p><em>Saint Sébastien soigné par Irène</em>, le Maître à la chandelle</p>
     </div>
   </div>
+
   <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider</button>
+
+  <div class="popin-overlay hidden"></div>
 
   <!-- Begin Global buttons -->
   <div class="bottom-menu">

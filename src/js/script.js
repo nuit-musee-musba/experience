@@ -6,7 +6,8 @@ import "./rotationSystem";
 
 window.experience = window.experience || {};
 
-window.experience.canRotate = false;
+window.experience.canRotate = true;
+window.experience.autoRotate = true;
 
 // Capture DOM elements
 
@@ -50,19 +51,20 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 2);
+const light = new THREE.SpotLight(0xffffff, 1);
 light.position.set(0, 0.5, -0.85);
 scene.add(light);
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, 0, 0); //
+carousel.rotation.set(0, 0, 0);
+carousel.position.set(0, 0, 0);
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
 
-const islands = [];
+window.experience.islands = [];
 
 // Count of islands
 const count = 5;
@@ -74,7 +76,7 @@ for (let i = 0; i < count; i++) {
     .then((island) => {
       // Add axes helper to the island
       carousel.add(island);
-      islands.push(island);
+      window.experience.islands.push(island);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -82,6 +84,7 @@ for (let i = 0; i < count; i++) {
 
   islandPromises.push(islandPromise);
 }
+
 // Show loader while worlds are loading
 const loaderElement = document.getElementById("loader");
 loaderElement.style.display = "flex";
@@ -123,6 +126,16 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   window.experience.updateCarouselRotation();
+
+  // Get current island
+  window.experience.currentIsland = window.experience.islands.find((island) => {
+    return island.userData.id === window.experience.index + 1;
+  });
+  window.experience.otherIslands = window.experience.islands.filter(
+    (island) => {
+      return island.userData.id !== window.experience.index + 1;
+    }
+  );
   // Render the scene
   renderer.render(scene, camera);
 };

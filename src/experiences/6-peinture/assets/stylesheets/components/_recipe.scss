@@ -25,28 +25,35 @@
   .list-items {
     .item {
       display: flex;
-      gap: 0.5vw;
+      gap: 0.2vw;
       align-items: center;
       justify-content: space-between;
       width: 94%;
       + .item {
         margin-top: 2.5rem;
       }
+      &::before {
+        padding: 1rem;
+        border-radius: 12px;
+      }
       &.food {
         @include icon(food);
         &::before {
+          background: rgba($food, 0.3);
           color: $food;
         }
       }
       &.animals {
         @include icon(animals);
         &::before {
+          background: rgba($animals, 0.3);
           color: $animals;
         }
       }
       &.objects {
         @include icon(objects);
         &::before {
+          background: rgba($objects, 0.3);
           color: $objects;
         }
       }
