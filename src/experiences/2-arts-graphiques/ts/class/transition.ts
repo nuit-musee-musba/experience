@@ -157,6 +157,8 @@ export default class Transition {
               getPercentage: true,
               getPercentageAt: 60,
             };
+            console.log("seal !!");
+
             paint(
               canvas,
               currentSectionNumber,

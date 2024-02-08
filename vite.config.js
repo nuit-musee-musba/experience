@@ -38,8 +38,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "./src/index.html",
-        "experience-template":
-          "./src/experiences/experience-template/index.html",
+        "ui-demo": "./src/ui-demo/index.html",
         "1-batiment": "./src/experiences/1-batiment/index.html",
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
         "6-peinture": "./src/experiences/6-peinture/index.html",
@@ -52,6 +51,7 @@ export default defineConfig({
           "./src/experiences/4-lumiere/second-painting.html",
         "4-lumiere/third-painting":
           "./src/experiences/4-lumiere/third-painting.html",
+        "4-lumiere/results": "./src/experiences/4-lumiere/results.html",
       },
     },
   },

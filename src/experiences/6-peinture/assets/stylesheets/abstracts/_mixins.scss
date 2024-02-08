@@ -5,6 +5,11 @@
     margin-top: 0;
 }
 
+@mixin btn-reset {
+    background: none;
+    border: 0;
+}
+
 @mixin icon($icon-name: '', $pseudo-element: before) {
     &::#{$pseudo-element} {
         content: map-get($icons, $icon-name);
@@ -26,6 +31,8 @@
     border-radius: 21px;
     color: $color;
     display: flex;
+    font-weight: bold;
+    font-size: $font-size;
     padding: $global-btn-padding;
     &::before {
         font-size: 3.188rem;

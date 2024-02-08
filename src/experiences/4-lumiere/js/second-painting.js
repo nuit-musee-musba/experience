@@ -10,42 +10,6 @@ import { enableInactivityRedirection } from "/global/js/inactivity";
 enableInactivityRedirection();
 
 /**
- * Popins
- */
-
-// Hide popin
-const popinHide = (targetPopin) => {
-  targetPopin.classList.add("hidden");
-  document.querySelector(".popin-overlay").classList.add("hidden");
-};
-
-// Show popin
-const popinShow = (targetPopin) => {
-  targetPopin.classList.remove("hidden");
-  document.querySelector(".popin-overlay").classList.remove("hidden");
-};
-
-// Popin close buttons
-const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
-for (const popinBtn of popinBtns) {
-  const targetPopin = document.querySelector(popinBtn.dataset.target);
-  popinBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinHide(targetPopin);
-  });
-}
-
-// Popin open buttons
-const popinOpenBtns = document.querySelectorAll(".popin-btn.popin-open");
-for (const popinOpenBtn of popinOpenBtns) {
-  const targetPopin = document.querySelector(popinOpenBtn.dataset.target);
-  popinOpenBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinShow(targetPopin);
-  });
-}
-
-/**
  * Threejs
  */
 
@@ -56,11 +20,14 @@ const gui = new GUI({
   closeFolders: true,
 });
 
+// Global parameters
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 5.6,
   planDistance: 0.5,
   white: "#f5f5f5",
+  ellipseDefaultOpacity: 0.5,
+  ellipseTouchOpacity: 0.2,
 };
 
 // Canvas
@@ -88,6 +55,7 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
+// Second painting
 const firstPlanTexture = textureLoader.load(
   "/4-lumiere/second-painting/second-painting-plan-1-2.png"
 );
@@ -107,11 +75,16 @@ const thirdPlanNormalTexture = textureLoader.load(
   "/4-lumiere/second-painting/second-painting-plan-3-normal.png"
 );
 
+// Light object
+const lightObjectTexture = textureLoader.load(
+  "/4-lumiere/second-painting/second-light-object.png"
+);
+
 /**
  * Loader
  */
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/4-lumiere//draco/");
+dracoLoader.setDecoderPath("/4-lumiere/draco/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -191,7 +164,7 @@ var ellipseGeometry = new THREE.TorusGeometry(
 var ellipseMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
+  opacity: globalParameters.ellipseDefaultOpacity,
   // wireframe: true,
 });
 var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
@@ -199,6 +172,20 @@ ellipse.position.z = 0.5;
 ellipse.rotation.x = -Math.PI * 0.45;
 ellipse.rotation.z = -0.9;
 scene.add(ellipse);
+
+// Light object
+const lightObjectGeometry = new THREE.PlaneGeometry(
+  1, // width
+  1, // height
+  3, //widthSegments
+  3 //heightSegments
+);
+const lightObjectMaterial = new THREE.MeshBasicMaterial({
+  map: lightObjectTexture,
+  transparent: true,
+  opacity: 1,
+});
+const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
 
 /**
  * Lights
@@ -224,6 +211,8 @@ const pointLight = new THREE.PointLight(
 );
 pointLight.position.x = globalParameters.lightRadius;
 scene.add(pointLight);
+pointLight.add(lightObject);
+
 ellipse.add(pointLight);
 const pointLightTweaks = gui.addFolder("Spot light parameters");
 pointLightTweaks.add(pointLight, "visible");
@@ -239,7 +228,7 @@ pointLightTweaks
 
 // Helper
 const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-pointLightHelper.visible = true;
+pointLightHelper.visible = false;
 pointLightHelper.color = "#ffffff";
 scene.add(pointLightHelper);
 pointLightTweaks.add(pointLightHelper, "visible").name("Repère visuel");
@@ -336,6 +325,7 @@ window.addEventListener(
 canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  ellipse.material.opacity = globalParameters.ellipseTouchOpacity;
 
   // Update firstPainting light position
   updateRotation();
@@ -347,6 +337,10 @@ canvas.addEventListener("touchmove", (event) => {
 
   // Update firstPainting light position
   updateRotation();
+});
+
+canvas.addEventListener("touchend", (event) => {
+  ellipse.material.opacity = globalParameters.ellipseDefaultOpacity;
 });
 
 // Calculate pointer angle
@@ -362,21 +356,19 @@ function calculateAngle() {
 // // Result button
 const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
-const valudResultPopin = document.querySelector("#popin-result-true");
 
 // Update ellipse rotation
+updateRotation;
 function updateRotation() {
   const angle = calculateAngle();
   ellipse.rotation.z = angle;
-
+  console.log("angle", angle);
   // // Check result
-  if (angle > 3.6 && angle < 3.9) {
-    console.log("angle ok");
+  if (angle > 3.4 && angle < 3.66) {
     resultState = true;
-    if (resultBtn.classList.contains("hidden")) {
-      resultBtn.classList.remove("hidden");
-    }
+    resultBtn.disabled = false;
   } else {
+    resultBtn.disabled = true;
     resultState = false;
   }
 }
@@ -385,8 +377,7 @@ function updateRotation() {
 resultBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (resultState == true) {
-    popinShow(valudResultPopin);
-  } else {
+    window.location.replace("./results.html?painting=second");
   }
 });
 
@@ -406,6 +397,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const tick = () => {
   // Light controls
   pointLightHelper.update();
+
+  // Update light object
+  lightObject.lookAt(camera.position);
 
   // Render
   renderer.render(scene, camera);

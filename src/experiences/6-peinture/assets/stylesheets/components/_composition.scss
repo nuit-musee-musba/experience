@@ -1,0 +1,101 @@
+.composition {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    .scene {
+        &-table {
+            margin-bottom: -6vh;
+        }
+        &-accessories {
+            position: absolute;
+            margin-bottom: 3vh;;
+        }
+    }
+    .item {
+        position: absolute;
+        display: none;
+        &-butterfly {
+            left: 18vw;
+            top: 26vh;
+        }
+        &-crab {
+            right: 15vw;
+            top: 31.5vh;
+        }
+        &-plum-1 {
+            top: 35vh;
+            left: 24vw;
+        }
+        &-plum-2 {
+            top: 35vh;
+            left: 28.5vw;
+        }
+        &-lemon {
+            top: 32.5vh;
+            left: 31.15vw;
+        }
+        &-grape-2 {
+            right: 34.5vw;
+            top: 16vh;
+            z-index: 0;
+        }
+        &-grape-1 {
+            right: 27.5vw;
+            top: 21vh;
+            z-index: 1;
+        }
+        &-catterpillar-1 {
+            top: 27vh;
+            right: 31vw;
+            z-index: 4;
+        }
+        &-catterpillar-2 {
+            top: 45.5vh;
+            right: 40vw;
+            z-index: 3;
+        }
+        &-grasshopper {
+            left: 23vw;
+            top: 2.5vh;
+            z-index: -1;
+        }
+        &-vase {
+            top: 18.5vh;
+            left: 33vw;
+            z-index: -1;
+        }
+        &-peach-1 {
+            top: 26vh;
+            left: 43.5vw;
+            z-index: 3;
+        }
+        &-peach-2 {
+            top: 28.5vh;
+            left: 49vw;
+            z-index: 3;
+        }
+        &-peach-3 {
+            top: 31.25vh;
+            left: 40.25vw;
+        }
+        &-peach-4 {
+            top: 33.5vh;
+            left: 43.5vw;
+            z-index: 3;
+        }
+        &-peach-5 {
+            top: 32vh;
+            left: 44vw;
+            z-index: 1;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.test {
+    position: relative;
+}

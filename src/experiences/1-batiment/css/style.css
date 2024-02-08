@@ -15,21 +15,15 @@ html,
 body {
   overflow: hidden;
 }
-
-html,
-body {
-  overflow: hidden;
-}
 .title-component {
   position: absolute;
   top: 6rem;
   left: 6rem;
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 }
 .title-line {
-  width: 4px;
-  height: full;
+  width: 5px;
   background-color: white;
 }
 #date-title {
@@ -59,31 +53,11 @@ body {
 }
 
 .parameter-buttons a svg {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 21px;
   width: 100%;
   height: 100%;
-}
-
-#nextButton {
-  z-index: 0;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  bottom: 0;
-  left: 50%;
-  padding-bottom: 2vh;
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-family: helvetica;
-  font-size: 2.5rem;
-  font-weight: 100;
-}
-
-#nextButton img {
-  z-index: -1;
-  position: absolute;
-  bottom: 0;
 }
 
 #interestButton {
@@ -98,7 +72,6 @@ body {
   cursor: pointer;
   border: none;
   color: white;
-  font-family: helvetica;
   font-size: 2.5rem;
   font-weight: 100;
 }
@@ -110,12 +83,25 @@ body {
 }
 
 .chronology {
-  z-index: 7;
-  bottom: 12vh;
+  position: absolute;
+  bottom: 5vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
+  align-items: center;
+  z-index: 7;
+}
+
+.left-arrow,
+.right-arrow {
+  background-color: transparent;
+  border: none;
+}
+
+.left-arrow svg,
+.right-arrow svg {
+  height: 5rem;
+  width: 5rem;
 }
 
 .chronology-container {
@@ -123,18 +109,55 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2vh;
+  padding: 0 3vw;
 }
 
-.chronology-buttons {
+.chronology-timeline {
   display: flex;
   align-items: center;
-  gap: 1vw;
+}
+
+.chronology-timeline .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chronology-timeline .buttons .date {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.chronology-timeline .button {
+  position: relative;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 5px solid white;
+}
+
+.chronology-timeline .button div {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.chronology-line {
+  width: 5vw;
+  height: 5px;
+  background-color: white;
 }
 
 .chronology-title {
   font-size: 3rem;
-  font-family: helvetica;
   font-weight: 100;
   color: white;
   display: flex;
@@ -161,19 +184,12 @@ body {
 }
 
 .chronology-buttons button {
+  font-family: Montserrat-Regular;
   font-size: 4rem;
-  font-weight: 100;
-  font-family: helvetica;
   background-color: transparent;
   color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
-}
-
-.chronology-line {
-  width: 100%;
-  height: 4px;
-  background-color: white;
 }
 
 #end-menu {
@@ -181,20 +197,20 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
   display: none;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(245, 245, 220, 1);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 
 .end-menu-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5rem;
+  padding: 6rem 13rem;
+  color: white;
 }
 
 .end-menu-buttons {
@@ -203,23 +219,24 @@ body {
   gap: 20px;
 }
 
-.end-menu-buttons div {
-  border: 2px dashed white;
-  padding: 5px;
+#restart-button button {
+  border: none;
+  color: black;
 }
 
 .interest-component {
   position: absolute;
-  bottom: 20%;
+  bottom: 25%;
   right: 0;
-  width: 30vw;
+  width: 25vw;
   display: none;
   flex-direction: column;
   gap: 2vh;
-  background: linear-gradient(0.25turn, #00000060, #00000030, #ebf8e100);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 2vh 8vw 4vh 3vw;
+  padding: 2vh 3vw 4vh 2vw;
   border-left: 5px solid white;
+  pointer-events: none;
 }
 
 .interest-component img {
@@ -228,8 +245,8 @@ body {
   left: -0.15vw;
 }
 #title-component {
-  font-family: musba;
   font-size: 4rem;
+  pointer-events: none;
 }
 
 #text-component {
@@ -237,7 +254,6 @@ body {
   flex-direction: column;
   gap: 1vh;
   font-size: 2.5rem;
-  font-family: helvetica;
   font-weight: 100;
 }
 
@@ -266,8 +282,5 @@ body {
 
   #title-component {
     font-size: 2rem;
-  }
-  #nextButton {
-    font-size: 1rem;
   }
 }

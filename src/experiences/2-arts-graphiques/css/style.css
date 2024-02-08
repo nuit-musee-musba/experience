@@ -24,25 +24,6 @@
   box-sizing: border-box;
 }
 
-.btn-icon {
-  width: 3rem;
-  height: 3rem;
-}
-.btn-small-icon {
-  background-color: white;
-  color: black;
-  padding: 2rem;
-  width: 8rem;
-  height: 8rem;
-  border: 5px solid black;
-  border-radius: 21px;
-  backdrop-filter: blur(6.4px);
-  display: grid;
-  place-items: center;
-
-  align-self: end;
-}
-
 .italic {
   font-style: italic;
 }
@@ -155,6 +136,10 @@ body {
 }
 
 /* section-4 */
+
+.sec4-dragable {
+  z-index: 1;
+}
 
 .painting-pieces-container {
   width: 1300px;
