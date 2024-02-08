@@ -205,11 +205,12 @@ const poi3 = [];
 const poi4 = [];
 
 for (let i = 0; i < period.length; i++) {
-  for (let j = 0; j < period[i].cubePosition.length; j++) {
+  for (let j = 0; j < period[i].poiPosition.length; j++) {
     const geometry = new THREE.SphereGeometry(0.2, 32, 16);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
+    cube.name = `${i + j}`;
 
     if (i === 0) {
       poi1.push(cube);
@@ -226,8 +227,6 @@ for (let i = 0; i < period.length; i++) {
 const allPOI = [poi1, poi2, poi3, poi4];
 
 scene.add(...poi1, ...poi2, ...poi3, ...poi4);
-console.log(allPOI);
-
 gltfLoader.load("/1-batiment/assets/0/plane.glb", (gltf) => {
   scene.add(gltf.scene);
 });
