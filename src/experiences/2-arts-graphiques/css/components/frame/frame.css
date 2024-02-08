@@ -10,3 +10,12 @@
   width: 1189.128px;
   height: 1471px;
 }
+
+#painting-frame__confirmation{
+  text-align: center;
+  visibility: hidden;
+}
+
+#painting-frame__confirmation.active{
+  visibility: visible;
+}

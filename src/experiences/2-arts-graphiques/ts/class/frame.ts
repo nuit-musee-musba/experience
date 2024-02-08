@@ -22,7 +22,8 @@ export class Frame {
     this.id = frameId;
   }
   addText(){
-    this.confirmationText.innerText = "Êtes vous sûr·e de votre choix ?"
+    // this.confirmationText.innerText = "Êtes vous sûr·e de votre choix ?"
+    this.confirmationText.classList.add('active')
   }
   addOpacity() {
     this.frame.style.opacity = "50%";
