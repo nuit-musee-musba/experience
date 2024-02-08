@@ -10,6 +10,7 @@ const Paint = async (
   currentSectionNumber: number,
   backgroundFile: String,
   imageToRevealFile: String,
+  brushImageFile: String,
   button: Button,
   options?: { getPercentage?: boolean; getPercentageAt?: number }
 ) => {
@@ -39,8 +40,13 @@ const Paint = async (
 
   target!.appendChild(app.view);
 
-  const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
-  const line = new PIXI.Graphics();
+  // const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
+  // const line = new PIXI.Graphics();
+
+  let brushTexture = await PIXI.Texture.from(`/2-arts-graphiques/images/textures/${brushImageFile}`);
+  // Créez un sprite PIXI à partir de l'image de pinceau
+  const brush = new PIXI.Sprite(brushTexture);
+  brush.anchor.set(0.5);
 
   let t1 = await PIXI.Assets.load(
     `/2-arts-graphiques/canvas/${backgroundFile}`
@@ -75,7 +81,7 @@ const Paint = async (
       .on("pointermove", pointerMove);
 
     let dragging = false;
-    let lastDrawnPoint: PIXI.Point | null = null;
+    // let lastDrawnPoint: PIXI.Point | null = null;
 
     totalPixels = background.width * background.height;
 
@@ -94,21 +100,21 @@ const Paint = async (
           skipUpdateTransform: false,
         });
 
-        if (lastDrawnPoint) {
-          line
-            .clear()
-            .lineStyle({ width: 400, color: 0xffffff })
-            .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
-            .lineTo(x, y);
-          app.renderer.render(line, {
-            renderTexture,
-            clear: false,
-            skipUpdateTransform: false,
-          });
-        }
+        // if (lastDrawnPoint) {
+        //   line
+        //     .clear()
+        //     .lineStyle({ width: 100, color: 0xffffff })
+        //     .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
+        //     .lineTo(x, y);
+        //   app.renderer.render(line, {
+        //     renderTexture,
+        //     clear: false,
+        //     skipUpdateTransform: false,
+        //   });
+        // }
 
-        lastDrawnPoint = lastDrawnPoint || new PIXI.Point();
-        lastDrawnPoint.set(x, y);
+        // lastDrawnPoint = lastDrawnPoint || new PIXI.Point();
+        // lastDrawnPoint.set(x, y);
       }
     }
 
@@ -138,7 +144,7 @@ const Paint = async (
 
     function pointerUp(event: any) {
       dragging = false;
-      lastDrawnPoint = null;
+      // lastDrawnPoint = null;
 
       if (options && options!.getPercentage) {
         percentage(options!.getPercentageAt);
