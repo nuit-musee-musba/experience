@@ -7,18 +7,19 @@ export default class Frames {
   frames: Frame[];
   selectedFrameId: string;
   button: Button;
-  image: Image;
+  images: NodeListOf<HTMLImageElement>;
 
   constructor(button: Button) {
     const frame1 = new Frame("frame-1");
     const frame2 = new Frame("frame-2");
     const frame3 = new Frame("frame-3");
 
-    const image = new Image(".selected-painting");
+    const images =
+      document.querySelectorAll<HTMLImageElement>(".selected-painting");
 
     this.frames = [frame1, frame2, frame3];
     this.button = button;
-    this.image = image;
+    this.images = images;
 
     frame1.addEventListener(() => this.selectFrame(frame1));
     frame2.addEventListener(() => this.selectFrame(frame2));
@@ -36,10 +37,11 @@ export default class Frames {
     this.frames.forEach((frame) => {
       if (this.selectedFrameId === frame.id) {
         const selectedImage = frame.frame.children[0] as HTMLImageElement;
-        this.image.changeSource(selectedImage.src);
+        this.images.forEach((element) => (element.src = selectedImage.src));
         frame.removeOpacity();
       } else {
         frame.addOpacity();
+        frame.addText();
       }
     });
   }

@@ -47,7 +47,7 @@ const router = [
     color: "purple",
     title: "Experience peinture",
     description:
-      "Plongez dans une aventure artistique captivante en devenant notre disciple. Recevez une commande exclusive du renommé XXX et explorez un univers d'ingrédients, sous la direction de votre maître d'art, Jeff Deuvre. Ensemble, créez une vanité unique et puissante, invitant à méditer sur la beauté éphémère de la vie !",
+      "Plongez dans une aventure artistique captivante en devenant notre disciple. Recevez une commande exclusive du renommé Jan Brueghel de Velours et explorez un univers d'ingrédients, sous la direction de votre maître d'art, Jeff Deuvre. Ensemble, créez une vanité unique et puissante, invitant à méditer sur la beauté éphémère de la vie !",
     modelPath: "/assets/hub/peinture.glb",
   },
 ];

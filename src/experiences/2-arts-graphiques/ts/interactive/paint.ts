@@ -127,7 +127,6 @@ const Paint = async (
       }
 
       if (percentageRemaining >= getPercentageAt) {
-        console.log("Vous pouvez passer à la suite si vous le souhaitez");
         button.button.disabled = false;
       }
     }
