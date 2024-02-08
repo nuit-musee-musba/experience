@@ -3,6 +3,7 @@ import { Sec1Dragables } from "./Sec1Dragables";
 import { initialiseAmountOutside } from "./utils";
 import Transition from "../class/transition";
 import Button from "../class/button";
+import { setBg } from "../utils/setBg";
 
 export class Section1 extends Section {
   dragables: Sec1Dragables[];
@@ -10,6 +11,8 @@ export class Section1 extends Section {
 
   constructor(sectionId: string, transition: Transition) {
     super(sectionId);
+    setBg("reserve");
+
     this.button = new Button("sec1-button", () => transition.next());
 
     const dragables = Array.from(

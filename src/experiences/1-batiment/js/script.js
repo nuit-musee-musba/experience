@@ -193,17 +193,19 @@ const sceneSetUp = async () => {
 
     const cameraPosition = getCameraPositionForTarget(targetPosition);
 
-    document.getElementById("subTitle").textContent = step.subTitle;
+    document.getElementById("subTitle").textContent = step.subTitle[0];
     document.getElementById("title-component").textContent = step.title;
     document.getElementById("text-component").innerHTML = step.description
       .map((paragraph) => `<p>${paragraph}</p>`)
       .join("");
 
-    cube.position.set(
-      step.cubePosition.x,
-      step.cubePosition.y,
-      step.cubePosition.z
-    );
+    if (step.cubePosition) {
+      cube.position.set(
+        step.cubePosition.x,
+        step.cubePosition.y,
+        step.cubePosition.z
+      );
+    }
 
     cube.cursor = "pointer";
 
