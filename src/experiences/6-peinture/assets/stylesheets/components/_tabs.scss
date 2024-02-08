@@ -65,7 +65,24 @@
   gap: 20px;
 
   .item {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     position: absolute;
+    &.selected-item {
+        &::before {
+            aspect-ratio: 1;
+            content: '';
+            position: absolute;
+            height: 160%;
+            width: 160%;
+            background-image: url('/6-peinture/images/ingredients/selection.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: -1;
+        }
+    }
     // TAB FOOD
     &-peach {
       left: 320px;
