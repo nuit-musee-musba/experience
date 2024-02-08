@@ -149,10 +149,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  gap: 2rem;
-  pointer-events: all;
-  margin-bottom: 5rem;
+  gap: 4rem;
 }
 
 .buttonContainer {
@@ -283,6 +280,11 @@ body {
   transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
 }
 
+.transition-move {
+  transition: transform 1s ease; /* Adjust the duration and timing function as needed */
+  transform: translateX(-100%);
+}
+
 .scroll-infos {
   position: absolute;
   display: flex;
@@ -290,4 +292,10 @@ body {
   align-items: center;
   gap: 2rem;
   top: 5rem;
+}
+
+.absolute-bottom {
+  position: absolute;
+  bottom: 5rem;
+  z-index: 100;
 }
