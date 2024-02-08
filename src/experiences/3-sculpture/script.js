@@ -73,6 +73,8 @@ scene.add(camera);
 //
 
 let workshop;
+let socle;
+
 let quantity;
 
 gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
@@ -80,7 +82,10 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
+
   for (let i = 0; i < workshop.children.length; i++) {
+  console.log(workshop.children[i].name);
+
     if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
     } else if (workshop.children[i].name === "LSpot") {
@@ -93,6 +98,9 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
+    } else if(workshop.children[i].name === "Socle") {
+      socle = workshop.children[i];
+
     }
   }
 
@@ -104,19 +112,23 @@ let statueV2;
 let statueV4;
 let statueV5;
 
+const statueScale = new THREE.Vector3(0.25, 0.25, 0.25);
+const statuePosition = new THREE.Vector3(1, -0.8, 0.6);
+const statueRotation = Math.PI / 2;
+
 gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
-  gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(1.3, -1, -1.5);
-  gltf.scene.rotation.y = Math.PI / 2;
+  gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
+  gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
+  gltf.scene.rotation.y = statueRotation;
   statueV1 = gltf.scene;
 
   scene.add(statueV1);
 });
 
 gltfLoader.load("/3-sculpture/dégrossi-to-sculpt.glb", (gltf) => {
-  gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(1.3, -1, -1.5);
-  gltf.scene.rotation.y = Math.PI / 2;
+  gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
+  gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
+  gltf.scene.rotation.y = statueRotation
   statueV2 = gltf.scene;
 
   scene.add(statueV2);
@@ -341,6 +353,10 @@ const tick = () => {
   if (statueV1) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
+  }
+
+  if(socle){
+    socle.rotation.y = socle.rotation.y - rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;
