@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -31,7 +30,6 @@ const popinShow = (targetPopin) => {
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
   popinShow(popin);
 });
 
@@ -54,22 +52,23 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
-gui.hide();
+// gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 1.3,
   planDistance: 0.5,
   white: "#f5f5f5",
-  ambientIntensity: 4.5,
+  ambientIntensity: 3,
   rectAreaIntensity: 1,
   changeValue: 1,
   lineDefaultOpacity: 0.5,
   lineTouchOpacity: 0.2,
-  resultValue: 0.5,
+  resultValue: 0.3,
   resultDelta: 0.05,
   step1: 0.1,
   step2: 0.3,
+  step3: 0.6,
 };
 
 // Canvas
@@ -240,15 +239,14 @@ const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
 
 // Light colors
 const lightColors = {
-  blue: new THREE.Color("#2d4ed6"),
-  yellow: new THREE.Color("#f09800"),
+  blue: new THREE.Color("#2277aa"),
+  yellow: new THREE.Color("#f8d181"),
   red: new THREE.Color("#FF000C"),
-  // white: new THREE.Color("#9FB2FF"),
 };
 
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  "#d1dbff", // color
+  lightColors.ambientYellow, // color
   globalParameters.ambientIntensity // intensity
 );
 scene.add(ambientLight);
@@ -258,7 +256,7 @@ const rectAreaLight = new THREE.RectAreaLight(
   "#9FB2FF", // color
   globalParameters.rectAreaIntensity, // intensity
   8, // width
-  2.5 // height
+  5 // height
 );
 // pointLight.position.x = globalParameters.lightRadius;
 scene.add(rectAreaLight);
@@ -271,13 +269,16 @@ const lightMinPos = -(line.geometry.parameters.height / 2);
 
 rectAreaLight.position.y = lightMaxPos / 2;
 
-gui.addColor(lightColors, "blue").onChange(() => {
+gui.addColor(lightColors, "blue").onChange((value) => {
+  // console.log("blue", value.getHexString())
   rectAreaLight.color.set(lightColors.blue);
 });
-gui.addColor(lightColors, "yellow").onChange(() => {
+gui.addColor(lightColors, "yellow").onChange((value) => {
+  // console.log("yellow", value.getHexString())
   rectAreaLight.color.set(lightColors.yellow);
 });
-gui.addColor(lightColors, "red").onChange(() => {
+gui.addColor(lightColors, "red").onChange((value) => {
+  // console.log("red", value.getHexString())
   rectAreaLight.color.set(lightColors.red);
 });
 
@@ -294,7 +295,6 @@ function changeMainLightColor() {
   let colorTo = null;
   let alphaInterpolation = null;
 
-  console.log("value", globalParameters.changeValue);
   if (globalParameters.changeValue <= globalParameters.step1) {
     colorFrom = lightColors.red;
     colorTo = lightColors.red;
@@ -308,12 +308,21 @@ function changeMainLightColor() {
     alphaInterpolation =
       (globalParameters.changeValue - globalParameters.step1) /
       (globalParameters.step2 - globalParameters.step1);
-  } else {
+  } else if (
+    globalParameters.changeValue > globalParameters.step2 &&
+    globalParameters.changeValue <= globalParameters.step3
+  ) {
     colorFrom = lightColors.yellow;
     colorTo = lightColors.blue;
     alphaInterpolation =
       (globalParameters.changeValue - globalParameters.step2) /
-      (1 - globalParameters.step2);
+      (globalParameters.step3 - globalParameters.step2);
+  } else {
+    colorFrom = lightColors.blue;
+    colorTo = lightColors.blue;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step3) /
+      (1 - globalParameters.step3);
   }
   rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
 
@@ -321,20 +330,17 @@ function changeMainLightColor() {
     // Change ambient light intensity
     ambientLight.intensity =
       globalParameters.ambientIntensity *
-      (globalParameters.changeValue / globalParameters.step2) +
-      0.5;
+      (globalParameters.changeValue / globalParameters.step2) + 0.5;
 
     // Change rectarea light intensity
     rectAreaLight.intensity =
       globalParameters.rectAreaIntensity *
       (globalParameters.changeValue / globalParameters.step2);
+  } else {
+    ambientLight.intensity =
+      globalParameters.ambientIntensity + ((globalParameters.changeValue - globalParameters.step2) / (1 - globalParameters.step2)) + 0.5;
   }
 }
-
-// Helper
-const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-rectAreaLightHelper.visible = false;
-scene.add(rectAreaLightHelper);
 
 /**
  * Sizes
@@ -446,6 +452,12 @@ canvas.addEventListener(
       }
       changeMainLightColor();
       checkResult();
+
+      const proximityPercentage = calculatePercentage(
+        globalParameters.changeValue,
+        globalParameters.resultValue
+      );
+      resultBtn.style.setProperty("--4-percentage", proximityPercentage + "%");
       // Update the starting Y position for the next frame
       touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
@@ -462,6 +474,15 @@ canvas.addEventListener("touchend", function () {
   // Reset the swipe tracking variables
   isSwiping = false;
 });
+
+function calculatePercentage(currentPosition, targetPosition) {
+
+  const proximity =
+    currentPosition < targetPosition ? currentPosition / targetPosition : 1 - ((currentPosition - targetPosition) * 2);
+  const positionPercentage = (proximity * 100);
+
+  return positionPercentage;
+}
 
 // // Result button
 const resultBtn = document.querySelector("#btn-validate");
