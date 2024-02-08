@@ -7,7 +7,6 @@ import "./rotationSystem";
 window.experience = window.experience || {};
 
 window.experience.canRotate = true;
-
 window.experience.autoRotate = true;
 
 // Capture DOM elements
@@ -127,6 +126,7 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   window.experience.updateCarouselRotation();
+
   // Get current island
   window.experience.currentIsland = window.experience.islands.find((island) => {
     return island.userData.id === window.experience.index + 1;
