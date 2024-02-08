@@ -48,7 +48,6 @@ const sceneSetUp = async () => {
     for (let i = 0; i < intersects.length; i++) {
       const intersectedObject = intersects[i].object;
 
-      // Check if the intersected object is a POI
       if (allPOI.flat().includes(intersectedObject)) {
         intersectedObjectName = intersectedObject.name;
         displayPOI(index);
@@ -135,7 +134,7 @@ const sceneSetUp = async () => {
     component.style.display = "none";
   };
   window.addEventListener("click", poiClick, false);
-  window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
+  window.addEventListener("mousedown", hideText(), false);
 
   const toggleInfo = () => {
     if (!isShowingText) {
@@ -230,8 +229,6 @@ const sceneSetUp = async () => {
       y: targetPosition.y,
       z: targetPosition.z,
     });
-
-    // controls.target = cube.position;
 
     gsap.to(controls.object.position, {
       duration: 1,
