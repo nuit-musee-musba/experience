@@ -84,14 +84,14 @@ gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   scene.add(statueV1);
 });
 
-gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
-  gltf.scene.scale.set(0.38, 0.38, 0.38);
-  gltf.scene.position.set(1.3, -1, -1.5);
-  gltf.scene.rotation.y = Math.PI / 2;
-  statueV2 = gltf.scene;
+// gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
+//   gltf.scene.scale.set(0.38, 0.38, 0.38);
+//   gltf.scene.position.set(1.3, -1, -1.5);
+//   gltf.scene.rotation.y = Math.PI / 2;
+//   statueV2 = gltf.scene;
 
-  scene.add(statueV2);
-});
+//   scene.add(statueV2);
+// });
 
 const light = new THREE.AmbientLight(0x404040);
 light.intensity = 100;
@@ -158,38 +158,41 @@ function stepsFunction() {
 
   switch (steps) {
     case 1:
-      const intersects = raycaster.intersectObject(statueV1);
-      const nextText = document.getElementById("nextText");
+      if (statueV1) {
+        const intersects = raycaster.intersectObject(statueV1);
+        const nextText = document.getElementById("nextText");
 
-      nextText.addEventListener("touchstart", function () {
-        changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
-      });
+        nextText.addEventListener("touchstart", function () {
+          changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
+        });
 
-      if (statueV1.children.length <= 4) {
-        changeTextInSteps(steps2InRoughPart, steps3InRoughPart);
-      }
+        if (statueV1.children.length <= 4) {
+          changeTextInSteps(steps2InRoughPart, steps3InRoughPart);
+        }
 
-      if (intersects.length > 0 && raycasterActive) {
-        const clickedBlock = intersects[0].object.parent;
+        if (intersects.length > 0 && raycasterActive) {
+          const clickedBlock = intersects[0].object.parent;
 
-        statueV1.remove(clickedBlock);
+          statueV1.remove(clickedBlock);
 
-        if (statueV1.children.length === 0) {
-          mouse.x = -1;
-          mouse.y = -1;
-          steps++;
-          raycasterActive = false;
-          DetailsPart();
-          stepsFunction();
+          if (statueV1.children.length === 0) {
+            mouse.x = -1;
+            mouse.y = -1;
+            steps++;
+            raycasterActive = false;
+            DetailsPart();
+            stepsFunction();
+          }
         }
       }
       break;
     case 2:
-      if (statueV2) {
+      if (statueV1) {
         const intersects = raycaster.intersectObject(statueV2);
-        const nextText = document.getElementById("nextText");
+        const nextText2 = document.getElementById("nextText2");
 
-        nextText.addEventListener("touchstart", function () {
+        nextText2.addEventListener("touchstart", function () {
+          console.log("test");
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
         });
 
@@ -255,9 +258,9 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  if (statueV1 && statueV2) {
+  if (statueV1) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
-    statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
+    // statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;
