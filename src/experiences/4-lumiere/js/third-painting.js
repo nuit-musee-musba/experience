@@ -54,6 +54,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
@@ -320,7 +321,7 @@ function changeMainLightColor() {
     // Change ambient light intensity
     ambientLight.intensity =
       globalParameters.ambientIntensity *
-        (globalParameters.changeValue / globalParameters.step2) +
+      (globalParameters.changeValue / globalParameters.step2) +
       0.5;
 
     // Change rectarea light intensity
@@ -471,9 +472,9 @@ function checkResult() {
   // // Check result
   if (
     globalParameters.changeValue <
-      globalParameters.resultValue + globalParameters.resultDelta &&
+    globalParameters.resultValue + globalParameters.resultDelta &&
     globalParameters.changeValue >
-      globalParameters.resultValue - globalParameters.resultDelta
+    globalParameters.resultValue - globalParameters.resultDelta
   ) {
     resultState = true;
     resultBtn.disabled = false;
