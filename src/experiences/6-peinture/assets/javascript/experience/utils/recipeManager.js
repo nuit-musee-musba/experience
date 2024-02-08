@@ -100,12 +100,12 @@ export function recipeGeneration() {
 recipeGeneration();
 
 export function recipeResolve(id) {
-  let thisItem = resultToVerify.find((el) => el.name === id);
-  const indexOfItem = resultToVerify.indexOf(thisItem);
-  resultToVerify[indexOfItem].count--;
+  //   let thisItem = resultToVerify.find((el) => el.name === id);
+  //   const indexOfItem = resultToVerify.indexOf(thisItem);
+  //   resultToVerify[indexOfItem].count--;
 
-  if (resultToVerify[indexOfItem].count <= 0) {
-    var this_object = document.getElementById("recipe-" + id);
-    this_object.classList.add("checked");
-  }
+  //if (resultToVerify[indexOfItem].count <= 0) {
+  var this_object = document.getElementById("recipe-" + id);
+  this_object.classList.add("checked");
+  //}
 }

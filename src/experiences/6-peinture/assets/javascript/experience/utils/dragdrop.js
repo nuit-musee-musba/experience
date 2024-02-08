@@ -91,20 +91,33 @@ function handleDragInteraction(
           playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
-            if (howManyDrags < dialog.number_needed) {
-              placedEl[howManyDrags].style.display = "block";
+            for (let index = 0; index < dialog.number_needed; index++) {
+              placedEl[index].style.display = "block";
               howManyDone++;
               howManyDrags++;
-
-              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-              recipeResolve(dialog.id);
-              //alert("Chef : " + dialog.dialog);
-            } else {
-              print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
-              ); //definie dans speechBehavior.js
-              //alert("tu as mis tout les elements requis pour cet aliment");
             }
+
+            console.log(dialog);
+
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            if (dialog.number_needed == howManyDrags) {
+              recipeResolve(dialog.id);
+            }
+
+            // if (howManyDrags < dialog.number_needed) {
+            //   placedEl[howManyDrags].style.display = "block";
+            //   howManyDone++;
+            //   howManyDrags++;
+
+            //   print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            //   recipeResolve(dialog.id);
+            //   //alert("Chef : " + dialog.dialog);
+            // } else {
+            //   print_chef_speech(
+            //     "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+            //   ); //definie dans speechBehavior.js
+            //   //alert("tu as mis tout les elements requis pour cet aliment");
+            // }
           } else {
             if (!success) {
               placedEl.style.display = "block";
