@@ -1,7 +1,6 @@
 import lottie from 'lottie-web';
 
 export function playAnimation(anim) {
-    console.log(anim)
     let container = document.querySelector('.game-chef__illustration');
     let animatedElement = container.querySelector('svg');
     if (animatedElement) {

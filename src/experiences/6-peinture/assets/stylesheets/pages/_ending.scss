@@ -1,0 +1,14 @@
+.page__game {
+    .ending-screen {
+        @include blur-filter;
+        background-image: url('/6-peinture/images/scenery/ending/background-1.svg');
+        > img {
+            bottom: 0;
+            position: absolute;
+            right: 2%;
+        }
+        .dialog {
+            position: relative;
+        }
+    }
+}
