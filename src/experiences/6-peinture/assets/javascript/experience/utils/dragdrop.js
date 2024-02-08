@@ -1,7 +1,7 @@
 import items from "../data/items.json" assert { type: "json" };
 import { recipeResolve, recipeGeneration } from "./recipeManager.js";
 import { print_chef_speech } from "./speechBehavior.js";
-import { playAnimation } from './playAnimation.js';
+import { playAnimation } from "./playAnimation.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
@@ -65,8 +65,8 @@ function handleDragInteraction(
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX;
-    const currentY = touch.clientY - initialY;
+    const currentX = touch.clientX - initialX + realInitialX - dragElWidth / 2;
+    const currentY = touch.clientY - initialY + realInitialY - dragElheight / 2;
     console.log(touch.clientX + "," + touch.clientY);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
