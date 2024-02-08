@@ -4,6 +4,7 @@
   /* font-size: 16px; */
   --4-white: #f5f5f5;
   --4-dark: #242424;
+  --4-percentage: 0%;
 }
 
 .bottom-menu {
@@ -218,10 +219,20 @@ p {
   bottom: 96px;
   left: 50%;
   transform: translateX(-50%);
+  background-color: transparent;
+  border-color: var(--4-white);
+  overflow: hidden;
 }
 
-.popin-btn:disabled {
-  opacity: 0.5;
+#btn-validate::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--4-white);
+  width: calc(var(--4-percentage) + 5px);
+  height: 100%;
+  z-index: -1;
 }
 
 /* ----- Results page ----- */

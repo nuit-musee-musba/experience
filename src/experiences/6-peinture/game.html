@@ -10,16 +10,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
   </head>
-  <nav>
-    <div class="bottom-menu">
-      <a href="/" class="btn-icon">
-        <i class="i-home">
-          <span>Accueil</span>
-        </i>
-      </a>
-    </div>
-  </nav>
-  <body class="page__game">
+  <body class="page__game has-ending-opened">
+    <nav>
+      <div class="bottom-menu">
+        <a href="/" class="btn-icon">
+          <i class="i-home">
+            <span>Accueil</span>
+          </i>
+        </a>
+      </div>
+    </nav>
     <main>
       <div id="game-top" class="game-top">
         <div class="game-chef">
@@ -310,7 +310,27 @@
         </div>
       </div>
 
-      <div class="ending-screen">Bravo !</div>
+      <div class="ending-screen">
+        <img src="/6-peinture/images/scenery/ending/jeff-1.svg" alt="" />
+        <div class="dialog">
+          <div class="dialog-nav">
+            <button class="btn-ending">Suivant</button>
+          </div>
+          <div class="dialog-content active">
+            <p>
+              Parfait ! Nous avons tous les ingrédients qu’il nous faut.
+              <br><br>
+              Permettez moi d’y apporter la cerise sur le gâteau !
+            </p>
+          </div>
+        </div>
+        <div class="player-video">
+          <video id="cinematic" width="640" height="360" controls autoplay>
+            <source src="/6-peinture/videos/test.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
     </main>
   </body>
   <script
