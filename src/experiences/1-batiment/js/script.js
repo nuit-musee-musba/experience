@@ -27,10 +27,6 @@ const sceneSetUp = async () => {
 
   enableInactivityRedirection();
 
-  // const getCameraPositionForTarget = (position) => {
-  //   return { x: position.x, y: position.y, z: position.z };
-  // };
-
   //MOUSE
 
   const mouse = new THREE.Vector2();
