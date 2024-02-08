@@ -143,10 +143,7 @@ body {
 
 .painting-pieces-container {
   width: 1300px;
-
   margin: 0 auto;
-  border: 10px solid black;
-  //position: relative;
 }
 
 .painting-pieces-container img {
