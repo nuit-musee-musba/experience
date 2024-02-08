@@ -52,7 +52,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
-// gui.hide();
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
