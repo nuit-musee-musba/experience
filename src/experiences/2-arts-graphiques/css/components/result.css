@@ -51,9 +51,3 @@
   width: max-content;
   transform: translate(-50%, 50%);
 }
-
-.result a.btn-small-secondary{
-  font-family: Montserrat-SemiBold;
-  font-size: 56px;
-  text-decoration: none;
-}

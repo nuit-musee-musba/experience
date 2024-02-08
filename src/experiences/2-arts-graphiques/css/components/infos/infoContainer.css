@@ -16,6 +16,8 @@
 .infosContainer{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
     height: 100%;
+    gap: 20px;
+    padding-bottom: 90px;
 }
