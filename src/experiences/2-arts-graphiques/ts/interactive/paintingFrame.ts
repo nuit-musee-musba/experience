@@ -14,7 +14,7 @@ export default class Frames {
     const frame2 = new Frame("frame-2");
     const frame3 = new Frame("frame-3");
 
-    const image = new Image("#selected-painting");
+    const image = new Image(".selected-painting");
 
     this.frames = [frame1, frame2, frame3];
     this.button = button;
