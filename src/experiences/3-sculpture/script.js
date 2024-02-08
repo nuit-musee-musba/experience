@@ -84,14 +84,14 @@ gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   scene.add(statueV1);
 });
 
-// gltfLoader.load("/3-sculpture/Mozart_V1.glb", (gltf) => {
-//   gltf.scene.scale.set(0.38, 0.38, 0.38);
-//   gltf.scene.position.set(1.3, -1, -1.5);
-//   gltf.scene.rotation.y = Math.PI / 2;
-//   statueV2 = gltf.scene;
+gltfLoader.load("/3-sculpture/dégrossi-to-sculpt.glb", (gltf) => {
+  gltf.scene.scale.set(0.38, 0.38, 0.38);
+  gltf.scene.position.set(1.3, -1, -1.5);
+  gltf.scene.rotation.y = Math.PI / 2;
+  statueV2 = gltf.scene;
 
-//   scene.add(statueV2);
-// });
+  scene.add(statueV2);
+});
 
 const light = new THREE.AmbientLight(0x404040);
 light.intensity = 100;
@@ -187,24 +187,31 @@ function stepsFunction() {
       }
       break;
     case 2:
-      if (statueV1) {
+      if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
         const nextText2 = document.getElementById("nextText2");
-
         nextText2.addEventListener("touchstart", function () {
-          console.log("test");
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
         });
 
-        // if (statueV1.children.length <= 4) {
-        //   changeTextInSteps(steps2InRoughPart, steps3InRoughPart);
-        // }
+        if (statueV2.children.length <= 6) {
+          changeTextInSteps(steps2InDetailsPart, steps3InDetailsPart);
+        }
+        if (statueV2.children.length <= 3) {
+          changeTextInSteps(steps3InDetailsPart, steps4InDetailsPart);
+        }
 
         if (intersects.length > 0 && raycasterActive) {
-          scene.remove(statueV2);
+          const clickedBlock = intersects[0].object.parent;
 
-          if (!statueV2) {
+          statueV2.remove(clickedBlock);
+
+          if (statueV2.children.length === 0) {
+            mouse.x = -1;
+            mouse.y = -1;
             steps++;
+            raycasterActive = false;
+            RefiningPart();
             stepsFunction();
           }
         }
@@ -260,7 +267,7 @@ const tick = () => {
 
   if (statueV1) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
-    // statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
+    statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
   }
 
   touchBefore = currentTouch;

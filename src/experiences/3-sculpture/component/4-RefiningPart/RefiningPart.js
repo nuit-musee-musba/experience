@@ -8,12 +8,6 @@ const RefiningPart = () => {
   const refiningPart = document.getElementById("RefiningPart");
 
   refiningPart.classList.add("show");
-
-  const refiningButton = document.getElementById("RefiningButton");
-
-  refiningButton.addEventListener("click", function () {
-    PolishingPart();
-  });
 };
 
 export default RefiningPart;
