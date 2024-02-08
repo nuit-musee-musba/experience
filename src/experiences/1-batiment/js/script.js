@@ -1,16 +1,18 @@
-import * as THREE from "three";
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
+import * as THREE from "three";
 import { period } from "./period";
-import { enableInactivityRedirection } from "/global/js/inactivity.ts";
+
+enableInactivityRedirection();
 
 import {
-  renderer,
+  animatedScenes,
   camera,
   controls,
-  scene,
-  animatedScenes,
   cube,
   loadModels,
+  renderer,
+  scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
 
@@ -24,8 +26,6 @@ const sceneSetUp = async () => {
   let previousTime = 0;
   let isShowingText = false;
   const raycaster = new THREE.Raycaster();
-
-  enableInactivityRedirection();
 
   const getCameraPositionForTarget = (position) => {
     return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
