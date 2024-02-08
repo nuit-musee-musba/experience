@@ -1,11 +1,11 @@
 Lancer le serveur sur windows:
-1. Double-cliquer sur le fichier "start_windows.cmd".
+1. Double-cliquer sur le fichier "windows_start.cmd".
 2. Windows peut demander d'autoriser l'application à accéder au réseau, accepter.
 3. Une invite de commande doit s'ouvrir avec des infos dedans.
 4. Aller sur http://localhost:3000 
 
 Lancer le serveur sur mac:
-1. Double-cliquer sur le fichier "start_mac.command" 
+1. Double-cliquer sur le fichier "mac_start.command" 
 2. Une invite de commande doit s'ouvrir avec des infos dedans.
 3. Aller sur http://localhost:3000 
 

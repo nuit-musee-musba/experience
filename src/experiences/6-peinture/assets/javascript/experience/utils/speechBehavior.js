@@ -1,7 +1,7 @@
 var speech_area = document.getElementById("dialog");
 var speech_area__parent = document.getElementById("game-top");
 let currentIndex = 0;
-let textSpeed = 25;
+let textSpeed = 15;
 let active_bulle = false;
 let isAnimating = false;
 let old_text = "";
@@ -11,10 +11,13 @@ speech_area__parent.addEventListener("touchstart", (e) => {
   textSpeed = 10;
 });
 
-function fadeOut() {
+function fadeOut(thisLoopId) {
   if (!active_bulle) {
-    speech_area.style.opacity = 0;
-    textSpeed = 35;
+    console.log(thisLoopId + "==" + loopId);
+    if (thisLoopId == loopId) {
+      speech_area.style.opacity = 0;
+      textSpeed = 15;
+    }
   }
 }
 
@@ -29,10 +32,10 @@ function animateText(speech, thisLoopId) {
     if (currentIndex < speech.length) {
       speech_area.textContent += speech.charAt(currentIndex);
       currentIndex++;
-      setTimeout(() => animateText(speech), textSpeed); // Délai entre chaque lettre
+      setTimeout(() => animateText(speech, thisLoopId), textSpeed); // Délai entre chaque lettre
     }
     if (currentIndex == speech.length) {
-      setTimeout(fadeOut, 5000);
+      setTimeout(() => fadeOut(thisLoopId), 5000);
       active_bulle = false;
       isAnimating = false;
     }
@@ -46,7 +49,7 @@ function init(text) {
   animateText(text, loopId);
 }
 
-function print_chef_speech(text) {
+export function print_chef_speech(text) {
   speech_area.style.opacity = 1;
   old_text = text;
   init(text);

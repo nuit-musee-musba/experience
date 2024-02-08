@@ -1,0 +1,37 @@
+[
+    {
+        "name": "home",
+        "className": "home",
+        "unicode": "ee01"
+    },
+    {
+        "name": "volume-on",
+        "className": "volume-on",
+        "unicode": "ee02"
+    },
+    {
+        "name": "volume-off",
+        "className": "volume-off",
+        "unicode": "ee03"
+    },
+    {
+        "name": "left",
+        "className": "left",
+        "unicode": "ee04"
+    },
+    {
+        "name": "close",
+        "className": "close",
+        "unicode": "ee05"
+    },
+    {
+        "name": "check",
+        "className": "check",
+        "unicode": "ee06"
+    },
+    {
+        "name": "info",
+        "className": "info",
+        "unicode": "ee07"
+    }
+]

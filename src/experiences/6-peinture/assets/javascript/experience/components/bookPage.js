@@ -14,6 +14,7 @@ class BookPage {
 
   listen() {
     this.item.addEventListener("touchstart", () => {
+      this.bookContainer.classList.add('is-opened');
       this.displayData();
     });
   }
@@ -22,7 +23,7 @@ class BookPage {
     const selectedItem = items.items.find((item) => item.id === this.id);
 
     this.bookTitle.textContent = selectedItem.name;
-    this.bookText.textContent = selectedItem.description;
+    this.bookText.innerHTML = selectedItem.description;
   }
 }
 

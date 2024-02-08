@@ -9,6 +9,7 @@ export function hasRepaired(id: string) {
     }
     return false;
   }
+  return false;
 }
 
 export function initialiseAmountPlaced() {

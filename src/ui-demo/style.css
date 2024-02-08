@@ -1,0 +1,37 @@
+:root {
+  --primary: #398384;
+}
+
+body {
+  background: #efefef;
+  padding: 4rem;
+}
+
+article {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+
+  padding-bottom: 14rem;
+}
+
+.btn-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.tab-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.gestures {
+  display: flex;
+  padding: 2rem 10rem;
+  gap: 4rem;
+  align-items: center;
+  background: var(--gray);
+  overflow-x: auto;
+}

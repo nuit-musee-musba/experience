@@ -1,10 +1,31 @@
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve } from "./recipeManager.js";
+import { recipeResolve, recipeGeneration } from "./recipeManager.js";
+import { print_chef_speech } from "./speechBehavior.js";
+import { playAnimation } from './playAnimation.js';
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
+var stepsEl = document.getElementById("stepnum");
 var winConditions = craftCont.length;
 var howManyDone = 0;
+export var current_step = 1;
+var current_step_done = 0;
+var current_step_win = 3;
+stepsEl.innerHTML = current_step;
+var step_success = false;
+
+function countDuplicatesNbMovesNeeded(strings) {
+  //cette fonction permet de compter le nombre d'objets
+  let frequency = [0, 0, 0, 0];
+
+  strings["items"].forEach((str) => {
+    frequency[str["recipe_step"]] += str["number_needed"];
+  });
+
+  return frequency;
+}
+
+const movesNeededPerSteps = countDuplicatesNbMovesNeeded(items);
 
 function handleDragInteraction(
   dragElementId,
@@ -44,7 +65,8 @@ function handleDragInteraction(
     e.preventDefault();
     const touch = e.touches[0];
     const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
-    const currentY = touch.clientY - initialY - dragElWidth / 2;
+    const currentY =
+      touch.clientY - initialY - dragElWidth / 2 + marginTopPlacement;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -60,72 +82,99 @@ function handleDragInteraction(
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      // if(successPosX && successPosY){
-      //     dragElement.style.left = successPosX + 'px';
-      //     dragElement.style.top = successPosY + 'px';
-      // }else{
-      //     dragElement.style.left = targetZoneRect.left + 'px';
-      //     dragElement.style.top = targetZoneRect.top + 'px';
-      // }
-
       let dialog = items.items.find((item) => item.id === dragElementId);
+      let numberUpdater = document.getElementById("actual-" + dialog.id);
 
       if (isCorrect) {
-        if (isMultiple) {
-          if (howManyDrags <= placedEl.length - 1) {
-            placedEl[howManyDrags].style.display = "block";
-            howManyDone++;
+        if (dialog.recipe_step == current_step) {
+          playAnimation(dialog.animation);
+          //l'item doit etre dans le step actuel
+          if (isMultiple) {
+            if (howManyDrags < dialog.number_needed) {
+              placedEl[howManyDrags].style.display = "block";
+              howManyDone++;
+              howManyDrags++;
 
-            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-            recipeResolve(dialog.id);
-            //alert("Chef : " + dialog.dialog);
+              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+              recipeResolve(dialog.id);
+              //alert("Chef : " + dialog.dialog);
+            } else {
+              print_chef_speech(
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+              ); //definie dans speechBehavior.js
+              //alert("tu as mis tout les elements requis pour cet aliment");
+            }
           } else {
-            print_chef_speech(
-              "Tu as mis tout les elements requis pour cet aliment"
-            ); //definie dans speechBehavior.js
-            //alert("tu as mis tout les elements requis pour cet aliment");
+            if (!success) {
+              placedEl.style.display = "block";
+              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+              recipeResolve(dialog.id);
+              //alert("Chef : " + dialog.dialog);
+              howManyDone++;
+              howManyDrags++;
+              current_step_done++;
+              success = true;
+            } else {
+              print_chef_speech(
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+              ); //definie dans speechBehavior.js
+              //alert("tu as mis tout les elements requis pour cet aliment");
+            }
           }
+        } else if (dialog.recipe_step < current_step) {
+          print_chef_speech(
+            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
+          );
         } else {
-          if (!success) {
-            placedEl.style.display = "block";
-            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-            recipeResolve(dialog.id);
-            //alert("Chef : " + dialog.dialog);
-            howManyDone++;
-          } else {
+          if (dialog.wrong_step_dialog == "") {
+            playAnimation("animJeffPensive");
             print_chef_speech(
-              "Tu as mis tout les elements requis pour cet aliment"
-            ); //definie dans speechBehavior.js
-            //alert("tu as mis tout les elements requis pour cet aliment");
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+            );
+          } else {
+            print_chef_speech(dialog.wrong_step_dialog);
           }
         }
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        success = true;
+        numberUpdater.innerHTML = howManyDrags;
 
-        // -- win --
+        // -- win a step --
 
-        if (howManyDone >= winConditions) {
-          document.body.classList.add('has-ending-opened')
+        if (howManyDone == movesNeededPerSteps[current_step] && !step_success) {
+          //win the game
+
+          if (current_step >= current_step_win) {
+            document.body.classList.add("has-ending-opened");
+          } else {
+            step_success = true;
+            setTimeout(() => {
+              current_step++;
+              recipeGeneration();
+              stepsEl.innerHTML = current_step;
+              howManyDone = 0;
+              step_success = false;
+              print_chef_speech("Passons à l'étape " + current_step + "/3 !");
+            }, 5000);
+          }
         }
       } else {
+        playAnimation(dialog.animation);
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px"; //l'utilisateur n'a pas selectionné le bon aliment
         print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
         //alert("Chef : " + dialog.dialog);
       }
 
-      howManyDrags++;
+      //howManyDrags++;
     } else {
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";
-      console.log("element pas dans la zone");
     }
   });
 }
-console.log(items);
 function countDuplicates(strings) {
   //cette fonction permet de compter le nombre d'objets dans chaque catégorie automatiquement
   const frequency = {};
@@ -153,8 +202,6 @@ function countDuplicates(strings) {
 // handleDragInteraction(draggableElementId,targetElementId,positionLorsSuccesX(fac),positionLorsSuccesY(fac))
 
 var numberItemsPerCategory = countDuplicates(items);
-
-console.log(items);
 
 let i = [1, 1, 1]; //boucle i
 let i_overall = [1, 1, 1]; //boucle i
@@ -201,7 +248,9 @@ items.items.forEach((element) => {
 
       leftPosition = // pour centrer les absolute on va faire ce calcul
         (parentElement.offsetWidth / //la width du parent divisé par...
-          (numberItemsPerCategory[category]["count"] - max_item_per_stage + 2) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
+          (numberItemsPerCategory[category]["count"] -
+            max_item_per_stage +
+            0.5) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
           324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
         i[category]; //multiplié par le nombre d'occurence en cours
       ElementList.style.left = leftPosition + "px"; // on applique
@@ -211,22 +260,21 @@ items.items.forEach((element) => {
       leftPosition = // pour centrer les absolute on va faire ce calcul
         (parentElement.offsetWidth / //la width du parent divisé par...
           (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
+          324 / 7) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
         i[category]; //multiplié par le nombre d'occurence en cours
       ElementList.style.left = leftPosition + "px"; // on applique
     }
   }
 
-  console.log(
-    "item:" + element.name + ",i:" + i[category] + "stage:" + cur_stage + ""
-  );
-
   if (cur_stage == 1) {
     ElementList.style.top = "90px"; //top position
+    marginTopPlacement = 90;
   } else if (cur_stage == 0) {
-    ElementList.style.top = "470px"; //bot position
+    ElementList.style.top = "400px"; //bot position
+    marginTopPlacement = 470;
   } else if (cur_stage == -1) {
     ElementList.style.top = "250px"; //top position
+    marginTopPlacement = 250;
   }
 
   if (

@@ -5,24 +5,40 @@ class Dialog {
 
     this.buttonNext = this.element.querySelector(".btn-next");
     this.buttonPrev = this.element.querySelector(".btn-prev");
+    this.buttonPlay = this.element.querySelector(".btn-game");
 
     this.listen();
   }
 
   listen() {
     let i = 0;
+    
 
     this.buttonPrev.addEventListener("click", () => {
+      if (i == 1) {
+        this.buttonPrev.style.display = "none";
+      }
       if (i > 0) {
         i--;
         this.updateCurrent(this.dialogs[i]);
       }
+      if (i != this.dialogs.length - 1) {
+        this.buttonNext.style.display = "flex";
+        this.buttonPlay.style.display = "none";
+      }
     });
 
     this.buttonNext.addEventListener("click", () => {
+      if (i == 0) {
+        this.buttonPrev.style.display = "flex";
+      }
       if (i < this.dialogs.length - 1) {
         i++;
         this.updateCurrent(this.dialogs[i]);
+      }
+      if (i == this.dialogs.length - 1) {
+        this.buttonNext.style.display = "none";
+        this.buttonPlay.style.display = "flex";
       }
     });
   }

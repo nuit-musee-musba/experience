@@ -157,6 +157,8 @@ export default class Transition {
               getPercentage: true,
               getPercentageAt: 60,
             };
+            console.log("seal !!");
+
             paint(
               canvas,
               currentSectionNumber,
@@ -202,10 +204,28 @@ export default class Transition {
       case 3:
         this.hintText.changeText("");
         break;
+      case 4:
+        this.hintText.changeText(
+          "Rassemblez les morceaux avec soin pour commencer la restauration."
+        );
+        break;
+      case 5:
+        this.hintText.changeText(
+          "Appliquez le solvant pour recoller les déchirures en suivant la ligne avec vos doigts."
+        );
+        break;
+      case 6:
+        this.hintText.changeText(
+          "Utilisez cette gomme pour nettoyer délicatement l'œuvre et en éliminer les impuretés."
+        );
+        break;
       case 7:
         this.hintText.changeText(
-          "Habillez la peinture  d’un cadre de votre choix"
+          "Revêtez-la d'un cadre de votre choix pour émerveiller les visiteurs."
         );
+        break;
+      case 8:
+        this.hintText.changeText("");
         break;
     }
   }
@@ -233,6 +253,6 @@ export default class Transition {
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
     this.displayTimelipse(this.currentSectionNumber);
     this.handleHintText();
-    landmark.updadeDot(this.currentSectionNumber)
+    landmark.updadeDot(this.currentSectionNumber);
   }
 }
