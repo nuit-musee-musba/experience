@@ -1,0 +1,4 @@
+http://localhost:3000
+
+root * ../dist
+file_server
