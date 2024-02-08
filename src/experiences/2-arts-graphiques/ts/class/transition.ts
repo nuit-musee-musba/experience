@@ -157,6 +157,8 @@ export default class Transition {
               getPercentage: true,
               getPercentageAt: 60,
             };
+            console.log("seal !!");
+
             paint(
               canvas,
               currentSectionNumber,
@@ -219,7 +221,7 @@ export default class Transition {
         break;
       case 7:
         this.hintText.changeText(
-          "Revêtez-la d'un cadre de votre choix pour émerveiller les visiteurs."
+          "Cette œuvre sera bientôt exposée, il est donc temps de revêtir un cadre qui la mettra en valeur."
         );
         break;
       case 8:

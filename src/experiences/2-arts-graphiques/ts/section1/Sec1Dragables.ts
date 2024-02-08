@@ -53,7 +53,7 @@ export class Sec1Dragables extends Dragable {
 
     if (this.isOutside) {
       handleAmountOutside("add", this.element.id, experience);
-      this.element.style.backgroundColor = "#BBEEAA";
+
       return;
     }
     handleAmountOutside("remove", this.element.id, experience);

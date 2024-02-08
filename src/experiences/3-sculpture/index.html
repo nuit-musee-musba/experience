@@ -13,92 +13,206 @@
     ></script>
   </head>
   <body>
+    <a href="/" class="btn-icon home">
+      <i class="i-home">
+        <span>Accueil</span>
+      </i>
+    </a>
     <div id="loadPart" class="loadPart show_flex">
       <span class="loader"></span>
     </div>
-    <div class="controlContainer">
-      <a href="/"><button>Retour au hub</button></a>
-    </div>
+
     <div id="IntroPart" class="introContent show">
       <div class="introContainer">
-        <div class="introCharacter">Personnage</div>
-        <div class="popupContainer">
-          <div class="popupContent">
-            <p id="popupText">
-              Bienvenue dans mon atelier où je sculpte depuis 1883 ! Votre
-              mission est de tailler dans l’intégralité ma sculpture “Mozart
-              expirant” à partir d’un bloc de marbre. Avant votre arrivée, j’ai
-              déjà réalisé le croquis et la petite maquette de la sculpture.
-              <br /><br />Maintenant, c’est à vous de reprendre le relais !
+        <img src="/3-sculpture/assets/Rinaldo.png" class="introCharacter" />
+
+        <div class="InIntroContainer">
+          <div class="InIntroContent">
+            <p id="popupText" class="text-p-body">
+              Bonjour, je suis <strong>Rinaldo Carnielo</strong>, bienvenue dans
+              mon atelier ! Je sculpte le marbre et je viens d’avoir une idée.
+              Avant votre arrivée, j’ai réalisé le croquis et le pointage de ma
+              nouvelle sculpture. J’aimerais reproduire Mozart composant son
+              ultime requiem, à l’aube de son dernier souffle.
+              <strong>Aidez-moi à lui donner vie !</strong>
             </p>
           </div>
-          <button id="buttonIntro">Suivant</button>
+          <button id="buttonIntro" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+        <img class="introSketch" src="/3-sculpture/assets/croquis.png" />
+      </div>
+    </div>
+
+    <div id="RoughHewingPart" class="roughPart">
+      <div id="steps1InRoughPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Commençons par le <strong>dégrossissage</strong>. C’est une
+                étape cruciale de la sculpture mais ne vous inquiétez pas, 
+                Costoli m’a tout appris à
+                <strong>l'Académie des Beaux-Arts</strong> de Florence en 1870.
+              </p>
+            </div>
+          </div>
+          <button id="nextText" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
         </div>
       </div>
-      <div class="introSketch">Croquis</div>
-      <div class="introModel">Maquette</div>
-    </div>
-    <div id="RoughHewingPart" class="roughPart">
-      <div class="roughContainer">
-        <h2>Étape 1 - Dégroissir le marbre</h2>
-        <p>
-          Commençons par l’étape du dégrossissage. Une technique que j'ai
-          apprise en 1870, du temps où j’étais encore élève à l'Académie des
-          Beaux-Arts à Florence. Cette étape consiste à retirer l'excès de
-          marbre pour définir les contours de la sculpture. À présent, c'est à
-          vous de manier le ciseau !
-        </p>
+      <div id="steps2InRoughPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Cette étape consiste à
+                <strong>retirer de gros morceaux de pierre</strong> pour
+                définir  les premières formes de la sculpture.
+              </p>
+            </div>
+            <div class="popupContent">
+              <p class="text-p-body">
+                À présent, c'est à vous de manier la gradine :
+                <strong>tapez sur le bloc de marbre</strong> pour le dégrossir.
+                N’hésitez pas à <strong>le tourner</strong>, nous ne devons
+                manquer aucune zone !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="steps3InRoughPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Super, continuez comme ça !
+                <strong>Plus que quelques coups</strong>
+                et nous pourrons passer à la prochaine étape.
+              </p>
+            </div>
+            <div class="popupContent">
+              <p class="text-p-body">
+                Pour information, <strong>la gradine</strong> est un ciseau très
+                effilé, muni de trois à six dents. Il sert à dégrossir
+                les parements en pierre ferme.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="DetailsPart" class="detailsPart">
-      <div class="detailsContainer">
-        <h2>Étape 2 - Sculpter les formes</h2>
-        <p>
-          Maintenant que vous avez formé la sculpture, concentrez-vous sur les
-          détails de l'œuvre. Comme vous le devinerez, la précision est ma
-          spécialité. Quand vous taillerez la sculpture, vous remarquerez les
-          détails tels que la couverture, la texture du coussin et les notes du
-          Requiem que Mozart tient.
-        </p>
-        <button id="DetailsButton">Sculpter</button>
-      </div>
-    </div>
-    <div id="RefiningPart" class="refiningPart">
-      <div class="refiningContainer">
-        <h2>Étape 3 - Affiner les détails</h2>
 
-        <p>
-          On y est presque ! Saviez-vous que cette sculpture a eu des
-          difficultés à être exposée à Paris en 1878, car le délégué du
-          gouvernement italien la trouvait trop lugubre ? Maintenant, affinons
-          la sculpture. Utilisez votre burin, perfectionnez les contours,
-          soignez les détails et lissez les surfaces
-        </p>
-        <button id="RefiningButton">Affiner</button>
+    <div id="DetailsPart" class="detailsPart">
+      <div id="steps1InDetailsPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                <strong>Bravo mon ami</strong>, notre bloc de marbre est bien
+                dégrossi, mais nous avons encore du pain sur la planche,
+                allons-y !
+              </p>
+            </div>
+          </div>
+          <button id="nextText2" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+      </div>
+      <div id="steps2InDetailsPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Le travail est loin d’être terminé, il faut encore
+                <strong>retirer l’excès de marbre</strong>. Commencez à sculpter
+                la forme du fauteuil, ses bras, la partition qu’il tient, sa
+                couverture, le coussin sur lequel il repose…
+                <strong>armez-vous de patience</strong>, nous en aurons pour un
+                bon moment !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="steps3InDetailsPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Il faut que je fasse bonne impression. Contrairement à mes
+                pairs, <strong>je ne viens pas d’une famille fortunée</strong>,
+                ce sera peut-être ma seule chance de briller...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="steps4InDetailsPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                <strong>Plus que trois coups</strong> et ça devrait être bon !
+                Si on creuse trop, on risque de perdre de la matière nécessaire
+                pour les détails.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div id="RefiningPart" class="refiningPart">
+      <div id="steps1InRefiningPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Nous y sommes presque, je le sens, mon Mozart est sur le point
+                de rendre l’âme ! Il ne vous reste plus qu’à
+                <strong>affiner les détails de la sculpture</strong>. C’est un
+                travail d’orfèvre, mais ne vous inquiétez pas, la précision est
+                ma spécialité !
+              </p>
+            </div>
+          </div>
+          <button id="nextText" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="PolishingPart" class="polishingPart">
-      <div class="polishingContainer">
-        <h2>Étape 4 - Polir les surfaces</h2>
-        <p>
-          Après l'affinage et le polissage, revenons à l'histoire. En 1880, le
-          gouvernement français a acquis le plâtre de ma sculpture pour
-          l'exécuter en marbre. Maintenant, c’est à votre tour d’utiliser le
-          polissoir pour rendre la surface lisse et brillante.
-        </p>
-        <button id="PolishingButton">Polir</button>
+      <div>
+        <input
+          type="range"
+          id="PolishRange"
+          name="PolishRange"
+          min="0"
+          max="1"
+          value="0"
+          step="0.1"
+        />
+        <label for="PolishRange">Polissage</label>
       </div>
     </div>
-    <div id="OutroPart" class="outroPart">
-      <div class="outroContainer">
-        <p>
-          Félicitations ! vous avez traversé chaque étape de la création de
-          "Mozart expirant”. Du dégrossissage au polissage, grâce à vous mon
-          œuvre reprend vie !
-        </p>
-      </div>
-      <a href="/"><button>Retour au hub</button></a>
-    </div>
+
+    <div id="OutroPart" class="outroPart"></div>
+
     <canvas class="webgl"></canvas>
   </body>
 </html>
