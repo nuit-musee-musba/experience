@@ -13,7 +13,8 @@ export function playAnimation(anim) {
         animJeffHappy: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-happy.json',
         animJeffAdorable: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-adorable.json',
         animJeffPerfect: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-perfect.json',
-        animJeffNope: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-nope.json'
+        animJeffNope: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-nope.json',
+        animJeffCringe: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-cringe.json'
     };
     const animPath = animationPaths[anim];
 

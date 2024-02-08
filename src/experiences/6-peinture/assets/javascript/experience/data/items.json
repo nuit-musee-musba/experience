@@ -58,7 +58,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffCringe"
     },
     {
       "id": "6",
@@ -70,7 +70,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffCringe"
     },
     {
       "id": "7",
@@ -166,7 +166,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffCringe"
     },
     {
       "id": "15",
