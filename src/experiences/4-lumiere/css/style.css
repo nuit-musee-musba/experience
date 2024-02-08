@@ -1,7 +1,13 @@
+@import url(/global/style.css);
+
 :root {
   /* font-size: 16px; */
   --4-white: #f5f5f5;
   --4-dark: #242424;
+}
+
+.bottom-menu {
+  z-index: 1050;
 }
 
 * {
