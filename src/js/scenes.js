@@ -9,10 +9,7 @@ const circle = Math.PI * 2;
 window.experience = window.experience || {};
 const index = window.experience.index;
 
-// Add event listener to showButton
 showButton.addEventListener("click", () => {
-  console.log("Show button clicked");
-  // Calculate the target rotation based on 'index'
   if (!window.experience.isRotating) {
     // // Smoothly interpolate the rotation over time
     window.experience.rotation = window.experience.index * (circle / parts);
@@ -57,38 +54,77 @@ showButton.addEventListener("click", () => {
 
     // Loop through all elements with the class 'first-scene' and set display to 'none'
     firstSceneElements.forEach((element) => {
-      element.style.display = "none";
+      element.classList.add("transition-opacity");
+      element.style.opacity = "0";
     });
 
-    // Loop through all elements with the class 'second-scene' and set display to 'flex'
-    secondSceneElements.forEach((element) => {
-      element.style.display = "flex";
-    });
-    window.experience.canRotate = false;
+    setTimeout(() => {
+      firstSceneElements.forEach((element) => {
+        element.style.display = "none";
+      });
+
+      secondSceneElements.forEach((element) => {
+        element.classList.add("transition-opacity");
+        element.style.display = "flex";
+        element.style.opacity = "0";
+      });
+
+      setTimeout(() => {
+        secondSceneElements.forEach((element) => {
+          element.classList.add("transition-opacity");
+          element.style.opacity = "1";
+        });
+      }, 300);
+
+      firstSceneElements.forEach((element) => {
+        element.classList.remove("transition-opacity");
+      });
+      secondSceneElements.forEach((element) => {
+        element.classList.remove("transition-opacity");
+      });
+    }, 300);
   }
 });
 
-// Add event listener to backButton
 backButton.addEventListener("click", () => {
-  // Loop through all elements with the class 'second-scene' and set display to 'none'
   secondSceneElements.forEach((element) => {
-    element.style.display = "none";
+    element.classList.add("transition-opacity");
+    element.style.opacity = "0";
   });
 
-  // Loop through all elements with the class 'first-scene' and set display to 'flex'
-  firstSceneElements.forEach((element) => {
-    element.style.display = "flex";
-  });
-  window.experience.canRotate = true;
-  console.log("Back button clicked");
+  setTimeout(() => {
+    secondSceneElements.forEach((element) => {
+      element.style.display = "none";
+    });
+
+    firstSceneElements.forEach((element) => {
+      element.style.display = "flex";
+      element.style.opacity = "0";
+    });
+
+    setTimeout(() => {
+      firstSceneElements.forEach((element) => {
+        element.classList.add("transition-opacity");
+        element.style.opacity = "1";
+      });
+    }, 500);
+
+    secondSceneElements.forEach((element) => {
+      element.classList.remove("transition-opacity");
+    });
+    firstSceneElements.forEach((element) => {
+      element.classList.remove("transition-opacity");
+    });
+  }, 300);
 });
 
-// Render loop
 const tik = () => {
   requestAnimationFrame(tik);
-  window.experience.isRotating
-    ? (showButton.style.display = "none")
-    : (showButton.style.display = "block");
+  if (window.experience.isRotating) {
+    showButton.style.opacity = "0";
+  } else {
+    showButton.style.opacity = "1";
+  }
 };
 
 tik();
