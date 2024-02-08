@@ -5,6 +5,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 import { ObjectLoader } from "/experiences/1-batiment/js/objectLoader";
 import { updateAllMaterials } from "./utils";
+import { period } from "/experiences/1-batiment/js/period";
 
 const gui = new GUI();
 
@@ -198,10 +199,34 @@ gui
   .onChange(updateAllMaterials);
 
 // MODELS
-const geometry = new THREE.SphereGeometry(0.2, 32, 16);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+const poi1 = [];
+const poi2 = [];
+const poi3 = [];
+const poi4 = [];
+
+for (let i = 0; i < period.length; i++) {
+  for (let j = 0; j < period[i].cubePosition.length; j++) {
+    const geometry = new THREE.SphereGeometry(0.2, 32, 16);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    if (i === 0) {
+      poi1.push(cube);
+    } else if (i === 1) {
+      poi2.push(cube);
+    } else if (i === 2) {
+      poi3.push(cube);
+    } else if (i === 3) {
+      poi4.push(cube);
+    }
+  }
+}
+
+const allPOI = [poi1, poi2, poi3, poi4];
+
+scene.add(...poi1, ...poi2, ...poi3, ...poi4);
+console.log(allPOI);
 
 gltfLoader.load("/1-batiment/assets/0/plane.glb", (gltf) => {
   scene.add(gltf.scene);
@@ -267,4 +292,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor("#FFF6ED");
 renderer.shadowMap.enabled = true;
 
-export { renderer, camera, controls, scene, animatedScenes, cube, loadModels };
+export {
+  renderer,
+  camera,
+  controls,
+  scene,
+  animatedScenes,
+  loadModels,
+  allPOI,
+};

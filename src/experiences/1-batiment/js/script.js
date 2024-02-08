@@ -9,8 +9,8 @@ import {
   controls,
   scene,
   animatedScenes,
-  cube,
   loadModels,
+  allPOI,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
 
@@ -43,21 +43,15 @@ const sceneSetUp = async () => {
 
     const intersects = raycaster.intersectObjects(scene.children);
 
-    for (let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object === cube) {
-        showText();
-        break;
-      } else {
-        hideText();
-      }
-    }
+    // for (let i = 0; i < intersects.length; i++) {
+    //   if (intersects[i].object === cube) {
+    //     showText();
+    //     break;
+    //   } else {
+    //     hideText();
+    //   }
+    // }
   }
-
-  // let restetDeltaTime = false;
-
-  // window.addEventListener("click", (event) => {
-  //   restetDeltaTime = true;
-  // });
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
@@ -150,12 +144,33 @@ const sceneSetUp = async () => {
       });
   }
 
+  const displayPOI = () => {
+    for (let i = 0; i < allPOI.length; i++) {
+      if (i !== index) {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[i][j].visible = false;
+          console.log(allPOI[i]);
+        }
+      } else {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[i][j].visible = true;
+          const position = period[i].cubePosition[j];
+          allPOI[i][j].position.set(position.x, position.y, position.z);
+          // if (i !== index) {
+          //   allPOI[i][j].visible = false;
+          //   console.log(i, index, allPOI[i][j]);
+          // }
+        }
+      }
+    }
+  };
+
   const handleFocusPeriod = async (step) => {
     if (!step) {
       return;
     }
-
     await loadModels();
+    displayPOI();
 
     updateAllMaterials();
 
@@ -202,22 +217,33 @@ const sceneSetUp = async () => {
       .map((paragraph) => `<p>${paragraph}</p>`)
       .join("");
 
-    cube.position.set(
-      step.cubePosition.x,
-      step.cubePosition.y,
-      step.cubePosition.z
-    );
+    // Modify the loop to hide points where i does not match the index
+    // for (let i = 0; i < allPOI.length; i++) {
+    //   if (i !== index) {
+    //     for (let j = 0; j < allPOI[i].length; j++) {
+    //       const position = period[index].cubePosition[j];
+    //       allPOI[index][j].position.set(position.x, position.y, position.z);
+    //       allPOI[i][j].visible = false;
+    //     }
+    //   }
+    // }
 
-    cube.cursor = "pointer";
+    // cube.position.set(
+    //   step.cubePosition[0].x,
+    //   step.cubePosition[0].y,
+    //   step.cubePosition[0].z
+    // );
 
-    const rayOrigin = new THREE.Vector3(camera.position);
-    const rayDirection = new THREE.Vector3(cube.position);
-    raycaster.set(rayOrigin, rayDirection);
-    rayDirection.normalize();
+    // cube.cursor = "pointer";
 
-    raycaster.setFromCamera(mouse, camera);
+    // const rayOrigin = new THREE.Vector3(camera.position);
+    // const rayDirection = new THREE.Vector3(cube.position);
+    // raycaster.set(rayOrigin, rayDirection);
+    // rayDirection.normalize();
 
-    cube.material.color.set("#0000ff");
+    // raycaster.setFromCamera(mouse, camera);
+
+    // cube.material.color.set("#0000ff");
 
     gsap.to(controls.step, {
       duration: 1,
