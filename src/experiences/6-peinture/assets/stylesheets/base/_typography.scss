@@ -1,23 +1,17 @@
 // ICONS
 @font-face {
-    font-display: block;
-    font-family: 'Icon';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../../static/fonts/IconFont/IconFont.ttf') format("ttf"), url('../../static/fonts/IconFont/IconFont.woff') format("woff"), url('../../static/fonts/IconFont/IconFont.woff2') format("woff2");
+  font-display: block;
+  font-family: "Icon";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("/6-peinture/fonts/Iconfont/IconFont.ttf") format("ttf"),
+    url("/6-peinture/fonts/Iconfont/IconFont.woff") format("woff"),
+    url("/6-peinture/fonts/Iconfont/IconFont.woff2") format("woff2");
 }
 
-// MUSBA
-@font-face {
-    font-display: swap;
-    font-family: 'Musba';
-    font-style: normal;
-    font-weight: bold;
-    src: url('../../static/fonts/MusBa/MusBA-Regular.woff2') format("ttf"), url('../../static/fonts/MusBa/MusBA-Regular.woff') format("woff");
-}
-
-h2, 
+h2,
 h3 {
-    font-family: $font-heading;
-    font-size: $h2-font-size;
+  font-family: $font-heading;
+  font-size: $h2-font-size;
 }
