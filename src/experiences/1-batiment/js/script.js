@@ -12,6 +12,7 @@ import {
   cube,
   loadModels,
 } from "./scene.js";
+import { updateAllMaterials } from "./utils";
 
 const sceneSetUp = async () => {
   document.oncontextmenu = function () {
@@ -156,6 +157,8 @@ const sceneSetUp = async () => {
     }
 
     await loadModels();
+
+    updateAllMaterials();
 
     animatedScenes[index].play();
 

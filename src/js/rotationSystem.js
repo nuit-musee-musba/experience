@@ -14,7 +14,7 @@ window.experience.canRotate = true;
 
 ////////////////////////////SCROLL LOGIC////////////
 const rotationFactor = 0.001;
-const powerFactor = 0.5;
+const powerFactor = 0.8;
 const parts = 5;
 const circle = Math.PI * 2;
 const deceleration = 1;
@@ -30,7 +30,6 @@ let moveX = 0;
 let isTouching = false;
 
 function updateRotation(delta) {
-  console.log("delta", delta);
   window.experience.rotation = (window.experience.rotation + delta) % circle;
   window.experience.index = Math.floor(
     ((window.experience.rotation + circle / (2 * parts)) / circle) * parts
@@ -40,7 +39,10 @@ function updateRotation(delta) {
 
 window.addEventListener("touchstart", (event) => {
   // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
-  // if (!window.experience.canRotate) return;
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;
@@ -52,6 +54,11 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
   isTouching = true;
   window.experience.isRotating = true;
+
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
 
