@@ -9,8 +9,8 @@ import {
   animatedScenes,
   camera,
   controls,
-  cube,
   loadModels,
+  allPOI,
   renderer,
   scene,
 } from "./scene.js";
@@ -27,31 +27,59 @@ const sceneSetUp = async () => {
   let isShowingText = false;
   const raycaster = new THREE.Raycaster();
 
-  const getCameraPositionForTarget = (position) => {
-    return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
-  };
-
   //MOUSE
 
   const mouse = new THREE.Vector2();
-
-  function onMouseClick(event) {
+  let intersectedObjectName;
+  function poiClick(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
 
-    const intersects = raycaster.intersectObjects(scene.children);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    let poiClicked = false;
 
     for (let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object === cube) {
+      const intersectedObject = intersects[i].object;
+
+      if (allPOI.flat().includes(intersectedObject)) {
+        intersectedObjectName = intersectedObject.name;
+        displayPOI(index);
         showText();
+        poiClicked = true;
         break;
-      } else {
-        hideText();
       }
     }
+
+    if (!poiClicked) {
+      hideText();
+    }
   }
+
+  const displayPOI = (index) => {
+    for (let i = 0; i < allPOI.length; i++) {
+      if (i !== index) {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[i][j].visible = false;
+        }
+      } else {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[index][j].visible = true;
+          if (intersectedObjectName === (i + j).toString()) {
+            document.getElementById("poi-title-component").textContent =
+              period[i].poiText[j].title;
+            document.getElementById("poi-text-component").innerHTML =
+              period[i].poiText[j].text;
+          }
+
+          const position = period[i].poiPosition[j];
+          allPOI[i][j].position.set(position.x, position.y, position.z);
+        }
+      }
+    }
+  };
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
@@ -70,7 +98,7 @@ const sceneSetUp = async () => {
 
   const endMenu = document.getElementById("end-menu");
   const lastStep = document.getElementById("last-step");
-  const component = document.getElementById("component");
+  const component = document.getElementById("poi-component");
   // const containerSubTitle = document.getElementById("container-subTitle");
 
   const restart = () => {
@@ -89,8 +117,8 @@ const sceneSetUp = async () => {
     component.style.display = "none";
     // containerSubTitle.style.display = "none";
   };
-  window.addEventListener("click", onMouseClick, false);
-  window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
+  window.addEventListener("click", poiClick, false);
+  window.addEventListener("mousedown", hideText(), false);
 
   const toggleInfo = () => {
     if (!isShowingText) {
@@ -137,8 +165,8 @@ const sceneSetUp = async () => {
     if (!step) {
       return;
     }
-
     await loadModels();
+    displayPOI(index);
 
     updateAllMaterials();
 
@@ -191,41 +219,16 @@ const sceneSetUp = async () => {
 
     const targetPosition = step.position;
 
-    const cameraPosition = getCameraPositionForTarget(targetPosition);
+    const cameraPosition = targetPosition;
 
     document.getElementById("subTitle").textContent = step.subTitle[0];
-    document.getElementById("title-component").textContent = step.title;
-    document.getElementById("text-component").innerHTML = step.description
-      .map((paragraph) => `<p>${paragraph}</p>`)
-      .join("");
 
-    if (step.cubePosition) {
-      cube.position.set(
-        step.cubePosition.x,
-        step.cubePosition.y,
-        step.cubePosition.z
-      );
-    }
-
-    cube.cursor = "pointer";
-
-    const rayOrigin = new THREE.Vector3(camera.position);
-    const rayDirection = new THREE.Vector3(cube.position);
-    raycaster.set(rayOrigin, rayDirection);
-    rayDirection.normalize();
-
-    raycaster.setFromCamera(mouse, camera);
-
-    cube.material.color.set("#0000ff");
-
-    gsap.to(controls.step, {
+    gsap.to(controls.target, {
       duration: 1,
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
+      x: step.target.x,
+      y: step.target.y,
+      z: step.target.z,
     });
-
-    // controls.target = cube.position;
 
     gsap.to(controls.object.position, {
       duration: 1,
