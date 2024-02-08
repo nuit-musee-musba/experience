@@ -8,6 +8,7 @@ import { Section1 } from "../section1/Section1";
 import { Section4 } from "../section4/Section4";
 import Button from "./button";
 import Paragraph from "./paragraph";
+import Div from "./div";
 
 export default class Transition {
   currentSection: Section;
@@ -35,6 +36,8 @@ export default class Transition {
   sections: Section[];
 
   hintText: Paragraph;
+
+  landmark: Div;
 
   constructor() {
     this.buttonSection2 = new Button("sec2-button", () => this.next());
@@ -73,6 +76,7 @@ export default class Transition {
     ];
 
     this.hintText = new Paragraph("hint");
+    this.landmark = new Div(".landmark");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -181,6 +185,9 @@ export default class Transition {
       previousSection = this.sections[this.sections.length - 1];
     } else {
       previousSection = this.sections[this.currentSectionNumber - 1];
+    }
+    if (this.currentSectionNumber === 9) {
+      this.landmark.div.style.display = "none";
     }
     this.currentSection.show();
     previousSection.hide();
