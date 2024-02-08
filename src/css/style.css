@@ -272,8 +272,7 @@ body {
 .experience-infos {
   width: 750px;
   position: absolute;
-  right: 20rem;
-  bottom: 10rem;
+  left: 5rem;
   flex-direction: column;
   justify-content: left;
   z-index: 3;
@@ -281,4 +280,13 @@ body {
 
 .transition-opacity {
   transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
+}
+
+.scroll-infos {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  top: 5rem;
 }
