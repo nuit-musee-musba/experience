@@ -11,6 +11,40 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 enableInactivityRedirection();
 
 /**
+ * Popins
+ */
+const popin = document.querySelector("#popin-info");
+let events = true;
+
+const popinHide = (targetPopin) => {
+  targetPopin.classList.add("hidden");
+  document.querySelector("body").classList.add("popin-visible");
+  document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
+};
+
+const popinShow = (targetPopin) => {
+  targetPopin.classList.remove("hidden");
+  document.querySelector("body").classList.remove("popin-visible");
+  document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
+};
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  popinShow(popin);
+});
+
+const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
+for (const popinBtn of popinBtns) {
+  const targetPopin = document.querySelector(popinBtn.dataset.target);
+  popinBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    popinHide(targetPopin);
+  });
+}
+
+/**
  * Threejs
  */
 
@@ -90,12 +124,13 @@ gltfLoader.setDRACOLoader(dracoLoader);
  */
 
 // Wallpaper
-const wallpaperGeometry = new THREE.PlaneGeometry(15, 15, 1, 1);
+const wallpaperGeometry = new THREE.PlaneGeometry(47.2, 28, 1, 1);
 const wallpaperMaterial = new THREE.MeshStandardMaterial({
   color: "#242424",
   // map: wallpaperHeightTexture,
   metalnessMap: wallpaperHeightTexture,
-  metalness: 0.5,
+  metalness: 1,
+  roughness: 0,
 });
 const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
 scene.add(wallpaper);
@@ -217,10 +252,10 @@ pointLightTweaks
 const spotLight = new THREE.SpotLight(
   "#ede2b9", // color
   3, // intensity
-  2, // distance
-  3, // angle
+  1.75, // distance
+  8, // angle
   0, // penumbra
-  2 // decay
+  0 // decay
 );
 
 pointLight.add(spotLight);
