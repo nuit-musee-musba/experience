@@ -37,9 +37,9 @@ export class Sec4Dragable extends Dragable {
   refElmt: HTMLElement;
   isInside: boolean;
   id: string;
-  onSucceed: (id: string) => void;
+  onSucceed: (id: string) => boolean;
 
-  constructor(element: HTMLElement, onSucceed: (id: string) => void) {
+  constructor(element: HTMLElement, onSucceed: (id: string) => boolean) {
     super(element, undefined, ".ref-click");
 
     this.id = element.id.split("-")[1];
@@ -113,7 +113,13 @@ export class Sec4Dragable extends Dragable {
       this.element.style.top = `${this.refData.top}px`;
       this.element.style.left = ` ${this.refData.left}px`;
       super.unable();
-      this.onSucceed(this.id);
+
+      const succeeded = this.onSucceed(this.id);
+      console.log({ succeeded });
+
+      if (!succeeded) {
+        this.element.style.zIndex = "0";
+      }
     }
   }
   show() {
