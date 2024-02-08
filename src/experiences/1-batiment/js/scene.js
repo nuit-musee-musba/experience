@@ -14,8 +14,14 @@ export const config = {
 
 const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
-const gltfLoader = new GLTFLoader();
-const dracoLoader = new DRACOLoader();
+const manager = new THREE.LoadingManager();
+const gltfLoader = new GLTFLoader(manager);
+const dracoLoader = new DRACOLoader(manager);
+
+manager.onLoad = () => {
+  document.querySelector(".loader").classList.add("loader-hidden");
+  document.querySelector(".loader-icon").classList.add("loader-hidden");
+};
 
 dracoLoader.setDecoderPath("/1-batiment/draco/");
 dracoLoader.preload();
@@ -173,7 +179,7 @@ const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 // ENVIRONMENT
 
-const loader = new THREE.CubeTextureLoader();
+const loader = new THREE.CubeTextureLoader(manager);
 const texture = loader.load([
   "/1-batiment/assets/environments/px.png",
   "/1-batiment/assets/environments/nx.png",
@@ -250,11 +256,13 @@ const camera = new THREE.PerspectiveCamera(
   0.2,
   500
 );
+camera.position.set(0, 0, 3);
 scene.add(camera);
 
 // CONTROLS CAMERA
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false;
+controls.enableZoom = false;
 controls.maxPolarAngle = Math.PI * 0.33;
 controls.minPolarAngle = Math.PI * 0.33;
 //RENDERER
