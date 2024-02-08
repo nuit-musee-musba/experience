@@ -1,0 +1,14 @@
+.timelapse{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelapse__context{
+  margin-bottom: 10rem;
+}
+
+#date-anim__year{
+  font-size: 25rem;
+}
