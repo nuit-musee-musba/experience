@@ -4,17 +4,12 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
+import data from "./data";
+
 // World creation
 export async function createIsland(i, count, color) {
   try {
-    let url;
-    // For a loaded GLTF model
-    if (i % 2 !== 0) {
-      url = "/assets/hub/Batiment.glb";
-    } else {
-      url = "/assets/hub/vanite.glb";
-    }
-
+    const url = data[i].modelPath;
     const island = await createGLTFModel(
       i,
       url, // url
