@@ -22,9 +22,7 @@ export class Dragable {
 
     if (this.target) {
       targetEvent = this.element.querySelector(this.target) as HTMLElement;
-      targetEvent.addEventListener("click", () => console.log("click"));
     }
-    console.log(targetEvent);
 
     targetEvent.addEventListener("touchend", this.drop.bind(this));
     targetEvent.addEventListener("touchmove", this.isDraging.bind(this));
