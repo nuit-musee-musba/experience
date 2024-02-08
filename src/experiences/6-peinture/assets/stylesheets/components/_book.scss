@@ -16,8 +16,20 @@
     }
     .book-description {
       margin-left: 3rem;
-      b {
-        font-weight: 700;
+      &.food {
+        b {
+          color: $food;
+        }
+      }
+      &.animals {
+        b {
+          color: $animals;
+        }
+      }
+      &.objects {
+        b {
+          color: $objects;
+        }
       }
     }
   }

@@ -6,6 +6,8 @@ import "./rotationSystem";
 
 window.experience = window.experience || {};
 
+window.experience.canRotate = false;
+
 // Capture DOM elements
 
 // Constants
@@ -121,8 +123,6 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   window.experience.updateCarouselRotation();
-  // console.log(window.experience.rotation);
-  // console.log(window.experience.index);
   // Render the scene
   renderer.render(scene, camera);
 };
