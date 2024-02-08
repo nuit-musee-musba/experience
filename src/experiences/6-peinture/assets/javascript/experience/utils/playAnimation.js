@@ -3,10 +3,6 @@ import lottie from 'lottie-web';
 export function playAnimation(anim) {
     console.log(anim)
     let container = document.querySelector('.game-chef__illustration');
-    let animatedElement = container.querySelector('svg');
-    if (animatedElement) {
-        animatedElement.remove();
-    }
     
     // PATH JSON
     const animationPaths = {
@@ -26,17 +22,14 @@ export function playAnimation(anim) {
         path: animPath,
         renderer: 'svg',
         loop: false,
-        autoplay: false
+        autoplay: false,
+        onComplete: lottie.destroy()
     });
 
     animation.play();
     container.classList.add('is-playing');
 
     animation.addEventListener("complete", () => {
-        let animatedElement = container.querySelector('svg');
-        if (animatedElement) {
-            animatedElement.remove();
-        }
         container.classList.remove('is-playing');
     });
 }
