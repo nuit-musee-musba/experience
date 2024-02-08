@@ -33,7 +33,7 @@ const Date = {
 
     setTimeout(() => {
       button.button.disabled = false;
-    }, 3000);
+    }, 1950);
   },
 };
 
