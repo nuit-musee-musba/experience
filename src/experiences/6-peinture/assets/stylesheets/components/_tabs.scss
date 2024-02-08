@@ -66,6 +66,18 @@
 
     .item{
         position: absolute;
+        &-peach {
+            left: 20rem;
+            top: 6rem;
+        }
+        &-lemon {
+            left: 37rem;
+            top: 6rem;
+        }
+        &-pineapple {
+            left: 5rem;
+            bottom: 15rem;
+        }
     }
 
     // TODO : ANIMATION ACTIVE
