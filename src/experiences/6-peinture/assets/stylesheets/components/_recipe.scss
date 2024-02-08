@@ -33,26 +33,28 @@
         margin-top: 2.5rem;
       }
       &::before {
-        color: white;
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 12px;
       }
       &.food {
         @include icon(food);
         &::before {
-          background: $food;
+          background: rgba($food, 0.3);
+          color: $food;
         }
       }
       &.animals {
         @include icon(animals);
         &::before {
-          background: $animals;
+          background: rgba($animals, 0.3);
+          color: $animals;
         }
       }
       &.objects {
         @include icon(objects);
         &::before {
-          background: $objects;
+          background: rgba($objects, 0.3);
+          color: $objects;
         }
       }
 
