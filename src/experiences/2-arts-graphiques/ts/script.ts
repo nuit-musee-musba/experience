@@ -12,7 +12,7 @@ const experience: ExperienceType = {};
 
 window.addEventListener("load", () => {
   experience.transition = new Transition();
-  experience.frames = new Frames();
+  experience.frames = new Frames(experience.transition.buttonSection7);
   experience.modal = new Modal("modal", experience);
   experience.modal.open();
   landmark.init(experience.transition.sections.length)
