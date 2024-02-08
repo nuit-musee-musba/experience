@@ -13,20 +13,21 @@ class Dialog {
   listen() {
     let i = 0;
     
-
-    this.buttonPrev.addEventListener("click", () => {
-      if (i == 1) {
-        this.buttonPrev.style.display = "none";
-      }
-      if (i > 0) {
-        i--;
-        this.updateCurrent(this.dialogs[i]);
-      }
-      if (i != this.dialogs.length - 1) {
-        this.buttonNext.style.display = "flex";
-        this.buttonPlay.style.display = "none";
-      }
-    });
+    if (this.buttonPrev) {
+      this.buttonPrev.addEventListener("click", () => {
+        if (i == 1) {
+          this.buttonPrev.style.display = "none";
+        }
+        if (i > 0) {
+          i--;
+          this.updateCurrent(this.dialogs[i]);
+        }
+        if (i != this.dialogs.length - 1) {
+          this.buttonNext.style.display = "flex";
+          this.buttonPlay.style.display = "none";
+        }
+      });
+    }
 
     this.buttonNext.addEventListener("click", () => {
       if (i == 0) {
