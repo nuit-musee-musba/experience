@@ -15,6 +15,7 @@ html,
 body {
   overflow: hidden;
 }
+
 .title-component {
   position: absolute;
   top: 6rem;
@@ -22,10 +23,26 @@ body {
   display: flex;
   gap: 3rem;
 }
+
 .title-line {
   width: 5px;
   background-color: white;
+  animation: slide-down 1s 3s ease-out forwards;
 }
+
+@keyframes slide-down{
+
+  0%
+  {
+    transform: translateY(-100%);
+  }
+
+  100%
+  {
+    transform: translateY(0%);
+  }
+}
+
 #date-title {
   color: white;
   font-size: 8rem;
@@ -37,6 +54,26 @@ body {
   color: white;
   font-size: 4rem;
   font-weight: 100;
+  overflow: hidden;
+  animation: slide2 1s 4s ease-out forwards;
+}
+
+@keyframes slide2{
+  0%
+  {
+    width: 0%;
+    white-space: nowrap;
+  }
+
+  80%{
+    white-space: nowrap;
+  }
+
+  100%
+  {
+    width: calc(100% / 2);
+    white-space: wrap;
+  }
 }
 
 .parameter-buttons {
