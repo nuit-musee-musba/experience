@@ -12,6 +12,7 @@
 @import url("./components/buttons/btn-primary.css");
 @import url("./components/landmark.css");
 @import url("./components/pieces.css");
+@import url("./components/tooltip.css");
 
 @import url("./components/infos/infoContainer.css");
 @import url("./components/infos/infoTimelineContainer.css");
@@ -185,12 +186,13 @@ body {
   width: 1212.68px;
 }
 
-.btn-primary, .btn-small-primary{
+.btn-primary,
+.btn-small-primary {
   background-color: var(--primary-1-color);
-  border-color: var(--primary-1-color)
+  border-color: var(--primary-1-color);
 }
 
-.btn-small-secondary{
+.btn-small-secondary {
   border-color: var(--primary-1-color);
-  color: var(--primary-1-color)
+  color: var(--primary-1-color);
 }

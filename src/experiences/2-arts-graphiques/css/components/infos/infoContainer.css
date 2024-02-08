@@ -1,23 +1,24 @@
-@import '../../utils/variables.css';
+@import "../../utils/variables.css";
 
-.info{
-    background-color: rgba(0,0,0,0.5);
-    padding: 32px 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    border-left: solid var(--white) 5px;
+.info {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  border-left: solid var(--white) 5px;
+  position: relative;
 }
 
-.info > p{
-    text-align: start;
+.info > p {
+  text-align: start;
 }
 
-.infosContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    height: 100%;
-    gap: 20px;
-    padding-bottom: 90px;
+.infosContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  gap: 20px;
+  padding-bottom: 90px;
 }
