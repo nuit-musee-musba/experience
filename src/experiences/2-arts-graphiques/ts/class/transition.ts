@@ -9,6 +9,8 @@ import { Section4 } from "../section4/Section4";
 import Button from "./button";
 import Paragraph from "./paragraph";
 import Div from "./div";
+import { Section2 } from "../section2/Section2";
+import { Section8 } from "../section8/Section8";
 
 export default class Transition {
   currentSection: Section;
@@ -53,13 +55,13 @@ export default class Transition {
 
     this.section0 = new Section("section-0");
     this.section1 = new Section1(`section-1`, this);
-    this.section2 = new Section(`section-2`);
+    this.section2 = new Section2(`section-2`);
     this.section3 = new Section(`section-3`);
     this.section4 = new Section4(`section-4`, this.buttonSection4);
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
-    this.section8 = new Section(`section-8`);
+    this.section8 = new Section8(`section-8`);
     this.section9 = new Section(`section-9`);
 
     this.sections = [

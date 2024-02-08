@@ -18,7 +18,7 @@
 
 @import url("./components/result.css");
 
-@import url('../../../global/style.css');
+@import url("../../../global/style.css");
 
 * {
   margin: 0;
@@ -34,7 +34,7 @@ body {
   overflow: hidden;
   height: 100%;
   position: relative;
-  background-color: rgb(55, 55, 55);
+  background-image: url("/2-arts-graphiques/images/bg/background-base.webp");
   color: white;
 }
 

@@ -5,7 +5,9 @@ export class Frame {
 
   constructor(frameId: string) {
     const frame = document.querySelector<HTMLDivElement>(`#${frameId}`);
-    const confirmationText = document.querySelector<HTMLElement>('#painting-frame__confirmation');
+    const confirmationText = document.querySelector<HTMLElement>(
+      "#painting-frame__confirmation"
+    );
 
     if (!frame) {
       console.error(`unable to find #${frameId} in the dom`);
@@ -21,8 +23,8 @@ export class Frame {
     this.confirmationText = confirmationText;
     this.id = frameId;
   }
-  addText(){
-    this.confirmationText.innerText = "Êtes vous sûr·e de votre choix ?"
+  addText() {
+    this.confirmationText.innerText = "Êtes vous sûr·e de votre choix ?";
   }
   addOpacity() {
     this.frame.style.opacity = "50%";

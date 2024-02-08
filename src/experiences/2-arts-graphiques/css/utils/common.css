@@ -1,13 +1,22 @@
 @font-face {
-    font-family: Montserrat-SemiBold;
-    src: url(fonts/Montserrat-SemiBold.ttf);
+  font-family: Montserrat-SemiBold;
+  src: url(fonts/Montserrat-SemiBold.ttf);
 }
 
-
-.bold{
-    font-family: Montserrat-SemiBold;
+.bold {
+  font-family: Montserrat-SemiBold;
 }
 
-.hide{
-    display: none !important;
+.hide {
+  display: none !important;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: 0;
+  left: 0;
 }
