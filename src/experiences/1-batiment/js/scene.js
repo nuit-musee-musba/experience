@@ -282,7 +282,78 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false;
 controls.maxPolarAngle = Math.PI * 0.33;
-controls.minPolarAngle = Math.PI * 0.33;
+
+// MODELS
+const poi1 = [];
+const poi2 = [];
+const poi3 = [];
+const poi4 = [];
+
+for (let i = 0; i < period.length; i++) {
+  for (let j = 0; j < period[i].poiPosition.length; j++) {
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load("./assets/icons/poi.png");
+
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true, // Enable transparency
+      alphaTest: 0.1, // Adjust the alpha test value if needed
+    });
+    const geometry = new THREE.PlaneGeometry(0.4, 0.4);
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    cube.name = `${i + j}`;
+
+    if (i === 0) {
+      poi1.push(cube);
+    } else if (i === 1) {
+      poi2.push(cube);
+    } else if (i === 2) {
+      poi3.push(cube);
+    } else if (i === 3) {
+      poi4.push(cube);
+    }
+
+    cube.lookAt(camera.position); // Orient the cube towards the camera
+  }
+}
+
+const allPOI = [poi1, poi2, poi3, poi4];
+
+scene.add(...poi1, ...poi2, ...poi3, ...poi4);
+gltfLoader.load("/1-batiment/assets/0/plane.glb", (gltf) => {
+  scene.add(gltf.scene);
+});
+
+function updateCubeOrientation() {
+  for (let i = 0; i < allPOI.length; i++) {
+    for (let j = 0; j < allPOI[i].length; j++) {
+      allPOI[i][j].lookAt(camera.position);
+    }
+  }
+}
+
+controls.addEventListener("change", updateCubeOrientation);
+
+const modelsPath = [
+  "/1-batiment/assets/0/ANIM_Bordeaux-bat0.glb", // tout bordeaux
+  "/1-batiment/assets/0/ANIM_mairie0.glb", //mairie, mettre animation flamme après
+  "/1-batiment/assets/0/ANIM_musba0.glb",
+];
+
+let animatedScenes = [];
+
+const loadModels = async () => {
+  for (let i = 0; i < modelsPath.length; i++) {
+    const gltf = await gltfLoader.loadAsync(modelsPath[i]);
+
+    scene.add(gltf.scene);
+    const objectLoader = new ObjectLoader(gltf);
+
+    animatedScenes.push(objectLoader);
+  }
+};
+
 //RENDERER
 
 const renderer = new THREE.WebGLRenderer({
