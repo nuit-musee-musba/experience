@@ -31,7 +31,9 @@ const popinShow = (targetPopin) => {
   document.querySelector(".popin-overlay").classList.remove("hidden");
   events = false;
   if (targetPopin === popin2) {
-    setTimeout(() => { targetPopin.classList.add("textshow"); }, 7000)
+    setTimeout(() => {
+      targetPopin.classList.add("textshow");
+    }, 7000);
   }
 };
 
@@ -51,10 +53,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     popinHide(popin2);
   } else {
     popinShow(popin1);
-    popinShow(popin2);
     setTimeout(() => {
       popinHide(popin1);
-    }, 1000);
+    }, 3000);
+    popinShow(popin2);
   }
 });
 

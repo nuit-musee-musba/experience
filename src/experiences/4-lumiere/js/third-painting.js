@@ -55,6 +55,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
@@ -339,7 +340,7 @@ function changeMainLightColor() {
 
 // Helper
 const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-// rectAreaLightHelper.visible = false;
+rectAreaLightHelper.visible = false;
 scene.add(rectAreaLightHelper);
 rectAreaLightTweaks.add(rectAreaLightHelper, "visible").name("Repère visuel");
 
