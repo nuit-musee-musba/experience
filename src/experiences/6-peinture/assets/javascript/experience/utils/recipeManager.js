@@ -78,9 +78,11 @@ export function recipeGeneration() {
     //element.count
     if (thisItem.recipe_step == current_step) {
       recipe.innerHTML +=
-        '<li class="item" id="recipe-' +
+        '<li class="item ' +
+        thisItem.category +
+        '" id="recipe-' +
         element.name +
-        '"><div>' +
+        `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +
         ' <span id="actual-' +
         element.name +
@@ -88,8 +90,9 @@ export function recipeGeneration() {
         actualNumber +
         "</span>/" +
         thisItem.number_needed +
-        "";
-      ("</div></li>");
+        "</div><span class='item-checkbox'><img id='img-check-" +
+        element.name +
+        "' src='/6-peinture/images/misc/checked.svg'></span></li>";
     }
   });
 }

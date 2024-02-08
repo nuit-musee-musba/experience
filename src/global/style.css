@@ -15,12 +15,14 @@
 }
 
 @font-face {
-  font-family: Montserrat-Regular;
+  font-family: Montserrat;
+  font-weight: 400;
   src: url(/global/fonts/Montserrat-Regular.ttf);
 }
 
 @font-face {
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   src: url(/global/fonts/Montserrat-SemiBold.ttf);
 }
 
@@ -42,7 +44,8 @@
 
 h1,
 .text-h1 {
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   font-size: 110px;
   line-height: 136px;
 }
@@ -57,30 +60,35 @@ h2,
 
 h3,
 .text-h3 {
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   font-size: 56px;
 }
 
 p,
 .text-p-body {
-  font-family: Montserrat-Regular;
+  font-family: Montserrat;
+  font-weight: 400;
   font-size: 56px;
   line-height: 72px;
 }
 
 .text-p-small {
-  font-family: Montserrat-Regular;
+  font-family: Montserrat;
+  font-weight: 400;
   font-size: 46px;
 }
 
 .text-p-mini {
-  font-family: Montserrat-Regular;
+  font-family: Montserrat;
+  font-weight: 400;
   font-size: 40px;
   line-height: 56px;
 }
 
 .text-btn-1 {
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   font-size: 56px;
 }
 
@@ -96,7 +104,8 @@ p,
   align-items: center;
   justify-content: center;
   border-radius: 21px;
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   font-size: 56px;
   border: var(--stroke-width) solid var(--accent);
 }
@@ -147,7 +156,8 @@ p,
   min-width: 7.5rem;
 }
 .btn-icon span {
-  font-family: Montserrat-Regular;
+  font-family: Montserrat;
+  font-weight: 400;
   font-size: 46px;
 }
 .btn-icon:has(> span) {
@@ -156,11 +166,12 @@ p,
 
 /* Tabs */
 .tab {
-  font-family: Montserrat-SemiBold;
+  font-family: Montserrat;
+  font-weight: 600;
   font-size: 56px;
   background-color: var(--accent);
   color: var(--white);
-  border-bottom: 0;
+  border: none;
   border-radius: 21px 21px 0 0;
   height: 8rem;
   padding: 0 5rem;
@@ -195,6 +206,18 @@ p,
   border: 2rem solid var(--gray);
   background: var(--white);
   border-radius: 100%;
+}
+
+/* Action Feedback */
+.btn-primary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-small-primary:active:not(:disabled),
+.btn-small-secondary:active:not(:disabled),
+.btn-icon:active:not(:disabled),
+.tab:active:not(:disabled),
+.step:active:not(:disabled),
+.poi:active:not(:disabled) {
+  filter: brightness(0.8);
 }
 
 /* Layout */
@@ -249,9 +272,9 @@ i.i-left::before {
 i.i-close::before {
   content: "\ee05";
 }
-i.i-info::before {
+i.i-check::before {
   content: "\ee06";
 }
-i.i-check::before {
+i.i-info::before {
   content: "\ee07";
 }

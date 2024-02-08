@@ -4,262 +4,791 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2 arts graphiques</title>
-    <link rel="stylesheet" href="/global/style.css" />
+    <link rel="stylesheet" href="../../global/style.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
   </head>
   <body>
-    <button id="button">Découvrir l'oeuvre</button>
-    <a href="/">Retourner au hub</a>
+    <div class="loading__container active"></div>
 
-    <section id="section-0">
-      <div class="left">
-        <h1>Une restautation historique</h1>
-        <p>
-          L’œuvre en pastel Saint Sébastien de Odilon Redon va sortir de la
-          réserve pour la prochaine exposition du MusBA.
-        </p>
-      </div>
-      <div class="center"></div>
-      <div class="right"></div>
-    </section>
-    <section id="section-1">
-      <div class="left">
-        <div class="paintingText">
-          <h1 id="title">2024</h1>
-          <h2>Réserve du musba</h2>
-          <div class="hSeparator"></div>
+    <div class="wrapper">
+      <header>
+        <div class="landmark">
+          <template id="landmark__dot">
+            <div class="landmark__dot"></div>
+          </template>
+        </div>
+      </header>
+      <section id="section-0">
+        <dialog id="modal">
+          <h1>Odysée d'une oeuvre</h1>
+          <div class="line"></div>
           <p>
-            Désemballage : Action d’enlever de leur emballage des objets, des
-            marchandises
+            Au cœur de l'exposition MusBA, un sanctuaire secret se dévoile...
+            Préparez-vous à plonger dans les mystères d'une expérience
+            envoûtante, où les secrets de préservation artistique de l'œuvre
+            <span class="bold">"Saint Sébastien”</span>
+            , d'Odilon Redon sont révélés.
           </p>
-          <p>Faites preuve de délicatesse en retirant l'emballge de l'oeuvre</p>
-        </div>
-      </div>
-      <div class="center">
-        <div class="sec1-painting"></div>
-        <div id="one" class="sec1-dragable"></div>
-        <div id="two" class="sec1-dragable"></div>
-        <div id="three" class="sec1-dragable"></div>
-        <div id="four" class="sec1-dragable"></div>
-      </div>
-      <div class="right"></div>
-    </section>
-
-    <section id="section-2">
-      <div class="left">
-        <div class="paintingText">
-          <h1>1910</h1>
-          <h2>Atelier d'Odilon Redon</h2>
-          <div class="hSeparator"></div>
-
-          <p>
-            Par un étrange tour du destin, vous vous retrouvez transporté 114
-            ans en arrière, en 1910.
-          </p>
-          <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
-        </div>
-      </div>
-      <div class="center">
-        <div class="canvas__container active" data-interaction="paint"></div>
-      </div>
-      <div class="right">
-        <p>Pour une raison inexpliquée, l'artiste est absent.</p>
-        <p>Mais vous, vous êtes là.</p>
-        <p>Donnez vie au chef-d'oeuvre d'Odilon Redon : "Saint Sébastien"</p>
-        <p>Odilon Redon</p>
-        <p>Né à Bordeaux en 1840, Odilon Redon est décédé à Paris en 1916</p>
-      </div>
-    </section>
-
-    <section id="section-3">
-      <div class="left">
-        <p>Timelapse</p>
-        <h2>
-          <span id="date-anim__year" data-from="2024" data-to="1910">2024</span>
-        </h2>
-      </div>
-      <div class="center">
-        <p>Peinture qui fond</p>
-      </div>
-      <div class="right"></div>
-    </section>
-
-    <section id="section-4">
-      <div class="left">
-        <p>Dans la reserve</p>
-        <p class="step">
-          Etape 1 : Rassemblez les morceaux avec soin pour commencer la
-          restauration !
-        </p>
-        <p>
-          Etape 2 : Avec précision, appliquez le solvant pour réparer les
-          déchirures (craquelures) en suivant la ligne avec vos doigts.
-        </p>
-      </div>
-      <div class="center">
-        <div class="canvas__container" data-interaction="seal"></div>
-        <p>Peinture abimé</p>
-        <div class="painting-pieces-container">
-          <img
-            id="dragable-dl"
-            class="sec4-dl sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/dl.svg"
-            alt=""
-          />
-          <img
-            id="dragable-dr"
-            class="sec4-dr sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/dr.svg"
-            alt=""
-          />
-          <img
-            id="dragable-ul"
-            class="sec4-ul sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/ul.svg"
-            alt=""
-          />
-          <img
-            id="dragable-ur"
-            class="sec4-ur sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/ur.svg"
-            alt=""
-          />
-          <svg
-            id="Calque_1"
-            data-name="Calque_1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 442 442"
-          >
-            <polygon
-              class="canvas-ul pieces-ref"
-              id="ref-ul"
-              points="310.64 48.25 199.64 196.25 118.64 247.25 44.64 176.25 1 278.25 1 1 143.64 1 310.64 48.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
+          <button class="btn-primary close-modal">
+            Entrer dans la réserve
+          </button>
+        </dialog>
+      </section>
+      <section id="section-1">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div>
+                <h1 id="title">2024</h1>
+                <h2>Réserve du MusBA</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>
+                    <span class="italic">Désemballage : </span><br />Action d’enlever
+                    de leur emballage des objets, des marchandises
+                  </p>
+                  <p>
+                    Faites preuve de délicatesse en retirant l'emballge de l'oeuvre
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <!-- <div class="sec1-painting"></div> -->
+            <img
+              src="/2-arts-graphiques/images/pieces/tableau-clean.png"
+              class="sec1-painting"
             />
-            <polygon
-              class="canvas-dl pieces-ref"
-              id="ref-dl"
-              points="310.64 226.25 226.64 360.25 82.64 441 1 441 1 278.25 44.64 176.25 118.64 247.25 221 256.25 310.64 226.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
+            <img
+              src="/2-arts-graphiques/images/wrapper/top-left.webp"
+              id="one"
+              class="sec1-dragable"
             />
-            <polygon
-              class="canvas-dr pieces-ref"
-              id="ref-dr"
-              points="441 150.25 441 441 82.64 441 226.64 360.25 310.64 226.25 395.64 304.25 441 150.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
+            <img
+              src="/2-arts-graphiques/images/wrapper/top-right.webp"
+              id="two"
+              class="sec1-dragable"
             />
-            <polygon
-              class="canvas-ur pieces-ref"
-              id="ref-ur"
-              points="441 1 441 150.25 395.64 304.25 310.64 226.25 221 256.25 118.64 247.25 199.64 196.25 310.64 48.25 143.64 1 441 1"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
+            <img
+              src="/2-arts-graphiques/images/wrapper/bottom-left.webp"
+              id="three"
+              class="sec1-dragable"
             />
-          </svg>
+            <img
+              src="/2-arts-graphiques/images/wrapper/bottom-right.webp"
+              id="four"
+              class="sec1-dragable"
+            />
+            <button class="btn-next sec1-button btn-primary">
+              Etape suivante
+            </button>
+          </div>
+          <div class="right"></div>
         </div>
-      </div>
-      <div class="right">
-        <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
-      </div>
-    </section>
+      </section>
 
-    <section id="section-5">
-      <div class="left">
-        <p>
-          Etape 3 : Au fil des années, l'œuvre a été affectée par l'humidité, la
-          nicotine, la poussière, les dépôts d'insectes, la pollution, etc.
-          Utilisez cette gomme pour nettoyer délicatement l'œuvre et en éliminer
-          les impuretés.
-        </p>
-      </div>
-      <div class="center">
-        <div class="canvas__container active" data-interaction="cleaning"></div>
-      </div>
-      <div class="right">
-        <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
-      </div>
-    </section>
+      <section id="section-2">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText" id="to-hide">
+              <div class="timeline old">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>1910</h1>
+                <h2>Atelier d'Odilon Redon</h2>
+                <div class="hSeparator"></div>
 
-    <section id="section-6">
-      <div class="left">
-        <div class="frame" id="frame-1">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+                <div class="paragraph">
+                  <p>
+                    Par un étrange tour du destin, vous vous retrouvez
+                    transporté un siècle en arrière, en 1910.
+                  </p>
+                  <p>Pour une raison inexpliquée, l'artise est absent.</p>
+                  <p>Mais vous, vous êtes là.</p>
+                </div>
+              </div>
+            </div>
+            <div class="infosContainer hide to-reveal">
+              <div class="info">
+                <h2>Dimensions</h2>
+                <p>
+                  Cette œuvre mesure 70.8 cm de hauteur et 55.3 cm de largeur
+                  sans cadre.
+                </p>
+              </div>
+              <div class="info">
+                <h2>La symbolique des fleurs</h2>
+                <p>
+                  Des fleurs sont à ses pieds, symbole de la souffrance et lien
+                  à l'arbre dénudé.
+                </p>
+              </div>
+              <div class="info">
+                <h2>Source d'inspiration</h2>
+                <p>
+                  Pour créer ce paysage, Redon s’est inspiré des paysages de
+                  Peyrelebade dans le Médoc (33).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec2-button btn-primary">
+              Etape suivante
+            </button>
+            <div
+              class="canvas__container active"
+              data-interaction="paint"
+            ></div>
+          </div>
+          <div class="right">
+            <div class="infosContainer">
+              <div class="info">
+                <div>
+                  <h2>Odilon Redon</h2>
+                  <h2>(1840 - 1916)</h2>
+                </div>
+                <p>
+                  Artiste bordelais, appartenant au mouvement du symbolisme.
+                </p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Martyre biblique</h2>
+                <p>
+                  Ce chef-d'œuvre représente une scène biblique où
+                  Saint-Sébastien, le martyr, est attaché à un arbre, percé de
+                  deux flèches.
+                </p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Acquisition de l’oeuvre</h2>
+                <p>
+                  Acquise par la commune de Bordeaux et le Musée des Beaux-Arts
+                  en 1980, l'œuvre repose aujourd'hui dans la réserve du musée.
+                </p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Signature discrete</h2>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="center">
+      </section>
+
+      <section id="section-3">
+        <div class="container row">
+          <div class="left">
+            <p>Timelapse</p>
+            <h2>
+              <span id="date-anim__year" data-from="2024" data-to="1910"
+                >2024</span
+              >
+            </h2>
+          </div>
+          <div class="center">
+            <button class="btn-next sec3-button btn-primary">
+              Etape suivante
+            </button>
+            <p>Peinture qui fond</p>
+          </div>
+          <div class="right"></div>
+        </div>
+      </section>
+
+      <section id="section-4">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>2024</h1>
+                <h2>Réserve du MusBA</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>Reconstitution:</p>
+                  <p>Réunir les fragments de l'œuvre pour lui redonner sa complétude originelle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec4-button btn-primary">
+              Etape suivante
+            </button>
+            <p>Peinture abimé</p>
+            <svg
+              id="dragable-hautGauche"
+              class="piece piece-top-left sec4-dragable"
+              data-name="top-left"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 126.52 360.5"
+            >
+              <defs>
+                <style>
+                  .cls-1 {
+                    clip-path: url(#clippath);
+                  }
+
+                  .cls-2 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke-width: 0px;
+                  }
+                </style>
+                <clipPath id="clippath">
+                  <polygon
+                    class="cls-2"
+                    points="27.66 0 24.05 8.56 25.86 12.44 24.37 14.01 23.69 16.51 25.35 17.34 25.35 19.42 23.9 21.72 25.3 22.91 23.69 28.8 26.5 28.8 23.69 34.58 26.66 38.17 28.48 39.79 25.62 39.79 29.05 47.75 26.37 48.38 29.05 52.02 26.14 52.23 26.76 56.76 28.74 60.15 29.83 63.58 27.28 69.78 29.83 71.08 28.22 72.39 28.53 75.2 30.77 75.2 30.09 77.85 34.48 78.36 34.48 80.1 36.8 80.1 36.8 82.14 41.27 82.14 40.75 84.34 38.13 85.91 41.27 89.45 44 91.66 47.07 87.3 47.71 90.73 49.45 93.51 53.92 92.06 53.11 93.28 53.11 95.6 56.01 95.6 55.03 98.39 55.67 103.03 58.51 104.25 60.54 104.25 60.54 106.4 63.27 105.99 63.27 107.62 65.24 108.78 63.5 109.59 69.6 108.78 70.41 108.49 71.11 112.03 74.24 110.06 76.85 111.22 76.85 114.47 81.38 114.47 82.45 117.2 84.47 117.94 84.47 120.83 86.02 122.72 89.18 121.98 89.18 123.79 92.62 125.27 92.62 128.57 96.99 127.43 96.99 130.79 100.76 130.79 100.76 133.22 101.77 135.77 103.99 134.83 103.99 137.25 103.99 141.49 107.29 141.49 110.13 142.79 110.13 145.99 107.79 147.22 110.13 150.18 113.7 151.54 113.7 154.74 110.25 156.47 115.18 158.44 119.62 156.96 125.53 156.84 126.52 160.29 123.07 162.75 117.77 166.45 113.95 172.86 110.99 170.89 110.87 174.83 107.64 175.39 104.46 173.87 103.76 178.51 97.76 179.97 97.76 183.4 95.09 183.86 91.81 179.77 89.34 181.03 88.13 183.4 85.21 185.32 82.89 183.55 82.89 187.18 78.75 190.06 76.58 190.66 74.57 189 75.1 191.72 71.04 190.41 71.69 193.28 67.36 192.88 67.96 195.94 65.32 197.56 65.41 199.17 62.77 202.23 65.75 202.23 62.43 204.36 62.94 208.35 60.9 208.35 60.9 210.56 62.69 211.16 59.71 212.35 61.07 215.83 57.84 215.83 58.27 219.49 54.53 221.87 56.82 221.87 55.04 224.25 52.06 225.52 54.7 228.24 51.81 229.43 47.56 230.96 49.86 232.49 47.48 234.96 50.11 234.96 48.24 237.42 43.49 238.99 44.39 242.97 42.76 242.97 42.04 244.96 41.68 248.58 36.43 251.12 39.68 252.93 37.69 257.27 36.79 262.89 40.77 265.06 39.68 267.78 35.88 272.12 38.24 274.66 40.95 274.66 40.95 277.73 36.43 280.63 39.12 283.17 35.95 288.68 38.91 289.19 36.46 293.69 38.81 296.04 36.16 298.69 33.7 301.56 35.95 304.21 32.68 305.44 32.27 309.32 33.5 310.24 31.56 313 33.09 313 32.17 317.39 30.13 319.95 32.58 321.17 31.56 324.95 26.65 327.1 22.36 327.91 22.36 332.1 18.79 333.02 18.79 337.01 14.6 338.85 18.07 342.83 18.89 347.94 14.6 349.47 11.13 353.05 6.94 355.09 4.59 357.54 0 360.5 0 0 27.66 0"
+                  />
+                </clipPath>
+              </defs>
+              <g id="haut-gauche">
+                <g class="cls-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <polygon
+                  class="cls-2 ref-click"
+                  points="27.66 0 24.05 8.56 25.86 12.44 24.37 14.01 23.69 16.51 25.35 17.34 25.35 19.42 23.9 21.72 25.3 22.91 23.69 28.8 26.5 28.8 23.69 34.58 26.66 38.17 28.48 39.79 25.62 39.79 29.05 47.75 26.37 48.38 29.05 52.02 26.14 52.23 26.76 56.76 28.74 60.15 29.83 63.58 27.28 69.78 29.83 71.08 28.22 72.39 28.53 75.2 30.77 75.2 30.09 77.85 34.48 78.36 34.48 80.1 36.8 80.1 36.8 82.14 41.27 82.14 40.75 84.34 38.13 85.91 41.27 89.45 44 91.66 47.07 87.3 47.71 90.73 49.45 93.51 53.92 92.06 53.11 93.28 53.11 95.6 56.01 95.6 55.03 98.39 55.67 103.03 58.51 104.25 60.54 104.25 60.54 106.4 63.27 105.99 63.27 107.62 65.24 108.78 63.5 109.59 69.6 108.78 70.41 108.49 71.11 112.03 74.24 110.06 76.85 111.22 76.85 114.47 81.38 114.47 82.45 117.2 84.47 117.94 84.47 120.83 86.02 122.72 89.18 121.98 89.18 123.79 92.62 125.27 92.62 128.57 96.99 127.43 96.99 130.79 100.76 130.79 100.76 133.22 101.77 135.77 103.99 134.83 103.99 137.25 103.99 141.49 107.29 141.49 110.13 142.79 110.13 145.99 107.79 147.22 110.13 150.18 113.7 151.54 113.7 154.74 110.25 156.47 115.18 158.44 119.62 156.96 125.53 156.84 126.52 160.29 123.07 162.75 117.77 166.45 113.95 172.86 110.99 170.89 110.87 174.83 107.64 175.39 104.46 173.87 103.76 178.51 97.76 179.97 97.76 183.4 95.09 183.86 91.81 179.77 89.34 181.03 88.13 183.4 85.21 185.32 82.89 183.55 82.89 187.18 78.75 190.06 76.58 190.66 74.57 189 75.1 191.72 71.04 190.41 71.69 193.28 67.36 192.88 67.96 195.94 65.32 197.56 65.41 199.17 62.77 202.23 65.75 202.23 62.43 204.36 62.94 208.35 60.9 208.35 60.9 210.56 62.69 211.16 59.71 212.35 61.07 215.83 57.84 215.83 58.27 219.49 54.53 221.87 56.82 221.87 55.04 224.25 52.06 225.52 54.7 228.24 51.81 229.43 47.56 230.96 49.86 232.49 47.48 234.96 50.11 234.96 48.24 237.42 43.49 238.99 44.39 242.97 42.76 242.97 42.04 244.96 41.68 248.58 36.43 251.12 39.68 252.93 37.69 257.27 36.79 262.89 40.77 265.06 39.68 267.78 35.88 272.12 38.24 274.66 40.95 274.66 40.95 277.73 36.43 280.63 39.12 283.17 35.95 288.68 38.91 289.19 36.46 293.69 38.81 296.04 36.16 298.69 33.7 301.56 35.95 304.21 32.68 305.44 32.27 309.32 33.5 310.24 31.56 313 33.09 313 32.17 317.39 30.13 319.95 32.58 321.17 31.56 324.95 26.65 327.1 22.36 327.91 22.36 332.1 18.79 333.02 18.79 337.01 14.6 338.85 18.07 342.83 18.89 347.94 14.6 349.47 11.13 353.05 6.94 355.09 4.59 357.54 0 360.5 0 0 27.66 0"
+                />
+              </g>
+            </svg>
+            <svg
+              id="dragable-hautCentre"
+              data-name="Calque 1"
+              class="piece piece-top-center sec4-dragable"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 376.02 189.41"
+            >
+              <defs>
+                <style>
+                  .cls-2_1 {
+                    clip-path: url(#clippath2);
+                  }
+
+                  .cls-2_2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .cls-2_3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippath2">
+                  <path
+                    class="cls-2_2"
+                    d="M3.97,0h368.96s-1.24,9.45-1.24,9.45l2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.65,7.13-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08v-9.21l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-.99-3.45-5.92.12-4.44,1.48-4.93-1.97,3.45-1.73v-3.2l-3.57-1.36-2.34-2.96,2.34-1.23v-3.2l-2.84-1.29h-3.3v-6.66l-2.22.94-1.01-2.56v-2.42h-3.77v-3.37l-4.37,1.14v-3.3l-3.43-1.48v-1.82l-3.16.74-1.55-1.88v-2.89l-2.02-.74-1.08-2.73h-4.52v-3.25l-2.61-1.16-3.13,1.97-.7-3.54-6.91,1.1,1.74-.81-1.97-1.16v-1.63l-2.73.41v-2.15h-2.03l-2.84-1.22-.64-4.64.99-2.79h-2.9v-2.32l.81-1.22-4.47,1.45-1.74-2.79-.64-3.42-3.08,4.35-2.73-2.21-3.13-3.54,2.61-1.57.52-2.21h-4.47v-2.03h-2.32v-1.74l-4.38-.51.68-2.66h-2.24l-.31-2.81,1.61-1.3-2.55-1.3,2.55-6.2-1.09-3.44-1.98-3.38-.62-4.53,2.92-.21-2.68-3.65,2.68-.62-3.44-7.97h2.86l-1.82-1.61-2.97-3.59,2.81-5.78H0l1.61-5.88-1.41-1.2,1.46-2.29v-2.08l-1.67-.83.68-2.5,1.49-1.57-1.8-3.88L3.97,0Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="haut-centre">
+                <g class="cls-2_1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(-23.69) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="cls-2_3 ref-click"
+                  d="M3.97,0h368.96s-1.24,9.45-1.24,9.45l2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.65,7.13-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08v-9.21l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-.99-3.45-5.92.12-4.44,1.48-4.93-1.97,3.45-1.73v-3.2l-3.57-1.36-2.34-2.96,2.34-1.23v-3.2l-2.84-1.29h-3.3v-6.66l-2.22.94-1.01-2.56v-2.42h-3.77v-3.37l-4.37,1.14v-3.3l-3.43-1.48v-1.82l-3.16.74-1.55-1.88v-2.89l-2.02-.74-1.08-2.73h-4.52v-3.25l-2.61-1.16-3.13,1.97-.7-3.54-6.91,1.1,1.74-.81-1.97-1.16v-1.63l-2.73.41v-2.15h-2.03l-2.84-1.22-.64-4.64.99-2.79h-2.9v-2.32l.81-1.22-4.47,1.45-1.74-2.79-.64-3.42-3.08,4.35-2.73-2.21-3.13-3.54,2.61-1.57.52-2.21h-4.47v-2.03h-2.32v-1.74l-4.38-.51.68-2.66h-2.24l-.31-2.81,1.61-1.3-2.55-1.3,2.55-6.2-1.09-3.44-1.98-3.38-.62-4.53,2.92-.21-2.68-3.65,2.68-.62-3.44-7.97h2.86l-1.82-1.61L0,34.58l2.81-5.78H0l1.61-5.88-1.41-1.2,1.46-2.29v-2.08L0,16.51l.68-2.5,1.49-1.57-1.8-3.88L3.97,0Z"
+                />
+              </g>
+            </svg>
+            <svg
+              id="dragable-centre"
+              class="piece piece-centre sec4-dragable"
+              data-name="Calque 1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 467.12 369.14"
+            >
+              <defs>
+                <style>
+                  .clsCentre-1 {
+                    clip-path: url(#clippathCentre);
+                  }
+
+                  .clsCentre-2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .clsCentre-3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippathCentre">
+                  <path
+                    class="clsCentre-2"
+                    d="M4.29,201.86v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s8.91-8.48,17.82-6.25,12.81-4.28,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.03,9.47,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03l25.62-5.57,7.8-11.14,4.46,8.35s.56,19.49,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38l-15.04-7.23s3.9-15.61.56-16.72-15.6-29.52-15.6-29.52h-16.71l8.35-10.58h-7.8l-2.23-8.91h-5.57l-3.34-9.47h-7.8l-5.01-12.81h11.14l-7.8-9.47-8.91-8.35,8.35-8.35,8.91-2.23v-11.14l10.58-2.78-6.13-9.47,3.34-10.58h-8.35l1.67-11.14-10.03-2.23,8.35-13.92h-12.81l2.78-13.91h-12.94l4.03-12.83-4.03-6.68h-10.45l5.57-8.35-14.65-3.61h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08V2.14l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56L192.05,0l-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-8.75,6.16-3.82,6.41-2.96-1.97-.12,3.94-3.23.55-3.18-1.51-.71,4.64-6,1.46v3.43l-2.67.45-3.28-4.08-2.47,1.26-1.21,2.37-2.92,1.92-2.32-1.76v3.63l-4.13,2.87-2.17.6-2.02-1.66.54,2.72-4.06-1.31.66,2.87-4.33-.4.59,3.06-2.63,1.61.08,1.61-2.63,3.06h2.97l-3.31,2.12.51,3.99h-2.04v2.21l1.78.59-2.97,1.19,1.36,3.48h-3.23l.42,3.65-3.74,2.38h2.29l-1.78,2.38-2.97,1.27,2.63,2.72-7.14,2.72,2.29,1.53-2.38,2.46h2.63l-1.87,2.46-4.75,1.56.91,3.98h-1.63l-.72,1.99-.36,3.62-5.25,2.53,3.26,1.81-1.99,4.35-.91,5.61,3.98,2.17-1.09,2.72-3.8,4.35,2.35,2.53h2.72v3.08l-4.53,2.9,2.69,2.54-3.17,5.52,2.96.51-2.45,4.5,2.35,2.35-5.11,5.52,2.25,2.66-3.27,1.23-.41,3.88,1.23.92-1.94,2.76h1.53l-.92,4.39-2.04,2.55,2.45,1.23-1.02,3.78-4.9,2.15-4.29.82v4.19l-3.58.92v3.98L0,192.77l3.47,3.98.82,5.11Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="centre-centre">
+                <g class="clsCentre-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(-14.6 -146.08) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="clsCentre-3 ref-click"
+                  d="M4.29,201.86v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s8.91-8.48,17.82-6.25,12.81-4.28,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.03,9.47,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03l25.62-5.57,7.8-11.14,4.46,8.35s.56,19.49,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38l-15.04-7.23s3.9-15.61.56-16.72-15.6-29.52-15.6-29.52h-16.71l8.35-10.58h-7.8l-2.23-8.91h-5.57l-3.34-9.47h-7.8l-5.01-12.81h11.14l-7.8-9.47-8.91-8.35,8.35-8.35,8.91-2.23v-11.14l10.58-2.78-6.13-9.47,3.34-10.58h-8.35l1.67-11.14-10.03-2.23,8.35-13.92h-12.81l2.78-13.91h-12.94l4.03-12.83-4.03-6.68h-10.45l5.57-8.35-14.65-3.61h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08V2.14l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-8.75,6.16-3.82,6.41-2.96-1.97-.12,3.94-3.23.55-3.18-1.51-.71,4.64-6,1.46v3.43l-2.67.45-3.28-4.08-2.47,1.26-1.21,2.37-2.92,1.92-2.32-1.76v3.63l-4.13,2.87-2.17.6-2.02-1.66.54,2.72-4.06-1.31.66,2.87-4.33-.4.59,3.06-2.63,1.61.08,1.61-2.63,3.06h2.97l-3.31,2.12.51,3.99h-2.04v2.21l1.78.59-2.97,1.19,1.36,3.48h-3.23l.42,3.65-3.74,2.38h2.29l-1.78,2.38-2.97,1.27,2.63,2.72-7.14,2.72,2.29,1.53-2.38,2.46h2.63l-1.87,2.46-4.75,1.56.91,3.98h-1.63l-.72,1.99-.36,3.62-5.25,2.53,3.26,1.81-1.99,4.35-.91,5.61,3.98,2.17-1.09,2.72-3.8,4.35,2.35,2.53h2.72v3.08l-4.53,2.9,2.69,2.54-3.17,5.52,2.96.51-2.45,4.5,2.35,2.35-5.11,5.52,2.25,2.66-3.27,1.23-.41,3.88,1.23.92-1.94,2.76h1.53l-.92,4.39-2.04,2.55,2.45,1.23-1.02,3.78-4.9,2.15-4.29.82v4.19l-3.58.92v3.98l-4.19,1.84,3.47,3.98.82,5.11Z"
+                />
+              </g>
+            </svg>
+
+            <svg
+              id="dragable-basGauche"
+              class="sec4-dragable piece piece-bas-gauche"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 348.05 423.9"
+            >
+              <defs>
+                <style>
+                  .clsBasGauche-1 {
+                    clip-path: url(#clippathBasGauche);
+                  }
+
+                  .clsBasGauche-2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .clsBasGauche-3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippathBasGauche">
+                  <path
+                    class="clsBasGauche-2"
+                    d="M348.05,144.81h-18.74l-4.03,3.89-4.76-1.94v6.7h-10.25v4.03l-6.59,2.56-2.93,5.86-4.03,2.93v8.29l-10.25,3.79-3.66-3.79v3.79l-5.86,6.59-7.32-2.93v7.32l-21.49-12.08h-12.17l-4.39-2.69-4.03,5.98v13.91l-13.91,5.86-1.46-6.22-5.86,1.83v7.69l-12.44-.73v4.76l-6.59,4.03v4.76l-7.19,13.32-9.92,3.5v4.67l1.75,6.71-8.46,7.3,4.38,4.67-5.84,2.63v4.96l-4.96,5.25v2.92l2.92,8.75-7,1.75v5.54l1.46,7.59-1.46,3.79v4.67l5.45,7.15-5.45,4.67,3.7,3.5-7,2.62-10.5-2.33v10.79l-5.83,1.75v3.21l-7.58,1.17v2.62l-7.58-1.75v3.79l-6.42-2.92-4.08,2.92s-5.54-.29-7.87,0-10.5,0-10.5,0l-2.92,7.58-6.71,10.5,2.62,2.04.58,6.42-4.96,2.62s-1.75,5.83,0,6.71,1.17,7,1.17,7c-1.46,3.21,1.17,11.96,1.17,11.96l-3.11,5.25-3.89,7.29,2.33,4.96-3.79,5.83-4.03,1.59H0V22.4l4.59-2.96,2.35-2.45,4.19-2.04,3.47-3.58,4.29-1.53v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s9.31-8.64,17.82-6.25,15.43-6.41,16.71-6.32S182.63,0,182.63,0c0,0,10.23,9.18,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="bas-gauche">
+                <g class="clsBasGauche-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(0 -338.1) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="clsBasGauche-3 ref-click"
+                  d="M348.05,144.81h-18.74l-4.03,3.89-4.76-1.94v6.7h-10.25v4.03l-6.59,2.56-2.93,5.86-4.03,2.93v8.29l-10.25,3.79-3.66-3.79v3.79l-5.86,6.59-7.32-2.93v7.32l-21.49-12.08h-12.17l-4.39-2.69-4.03,5.98v13.91l-13.91,5.86-1.46-6.22-5.86,1.83v7.69l-12.44-.73v4.76l-6.59,4.03v4.76l-7.19,13.32-9.92,3.5v4.67l1.75,6.71-8.46,7.3,4.38,4.67-5.84,2.63v4.96l-4.96,5.25v2.92l2.92,8.75-7,1.75v5.54l1.46,7.59-1.46,3.79v4.67l5.45,7.15-5.45,4.67,3.7,3.5-7,2.62-10.5-2.33v10.79l-5.83,1.75v3.21l-7.58,1.17v2.62l-7.58-1.75v3.79l-6.42-2.92-4.08,2.92s-5.54-.29-7.87,0-10.5,0-10.5,0l-2.92,7.58-6.71,10.5,2.62,2.04.58,6.42-4.96,2.62s-1.75,5.83,0,6.71,1.17,7,1.17,7c-1.46,3.21,1.17,11.96,1.17,11.96l-3.11,5.25-3.89,7.29,2.33,4.96-3.79,5.83-4.03,1.59H0V22.4l4.59-2.96,2.35-2.45,4.19-2.04,3.47-3.58,4.29-1.53v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s9.31-8.64,17.82-6.25,15.43-6.41,16.71-6.32S182.63,0,182.63,0c0,0,10.23,9.18,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03Z"
+                />
+              </g>
+            </svg>
+            <svg
+              id="dragable-basCentre"
+              class="piece piece-bas-centre sec4-dragable"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 408.97 295.8"
+            >
+              <defs>
+                <style>
+                  .clsBasCentre-1 {
+                    clip-path: url(#clippathBasCentre);
+                  }
+
+                  .clsBasCentre-2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .clsBasCentre-3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippathBasCentre">
+                  <path
+                    class="clsBasCentre-2"
+                    d="M346.38,46.23l-8.9,11.9,3.58,5.7-3.58,4.23,2.12,3.75-2.12,1.63v2.61l-.81,4.56h1.79v5.7l4.4,1.95,6.84,4.4,5.7,4.56-2.77,4.23,4.07.65,4.07,1.79s-1.47.33-1.47,2.28,3.58,3.26,3.58,3.26v4.72l-3.91,1.63,2.44,4.56,3.26,4.07-9.28,2.77,5.54,12.7,7.84,1.41v6.63h3.64v5.3l-3.98,6.3,3.98,1.66-4.64,7.95-7.62,2.65-2.32,5.3h-5.3l-.99,5.96h-7.62v6.96l1.7,1.88,3.57,2.38h5.36v1.49h4.31l1.49,4.61,6.69-.89,3.12,4.02h2.26l6.51.89,1.49,3.87h7.44l2.97,4.76h5.5l6.1,4.91-1.04,5.65,7.58,3.42-.89,6.39-4.31.89.59,3.27h-4.31v1.64h-3.42v2.97h-4.76v1.64l-4.16,2.08v2.83l-6.99,1.64.59,7.14-6.25-.89v4.02h-2.24l-1.77,1.19h-2.68v1.34l-3.57-1.04v4.76l-2.23,2.83-3.87-2.08-1.49,2.83-3.57-.89-6.75.89v2.63l-3.54,1.27-3.42-1.65-.13,3.16h-3.92v2.53l-1.65,3.16-4.3-.89v3.67h-3.04v2.02l-3.16,1.77h-3.04v2.53l-3.29.76v1.52l-2.53,2.91H-3.49l4.03-1.59,3.79-5.83-2.33-4.96,7-12.54s-2.67-10.11-1.17-11.96-.52-6.89-1.17-7-1.39-2.4,0-6.71,4.96-2.62,4.96-2.62l-.58-6.42-2.62-2.04,6.71-10.5,2.92-7.58s9.88.25,10.5,0,7.87,0,7.87,0l4.08-2.92,6.42,2.92v-3.79l7.58,1.75v-2.62l7.58-1.17v-3.21l5.83-1.75v-10.79l10.5,2.33,7-2.62-3.7-3.5,5.45-4.67-5.45-7.15v-4.67l1.46-3.79-1.46-7.59v-5.54l7-1.75-2.92-8.75v-2.92l4.96-5.25v-4.96l5.84-2.63-4.38-4.67,8.46-7.3-1.75-6.71v-4.67l9.92-3.5,7.19-13.32v-4.76l6.59-4.03v-4.76l12.44.73v-7.69l5.86-1.83,1.46,6.22,13.91-5.86v-13.91l4.03-5.98,4.39,2.69h12.17l21.49,12.08v-7.32l7.32,2.93,5.86-6.59v-3.79l3.66,3.79,10.25-3.79v-8.29l4.03-2.93,2.93-5.86,6.59-2.56v-4.03h10.25v-6.7l4.76,1.94,4.03-3.89h18.74l25.62-5.57,7.8-11.14,4.46,8.35s.66,19.86,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="bas-centre">
+                <g class="clsBasCentre-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(-71.29 -466.2) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="clsBasCentre-3 ref-click"
+                  d="M346.38,46.23l-8.9,11.9,3.58,5.7-3.58,4.23,2.12,3.75-2.12,1.63v2.61l-.81,4.56h1.79v5.7l4.4,1.95,6.84,4.4,5.7,4.56-2.77,4.23,4.07.65,4.07,1.79s-1.47.33-1.47,2.28,3.58,3.26,3.58,3.26v4.72l-3.91,1.63,2.44,4.56,3.26,4.07-9.28,2.77,5.54,12.7,7.84,1.41v6.63h3.64v5.3l-3.98,6.3,3.98,1.66-4.64,7.95-7.62,2.65-2.32,5.3h-5.3l-.99,5.96h-7.62v6.96l1.7,1.88,3.57,2.38h5.36v1.49h4.31l1.49,4.61,6.69-.89,3.12,4.02h2.26l6.51.89,1.49,3.87h7.44l2.97,4.76h5.5l6.1,4.91-1.04,5.65,7.58,3.42-.89,6.39-4.31.89.59,3.27h-4.31v1.64h-3.42v2.97h-4.76v1.64l-4.16,2.08v2.83l-6.99,1.64.59,7.14-6.25-.89v4.02h-2.24l-1.77,1.19h-2.68v1.34l-3.57-1.04v4.76l-2.23,2.83-3.87-2.08-1.49,2.83-3.57-.89-6.75.89v2.63l-3.54,1.27-3.42-1.65-.13,3.16h-3.92v2.53l-1.65,3.16-4.3-.89v3.67h-3.04v2.02l-3.16,1.77h-3.04v2.53l-3.29.76v1.52l-2.53,2.91H-3.49l4.03-1.59,3.79-5.83-2.33-4.96,7-12.54s-2.67-10.11-1.17-11.96-.52-6.89-1.17-7-1.39-2.4,0-6.71,4.96-2.62,4.96-2.62l-.58-6.42-2.62-2.04,6.71-10.5,2.92-7.58s9.88.25,10.5,0,7.87,0,7.87,0l4.08-2.92,6.42,2.92v-3.79l7.58,1.75v-2.62l7.58-1.17v-3.21l5.83-1.75v-10.79l10.5,2.33,7-2.62-3.7-3.5,5.45-4.67-5.45-7.15v-4.67l1.46-3.79-1.46-7.59v-5.54l7-1.75-2.92-8.75v-2.92l4.96-5.25v-4.96l5.84-2.63-4.38-4.67,8.46-7.3-1.75-6.71v-4.67l9.92-3.5,7.19-13.32v-4.76l6.59-4.03v-4.76l12.44.73v-7.69l5.86-1.83,1.46,6.22,13.91-5.86v-13.91l4.03-5.98,4.39,2.69h12.17l21.49,12.08v-7.32l7.32,2.93,5.86-6.59v-3.79l3.66,3.79,10.25-3.79v-8.29l4.03-2.93,2.93-5.86,6.59-2.56v-4.03h10.25v-6.7l4.76,1.94,4.03-3.89h18.74l25.62-5.57,7.8-11.14,4.46,8.35s.66,19.86,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78Z"
+                />
+              </g>
+            </svg>
+            <svg
+              id="dragable-basDroite"
+              class="piece piece-bas-droite sec4-dragable"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 204.31 471.4"
+            >
+              <defs>
+                <style>
+                  .clsBasDroite-1 {
+                    clip-path: url(#clippathBasDroite);
+                  }
+
+                  .clsBasDroite-2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .clsBasDroite-3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippathBasDroite">
+                  <path
+                    class="clsBasDroite-2"
+                    d="M95.55,97.63l3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56v471.4H0l2.53-2.91v-1.52l3.29-.76v-2.53h3.04l3.16-1.77v-2.02h3.04v-3.67l4.3.89,1.65-3.16v-2.53h3.92l.13-3.16,3.42,1.65,3.54-1.27v-2.63l6.75-.89,3.57.89,1.49-2.83,3.87,2.08,2.23-2.83v-4.76l3.57,1.04v-1.34h2.68l1.77-1.19h2.24v-4.02l6.25.89-.59-7.14,6.99-1.64v-2.83l4.16-2.08v-1.64h4.76v-2.97h3.42v-1.64h4.31l-.59-3.27,4.31-.89.89-6.39-7.58-3.42,1.04-5.65-6.1-4.91h-5.5l-2.97-4.76h-7.44l-1.49-3.87-6.51-.89h-2.26l-3.12-4.02-6.69.89-1.49-4.61h-4.31v-1.49h-5.36l-3.57-2.38-1.7-1.88v-6.96h7.62l.99-5.96h5.3l2.32-5.3,7.62-2.65,4.64-7.95-3.8-1.59,3.8-6.37v-5.3h-3.64v-6.63l-7.84-1.41-5.54-12.7,9.28-2.77-3.26-4.07-2.44-4.56,3.91-1.63v-4.72s-6.43-2.47-2.12-5.54l-4.07-1.79-4.07-.65,2.77-4.23-5.7-4.56-6.84-4.4-4.4-1.95v-5.7h-1.79l.81-4.56v-2.61l2.12-1.63-2.12-3.75,3.58-4.23-3.58-5.7,8.9-11.9,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="bas-droite">
+                <g class="clsBasDroite-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(-386.17 -290.6) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="clsBasDroite-3 ref-click"
+                  d="M95.55,97.63l3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56v471.4H0l2.53-2.91v-1.52l3.29-.76v-2.53h3.04l3.16-1.77v-2.02h3.04v-3.67l4.3.89,1.65-3.16v-2.53h3.92l.13-3.16,3.42,1.65,3.54-1.27v-2.63l6.75-.89,3.57.89,1.49-2.83,3.87,2.08,2.23-2.83v-4.76l3.57,1.04v-1.34h2.68l1.77-1.19h2.24v-4.02l6.25.89-.59-7.14,6.99-1.64v-2.83l4.16-2.08v-1.64h4.76v-2.97h3.42v-1.64h4.31l-.59-3.27,4.31-.89.89-6.39-7.58-3.42,1.04-5.65-6.1-4.91h-5.5l-2.97-4.76h-7.44l-1.49-3.87-6.51-.89h-2.26l-3.12-4.02-6.69.89-1.49-4.61h-4.31v-1.49h-5.36l-3.57-2.38-1.7-1.88v-6.96h7.62l.99-5.96h5.3l2.32-5.3,7.62-2.65,4.64-7.95-3.8-1.59,3.8-6.37v-5.3h-3.64v-6.63l-7.84-1.41-5.54-12.7,9.28-2.77-3.26-4.07-2.44-4.56,3.91-1.63v-4.72s-6.43-2.47-2.12-5.54l-4.07-1.79-4.07-.65,2.77-4.23-5.7-4.56-6.84-4.4-4.4-1.95v-5.7h-1.79l.81-4.56v-2.61l2.12-1.63-2.12-3.75,3.58-4.23-3.58-5.7,8.9-11.9,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38Z"
+                />
+              </g>
+            </svg>
+            <svg
+              id="dragable-hautDroite"
+              class="piece piece-haut-droite sec4-dragable"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 216.49 388.23"
+            >
+              <defs>
+                <style>
+                  .clsHautDroite-1 {
+                    clip-path: url(#clippathHautGauche);
+                  }
+
+                  .clsHautDroite-2 {
+                    fill: none;
+                    stroke-width: 0px;
+                  }
+
+                  .clsHautDroite-3 {
+                    fill: #fff;
+                    opacity: 0;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+                <clipPath id="clippathHautGauche">
+                  <path
+                    class="clsHautDroite-2"
+                    d="M216.49,0H22.63l-1.24,9.45,2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.56,7.17-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06,14.65,3.61-5.57,8.35h10.45l4.03,6.68-4.03,12.83h12.94l-2.78,13.91h12.81l-8.35,13.92,10.03,2.23-1.67,11.14h8.35l-3.34,10.58,6.13,9.47-10.58,2.78v11.14l-8.91,2.23-8.35,8.35,8.91,8.35,7.8,9.47h-11.14l5.01,12.81h7.8l3.34,9.47h5.57l2.23,8.91h7.8l-8.35,10.58h16.71s13.16,30.04,15.6,29.52-.56,16.72-.56,16.72l15.04,7.23,3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56V0Z"
+                  />
+                </clipPath>
+              </defs>
+              <g id="haut-droite">
+                <g class="clsHautDroite-1">
+                  <image
+                    width="1525"
+                    height="1968"
+                    transform="translate(-373.98) scale(.39)"
+                    xlink:href="/2-arts-graphiques/images/pieces/tableau-complet.png"
+                  />
+                </g>
+                <path
+                  class="clsHautDroite-3 ref-click"
+                  d="M216.49,0H22.63l-1.24,9.45,2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.56,7.17-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06,14.65,3.61-5.57,8.35h10.45l4.03,6.68-4.03,12.83h12.94l-2.78,13.91h12.81l-8.35,13.92,10.03,2.23-1.67,11.14h8.35l-3.34,10.58,6.13,9.47-10.58,2.78v11.14l-8.91,2.23-8.35,8.35,8.91,8.35,7.8,9.47h-11.14l5.01,12.81h7.8l3.34,9.47h5.57l2.23,8.91h7.8l-8.35,10.58h16.71s13.16,30.04,15.6,29.52-.56,16.72-.56,16.72l15.04,7.23,3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56V0Z"
+                />
+              </g>
+            </svg>
+            <div class="painting-pieces-container">
+              <svg
+                id="Calque_2"
+                data-name="Calque 2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 592.47 764"
+              >
+                <defs>
+                  <style>
+                    .ref-1,
+                    .ref-2 {
+                      fill: #fff;
+                      stroke: #1d1d1b;
+                      stroke-miterlimit: 10;
+                      stroke-width: 2px;
+                    }
+                  </style>
+                </defs>
+                <g id="Calque_1-2" data-name="Calque 1">
+                  <g id="ref-hautDroite">
+                    <path
+                      class="ref-2 ref-haut-droite pieces-ref"
+                      d="M591.47,1h-193.86l-1.24,9.45,2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.56,7.17-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06,14.65,3.61-5.57,8.35h10.45l4.03,6.68-4.03,12.83h12.94l-2.78,13.91h12.81l-8.35,13.92,10.03,2.23-1.67,11.14h8.35l-3.34,10.58,6.13,9.47-10.58,2.78v11.14l-8.91,2.23-8.35,8.35,8.91,8.35,7.8,9.47h-11.14l5.01,12.81h7.8l3.34,9.47h5.57l2.23,8.91h7.8l-8.35,10.58h16.71s13.16,30.04,15.6,29.52-.56,16.72-.56,16.72l15.04,7.23,3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56V1Z"
+                    />
+                  </g>
+                  <g id="ref-basDroite">
+                    <path
+                      class="ref-1 ref-bas-droite pieces-ref"
+                      d="M482.72,389.23l3.12-7.23h4.35l1.26-3.47h3.65l2.66-3.51.84-4.91,4.49-.7,1.68-5.47v-4.63l3.51-.56,3.79-7.57,3.23-4.91h4.63l.84-5.75v-2.66l3.51-2.66,5.33-1.82v-4.35l7.01-3.23,6.59-5.75,4.91,2.24,7.01-2.24,3.08,4.91,8.69.56v-6.87l-1.68-4.49,2.38-1.82,4.77-2.94,4.21-5.19.56-4.49h3.08l.98-4.07,2.52-3.51h2.52l5.24-.56v471.4h-204.31l2.53-2.91v-1.52l3.29-.76v-2.53h3.04l3.16-1.77v-2.02h3.04v-3.67l4.3.89,1.65-3.16v-2.53h3.92l.13-3.16,3.42,1.65,3.54-1.27v-2.63l6.75-.89,3.57.89,1.49-2.83,3.87,2.08,2.23-2.83v-4.76l3.57,1.04v-1.34h2.68l1.77-1.19h2.24v-4.02l6.25.89-.59-7.14,6.99-1.64v-2.83l4.16-2.08v-1.64h4.76v-2.97h3.42v-1.64h4.31l-.59-3.27,4.31-.89.89-6.39-7.58-3.42,1.04-5.65-6.1-4.91h-5.5l-2.97-4.76h-7.44l-1.49-3.87-6.51-.89h-2.26l-3.12-4.02-6.69.89-1.49-4.61h-4.31v-1.49h-5.36l-3.57-2.38-1.7-1.88v-6.96h7.62l.99-5.96h5.3l2.32-5.3,7.62-2.65,4.64-7.95-3.8-1.59,3.8-6.37v-5.3h-3.64v-6.63l-7.84-1.41-5.54-12.7,9.28-2.77-3.26-4.07-2.44-4.56,3.91-1.63v-4.72s-6.43-2.47-2.12-5.54l-4.07-1.79-4.07-.65,2.77-4.23-5.7-4.56-6.84-4.4-4.4-1.95v-5.7h-1.79l.81-4.56v-2.61l2.12-1.63-2.12-3.75,3.58-4.23-3.58-5.7,8.9-11.9,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38Z"
+                    />
+                  </g>
+                  <g id="ref-basCentre">
+                    <path
+                      class="ref-1 ref-bas-centre pieces-ref"
+                      d="M418.67,513.43l-8.9,11.9,3.58,5.7-3.58,4.23,2.12,3.75-2.12,1.63v2.61l-.81,4.56h1.79v5.7l4.4,1.95,6.84,4.4,5.7,4.56-2.77,4.23,4.07.65,4.07,1.79s-1.47.33-1.47,2.28,3.58,3.26,3.58,3.26v4.72l-3.91,1.63,2.44,4.56,3.26,4.07-9.28,2.77,5.54,12.7,7.84,1.41v6.63h3.64v5.3l-3.98,6.3,3.98,1.66-4.64,7.95-7.62,2.65-2.32,5.3h-5.3l-.99,5.96h-7.62v6.96l1.7,1.88,3.57,2.38h5.36v1.49h4.31l1.49,4.61,6.69-.89,3.12,4.02h2.26l6.51.89,1.49,3.87h7.44l2.97,4.76h5.5l6.1,4.91-1.04,5.65,7.58,3.42-.89,6.39-4.31.89.59,3.27h-4.31v1.64h-3.42v2.97h-4.76v1.64l-4.16,2.08v2.83l-6.99,1.64.59,7.14-6.25-.89v4.02h-2.24l-1.77,1.19h-2.68v1.34l-3.57-1.04v4.76l-2.23,2.83-3.87-2.08-1.49,2.83-3.57-.89-6.75.89v2.63l-3.54,1.27-3.42-1.65-.13,3.16h-3.92v2.53l-1.65,3.16-4.3-.89v3.67h-3.04v2.02l-3.16,1.77h-3.04v2.53l-3.29.76v1.52l-2.53,2.91H68.8l4.03-1.59,3.79-5.83-2.33-4.96,7-12.54s-2.67-10.11-1.17-11.96-.52-6.89-1.17-7-1.39-2.4,0-6.71,4.96-2.62,4.96-2.62l-.58-6.42-2.62-2.04,6.71-10.5,2.92-7.58s9.88.25,10.5,0,7.87,0,7.87,0l4.08-2.92,6.42,2.92v-3.79l7.58,1.75v-2.62l7.58-1.17v-3.21l5.83-1.75v-10.79l10.5,2.33,7-2.62-3.7-3.5,5.45-4.67-5.45-7.15v-4.67l1.46-3.79-1.46-7.59v-5.54l7-1.75-2.92-8.75v-2.92l4.96-5.25v-4.96l5.84-2.63-4.38-4.67,8.46-7.3-1.75-6.71v-4.67l9.92-3.5,7.19-13.32v-4.76l6.59-4.03v-4.76l12.44.73v-7.69l5.86-1.83,1.46,6.22,13.91-5.86v-13.91l4.03-5.98,4.39,2.69h12.17l21.49,12.08v-7.32l7.32,2.93,5.86-6.59v-3.79l3.66,3.79,10.25-3.79v-8.29l4.03-2.93,2.93-5.86,6.59-2.56v-4.03h10.25v-6.7l4.76,1.94,4.03-3.89h18.74l25.62-5.57,7.8-11.14,4.46,8.35s.66,19.86,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78Z"
+                    />
+                  </g>
+                  <g id="ref-basGauche">
+                    <path
+                      class="ref-1 ref-bas-gauche pieces-ref"
+                      d="M349.05,483.91h-18.74l-4.03,3.89-4.76-1.94v6.7h-10.25v4.03l-6.59,2.56-2.93,5.86-4.03,2.93v8.29l-10.25,3.79-3.66-3.79v3.79l-5.86,6.59-7.32-2.93v7.32l-21.49-12.08h-12.17l-4.39-2.69-4.03,5.98v13.91l-13.91,5.86-1.46-6.22-5.86,1.83v7.69l-12.44-.73v4.76l-6.59,4.03v4.76l-7.19,13.32-9.92,3.5v4.67l1.75,6.71-8.46,7.3,4.38,4.67-5.84,2.63v4.96l-4.96,5.25v2.92l2.92,8.75-7,1.75v5.54l1.46,7.59-1.46,3.79v4.67l5.45,7.15-5.45,4.67,3.7,3.5-7,2.62-10.5-2.33v10.79l-5.83,1.75v3.21l-7.58,1.17v2.62l-7.58-1.75v3.79l-6.42-2.92-4.08,2.92s-5.54-.29-7.87,0-10.5,0-10.5,0l-2.92,7.58-6.71,10.5,2.62,2.04.58,6.42-4.96,2.62s-1.75,5.83,0,6.71,1.17,7,1.17,7c-1.46,3.21,1.17,11.96,1.17,11.96l-3.11,5.25-3.89,7.29,2.33,4.96-3.79,5.83-4.03,1.59H1v-401.5l4.59-2.96,2.35-2.45,4.19-2.04,3.47-3.58,4.29-1.53v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s9.31-8.64,17.82-6.25,15.43-6.41,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.23,9.18,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03Z"
+                    />
+                  </g>
+                  <g id="ref-centre" class="ref-centre-centre pieces-ref">
+                    <path
+                      class="ref-1"
+                      d="M19.89,348.94v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s8.91-8.48,17.82-6.25,12.81-4.28,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.03,9.47,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03l25.62-5.57,7.8-11.14,4.46,8.35s.56,19.49,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38l-15.04-7.23s3.9-15.61.56-16.72-15.6-29.52-15.6-29.52h-16.71l8.35-10.58h-7.8l-2.23-8.91h-5.57l-3.34-9.47h-7.8l-5.01-12.81h11.14l-7.8-9.47-8.91-8.35,8.35-8.35,8.91-2.23v-11.14l10.58-2.78-6.13-9.47,3.34-10.58h-8.35l1.67-11.14-10.03-2.23,8.35-13.92h-12.81l2.78-13.91h-12.94l4.03-12.83-4.03-6.68h-10.45l5.57-8.35-14.65-3.61h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08v-9.21l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-8.75,6.16-3.82,6.41-2.96-1.97-.12,3.94-3.23.55-3.18-1.51-.71,4.64-6,1.46v3.43l-2.67.45-3.28-4.08-2.47,1.26-1.21,2.37-2.92,1.92-2.32-1.76v3.63l-4.13,2.87-2.17.6-2.02-1.66.54,2.72-4.06-1.31.66,2.87-4.33-.4.59,3.06-2.63,1.61.08,1.61-2.63,3.06h2.97l-3.31,2.12.51,3.99h-2.04v2.21l1.78.59-2.97,1.19,1.36,3.48h-3.23l.42,3.65-3.74,2.38h2.29l-1.78,2.38-2.97,1.27,2.63,2.72-7.14,2.72,2.29,1.53-2.38,2.46h2.63l-1.87,2.46-4.75,1.56.91,3.98h-1.63l-.72,1.99-.36,3.62-5.25,2.53,3.26,1.81-1.99,4.35-.91,5.61,3.98,2.17-1.09,2.72-3.8,4.35,2.35,2.53h2.72v3.08l-4.53,2.9,2.69,2.54-3.17,5.52,2.96.51-2.45,4.5,2.35,2.35-5.11,5.52,2.25,2.66-3.27,1.23-.41,3.88,1.23.92-1.94,2.76h1.53l-.92,4.39-2.04,2.55,2.45,1.23-1.02,3.78-4.9,2.15-4.29.82v4.19l-3.58.92v3.98l-4.19,1.84,3.47,3.98.82,5.11Z"
+                    />
+                  </g>
+                  <g id="ref-hautCentre">
+                    <path
+                      class="ref-1 ref-haut-centre pieces-ref"
+                      d="M28.66,1h368.96s-1.24,9.45-1.24,9.45l2.48,4.03-1.55,4.65,1.55,4.65v4.65l-3.72,4.96,5.58,4.96-3.72,2.17v10.23s-4.65,7.13-3.72,8.99.93,12.4.93,12.4l-4.34,3.1.62,6.82-1.55,5.89-4.96,1.55,4.96,1.86-2.48,6.51,4.03,2.48-2.79,3.72-3.1,10.54,4.03,4.03-1.86,7.13-4.34,6.51,3.72,8.37-11.16,8.06,6.51,2.17-.31,8.06h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08v-9.21l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-.99-3.45-5.92.12-4.44,1.48-4.93-1.97,3.45-1.73v-3.2l-3.57-1.36-2.34-2.96,2.34-1.23v-3.2l-2.84-1.29h-3.3v-6.66l-2.22.94-1.01-2.56v-2.42h-3.77v-3.37l-4.37,1.14v-3.3l-3.43-1.48v-1.82l-3.16.74-1.55-1.88v-2.89l-2.02-.74-1.08-2.73h-4.52v-3.25l-2.61-1.16-3.13,1.97-.7-3.54-6.91,1.1,1.74-.81-1.97-1.16v-1.63l-2.73.41v-2.15h-2.03l-2.84-1.22-.64-4.64.99-2.79h-2.9v-2.32l.81-1.22-4.47,1.45-1.74-2.79-.64-3.42-3.08,4.35-2.73-2.21-3.13-3.54,2.61-1.57.52-2.21h-4.47v-2.03h-2.32v-1.74l-4.38-.51.68-2.66h-2.24l-.31-2.81,1.61-1.3-2.55-1.3,2.55-6.2-1.09-3.44-1.98-3.38-.62-4.53,2.92-.21-2.68-3.65,2.68-.62-3.44-7.97h2.86l-1.82-1.61-2.97-3.59,2.81-5.78h-2.81l1.61-5.88-1.41-1.2,1.46-2.29v-2.08l-1.67-.83.68-2.5,1.49-1.57-1.8-3.88,3.6-8.56Z"
+                    />
+                  </g>
+                  <g id="ref-hautGauche">
+                    <polygon
+                      class="ref-1 ref-haut-gauche pieces-ref"
+                      points="28.66 1 25.05 9.56 26.86 13.44 25.37 15.01 24.69 17.51 26.35 18.34 26.35 20.42 24.9 22.72 26.3 23.91 24.69 29.8 27.5 29.8 24.69 35.58 27.66 39.17 29.48 40.79 26.62 40.79 30.05 48.75 27.37 49.38 30.05 53.02 27.14 53.23 27.76 57.76 29.74 61.15 30.83 64.58 28.28 70.78 30.83 72.08 29.22 73.39 29.53 76.2 31.77 76.2 31.09 78.85 35.48 79.36 35.48 81.1 37.8 81.1 37.8 83.14 42.27 83.14 41.75 85.34 39.13 86.91 42.27 90.45 45 92.66 48.07 88.3 48.71 91.73 50.45 94.51 54.92 93.06 54.11 94.28 54.11 96.6 57.01 96.6 56.03 99.39 56.67 104.03 59.51 105.25 61.54 105.25 61.54 107.4 64.27 106.99 64.27 108.62 66.24 109.78 64.5 110.59 70.6 109.78 71.41 109.49 72.11 113.03 75.24 111.06 77.85 112.22 77.85 115.47 82.38 115.47 83.45 118.2 85.47 118.94 85.47 121.83 87.02 123.72 90.18 122.98 90.18 124.79 93.62 126.27 93.62 129.57 97.99 128.43 97.99 131.79 101.76 131.79 101.76 134.22 102.77 136.77 104.99 135.83 104.99 138.25 104.99 142.49 108.29 142.49 111.13 143.79 111.13 146.99 108.79 148.22 111.13 151.18 114.7 152.54 114.7 155.74 111.25 157.47 116.18 159.44 120.62 157.96 126.53 157.84 127.52 161.29 124.07 163.75 118.77 167.45 114.95 173.86 111.99 171.89 111.87 175.83 108.64 176.39 105.46 174.87 104.76 179.51 98.76 180.97 98.76 184.4 96.09 184.86 92.81 180.77 90.34 182.03 89.13 184.4 86.21 186.32 83.89 184.55 83.89 188.18 79.75 191.06 77.58 191.66 75.57 190 76.1 192.72 72.04 191.41 72.69 194.28 68.36 193.88 68.96 196.94 66.32 198.56 66.41 200.17 63.77 203.23 66.75 203.23 63.43 205.36 63.94 209.35 61.9 209.35 61.9 211.56 63.69 212.16 60.71 213.35 62.07 216.83 58.84 216.83 59.27 220.49 55.53 222.87 57.82 222.87 56.04 225.25 53.06 226.52 55.7 229.24 52.81 230.43 48.56 231.96 50.86 233.49 48.48 235.96 51.11 235.96 49.24 238.42 44.49 239.99 45.39 243.97 43.76 243.97 43.04 245.96 42.68 249.58 37.43 252.12 40.68 253.93 38.69 258.27 37.79 263.89 41.77 266.06 40.68 268.78 36.88 273.12 39.24 275.66 41.95 275.66 41.95 278.73 37.43 281.63 40.12 284.17 36.95 289.68 39.91 290.19 37.46 294.69 39.81 297.04 37.16 299.69 34.7 302.56 36.95 305.21 33.68 306.44 33.27 310.32 34.5 311.24 32.56 314 34.09 314 33.17 318.39 31.13 320.95 33.58 322.17 32.56 325.95 27.65 328.1 23.36 328.91 23.36 333.1 19.79 334.02 19.79 338.01 15.6 339.85 19.07 343.83 19.89 348.94 15.6 350.47 12.13 354.05 7.94 356.09 5.59 358.54 1 361.5 1 1 28.66 1"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="right"></div>
+        </div>
+      </section>
+      <section id="section-5">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>2024</h1>
+                <h2>Réserve du MusBA</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>Collage :</p>
+                  <p>Collage de tous les fragments de l'œuvre et renfort des plis et des déchirures pour consolider la structure de l'œuvre.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec5-button btn-primary">
+              Etape suivante
+            </button>
+            <div class="canvas__container active" data-interaction="seal"></div>
+          </div>
+          <div class="right"></div>
+        </div>
+      </section>
+
+      <section id="section-6">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>2024</h1>
+                <h2>Réserve du MusBA</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>Décrassage :</p>
+                  <p>Nettoyez l'œuvre délicatement avec cette gomme pour éliminer les impuretés causées par divers facteurs tels que l'humidité, la nicotine, la poussière, les dépôts d'insectes et la pollution, restaurant ainsi sa beauté originelle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec6-button btn-primary">
+              Etape suivante
+            </button>
+            <div
+              class="canvas__container active"
+              data-interaction="cleaning"
+            ></div>
+          </div>
+          <div class="right">
+            <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-7">
         <p class="frame-step">
-          Cette œuvre sera bientôt exposée, il est donc temps de choisir un
-          cadre qui la mettra en valeur. Revêtez là d'un habillage approprié
-          pour émerveiller les spectateurs.
+          Cette œuvre sera bientôt exposée, il est donc temps de revêtir un cadre qui la mettra en valeur.
         </p>
-        <div class="frame" id="frame-2">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+        <div class="container row">
+          <div class="left">
+            <div class="frame" id="frame-1">
+              <img
+                src="/2-arts-graphiques/images/painting-frames/painting-frame-1.webp"
+                alt="peinture"
+              />
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec7-button btn-primary">Etape suivante</button>
+            <div class="frame" id="frame-2">
+              <img
+                src="/2-arts-graphiques/images/painting-frames/painting-frame-2.webp"
+                alt="peinture"
+              />
+            </div>
+          </div>
+          <div class="right">
+            <div class="frame" id="frame-3">
+              <img
+                src="/2-arts-graphiques/images/painting-frames/painting-frame-3.webp"
+                alt="peinture"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="right">
-        <div class="frame" id="frame-3">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+      </section>
+
+      <section id="section-8">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>2024</h1>
+                <h2>Galerie des collections</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>L’exposition bat son plein, avec en son centre la peinture au pastel Saint-Sébastien de Odilon Redon.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec8-button btn-primary">Etape suivante</button>
+            <img src="" alt="peinture" class="selected-painting">
+          </div>
+          <div class="right"></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="section-7">
-      <div class="left">
-        <p>Dans la galerie</p>
-      </div>
-      <div class="center">
-        <p>Exposition</p>
-      </div>
-      <div class="right"></div>
-    </section>
+      <section id="section-9">
+        <div class="container row">
+          <div class="left">
+            <h1>Une restauration historique</h1>
+            <p>
+              Saint Sebastien de Odilon Redon restera accessible au grand public
+              pendant 3 mois avant d'être remise dans la réserve, gardée secrète
+              du public.
+            </p>
+            <p>
+              Les oeuvres d'art graphiques sont extrêmement fragiles donc
+              demandent plus de soin.
+            </p>
+          </div>
+          <div class="center">
+            <button class="btn-next sec9-button btn-primary">
+              Recommencer l'expérience
+            </button>
+<!--            <p>Scanez le QR pour récuperer votre oeuvre.</p>-->
+          </div>
+          <div class="right"></div>
+        </div>
+      </section>
 
-    <section id="section-8">
-      <div class="left">
-        <h1>Une restauration historique</h1>
-        <p>
-          Saint Sebastien de Odilon Redon restera accessible au grand public
-          pendant 3 mois avant d'être remise dans la réserve, gardée secrète du
-          public.
-        </p>
-        <p>
-          Les oeuvres d'art graphiques sont extrêmement fragiles donc demandent
-          plus de soin.
-        </p>
-      </div>
-      <div class="center">
-        <p>Scanez le QR pour récuperer votre oeuvre.</p>
-      </div>
-      <div class="left"></div>
-    </section>
+      <footer>
+        <a href="/" class="btn-icon">
+          <i class="i-home">
+            <span>Accueil</span>
+          </i>
+        </a>
+        <div class="indice">
+          <p id="hint"></p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
+
+<style>
+  .loading__container {
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(55, 55, 55);
+    display: none;
+  }
+  .loading__container.active {
+    display: block;
+  }
+</style>

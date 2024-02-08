@@ -1,0 +1,21 @@
+@import '../../utils/variables.css';
+
+.info{
+    background-color: rgba(0,0,0,0.5);
+    padding: 32px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    border-left: solid var(--white) 5px;
+}
+
+.info > p{
+    text-align: start;
+}
+
+.infosContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

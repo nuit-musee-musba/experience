@@ -1,0 +1,34 @@
+@import url('../utils/variables.css');
+
+#modal{
+    margin: auto auto;
+    padding: 224px 94px 103px 94px;
+    height: 1304px;
+    width: 1812px;
+    display: grid;
+}
+
+#modal > h1{
+    color: var(--primary-1-color);
+}
+
+#modal > h1, p {
+    text-align: center;
+}
+
+#modal > button{
+    align-self: end;
+    justify-self: center;
+}
+
+.line{
+    height: 5px;
+    width: 100%;
+    background-color: var(--primary-1-color);
+    margin: 8px 0
+}
+
+#modal::backdrop{
+    background-color: black;
+    opacity: 70%;
+}
