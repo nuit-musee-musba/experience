@@ -28,6 +28,6 @@
   flex: 1;
 }
 
-.container.row .center {
-  /* position: relative; */
+.container.row .left {
+  padding-top: 8rem;
 }
