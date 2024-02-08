@@ -184,3 +184,13 @@ body {
   left: 0;
   width: 1212.68px;
 }
+
+.btn-primary, .btn-small-primary{
+  background-color: var(--primary-1-color);
+  border-color: var(--primary-1-color)
+}
+
+.btn-small-secondary{
+  border-color: var(--primary-1-color);
+  color: var(--primary-1-color)
+}
