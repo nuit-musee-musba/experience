@@ -152,7 +152,7 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        // numberUpdater.innerHTML = howManyDrags;
+        //numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 

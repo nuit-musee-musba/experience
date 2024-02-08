@@ -63,13 +63,13 @@ let globalParameters = {
   white: "#f5f5f5",
   ambientIntensity: 4.5,
   rectAreaIntensity: 1,
-  changeValue: 0,
+  changeValue: 1,
   lineDefaultOpacity: 0.5,
   lineTouchOpacity: 0.2,
-  step1: 0.4,
-  step2: 0.45,
-  step3: 0.5,
-  step4: 0.7,
+  resultValue: 0.5,
+  resultDelta: 0.05,
+  step1: 0.1,
+  step2: 0.3,
 };
 
 // Canvas
@@ -167,8 +167,6 @@ gltfLoader.load(
   (gltf) => {
     gltf.scene.scale.set(7.5, 7.5, 7.5);
     gltf.scene.position.z = 1;
-    console.log(gltf.scene);
-    // gltf.scene.rotation.z = Math.PI;
     scene.add(gltf.scene);
   },
   () => {
@@ -183,7 +181,7 @@ gltfLoader.load(
 var lineGeometry = new THREE.CylinderGeometry(
   0.01, // radiusTop
   0.01, // radiusBottom
-  3, // height
+  4, // height
   32, // radialSegments
   1 // heightSegments
 );
@@ -194,13 +192,38 @@ var lineMaterial = new THREE.MeshBasicMaterial({
 });
 var line = new THREE.Mesh(lineGeometry, lineMaterial);
 line.position.z = globalParameters.planDistance;
-line.position.y = -0.3625;
-scene.add(line);
+line.position.y = 0;
+
+// line 2
+var line2Geometry = new THREE.CylinderGeometry(
+  0.01, // radiusTop
+  0.01, // radiusBottom
+  1.825, // height
+  32, // radialSegments
+  1 // heightSegments
+);
+var line2 = new THREE.Mesh(line2Geometry, lineMaterial);
+line2.position.z = 1.3;
+line2.position.y = -1.4;
+
+// line 3
+var line3Geometry = new THREE.CylinderGeometry(
+  0.01, // radiusTop
+  0.01, // radiusBottom
+  0.45, // height
+  32, // radialSegments
+  1 // heightSegments
+);
+var line3 = new THREE.Mesh(line3Geometry, lineMaterial);
+line3.position.z = 1.3;
+line3.position.y = 2.1125;
+
+scene.add(line, line2, line3);
 
 // Light object
 const lightObjectGeometry = new THREE.PlaneGeometry(
-  0.375, // width
-  0.375, // height
+  0.75, // width
+  0.75, // height
   3, //widthSegments
   3 //heightSegments
 );
@@ -218,9 +241,9 @@ const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
 // Light colors
 const lightColors = {
   blue: new THREE.Color("#2d4ed6"),
-  yellow: new THREE.Color("#FFD79E"),
+  yellow: new THREE.Color("#f09800"),
   red: new THREE.Color("#FF000C"),
-  white: new THREE.Color("#9FB2FF"),
+  // white: new THREE.Color("#9FB2FF"),
 };
 
 // Ambient light
@@ -248,53 +271,64 @@ const lightMinPos = -(line.geometry.parameters.height / 2);
 
 rectAreaLight.position.y = lightMaxPos / 2;
 
+gui.addColor(lightColors, "blue").onChange(() => {
+  rectAreaLight.color.set(lightColors.blue);
+});
+gui.addColor(lightColors, "yellow").onChange(() => {
+  rectAreaLight.color.set(lightColors.yellow);
+});
+gui.addColor(lightColors, "red").onChange(() => {
+  rectAreaLight.color.set(lightColors.red);
+});
+
 // RectAreaLight color change
 changeMainLightColor();
 
 function changeMainLightColor() {
+  // Update the change value depending on the light position
+  globalParameters.changeValue =
+    (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
+
+  // Frame light colors
   let colorFrom = null;
   let colorTo = null;
   let alphaInterpolation = null;
 
+  console.log("value", globalParameters.changeValue);
   if (globalParameters.changeValue <= globalParameters.step1) {
-    colorFrom = lightColors.white;
-    colorTo = lightColors.white;
+    colorFrom = lightColors.red;
+    colorTo = lightColors.red;
     alphaInterpolation = globalParameters.changeValue / globalParameters.step1;
   } else if (
     globalParameters.changeValue > globalParameters.step1 &&
     globalParameters.changeValue <= globalParameters.step2
   ) {
-    colorFrom = lightColors.white;
-    colorTo = lightColors.red;
-    alphaInterpolation =
-      (globalParameters.changeValue - globalParameters.step1) /
-      (globalParameters.step2 - globalParameters.step1);
-  } else if (
-    globalParameters.changeValue > globalParameters.ste2 &&
-    globalParameters.changeValue <= globalParameters.step3
-  ) {
     colorFrom = lightColors.red;
     colorTo = lightColors.yellow;
     alphaInterpolation =
-      (globalParameters.changeValue - globalParameters.step2) /
-      (globalParameters.step3 - globalParameters.step2);
-  } else if (
-    globalParameters.changeValue > globalParameters.step3 &&
-    globalParameters.changeValue <= globalParameters.step4
-  ) {
+      (globalParameters.changeValue - globalParameters.step1) /
+      (globalParameters.step2 - globalParameters.step1);
+  } else {
     colorFrom = lightColors.yellow;
     colorTo = lightColors.blue;
     alphaInterpolation =
-      (globalParameters.changeValue - globalParameters.step3) /
-      (globalParameters.step4 - globalParameters.step3);
-  } else {
-    colorFrom = lightColors.blue;
-    colorTo = lightColors.blue;
-    alphaInterpolation =
-      (globalParameters.changeValue - globalParameters.step4) /
-      (1 - globalParameters.step4);
+      (globalParameters.changeValue - globalParameters.step2) /
+      (1 - globalParameters.step2);
   }
   rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
+
+  if (globalParameters.changeValue <= globalParameters.step2) {
+    // Change ambient light intensity
+    ambientLight.intensity =
+      globalParameters.ambientIntensity *
+      (globalParameters.changeValue / globalParameters.step2) +
+      0.5;
+
+    // Change rectarea light intensity
+    rectAreaLight.intensity =
+      globalParameters.rectAreaIntensity *
+      (globalParameters.changeValue / globalParameters.step2);
+  }
 }
 
 // Helper
@@ -410,7 +444,6 @@ canvas.addEventListener(
           ? (rectAreaLight.position.y = lightMinPos)
           : (rectAreaLight.position.y = rectAreaLight.position.y);
       }
-      changeLights();
       changeMainLightColor();
       checkResult();
       // Update the starting Y position for the next frame
@@ -430,21 +463,6 @@ canvas.addEventListener("touchend", function () {
   isSwiping = false;
 });
 
-// Change day time
-function changeLights() {
-  // Update the change value depending on the light position
-  globalParameters.changeValue =
-    (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
-
-  // Update ambientLight intensity
-  ambientLight.intensity =
-    globalParameters.ambientIntensity * globalParameters.changeValue + 0.5;
-
-  // Update rectAreaLight intensity
-  rectAreaLight.intensity =
-    globalParameters.rectAreaIntensity * globalParameters.changeValue;
-}
-
 // // Result button
 const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
@@ -453,8 +471,10 @@ let resultState = false;
 function checkResult() {
   // // Check result
   if (
-    globalParameters.changeValue < 0.55 &&
-    globalParameters.changeValue > 0.45
+    globalParameters.changeValue <
+    globalParameters.resultValue + globalParameters.resultDelta &&
+    globalParameters.changeValue >
+    globalParameters.resultValue - globalParameters.resultDelta
   ) {
     resultState = true;
     resultBtn.disabled = false;
