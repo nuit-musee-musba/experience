@@ -27,9 +27,9 @@ const sceneSetUp = async () => {
 
   enableInactivityRedirection();
 
-  const getCameraPositionForTarget = (position) => {
-    return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
-  };
+  // const getCameraPositionForTarget = (position) => {
+  //   return { x: position.x, y: position.y, z: position.z };
+  // };
 
   //MOUSE
 
@@ -221,13 +221,13 @@ const sceneSetUp = async () => {
 
     const targetPosition = step.position;
 
-    const cameraPosition = getCameraPositionForTarget(targetPosition);
+    const cameraPosition = targetPosition;
 
-    gsap.to(controls.step, {
+    gsap.to(controls.target, {
       duration: 1,
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
+      x: step.target.x,
+      y: step.target.y,
+      z: step.target.z,
     });
 
     gsap.to(controls.object.position, {

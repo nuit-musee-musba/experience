@@ -228,6 +228,7 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false;
 controls.maxPolarAngle = Math.PI * 0.33;
+controls.minPolarAngle = Math.PI * 0.33;
 
 // MODELS
 const poi1 = [];
