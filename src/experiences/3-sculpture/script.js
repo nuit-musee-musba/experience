@@ -47,7 +47,7 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog( 0x000000, 0, 15 );
+scene.fog = new THREE.Fog(0x000000, 0, 15);
 
 // TextureLoader
 
@@ -72,7 +72,7 @@ scene.add(camera);
 // OBJET
 //
 
-let workshop
+let workshop;
 let quantity;
 
 gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
@@ -81,30 +81,22 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   workshop = gltf.scene;
 
   for (let i = 0; i < workshop.children.length; i++) {
-    if(workshop.children[i].name === "RSpot"){
+    if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
-
-    }else if(workshop.children[i].name === "LSpot"){
+    } else if (workshop.children[i].name === "LSpot") {
       workshop.children[i].intensity = 5;
-
-
-    } else if(workshop.children[i].name === "Area002_1"){
+    } else if (workshop.children[i].name === "Area002_1") {
       workshop.children[i].intensity = 800;
-
-
-    } else if(workshop.children[i].name === "Spot"){
+    } else if (workshop.children[i].name === "Spot") {
       workshop.children[i].intensity = 350;
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
-
-
     }
   }
 
   scene.add(workshop);
-
 });
 
 let statueV1;
@@ -186,10 +178,10 @@ const mouse = new THREE.Vector2();
 window.addEventListener("touchmove", (event) => {
   // } else {
   if (event.target.id === "PolishRange") {
-    touchBoxContent = true;
+    isPolished = true;
   } else {
     currentTouch = event.touches[0].clientX / 100;
-    touchBoxContent = false;
+    isPolished = false;
   }
 });
 
@@ -269,23 +261,12 @@ function stepsFunction() {
         if (statueV2.children.length <= 3) {
           changeTextInSteps(steps3InDetailsPart, steps4InDetailsPart);
         }
-        //
-        //if (intersects.length > 0) {
-       //   scene.remove(statueV2);
-         // if (statueV4) {
-          //  scene.add(statueV4);
-         //   scene.add(statueV5);
-        // const polishRange = document.getElementById("PolishRange");
-
-           // console.log(polishRange.value);
-      //}
 
         if (intersects.length > 0 && raycasterActive) {
           const clickedBlock = intersects[0].object.parent;
 
           statueV2.remove(clickedBlock);
-
-          if (statueV2.children.length === 0) {
+          if (statueV2.children.length === 1) {
             mouse.x = -1;
             mouse.y = -1;
             mouse.y = -1;
@@ -298,6 +279,16 @@ function stepsFunction() {
       }
       break;
     case 3:
+      //
+      //if (intersects.length > 0) {
+      //   scene.remove(statueV2);
+      // if (statueV4) {
+      //  scene.add(statueV4);
+      //   scene.add(statueV5);
+      // const polishRange = document.getElementById("PolishRange");
+
+      // console.log(polishRange.value);
+      //}
       break;
   }
 }
@@ -340,7 +331,7 @@ const tick = () => {
   previousTime = elapsedTime;
 
   //UpdateControls
-   controls.update();
+  controls.update();
 
   //Animate in tick
 
