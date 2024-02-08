@@ -50,7 +50,7 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 2);
+const light = new THREE.SpotLight(0xffffff, 1);
 light.position.set(0, 0.5, -0.85);
 scene.add(light);
 

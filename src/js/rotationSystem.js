@@ -39,7 +39,10 @@ function updateRotation(delta) {
 
 window.addEventListener("touchstart", (event) => {
   // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
-  // if (!window.experience.canRotate) return;
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;
@@ -51,6 +54,11 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
   isTouching = true;
   window.experience.isRotating = true;
+
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
 
