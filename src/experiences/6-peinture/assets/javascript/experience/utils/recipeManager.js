@@ -84,12 +84,12 @@ export function recipeGeneration() {
         element.name +
         `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +
-        ' <span id="actual-' +
-        element.name +
-        '">' +
-        actualNumber +
-        "</span>/" +
-        thisItem.number_needed +
+        //' <span id="actual-' +
+        //element.name +
+        //'">' +
+        //actualNumber +
+        //"</span>/" +
+        //thisItem.number_needed +
         "</div><span class='item-checkbox'><img id='img-check-" +
         element.name +
         "' src='/6-peinture/images/misc/checked.svg'></span></li>";
