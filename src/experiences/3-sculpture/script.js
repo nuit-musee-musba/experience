@@ -21,6 +21,8 @@ const steps2InRoughPart = document.getElementById("steps2InRoughPart");
 // INITIALIZATION
 //
 
+let isPolished = false;
+
 const IntroPopup = () => {
   const IntroPart = document.getElementById("IntroPart");
   const buttonIntro = document.getElementById("buttonIntro");
@@ -45,7 +47,11 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog( 0x000000, 0, 15 );
+scene.fog = new THREE.Fog(0x000000, 0, 15);
+
+// TextureLoader
+
+const textureLoader = new THREE.TextureLoader();
 
 // GLTFLoader
 
@@ -66,7 +72,8 @@ scene.add(camera);
 // OBJET
 //
 
-let workshop
+let workshop;
+let quantity;
 
 gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   gltf.scene.position.set(0, -1, -1.5);
@@ -74,34 +81,28 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   workshop = gltf.scene;
 
   for (let i = 0; i < workshop.children.length; i++) {
-    if(workshop.children[i].name === "RSpot"){
+    if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
-
-    }else if(workshop.children[i].name === "LSpot"){
+    } else if (workshop.children[i].name === "LSpot") {
       workshop.children[i].intensity = 5;
-
-
-    } else if(workshop.children[i].name === "Area002_1"){
+    } else if (workshop.children[i].name === "Area002_1") {
       workshop.children[i].intensity = 800;
-
-
-    } else if(workshop.children[i].name === "Spot"){
+    } else if (workshop.children[i].name === "Spot") {
       workshop.children[i].intensity = 350;
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
-
-
     }
   }
 
   scene.add(workshop);
-
 });
 
 let statueV1;
 let statueV2;
+let statueV4;
+let statueV5;
 
 gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
   gltf.scene.scale.set(0.38, 0.38, 0.38);
@@ -119,6 +120,32 @@ gltfLoader.load("/3-sculpture/dégrossi-to-sculpt.glb", (gltf) => {
   statueV2 = gltf.scene;
 
   scene.add(statueV2);
+});
+
+gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
+  statueV4 = gltf.scene.children[0];
+  statueV4.scale.set(1.4, 1.4, 1.4);
+  statueV4.position.set(0.5, -1, -0.5);
+  statueV4.rotation.y = Math.PI + 0.6;
+
+  const loader = new THREE.TextureLoader();
+  loader.load("/3-sculpture/assets/croquis.png", (texture) => {
+    statueV5 = statueV4.clone();
+    statueV5.geometry = statueV4.geometry.clone();
+    statueV5.scale.multiplyScalar(1.002);
+    statueV5.position.z += 0.01;
+
+    statueV5.material = statueV5.material.clone();
+    statueV5.material.color = new THREE.Color(0x000000);
+    statueV5.material.opacity = 1;
+    statueV5.material.transparent = true;
+
+    const polishRange = document.getElementById("PolishRange");
+    polishRange.addEventListener("input", (event) => {
+      quantity = 1 - parseFloat(event.target.value);
+      statueV5.material.opacity = quantity;
+    });
+  });
 });
 
 const light = new THREE.AmbientLight(0x404040);
@@ -149,7 +176,13 @@ let currentTouch = 0;
 const mouse = new THREE.Vector2();
 
 window.addEventListener("touchmove", (event) => {
-  currentTouch = event.touches[0].clientX / 100;
+  // } else {
+  if (event.target.id === "PolishRange") {
+    isPolished = true;
+  } else {
+    currentTouch = event.touches[0].clientX / 100;
+    isPolished = false;
+  }
 });
 
 window.addEventListener("touchstart", (event) => {
@@ -233,9 +266,9 @@ function stepsFunction() {
           const clickedBlock = intersects[0].object.parent;
 
           statueV2.remove(clickedBlock);
-
-          if (statueV2.children.length === 0) {
+          if (statueV2.children.length === 1) {
             mouse.x = -1;
+            mouse.y = -1;
             mouse.y = -1;
             steps++;
             raycasterActive = false;
@@ -246,6 +279,16 @@ function stepsFunction() {
       }
       break;
     case 3:
+      //
+      //if (intersects.length > 0) {
+      //   scene.remove(statueV2);
+      // if (statueV4) {
+      //  scene.add(statueV4);
+      //   scene.add(statueV5);
+      // const polishRange = document.getElementById("PolishRange");
+
+      // console.log(polishRange.value);
+      //}
       break;
   }
 }
@@ -288,12 +331,13 @@ const tick = () => {
   previousTime = elapsedTime;
 
   //UpdateControls
-   controls.update();
+  controls.update();
 
   //Animate in tick
 
   const rotateSpeed = currentTouch - touchBefore;
 
+  //if (statueV1 && statueV2 && isPolished == false) {
   if (statueV1) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
@@ -309,5 +353,3 @@ const tick = () => {
 };
 
 tick();
-
-export { steps };
