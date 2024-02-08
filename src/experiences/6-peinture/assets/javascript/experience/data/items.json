@@ -22,7 +22,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     },
     {
       "id": "3",
@@ -130,7 +130,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     },
     {
       "id": "12",
@@ -238,7 +238,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     }
   ]
 }
