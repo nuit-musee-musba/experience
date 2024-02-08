@@ -3,7 +3,7 @@ export const period = [
     title: "La Création du Musée",
     date: "1801",
     target: { x: -15, y: 0.6, z: -15 },
-    position: { x: -12, y: 0, z: -12},
+    position: { x: -18, y: 0, z: -17 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -37,8 +37,8 @@ export const period = [
   {
     title: "Construction du Musée Actuel",
     date: "1875",
-    target: {x: -1.35, y: 0.6, z: 3.3},
-    position: { x: 3.5, y: 2, z: 3.5 },
+    target: { x: -1.35, y: 0.6, z: 3.3 },
+    position: { x: 2.5, y: 2, z: 8.5 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -66,7 +66,7 @@ export const period = [
   {
     title: "Aujourd'hui",
     date: "2024",
-    target: { x:0.9, y: 0.6, z: 0.9 },
+    target: { x: 0.9, y: 0.6, z: 0.9 },
     position: { x: 6, y: 2, z: 6 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes dans les ailes construites par Burguet.",

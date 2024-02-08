@@ -261,7 +261,7 @@ for (let i = 0; i < period.length; i++) {
       poi4.push(cube);
     }
 
-    cube.lookAt(camera.position); // Orient the cube towards the camera
+    cube.lookAt(camera.position);
   }
 }
 
