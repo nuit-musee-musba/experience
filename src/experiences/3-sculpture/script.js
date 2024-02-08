@@ -19,6 +19,8 @@ let steps = 0;
 // INITIALIZATION
 //
 
+let isPolished = false;
+
 const IntroPopup = () => {
   const IntroPart = document.getElementById("IntroPart");
   const buttonIntro = document.getElementById("buttonIntro");
@@ -123,7 +125,6 @@ gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
 
     const polishRange = document.getElementById("PolishRange");
     polishRange.addEventListener("input", (event) => {
-      // Mettez à jour la variable quantity en fonction de la valeur de l'input
       quantity = 1 - parseFloat(event.target.value);
       statueV5.material.opacity = quantity;
     });
@@ -158,7 +159,13 @@ let currentTouch = 0;
 const mouse = new THREE.Vector2();
 
 window.addEventListener("touchmove", (event) => {
-  currentTouch = event.touches[0].clientX / 100;
+  // } else {
+  if (event.target.id === "PolishRange") {
+    touchBoxContent = true;
+  } else {
+    currentTouch = event.touches[0].clientX / 100;
+    touchBoxContent = false;
+  }
 });
 
 window.addEventListener("touchstart", (event) => {
@@ -280,7 +287,7 @@ const tick = () => {
 
   const rotateSpeed = currentTouch - touchBefore;
 
-  if (statueV1 && statueV2) {
+  if (statueV1 && statueV2 && isPolished == false) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
   }
