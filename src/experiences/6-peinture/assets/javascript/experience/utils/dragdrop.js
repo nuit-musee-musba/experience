@@ -31,9 +31,7 @@ function handleDragInteraction(
   dragElementId,
   isMultiple,
   placedEl,
-  marginTopPlacement,
   isCorrect,
-  padLeft,
   targetZoneId,
   successPosX = null,
   successPosY = null
@@ -50,7 +48,10 @@ function handleDragInteraction(
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
+  console.log(dragElementId + ":" + initialX + "," + initialY);
+
   let dragElWidth = dragElement.offsetWidth;
+  let dragElheight = dragElement.offsetHeight;
 
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
@@ -64,9 +65,9 @@ function handleDragInteraction(
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
-    const currentY =
-      touch.clientY - initialY - dragElWidth / 2;
+    const currentX = touch.clientX - initialX;
+    const currentY = touch.clientY - initialY;
+    console.log(touch.clientX + "," + touch.clientY);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -217,84 +218,8 @@ let category = 0; //0=Aliments, 1=Objets, 2=Animaux
 items.items.forEach((element) => {
   let placedEl = document.getElementById(element.id + "-placed");
   var elementsWithId = document.querySelectorAll(".multiple-" + element.id);
-
-  let ElementList = document.getElementById(element.id);
-
-  let leftPosition;
-
-  if (numberItemsPerCategory[category]["count"] > max_item_per_stage) {
-    staged[category] =
-      numberItemsPerCategory[category]["count"] - max_item_per_stage; //number of items on top (stage 1)
-
-    if (cur_stage != 1) {
-      cur_stage = 0;
-    }
-  } else {
-    staged[category] = 0;
-    cur_stage = -1;
-  }
-
-  // if (staged[category] == 0) {
-  //   leftPosition = // pour centrer les absolute on va faire ce calcul
-  //     (parentElement.offsetWidth / //la width du parent divisé par...
-  //       (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-  //       324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-  //     i[category]; //multiplié par le nombre d'occurence en cours
-  //   ElementList.style.left = leftPosition + "px"; // on applique
-  // } else {
-  //   //cur_stage = 0;
-  //   if (cur_stage == 1) {
-  //     //stage 1
-
-  //     leftPosition = // pour centrer les absolute on va faire ce calcul
-  //       (parentElement.offsetWidth / //la width du parent divisé par...
-  //         (numberItemsPerCategory[category]["count"] -
-  //           max_item_per_stage +
-  //           0.5) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-  //         324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-  //       i[category]; //multiplié par le nombre d'occurence en cours
-  //     ElementList.style.left = leftPosition + "px"; // on applique
-  //   } else if (cur_stage == 0) {
-  //     //stage 0 (forcement égal à max_item_per_stage)
-
-  //     leftPosition = // pour centrer les absolute on va faire ce calcul
-  //       (parentElement.offsetWidth / //la width du parent divisé par...
-  //         (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-  //         324 / 7) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-  //       i[category]; //multiplié par le nombre d'occurence en cours
-  //     ElementList.style.left = leftPosition + "px"; // on applique
-  //   }
-  // }
-
-  console.log(
-    "item:" + element.name + ",i:" + i[category] + "stage:" + cur_stage + ""
-  );
-
-  // if (cur_stage == 1) {
-  //   ElementList.style.top = "90px"; //top position
-  //   marginTopPlacement = 90;
-  // } else if (cur_stage == 0) {
-  //   ElementList.style.top = "400px"; //bot position
-  //   marginTopPlacement = 470;
-  // } else if (cur_stage == -1) {
-  //   ElementList.style.top = "250px"; //top position
-  //   marginTopPlacement = 250;
-  // }
-
-  if (
-    i_overall[category] >= numberItemsPerCategory[category]["count"] ||
-    (i[category] == staged[category] && cur_stage == 1)
-  ) {
-    category++;
-    i_overall[category] = 1;
-    cur_stage = -1;
-  } else if (i[category] >= max_item_per_stage) {
-    cur_stage++;
-    i[category] = 1;
-  } else {
-    i[category]++;
-    i_overall[category]++;
-  }
+  let leftPosition,
+    marginTopPlacement = 0;
 
   //ce code implique donc que les items dans items.json soient bien rangés par catégorie
 
@@ -304,9 +229,7 @@ items.items.forEach((element) => {
         element.id,
         false,
         placedEl,
-        marginTopPlacement,
         true,
-        leftPosition,
         "targetCraftZone"
       );
     } else {
@@ -314,9 +237,7 @@ items.items.forEach((element) => {
         element.id,
         false,
         placedEl,
-        marginTopPlacement,
         false,
-        leftPosition,
         "targetCraftZone"
       );
     }
@@ -325,9 +246,7 @@ items.items.forEach((element) => {
       element.id,
       true,
       elementsWithId,
-      marginTopPlacement,
       true,
-      leftPosition,
       "targetCraftZone"
     );
   }
