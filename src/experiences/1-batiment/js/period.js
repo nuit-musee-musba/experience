@@ -24,7 +24,7 @@ export const period = [
       "Malgré des ajustements en 1809, les déménagements se succèdent, avec des tentatives d'installation dans divers endroits.",
       "Incendies en 1862 et 1870 obligent à des travaux de réfection, déplaçant temporairement la collection dans des structures vulnérables.",
     ],
-    poiPosition: [{ x: 0.7, y: 0.7, z: 0.7 }],
+    poiPosition: [{ x: 0.7, y: 0.6, z: -0.7 }],
     poiText: [
       {
         title: "Déplacements Successifs et Incendies",
@@ -41,9 +41,9 @@ export const period = [
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
     ],
     poiPosition: [
-      { x: 2.4, y: 0.7, z: 2.7 },
-      { x: -0.2, y: 0.7, z: -2.7 },
-      { x: 0.1, y: 0.7, z: -2.1 },
+      { x: -2.4, y: 0.2, z: 4.5 },
+      { x: -0.2, y: 0.6, z: 2.7 },
+      { x: 0.1, y: 0.6, z: 2.1 },
     ],
     poiText: [
       {
@@ -69,8 +69,8 @@ export const period = [
       "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
     ],
     poiPosition: [
-      { x: 0.9, y: 0.7, z: 2.7 },
-      { x: 2.4, y: 0.7, z: 0.9 },
+      { x: 0.9, y: 0.6, z: 2.7 },
+      { x: 2.4, y: 0.6, z: 0.9 },
     ],
     poiText: [
       {

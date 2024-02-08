@@ -208,9 +208,8 @@ for (let i = 0; i < period.length; i++) {
   for (let j = 0; j < period[i].poiPosition.length; j++) {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/1-batiment/assets/icons/poi.png");
-
     const material = new THREE.MeshBasicMaterial({ map: texture });
-    const geometry = new THREE.SphereGeometry(0.4, 32, 16);
+    const geometry = new THREE.SphereGeometry(0.2, 32, 16);
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
     cube.name = `${i + j}`;
