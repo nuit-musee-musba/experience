@@ -74,6 +74,7 @@ const sceneSetUp = async () => {
   tick();
 
   const endMenu = document.getElementById("end-menu");
+  const lastStep = document.getElementById("last-step");
   const component = document.getElementById("component");
 
   // const audioContent = document.getElementById("audio-content");
@@ -94,7 +95,6 @@ const sceneSetUp = async () => {
   const restart = () => {
     index = 0;
     handleFocusPeriod(period[index]);
-    endMenu.style.display = "none";
   };
 
   const showText = () => {
@@ -133,6 +133,7 @@ const sceneSetUp = async () => {
       handleFocusPeriod(period[index]);
     } else {
       endMenu.style.display = "flex";
+      lastStep.style.display = "none";
     }
   };
 
@@ -167,6 +168,19 @@ const sceneSetUp = async () => {
     const selectedPeriodButtonId = `periodButton${index + 1}`;
     const selectedButtonActive = `periodActive${index + 1}`;
     const selectedDashedButton = `dashed-border${index + 1}`;
+
+    if (index === 0) {
+      document.getElementById("prevButton").style.display = "none";
+    } else {
+      document.getElementById("prevButton").style.display = "block";
+    }
+    if (index === period.length - 1) {
+      document.getElementById("nextButton").style.display = "none";
+      document.getElementById("last-step").style.display = "flex";
+    } else {
+      document.getElementById("nextButton").style.display = "block";
+      document.getElementById("last-step").style.display = "none";
+    }
 
     document.getElementById(selectedButtonId).style.fontSize = "8rem";
     document.getElementById(selectedButtonId).style.top = "-12rem";
@@ -237,6 +251,7 @@ const sceneSetUp = async () => {
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);
   document.getElementById("nextButton").addEventListener("click", nextStep);
+  document.getElementById("last-step").addEventListener("click", nextStep);
   document
     .getElementById("interestButton")
     .addEventListener("click", toggleInfo);
