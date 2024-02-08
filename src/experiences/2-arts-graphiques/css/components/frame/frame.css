@@ -11,6 +11,15 @@
   height: 1471px;
 }
 
+#painting-frame__confirmation{
+  text-align: center;
+  visibility: hidden;
+}
+
+#painting-frame__confirmation.active{
+  visibility: visible;
+}
+
 .left > .selected-painting{
   margin-right: 100px;
   width: 1063.187px;
