@@ -41,8 +41,7 @@ body {
 
 .parameter-buttons {
   position: absolute;
-  left: 4rem;
-  bottom: 4rem;
+  left: 3vw;
   display: flex;
   gap: 1.5rem;
 }
@@ -92,8 +91,18 @@ body {
   z-index: 7;
 }
 
+.left-arrow {
+  display: none;
+  left: 33vw;
+}
+
+.right-arrow {
+  right: 33vw;
+}
+
 .left-arrow,
 .right-arrow {
+  position: absolute;
   background-color: transparent;
   border: none;
 }
@@ -102,6 +111,14 @@ body {
 .right-arrow svg {
   height: 5rem;
   width: 5rem;
+}
+
+#last-step {
+  display: none;
+  position: absolute;
+  right: 3vw;
+  border: 5px solid black;
+  color: black;
 }
 
 .chronology-container {
@@ -226,7 +243,8 @@ body {
 
 .interest-component {
   position: absolute;
-  bottom: 25%;
+  bottom: 50%;
+  transform: translate(0%, 50%);
   right: 0;
   width: 25vw;
   display: none;
@@ -244,7 +262,10 @@ body {
   top: -177px;
   left: -0.15vw;
 }
+
 #title-component {
+  font-family: Montserrat;
+  font-weight: bold;
   font-size: 4rem;
   pointer-events: none;
 }
@@ -257,18 +278,26 @@ body {
   font-weight: 100;
 }
 
-.audio-content {
+.button-interest {
   position: absolute;
-  bottom: 2vh;
-  right: 2vh;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
+  bottom: 24vh;
+  left: 2vw;
 }
 
-.audio {
-  width: 56px;
+#container-subTitle {
+  position: absolute;
+  left: 7vw;
+  bottom: 25vh;
+  width: 30vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+#subTitle {
+  padding: 2.5rem;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 58px;
 }
 
 @media screen and (max-width: 1508px) {

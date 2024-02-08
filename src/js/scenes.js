@@ -8,20 +8,19 @@ const parts = 5;
 const circle = Math.PI * 2;
 window.experience = window.experience || {};
 const index = window.experience.index;
+const meshScale = 0.03;
+const biggerScale = 0.035;
 
 showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
+    window.experience.autoRotate = false;
     // Smoothly interpolate the rotation over time
     let currentRotation = window.experience.rotation;
 
     // This is a positive number always
     let targetRotation = window.experience.index * (circle / parts);
 
-    console.log(circle / parts / 2);
-
     if (currentRotation < -(circle / parts / 2)) {
-      console.log("INSIDE");
-
       targetRotation = targetRotation - circle;
     }
 
@@ -30,14 +29,14 @@ showButton.addEventListener("click", () => {
     // Scale
 
     // Define the target scale for the island
-    const targetScale = 0.05; // Adjust as needed
+    const targetScale = biggerScale; // Adjust as needed
 
     const initialScale = window.experience.currentIsland.scale.x; // Adjust as needed
 
     // Position
 
     // Calculate the target rotation based on the current'index'
-    const duration = 500; // Adjust duration as needed
+    const duration = 1000; // Adjust duration as needed
     const startTime = Date.now();
 
     function animate() {
@@ -121,7 +120,7 @@ showButton.addEventListener("click", () => {
 
 backButton.addEventListener("click", () => {
   // Define the target scale for the elements
-  const targetScale = 0.035; // Adjust as needed
+  const targetScale = meshScale; // Adjust as needed
 
   // Calculate the initial scale of the elements
   const initialScale = window.experience.currentIsland.scale.x; // Adjust as needed
@@ -159,6 +158,7 @@ backButton.addEventListener("click", () => {
         requestAnimationFrame(animate); // Continue the animation if not finished
       } else {
         window.experience.canRotate = true;
+        window.experience.autoRotate = true;
       }
     }
 

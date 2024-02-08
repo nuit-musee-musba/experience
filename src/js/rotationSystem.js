@@ -38,11 +38,15 @@ function updateRotation(delta) {
 }
 
 window.addEventListener("touchstart", (event) => {
+  // Stop aurto rotation when the user starts touch
+  window.experience.autoRotate = false;
+
   // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
   if (!window.experience.canRotate) {
     console.log("Can rotate? ", window.experience.canRotate);
     return;
   }
+  window.experience.autoRotate = false;
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;
@@ -54,9 +58,10 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
   isTouching = true;
   window.experience.isRotating = true;
+  window.experience.autoRotate = false;
 
   if (!window.experience.canRotate) {
-    console.log("Can rotate? ", window.experience.canRotate);
+    console.log("Cannot rotate");
     return;
   }
   const touch = event.touches[0];
@@ -78,6 +83,10 @@ window.addEventListener("touchmove", (event) => {
 
 window.addEventListener("touchend", (event) => {
   isTouching = false;
+  setTimeout(() => {
+    window.experience.autoRotate = true;
+  }, 10000);
+  // window.experience.autoRotate = false;
 });
 
 window.experience.updateCarouselRotation = function () {
@@ -88,9 +97,12 @@ window.experience.updateCarouselRotation = function () {
     : (window.experience.isRotating = true);
 
   if (!isTouching) {
-    updateRotation(velocity * direction * rotationFactor);
+    if (window.experience.autoRotate) {
+      updateRotation(0.002);
+    } else {
+      updateRotation(velocity * direction * rotationFactor);
+    }
   }
-
   window.experience.carousel.rotation.y = window.experience.rotation;
   updateIslandInformation(
     window.experience.index,

@@ -1,16 +1,18 @@
-import * as THREE from "three";
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
+import * as THREE from "three";
 import { period } from "./period";
-import { enableInactivityRedirection } from "/global/js/inactivity.ts";
+
+enableInactivityRedirection();
 
 import {
-  renderer,
+  animatedScenes,
   camera,
   controls,
-  scene,
-  animatedScenes,
   cube,
   loadModels,
+  renderer,
+  scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
 
@@ -24,8 +26,6 @@ const sceneSetUp = async () => {
   let previousTime = 0;
   let isShowingText = false;
   const raycaster = new THREE.Raycaster();
-
-  enableInactivityRedirection();
 
   const getCameraPositionForTarget = (position) => {
     return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
@@ -53,12 +53,6 @@ const sceneSetUp = async () => {
     }
   }
 
-  // let restetDeltaTime = false;
-
-  // window.addEventListener("click", (event) => {
-  //   restetDeltaTime = true;
-  // });
-
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
     const deltaTime = elapsedTime - previousTime;
@@ -75,37 +69,25 @@ const sceneSetUp = async () => {
   tick();
 
   const endMenu = document.getElementById("end-menu");
+  const lastStep = document.getElementById("last-step");
   const component = document.getElementById("component");
-
-  // const audioContent = document.getElementById("audio-content");
-  // const audio = document.getElementById("audio");
-
-  // let isAudioPlaying = false;
-
-  // audioContent.addEventListener("click", () => {
-  //   if (isAudioPlaying) {
-  //     audio.src = "./assets/icons/audio.svg";
-  //   } else {
-  //     audio.src = "./assets/icons/audioNone.svg";
-  //   }
-
-  //   isAudioPlaying = !isAudioPlaying;
-  // });
+  // const containerSubTitle = document.getElementById("container-subTitle");
 
   const restart = () => {
     index = 0;
     handleFocusPeriod(period[index]);
-    endMenu.style.display = "none";
   };
 
   const showText = () => {
     isShowingText = true;
     component.style.display = "flex";
+    // containerSubTitle.style.display = "flex";
   };
 
   const hideText = () => {
     isShowingText = false;
     component.style.display = "none";
+    // containerSubTitle.style.display = "none";
   };
   window.addEventListener("click", onMouseClick, false);
   window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
@@ -134,6 +116,7 @@ const sceneSetUp = async () => {
       handleFocusPeriod(period[index]);
     } else {
       endMenu.style.display = "flex";
+      lastStep.style.display = "none";
     }
   };
 
@@ -171,6 +154,19 @@ const sceneSetUp = async () => {
     const selectedButtonActive = `periodActive${index + 1}`;
     const selectedDashedButton = `dashed-border${index + 1}`;
 
+    if (index === 0) {
+      document.getElementById("prevButton").style.display = "none";
+    } else {
+      document.getElementById("prevButton").style.display = "block";
+    }
+    if (index === period.length - 1) {
+      document.getElementById("nextButton").style.display = "none";
+      document.getElementById("last-step").style.display = "flex";
+    } else {
+      document.getElementById("nextButton").style.display = "block";
+      document.getElementById("last-step").style.display = "none";
+    }
+
     document.getElementById(selectedButtonId).style.fontSize = "8rem";
     document.getElementById(selectedButtonId).style.top = "-12rem";
     document.getElementById(selectedPeriodButtonId).style.width = "6rem";
@@ -197,6 +193,7 @@ const sceneSetUp = async () => {
 
     const cameraPosition = getCameraPositionForTarget(targetPosition);
 
+    document.getElementById("subTitle").textContent = step.subTitle;
     document.getElementById("title-component").textContent = step.title;
     document.getElementById("text-component").innerHTML = step.description
       .map((paragraph) => `<p>${paragraph}</p>`)
@@ -240,6 +237,7 @@ const sceneSetUp = async () => {
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);
   document.getElementById("nextButton").addEventListener("click", nextStep);
+  document.getElementById("last-step").addEventListener("click", nextStep);
   document
     .getElementById("interestButton")
     .addEventListener("click", toggleInfo);
