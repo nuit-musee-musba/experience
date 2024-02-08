@@ -8,20 +8,20 @@ const parts = 5;
 const circle = Math.PI * 2;
 window.experience = window.experience || {};
 const index = window.experience.index;
+const meshScale = 0.03;
+const biggerScale = 0.035;
+const positionY = 0.1;
 
 showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
+    window.experience.autoRotate = false;
     // Smoothly interpolate the rotation over time
     let currentRotation = window.experience.rotation;
 
     // This is a positive number always
     let targetRotation = window.experience.index * (circle / parts);
 
-    console.log(circle / parts / 2);
-
     if (currentRotation < -(circle / parts / 2)) {
-      console.log("INSIDE");
-
       targetRotation = targetRotation - circle;
     }
 
@@ -30,14 +30,14 @@ showButton.addEventListener("click", () => {
     // Scale
 
     // Define the target scale for the island
-    const targetScale = 0.05; // Adjust as needed
+    const targetScale = biggerScale; // Adjust as needed
 
     const initialScale = window.experience.currentIsland.scale.x; // Adjust as needed
 
     // Position
 
     // Calculate the target rotation based on the current'index'
-    const duration = 500; // Adjust duration as needed
+    const duration = 1000; // Adjust duration as needed
     const startTime = Date.now();
 
     function animate() {
@@ -62,17 +62,12 @@ showButton.addEventListener("click", () => {
 
       // Move other islands to the back
       window.experience.otherIslands.forEach((island) => {
-        const angle = island.rotation.y;
-        console.log(angle);
         const currenPosition = island.position.y;
-        const targetPosition = currenPosition - 1;
+        const targetPosition = positionY - 1; // initial position = 0
         const interpolatedPosition =
           currenPosition + (targetPosition - currenPosition) * progress * 0.1;
         island.position.y = interpolatedPosition;
       });
-
-      // Scale
-
       if (progress < 1) {
         window.experience.isRotating = true;
 
@@ -107,7 +102,7 @@ showButton.addEventListener("click", () => {
           element.classList.add("transition-opacity");
           element.style.opacity = "1";
         });
-      }, 300);
+      }, 800);
 
       firstSceneElements.forEach((element) => {
         element.classList.remove("transition-opacity");
@@ -115,13 +110,13 @@ showButton.addEventListener("click", () => {
       secondSceneElements.forEach((element) => {
         element.classList.remove("transition-opacity");
       });
-    }, 300);
+    }, 800);
   }
 });
 
 backButton.addEventListener("click", () => {
   // Define the target scale for the elements
-  const targetScale = 0.035; // Adjust as needed
+  const targetScale = meshScale; // Adjust as needed
 
   // Calculate the initial scale of the elements
   const initialScale = window.experience.currentIsland.scale.x; // Adjust as needed
@@ -137,8 +132,12 @@ backButton.addEventListener("click", () => {
       const elapsedTime = now - startTime;
       const progress = Math.min(elapsedTime / duration, 1); // Ensure progress is between 0 and 1
       // Interpolate the scale smoothly
-      const interpolatedScale =
-        initialScale - (initialScale - targetScale) * progress;
+      let interpolatedScale =
+        initialScale - (initialScale - targetScale) * progress * 2;
+      if (interpolatedScale <= targetScale) {
+        interpolatedScale = targetScale;
+      }
+
       window.experience.currentIsland.scale.set(
         interpolatedScale,
         interpolatedScale,
@@ -147,18 +146,17 @@ backButton.addEventListener("click", () => {
 
       // Move other islands to the back
       window.experience.otherIslands.forEach((island) => {
-        const angle = island.rotation.y;
-        console.log(angle);
         const currentPosition = island.position.y;
         const targetPosition = 0; // initial position
         const interpolatedPosition =
-          currentPosition - (currentPosition - targetPosition) * progress * 0.1;
+          currentPosition - (currentPosition - targetPosition) * progress * 0.2;
         island.position.y = interpolatedPosition;
       });
       if (progress < 1) {
         requestAnimationFrame(animate); // Continue the animation if not finished
       } else {
         window.experience.canRotate = true;
+        window.experience.autoRotate = true;
       }
     }
 
