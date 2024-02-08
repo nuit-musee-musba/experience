@@ -2,7 +2,7 @@ export const enableInactivityRedirection = () => {
   let time: NodeJS.Timeout;
 
   const minutesInMS = 1000 * 60;
-  const timeInMs = 5 * minutesInMS;
+  const timeInMs = 3 * minutesInMS;
 
   const goHome = () => {
     window.location.href = "/";
