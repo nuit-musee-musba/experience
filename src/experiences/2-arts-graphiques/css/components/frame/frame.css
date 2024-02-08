@@ -19,3 +19,9 @@
 #painting-frame__confirmation.active{
   visibility: visible;
 }
+
+.left > .selected-painting{
+  margin-right: 100px;
+  width: 1063.187px;
+  height: 1315.205px;
+}

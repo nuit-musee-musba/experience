@@ -28,12 +28,8 @@
   text-align: left;
 }
 
-.result h2{
-  font-size: 6.875rem;
-  width: 90%;
-  font-family: 'Montserrat-SemiBold';
-  color: var(--primary-1-color);
-  line-height: 8.5rem;
+.result h1{
+  color: var(--primary-1-color) !important;
 }
 
 .result p{
@@ -54,10 +50,4 @@
   left: 50%;
   width: max-content;
   transform: translate(-50%, 50%);
-}
-
-.result a.btn-small-secondary{
-  font-family: Montserrat-SemiBold;
-  font-size: 56px;
-  text-decoration: none;
 }

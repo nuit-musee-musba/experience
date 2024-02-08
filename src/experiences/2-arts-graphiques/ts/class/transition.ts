@@ -8,6 +8,9 @@ import { Section1 } from "../section1/Section1";
 import { Section4 } from "../section4/Section4";
 import Button from "./button";
 import Paragraph from "./paragraph";
+import Div from "./div";
+import { Section2 } from "../section2/Section2";
+import { Section8 } from "../section8/Section8";
 
 export default class Transition {
   currentSection: Section;
@@ -36,6 +39,8 @@ export default class Transition {
 
   hintText: Paragraph;
 
+  landmark: Div;
+
   constructor() {
     this.buttonSection2 = new Button("sec2-button", () => this.next());
     this.buttonSection3 = new Button("sec3-button", () => this.next());
@@ -50,13 +55,13 @@ export default class Transition {
 
     this.section0 = new Section("section-0");
     this.section1 = new Section1(`section-1`, this);
-    this.section2 = new Section(`section-2`);
+    this.section2 = new Section2(`section-2`);
     this.section3 = new Section(`section-3`);
     this.section4 = new Section4(`section-4`, this.buttonSection4);
     this.section5 = new Section(`section-5`);
     this.section6 = new Section(`section-6`);
     this.section7 = new Section(`section-7`);
-    this.section8 = new Section(`section-8`);
+    this.section8 = new Section8(`section-8`);
     this.section9 = new Section(`section-9`);
 
     this.sections = [
@@ -73,6 +78,7 @@ export default class Transition {
     ];
 
     this.hintText = new Paragraph("hint");
+    this.landmark = new Div(".landmark");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -182,6 +188,9 @@ export default class Transition {
     } else {
       previousSection = this.sections[this.currentSectionNumber - 1];
     }
+    if (this.currentSectionNumber === 9) {
+      this.landmark.div.style.display = "none";
+    }
     this.currentSection.show();
     previousSection.hide();
   }
@@ -198,7 +207,7 @@ export default class Transition {
         break;
       case 2:
         this.hintText.changeText(
-          'Donnez vie au chef-d\'œuvre d’Odilon Redon : "Saint Sébastien".'
+          "Dessinez l’oeuvre “Saint Sebastien” pour lui donner vie ."
         );
         break;
       case 3:
@@ -245,7 +254,7 @@ export default class Transition {
 
   next() {
     if (this.currentSectionNumber === 9) {
-      this.currentSectionNumber = 0;
+      location.reload();
     } else {
       this.currentSectionNumber = this.currentSectionNumber + 1;
     }
