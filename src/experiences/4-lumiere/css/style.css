@@ -68,7 +68,7 @@ p {
   height: 100%;
   background-color: var(--4-dark);
   z-index: 999;
-  transition: opacity 0.5s ease-in-out;
+  /* transition: opacity 0.5s ease-in-out; */
 }
 
 .popin {
@@ -82,17 +82,41 @@ p {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* transition: opacity 0.5s ease-in-out; */
+}
+.popin.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 3s, opacity 3s ease-in-out;
 }
 
 #popin-welcome {
   z-index: 1001;
+  padding-left: 0;
+  transition: opacity 2s ease-in-out;
 }
-
-.popin.hidden {
+#popin-welcome.hidden {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
+  transition: visibility 0s 2s, opacity 2s ease-in-out;
+}
+
+#popin-consignes {
+  z-index: 1000;
+  transition: opacity 2s ease-in-out;
+}
+#popin-consignes .popin-body {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 2s ease-in-out;
+}
+#popin-consignes.textshow .popin-body {
+  opacity: 1;
+  visibility: visible;
+}
+#popin-consignes.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 2s ease-in-out;
 }
 
 .popin.hidden,
@@ -100,7 +124,7 @@ p {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: visibility 0s 2s, opacity 2s linear;
+  transition: visibility 0s 2s, opacity 2s ease-in-out;
 }
 
 .popin-body {
