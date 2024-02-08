@@ -1,16 +1,17 @@
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import LoadPart from "./LoadPart";
+import "./component/1-IntroPart/IntroPart.scss";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
-import PolishingPart from "./component/5-PolishingPart/PolishingPart";
-import OutroPart from "./component/6-OutroPart/OutroPart";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import "./component/1-IntroPart/IntroPart.scss";
+
+enableInactivityRedirection();
 
 const sizes = {
   width: window.innerWidth,
@@ -43,7 +44,6 @@ const IntroPopup = () => {
 };
 
 IntroPopup();
-
 
 const canvas = document.querySelector("canvas.webgl");
 
@@ -85,7 +85,6 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-
   for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
@@ -101,7 +100,6 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
       workshop.children[i].decay = 2;
     } else if (workshop.children[i].name === "Socle") {
       socle = workshop.children[i];
-
     }
   }
   scene.add(workshop);
@@ -128,7 +126,7 @@ gltfLoader.load("/3-sculpture/Bloc_Degrossi.glb", (gltf) => {
 gltfLoader.load("/3-sculpture/dégrossi-to-sculpt.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
-  gltf.scene.rotation.y = statueRotation
+  gltf.scene.rotation.y = statueRotation;
   statueV2 = gltf.scene;
 
   scene.add(statueV2);
@@ -338,7 +336,11 @@ let composer = new EffectComposer(renderer);
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
 
-let outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
+let outlinePass = new OutlinePass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  scene,
+  camera
+);
 composer.addPass(outlinePass);
 
 const clock = new THREE.Clock();
@@ -364,7 +366,6 @@ const tick = () => {
 
     outlinePass.selectedObjects = [statueV1, statueV2];
   }
-
 
   if (socle) {
     socle.rotation.y = socle.rotation.y - rotateSpeed * 0.3;

@@ -57,12 +57,12 @@ function handleDragInteraction(
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
   dragElement.addEventListener("touchstart", (e) => {
-    let selectedElement = parentElement.querySelector('.selected-item');
+    let selectedElement = parentElement.querySelector(".selected-item");
     if (selectedElement) {
-      selectedElement.classList.remove('selected-item');
+      selectedElement.classList.remove("selected-item");
     }
     const targetZoneRect = targetZone.getBoundingClientRect();
-    dragElement.classList.add('selected-item');
+    dragElement.classList.add("selected-item");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
