@@ -59,7 +59,7 @@ scene.add(light);
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
 carousel.rotation.set(0, 0, 0);
-carousel.position.set(0, 0.1, 0);
+carousel.position.set(0, 0, 0);
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
