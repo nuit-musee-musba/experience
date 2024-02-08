@@ -26,6 +26,7 @@ export class Section4 extends Section {
     if (isRepaired) {
       this.button.button.disabled = false;
     }
+    return isRepaired;
   }
 
   show() {
