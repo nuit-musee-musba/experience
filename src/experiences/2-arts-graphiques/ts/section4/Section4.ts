@@ -6,7 +6,7 @@ import Button from "../class/button";
 export class Section4 extends Section {
   dragables: Sec4Dragable[];
   dragablesElmt: HTMLElement[];
-  canvasContainer: HTMLElement;
+
   button: Button;
 
   constructor(sectionId: string, button: Button) {
@@ -30,9 +30,13 @@ export class Section4 extends Section {
 
   show() {
     super.show();
+    initialiseAmountPlaced();
     this.dragables = this.dragablesElmt.map(
       (elmt) => new Sec4Dragable(elmt, this.handleSuccess)
     );
+    if (this.dragables) {
+      this.dragables.forEach((elmt) => elmt.show());
+    }
 
     const paintingContainer = document.querySelector<HTMLElement>(
       ".painting-pieces-container"
@@ -42,7 +46,7 @@ export class Section4 extends Section {
   }
   hide() {
     super.hide();
-    initialiseAmountPlaced();
+
     if (this.dragables) {
       this.dragables.forEach((elmt) => elmt.initialise());
     }
