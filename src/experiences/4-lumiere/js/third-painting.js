@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -55,6 +54,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
@@ -161,18 +161,6 @@ thirdPainting3.position.z = -globalParameters.planDistance;
 // Third painting | Add to scene
 scene.add(thirdPainting1, thirdPainting2, thirdPainting3);
 
-const paintingTweaks = gui.addFolder("Painting parameters");
-paintingTweaks
-  .add(globalParameters, "planDistance")
-  .min(0)
-  .max(1)
-  .step(0.01)
-  .name("Plan distance")
-  .onChange(() => {
-    secondPainting1.position.z = 2 * globalParameters.planDistance;
-    secondPainting3.position.z = -globalParameters.planDistance;
-  });
-
 // Frame
 gltfLoader.load(
   "/4-lumiere/third-painting/third-painting-frame.glb",
@@ -203,7 +191,6 @@ var lineMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
   opacity: globalParameters.lineDefaultOpacity,
-  // wireframe: true,
 });
 var line = new THREE.Mesh(lineGeometry, lineMaterial);
 line.position.z = globalParameters.planDistance;
@@ -243,11 +230,6 @@ const ambientLight = new THREE.AmbientLight(
 );
 scene.add(ambientLight);
 
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
-
 // Second painting point light
 const rectAreaLight = new THREE.RectAreaLight(
   "#9FB2FF", // color
@@ -266,26 +248,15 @@ const lightMinPos = -(line.geometry.parameters.height / 2);
 
 rectAreaLight.position.y = lightMaxPos / 2;
 
-console.log("rectAreaLight: ", rectAreaLight);
-const rectAreaLightTweaks = gui.addFolder("Rectangle area light parameters");
-rectAreaLightTweaks.add(rectAreaLight, "visible");
-rectAreaLightTweaks.addColor(rectAreaLight, "color").onChange((value) => {
-  console.log(value.getHexString());
-});
-rectAreaLightTweaks.add(rectAreaLight, "intensity").min(0).max(15).step(1);
-
 // RectAreaLight color change
 changeMainLightColor();
 
 function changeMainLightColor() {
-  // const framePosY = globalParameters.changeValue >= 0.5 ? "top" : "bottom";
   let colorFrom = null;
   let colorTo = null;
   let alphaInterpolation = null;
 
-  console.log("changeValue", globalParameters.changeValue);
   if (globalParameters.changeValue <= globalParameters.step1) {
-    console.log("bottom");
     colorFrom = lightColors.white;
     colorTo = lightColors.white;
     alphaInterpolation = globalParameters.changeValue / globalParameters.step1;
@@ -293,7 +264,6 @@ function changeMainLightColor() {
     globalParameters.changeValue > globalParameters.step1 &&
     globalParameters.changeValue <= globalParameters.step2
   ) {
-    console.log("middle-bottom");
     colorFrom = lightColors.white;
     colorTo = lightColors.red;
     alphaInterpolation =
@@ -303,7 +273,6 @@ function changeMainLightColor() {
     globalParameters.changeValue > globalParameters.ste2 &&
     globalParameters.changeValue <= globalParameters.step3
   ) {
-    console.log("middle");
     colorFrom = lightColors.red;
     colorTo = lightColors.yellow;
     alphaInterpolation =
@@ -313,55 +282,25 @@ function changeMainLightColor() {
     globalParameters.changeValue > globalParameters.step3 &&
     globalParameters.changeValue <= globalParameters.step4
   ) {
-    console.log("middle-top");
     colorFrom = lightColors.yellow;
     colorTo = lightColors.blue;
     alphaInterpolation =
       (globalParameters.changeValue - globalParameters.step3) /
       (globalParameters.step4 - globalParameters.step3);
   } else {
-    console.log("top");
     colorFrom = lightColors.blue;
     colorTo = lightColors.blue;
     alphaInterpolation =
       (globalParameters.changeValue - globalParameters.step4) /
       (1 - globalParameters.step4);
   }
-
-  // const colorFrom = framePosY === "top" ? lightColors.yellow : lightColors.red;
-  // const colorTo = framePosY === "top" ? lightColors.white : lightColors.yellow;
-  // const alphaInterpolation =
-  //   framePosY === "top"
-  //     ? globalParameters.changeValue - 0.5
-  //     : globalParameters.changeValue;
   rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
 }
 
 // Helper
 const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-// rectAreaLightHelper.visible = false;
+rectAreaLightHelper.visible = false;
 scene.add(rectAreaLightHelper);
-rectAreaLightTweaks.add(rectAreaLightHelper, "visible").name("Repère visuel");
-
-const rectAreaLightPosition = rectAreaLightTweaks.addFolder(
-  "Spot light position"
-);
-
-rectAreaLightPosition
-  .add(rectAreaLight.position, "x")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "y")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "z")
-  .min(-10)
-  .max(10)
-  .step(0.01);
 
 /**
  * Sizes
@@ -399,14 +338,6 @@ camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 30;
 scene.add(camera);
-
-const cameraTweaks = gui.addFolder("Camera parameters");
-cameraTweaks
-  .add(camera.position, "z")
-  .min(-10)
-  .max(200)
-  .step(0.1)
-  .name("Camera z pos");
 
 /**
  * Pointer
@@ -541,11 +472,6 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = line.position;
-// controls.enableDamping = true;
-
 /**
  * Renderer
  */
@@ -560,9 +486,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Update controls
-  // controls.update();
-
   // Render
   renderer.render(scene, camera);
 

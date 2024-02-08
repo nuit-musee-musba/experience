@@ -1,5 +1,4 @@
 import * as THREE from "three";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -31,17 +30,11 @@ const popinShow = (targetPopin) => {
   document.querySelector(".popin-overlay").classList.remove("hidden");
   events = false;
   if (targetPopin === popin2) {
-    setTimeout(() => { targetPopin.classList.add("textshow"); }, 7000)
+    setTimeout(() => {
+      targetPopin.classList.add("textshow");
+    }, 7000);
   }
 };
-
-// test const qui n'est pas un hide direct mais une animation
-// const popinFadeOut = (targetPopin) => {
-//   targetPopin.classList.add("fadeout");
-//   document.querySelector("body").classList.add("popin-fadeout");
-//   document.querySelector(".popin-overlay").classList.add("hidden");
-//   events = true;
-// };
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
@@ -51,16 +44,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     popinHide(popin2);
   } else {
     popinShow(popin1);
-    popinShow(popin2);
     setTimeout(() => {
       popinHide(popin1);
-    }, 1000);
+    }, 3000);
+    popinShow(popin2);
   }
 });
-
-// function FadeOut() {
-//   alert("On attend");
-// };
 
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
@@ -72,15 +61,20 @@ for (const popinBtn of popinBtns) {
 }
 
 /**
- * Base
+ * Threejs
  */
+
 // Debug
 const gui = new GUI({
   width: 300,
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
+/**
+ * Base
+ */
 let globalParameters = {
   lightAngleStrength: 0.5,
   ellipseRadius: 4,
@@ -364,22 +358,12 @@ window.addEventListener("touchend", function () {
   isSwiping = false;
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = ellipse.position;
-// controls.enableDamping = true;
-
 /**
  * SetInterval
  */
 
 // Function
 setInterval(checkUserInteractions, 2000);
-
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = ellipse.position;
-// controls.enableDamping = true;
 
 /**
  * Renderer
@@ -400,28 +384,12 @@ const ambientLight = new THREE.AmbientLight(
 );
 scene.add(ambientLight);
 
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
-
 /**
  * Animate
  */
-const clock = new THREE.Clock();
-
 let currentIntersect = null;
-let previousTime = 0;
-let deltaTime = 0;
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
-  deltaTime = elapsedTime - previousTime;
-  previousTime = elapsedTime;
-
-  // Update controls
-  // controls.update();
-
   // Update paintings positions based on ellipse rotation
   const angle = ellipse.rotation.z;
   const radius = globalParameters.ellipseRadius;
