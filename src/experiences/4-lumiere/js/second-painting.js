@@ -10,6 +10,40 @@ import { enableInactivityRedirection } from "/global/js/inactivity";
 enableInactivityRedirection();
 
 /**
+ * Popins
+ */
+const popin = document.querySelector("#popin-info");
+let events = true;
+
+const popinHide = (targetPopin) => {
+  targetPopin.classList.add("hidden");
+  document.querySelector("body").classList.add("popin-visible");
+  document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
+};
+
+const popinShow = (targetPopin) => {
+  targetPopin.classList.remove("hidden");
+  document.querySelector("body").classList.remove("popin-visible");
+  document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
+};
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  popinShow(popin);
+});
+
+const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
+for (const popinBtn of popinBtns) {
+  const targetPopin = document.querySelector(popinBtn.dataset.target);
+  popinBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    popinHide(targetPopin);
+  });
+}
+
+/**
  * Threejs
  */
 
@@ -117,7 +151,7 @@ secondPainting2.scale.set(0.985, 0.985, 1);
 const secondPaintingMaterial3 = new THREE.MeshStandardMaterial({
   map: thirdPlanTexture,
   transparent: true,
-  normal: thirdPlanNormalTexture,
+  normalMap: thirdPlanNormalTexture,
 });
 const secondPainting3 = new THREE.Mesh(planeGeometry, secondPaintingMaterial3);
 secondPainting3.position.z = -globalParameters.planDistance;
@@ -362,7 +396,6 @@ updateRotation;
 function updateRotation() {
   const angle = calculateAngle();
   ellipse.rotation.z = angle;
-  console.log("angle", angle);
   // // Check result
   if (angle > 3.4 && angle < 3.66) {
     resultState = true;

@@ -11,7 +11,6 @@ enableInactivityRedirection();
 /**
  * Popins
  */
-
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlOrigin = urlParams.get("home-popin");
@@ -48,16 +47,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
     popinHide(popin1);
     popinHide(popin2);
   } else {
-    popinShow(popin1)
-    popinShow(popin2)
-    setTimeout(() => { popinHide(popin1); }, 1000)
+    popinShow(popin1);
+    popinShow(popin2);
+    setTimeout(() => {
+      popinHide(popin1);
+    }, 1000);
   }
 });
 
 // function FadeOut() {
 //   alert("On attend");
 // };
-
 
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
@@ -67,7 +67,6 @@ for (const popinBtn of popinBtns) {
     popinHide(targetPopin);
   });
 }
-
 
 /**
  * Base
@@ -250,11 +249,11 @@ canvas.addEventListener("click", () => {
   const objectsToTest = [firstPainting, secondPainting, thirdPainting];
   const intersects = raycaster.intersectObjects(objectsToTest);
 
-  if (intersects.length) {
+  if (intersects.length && intersects[0].point.z > 0) {
     if (currentIntersect === null) {
       console.log("mouse enter");
     }
-
+    console.log("intersect", intersects[0]);
     currentIntersect = intersects[0];
   } else {
     if (currentIntersect) {
