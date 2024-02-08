@@ -15,7 +15,8 @@ export function playAnimation(anim) {
         animJeffPerfect: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-perfect.json',
         animJeffNope: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-nope.json',
         animJeffCringe: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-cringe.json',
-        animJeffPensive: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-pensive.json'
+        animJeffPensive: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-pensive.json',
+        animJeffDrama: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-drama.json'
     };
     const animPath = animationPaths[anim];
 
