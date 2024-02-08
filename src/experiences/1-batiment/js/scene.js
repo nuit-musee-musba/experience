@@ -223,10 +223,10 @@ window.addEventListener("resize", () => {
 
 // CAMERA
 const camera = new THREE.PerspectiveCamera(
-  75,
+  50,
   sizes.width / sizes.height,
   0.2,
-  500
+  300
 );
 camera.position.set(0, 0, 3);
 scene.add(camera);
@@ -269,7 +269,7 @@ for (let i = 0; i < period.length; i++) {
       poi4.push(cube);
     }
 
-    cube.lookAt(camera.position); // Orient the cube towards the camera
+    cube.lookAt(camera.position);
   }
 }
 
