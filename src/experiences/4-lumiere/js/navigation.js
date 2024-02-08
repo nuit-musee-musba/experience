@@ -31,6 +31,9 @@ const popinShow = (targetPopin) => {
   document.querySelector("body").classList.remove("popin-visible");
   document.querySelector(".popin-overlay").classList.remove("hidden");
   events = false;
+  if (targetPopin === popin2) {
+    setTimeout(() => { targetPopin.classList.add("textshow"); }, 7000)
+  }
 };
 
 // test const qui n'est pas un hide direct mais une animation
@@ -49,8 +52,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     popinHide(popin2);
   } else {
     popinShow(popin1)
-    popinShow(popin2)
     setTimeout(() => { popinHide(popin1); }, 1000)
+    popinShow(popin2)
+    
   }
 });
 
