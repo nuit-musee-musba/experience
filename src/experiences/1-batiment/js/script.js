@@ -199,11 +199,13 @@ const sceneSetUp = async () => {
       .map((paragraph) => `<p>${paragraph}</p>`)
       .join("");
 
-    cube.position.set(
-      step.cubePosition.x,
-      step.cubePosition.y,
-      step.cubePosition.z
-    );
+    if (step.cubePosition) {
+      cube.position.set(
+        step.cubePosition.x,
+        step.cubePosition.y,
+        step.cubePosition.z
+      );
+    }
 
     cube.cursor = "pointer";
 
