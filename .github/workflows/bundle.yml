@@ -1,0 +1,50 @@
+name: Bundle
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest commit
+        uses: actions/checkout@v4
+
+      - name: Build bundle
+        run: |
+          npm install
+          npm run bundle:zip
+
+      - name: Get build date
+        run: |
+          echo "builddate=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
+        id: version # this is used on variable path
+
+      - name: Create draft release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: bundle-${{ steps.version.outputs.builddate }}
+          release_name: bundle-${{ steps.version.outputs.builddate }}
+          draft: true
+          prerelease: false
+
+      - name: Add bundle to release
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bundle.zip
+          asset_name: bundle.zip
+          asset_content_type: application/zip
+
+      - name: Publish release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
