@@ -32,7 +32,6 @@ gui
 
 const sunLight = new THREE.DirectionalLight("#F5F0E8");
 gui.add(sunLight, "intensity").min(0).max(10).step(0.001).name("Sun");
-// sunLight.lookAt(4, 2, 4);
 
 sunLight.position.set(63.9, 22.2, 100);
 sunLight.shadow.camera.left = -26;
@@ -40,8 +39,6 @@ sunLight.shadow.camera.right = 45;
 sunLight.shadow.camera.top = 13;
 sunLight.shadow.camera.bottom = -3;
 sunLight.intensity = 5.5;
-
-// scene.add(ambientLight, sunLight1, sunLight2);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
 sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
@@ -164,7 +161,7 @@ const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
 
 gui.onFinishChange(() => {
   sunLight.shadow.camera.updateProjectionMatrix();
-  // sunLight.shadow.updateMatrices();
+  sunLight.shadow.updateMatrices();
   sunLightCameraHelper.update();
   updateAllMaterials();
 });
