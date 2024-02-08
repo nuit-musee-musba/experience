@@ -77,17 +77,10 @@ export function recipeGeneration() {
     let thisItem = items.items.find((item) => item.id === element.name);
     //element.count
     if (thisItem.recipe_step == current_step) {
-      let symbol = "";
-      //   if (thisItem.category == "food") {
-      //     symbol = `\ee04`;
-      //   } else if (thisItem.category == "animals") {
-      //     symbol = `ee02`;
-      //   } else if (thisItem.category == "objects") {
-      //     symbol = `ee03`;
-      //   }
-
       recipe.innerHTML +=
-        '<li class="item ' + thisItem.category + '" id="recipe-' +
+        '<li class="item ' +
+        thisItem.category +
+        '" id="recipe-' +
         element.name +
         `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +
@@ -99,7 +92,7 @@ export function recipeGeneration() {
         thisItem.number_needed +
         "</div><span class='item-checkbox'><img id='img-check-" +
         element.name +
-        "' src='./static/images/misc/checked.svg'></span></li>";
+        "' src='/6-peinture/images/misc/checked.svg'></span></li>";
     }
   });
 }

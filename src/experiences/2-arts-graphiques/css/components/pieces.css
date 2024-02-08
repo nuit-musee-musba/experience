@@ -1,0 +1,38 @@
+.piece {
+  position: absolute;
+}
+.piece-haut-droite {
+  width: 468px;
+  top: 1300px;
+  left: 3337px;
+}
+.piece-bas-droite {
+  width: 441px;
+  top: 1085px;
+  left: 820px;
+}
+.piece-bas-centre {
+  width: 884px;
+  top: 20px;
+  left: 2900px;
+}
+.piece-bas-gauche {
+  width: 752px;
+  top: 1034px;
+  left: 3040px;
+}
+.piece-centre {
+  width: 1010px;
+  top: 521.2px;
+  left: 5.79px;
+}
+.piece-top-center {
+  width: 812px;
+  top: 1392px;
+  left: -41px;
+}
+.piece-top-left {
+  width: 273px;
+  top: 10px;
+  left: 3153px;
+}
