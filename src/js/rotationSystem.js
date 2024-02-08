@@ -88,9 +88,12 @@ window.experience.updateCarouselRotation = function () {
     : (window.experience.isRotating = true);
 
   if (!isTouching) {
-    updateRotation(velocity * direction * rotationFactor);
+    if (window.experience.autoRotate) {
+      updateRotation(0.002);
+    } else {
+      updateRotation(velocity * direction * rotationFactor);
+    }
   }
-
   window.experience.carousel.rotation.y = window.experience.rotation;
   updateIslandInformation(
     window.experience.index,

@@ -8,6 +8,8 @@ window.experience = window.experience || {};
 
 window.experience.canRotate = true;
 
+window.experience.autoRotate = true;
+
 // Capture DOM elements
 
 // Constants
@@ -57,7 +59,8 @@ scene.add(light);
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, 0, 0); //
+carousel.rotation.set(0, 0, 0);
+carousel.position.set(0, 0.1, 0);
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
