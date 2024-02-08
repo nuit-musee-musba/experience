@@ -123,13 +123,13 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  position: relative;
-  top: 0;
+  position: absolute;
+  bottom: 0;
   width: 100vw;
   pointer-events: all;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 3;
+  z-index: 1;
 }
 
 #infoText {
@@ -144,6 +144,7 @@ body {
   position: relative;
   gap: 2rem;
   pointer-events: all;
+  margin-bottom: 5rem;
 }
 
 .buttonContainer {
