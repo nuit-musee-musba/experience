@@ -1,9 +1,9 @@
 .book {
   pointer-events: none;
-  width: 28vw;
-  background-image: url("/6-peinture/images/scenery/book-cover.svg");
+  width: 29vw;
+  background-image: url(/6-peinture/images/scenery/book-cover.svg);
   background-repeat: no-repeat;
-  margin-top: -4vh;
+  margin-top: -10vh;
   background-size: cover;
   &.is-opened {
     background-image: url("/6-peinture/images/scenery/book-content.svg");
@@ -15,6 +15,7 @@
       margin-bottom: 4rem;
     }
     .book-description {
+      margin-left: 3rem;
       b {
         font-weight: 700;
       }
