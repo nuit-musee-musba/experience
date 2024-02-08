@@ -15,11 +15,6 @@ html,
 body {
   overflow: hidden;
 }
-
-html,
-body {
-  overflow: hidden;
-}
 .title-component {
   position: absolute;
   top: 6rem;
@@ -58,6 +53,9 @@ body {
 }
 
 .parameter-buttons a svg {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 21px;
   width: 100%;
   height: 100%;
 }
@@ -86,7 +84,7 @@ body {
 
 .chronology {
   position: absolute;
-  bottom: 12vh;
+  bottom: 5vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -102,8 +100,8 @@ body {
 
 .left-arrow svg,
 .right-arrow svg {
-  height: 80px;
-  width: 80px;
+  height: 5rem;
+  width: 5rem;
 }
 
 .chronology-container {
@@ -199,20 +197,20 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
   display: none;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(245, 245, 220, 1);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 
 .end-menu-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5rem;
+  padding: 6rem 13rem;
+  color: white;
 }
 
 .end-menu-buttons {
@@ -221,9 +219,9 @@ body {
   gap: 20px;
 }
 
-.end-menu-buttons div {
-  border: 2px dashed white;
-  padding: 5px;
+#restart-button button {
+  border: none;
+  color: black;
 }
 
 .interest-component {

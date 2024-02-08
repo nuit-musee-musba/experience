@@ -19,7 +19,7 @@ export async function createIsland(i, count, color) {
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.04, 0.04, 0.04], // scale
+      [0.035, 0.035, 0.035], // scale
       color
     );
     // if (island.scene.userData.id === 1) {
@@ -47,19 +47,19 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
         // If you need to perform additional actions after loading, resolve the promise
         // Traverse through the scene to update materials
-        gltf.scene.traverse((child) => {
-          if (child.isMesh) {
-            // Check if the material has a color property (for Lambert or Phong materials)
-            if (child.material.color) {
-              child.material.color.set(color);
-            }
-            // Check if the material has an emissive property (for Standard materials)
-            if (child.material.emissive) {
-              child.material.emissive.set(color);
-            }
-            // You may need to add more checks based on the material type used in your model
-          }
-        });
+        // gltf.scene.traverse((child) => {
+        //   if (child.isMesh) {
+        //     // Check if the material has a color property (for Lambert or Phong materials)
+        //     if (child.material.color) {
+        //       child.material.color.set(color);
+        //     }
+        //     // Check if the material has an emissive property (for Standard materials)
+        //     if (child.material.emissive) {
+        //       child.material.emissive.set(color);
+        //     }
+        //     // You may need to add more checks based on the material type used in your model
+        //   }
+        // });
         resolve(gltf);
       },
       undefined,
@@ -76,17 +76,15 @@ export function findClosestRotation(carousel, scrollDistance) {
 export function updateIslandInformation(
   index,
   data,
-  infoTitle,
+  frontTitle,
   infoDescription,
   infoButton
 ) {
+  const infoTitle = document.getElementById("infoTitle");
+  frontTitle.innerHTML = data[index].title;
   infoTitle.innerHTML = data[index].title;
   infoDescription.innerHTML = data[index].description;
-
-  infoButton.addEventListener("click", function () {
-    const url = data[index].path;
-    window.location.href = url;
-  });
+  infoButton.href = data[index].path;
 }
 
 export function rotateCarousel(direction, rotate, carousel) {

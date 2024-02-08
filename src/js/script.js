@@ -1,10 +1,5 @@
 import * as THREE from "three";
-import {
-  createIsland,
-  rotateCarousel,
-  updateIslandInformation,
-  handleScaleClick,
-} from "./helpers";
+import { createIsland } from "./helpers";
 import data from "./data";
 
 import "./rotationSystem";
@@ -13,20 +8,17 @@ window.experience = window.experience || {};
 
 // Capture DOM elements
 
-// Modifiable
-const infoTitle = document.getElementById("infoTitle");
+// Constants
+const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
 const infoButton = document.getElementById("startButton");
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Set initial info box data
-  infoTitle.innerHTML = data[0].title;
+  // Set initial info box userData
+  // TODO: make random
+  frontTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
-  infoButton.addEventListener("click", function () {
-    const url = data[0].path;
-    window.location.href = url;
-    // camera.position.set(0, 3, 7);
-  });
+  infoButton.href = data[0].path;
 });
 
 // Create scene
@@ -56,9 +48,9 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.DirectionalLight(0xffffff, 4);
+const light = new THREE.PointLight(0xffffff, 10);
 // const light = new THREE.AmbientLight(0x404040, 3); // soft white light
-light.position.set(0, 1, 10);
+light.position.set(0, 1, -1);
 scene.add(light);
 
 // Carousel : Group of islands

@@ -5,26 +5,88 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/global/style.css" />
   <link rel="stylesheet" href="./assets/stylesheets/main.scss">
 </head>
-<body>
+<body class="page__home">
   <main>
-    <h1>Index</h1>
+    <div class="chef-illustration">
+      <img src="./static/images/scenery/intro-chef.svg" alt="">
+    </div>
     <div class="dialog">
-      <button class="btn-prev">Prev</button>
-      <button class="btn-next">Next</button>
+      <div class="dialog-nav">
+        <button class="btn-prev">Précédent</button>
+        <button class="btn-next">Suivant</button>
+        <a class="btn-game" href="./game.html">Lancer le jeu</a>
+      </div>
       <div class="dialog-content active">
-        <p>Je suis la bulle 1</p>
+        <p>Oh ! Quelle aubaine ! Vous tombez à pic(asso) !<br>
+          Moi c’est Jeff Deuvre, votre maître d’art !<br>
+          Nous venons de recevoir une commande de XXX. </p>
       </div>
       <div class="dialog-content">
-        <p>Je suis la bulle 2</p>
+        <p>Il désire une peinture 
+          <br><br>
+          <b><i>“qui représente le temps qui passe et qui nous invite à méditer sur la fragilité de la vie</i></b>”.
+          <br><br>
+          Pas de doute c’est une vanité !
+        </p>
       </div>
       <div class="dialog-content">
-        <p>Je suis la bulle 3</p>
-        <a href="./game.html">Lancer le jeu</a>
+        <p>
+          Sa demande est claire comme de l’eau de roche :
+          <br><br>
+          <b><i>“Pour le temps qui passe, j’aurais besoin de représenter :
+          <br><br>
+          <ul>
+            <li>le déroulement de la vie terrestre</li>
+            <li>la vie qui s’écoule inexorablement</li>
+            <li>les évènements inattendus qui bouleversent la vie humaine</i></b></li>
+          </ul>
+        </p>
+      </div>
+      <div class="dialog-content">
+        <p>
+          <b><i>Il faudrait aussi faire allusion à la mort qui nous attends en utilisant l’allégorie de :
+          <br><br>
+          <ul>
+            <li>la fragilité de la vie</li>
+            <li>la corruption du corps</li>
+            <li>l’âme éternelle et flamboyante</i></b></li>
+          </ul>
+        </p>
+      </div>
+      <div class="dialog-content">
+        <p>
+          <b><i>Enfin, pour la représentation du Christ, j’aimerais plusieurs éléments :
+          <br><br>
+          <ul>
+            <li>l’allégorie de sa souffrance et de sa mort</li>
+            <li>quelque chose qui représente à la fois son sang et sa passion</li>
+            <li>le symbole de la résurrection</i></b></li>
+          </ul>
+        </p>
+      </div>
+      <div class="dialog-content">
+        <p>
+          <b><i>J’ai confiance en vous pour créer un chef-d’œuvre !”</i></b>
+          <br><br>
+          Ne vous inquiétez pas si vous n'avez pas tout compris, je vais vous guider tout au long de la création. 
+          <br><br>
+          C’est parti, nous avons du pain sur la planche !
+        </p>
       </div>
     </div>
   </main>
+  <nav>
+    <div class="bottom-menu">
+      <a href="/" class="btn-icon">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </a>
+    </div>
+  </nav>
 </body>
 <script type="module" src="./assets/javascript/main.js"></script>
 </html>
