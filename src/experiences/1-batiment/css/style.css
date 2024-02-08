@@ -41,8 +41,7 @@ body {
 
 .parameter-buttons {
   position: absolute;
-  left: 4rem;
-  bottom: 4rem;
+  left: 3vw;
   display: flex;
   gap: 1.5rem;
 }
@@ -92,6 +91,10 @@ body {
   z-index: 7;
 }
 
+.left-arrow {
+  display: none;
+}
+
 .left-arrow,
 .right-arrow {
   background-color: transparent;
@@ -102,6 +105,14 @@ body {
 .right-arrow svg {
   height: 5rem;
   width: 5rem;
+}
+
+#last-step {
+  display: none;
+  position: absolute;
+  right: 3vw;
+  border: 5px solid black;
+  color: black;
 }
 
 .chronology-container {
