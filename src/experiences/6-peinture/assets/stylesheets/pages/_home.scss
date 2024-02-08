@@ -1,0 +1,12 @@
+.page__home {
+    background-image: url('../../static/images/scenery/intro-bg.svg');
+    background-size: cover;
+    main {
+        position: relative;
+    }
+    .chef-illustration {
+        position: absolute;
+        bottom: -1vh;
+        left: 8%;
+    }
+}
