@@ -124,16 +124,9 @@ window.addEventListener("touchmove", (event) => {
   currentTouch = event.touches[0].clientX / 100;
 });
 
-window.addEventListener("touchstart", (event) => {
-  currentTouch = event.touches[0].clientX / 100;
-  touchBefore = currentTouch;
-});
-
 //
 // ANIMATE
 //
-
-// Mouse Moove
 
 window.addEventListener("mousemove", (event) => {
   mouse.x = (event.clientX / sizes.width) * 2 - 1;
