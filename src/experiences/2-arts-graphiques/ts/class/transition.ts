@@ -157,6 +157,8 @@ export default class Transition {
               getPercentage: true,
               getPercentageAt: 60,
             };
+            console.log("seal !!");
+
             paint(
               canvas,
               currentSectionNumber,
@@ -233,6 +235,6 @@ export default class Transition {
     this.DisplayInteractiveCanvas(this.currentSectionNumber);
     this.displayTimelipse(this.currentSectionNumber);
     this.handleHintText();
-    landmark.updadeDot(this.currentSectionNumber)
+    landmark.updadeDot(this.currentSectionNumber);
   }
 }
