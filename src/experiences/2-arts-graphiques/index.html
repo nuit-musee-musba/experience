@@ -6,8 +6,6 @@
     <title>2 arts graphiques</title>
     <link rel="stylesheet" href="../../global/style.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/utils/reset.css" />
-    <link rel="stylesheet" href="./css/utils/common.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
   </head>
@@ -97,21 +95,48 @@
       <section id="section-2">
         <div class="container row">
           <div class="left">
-            <div class="paintingText">
+            <div class="paintingText" id="to-hide">
               <div class="timeline old">
                 <div class="timeline-bar"></div>
               </div>
-              <div class="">
+              <div class="text">
                 <h1>1910</h1>
                 <h2>Atelier d'Odilon Redon</h2>
                 <div class="hSeparator"></div>
 
+                <div class="paragraph">
+                  <p>
+                    Par un étrange tour du destin, vous vous retrouvez
+                    transporté un siècle en arrière, en 1910.
+                  </p>
+                  <p>Pour une raison inexpliquée, l'artise est absent.</p>
+                  <p>Mais vous, vous êtes là.</p>
+                  <p>
+                    Peinture terminé à : <span class="canvas_percentage"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="infosContainer hide to-reveal">
+              <div class="info">
+                <h2>Dimensions</h2>
                 <p>
-                  Par un étrange tour du destin, vous vous retrouvez transporté
-                  114 ans en arrière, en 1910.
+                  Cette œuvre mesure 70.8 cm de hauteur et 55.3 cm de largeur
+                  sans cadre.
                 </p>
+              </div>
+              <div class="info">
+                <h2>La symbolique des fleurs</h2>
                 <p>
-                  Peinture terminé à : <span class="canvas_percentage"></span>
+                  Des fleurs sont à ses pieds, symbole de la souffrance et lien
+                  à l'arbre dénudé.
+                </p>
+              </div>
+              <div class="info">
+                <h2>Source d'inspiration</h2>
+                <p>
+                  Pour créer ce paysage, Redon s’est inspiré des paysages de
+                  Peyrelebade dans le Médoc (33).
                 </p>
               </div>
             </div>
@@ -126,12 +151,34 @@
             ></div>
           </div>
           <div class="right">
-            <div class="info">
-              <div>
-                <h2>Odilon Redon</h2>
-                <h2>(1840 - 1916)</h2>
+            <div class="infosContainer">
+              <div class="info">
+                <div>
+                  <h2>Odilon Redon</h2>
+                  <h2>(1840 - 1916)</h2>
+                </div>
+                <p>
+                  Artiste bordelais, appartenant au mouvement du symbolisme.
+                </p>
               </div>
-              <p>Artiste bordelais, appartenant au mouvement du symbolisme.</p>
+              <div class="info hide to-reveal">
+                <h2>Martyre biblique</h2>
+                <p>
+                  Ce chef-d'œuvre représente une scène biblique où
+                  Saint-Sébastien, le martyr, est attaché à un arbre, percé de
+                  deux flèches.
+                </p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Acquisition de l’oeuvre</h2>
+                <p>
+                  Acquise par la commune de Bordeaux et le Musée des Beaux-Arts
+                  en 1980, l'œuvre repose aujourd'hui dans la réserve du musée.
+                </p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Signature discrete</h2>
+              </div>
             </div>
           </div>
         </div>
