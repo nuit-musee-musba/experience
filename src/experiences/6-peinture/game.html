@@ -10,7 +10,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
   </head>
-  <body class="page__game">
+  <body class="page__game has-ending-opened">
     <nav>
       <div class="bottom-menu">
         <a href="/" class="btn-icon">
@@ -314,7 +314,7 @@
         <img src="/6-peinture/images/scenery/ending/jeff-1.svg" alt="" />
         <div class="dialog">
           <div class="dialog-nav">
-            <a class="btn-next" href="./ending.html">Suivant</a>
+            <button class="btn-ending">Suivant</button>
           </div>
           <div class="dialog-content active">
             <p>
@@ -323,6 +323,12 @@
               Permettez moi d’y apporter la cerise sur le gâteau !
             </p>
           </div>
+        </div>
+        <div class="player-video">
+          <video id="cinematic" width="640" height="360" controls autoplay>
+            <source src="/6-peinture/videos/test.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </main>

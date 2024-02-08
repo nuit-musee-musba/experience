@@ -12,3 +12,33 @@
         }
     }
 }
+
+.page__ending {
+    background-image: url("/6-peinture/images/scenery/ending/background-2.svg");
+    background-size: cover;
+    .chef-illustration {
+        bottom: -2%;
+        position: absolute;
+        right: 2%;
+        z-index: 1;
+    }
+    .popup-animation {
+        background-image: url("/6-peinture/images/scenery/ending/background-4.svg");
+        background-size: cover;
+        display: none;
+        height: 100vh;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 99;
+    }
+    .dialog {
+        z-index: 9;
+        position: relative;
+        .btn-prev {
+            display: none !important;
+        }
+    }
+}
