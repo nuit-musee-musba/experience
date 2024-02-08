@@ -217,10 +217,10 @@ window.addEventListener("resize", () => {
 
 // CAMERA
 const camera = new THREE.PerspectiveCamera(
-  75,
+  50,
   sizes.width / sizes.height,
   0.2,
-  500
+  300
 );
 scene.add(camera);
 
