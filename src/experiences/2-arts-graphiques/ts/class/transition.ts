@@ -207,7 +207,7 @@ export default class Transition {
         break;
       case 2:
         this.hintText.changeText(
-          "Dessinez l’oeuvre “Saint Sebastien” pour lui donner vie ."
+          "Dessinez l’œuvre “Saint Sébastien” pour lui donner vie."
         );
         break;
       case 3:
