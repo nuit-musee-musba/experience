@@ -48,9 +48,8 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.PointLight(0xffffff, 10);
-// const light = new THREE.AmbientLight(0x404040, 3); // soft white light
-light.position.set(0, 1, -1);
+const light = new THREE.SpotLight(0xffffff, 2);
+light.position.set(0, 0.5, -0.85);
 scene.add(light);
 
 // Carousel : Group of islands
@@ -122,6 +121,8 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   window.experience.updateCarouselRotation();
+  // console.log(window.experience.rotation);
+  // console.log(window.experience.index);
   // Render the scene
   renderer.render(scene, camera);
 };

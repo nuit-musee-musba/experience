@@ -263,7 +263,12 @@ body {
   width: 750px;
   position: absolute;
   right: 20rem;
+  bottom: 10rem;
   flex-direction: column;
   justify-content: left;
   z-index: 3;
+}
+
+.transition-opacity {
+  transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
 }
