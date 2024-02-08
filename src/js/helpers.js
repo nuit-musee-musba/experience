@@ -6,6 +6,8 @@ import * as THREE from "three";
 
 import data from "./data";
 
+const meshScale = 0.025;
+
 // World creation
 export async function createIsland(i, count, color) {
   try {
@@ -15,7 +17,7 @@ export async function createIsland(i, count, color) {
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.035, 0.035, 0.035], // scale
+      [meshScale, meshScale, meshScale], // scale
       color
     );
 
