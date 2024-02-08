@@ -69,6 +69,7 @@ elements.forEach((element) => {
 
 const result = countDuplicates(accArray);
 let resultToVerify = countDuplicates(accArray);
+let actualNumber = 0;
 
 export function recipeGeneration() {
   recipe.innerHTML = "";
@@ -76,14 +77,29 @@ export function recipeGeneration() {
     let thisItem = items.items.find((item) => item.id === element.name);
     //element.count
     if (thisItem.recipe_step == current_step) {
+      let symbol = "";
+      //   if (thisItem.category == "food") {
+      //     symbol = `\ee04`;
+      //   } else if (thisItem.category == "animals") {
+      //     symbol = `ee02`;
+      //   } else if (thisItem.category == "objects") {
+      //     symbol = `ee03`;
+      //   }
+
       recipe.innerHTML +=
-        '<li class="item" id="recipe-' +
+        '<li class="item ' + thisItem.category + '" id="recipe-' +
         element.name +
-        '">x' +
-        thisItem.number_needed +
-        " - " +
+        `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +
-        "</li>";
+        ' <span id="actual-' +
+        element.name +
+        '">' +
+        actualNumber +
+        "</span>/" +
+        thisItem.number_needed +
+        "</div><span class='item-checkbox'><img id='img-check-" +
+        element.name +
+        "' src='./static/images/misc/checked.svg'></span></li>";
     }
   });
 }

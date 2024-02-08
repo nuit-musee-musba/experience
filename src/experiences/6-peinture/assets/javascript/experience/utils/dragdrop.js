@@ -84,6 +84,8 @@ function handleDragInteraction(
     ) {
       let dialog = items.items.find((item) => item.id === dragElementId);
 
+      let numberUpdater = document.getElementById("actual-" + dialog.id);
+
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
           //l'item doit etre dans le step actuel
@@ -101,7 +103,7 @@ function handleDragInteraction(
               //alert("Chef : " + dialog.dialog);
             } else {
               print_chef_speech(
-                "Tu as mis tout les elements requis pour cet aliment multiple"
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -112,23 +114,24 @@ function handleDragInteraction(
               recipeResolve(dialog.id);
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
+              howManyDrags++;
               current_step_done++;
               success = true;
             } else {
               print_chef_speech(
-                "Tu as mis tout les elements requis pour cet aliment"
+                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
           }
         } else if (dialog.recipe_step < current_step) {
           print_chef_speech(
-            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
+            "Vous l'avez déjà utilisé dans les étapes précédentes ! Cherchez autre chose..."
           );
         } else {
           if (dialog.wrong_step_dialog == "") {
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
@@ -137,6 +140,8 @@ function handleDragInteraction(
 
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
+
+        numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 
@@ -158,6 +163,7 @@ function handleDragInteraction(
               stepsEl.innerHTML = current_step;
               howManyDone = 0;
               step_success = false;
+              print_chef_speech("Passons à l'étape " + current_step + "/3 !");
             }, 5000);
           }
         }

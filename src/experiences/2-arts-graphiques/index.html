@@ -4,262 +4,367 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2 arts graphiques</title>
-    <link rel="stylesheet" href="/global/style.css" />
+    <link rel="stylesheet" href="../../global/style.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
   </head>
   <body>
-    <button id="button">Découvrir l'oeuvre</button>
-    <a href="/">Retourner au hub</a>
+    <div class="loading__container active"></div>
 
-    <section id="section-0">
-      <div class="left">
-        <h1>Une restautation historique</h1>
-        <p>
-          L’œuvre en pastel Saint Sébastien de Odilon Redon va sortir de la
-          réserve pour la prochaine exposition du MusBA.
-        </p>
-      </div>
-      <div class="center"></div>
-      <div class="right"></div>
-    </section>
-    <section id="section-1">
-      <div class="left">
-        <div class="paintingText">
-          <h1 id="title">2024</h1>
-          <h2>Réserve du musba</h2>
-          <div class="hSeparator"></div>
+    <div class="wrapper">
+      <header>
+        <div class="landmark">
+          <template id="landmark__dot">
+            <div class="landmark__dot"></div>
+          </template>
+        </div>
+      </header>
+      <section id="section-0">
+        <dialog id="modal">
+          <h1>Odysée d'une oeuvre</h1>
+          <div class="line"></div>
           <p>
-            Désemballage : Action d’enlever de leur emballage des objets, des
-            marchandises
+            Au cœur de l'exposition MusBA, un sanctuaire secret se dévoile... Préparez-vous à plonger dans les mystères d'une expérience envoûtante, où les secrets de préservation artistique de l'œuvre
+            <span class="bold">"Saint Sébastien”</span>
+            , d'Odilon Redon sont révélés.
           </p>
-          <p>Faites preuve de délicatesse en retirant l'emballge de l'oeuvre</p>
+          <button class="btn-primary close-modal">Entrer dans la réserve</button>
+        </dialog>
+      </section>
+      <section id="section-1">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText">
+              <div class="timeline">
+                <div class="timeline-bar"></div>
+              </div>
+              <div>
+                <h1 id="title">2024</h1>
+                <h2>Réserve du musba</h2>
+                <div class="hSeparator"></div>
+                <p>
+                  <span class="italic">Désemballage : </span><br />Action d’enlever
+                  de leur emballage des objets, des marchandises
+                </p>
+                <p>
+                  Faites preuve de délicatesse en retirant l'emballge de l'oeuvre
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="center">
+            <div class="sec1-painting"></div>
+            <div id="one" class="sec1-dragable"></div>
+            <div id="two" class="sec1-dragable"></div>
+            <div id="three" class="sec1-dragable"></div>
+            <div id="four" class="sec1-dragable"></div>
+            <button class="btn-next sec1-button btn-primary">Etape suivante</button>
+          </div>
+          <div class="right"></div>
         </div>
-      </div>
-      <div class="center">
-        <div class="sec1-painting"></div>
-        <div id="one" class="sec1-dragable"></div>
-        <div id="two" class="sec1-dragable"></div>
-        <div id="three" class="sec1-dragable"></div>
-        <div id="four" class="sec1-dragable"></div>
-      </div>
-      <div class="right"></div>
-    </section>
+      </section>
 
-    <section id="section-2">
-      <div class="left">
-        <div class="paintingText">
-          <h1>1910</h1>
-          <h2>Atelier d'Odilon Redon</h2>
-          <div class="hSeparator"></div>
-
-          <p>
-            Par un étrange tour du destin, vous vous retrouvez transporté 114
-            ans en arrière, en 1910.
-          </p>
-          <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
+      <section id="section-2">
+        <div class="container row">
+          <div class="left">
+            <div class="paintingText" id="to-hide">
+              <div class="timeline old">
+                <div class="timeline-bar"></div>
+              </div>
+              <div class="text">
+                <h1>1910</h1>
+                <h2>Atelier d'Odilon Redon</h2>
+                <div class="hSeparator"></div>
+                <div class="paragraph">
+                  <p>Par un étrange tour du destin, vous vous retrouvez transporté un siècle en arrière, en 1910.</p>
+                  <p>Pour une raison inexpliquée, l'artise est absent.</p>
+                  <p>Mais vous, vous êtes là.</p>
+                  <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="infosContainer hide to-reveal">
+              <div class="info">
+                <h2>Dimensions</h2>
+                <p>Cette œuvre mesure 70.8 cm de hauteur et 55.3 cm de largeur sans cadre.</p>
+              </div>
+              <div class="info">
+                <h2>La symbolique des fleurs</h2>
+                <p>Des fleurs sont à ses pieds, symbole de la souffrance et lien à l'arbre dénudé.</p>
+              </div>
+              <div class="info">
+                <h2>Source d'inspiration</h2>
+                <p>Pour créer ce paysage, Redon s’est inspiré des paysages de Peyrelebade dans le Médoc (33).</p>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec2-button btn-primary">Etape suivante</button>
+            <div class="canvas__container active" data-interaction="paint"></div>
+          </div>
+          <div class="right">
+            <div class="infosContainer">
+              <div class="info">
+                <div>
+                  <h2>Odilon Redon</h2>
+                  <h2>(1840 - 1916)</h2>
+                </div>
+                <p>Artiste bordelais, appartenant au mouvement du symbolisme.</p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Martyre biblique</h2>
+                <p>Ce chef-d'œuvre représente une scène biblique où Saint-Sébastien, le martyr, est attaché à un arbre, percé de deux flèches.</p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Acquisition de l’oeuvre</h2>
+                <p>Acquise par la commune de Bordeaux et le Musée des Beaux-Arts en 1980, l'œuvre repose aujourd'hui dans la réserve du musée.</p>
+              </div>
+              <div class="info hide to-reveal">
+                <h2>Signature discrete</h2>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="center">
-        <div class="canvas__container active" data-interaction="paint"></div>
-      </div>
-      <div class="right">
-        <p>Pour une raison inexpliquée, l'artiste est absent.</p>
-        <p>Mais vous, vous êtes là.</p>
-        <p>Donnez vie au chef-d'oeuvre d'Odilon Redon : "Saint Sébastien"</p>
-        <p>Odilon Redon</p>
-        <p>Né à Bordeaux en 1840, Odilon Redon est décédé à Paris en 1916</p>
-      </div>
-    </section>
+      </section>
 
-    <section id="section-3">
-      <div class="left">
-        <p>Timelapse</p>
-        <h2>
-          <span id="date-anim__year" data-from="2024" data-to="1910">2024</span>
-        </h2>
-      </div>
-      <div class="center">
-        <p>Peinture qui fond</p>
-      </div>
-      <div class="right"></div>
-    </section>
-
-    <section id="section-4">
-      <div class="left">
-        <p>Dans la reserve</p>
-        <p class="step">
-          Etape 1 : Rassemblez les morceaux avec soin pour commencer la
-          restauration !
-        </p>
-        <p>
-          Etape 2 : Avec précision, appliquez le solvant pour réparer les
-          déchirures (craquelures) en suivant la ligne avec vos doigts.
-        </p>
-      </div>
-      <div class="center">
-        <div class="canvas__container" data-interaction="seal"></div>
-        <p>Peinture abimé</p>
-        <div class="painting-pieces-container">
-          <img
-            id="dragable-dl"
-            class="sec4-dl sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/dl.svg"
-            alt=""
-          />
-          <img
-            id="dragable-dr"
-            class="sec4-dr sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/dr.svg"
-            alt=""
-          />
-          <img
-            id="dragable-ul"
-            class="sec4-ul sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/ul.svg"
-            alt=""
-          />
-          <img
-            id="dragable-ur"
-            class="sec4-ur sec4-dragable"
-            src="/2-arts-graphiques/images/painting-pieces/ur.svg"
-            alt=""
-          />
-          <svg
-            id="Calque_1"
-            data-name="Calque_1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 442 442"
-          >
-            <polygon
-              class="canvas-ul pieces-ref"
-              id="ref-ul"
-              points="310.64 48.25 199.64 196.25 118.64 247.25 44.64 176.25 1 278.25 1 1 143.64 1 310.64 48.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
-            />
-            <polygon
-              class="canvas-dl pieces-ref"
-              id="ref-dl"
-              points="310.64 226.25 226.64 360.25 82.64 441 1 441 1 278.25 44.64 176.25 118.64 247.25 221 256.25 310.64 226.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
-            />
-            <polygon
-              class="canvas-dr pieces-ref"
-              id="ref-dr"
-              points="441 150.25 441 441 82.64 441 226.64 360.25 310.64 226.25 395.64 304.25 441 150.25"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
-            />
-            <polygon
-              class="canvas-ur pieces-ref"
-              id="ref-ur"
-              points="441 1 441 150.25 395.64 304.25 310.64 226.25 221 256.25 118.64 247.25 199.64 196.25 310.64 48.25 143.64 1 441 1"
-              style="
-                fill: none;
-                stroke: #1d1d1b;
-                stroke-miterlimit: 10;
-                stroke-width: 2px;
-              "
-            />
-          </svg>
+      <section id="section-3">
+        <div class="container row">
+          <div class="left">
+            <p>Timelapse</p>
+            <h2>
+              <span id="date-anim__year" data-from="2024" data-to="1910">2024</span>
+            </h2>
+          </div>
+          <div class="center">
+            <button class="btn-next sec3-button btn-primary">Etape suivante</button>
+            <p>Peinture qui fond</p>
+          </div>
+          <div class="right"></div>
         </div>
-      </div>
-      <div class="right">
-        <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
-      </div>
-    </section>
+      </section>
 
-    <section id="section-5">
-      <div class="left">
-        <p>
-          Etape 3 : Au fil des années, l'œuvre a été affectée par l'humidité, la
-          nicotine, la poussière, les dépôts d'insectes, la pollution, etc.
-          Utilisez cette gomme pour nettoyer délicatement l'œuvre et en éliminer
-          les impuretés.
-        </p>
-      </div>
-      <div class="center">
-        <div class="canvas__container active" data-interaction="cleaning"></div>
-      </div>
-      <div class="right">
-        <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
-      </div>
-    </section>
-
-    <section id="section-6">
-      <div class="left">
-        <div class="frame" id="frame-1">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+      <section id="section-4">
+        <div class="container row">
+          <div class="left">
+            <p>Dans la reserve</p>
+            <p class="step">
+              Etape 1 : Rassemblez les morceaux avec soin pour commencer la
+              restauration !
+            </p>
+          </div>
+          <div class="center" >
+            <button class="btn-next sec4-button btn-primary">Etape suivante</button>
+            <p>Peinture abimé</p>
+            <div class="painting-pieces-container">
+              <img
+                id="dragable-dl"
+                class="sec4-dl sec4-dragable"
+                src="/2-arts-graphiques/images/painting-pieces/dl.svg"
+                alt=""
+              />
+              <img
+                id="dragable-dr"
+                class="sec4-dr sec4-dragable"
+                src="/2-arts-graphiques/images/painting-pieces/dr.svg"
+                alt=""
+              />
+              <img
+                id="dragable-ul"
+                class="sec4-ul sec4-dragable"
+                src="/2-arts-graphiques/images/painting-pieces/ul.svg"
+                alt=""
+              />
+              <img
+                id="dragable-ur"
+                class="sec4-ur sec4-dragable"
+                src="/2-arts-graphiques/images/painting-pieces/ur.svg"
+                alt=""
+              />
+              <svg
+                id="Calque_1"
+                data-name="Calque_1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 442 442"
+              >
+                <polygon
+                  class="canvas-ul pieces-ref"
+                  id="ref-ul"
+                  points="310.64 48.25 199.64 196.25 118.64 247.25 44.64 176.25 1 278.25 1 1 143.64 1 310.64 48.25"
+                  style="
+                    fill: none;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 2px;
+                  "
+                />
+                <polygon
+                  class="canvas-dl pieces-ref"
+                  id="ref-dl"
+                  points="310.64 226.25 226.64 360.25 82.64 441 1 441 1 278.25 44.64 176.25 118.64 247.25 221 256.25 310.64 226.25"
+                  style="
+                    fill: none;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 2px;
+                  "
+                />
+                <polygon
+                  class="canvas-dr pieces-ref"
+                  id="ref-dr"
+                  points="441 150.25 441 441 82.64 441 226.64 360.25 310.64 226.25 395.64 304.25 441 150.25"
+                  style="
+                    fill: none;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 2px;
+                  "
+                />
+                <polygon
+                  class="canvas-ur pieces-ref"
+                  id="ref-ur"
+                  points="441 1 441 150.25 395.64 304.25 310.64 226.25 221 256.25 118.64 247.25 199.64 196.25 310.64 48.25 143.64 1 441 1"
+                  style="
+                    fill: none;
+                    stroke: #1d1d1b;
+                    stroke-miterlimit: 10;
+                    stroke-width: 2px;
+                  "
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="right">
+            <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
+          </div>
         </div>
-      </div>
-      <div class="center">
+      </section>
+
+      <section id="section-5">
+        <div class="container row">
+          <div class="left">
+            <p>
+              Etape 2 : Avec précision, appliquez le solvant pour réparer les
+              déchirures (craquelures) en suivant la ligne avec vos doigts.
+            </p>
+          </div>
+          <div class="center">
+            <button class="btn-next sec5-button btn-primary">Etape suivante</button>
+            <div class="canvas__container active" data-interaction="seal"></div>
+          </div>
+          <div class="right">
+          </div>
+        </div>
+      </section>
+
+      <section id="section-6">
+        <div class="container row">
+          <div class="left">
+            <p>
+              Etape 3 : Au fil des années, l'œuvre a été affectée par l'humidité, la
+              nicotine, la poussière, les dépôts d'insectes, la pollution, etc.
+              Utilisez cette gomme pour nettoyer délicatement l'œuvre et en éliminer
+              les impuretés.
+            </p>
+          </div>
+          <div class="center">
+            <button class="btn-next sec6-button btn-primary">Etape suivante</button>
+            <div class="canvas__container active" data-interaction="cleaning"></div>
+          </div>
+          <div class="right">
+            <p>Peinture terminé à : <span class="canvas_percentage"></span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-7">
         <p class="frame-step">
           Cette œuvre sera bientôt exposée, il est donc temps de choisir un
           cadre qui la mettra en valeur. Revêtez là d'un habillage approprié
           pour émerveiller les spectateurs.
         </p>
-        <div class="frame" id="frame-2">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+        <div class="container row">
+          <div class="left">
+            <div class="frame" id="frame-1">
+              <img src="/2-arts-graphiques/images/painting-frames/painting-frame-1.webp" alt="peinture" />
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn-next sec7-button btn-primary">Etape suivant</button>
+            <div class="frame" id="frame-2">
+              <img src="/2-arts-graphiques/images/painting-frames/painting-frame-2.webp" alt="peinture" />
+            </div>
+          </div>
+          <div class="right">
+            <div class="frame" id="frame-3">
+              <img src="/2-arts-graphiques/images/painting-frames/painting-frame-3.webp" alt="peinture" />
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="right">
-        <div class="frame" id="frame-3">
-          <img
-            src="/2-arts-graphiques/canvas/canvas1.jpeg"
-            alt="peinture"
-          />
+      </section>
+
+      <section id="section-8">
+        <div class="container row">
+          <div class="left">
+            <p>Dans la galerie</p>
+          </div>
+          <div class="center">
+            <button class="btn-next sec8-button btn-primary">Etape suivante</button>
+            <p>Exposition</p>
+          </div>
+          <div class="right"></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="section-7">
-      <div class="left">
-        <p>Dans la galerie</p>
-      </div>
-      <div class="center">
-        <p>Exposition</p>
-      </div>
-      <div class="right"></div>
-    </section>
+      <section id="section-9">
+        <div class="container row">
+          <div class="left">
+            <h1>Une restauration historique</h1>
+            <p>
+              Saint Sebastien de Odilon Redon restera accessible au grand public
+              pendant 3 mois avant d'être remise dans la réserve, gardée secrète du
+              public.
+            </p>
+            <p>
+              Les oeuvres d'art graphiques sont extrêmement fragiles donc demandent
+              plus de soin.
+            </p>
+          </div>
+          <div class="center">
+            <button class="btn-next sec9-button btn-primary">Etape suivante</button>
+            <p>Scanez le QR pour récuperer votre oeuvre.</p>
+          </div>
+          <div class="right"></div>
+        </div>
+      </section>
 
-    <section id="section-8">
-      <div class="left">
-        <h1>Une restauration historique</h1>
-        <p>
-          Saint Sebastien de Odilon Redon restera accessible au grand public
-          pendant 3 mois avant d'être remise dans la réserve, gardée secrète du
-          public.
-        </p>
-        <p>
-          Les oeuvres d'art graphiques sont extrêmement fragiles donc demandent
-          plus de soin.
-        </p>
-      </div>
-      <div class="center">
-        <p>Scanez le QR pour récuperer votre oeuvre.</p>
-      </div>
-      <div class="left"></div>
-    </section>
+      <footer>
+        <div class="actions">
+          <a href="/" class="btn-small-icon"><img class="btn-icon" src="/global/svg/home.svg" alt=""/></a>
+        </div>
+        <div class="indice">
+          <p id="hint"></p>
+        </div>
+      </footer>
+    </div>
+
+
   </body>
 </html>
+
+<style>
+  .loading__container{
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(55, 55, 55);
+    display: none;
+  }
+  .loading__container.active{
+    display: block;
+  }
+</style>

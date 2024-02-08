@@ -5,7 +5,8 @@ const router = [
     path: "/experiences/1-batiment/index.html",
     color: "red",
     title: "Experience batiment",
-    description: "Experience batiment description",
+    description:
+      "Explorez l'histoire du Musée des Beaux-Arts de Bordeaux à travers une mini-carte interactive, depuis sa première installation jusqu'à la construction de son édifice actuel. Cette expérience relève les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
   },
   {
     id: 2,

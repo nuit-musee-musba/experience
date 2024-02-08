@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -15,7 +15,8 @@ enableInactivityRedirection();
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlOrigin = urlParams.get("home-popin");
-const popin = document.querySelector("#popin-home");
+const popin1 = document.querySelector("#popin-welcome");
+const popin2 = document.querySelector("#popin-consignes");
 let events = true;
 
 const popinHide = (targetPopin) => {
@@ -32,15 +33,31 @@ const popinShow = (targetPopin) => {
   events = false;
 };
 
+// test const qui n'est pas un hide direct mais une animation
+// const popinFadeOut = (targetPopin) => {
+//   targetPopin.classList.add("fadeout");
+//   document.querySelector("body").classList.add("popin-fadeout");
+//   document.querySelector(".popin-overlay").classList.add("hidden");
+//   events = true;
+// };
+
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
 
   if (urlOrigin == "false") {
-    popinHide(popin);
+    popinHide(popin1);
+    popinHide(popin2);
   } else {
-    popinShow(popin);
+    popinShow(popin1)
+    popinShow(popin2)
+    setTimeout(() => { popinHide(popin1); }, 1000)
   }
 });
+
+// function FadeOut() {
+//   alert("On attend");
+// };
+
 
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
@@ -50,6 +67,8 @@ for (const popinBtn of popinBtns) {
     popinHide(targetPopin);
   });
 }
+
+
 /**
  * Base
  */
@@ -166,7 +185,6 @@ scene.add(ellipse);
 
 // Wheel positions
 ellipse.rotation.y = -Math.PI * 0.5;
-// ellipse.add(firstPainting, secondPainting, thirdPainting);
 
 /**
  * Raycaster
@@ -355,6 +373,12 @@ window.addEventListener("touchend", function () {
 
 // Function
 setInterval(checkUserInteractions, 2000);
+
+// Controls
+// const controls = new OrbitControls(camera, canvas);
+// controls.target = ellipse.position;
+// controls.enableDamping = true;
+
 /**
  * Renderer
  */
@@ -395,8 +419,6 @@ const tick = () => {
 
   // Update controls
   // controls.update();
-
-  // ellipse.rotation.z += Math.PI * deltaTime * 0.25;
 
   // Update paintings positions based on ellipse rotation
   const angle = ellipse.rotation.z;

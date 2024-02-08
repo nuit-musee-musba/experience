@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 /**
  * Inactivity
@@ -22,9 +23,12 @@ const gui = new GUI({
 
 // Global parameters
 let globalParameters = {
+  lightDistance: 0.7,
   lightAngleStrength: 0.5,
-  lightRadius: 1.3,
+  lightRadius: 1.2,
   white: "#f5f5f5",
+  ellipseDefaultOpacity: 0.5,
+  ellipseTouchOpacity: 0.2,
 };
 
 // Canvas
@@ -59,12 +63,17 @@ const colorTexture = textureLoader.load(
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 
 const heightTexture = textureLoader.load(
-  "/4-lumiere/first-painting/first-painting-height.png"
+  "/4-lumiere/first-painting/first-painting-height.jpg"
 );
 
 // Wallpaper
 const wallpaperHeightTexture = textureLoader.load(
   "/4-lumiere/first-painting/background-height.png"
+);
+
+// Light object
+const lightObjectTexture = textureLoader.load(
+  "/4-lumiere/first-painting/first-light-object.png"
 );
 
 /**
@@ -81,15 +90,16 @@ gltfLoader.setDRACOLoader(dracoLoader);
  */
 
 // Wallpaper
-const wallpaperGeometry = new THREE.PlaneGeometry(6, 4, 1, 1);
+const wallpaperGeometry = new THREE.PlaneGeometry(15, 15, 1, 1);
 const wallpaperMaterial = new THREE.MeshStandardMaterial({
-  color: "#000000",
-  displacementMap: wallpaperHeightTexture,
-  displacementScale: 0.2,
+  color: "#242424",
+  // map: wallpaperHeightTexture,
+  metalnessMap: wallpaperHeightTexture,
+  metalness: 0.5,
 });
 const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
 scene.add(wallpaper);
-wallpaper.position.z = -0.5;
+wallpaper.position.z = -2;
 
 // First painting
 const planeGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
@@ -134,22 +144,37 @@ gltfLoader.load(
 );
 
 // ellipse
-var ellipseGeometry = new THREE.TorusGeometry(
+const ellipseGeometry = new THREE.TorusGeometry(
   globalParameters.lightRadius, // Radius
   0.005, // tube
   12, // radialSegments
   48, // tubularSegments
   Math.PI * 2 // arc
 );
-var ellipseMaterial = new THREE.MeshBasicMaterial({
+const ellipseMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
+  opacity: globalParameters.ellipseDefaultOpacity,
   // wireframe: true,
 });
-var ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
-ellipse.position.z = 0.5;
+const ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
+ellipse.position.z = globalParameters.lightDistance;
 scene.add(ellipse);
+
+// Light object
+const lightObjectGeometry = new THREE.PlaneGeometry(
+  0.6, // width
+  0.6, // height
+  3, //widthSegments
+  3 //heightSegments
+);
+const lightObjectMaterial = new THREE.MeshBasicMaterial({
+  map: lightObjectTexture,
+  transparent: true,
+  opacity: 1,
+});
+const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
+scene.add(lightObject);
 
 /**
  * Lights
@@ -168,14 +193,15 @@ ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
 // firstPainting point light
 const pointLight = new THREE.PointLight(
-  "#ffCC70", // color
-  10, // intensity
-  3, // distance
+  "#ede2b9", // color
+  15, // intensity
+  8, // distance
   1 // decay
 );
 pointLight.position.x = globalParameters.lightRadius;
 scene.add(pointLight);
 ellipse.add(pointLight);
+lightObject.position.z = globalParameters.lightDistance + 0.1;
 const pointLightTweaks = gui.addFolder("Spot light parameters");
 pointLightTweaks.add(pointLight, "visible");
 pointLightTweaks.addColor(pointLight, "color");
@@ -187,9 +213,21 @@ pointLightTweaks
   .max(20)
   .step(0.001);
 
+// Spotlight
+const spotLight = new THREE.SpotLight(
+  "#ede2b9", // color
+  3, // intensity
+  2, // distance
+  3, // angle
+  0, // penumbra
+  2 // decay
+);
+
+pointLight.add(spotLight);
+spotLight.position.z = -0.75;
 // Helper
 const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-pointLightHelper.visible = true;
+pointLightHelper.visible = false;
 pointLightHelper.color = "#ffffff";
 scene.add(pointLightHelper);
 pointLightTweaks.add(pointLightHelper, "visible").name("Repère visuel");
@@ -278,6 +316,7 @@ window.addEventListener(
 canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  ellipse.material.opacity = globalParameters.ellipseTouchOpacity;
 
   // Update firstPainting light position
   updateRotation();
@@ -289,6 +328,10 @@ canvas.addEventListener("touchmove", (event) => {
 
   // Update firstPainting light position
   updateRotation();
+});
+
+canvas.addEventListener("touchend", (event) => {
+  ellipse.material.opacity = globalParameters.ellipseDefaultOpacity;
 });
 
 // Calculate pointer angle
@@ -306,12 +349,20 @@ const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
 
 // Update ellipse rotation
+updateRotation();
 function updateRotation() {
   const angle = calculateAngle();
   ellipse.rotation.z = angle;
+  const radius = globalParameters.lightRadius;
+
+  lightObject.position.set(
+    Math.cos(angle) * radius,
+    Math.sin(angle) * radius,
+    globalParameters.lightDistance + 0.1
+  );
 
   // Check result
-  if (angle > 1.5 && angle < 1.8) {
+  if (angle > 1.64 && angle < 1.84) {
     resultState = true;
     resultBtn.disabled = false;
   } else {
@@ -328,6 +379,11 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
+// Controls
+// const controls = new OrbitControls(camera, canvas);
+// controls.target = ellipse.position;
+// controls.enableDamping = true;
+
 /**
  * Renderer
  */
@@ -342,6 +398,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
+  // Update controls
+  // controls.update();
+
   // Light controls
   pointLightHelper.update();
 

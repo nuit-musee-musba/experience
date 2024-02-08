@@ -15,11 +15,6 @@ html,
 body {
   overflow: hidden;
 }
-
-html,
-body {
-  overflow: hidden;
-}
 .title-component {
   position: absolute;
   top: 6rem;
@@ -58,30 +53,11 @@ body {
 }
 
 .parameter-buttons a svg {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 21px;
   width: 100%;
   height: 100%;
-}
-
-#nextButton {
-  z-index: 0;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  bottom: 0;
-  left: 50%;
-  padding-bottom: 2vh;
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-size: 2.5rem;
-  font-weight: 100;
-}
-
-#nextButton img {
-  z-index: -1;
-  position: absolute;
-  bottom: 0;
 }
 
 #interestButton {
@@ -107,12 +83,25 @@ body {
 }
 
 .chronology {
-  z-index: 7;
-  bottom: 12vh;
+  position: absolute;
+  bottom: 5vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
+  align-items: center;
+  z-index: 7;
+}
+
+.left-arrow,
+.right-arrow {
+  background-color: transparent;
+  border: none;
+}
+
+.left-arrow svg,
+.right-arrow svg {
+  height: 5rem;
+  width: 5rem;
 }
 
 .chronology-container {
@@ -120,13 +109,51 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0 3vw;
 }
 
-.chronology-buttons {
+.chronology-timeline {
   display: flex;
   align-items: center;
-  gap: 5vw;
-  padding: 0 4vw;
+}
+
+.chronology-timeline .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chronology-timeline .buttons .date {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.chronology-timeline .button {
+  position: relative;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 5px solid white;
+}
+
+.chronology-timeline .button div {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.chronology-line {
+  width: 5vw;
+  height: 5px;
+  background-color: white;
 }
 
 .chronology-title {
@@ -165,31 +192,25 @@ body {
   cursor: pointer;
 }
 
-.chronology-line {
-  width: 100%;
-  height: 5px;
-  background-color: white;
-}
-
 #end-menu {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
   display: none;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(245, 245, 220, 1);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 
 .end-menu-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5rem;
+  padding: 6rem 13rem;
+  color: white;
 }
 
 .end-menu-buttons {
@@ -198,9 +219,9 @@ body {
   gap: 20px;
 }
 
-.end-menu-buttons div {
-  border: 2px dashed white;
-  padding: 5px;
+#restart-button button {
+  border: none;
+  color: black;
 }
 
 .interest-component {
@@ -261,8 +282,5 @@ body {
 
   #title-component {
     font-size: 2rem;
-  }
-  #nextButton {
-    font-size: 1rem;
   }
 }

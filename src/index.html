@@ -9,58 +9,82 @@
   </head>
   <body>
     <div id="app">
-      <!-- Loader -->
+      <div class="second-scene experience-infos">
+        <h2 id="infoTitle"></h2>
+        <div id="infoText"></div>
+      </div>
+
       <div id="loader" class="loader-wrapper">
         <div class="loader"></div>
-        <p>Ça tourne :0</p>
+        <img src="/assets/hub/logo_musba.png" />
       </div>
-      <!-- Hero Wrapper -->
       <div class="heroWrapper">
-        <!-- Webgl canvas -->
         <div id="scrollBox">
           <canvas id="webgl"></canvas>
-
-          <!-- <div class="listBox">
-            <ul class="colorList">
-              <li style="color: red">1 batiment : red</li>
-              <li style="color: blue">2 arts-graphiques : blue</li>
-              <li style="color: green">3 sculpture : green</li>
-              <li style="color: black">4 lumiere : yellow</li>
-              <l style="color: purple">6 peinture : purple</l>
-            </ul>
-          </div> -->
         </div>
         <div id="infoBox">
-          <div class="controls">
-            <!-- Start Experience Button -->
-            <button id="left" class="control">
-              <div class="button-loader-left button-loader"></div>
-              <spa>Left</spa>
+          <button class="btn-icon second-scene" id="backButton">
+            <i class="i-left"> </i>
+            <span>Retour à la galerie</span>
+          </button>
+          <button id="helpButton" class="btn-icon">
+            <i class="i-info"></i>
+          </button>
+          <div id="helpPopup">
+            <div class="popup-text">
+              Cette expérience interactive a été réalisée par la promotion 2024 -
+              3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
+              Bordeaux Montaigne.</br></br> Ce projet a vu le jour dans le cadre de la Nuit
+              Européenne des Musées, en partenariat avec le musée des Beaux-Arts de
+              Bordeaux.</br></br> Les quelque 50 étudiants de la promotion se sont liés pour
+              créer une production commune via cinq modules distincts que nous vous
+              invitons à découvrir.
+            </div>
+            <button id="closeButton" class="btn-icon">
+              <i class="i-close"></i>
             </button>
-            <button id="right" class="control">
-              <div class="button-loader-right button-loader"></div>
-              <spa>Right</spa>
-            </button>
-            <button id="scaleButton" class="control">scale</button>
-            <button id="scaleDownButton" class="control">scale down</button>
           </div>
-          <h1 id="infoTitle"></h1>
-          <p id="infoText"></p>
-          <!-- Start Experience Button -->
-          <button id="startButton">Commencer l'éxpérience</button>
+          <div class="flex-col first-scene">
+            <h2 id="frontTitle"></h2>
+            <div class="hub-title">SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</div>
+            <svg
+              width="63"
+              height="63"
+              viewBox="0 0 63 63"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M39.6504 35.77L49.6035 40.6239L44.7496 50.5771"
+                stroke="black"
+                stroke-width="3.91444"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M49.5824 40.6321C44.8747 42.9416 38.4289 44.3639 31.315 44.3639C16.9021 44.3639 5.21875 38.5209 5.21875 31.3157C5.21875 24.1105 16.9021 18.2676 31.315 18.2676C43.9404 18.2676 54.4703 22.7509 56.8894 28.7061"
+                stroke="black"
+                stroke-width="3.91444"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <button class="btn-primary" id="showButton">
+              Voir l'expérience
+            </button>
+          </div>
+          <div class="flex-col second-scene">
+            <a class="btn-primary" id="startButton">
+              Commencer l'éxpérience
+            </a>
+            <div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- Footer -->
-      <!-- Help button -->
-      <!-- <button id="helpButton">Help</button> -->
-      <!-- Help popup -->
-      <!-- TODO: Change help button by credits or other (waiting ui/ux) -->
-      <!-- <div id="helpPopup">
-        <span id="closeButton">X</span>
-        <p>This is your help content. You can customize it as needed.</p>
-      </div> -->
     </div>
     <script type="module" src="./js/script.js"></script>
-    <!-- <script type="module" src="./js/popUp.js"></script> -->
+    <script type="module" src="./js/popUp.js"></script>
+    <script type="module" src="./js/scenes.js"></script>
   </body>
 </html>
