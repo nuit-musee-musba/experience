@@ -84,15 +84,15 @@ export function recipeGeneration() {
         element.name +
         `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
         thisItem.recipe_text +
-        ' <span id="actual-' +
-        element.name +
-        '">' +
-        actualNumber +
-        "</span>/" +
-        thisItem.number_needed +
+        //' <span id="actual-' +
+        //element.name +
+        //'">' +
+        //actualNumber +
+        //"</span>/" +
+        //thisItem.number_needed +
         "</div><span class='item-checkbox'><img id='img-check-" +
         element.name +
-        "' src='./static/images/misc/checked.svg'></span></li>";
+        "' src='/6-peinture/images/misc/checked.svg'></span></li>";
     }
   });
 }
@@ -100,12 +100,12 @@ export function recipeGeneration() {
 recipeGeneration();
 
 export function recipeResolve(id) {
-  let thisItem = resultToVerify.find((el) => el.name === id);
-  const indexOfItem = resultToVerify.indexOf(thisItem);
-  resultToVerify[indexOfItem].count--;
+  //   let thisItem = resultToVerify.find((el) => el.name === id);
+  //   const indexOfItem = resultToVerify.indexOf(thisItem);
+  //   resultToVerify[indexOfItem].count--;
 
-  if (resultToVerify[indexOfItem].count <= 0) {
-    var this_object = document.getElementById("recipe-" + id);
-    this_object.classList.add("checked");
-  }
+  //if (resultToVerify[indexOfItem].count <= 0) {
+  var this_object = document.getElementById("recipe-" + id);
+  this_object.classList.add("checked");
+  //}
 }

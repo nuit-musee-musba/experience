@@ -24,6 +24,7 @@ class BookPage {
 
     this.bookTitle.textContent = selectedItem.name;
     this.bookText.innerHTML = selectedItem.description;
+    this.bookText.classList.add(selectedItem.category)
   }
 }
 

@@ -1,76 +1,159 @@
 // TABS BUTTON
 .categories-tabs {
-    @include list-reset;
+  @include list-reset;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  position: relative;
+  gap: 2.563rem;
+  z-index: 9;
+  .tab-btn {
+    align-items: center;
+    border-radius: $btn-border-radius;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    position: relative;
-    gap: 2.563rem;
-    z-index: 9;
-    .tab-btn {
-        align-items: center;
-        border-radius: $btn-border-radius;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        display: flex;
-        gap: 1rem;
-        padding: $btn-padding-y $btn-padding-x;
-        &.btn-food {
-            @include icon(food);
-            background: rgba($food, 0.3);
-            color: $food;
-            &.selected {
-                background: $food;
-            }
-        }
-        &.btn-animals {
-            @include icon(animals);
-            background: rgba($animals, 0.3);
-            color: $animals;
-            &.selected {
-                background: $animals;
-            }
-        }
-        &.btn-objects {
-            @include icon(objects);
-            background: rgba($objects, 0.3);
-            color: $objects;
-            &.selected {
-                background: $objects;
-            }
-        }
-        &.selected {
-            padding-top: $btn-selected-padding-y;
-            padding-bottom: $btn-selected-padding-y;
-            color: white;
-        }
+    gap: 1rem;
+    padding: $btn-padding-y $btn-padding-x;
+    &.btn-food {
+      @include icon(food);
+      background: rgba($food, 0.3);
+      color: $food;
+      &.selected {
+        background: $food;
+      }
     }
+    &.btn-animals {
+      @include icon(animals);
+      background: rgba($animals, 0.3);
+      color: $animals;
+      &.selected {
+        background: $animals;
+      }
+    }
+    &.btn-objects {
+      @include icon(objects);
+      background: rgba($objects, 0.3);
+      color: $objects;
+      &.selected {
+        background: $objects;
+      }
+    }
+    &.selected {
+      padding-top: $btn-selected-padding-y;
+      padding-bottom: $btn-selected-padding-y;
+      color: white;
+    }
+  }
 }
 
 // TABS PANEL
 .category-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6vh;
-    padding: 0 6vh 6vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6vh;
+  padding: 0 6vh 6vh;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .item {
     position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-
-    .item{
-        position: absolute;
+    // TAB FOOD
+    &-peach {
+      left: 320px;
+      top: 95px;
     }
-
-    // TODO : ANIMATION ACTIVE
-    &:not(.active) {
-        opacity: 0;
-        pointer-events: none;
+    &-grape {
+      left: 850px;
+      top: 95px;
     }
+    &-carrot {
+      left: 1250px;
+      top: 95px;
+    }
+    &-lemon {
+      left: 592px;
+      top: 95px;
+    }
+    &-pineapple {
+      left: 80px;
+      top: 225px;
+    }
+    &-cake {
+      left: 350px;
+      top: 390px;
+    }
+    &-plum {
+      left: 1050px;
+      top: 430px;
+    }
+    &-garlic {
+      left: 730px;
+      top: 410px;
+    }
+    &-lemon2 {
+      left: 1360px;
+      top: 420px;
+    }
+    // TAB OBJECTS
+    &-tulip {
+      left: 140px;
+      top: 200px;
+    }
+    &-skull {
+      left: 460px;
+      top: 320px;
+    }
+    &-hyacinth {
+      left: 870px;
+      top: 170px;
+    }
+    &-vase {
+      left: 1200px;
+      top: 210px;
+    }
+    // TAB ANIMALS
+    &-toad {
+      left: 1290px;
+      top: 400px;
+    }
+    &-piggy {
+      top: 320px;
+      left: 940px;
+    }
+    &-butterfly {
+      top: 95px;
+      left: 750px;
+    }
+    &-grasshopper {
+      top: 95px;
+      left: 1170px;
+    }
+    &-fish {
+      left: 355px;
+      top: 95px;
+    }
+    &-catterpillar {
+      left: 150px;
+      top: 430px;
+    }
+    &-crab {
+      left: 500px;
+      top: 420px;
+    }
+  }
+
+  // TODO : ANIMATION ACTIVE
+  &:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+  }
 }

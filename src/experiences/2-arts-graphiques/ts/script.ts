@@ -2,7 +2,6 @@ import Transition from "./class/transition";
 import Frames from "./interactive/paintingFrame";
 import Modal from "./class/modal";
 import landmark from "./animation/landmark";
-import Button from "./class/button";
 
 export type ExperienceType = {
   transition?: Transition;
