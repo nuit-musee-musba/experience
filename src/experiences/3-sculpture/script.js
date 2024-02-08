@@ -22,6 +22,7 @@ const steps2InRoughPart = document.getElementById("steps2InRoughPart");
 //
 
 let isPolished = false;
+let sceneLoaded = false;
 
 const IntroPopup = () => {
   const IntroPart = document.getElementById("IntroPart");
@@ -37,7 +38,7 @@ const IntroPopup = () => {
     RoughHewingPart();
   });
 };
-LoadPart();
+
 IntroPopup();
 
 console.log(steps);
@@ -95,10 +96,9 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
       workshop.children[i].decay = 2;
     }
   }
-
   scene.add(workshop);
+  LoadPart();
 });
-
 let statueV1;
 let statueV2;
 let statueV4;
