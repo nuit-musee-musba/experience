@@ -40,6 +40,7 @@ export default class Frames {
         frame.removeOpacity();
       } else {
         frame.addOpacity();
+        frame.addText();
       }
     });
   }
