@@ -15,7 +15,34 @@ html,
 body {
   overflow: hidden;
 }
-.title-component {
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2a2a2a;
+  z-index: 100;
+  transition: opacity 0.6s ease-in-out;
+  transition-delay: 200ms;
+}
+
+.loader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-icon {
+  width: 172px;
+  height: 172px;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.poi-title-component {
   position: absolute;
   top: 6rem;
   left: 6rem;
@@ -241,7 +268,7 @@ body {
   color: black;
 }
 
-.interest-component {
+.point-interest-component {
   position: absolute;
   bottom: 50%;
   transform: translate(0%, 50%);
@@ -257,7 +284,7 @@ body {
   pointer-events: none;
 }
 
-.interest-component img {
+.point-interest-component img {
   position: absolute;
   top: -177px;
   left: -0.15vw;
@@ -270,7 +297,14 @@ body {
   pointer-events: none;
 }
 
-#text-component {
+#poi-title-component {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 4rem;
+  pointer-events: none;
+}
+
+#poi-text-component {
   display: flex;
   flex-direction: column;
   gap: 1vh;
@@ -305,11 +339,11 @@ body {
     font-size: 1rem;
   }
 
-  #text-component {
+  #poi-text-component {
     font-size: 1rem;
   }
 
-  #title-component {
+  #poi-title-component {
     font-size: 2rem;
   }
 }

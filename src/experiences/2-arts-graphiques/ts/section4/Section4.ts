@@ -2,6 +2,7 @@ import { Section } from "../class/section";
 import { Sec4Dragable } from "./Sec4Dragable";
 import { hasRepaired, initialiseAmountPlaced } from "./util";
 import Button from "../class/button";
+import { setBg } from "../utils/setBg";
 
 export class Section4 extends Section {
   dragables: Sec4Dragable[];
@@ -30,6 +31,7 @@ export class Section4 extends Section {
   }
 
   show() {
+    setBg("reserve");
     super.show();
     initialiseAmountPlaced();
     this.dragables = this.dragablesElmt.map(
