@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -14,36 +13,34 @@ enableInactivityRedirection();
 /**
  * Popins
  */
+const popin = document.querySelector("#popin-info");
+let events = true;
 
-// Hide popin
 const popinHide = (targetPopin) => {
   targetPopin.classList.add("hidden");
+  document.querySelector("body").classList.add("popin-visible");
   document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
 };
 
-// Show popin
 const popinShow = (targetPopin) => {
   targetPopin.classList.remove("hidden");
+  document.querySelector("body").classList.remove("popin-visible");
   document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
 };
 
-// Popin close buttons
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  popinShow(popin);
+});
+
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
   const targetPopin = document.querySelector(popinBtn.dataset.target);
   popinBtn.addEventListener("click", (event) => {
     event.preventDefault();
     popinHide(targetPopin);
-  });
-}
-
-// Popin open buttons
-const popinOpenBtns = document.querySelectorAll(".popin-btn.popin-open");
-for (const popinOpenBtn of popinOpenBtns) {
-  const targetPopin = document.querySelector(popinOpenBtn.dataset.target);
-  popinOpenBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinShow(targetPopin);
   });
 }
 
@@ -57,6 +54,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
@@ -66,6 +64,12 @@ let globalParameters = {
   ambientIntensity: 4.5,
   rectAreaIntensity: 1,
   changeValue: 0,
+  lineDefaultOpacity: 0.5,
+  lineTouchOpacity: 0.2,
+  step1: 0.4,
+  step2: 0.45,
+  step3: 0.5,
+  step4: 0.7,
 };
 
 // Canvas
@@ -93,6 +97,7 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
+// Third painting
 const firstPlanTexture = textureLoader.load(
   "/4-lumiere/third-painting/third-painting-plan-1.png"
 );
@@ -107,6 +112,11 @@ const thirdPlanTexture = textureLoader.load(
   "/4-lumiere/third-painting/third-painting-plan-3.png"
 );
 thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
+
+// Light object
+const lightObjectTexture = textureLoader.load(
+  "/4-lumiere/third-painting/third-light-object.png"
+);
 
 /**
  * Loader
@@ -151,40 +161,28 @@ thirdPainting3.position.z = -globalParameters.planDistance;
 // Third painting | Add to scene
 scene.add(thirdPainting1, thirdPainting2, thirdPainting3);
 
-const paintingTweaks = gui.addFolder("Painting parameters");
-paintingTweaks
-  .add(globalParameters, "planDistance")
-  .min(0)
-  .max(1)
-  .step(0.01)
-  .name("Plan distance")
-  .onChange(() => {
-    secondPainting1.position.z = 2 * globalParameters.planDistance;
-    secondPainting3.position.z = -globalParameters.planDistance;
-  });
-
 // Frame
-// gltfLoader.load(
-//   "/4-lumiere/third-painting/third-painting-frame.glb",
-//   (gltf) => {
-//     // gltf.scene.scale.set(6.0625, 6.0625, 6.0625);
-//     gltf.scene.position.z = 0.5;
-//     gltf.scene.position.x = -0.05;
-//     // gltf.scene.rotation.z = Math.PI;
-//     scene.add(gltf.scene);
-//   },
-//   () => {
-//     console.log("progress");
-//   },
-//   (error) => {
-//     console.log("error:", error);
-//   }
-// );
+gltfLoader.load(
+  "/4-lumiere/third-painting/third-painting-frame.glb",
+  (gltf) => {
+    gltf.scene.scale.set(7.5, 7.5, 7.5);
+    gltf.scene.position.z = 1;
+    console.log(gltf.scene);
+    // gltf.scene.rotation.z = Math.PI;
+    scene.add(gltf.scene);
+  },
+  () => {
+    console.log("progress");
+  },
+  (error) => {
+    console.log("error:", error);
+  }
+);
 
 // line
 var lineGeometry = new THREE.CylinderGeometry(
-  0.005, // radiusTop
-  0.005, // radiusBottom
+  0.01, // radiusTop
+  0.01, // radiusBottom
   3, // height
   32, // radialSegments
   1 // heightSegments
@@ -192,13 +190,26 @@ var lineGeometry = new THREE.CylinderGeometry(
 var lineMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
-  // wireframe: true,
+  opacity: globalParameters.lineDefaultOpacity,
 });
 var line = new THREE.Mesh(lineGeometry, lineMaterial);
 line.position.z = globalParameters.planDistance;
-line.position.y = -0.5;
+line.position.y = -0.3625;
 scene.add(line);
+
+// Light object
+const lightObjectGeometry = new THREE.PlaneGeometry(
+  0.375, // width
+  0.375, // height
+  3, //widthSegments
+  3 //heightSegments
+);
+const lightObjectMaterial = new THREE.MeshBasicMaterial({
+  map: lightObjectTexture,
+  transparent: true,
+  opacity: 1,
+});
+const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
 
 /**
  * Lights
@@ -206,9 +217,10 @@ scene.add(line);
 
 // Light colors
 const lightColors = {
-  blue: new THREE.Color("#9FB2FF"),
+  blue: new THREE.Color("#2d4ed6"),
   yellow: new THREE.Color("#FFD79E"),
   red: new THREE.Color("#FF000C"),
+  white: new THREE.Color("#9FB2FF"),
 };
 
 // Ambient light
@@ -217,11 +229,6 @@ const ambientLight = new THREE.AmbientLight(
   globalParameters.ambientIntensity // intensity
 );
 scene.add(ambientLight);
-
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
 // Second painting point light
 const rectAreaLight = new THREE.RectAreaLight(
@@ -233,60 +240,67 @@ const rectAreaLight = new THREE.RectAreaLight(
 // pointLight.position.x = globalParameters.lightRadius;
 scene.add(rectAreaLight);
 line.add(rectAreaLight);
+rectAreaLight.add(lightObject);
+lightObject.position.z = 0.1;
 
 const lightMaxPos = line.geometry.parameters.height / 2;
 const lightMinPos = -(line.geometry.parameters.height / 2);
 
 rectAreaLight.position.y = lightMaxPos / 2;
 
-console.log("rectAreaLight: ", rectAreaLight);
-const rectAreaLightTweaks = gui.addFolder("Rectangle area light parameters");
-rectAreaLightTweaks.add(rectAreaLight, "visible");
-rectAreaLightTweaks.addColor(rectAreaLight, "color").onChange((value) => {
-  console.log(value.getHexString());
-});
-rectAreaLightTweaks.add(rectAreaLight, "intensity").min(0).max(15).step(1);
-
 // RectAreaLight color change
 changeMainLightColor();
 
 function changeMainLightColor() {
-  const framePosY = globalParameters.changeValue >= 0.5 ? "top" : "bottom";
+  let colorFrom = null;
+  let colorTo = null;
+  let alphaInterpolation = null;
 
-  const colorFrom = framePosY === "top" ? lightColors.yellow : lightColors.red;
-  const colorTo = framePosY === "top" ? lightColors.blue : lightColors.yellow;
-  const alphaInterpolation =
-    framePosY === "top"
-      ? globalParameters.changeValue - 0.5
-      : globalParameters.changeValue;
+  if (globalParameters.changeValue <= globalParameters.step1) {
+    colorFrom = lightColors.white;
+    colorTo = lightColors.white;
+    alphaInterpolation = globalParameters.changeValue / globalParameters.step1;
+  } else if (
+    globalParameters.changeValue > globalParameters.step1 &&
+    globalParameters.changeValue <= globalParameters.step2
+  ) {
+    colorFrom = lightColors.white;
+    colorTo = lightColors.red;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step1) /
+      (globalParameters.step2 - globalParameters.step1);
+  } else if (
+    globalParameters.changeValue > globalParameters.ste2 &&
+    globalParameters.changeValue <= globalParameters.step3
+  ) {
+    colorFrom = lightColors.red;
+    colorTo = lightColors.yellow;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step2) /
+      (globalParameters.step3 - globalParameters.step2);
+  } else if (
+    globalParameters.changeValue > globalParameters.step3 &&
+    globalParameters.changeValue <= globalParameters.step4
+  ) {
+    colorFrom = lightColors.yellow;
+    colorTo = lightColors.blue;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step3) /
+      (globalParameters.step4 - globalParameters.step3);
+  } else {
+    colorFrom = lightColors.blue;
+    colorTo = lightColors.blue;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step4) /
+      (1 - globalParameters.step4);
+  }
   rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
 }
 
 // Helper
 const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-// rectAreaLightHelper.visible = false;
+rectAreaLightHelper.visible = false;
 scene.add(rectAreaLightHelper);
-rectAreaLightTweaks.add(rectAreaLightHelper, "visible").name("Repère visuel");
-
-const rectAreaLightPosition = rectAreaLightTweaks.addFolder(
-  "Spot light position"
-);
-
-rectAreaLightPosition
-  .add(rectAreaLight.position, "x")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "y")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "z")
-  .min(-10)
-  .max(10)
-  .step(0.01);
 
 /**
  * Sizes
@@ -324,14 +338,6 @@ camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 30;
 scene.add(camera);
-
-const cameraTweaks = gui.addFolder("Camera parameters");
-cameraTweaks
-  .add(camera.position, "z")
-  .min(-10)
-  .max(200)
-  .step(0.1)
-  .name("Camera z pos");
 
 /**
  * Pointer
@@ -374,6 +380,7 @@ canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
+  line.material.opacity = globalParameters.lineTouchOpacity;
   // Record the starting Y position of the touch
   touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
@@ -416,7 +423,9 @@ canvas.addEventListener(
   { passive: false }
 );
 
-window.addEventListener("touchend", function () {
+canvas.addEventListener("touchend", function () {
+  line.material.opacity = globalParameters.lineDefaultOpacity;
+
   // Reset the swipe tracking variables
   isSwiping = false;
 });
@@ -463,11 +472,6 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = line.position;
-// controls.enableDamping = true;
-
 /**
  * Renderer
  */
@@ -482,9 +486,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Update controls
-  // controls.update();
-
   // Render
   renderer.render(scene, camera);
 

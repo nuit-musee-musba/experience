@@ -10,10 +10,11 @@ window.experience = window.experience || {};
 window.experience.index = 0;
 window.experience.rotation = 0;
 window.experience.isRotating = false;
+window.experience.canRotate = true;
 
 ////////////////////////////SCROLL LOGIC////////////
 const rotationFactor = 0.001;
-const powerFactor = 0.5;
+const powerFactor = 0.8;
 const parts = 5;
 const circle = Math.PI * 2;
 const deceleration = 1;
@@ -37,6 +38,11 @@ function updateRotation(delta) {
 }
 
 window.addEventListener("touchstart", (event) => {
+  // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;
@@ -48,6 +54,11 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
   isTouching = true;
   window.experience.isRotating = true;
+
+  if (!window.experience.canRotate) {
+    console.log("Can rotate? ", window.experience.canRotate);
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
 
@@ -81,7 +92,6 @@ window.experience.updateCarouselRotation = function () {
   }
 
   window.experience.carousel.rotation.y = window.experience.rotation;
-  console.log(window.experience.index);
   updateIslandInformation(
     window.experience.index,
     data,

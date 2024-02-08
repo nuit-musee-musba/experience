@@ -14,7 +14,6 @@ export function handleAmountOutside(
       ) as HTMLButtonElement;
 
       button.disabled = false;
-      // experience.transition?.next();
     }
     return;
   }

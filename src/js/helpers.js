@@ -4,16 +4,12 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
+import data from "./data";
+
 // World creation
 export async function createIsland(i, count, color) {
   try {
-    let url;
-    // For a loaded GLTF model
-    if (i % 2 !== 0) {
-      url = "/assets/hub/sculpture.glb";
-    } else {
-      url = "/assets/hub/vanite.glb";
-    }
+    const url = data[i].modelPath;
     const island = await createGLTFModel(
       i,
       url, // url
@@ -22,10 +18,7 @@ export async function createIsland(i, count, color) {
       [0.035, 0.035, 0.035], // scale
       color
     );
-    // if (island.scene.userData.id === 1) {
-    //   island.scene.scale.set(0.05, 0.05, 0.05);
-    //   console.log("island id", island.scene);
-    // }
+
     return island.scene;
   } catch (error) {
     console.error("Error creating island:", error);

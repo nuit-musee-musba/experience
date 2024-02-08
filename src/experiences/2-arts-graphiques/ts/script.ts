@@ -1,8 +1,10 @@
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import landmark from "./animation/landmark";
+import Modal from "./class/modal";
 import Transition from "./class/transition";
 import Frames from "./interactive/paintingFrame";
-import Modal from "./class/modal";
-import landmark from "./animation/landmark";
-import Button from "./class/button";
+
+enableInactivityRedirection();
 
 export type ExperienceType = {
   transition?: Transition;

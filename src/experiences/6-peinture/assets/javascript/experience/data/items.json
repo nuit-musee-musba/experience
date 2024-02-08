@@ -22,7 +22,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     },
     {
       "id": "3",
@@ -130,13 +130,13 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     },
     {
       "id": "12",
-      "name": "Le vase",
+      "name": "Le calice",
       "category": "objects",
-      "description": "Objet de luxe car il ne sert pas aux besoins quotidiens, il représente <b>la vanité</b> des biens de ce monde. <b>Rempli à moitié d’eau</b>, il exprime <b>la vie qui s’écoule inexorablement</b>.",
+      "description": "Le calice de vin représente <b>le sang versé par le Christ</b>.",
       "dialog": "Oh oui ! Vous êtes amphore(me) !",
       "wrong_step_dialog": "",
       "recipe_text": "Écoulement inexorable de la vie",
@@ -238,7 +238,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffDrama"
     }
   ]
 }
