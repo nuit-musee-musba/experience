@@ -67,8 +67,8 @@ function handleDragInteraction(
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + realInitialX - dragElWidth / 2;
-    const currentY = touch.clientY - initialY + realInitialY - dragElheight / 2;
+    const currentX = touch.clientX - initialX + realInitialX - (dragElWidth / 2);
+    const currentY = touch.clientY - initialY + realInitialY - (dragElheight / 2);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -142,7 +142,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "Mmh, gardez-le sous votre établi, il nous sera peut-être utile plus tard."
+              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
