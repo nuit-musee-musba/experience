@@ -49,7 +49,7 @@ sunLight.shadow.camera.left = -26;
 sunLight.shadow.camera.right = 45;
 sunLight.shadow.camera.top = 13;
 sunLight.shadow.camera.bottom = -3;
-sunLight.intensity = 5.5;
+sunLight.intensity = 4.5;
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
 sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
@@ -58,129 +58,129 @@ sunLight.shadow.blurSamples = 25;
 sunLight.shadow.bias = -0.0002;
 
 // GUI for Light Controls
-// const lightControls = gui.addFolder("Light Controls");
+const lightControls = gui.addFolder("Light Controls");
 
-// lightControls
-//   .add(sunLight.position, "x")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light X");
-// lightControls
-//   .add(sunLight.position, "y")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light Y");
-// lightControls
-//   .add(sunLight.position, "z")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light Z");
+lightControls
+  .add(sunLight.position, "x")
+  .min(-100)
+  .max(100)
+  .step(0.1)
+  .name("Light X");
+lightControls
+  .add(sunLight.position, "y")
+  .min(-100)
+  .max(100)
+  .step(0.1)
+  .name("Light Y");
+lightControls
+  .add(sunLight.position, "z")
+  .min(-100)
+  .max(100)
+  .step(0.1)
+  .name("Light Z");
 
-// lightControls
-//   .add(sunLight.rotation, "x")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation X");
-// lightControls
-//   .add(sunLight.rotation, "y")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation Y");
-// lightControls
-//   .add(sunLight.rotation, "z")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation Z");
+lightControls
+  .add(sunLight.rotation, "x")
+  .min(-Math.PI)
+  .max(Math.PI)
+  .step(0.01)
+  .name("Light Rotation X");
+lightControls
+  .add(sunLight.rotation, "y")
+  .min(-Math.PI)
+  .max(Math.PI)
+  .step(0.01)
+  .name("Light Rotation Y");
+lightControls
+  .add(sunLight.rotation, "z")
+  .min(-Math.PI)
+  .max(Math.PI)
+  .step(0.01)
+  .name("Light Rotation Z");
 
-// lightControls.add(sunLight, "castShadow").name("Cast Shadow");
+lightControls.add(sunLight, "castShadow").name("Cast Shadow");
 
-// lightControls
-//   .add(sunLight.shadow.camera, "left")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Left");
-// lightControls
-//   .add(sunLight.shadow.camera, "right")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Right");
+lightControls
+  .add(sunLight.shadow.camera, "left")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Left");
+lightControls
+  .add(sunLight.shadow.camera, "right")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Right");
 
-// lightControls
-//   .add(sunLight.shadow.camera, "top")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Top");
+lightControls
+  .add(sunLight.shadow.camera, "top")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Top");
 
-// lightControls
-//   .add(sunLight.shadow.camera, "bottom")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Bottom");
+lightControls
+  .add(sunLight.shadow.camera, "bottom")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Bottom");
 
-// lightControls
-//   .add(sunLight.shadow.camera, "near")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Near");
+lightControls
+  .add(sunLight.shadow.camera, "near")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Near");
 
-// lightControls
-//   .add(sunLight.shadow.camera, "far")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Far");
+lightControls
+  .add(sunLight.shadow.camera, "far")
+  .min(-100)
+  .max(100)
+  .name("Shadow Camera Far");
 
-// lightControls
-//   .add(sunLight, "intensity")
-//   .min(0)
-//   .max(10)
-//   .step(0.001)
-//   .name("Light Intensity");
+lightControls
+  .add(sunLight, "intensity")
+  .min(0)
+  .max(10)
+  .step(0.001)
+  .name("Light Intensity");
 
-// lightControls
-//   .add(sunLight.shadow, "radius")
-//   .min(0)
-//   .max(10)
-//   .step(0.001)
-//   .name("Shadow Radius");
+lightControls
+  .add(sunLight.shadow, "radius")
+  .min(0)
+  .max(10)
+  .step(0.001)
+  .name("Shadow Radius");
 
-// lightControls
-//   .add(sunLight.shadow, "blurSamples")
-//   .min(0)
-//   .max(100)
-//   .step(1)
-//   .name("Shadow Blur Samples");
+lightControls
+  .add(sunLight.shadow, "blurSamples")
+  .min(0)
+  .max(100)
+  .step(1)
+  .name("Shadow Blur Samples");
 
-// lightControls
-//   .add(sunLight.shadow, "bias")
-//   .min(-0.01)
-//   .max(0.01)
-//   .step(0.0001)
-//   .name("Shadow Bias");
+lightControls
+  .add(sunLight.shadow, "bias")
+  .min(-0.01)
+  .max(0.01)
+  .step(0.0001)
+  .name("Shadow Bias");
 
-// lightControls.open();
+lightControls.open();
 
 
-// const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
-// const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
+const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
+const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
 
-// gui.onFinishChange(() => {
-//   sunLight.shadow.camera.updateProjectionMatrix();
-//   sunLight.shadow.updateMatrices();
-//   sunLightCameraHelper.update();
-//   updateAllMaterials();
-// });
+gui.onFinishChange(() => {
+  sunLight.shadow.camera.updateProjectionMatrix();
+  sunLight.shadow.updateMatrices();
+  sunLightCameraHelper.update();
+  updateAllMaterials();
+});
 
-// scene.add(sunLightHelper);
-// scene.add(sunLightCameraHelper);
+scene.add(sunLightHelper);
+scene.add(sunLightCameraHelper);
 
-// const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
 
 
 // ENVIRONMENT
