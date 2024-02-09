@@ -2,9 +2,10 @@ import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
 import * as THREE from "three";
 import { onboardingContent, periods } from "./constants";
+import { enableInactivityAnimation } from "./inactivity.ts";
 
-enableInactivityRedirection();
-
+// enableInactivityRedirection();
+enableInactivityAnimation()
 import {
   animatedScenes,
   camera,
@@ -36,6 +37,7 @@ const sceneSetUp = async () => {
 
   const clock = new THREE.Clock();
   let index = 0;
+  let previousIndex = null;
   let previousTime = 0;
   let isShowingText = false;
   let isOnboarded = false
@@ -242,7 +244,13 @@ const sceneSetUp = async () => {
 
     updateAllMaterials();
 
-    animatedScenes[index].play();
+    for (let i = 0; i < animatedScenes.length; i++) {
+      if (i <= index) {
+        animatedScenes[i].play();
+      } else {
+        animatedScenes[i].reverse();
+      }
+    }
 
     const dateTitleElement = document.getElementById("date-title");
     document.querySelector('.chronology').classList.remove("hidden")
@@ -320,6 +328,11 @@ const sceneSetUp = async () => {
     });
   };
 
+  async function startExperience() {
+    await loadModels();
+    handleFocusPeriod(periods[index]);
+  }
+
   if (!isOnboarded) {
     await handleStart();
   } else {
@@ -327,7 +340,8 @@ const sceneSetUp = async () => {
       animatedScene.setup();
       animatedScene.resetAnimations();
     });
-    handleFocusPeriod(periods[index]);
+
+    startExperience();
   }
 
   subTitleNextButton.addEventListener("click", handleNext);
