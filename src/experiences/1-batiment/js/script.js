@@ -245,8 +245,8 @@ const sceneSetUp = async () => {
 
     updateAllMaterials();
 
-    controls.object.position.set(0, 6, 0);
-    controls.target.set(2, 2, 0);
+    controls.object.position.set(1, 4.5, 1);
+    controls.target.set(1, 0, 1);
 
     await handleNext();
   };
