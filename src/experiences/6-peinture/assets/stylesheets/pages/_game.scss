@@ -62,17 +62,17 @@
     z-index: 99;
   }
   .player-video {
-      height: 100vh;
-      left: 0;
-      position: absolute;
-      top: 0;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    display: none;
+    video {
+      height: 100%;
       width: 100%;
-      z-index: 99;
-      display: none;
-      video {
-          height: 100%;
-          width: 100%;
-      }
+    }
   }
 }
 
@@ -86,4 +86,10 @@
 
 .shepherd-button {
   pointer-events: all;
+}
+
+.disabled-item {
+  opacity: 0.3;
+  filter: grayscale(1);
+  pointer-events: none;
 }
