@@ -3,7 +3,7 @@ import items from "../data/items.json" assert { type: "json" };
 class BookPage {
     constructor(container) {
         this.container = container;
-        this.hasSelectedItem = true;
+        // this.hasSelectedItem = true;
         this.selectedClass = ".selected-item";
 
         this.items = this.container.querySelectorAll(".item");
@@ -23,15 +23,15 @@ class BookPage {
                 this.displayData(item);
             });
             item.addEventListener("touchstart", () => {
-                this.hasSelectedItem = true;
+                // this.hasSelectedItem = true;
                 this.displayData(item);
             });
             item.addEventListener("touchmove", () => {
-                this.hasSelectedItem = true;
+                // this.hasSelectedItem = true;
                 this.animation(item, false);
             });
             item.addEventListener("touchend", () => {
-                this.hasSelectedItem = true;
+                // this.hasSelectedItem = true;
                 this.animation(item, true);
             });
         });
