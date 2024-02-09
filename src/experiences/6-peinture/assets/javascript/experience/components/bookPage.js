@@ -23,12 +23,13 @@ class BookPage {
       this.displayData(this.selectedItem);
     });
     this.item.addEventListener("click", () => {
+      this.selectedItem = items.items.find((item) => item.id === this.id);
       this.animation(true);
       this.displayData(this.selectedItem);
     });
-    this.item.addEventListener("touchstart", () => {
-      this.animation(true);
-    });
+    // this.item.addEventListener("touchstart", () => {
+    //   this.animation(true);
+    // });
     this.item.addEventListener("touchend", () => {
       this.closeBook();
       this.animation(false);
@@ -63,15 +64,18 @@ class BookPage {
 
     this.items.forEach(item => {
       if (item.classList.contains('selected-item')) {
-        this.bookContainer.classList.remove('is-closed');
         hasSelectedItem = true;
       }
     });
+    console.log(hasSelectedItem)
 
     if (!hasSelectedItem) {
       this.bookContainer.classList.add('is-closed');
       this.bookTitle.textContent = "";
       this.bookText.innerHTML = "";
+    }
+    else {
+      this.bookContainer.classList.remove('is-closed');
     }
   }
 }
