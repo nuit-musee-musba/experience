@@ -160,7 +160,7 @@
       "id": "14",
       "name": "Le poisson",
       "category": "animals",
-      "description": "Il représente <b>Jésus-Christ</b> mais aussi le <b>baptême</b> car tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême (sacrement réalisé avec de l’eau).",
+      "description": "Il représente <b>Jésus-Christ</b> mais aussi <b>le baptême</b> car «tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême» (sacrement réalisé avec de l’eau).",
       "dialog": "Vous me faites un poisson d’avril là ?",
       "wrong_step_dialog": "",
       "recipe_text": "",
