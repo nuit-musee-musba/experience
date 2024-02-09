@@ -11,6 +11,10 @@ export class ObjectLoader {
     this.mixer = new THREE.AnimationMixer(gltf.scene);
     this.animations = this.gltf.animations;
 
+    this.setup();
+  }
+
+  setup() {
     this.animations.forEach((animation) => {
       const action = this.mixer.clipAction(animation);
       action.setEffectiveTimeScale(1);
@@ -21,6 +25,23 @@ export class ObjectLoader {
       action.enabled = true;
 
       this.actions.push(action);
+    });
+  }
+
+  resetAnimations() {
+    this.actions.forEach((action) => {
+      action.reset();
+    });
+  }
+
+  // method to have the final state of the animation
+  finalState() {
+    this.actions.forEach((action) => {
+      // Start the animation
+      action.play();
+
+      // Skip to the end of the animation
+      action.time = action.getClip().duration;
     });
   }
 
