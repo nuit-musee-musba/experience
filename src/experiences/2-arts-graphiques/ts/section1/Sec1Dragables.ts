@@ -45,6 +45,11 @@ export class Sec1Dragables extends Dragable {
     const elmtBoundindRect = this.element.getBoundingClientRect();
     const zoneBoundindRect = this.zone.getBoundingClientRect();
 
+    const handTool = document.querySelector(".sec1-hand-tool") as HTMLElement;
+    if (!handTool.classList.contains("hidden")) {
+      handTool.classList.add("hidden");
+    }
+
     this.isOutside =
       elmtBoundindRect.top > zoneBoundindRect.bottom ||
       elmtBoundindRect.right < zoneBoundindRect.left ||
