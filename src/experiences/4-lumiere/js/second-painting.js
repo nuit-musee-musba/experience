@@ -258,16 +258,16 @@ const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  0xffffff, // color
-  1 // intensity
+  0xCAEFFF, // color
+  1.5 // intensity
 );
 scene.add(ambientLight);
 
 // Second painting point light
 const pointLight = new THREE.PointLight(
-  "#f09647", // color
-  25, // intensity
-  50, // distance
+  "#E4A56D", // color
+  20, // intensity
+  70, // distance
   1 // decay
 );
 pointLight.position.x = globalParameters.lightRadius;
