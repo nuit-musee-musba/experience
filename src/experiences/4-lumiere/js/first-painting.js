@@ -122,7 +122,7 @@ const textureLoader = new THREE.TextureLoader(loadingManager);
 
 // First painting
 const colorTexture = textureLoader.load(
-  "/4-lumiere/first-painting/first-painting-color.jpg"
+  "/4-lumiere/first-painting/first-painting-color.webp"
 );
 colorTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -132,7 +132,7 @@ const heightTexture = textureLoader.load(
 
 // Wallpaper
 const wallpaperHeightTexture = textureLoader.load(
-  "/4-lumiere/first-painting/background-height.png"
+  "/4-lumiere/first-painting/first-painting-background.webp"
 );
 
 // Light object

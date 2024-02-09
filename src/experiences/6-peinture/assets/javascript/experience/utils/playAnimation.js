@@ -43,7 +43,7 @@ export function playAnimation(anim) {
             container: container,
             path: animationPaths["animJeffIddle"],
             renderer: 'svg',
-            loop: false,
+            loop: true,
             autoplay: false
         });
         iddleAnimation.play();
