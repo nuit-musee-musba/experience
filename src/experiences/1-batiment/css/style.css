@@ -386,11 +386,12 @@ body {
   line-height: 58px;
 }
 
-.finger-rotation{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+.finger-rotation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
 }
 
 @media screen and (max-width: 1508px) {

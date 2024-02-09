@@ -17,6 +17,7 @@
       src="/experiences/1-batiment/js/inactivity.ts"
     ></script>
   </head>
+
   <body onselectstart="return false">
     <div class="loader">
       <svg
@@ -46,7 +47,18 @@
     </div>
 
     <div class="animation">
-      <div id="animation-video">cc</div>
+      <lottie-player
+        id="animation-video"
+        class="finger-rotation"
+        src="./assets/finger_rotation_animation.json"
+        background="transparent"
+        speed="1"
+        direction="1"
+        mode="normal"
+        loop
+        controls
+        autoplay
+      ></lottie-player>
     </div>
 
     <div class="vignette"></div>
@@ -233,8 +245,5 @@
     </section>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <lottie-player class="finger-rotation" src="./assets/finger_rotation_animation.json" background="transparent" speed="1" direction="1" mode="normal" loop controls autoplay></lottie-player>
-  
   </body>
 </html>
-
