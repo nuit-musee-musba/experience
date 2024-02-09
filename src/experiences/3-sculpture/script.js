@@ -378,7 +378,9 @@ function stepsFunction() {
         const nextText5 = document.getElementById("nextText5");
         const nextText6 = document.getElementById("nextText6");
         const nextText7 = document.getElementById("nextText7");
-        const polishControler = document.getElementById("polishControler");
+        const polishText = document.getElementById("polishText");
+
+
 
         nextText5.addEventListener("click", function () {
           changeTextInSteps(steps1InPolishingPart, steps2InPolishingPart);
@@ -386,14 +388,14 @@ function stepsFunction() {
 
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
-          polishControler.classList.add("show")
+          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
         });
 
-        if (quantity <= 0.8) {
-          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
+        if (quantity <= 0.5) {
+          polishText.innerHTML = "Nous-y sommes presque, mais ce n’est pas encore assez poli..."
         }
         if (quantity <= 0) {
-          changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
+          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
         }
 
         nextText7.addEventListener("click", function () {
