@@ -17,6 +17,14 @@ body {
   font-family: Montserrat;
 }
 
+.title-component {
+  pointer-events: none;
+  position: absolute;
+  top: 6rem;
+  left: 6rem;
+  display: flex;
+  gap: 3rem;
+}
 .animation {
   position: absolute;
   top: 0;
@@ -98,9 +106,21 @@ body {
   display: flex;
   gap: 3rem;
 }
+
 .title-line {
   width: 5px;
   background-color: white;
+  animation: slide-down 2s 4s cubic-bezier(0.2, 0, 0.25, 1) forwards;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 #date-title {
@@ -124,6 +144,24 @@ body {
   color: white;
   font-size: 4rem;
   font-weight: 100;
+  overflow: hidden;
+  animation: slide2 2s 5s cubic-bezier(0.2, 0, 0.25, 1) forwards;
+}
+
+@keyframes slide2 {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 
 .parameter-buttons {
