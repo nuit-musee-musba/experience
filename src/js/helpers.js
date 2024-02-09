@@ -129,3 +129,13 @@ export function handleScaleClick(carousel, index) {
   }
   scaleModel(model, 0.0315, 100);
 }
+
+export const updateAllMaterials = () => {
+  window.experience.scene.traverse((child) => {
+    if (child.isMesh && child.material.isMeshStandardMaterial) {
+      child.material.envMapIntensity = config.envMapIntensity;
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+};
