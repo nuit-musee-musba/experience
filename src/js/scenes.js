@@ -5,7 +5,7 @@ const showButton = document.getElementById("showButton");
 const backButton = document.getElementById("backButton");
 const firstSceneElements = document.querySelectorAll(".first-scene");
 const secondSceneElements = document.querySelectorAll(".second-scene");
-
+const canvas = document.getElementById("webgl");
 // Constants
 const PARTS = 5;
 const CIRCLE = Math.PI * 2;
@@ -30,6 +30,9 @@ showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
     // Stop aurto rotation when the user clicks the button
     window.experience.autoRotate = false;
+
+    canvas.classList.add("activated");
+    console.log(canvas.classList)
 
     // set current rotation
     let currentRotation = window.experience.rotation;
@@ -113,10 +116,6 @@ showButton.addEventListener("click", () => {
       element.classList.add("transition-opacity");
       element.style.opacity = "0";
     });
-
-    // setTimeout(() => {
-
-    // }, 800);
     firstSceneElements.forEach((element) => {
       element.style.display = "none";
     });
@@ -146,6 +145,7 @@ showButton.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
   // Define the target scale for the elements
   const targetScale = MESHSCALE;
+  canvas.classList.remove("activated");
 
   function descale() {
     // Interpolate the scale smoothly
@@ -196,6 +196,8 @@ backButton.addEventListener("click", () => {
   }
 
   descale();
+
+
   secondSceneElements.forEach((element) => {
     element.classList.add("transition-opacity");
     element.style.opacity = "0";
