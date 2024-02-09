@@ -60,7 +60,7 @@ body {
     rgba(0, 0, 0, 0.74) 93.33%,
     rgba(0, 0, 0, 0.75) 100%
   );
-  z-index: 10;
+  z-index: 5;
   pointer-events: none;
 }
 
@@ -415,6 +415,7 @@ body {
     transform 0.3s ease-in-out;
   opacity: 1;
   transform: translateY(0);
+  z-index: 11;
 }
 
 .wrapper-subTitle.hidden {
