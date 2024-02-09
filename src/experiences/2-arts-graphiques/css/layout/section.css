@@ -21,6 +21,17 @@ section.painting-frame .container > .left{
   padding-top: 0;
 }
 
+section.expo{
+  position: relative;
+}
+
+section.expo > .crowd{
+  position: absolute;
+  bottom: -6rem;
+  left: -6rem;
+  width: calc(100% + 12rem);
+}
+
 /*section .left {*/
 /*  display: grid;*/
 /*  flex-direction: column;*/
