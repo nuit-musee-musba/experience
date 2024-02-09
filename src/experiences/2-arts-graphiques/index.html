@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
+    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
   <body>
     <div class="loading__container active"></div>
@@ -21,7 +22,7 @@
       </header>
       <section id="section-0">
         <dialog id="modal">
-          <h1>Odysée d'une œuvre</h1>
+          <h1>Odyssée d'une œuvre</h1>
           <div class="line"></div>
           <p>
             Au cœur des collections du musée, un sanctuaire secret se dévoile...
@@ -205,11 +206,24 @@
           <div class="left"></div>
           <div class="center timelapse">
             <p class="timelapse__context">De retour en</p>
-            <h1>
-              <span id="date-anim__year" data-from="1910" data-to="2024"
-                >1910</span
-              >
-            </h1>
+<!--            <h1>-->
+<!--              <span id="date-anim__year" data-from="1910" data-to="2024"-->
+<!--                >1910</span-->
+<!--              >-->
+<!--            </h1>-->
+            <lottie-player
+                id="animation-video"
+                class="finger-rotation"
+                src="/2-arts-graphiques/lottie/timeline.json"
+                background="transparent"
+                speed="1"
+                direction="1"
+                mode="normal"
+                controls
+                autoplay
+                height="300px"
+                width="600px"
+            ></lottie-player>
             <button class="btn-next sec3-button btn-primary">
               Etape suivante
             </button>
