@@ -1,7 +1,7 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
 import * as THREE from "three";
-import { period } from "./period";
+import { onboardingContent, periods } from "./constants";
 
 enableInactivityRedirection();
 
@@ -15,6 +15,53 @@ import {
   scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
+
+const titleElm = document.querySelector("#date-title");
+const subTitleElm = document.querySelector("#subTitle");
+const mainTitleElm = document.querySelector(".main-title");
+const subTitleNextButton = document.querySelector(".subTitle-next");
+
+let currentStep = 0;
+
+const handleNext = () => {
+  titleElm.classList.add("date-title-hidden");
+  if (currentStep >= 0 && currentStep <= 2) {
+    subTitleElm.textContent = onboardingContent[currentStep].subTitle;
+    mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
+
+    if (onboardingContent[currentStep].title) {
+      titleElm.classList.remove("date-title-hidden");
+      titleElm.textContent = onboardingContent[currentStep].title;
+    }
+
+    currentStep++;
+  }
+};
+
+const handleStart = async () => {
+  titleElm.classList.add("date-title-hidden");
+
+  await loadModels();
+
+  animatedScenes.forEach((animatedScene) => {
+    animatedScene.finalState();
+  });
+
+  updateAllMaterials();
+
+  controls.object.position.set(0, 6, 0);
+  controls.target.set(2, 2, 0);
+
+  subTitleNextButton.addEventListener("click", handleNext);
+
+  handleNext();
+};
+
+const handleStartExperience = () => {
+  animatedScenes.forEach((animatedScene) => {
+    animatedScene.setup();
+  });
+};
 
 const sceneSetUp = async () => {
   document.oncontextmenu = function () {
@@ -69,12 +116,12 @@ const sceneSetUp = async () => {
           allPOI[index][j].visible = true;
           if (intersectedObjectName === (i + j).toString()) {
             document.getElementById("poi-title-component").textContent =
-              period[i].poiText[j].title;
+              periods[i].poiText[j].title;
             document.getElementById("poi-text-component").innerHTML =
-              period[i].poiText[j].text;
+              periods[i].poiText[j].text;
           }
 
-          const position = period[i].poiPosition[j];
+          const position = periods[i].poiPosition[j];
           allPOI[i][j].position.set(position.x, position.y, position.z);
         }
       }
@@ -103,7 +150,7 @@ const sceneSetUp = async () => {
 
   const restart = () => {
     index = 0;
-    handleFocusPeriod(period[index]);
+    handleFocusPeriod(periods[index]);
   };
 
   const showText = () => {
@@ -134,14 +181,14 @@ const sceneSetUp = async () => {
   const prevStep = () => {
     if (index - 1 >= 0) {
       index--;
-      handleFocusPeriod(period[index]);
+      handleFocusPeriod(periods[index]);
     }
   };
 
   const nextStep = () => {
-    if (index + 1 < period.length) {
+    if (index + 1 < periods.length) {
       index++;
-      handleFocusPeriod(period[index]);
+      handleFocusPeriod(periods[index]);
     } else {
       endMenu.style.display = "flex";
       lastStep.style.display = "none";
@@ -151,13 +198,13 @@ const sceneSetUp = async () => {
   for (let i = 1; i <= 4; i++) {
     document.getElementById(`period${i}`).addEventListener("click", () => {
       index = i - 1;
-      handleFocusPeriod(period[i - 1]);
+      handleFocusPeriod(periods[i - 1]);
     });
     document
       .getElementById(`periodButton${i}`)
       .addEventListener("click", () => {
         index = i - 1;
-        handleFocusPeriod(period[i - 1]);
+        handleFocusPeriod(periods[i - 1]);
       });
   }
 
@@ -187,7 +234,7 @@ const sceneSetUp = async () => {
     } else {
       document.getElementById("prevButton").style.display = "block";
     }
-    if (index === period.length - 1) {
+    if (index === periods.length - 1) {
       document.getElementById("nextButton").style.display = "none";
       document.getElementById("last-step").style.display = "flex";
     } else {
@@ -205,7 +252,7 @@ const sceneSetUp = async () => {
     document.getElementById(selectedDashedButton).style.borderRadius = "100px";
     document.getElementById(selectedButtonActive).style.display = "block";
 
-    for (let i = 1; i <= period.length; i++) {
+    for (let i = 1; i <= periods.length; i++) {
       if (i - 1 !== index) {
         document.getElementById(`period${i}`).style.fontSize = "4rem";
         document.getElementById(`period${i}`).style.top = "-8rem";
@@ -237,7 +284,8 @@ const sceneSetUp = async () => {
       z: cameraPosition.z,
     });
   };
-  handleFocusPeriod(period[index]);
+  await handleStart();
+  // handleFocusPeriod(period[index]);
 
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);

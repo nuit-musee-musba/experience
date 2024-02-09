@@ -83,10 +83,21 @@ body {
   width: 5px;
   background-color: white;
 }
+
 #date-title {
   color: white;
   font-size: 8rem;
   font-weight: 100;
+  /* Existing styles */
+  transition: opacity 0.6s ease-in-out;
+  transition-delay: 200ms;
+}
+.date-title-hidden {
+  color: white;
+  font-size: 8rem;
+  font-weight: 100;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .main-title {
@@ -345,16 +356,21 @@ body {
 
 .button-interest {
   position: absolute;
-  bottom: 24vh;
+  bottom: 25vh;
   left: 2vw;
   z-index: 11;
 }
 
-#container-subTitle {
+.wrapper-subTitle {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   left: 7vw;
-  bottom: 25vh;
+  bottom: 20vh;
   width: 30vw;
+}
+
+#container-subTitle {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
 }
@@ -364,6 +380,25 @@ body {
   font-size: 45px;
   font-weight: 400;
   line-height: 58px;
+}
+
+.subTitle-next {
+  align-self: flex-end;
+  margin-top: 22px;
+
+  text-decoration: none;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 21px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 46px;
+
+  color: white;
+  background: #00000080;
+  border: none;
 }
 
 @media screen and (max-width: 1508px) {

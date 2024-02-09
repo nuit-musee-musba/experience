@@ -3,11 +3,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
-import { ObjectLoader } from "/experiences/1-batiment/js/objectLoader";
 import { updateAllMaterials } from "./utils";
-import { period } from "/experiences/1-batiment/js/period";
 import gsap from "gsap";
 
+import { periods } from "./constants.js";
+import { ObjectLoader } from "./objectLoader.js";
 
 const gui = new GUI();
 
@@ -249,8 +249,8 @@ const poi2 = [];
 const poi3 = [];
 const poi4 = [];
 
-for (let i = 0; i < period.length; i++) {
-  for (let j = 0; j < period[i].poiPosition.length; j++) {
+for (let i = 0; i < periods.length; i++) {
+  for (let j = 0; j < periods[i].poiPosition.length; j++) {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/1-batiment/assets/icons/poi.png");
 
@@ -332,6 +332,13 @@ const loadModels = async () => {
     animatedScenes.push(objectLoader);
   }
 };
+
+gui.onFinishChange(() => {
+  sunLight.shadow.camera.updateProjectionMatrix();
+  sunLight.shadow.updateMatrices();
+  sunLightCameraHelper.update();
+  updateAllMaterials();
+});
 
 //RENDERER
 
