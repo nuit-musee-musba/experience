@@ -14,14 +14,14 @@ window.experience.autoRotate = true;
 // Constants
 const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
-const infoButton = document.getElementById("startButton");
+const startButton = document.getElementById("startButton");
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box userData
   // TODO: make random
   frontTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
-  infoButton.href = data[0].path;
+  startButton.href = data[0].path;
 });
 
 // Create scene
@@ -29,6 +29,7 @@ const scene = new THREE.Scene();
 
 // Target canvas
 var canvas = document.getElementById("webgl");
+window.experience.canvas = canvas;
 
 // Create camera
 const camera = new THREE.PerspectiveCamera(
@@ -39,20 +40,19 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 1.2, -4.5);
 camera.lookAt(0, 0, 0);
-
-// Create Renderer
+window.experience.camera = camera;
+// Create Rendererx@
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
   canvas: canvas,
 });
 renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensions
-
 // // Add renderer to DOM
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 1);
-light.position.set(0, 0.5, -0.85);
+const light = new THREE.SpotLight(0xffffff, 1, 1, Math.PI);
+light.position.set(0, 0.5, -0.6);
 scene.add(light);
 
 const axesHelper = new THREE.AxesHelper(10);
@@ -140,8 +140,10 @@ const animate = () => {
       return island.userData.id !== window.experience.index + 1;
     }
   );
+  //console.log(window.experience.canRotate);
   // Render the scene
   renderer.render(scene, camera);
 };
 
 animate();
+

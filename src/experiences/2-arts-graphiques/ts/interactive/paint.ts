@@ -49,7 +49,7 @@ const Paint = async (
   brush.anchor.set(0.7);
 
   if (brushImageFile == "texture.png") {
-    const brushScale = 0.5;
+    const brushScale = 0.7;
     brush.scale.set(brushScale);
   }
 

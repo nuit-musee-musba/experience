@@ -129,7 +129,7 @@ function handleDragInteraction(
               placedEl.style.display = "block";
               print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
               recipeResolve(dialog.id);
-              dragElement.classList.add('disabled-item')
+              dragElement.classList.add('disabled')
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
               howManyDrags++;

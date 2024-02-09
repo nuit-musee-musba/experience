@@ -26,8 +26,8 @@ body {
     circle,
     rgba(152, 152, 152, 1) 0%,
     rgba(200, 200, 200, 1) 34%,
-    rgba(228, 228, 228, 1) 60%,
-    rgba(230, 230, 230, 1) 100%
+    rgba(228, 228, 228, 1) 45%,
+    rgba(255, 255, 255, 1) 100%
   );
   width: 100vw;
   height: 100vh;
@@ -125,6 +125,21 @@ body {
   width: 100%;
 }
 
+.activated {
+  left: 15% !important;
+  transition: left 2s ease; /* Add smooth transition */
+}
+
+.deactivated {
+  left: inherit;
+  transition: left 2s ease; /* Add smooth transition */
+}
+#infoTitle,
+#frontTitle {
+  font-size: 110px;
+  line-height: 150%;
+}
+
 #infoBox {
   flex: 1;
   display: flex;
@@ -139,9 +154,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
 #infoText {
-  margin-top: 5rem;
+  line-height: 200%;
 }
 
 .flex-col {
@@ -240,7 +254,12 @@ body {
   right: 5rem;
   cursor: pointer;
   pointer-events: all;
-  z-index: 2;
+  z-index: 4;
+  padding: 2rem;
+}
+
+.i-info {
+  pointer-events: none;
 }
 #closeButton {
   position: absolute;
@@ -249,7 +268,6 @@ body {
   cursor: pointer;
   pointer-events: all;
 }
-
 .first-scene {
   display: flex;
 }
@@ -261,21 +279,32 @@ body {
 #backButton {
   position: absolute;
   bottom: 5rem;
-  left: 5rem;
+  left: 15%;
   cursor: pointer;
   pointer-events: all;
   z-index: 2;
 }
 
 .experience-infos {
-  width: 750px;
+  width: 900px;
   position: absolute;
-  left: 5rem;
+  left: 15% !important;
   flex-direction: column;
-  justify-content: left;
+  justify-content: space-around;
   z-index: 3;
+  gap: 5rem;
 }
-
+.experience-scroll {
+  width: 850px;
+  position: absolute;
+  right: 5rem;
+  flex-direction: column;
+  z-index: 3;
+  align-items: center;
+}
+#scrollText {
+  color: #b7b7b7;
+}
 .transition-opacity {
   transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
 }
@@ -292,6 +321,10 @@ body {
   align-items: center;
   gap: 2rem;
   top: 5rem;
+}
+#scrollXIcon {
+  width: 100px;
+  height: 100px;
 }
 
 .absolute-bottom {

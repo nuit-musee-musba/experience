@@ -1,6 +1,6 @@
-import Transition from "./transition";
-import Button from "./button";
 import { ExperienceType } from "../script";
+import Button from "./button";
+import Transition from "./transition";
 
 export default class Modal {
   modal: HTMLDialogElement;
@@ -30,7 +30,5 @@ export default class Modal {
   close() {
     this.transition.next();
     this.modal.close();
-    const audio : HTMLAudioElement | null = document.querySelector<HTMLAudioElement>('audio');
-    audio!.play()
   }
 }

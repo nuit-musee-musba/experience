@@ -1,8 +1,16 @@
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { ambiantSound } from "@/global/js/sound";
 import GUI from "lil-gui";
+import * as THREE from "three";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+
+/**
+ * Ambiant Sound
+ */
+ambiantSound("/global/sounds/g4.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 /**
  * Global settings

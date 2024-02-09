@@ -1,4 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -14,6 +15,9 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
+ambiantSound("/global/sounds/g3.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 const sizes = {
   width: window.innerWidth,
@@ -333,13 +337,15 @@ function stepsFunction() {
         const nextText4 = document.getElementById("nextText4");
 
         nextText3.addEventListener("click", function () {
-          changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
-          isNextText3 = true;
+          steps1InRefiningPart.classList.remove("show");
+          steps2InRefiningPart.classList.add("show");
 
         });
 
         nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
+          isNextText3 = true;
+
         });
 
         if (statueV3.children.length <= 6) {
