@@ -262,7 +262,7 @@ function stepsFunction() {
         const intersects = raycaster.intersectObject(statueV1);
         const nextText = document.getElementById("nextText");
 
-        nextText.addEventListener("touchstart", function () {
+        nextText.addEventListener('click', function () {
           changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
         });
 
@@ -290,7 +290,7 @@ function stepsFunction() {
       if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
         const nextText2 = document.getElementById("nextText2");
-        nextText2.addEventListener("touchstart", function () {
+        nextText2.addEventListener("click", function () {
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
         });
 
@@ -323,11 +323,11 @@ function stepsFunction() {
         const nextText3 = document.getElementById("nextText3");
         const nextText4 = document.getElementById("nextText4");
 
-        nextText3.addEventListener("touchstart", function () {
+        nextText3.addEventListener("click", function () {
           changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
         });
 
-        nextText4.addEventListener("touchstart", function () {
+        nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
         });
 
@@ -361,11 +361,11 @@ function stepsFunction() {
         const nextText5 = document.getElementById("nextText5");
         const nextText6 = document.getElementById("nextText6");
 
-        nextText5.addEventListener("touchstart", function () {
+        nextText5.addEventListener("click", function () {
           changeTextInSteps(steps1InPolishingPart, steps2InRPolishingPart);
         });
 
-        nextText6.addEventListener("touchstart", function () {
+        nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
         });
 
