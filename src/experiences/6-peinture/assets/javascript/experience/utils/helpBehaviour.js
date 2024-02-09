@@ -13,13 +13,13 @@ export function demarrerTour() {
   });
 
   tour.addStep({
-    id: "example-step",
-    text: "Voici le livre. Vous pouvez cliquer sur les fruits à droite pour voir ici leurs significations !",
+    id: "book-step",
+    text: "Ici vous pouvez retrouver la signification de l’élément que vous avez sélectionné.",
     attachTo: {
       element: ".book",
       on: "right",
     },
-    classes: "book",
+    classes: "heyyy",
     buttons: [
       {
         text: "Suivant",
@@ -31,13 +31,31 @@ export function demarrerTour() {
   });
 
   tour.addStep({
-    id: "example-step2",
-    text: "Voici la recette. Chaque ligne correspond à la description d'un fruit. En appuyant sur les fruits et en regardant le livre, trouvez les fruits dont vous avez besoin !",
+    id: "elements-step",
+    text: "Voici votre inventaire, déplacez les éléments sur la table pour faire votre composition !",
     attachTo: {
-      element: ".img-recipe",
-      on: "left",
+      element: ".ingredients-container",
+      on: "top",
     },
-    classes: "img-recipe",
+    classes: "heyyy",
+    buttons: [
+      {
+        text: "Suivant",
+        defaultStepOptions: false,
+        classes: "btn-small-primary",
+        action: tour.next,
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: "onglets-step",
+    text: "Vous pouvez changer de catégorie pour trouver le bon élément !",
+    attachTo: {
+      element: ".categories-tabs",
+      on: "top",
+    },
+    classes: "heyyy",
     buttons: [
       {
         text: "Suivant",
@@ -50,12 +68,12 @@ export function demarrerTour() {
 
   tour.addStep({
     id: "example-step3",
-    text: "Voici votre plan de travail. Quand vous avez repéré un fruit qui semble correspondre et à la description et à l'indication dans la recette, glissez-le ici.",
+    text: "Ici se trouve votre table de composition. Déplacez les bons éléments de votre inventaire ici !",
     attachTo: {
       element: ".composition",
       on: "bottom",
     },
-    classes: "composition",
+    classes: "heyyy",
     buttons: [
       {
         text: "Terminer",
@@ -72,6 +90,6 @@ export function demarrerTour() {
 
   tour.on("complete", function () {
     // Fonction à exécuter une fois le tour complété
-    helpbtn.style.display = "block";
+    helpbtn.style.display = "flex";
   });
 }
