@@ -386,6 +386,13 @@ body {
   line-height: 58px;
 }
 
+.finger-rotation{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
 @media screen and (max-width: 1508px) {
   .chronology-buttons button {
     font-size: 1rem;
