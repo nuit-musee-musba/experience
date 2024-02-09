@@ -5,14 +5,18 @@ import { playAnimation } from "./playAnimation.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
-var stepsEl = document.getElementById("stepnum");
+var stepsEls = document.querySelectorAll("#stepnum");
 var stepTitleEl = document.getElementById("list-name")
 var winConditions = craftCont.length;
 var howManyDone = 0;
 export var current_step = 1;
 var current_step_done = 0;
 var current_step_win = 3;
-stepsEl.innerHTML = current_step;
+
+stepsEls.forEach((element) => {
+  element.innerHTML = current_step;
+});
+
 var stepTitle = ["La mort", "Le temps qui passe", "Les symboles du Christ"];
 stepTitleEl.innerHTML = stepTitle[current_step - 1]
 var step_success = false;
@@ -176,7 +180,10 @@ function handleDragInteraction(
             setTimeout(() => {
               current_step++;
               recipeGeneration();
-              stepsEl.innerHTML = current_step;
+
+              stepsEls.forEach((element) => {
+                element.innerHTML = current_step;
+              });
               howManyDone = 0;
               step_success = false;
               print_chef_speech("Passons à l'étape " + current_step + "/3 !");
