@@ -1,4 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -14,6 +15,9 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
+ambiantSound("/global/sounds/g3.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 const sizes = {
   width: window.innerWidth,
@@ -23,6 +27,7 @@ let steps = 0;
 let raycasterActive = false;
 const steps1InRoughPart = document.getElementById("steps1InRoughPart");
 const steps2InRoughPart = document.getElementById("steps2InRoughPart");
+
 //
 // INITIALIZATION
 //
@@ -93,7 +98,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0;i < workshop.children.length;i++) {
+  for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
 
       console.log(workshop.children[i].intensity);
@@ -116,7 +121,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
 
-
+      workshop.children[i].position.set(2, 0.5, -2.5);
 
 
     } else if (workshop.children[i].name === "Socle") {
@@ -181,8 +186,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
     statueV4.material.opacity = 1;
     statueV4.material.transparent = true;
 
-    scene.add(statueV4)
-    scene.add(statueV5)
+
 
     const polishRange = document.getElementById("PolishRange");
     polishRange.addEventListener("input", (event) => {
@@ -252,6 +256,10 @@ function changeTextInSteps(removeText, addText) {
   raycasterActive = true;
 }
 
+let isNextText1 = false;
+let isNextText2 = false;
+let isNextText3 = false;
+
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
@@ -262,8 +270,9 @@ function stepsFunction() {
         const intersects = raycaster.intersectObject(statueV1);
         const nextText = document.getElementById("nextText");
 
-        nextText.addEventListener("touchstart", function () {
+        nextText.addEventListener('click', function () {
           changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
+          isNextText1 = true;
         });
 
         if (statueV1.children.length <= 4) {
@@ -290,8 +299,10 @@ function stepsFunction() {
       if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
         const nextText2 = document.getElementById("nextText2");
-        nextText2.addEventListener("touchstart", function () {
+        nextText2.addEventListener("click", function () {
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
+          isNextText2 = true;
+
         });
 
         if (statueV2.children.length <= 6) {
@@ -313,6 +324,8 @@ function stepsFunction() {
             raycasterActive = false;
             RefiningPart();
             stepsFunction();
+            scene.add(statueV4)
+            scene.add(statueV5)
           }
         }
       }
@@ -323,12 +336,16 @@ function stepsFunction() {
         const nextText3 = document.getElementById("nextText3");
         const nextText4 = document.getElementById("nextText4");
 
-        nextText3.addEventListener("touchstart", function () {
-          changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
+        nextText3.addEventListener("click", function () {
+          steps1InRefiningPart.classList.remove("show");
+          steps2InRefiningPart.classList.add("show");
+
         });
 
-        nextText4.addEventListener("touchstart", function () {
+        nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
+          isNextText3 = true;
+
         });
 
         if (statueV3.children.length <= 6) {
@@ -360,37 +377,31 @@ function stepsFunction() {
         const intersects = raycaster.intersectObject(statueV4);
         const nextText5 = document.getElementById("nextText5");
         const nextText6 = document.getElementById("nextText6");
+        const nextText7 = document.getElementById("nextText7");
+        const polishText = document.getElementById("polishText");
 
-        nextText5.addEventListener("touchstart", function () {
-          changeTextInSteps(steps1InPolishingPart, steps2InRPolishingPart);
+
+
+        nextText5.addEventListener("click", function () {
+          changeTextInSteps(steps1InPolishingPart, steps2InPolishingPart);
         });
 
-        nextText6.addEventListener("touchstart", function () {
+        nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
+          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
         });
 
-        if (statueV4.children.length <= 6) {
+        if (quantity <= 0.5) {
+          polishText.innerHTML = "Nous-y sommes presque, mais ce n’est pas encore assez poli..."
+        }
+        if (quantity <= 0) {
           changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
         }
-        if (statueV4.children.length <= 4) {
-          changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
-        }
 
-        if (intersects.length > 0 && raycasterActive) {
-          const clickedBlock = intersects[0].object;
-          statueV4.remove(clickedBlock);
+        nextText7.addEventListener("click", function () {
+          OutroPart();
+        });
 
-          if (statueV4.children.length === 0) {
-            mouse.x = -1;
-            mouse.y = -1;
-            mouse.y = -1;
-            steps++;
-            raycasterActive = false;
-
-            OutroPart();
-            stepsFunction();
-          }
-        }
       }
   }
 }
@@ -478,7 +489,8 @@ const tick = () => {
     switch (steps) {
       case 1:
 
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText1) {
           if (statueV1.children.length > 0) {
             outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
           }
@@ -487,7 +499,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 2:
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText2) {
           if (statueV2.children.length > 0) {
             outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
           }
@@ -496,7 +508,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 3:
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText3) {
           if (statueV3.children.length > 0) {
             outlinePass.selectedObjects = [statueV3.children[Math.floor(Math.random() * statueV3.children.length)]];
           }

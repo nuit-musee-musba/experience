@@ -12,6 +12,8 @@
 
 h2,
 h3 {
-  font-family: $font-heading;
-  font-size: $h2-font-size;
+  &, span {
+    font-family: $font-heading;
+    font-size: $h2-font-size;
+  }
 }

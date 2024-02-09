@@ -8,6 +8,8 @@ const OutroPart = () => {
 
   outroPart.classList.add("show");
 
+  console.log('copil')
+
   // outroPart.addEventListener("click", () => {
   //   outroPart.classList.remove("show");
   // });

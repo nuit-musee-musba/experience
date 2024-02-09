@@ -119,8 +119,8 @@ p {
   opacity: 0;
   visibility: hidden;
   transition:
-    visibility 0s,
-    opacity 2s ease-in-out;
+    visibility 3.5s,
+    opacity 3.5s ease-in-out;
 }
 #popin-consignes.textshow .popin-body {
   opacity: 1;
@@ -130,8 +130,8 @@ p {
   visibility: hidden;
   opacity: 0;
   transition:
-    visibility 0s,
-    opacity 2s ease-in-out;
+    visibility 3.5s,
+    opacity 3.5s ease-in-out;
 }
 
 .popin.hidden,

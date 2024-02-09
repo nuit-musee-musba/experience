@@ -69,7 +69,7 @@ p,
 .text-p-body {
   font-family: Montserrat;
   font-weight: 400;
-  font-size: 56px;
+  font-size: 50px;
   line-height: 72px;
 }
 
@@ -277,4 +277,5 @@ i.i-check::before {
 }
 i.i-info::before {
   content: "\ee07";
+  pointer-events: all;
 }
