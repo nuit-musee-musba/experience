@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
-    <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+    ></script>
   </head>
   <body>
     <div class="loading__container active"></div>
@@ -59,10 +62,18 @@
             </div>
           </div>
           <div class="center">
-            <img
+            <lottie-player
+              id="animation-video"
               class="sec1-hand-tool"
-              src="/global/svg/gestures/swipe-left.svg"
-            />
+              src="/global/lottie/finger_rotation_animation.json"
+              background="transparent"
+              speed="1"
+              direction="1"
+              mode="normal"
+              loop
+              autoplay
+            ></lottie-player>
+
             <img
               src="/2-arts-graphiques/images/pieces/tableau-clean.png"
               class="sec1-painting"
@@ -109,7 +120,8 @@
 
                 <div class="paragraph">
                   <p>
-                    Retour un siècle en arrière dans le passé, en 1919, lors de la création de l’œuvre “Saint Sébastien” d’Odilon Redon.
+                    Retour un siècle en arrière dans le passé, en 1919, lors de
+                    la création de l’œuvre “Saint Sébastien” d’Odilon Redon.
                   </p>
                 </div>
               </div>
@@ -195,11 +207,11 @@
           <div class="left"></div>
           <div class="center timelapse">
             <p class="timelapse__context">De retour en</p>
-<!--            <h1>-->
-<!--              <span id="date-anim__year" data-from="1910" data-to="2024"-->
-<!--                >1910</span-->
-<!--              >-->
-<!--            </h1>-->
+            <!--            <h1>-->
+            <!--              <span id="date-anim__year" data-from="1910" data-to="2024"-->
+            <!--                >1910</span-->
+            <!--              >-->
+            <!--            </h1>-->
             <lottie-player
                 class="timelapse-lotti"
                 src="/2-arts-graphiques/lottie/timeline.json"
@@ -822,7 +834,11 @@
           <h2 id="hint"></h2>
         </div>
       </footer>
-      <audio id="audio" src="/2-arts-graphiques/musics/g2.mp3" style="display: none;"></audio>
+      <audio
+        id="audio"
+        src="/2-arts-graphiques/musics/g2.mp3"
+        style="display: none"
+      ></audio>
     </div>
   </body>
 </html>

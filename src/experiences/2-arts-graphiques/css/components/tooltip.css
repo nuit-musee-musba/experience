@@ -50,7 +50,8 @@
 .sec1-hand-tool {
   position: absolute;
   left: 2031px;
-  top: 582px;
+  top: -182px;
+  width: 800px;
   z-index: 6;
   pointer-events: none;
   opacity: 1;
