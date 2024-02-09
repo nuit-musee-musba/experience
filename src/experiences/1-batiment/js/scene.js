@@ -13,6 +13,9 @@ const gui = new GUI();
 
 export const config = {
   envMapIntensity: 3,
+  // 1 = 75 fps on MBP M1PRO
+  // .7 = 100 fps on MBP M1PRO
+  scalePixelRatioFactor: .7,
 };
 
 const canvas = document.querySelector("canvas.webgl");
@@ -49,7 +52,7 @@ sunLight.shadow.camera.left = -26;
 sunLight.shadow.camera.right = 45;
 sunLight.shadow.camera.top = 13;
 sunLight.shadow.camera.bottom = -3;
-sunLight.intensity = 5.5;
+sunLight.intensity = 4.5;
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
 sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
@@ -57,7 +60,7 @@ sunLight.shadow.radius = 4.2;
 sunLight.shadow.blurSamples = 25;
 sunLight.shadow.bias = -0.0002;
 
-// GUI for Light Controls
+// // GUI for Light Controls
 // const lightControls = gui.addFolder("Light Controls");
 
 // lightControls
@@ -163,24 +166,26 @@ sunLight.shadow.bias = -0.0002;
 //   .step(0.0001)
 //   .name("Shadow Bias");
 
-// lightControls.open();
+// lightControls.close();
 
 
 // const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
 // const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
-
-// gui.onFinishChange(() => {
-//   sunLight.shadow.camera.updateProjectionMatrix();
-//   sunLight.shadow.updateMatrices();
-//   sunLightCameraHelper.update();
-//   updateAllMaterials();
-// });
 
 // scene.add(sunLightHelper);
 // scene.add(sunLightCameraHelper);
 
 // const axesHelper = new THREE.AxesHelper(5);
 // scene.add(axesHelper);
+
+gui.onFinishChange(() => {
+  sunLight.shadow.camera.updateProjectionMatrix();
+  sunLight.shadow.updateMatrices();
+  sunLightCameraHelper.update();
+  updateAllMaterials();
+});
+
+
 
 
 // ENVIRONMENT
@@ -223,7 +228,7 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 
   renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 });
 
 // CAMERA
@@ -345,9 +350,10 @@ gui.onFinishChange(() => {
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  powerPreference: "high-performance",
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 renderer.setClearColor("#FFF6ED");
 renderer.shadowMap.enabled = true;
 

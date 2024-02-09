@@ -8,13 +8,26 @@
   </head>
   <body>
     <div id="app">
-      <div class="second-scene experience-infos">
+      <div class="second-scene experience-infos ">
         <h2 id="infoTitle"></h2>
         <p class="text-p-mini" id="infoText"></p>
+          <a class="btn-primary" id="startButton">
+           Commencer l'expérience
+          </a>
+
       </div>
+      <!-- <div class="second-scene experience-scroll">
+        <svg width="500" height="501" viewBox="0 0 500 501" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M343.042 156.839C325.896 88.8603 290.667 42.2561 250.001 42.2561C192.48 42.2561 145.834 135.527 145.834 250.589C145.834 365.652 192.48 458.923 250.001 458.923C257.126 458.923 264.105 457.485 270.834 454.756M316.542 286.152L396.001 324.902L357.251 404.36" stroke="#B8B8B8" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M395.829 324.966C358.245 343.403 306.787 354.757 249.995 354.757C134.933 354.757 41.6621 308.112 41.6621 250.591C41.6621 193.07 134.933 146.424 249.995 146.424C350.787 146.424 434.85 182.216 454.162 229.757" stroke="#B8B8B8" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+              
+           <p class="text-p-mini" id="scrollText">Faites tourner et découvrez l’expérience</p>
+
+      </div> -->
       <div class="scroll-infos first-scene">
         <h3>SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</h3>
-        <svg
+        <svg id="scrollXIcon"
           width="63"
           height="63"
           viewBox="0 0 63 63"
@@ -49,7 +62,7 @@
         <div id="infoBox">
             <button class="btn-icon second-scene" id="backButton">
               <i class="i-left"> </i>
-              <span>Retour à la galerie</span>
+              <span>Retour à l'accueil</span>
             </button>
           <button id="helpButton" class="btn-icon first-scene">
             <i class="i-info"></i>
@@ -74,18 +87,14 @@
               Voir l'expérience
             </button>
           </div>
-          <div class="absolute-bottom second-scene">
-            <a class="btn-primary" id="startButton">
-             Commencer l'expérience
-            </a>
-            <div>
-            </div>
-          </div>
+          
+          
         </div>
       </div>
     </div>
     <script type="module" src="./js/script.js"></script>
     <script type="module" src="./js/popUp.js"></script>
     <script type="module" src="./js/scenes.js"></script>
+    <script type="module" src="./js/orbitControl.js"></script>
   </body>
 </html>
