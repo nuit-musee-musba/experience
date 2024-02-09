@@ -166,15 +166,19 @@ function generateParticles() {
 // GENERATE 4 groups of particles
 
 const particles1 = generateParticles();
+particles1.position.z = 9
 scene.add(particles1)
 
 const particles2 = generateParticles();
+particles2.position.z = 9
 scene.add(particles2)
 
 const particles3 = generateParticles();
+particles3.position.z = 9
 scene.add(particles3)
 
 const particles4 = generateParticles();
+particles4.position.z = 9
 scene.add(particles4)
 
 // First painting
@@ -469,19 +473,19 @@ const tick = () => {
   // __Update particles__
   particles1.position.x = Math.cos(elapsedTime / 2) * 0.05
   particles1.position.y = Math.sin(elapsedTime / 2) * 0.05
-  particles1.position.z = Math.sin(elapsedTime / 2) * 0.05
+  particles1.position.z = Math.sin(elapsedTime / 2) * 0.05 + 9
 
   particles2.position.x = Math.cos(elapsedTime / 2) * -0.05
   particles2.position.y = Math.sin(elapsedTime / 2) * -0.05
-  particles2.position.z = Math.sin(elapsedTime / 2) * -0.05
+  particles2.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
 
   particles3.position.x = Math.sin(elapsedTime / 2) * 0.05
   particles3.position.y = Math.cos(elapsedTime / 2) * -0.05
-  particles3.position.z = Math.cos(elapsedTime / 2) * 0.05
+  particles3.position.z = Math.cos(elapsedTime / 2) * 0.05 + 9
 
   particles4.position.x = Math.sin(elapsedTime / 2) * -0.05
   particles4.position.y = Math.cos(elapsedTime / 2) * 0.05
-  particles4.position.z = Math.sin(elapsedTime / 2) * -0.05
+  particles4.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
 
   // __Update controls__
   // controls.update()
