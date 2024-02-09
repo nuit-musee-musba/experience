@@ -22,3 +22,7 @@
   gap: 20px;
   padding-bottom: 90px;
 }
+
+.per-10, .per-20, .per-40, .per-60, .per-70, .per-85{
+  opacity: 0;
+}
