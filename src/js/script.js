@@ -7,8 +7,10 @@ import "./rotationSystem";
 
 window.experience = window.experience || {};
 
+// Set initial values
 window.experience.canRotate = true;
 window.experience.autoRotate = true;
+window.experience.clickedOnExperience = false;
 
 // Capture DOM elements
 
@@ -16,6 +18,8 @@ window.experience.autoRotate = true;
 const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
 const startButton = document.getElementById("startButton");
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box userData
@@ -25,10 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
   startButton.href = data[0].path;
 });
 
+
 // Create scene
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0xf8f4f4, 3, 5.3);
 window.experience.scene = scene;
+
 
 // Target canvas
 var canvas = document.getElementById("webgl");
@@ -70,8 +76,6 @@ mainLight.position.set(0, 0.2, 0);
 mainLight.castShadow = true;
 scene.add(mainLight);
 
-const axesHelper = new THREE.AxesHelper(10);
-axesHelper.setColors("red", "green", "blue");
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
@@ -95,7 +99,6 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       window.experience.islands.push(island);
-      island.add(axesHelper);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -127,6 +130,9 @@ updateAllMaterials();
 
 window.experience.carousel = carousel;
 
+// We set this here once all promises are resolved
+window.experience.scene = scene;
+
 // Handle window resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -140,6 +146,7 @@ canvas.addEventListener("wheel", (event) => {
   const scrollPosition = event.deltaX % window.innerWidth; // Use deltaX for horizontal scrolling
   carousel.rotation.y += (-scrollPosition * Math.PI) / window.innerWidth;
 });
+
 
 // Render loop
 const animate = () => {
