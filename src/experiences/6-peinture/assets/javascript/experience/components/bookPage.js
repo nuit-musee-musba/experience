@@ -9,7 +9,7 @@ class BookPage {
     this.bookContainer = document.querySelector(".book");
     this.bookTitle = this.bookContainer.querySelector(".book-title");
     this.bookText = this.bookContainer.querySelector(".book-description");
-    
+
     this.selectedItem = items.items.find((item) => item.id === "1");
     this.displayData(this.selectedItem);
 
@@ -24,6 +24,7 @@ class BookPage {
     });
     this.item.addEventListener("click", () => {
       this.animation(true);
+      this.displayData(this.selectedItem);
     });
     this.item.addEventListener("touchstart", () => {
       this.animation(true);
@@ -34,6 +35,7 @@ class BookPage {
     });
     this.item.addEventListener("touchmove", () => {
       this.animation(false);
+      this.displayData(this.selectedItem);
     });
   }
 
@@ -45,8 +47,12 @@ class BookPage {
 
   animation(status) {
     if (status && !this.item.classList.contains('selected-item')) {
+      this.elSelected = document.querySelector('.selected-item');
+      if (this.elSelected) {
+        this.elSelected.classList.remove('selected-item');
+      }
       this.item.classList.add('selected-item');
-    } 
+    }
     else if (this.item.classList.contains('selected-item')) {
       this.item.classList.remove('selected-item');
     }
@@ -54,7 +60,7 @@ class BookPage {
 
   closeBook() {
     let hasSelectedItem = false;
-  
+
     this.items.forEach(item => {
       if (item.classList.contains('selected-item')) {
         this.bookContainer.classList.remove('is-closed');
@@ -67,7 +73,7 @@ class BookPage {
       this.bookTitle.textContent = "";
       this.bookText.innerHTML = "";
     }
-  }  
+  }
 }
 
 

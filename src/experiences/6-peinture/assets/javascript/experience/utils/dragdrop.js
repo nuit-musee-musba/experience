@@ -142,7 +142,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "Mmh, gardez-le sous votre établi, il nous sera peut-être utile plus tard."
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
@@ -160,7 +160,9 @@ function handleDragInteraction(
           //win the game
 
           if (current_step >= current_step_win) {
-            document.body.classList.add("has-ending-opened");
+            setTimeout(() => {
+              document.body.classList.add("has-ending-opened");
+            }, 2000);
           } else {
             step_success = true;
             setTimeout(() => {
