@@ -144,6 +144,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-sketch.webp",
               "painting-clean.webp",
+              "texture.png",
               this.buttonSection2,
               options
             );
@@ -154,6 +155,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-stain.webp",
               "painting-clean.webp",
+              "eraser.png",
               this.buttonSection6,
               options
             );
@@ -170,6 +172,7 @@ export default class Transition {
               currentSectionNumber,
               "painting-cracked.webp",
               "painting-stain.webp",
+              "eraser.png",
               this.buttonSection5,
               optionsSeal
             );

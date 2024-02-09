@@ -51,3 +51,24 @@
 .timeline-bar::after {
   bottom: 0;
 }
+
+
+.timeline.expo::before {
+  content: "";
+  position: absolute;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background-color: var(--white);
+  left: 50%;
+  transform: translateX(-50%);
+  /* top: -5px; */
+}
+.timeline.expo::after {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.timeline.expo .timeline-bar::after {
+  width: 2.4rem;
+  height: 2.4rem;
+}
