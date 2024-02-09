@@ -1,22 +1,21 @@
 import lottie from 'lottie-web';
 
 export function playAnimation(anim) {
-    console.log(anim)
     let container = document.querySelector('.game-chef__illustration');
     let animatedElement = container.querySelector('svg');
     if (animatedElement) {
         animatedElement.remove();
     }
-    
+
     // PATH JSON
     const animationPaths = {
-        animJeffHappy: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-happy.json',
-        animJeffAdorable: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-adorable.json',
-        animJeffPerfect: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-perfect.json',
-        animJeffNope: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-nope.json',
-        animJeffCringe: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-cringe.json',
-        animJeffPensive: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-pensive.json',
-        animJeffDrama: '/experiences/6-peinture/assets/javascript/experience/animations/anim-jeff-drama.json'
+        animJeffHappy: '/6-peinture/animations/anim-jeff-happy.json',
+        animJeffAdorable: '/6-peinture/animations/anim-jeff-adorable.json',
+        animJeffPerfect: '/6-peinture/animations/anim-jeff-perfect.json',
+        animJeffNope: '/6-peinture/animations/anim-jeff-nope.json',
+        animJeffCringe: '/6-peinture/animations/anim-jeff-cringe.json',
+        animJeffPensive: '/6-peinture/animations/anim-jeff-pensive.json',
+        animJeffDrama: '/6-peinture/animations/anim-jeff-drama.json'
     };
     const animPath = animationPaths[anim];
 

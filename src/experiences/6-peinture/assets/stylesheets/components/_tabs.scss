@@ -76,7 +76,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-
   .item {
     align-items: center;
     display: flex;
@@ -98,6 +97,13 @@
             background-position: center;
             z-index: -1;
         }
+    }
+    &.disabled {
+      filter: saturate(0);
+      opacity: .5;
+      img {
+        animation: none;
+      }
     }
     // TAB FOOD
     &-peach {

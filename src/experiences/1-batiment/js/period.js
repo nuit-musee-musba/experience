@@ -2,8 +2,8 @@ export const period = [
   {
     title: "La Création du Musée",
     date: "1801",
-    target: { x: 4, y: 0, z: 0 },
-    position: { x: 7, y: 2, z: 0 },
+    target: { x: -15, y: 0.7, z: -15 },
+    position: { x: -18, y: 0, z: -17 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -14,7 +14,7 @@ export const period = [
       "Dès lors de l'installation, les locaux n'étaient pas suffisamment adaptés à ses deux missions essentielles : conserver et présenter.",
       "Malgré l’aménagement conçu par l’ingénieur de la Ville en 1809, la galerie, ouverte le 1er octobre 1810, ne put présenter toutes ses œuvres. Pierre Lacour installa le nouveau musée dans l’hôtel de l’ancienne Académie royale.",
     ],
-    poiPosition: [{ x: -15, y: 0.6, z: -15 }],
+    poiPosition: [{ x: -15, y: 0.7, z: -15 }],
     poiText: [
       {
         title: "Création du musée",
@@ -25,8 +25,8 @@ export const period = [
   {
     title: "Déplacements Successifs et Incendies",
     date: "1832",
-    target: { x: 7, y: 0, z: 0 },
-    position: { x: 0, y: 2, z: 0 },
+    target: { x: 0.7, y: 0.7, z: -0.7 },
+    position: { x: 2, y: 2, z: 2 },
     description: [
       "Malgré des ajustements en 1809, les déménagements se succèdent, avec des tentatives d'installation dans divers endroits.",
       "Incendies en 1862 et 1870 obligent à des travaux de réfection, déplaçant temporairement la collection dans des structures vulnérables.",
@@ -36,7 +36,7 @@ export const period = [
       "L’architecte municipal élabora en 1858 un projet de musée situé à l’arrière du palais. Aucun des projets n’avança à cette époque puis un premier incendie ravagea ce dernier le 13 juin 1862, endommageant quelques peintures.",
       "Les travaux nécessitèrent le déplacement de la collection dans un « local en planches » installé dans le jardin. Provisoire à l’origine, cette structure, vulnérable aux incendies et aux inondations, demeura 8 années !",
     ],
-    poiPosition: [{ x: 0.7, y: 0.6, z: -0.7 }],
+    poiPosition: [{ x: 0.7, y: 0.7, z: -0.7 }],
     poiText: [
       {
         title: "Déplacements Successifs et Incendies",
@@ -47,8 +47,8 @@ export const period = [
   {
     title: "Construction du Musée Actuel",
     date: "1875",
-    target: { x: 9, y: 0, z: 4 },
-    position: { x: 0, y: 2, z: 0 },
+    target: { x: -1.35, y: 0.7, z: 3.3 },
+    position: { x: 2.5, y: 2, z: 8.5 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -60,9 +60,9 @@ export const period = [
       "C’est en 2001, qu’elle a été restaurée pour se conformer aux normes de sécurité et d'accessibilité.",
     ],
     poiPosition: [
-      { x: -2.4, y: 0.6, z: 4.5 },
-      { x: -0.2, y: 0.6, z: 2.7 },
-      { x: 0.1, y: 0.6, z: 2.1 },
+      { x: -2.4, y: 0.7, z: 4.5 },
+      { x: -0.2, y: 0.7, z: 2.7 },
+      { x: 0.1, y: 0.7, z: 2.1 },
     ],
     poiText: [
       {
@@ -82,8 +82,8 @@ export const period = [
   {
     title: "Aujourd'hui",
     date: "2024",
-    target: { x: 5, y: 0, z: 2 },
-    position: { x: 0, y: 2, z: 0 },
+    target: { x: 0.9, y: 0.7, z: 0.9 },
+    position: { x: 6, y: 2, z: 6 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes dans les ailes construites par Burguet.",
       "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
@@ -93,8 +93,8 @@ export const period = [
       "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
     ],
     poiPosition: [
-      { x: 0.9, y: 0.6, z: 2.7 },
-      { x: 2.4, y: 0.6, z: 0.9 },
+      { x: 0.9, y: 0.7, z: 2.7 },
+      { x: 2.4, y: 0.7, z: 0.9 },
     ],
     poiText: [
       {

@@ -20,6 +20,7 @@
     </a>
     <div id="loadPart" class="loadPart show_flex">
       <span class="loader"></span>
+      <p>Parce qu’une journée sans sculpter est une journée perdue...</p>
     </div>
 
     <div id="IntroPart" class="introContent show">
@@ -271,6 +272,86 @@
           <div class="borderPopup">
             <div class="popupContent">
               <p class="text-p-body">
+                Magnifico ! Notre sculpture est presque parfaite ! Merci à vous
+                pour votre attention méticuleuse ! Mon œuvre est presque
+                terminée, il  ne reste plus qu’à la polir.
+              </p>
+            </div>
+          </div>
+          <button id="nextText5" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+      </div>
+
+      <div id="steps2InPolishingPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Pour polir, nous utilisons généralement du papier abrasif. Cette
+                fois, nous utiliserons du papier Émeri, un type de papier
+                abrasif utilisé pour polir les métaux et la pierre.
+              </p>
+            </div>
+          </div>
+          <button id="nextText6" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+      </div>
+
+      <div id="steps3InPolishingPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Maintenant, c’est à votre tour d’utiliser le polissoir pour
+                rendre la surface lisse et brillante. Servez-vous de la jauge
+                pour lui donner tout son éclat
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="steps4InPolishingPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Nous-y sommes presque, mais ce n’est pas encore assez poli...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="steps5InPolishingPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
+                Que ça brille ! Tu es vraiment talentueux
+              </p>
+            </div>
+          </div>
+          <button id="nextText7" class="btn-small-secondary text-btn-1">
+            Suivant
+          </button>
+        </div>
+      </div>
+
+      <div id="steps6InPolishingPart">
+        <div class="popupContainer">
+          <img src="/3-sculpture/assets/rinaldoPicture.png" alt="rinaldo" />
+          <div class="borderPopup">
+            <div class="popupContent">
+              <p class="text-p-body">
                 <input
                   type="range"
                   id="PolishRange"
@@ -286,8 +367,20 @@
           </div>
         </div>
       </div>
-    </div>
 
+      <p class="text-p-body">
+        <input
+          type="range"
+          id="PolishRange"
+          name="PolishRange"
+          min="0"
+          max="1"
+          value="0"
+          step="0.1"
+        />
+        <label for="PolishRange">Polissage</label>
+      </p>
+    </div>
     <div id="OutroPart" class="outroPart"></div>
 
     <canvas class="webgl"></canvas>

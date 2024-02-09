@@ -11,7 +11,18 @@
       type="module"
       src="/experiences/1-batiment/js/script.js"
     ></script>
+    <script
+      defer
+      type="module"
+      src="/experiences/1-batiment/js/inactivity.ts"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+    ></script>
   </head>
+
   <body onselectstart="return false">
     <div class="loader">
       <svg
@@ -39,6 +50,22 @@
         </g>
       </svg>
     </div>
+
+    <div class="animation">
+      <lottie-player
+        id="animation-video"
+        class="finger-rotation"
+        src="/global/lottie/finger_rotation_animation.json"
+        background="transparent"
+        speed="1"
+        direction="1"
+        mode="normal"
+        loop
+        controls
+        autoplay
+      ></lottie-player>
+    </div>
+
     <div class="vignette"></div>
     <canvas class="webgl"></canvas>
 
@@ -87,19 +114,18 @@
       <div class="end-menu-content">
         <h1>Merci de votre visite !</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur. Etiam dui eget pellentesque
-          ac. Odio feugiat sed faucibus dolor adipiscing. Id gravida velit
-          commodo adipiscing eu. Vitae donec mattis arcu vestibulum diam. Cras
-          eget consequat diam volutpat in. Magna etiam tortor.
+          Vous avez maintenant une connaissance approfondie de l'histoire des
+          bâtiments du MusBA !Impressionnant, n'est-ce pas ? Vous pouvez
+          maintenant continuer votre exploration en retournant au menu
+          principal.
         </p>
         <div class="end-menu-buttons">
-          <div>
-            <a href="index.html" id="restart-button">
-              <button class="btn-small-secondary">
-                Explorer le MusBA en 3D
-              </button>
-            </a>
-          </div>
+          <a href="index.html" id="restart-button">
+            <button class="btn-small-secondary">Explorer le MusBA en 3D</button>
+          </a>
+          <a href="/" id="restart-button">
+            <button class="btn-small-secondary">Retourner au hub</button>
+          </a>
         </div>
       </div>
     </div>

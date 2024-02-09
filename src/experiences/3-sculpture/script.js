@@ -10,6 +10,8 @@ import "./component/1-IntroPart/IntroPart.scss";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
+import PolishingPart from "./component/5-PolishingPart/PolishingPart";
+import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
 
@@ -50,7 +52,7 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x000000, 0, 15);
+scene.fog = new THREE.FogExp2(0x000000, 0.1);
 
 // TextureLoader
 
@@ -80,24 +82,43 @@ let socle;
 
 let quantity;
 
-gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
-  gltf.scene.position.set(0, -1, -1.5);
+
+const light = new THREE.AmbientLight(0x404040);
+light.intensity = 25;
+scene.add(light);
+
+
+gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
+  gltf.scene.position.set(-0.1, -0.8, -1.2);
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
   for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
-      workshop.children[i].intensity = 20;
+
+      console.log(workshop.children[i].intensity);
+      workshop.children[i].intensity = 113;
+
     } else if (workshop.children[i].name === "LSpot") {
-      workshop.children[i].intensity = 5;
+
+      workshop.children[i].intensity = 0;
+
     } else if (workshop.children[i].name === "Area002_1") {
-      workshop.children[i].intensity = 800;
+
+      workshop.children[i].intensity = 1000;
+      workshop.children[i].angle = 0.281;
+
     } else if (workshop.children[i].name === "Spot") {
-      workshop.children[i].intensity = 350;
+
+      workshop.children[i].intensity = 250;
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
+
+
+
+
     } else if (workshop.children[i].name === "Socle") {
       socle = workshop.children[i];
     }
@@ -115,18 +136,16 @@ const statueScale = new THREE.Vector3(0.25, 0.25, 0.25);
 const statuePosition = new THREE.Vector3(1, -0.8, 0.6);
 const statueRotation = Math.PI / 2;
 
-gltfLoader.load("/3-sculpture/models/Bloc_Degrossi.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_bloc.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
   statueV1 = gltf.scene;
 
-
-
   scene.add(statueV1);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_degrossiV1.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_degrossi.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
@@ -135,7 +154,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_degrossiV1.glb", (gltf) => {
   scene.add(statueV2);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_sculptV1.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_sculpt.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
@@ -144,35 +163,36 @@ gltfLoader.load("/3-sculpture/models/Mozart_sculptV1.glb", (gltf) => {
   scene.add(statueV3);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
-  statueV4 = gltf.scene.children[0];
-  statueV4.scale.set(1.4, 1.4, 1.4);
-  statueV4.position.set(0.5, -1, -0.5);
-  statueV4.rotation.y = Math.PI + 0.6;
+gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
+  statueV5 = gltf.scene.children[0];
+  statueV5.scale.set(statueScale.x, statueScale.y, statueScale.z);
+  statueV5.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
+  statueV5.rotation.y = statueRotation;
 
   const loader = new THREE.TextureLoader();
-  loader.load("/3-sculpture/assets/croquis.png", (texture) => {
-    statueV5 = statueV4.clone();
-    statueV5.geometry = statueV4.geometry.clone();
-    statueV5.scale.multiplyScalar(1.002);
-    statueV5.position.z += 0.01;
+  loader.load("/3-sculpture/textures/Mozart_affinage_texture.png", (texture) => {
+    statueV4 = statueV5.clone();
+    statueV4.geometry = statueV5.geometry.clone();
+    statueV4.scale.multiplyScalar(1.002);
+    statueV4.position.z += 0.01;
 
-    statueV5.material = statueV5.material.clone();
-    statueV5.material.color = new THREE.Color(0x000000);
-    statueV5.material.opacity = 1;
-    statueV5.material.transparent = true;
+    statueV4.material = statueV5.material.clone();
+    statueV4.material.map = texture;
+    statueV4.material.opacity = 1;
+    statueV4.material.transparent = true;
+
+    scene.add(statueV4)
+    scene.add(statueV5)
 
     const polishRange = document.getElementById("PolishRange");
     polishRange.addEventListener("input", (event) => {
       quantity = 1 - parseFloat(event.target.value);
-      statueV5.material.opacity = quantity;
+      statueV4.material.opacity = quantity;
     });
   });
 });
 
-const light = new THREE.AmbientLight(0x404040);
-light.intensity = 20;
-scene.add(light);
+
 
 //
 // EVENT
@@ -196,6 +216,10 @@ let touchBefore = 0;
 let currentTouch = 0;
 
 const mouse = new THREE.Vector2();
+window.addEventListener("touchstart", (event) => {
+  currentTouch = event.touches[0].clientX / 100;
+  touchBefore = currentTouch;
+});
 
 window.addEventListener("touchmove", (event) => {
   // } else {
@@ -228,6 +252,10 @@ function changeTextInSteps(removeText, addText) {
   raycasterActive = true;
 }
 
+let isNextText1 = false;
+let isNextText2 = false;
+let isNextText3 = false;
+
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
@@ -238,8 +266,9 @@ function stepsFunction() {
         const intersects = raycaster.intersectObject(statueV1);
         const nextText = document.getElementById("nextText");
 
-        nextText.addEventListener("touchstart", function () {
+        nextText.addEventListener('click', function () {
           changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
+          isNextText1 = true;
         });
 
         if (statueV1.children.length <= 4) {
@@ -266,8 +295,10 @@ function stepsFunction() {
       if (statueV2) {
         const intersects = raycaster.intersectObject(statueV2);
         const nextText2 = document.getElementById("nextText2");
-        nextText2.addEventListener("touchstart", function () {
+        nextText2.addEventListener("click", function () {
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
+          isNextText2 = true;
+
         });
 
         if (statueV2.children.length <= 6) {
@@ -299,11 +330,13 @@ function stepsFunction() {
         const nextText3 = document.getElementById("nextText3");
         const nextText4 = document.getElementById("nextText4");
 
-        nextText3.addEventListener("touchstart", function () {
+        nextText3.addEventListener("click", function () {
           changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
+          isNextText3 = true;
+
         });
 
-        nextText4.addEventListener("touchstart", function () {
+        nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
         });
 
@@ -316,7 +349,6 @@ function stepsFunction() {
 
         if (intersects.length > 0 && raycasterActive) {
           const clickedBlock = intersects[0].object;
-          console.log(clickedBlock);
           statueV3.remove(clickedBlock);
 
           if (statueV3.children.length === 0) {
@@ -325,12 +357,50 @@ function stepsFunction() {
             mouse.y = -1;
             steps++;
             raycasterActive = false;
+
             PolishingPart();
             stepsFunction();
           }
         }
       }
       break;
+    case 4:
+      if (statueV4) {
+        const intersects = raycaster.intersectObject(statueV4);
+        const nextText5 = document.getElementById("nextText5");
+        const nextText6 = document.getElementById("nextText6");
+
+        nextText5.addEventListener("click", function () {
+          changeTextInSteps(steps1InPolishingPart, steps2InRPolishingPart);
+        });
+
+        nextText6.addEventListener("click", function () {
+          changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
+        });
+
+        if (statueV4.children.length <= 6) {
+          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
+        }
+        if (statueV4.children.length <= 4) {
+          changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
+        }
+
+        if (intersects.length > 0 && raycasterActive) {
+          const clickedBlock = intersects[0].object;
+          statueV4.remove(clickedBlock);
+
+          if (statueV4.children.length === 0) {
+            mouse.x = -1;
+            mouse.y = -1;
+            mouse.y = -1;
+            steps++;
+            raycasterActive = false;
+
+            OutroPart();
+            stepsFunction();
+          }
+        }
+      }
   }
 }
 
@@ -357,6 +427,8 @@ controls.rotateSpeed = 0.1;
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
+  powerPreference: "low-power",
+  physicallyCorrectLights: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -405,16 +477,18 @@ const tick = () => {
   const rotateSpeed = currentTouch - touchBefore;
 
   //if (statueV1 && statueV2 && isPolished == false) {
-  if (statueV1 && statueV2 && statueV3 && statueV4) {
+  if (statueV1 && statueV2 && statueV3 && statueV4 && statueV5) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
     statueV3.rotation.y = statueV3.rotation.y + rotateSpeed * 0.3;
+    statueV4.rotation.y = statueV4.rotation.y + rotateSpeed * 0.3;
+    statueV5.rotation.y = statueV5.rotation.y + rotateSpeed * 0.3;
 
     switch (steps) {
       case 1:
-        console.log("heh1")
 
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText1) {
           if (statueV1.children.length > 0) {
             outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
           }
@@ -423,8 +497,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 2:
-        console.log("heh2")
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText2) {
           if (statueV2.children.length > 0) {
             outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
           }
@@ -433,7 +506,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 3:
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText3) {
           if (statueV3.children.length > 0) {
             outlinePass.selectedObjects = [statueV3.children[Math.floor(Math.random() * statueV3.children.length)]];
           }

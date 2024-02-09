@@ -2,9 +2,10 @@ import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
 import * as THREE from "three";
 import { period } from "./period";
+import { enableInactivityAnimation } from "./inactivity.ts";
 
 enableInactivityRedirection();
-
+enableInactivityAnimation()
 import {
   animatedScenes,
   camera,
@@ -23,6 +24,7 @@ const sceneSetUp = async () => {
 
   const clock = new THREE.Clock();
   let index = 0;
+  let previousIndex = null;
   let previousTime = 0;
   let isShowingText = false;
   const raycaster = new THREE.Raycaster();
@@ -170,7 +172,13 @@ const sceneSetUp = async () => {
 
     updateAllMaterials();
 
-    animatedScenes[index].play();
+    for (let i = 0; i < animatedScenes.length; i++) {
+      if (i <= index) {
+        animatedScenes[i].play();
+      } else {
+        animatedScenes[i].reverse();
+      }
+    }
 
     const dateTitleElement = document.getElementById("date-title");
     dateTitleElement.textContent = "";
@@ -237,7 +245,13 @@ const sceneSetUp = async () => {
       z: cameraPosition.z,
     });
   };
-  handleFocusPeriod(period[index]);
+
+  async function startExperience() {
+    await loadModels();
+    handleFocusPeriod(period[index]);
+  }
+
+  startExperience();
 
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);
