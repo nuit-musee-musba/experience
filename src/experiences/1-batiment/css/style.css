@@ -205,6 +205,7 @@ body {
   position: absolute;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .left-arrow svg,
@@ -245,7 +246,8 @@ body {
   background-color: transparent;
   border: none;
   color: white;
-  padding: 1rem 4rem 6rem 4rem;
+  margin: 1rem 4rem 6rem 4rem;
+  cursor: pointer;
 }
 
 .chronology-timeline .button {
@@ -256,6 +258,7 @@ body {
   background-color: rgba(255, 255, 255, 0.3);
   border: 5px solid white;
   padding: 1rem 1rem 1rem 1rem;
+  cursor: pointer;
 }
 
 .chronology-timeline .button div {
