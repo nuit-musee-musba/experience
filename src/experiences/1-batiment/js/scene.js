@@ -252,7 +252,7 @@ const poi4 = [];
 for (let i = 0; i < period.length; i++) {
   for (let j = 0; j < period[i].poiPosition.length; j++) {
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load("./assets/icons/poi.png");
+    const texture = textureLoader.load("/1-batiment/assets/icons/poi.png");
 
     const material = new THREE.MeshBasicMaterial({
       map: texture,
