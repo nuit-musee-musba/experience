@@ -299,6 +299,15 @@ body {
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   z-index: 10;
+
+  display: flex;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#end-menu.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .end-menu-content {

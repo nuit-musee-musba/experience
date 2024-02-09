@@ -157,7 +157,7 @@ const sceneSetUp = async () => {
       index++;
       handleFocusPeriod(periods[index]);
     } else {
-      endMenu.style.display = "flex";
+      endMenu.classList.remove('hidden')
       lastStep.style.display = "none";
     }
   };

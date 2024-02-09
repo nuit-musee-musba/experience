@@ -261,7 +261,9 @@ for (let i = 0; i < periods.length; i++) {
     });
     const geometry = new THREE.PlaneGeometry(0.4, 0.4);
     const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+
+    cube.position.setY(-10);
+    // scene.add(cube);
     cube.name = `${i + j}`;
 
     if (i === 0) {
