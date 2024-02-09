@@ -32,10 +32,7 @@ showButton.addEventListener("click", () => {
     window.experience.autoRotate = false;
     window.experience.canRotate = false;
     window.experience.clickedOnExperience = false;
-
-
     canvas.classList.add("activated");
-    console.log(canvas.classList)
 
     // set current rotation
     let currentRotation = window.experience.rotation;
@@ -113,6 +110,7 @@ showButton.addEventListener("click", () => {
     }
 
     window.experience.animate();
+
     // Loop through all elements with the class 'first-scene' and set display to 'none'
     firstSceneElements.forEach((element) => {
       element.classList.add("transition-opacity");
@@ -160,7 +158,6 @@ backButton.addEventListener("click", async () => {
   await executeAnimation();
   window.experience.onZoom = false;
 
-
   const targetScale = MESHSCALE;
   canvas.classList.remove("activated");
   canvas.classList.add("deactivated");
@@ -203,7 +200,6 @@ backButton.addEventListener("click", async () => {
     } else {
       window.experience.canRotate = true;
       window.experience.autoRotate = true;
-
     }
   }
 
@@ -251,15 +247,12 @@ const tik = () => {
   }
   if (window.experience.clickedOnExperience) {
     window.experience.onZoom = true;
-
-    console.log("Experience  clicked")
     if (!window.experience.isRotating) {
       // Stop aurto rotation when the user clicks the button
       window.experience.autoRotate = false;
       window.experience.canRotate = false;
 
       canvas.classList.add("activated");
-      console.log(canvas.classList)
 
       // set current rotation
       let currentRotation = window.experience.rotation;
@@ -340,10 +333,6 @@ const tik = () => {
 
       window.experience.animate();
 
-      console.log("FINISHED ANIMATION FROM CLICKED EXPERIENCE")
-
-      console.log("firstSceneElements", firstSceneElements)
-      console.log("secondSceneElements", secondSceneElements)
       // Loop through all elements with the class 'first-scene' and set display to 'none'
       firstSceneElements.forEach((element) => {
         element.classList.add("transition-opacity");
@@ -376,7 +365,6 @@ const tik = () => {
     // Reset the clickedOnExperience flag
     window.experience.clickedOnExperience = false;
   }
-
 };
 
 tik();

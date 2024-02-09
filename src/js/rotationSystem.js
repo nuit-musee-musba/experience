@@ -9,9 +9,7 @@ const infoButton = document.getElementById("startButton");
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
-console.log("Raycaster", raycaster)
 const pointer = new THREE.Vector2();
-console.log("Pointer", pointer);
 
 window.experience = window.experience || {};
 
@@ -93,48 +91,29 @@ window.addEventListener("touchmove", (event) => {
 
   lastX = touch.clientX;
   lastY = touch.clientY;
-  console.log("lastX", lastX)
-
 });
 
 window.addEventListener("touchend", (event) => {
   isTouching = false;
-  // Raycaster
-  // pointer.x = (lastX / window.innerWidth) * 2 - 1;
-  // pointer.y = - (lastY / window.innerHeight) * 2 + 1;
-
   finalPointer = pointer.x
 
-  console.log("inititalPointer", inititalPointer)
-  console.log("finalPointer", finalPointer)
 
   // HEre will be the logic to capture the click on the island
 
   if (inititalPointer === finalPointer) {
 
-    console.log("Pointer", pointer)
     if (!window.experience.clickedOnExperience) {
       raycaster.setFromCamera(pointer, window.experience.camera);//
-      console.log("Raycaster", raycaster)
       const carousel = window.experience.scene.children[1];
       if (carousel.isObject3D) {
-        console.log('Carousel is 3D object', carousel)
         const intersects = raycaster.intersectObjects(window.experience.scene.children, true); // Set recursive flag to true
         if (intersects.length > 0) {
-          console.log('Intersects', intersects);
           const intersectedElement = intersects[0];
-          console.log('intersected object', intersectedElement.object)
           if (intersectedElement.object.type === "Mesh") {
             try {
               const islandElement = intersectedElement.object.parent
               const islandId = islandElement.userData.id;
               const islandName = islandElement.userData.islandName;
-              console.log(islandName);
-              // if (islandId === window.experience.index + 1) {
-              //   window.experience.clickedOnExperience = true;
-              //   window.experience.clickedIndex = islandId - 1;
-              //   console.log("Clicked on the current Island", islandId);
-              // }
               window.experience.clickedOnExperience = true;
               window.experience.clickedIndex = islandId - 1;
 
@@ -151,7 +130,6 @@ window.addEventListener("touchend", (event) => {
 
   } else {
     window.experience.onZoom = false
-    console.log("Scrolled")
 
   }
 });
@@ -174,7 +152,6 @@ window.experience.updateCarouselRotation = function () {
     }
   }
   window.experience.carousel.rotation.y = window.experience.rotation;
-  console.log(window.experience.onZoom)
   updateIslandInformation(
     window.experience.index,
     data,
