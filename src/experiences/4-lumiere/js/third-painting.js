@@ -314,15 +314,12 @@ const lightMinPos = -(line.geometry.parameters.height / 2);
 rectAreaLight.position.y = lightMaxPos / 2;
 
 gui.addColor(lightColors, "blue").onChange((value) => {
-  // console.log("blue", value.getHexString())
   rectAreaLight.color.set(lightColors.blue);
 });
 gui.addColor(lightColors, "yellow").onChange((value) => {
-  // console.log("yellow", value.getHexString())
   rectAreaLight.color.set(lightColors.yellow);
 });
 gui.addColor(lightColors, "red").onChange((value) => {
-  // console.log("red", value.getHexString())
   rectAreaLight.color.set(lightColors.red);
 });
 

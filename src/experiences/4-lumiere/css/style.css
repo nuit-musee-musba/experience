@@ -65,6 +65,27 @@ p {
   pointer-events: none;
 }
 
+/* ----- Painting description ----- */
+.painting-desc {
+  position: absolute;
+  right: 124px;
+  padding: 2rem 3rem;
+  width: 894px;
+  color: var(--4-white);
+  border-left: 5px solid var(--4-white);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.painting-desc.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.painting-desc .painting-title,
+.painting-desc .painting-author {
+  margin-bottom: 2.5rem;
+}
+
 /* ----- Popins ----- */
 
 .popin-overlay {
@@ -132,6 +153,7 @@ p {
   z-index: 1000;
   transition: opacity 2s ease-in-out;
 }
+
 #popin-consignes .popin-body {
   opacity: 0;
   visibility: hidden;
@@ -139,10 +161,12 @@ p {
     visibility 3.5s,
     opacity 3.5s ease-in-out;
 }
+
 #popin-consignes.textshow .popin-body {
   opacity: 1;
   visibility: visible;
 }
+
 #popin-consignes.hidden {
   visibility: hidden;
   opacity: 0;
@@ -233,6 +257,7 @@ p {
   display: flex;
   justify-content: center;
 }
+
 .legende-ecriteau {
   position: relative;
   display: flex;
@@ -242,6 +267,7 @@ p {
   height: 70px;
   padding: 8px 175px;
 }
+
 .legende-ecriteau::before,
 .legende-ecriteau::after {
   content: "";
