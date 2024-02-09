@@ -149,6 +149,10 @@ body {
   z-index: 11;
 }
 
+.chronology .btn-icon {
+  cursor: pointer;
+}
+
 .left-arrow {
   display: none;
   left: 33vw;
@@ -296,8 +300,9 @@ body {
 }
 
 #restart-button button {
-  border: none;
+  border-color: black;
   color: black;
+  cursor: pointer;
 }
 
 .point-interest-component {
