@@ -160,7 +160,9 @@ function handleDragInteraction(
           //win the game
 
           if (current_step >= current_step_win) {
-            document.body.classList.add("has-ending-opened");
+            setTimeout(() => {
+              document.body.classList.add("has-ending-opened");
+            }, 2000);
           } else {
             step_success = true;
             setTimeout(() => {
