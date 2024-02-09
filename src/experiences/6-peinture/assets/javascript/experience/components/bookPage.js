@@ -24,6 +24,7 @@ class BookPage {
     });
     this.item.addEventListener("click", () => {
       this.animation(true);
+      this.displayData(this.selectedItem);
     });
     this.item.addEventListener("touchstart", () => {
       this.animation(true);
@@ -34,6 +35,7 @@ class BookPage {
     });
     this.item.addEventListener("touchmove", () => {
       this.animation(false);
+      this.displayData(this.selectedItem);
     });
   }
 
@@ -45,7 +47,10 @@ class BookPage {
 
   animation(status) {
     if (status && !this.item.classList.contains('selected-item')) {
-      document.querySelector('.selected-item').classList.remove('selected-item');
+      this.elSelected = document.querySelector('.selected-item');
+      if (this.elSelected) {
+        this.elSelected.classList.remove('selected-item');
+      }
       this.item.classList.add('selected-item');
     }
     else if (this.item.classList.contains('selected-item')) {
