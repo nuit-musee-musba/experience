@@ -1,11 +1,11 @@
 // Get references to your elements
-
+import gsap from "gsap";
 // DOM elements
 const showButton = document.getElementById("showButton");
 const backButton = document.getElementById("backButton");
 const firstSceneElements = document.querySelectorAll(".first-scene");
 const secondSceneElements = document.querySelectorAll(".second-scene");
-
+const canvas = document.getElementById("webgl");
 // Constants
 const PARTS = 5;
 const CIRCLE = Math.PI * 2;
@@ -30,6 +30,9 @@ showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
     // Stop aurto rotation when the user clicks the button
     window.experience.autoRotate = false;
+
+    canvas.classList.add("activated");
+    console.log(canvas.classList)
 
     // set current rotation
     let currentRotation = window.experience.rotation;
@@ -113,10 +116,6 @@ showButton.addEventListener("click", () => {
       element.classList.add("transition-opacity");
       element.style.opacity = "0";
     });
-
-    // setTimeout(() => {
-
-    // }, 800);
     firstSceneElements.forEach((element) => {
       element.style.display = "none";
     });
@@ -143,17 +142,29 @@ showButton.addEventListener("click", () => {
   }
 });
 
-backButton.addEventListener("click", () => {
-  // Define the target scale for the elements
+backButton.addEventListener("click", async () => {
+  const executeAnimation = async () => {
+    await new Promise((resolve) => {
+      gsap.to(window.experience.camera.position, {
+        duration: 0.5,
+        x: 0,
+        y: 1.2,
+        z: -4.2,
+        onComplete: resolve,
+      });
+    });
+  };
+
+  await executeAnimation();
+
   const targetScale = MESHSCALE;
+  canvas.classList.remove("activated");
+  canvas.classList.add("deactivated");
+
 
   function descale() {
-    // Interpolate the scale smoothly
-
     let newScale = window.experience.currentIsland.scale.x - SCALEFACTOR;
-
     window.experience.currentIsland.scale.set(newScale, newScale, newScale);
-
     if (newScale <= targetScale) {
       window.experience.currentIsland.scale.set(
         targetScale,
@@ -165,19 +176,16 @@ backButton.addEventListener("click", () => {
       Math.abs(targetScale - window.experience.currentIsland.scale.x) < 0.001;
 
     window.experience.currentIsland.position.y -= POSITIONFACTOR; // as the camera is at negative z
-
     if (window.experience.currentIsland.position.y <= 0) {
       window.experience.currentIsland.position.y = 0;
       positionYComplete = true;
     } else {
       positionYComplete =
-        Math.abs(window.experience.currentIsland.position.y - TARGETYPOSITION) <
-        0.001;
+        Math.abs(
+          window.experience.currentIsland.position.y - TARGETYPOSITION
+        ) < 0.001;
     }
-    // Move other islands up
-
     window.experience.otherIslands.forEach((island, i) => {
-      // Stop the animation if the position is reached
       island.position.y += POSITIONFACTOR;
       if (island.position.y >= 0) {
         island.position.y = 0;
@@ -186,9 +194,8 @@ backButton.addEventListener("click", () => {
     const positionComplete = window.experience.otherIslands.every(
       (island) => Math.abs(island.position.y - POSITIONY) < 0.001
     );
-
     if (!scaleComplete || !positionComplete || !positionYComplete) {
-      requestAnimationFrame(descale); // Continue the animation if not finished
+      requestAnimationFrame(descale);
     } else {
       window.experience.canRotate = true;
       window.experience.autoRotate = true;
@@ -196,6 +203,8 @@ backButton.addEventListener("click", () => {
   }
 
   descale();
+
+
   secondSceneElements.forEach((element) => {
     element.classList.add("transition-opacity");
     element.style.opacity = "0";
@@ -226,6 +235,7 @@ backButton.addEventListener("click", () => {
     });
   }, 300);
 });
+
 
 const tik = () => {
   requestAnimationFrame(tik);

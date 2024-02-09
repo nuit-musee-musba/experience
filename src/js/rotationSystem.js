@@ -37,13 +37,12 @@ function updateRotation(delta) {
 
 window.addEventListener("touchstart", (event) => {
   // Stop aurto rotation when the user starts touch
-  window.experience.autoRotate = false;
+  // window.experience.autoRotate = false;
 
   // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
   if (!window.experience.canRotate) {
     return;
   }
-  window.experience.autoRotate = false;
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;

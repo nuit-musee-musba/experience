@@ -14,8 +14,18 @@ html {
 html,
 body {
   overflow: hidden;
+  font-family: Montserrat;
 }
 
+.title-component {
+  pointer-events: none;
+  position: absolute;
+  top: 6rem;
+  left: 6rem;
+  display: flex;
+  gap: 3rem;
+  z-index: 20;
+}
 .animation {
   position: absolute;
   top: 0;
@@ -59,7 +69,7 @@ body {
     rgba(0, 0, 0, 0.74) 93.33%,
     rgba(0, 0, 0, 0.75) 100%
   );
-  z-index: 10;
+  z-index: 5;
   pointer-events: none;
 }
 
@@ -97,14 +107,36 @@ body {
   display: flex;
   gap: 3rem;
 }
+
 .title-line {
   width: 5px;
   background-color: white;
+  animation: slide-down 2s 4s cubic-bezier(0.2, 0, 0.25, 1) forwards;
 }
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 #date-title {
   color: white;
   font-size: 8rem;
   font-weight: 100;
+  transition: opacity 0.6s ease-in-out;
+  transition-delay: 200ms;
+}
+.date-title-hidden {
+  color: white;
+  font-size: 8rem;
+  font-weight: 100;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .main-title {
@@ -113,6 +145,24 @@ body {
   color: white;
   font-size: 4rem;
   font-weight: 100;
+  overflow: hidden;
+  animation: slide2 2s 5s cubic-bezier(0.2, 0, 0.25, 1) forwards;
+}
+
+@keyframes slide2 {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 
 .parameter-buttons {
@@ -165,6 +215,19 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 11;
+  transition: all 0.3s ease-in-out;
+  transition-delay: 200ms;
+
+  transform: translateY(0);
+}
+
+.chronology.hidden {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.btn-icon {
+  cursor: pointer;
 }
 
 .left-arrow {
@@ -181,6 +244,7 @@ body {
   position: absolute;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .left-arrow svg,
@@ -221,15 +285,19 @@ body {
   background-color: transparent;
   border: none;
   color: white;
+  margin: 1rem 4rem 6rem 4rem;
+  cursor: pointer;
 }
 
 .chronology-timeline .button {
   position: relative;
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.3);
   border: 5px solid white;
+  padding: 1rem 1rem 1rem 1rem;
+  cursor: pointer;
 }
 
 .chronology-timeline .button div {
@@ -296,6 +364,15 @@ body {
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   z-index: 10;
+
+  display: flex;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#end-menu.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .end-menu-content {
@@ -314,8 +391,9 @@ body {
 }
 
 #restart-button button {
-  border: none;
+  border-color: black;
   color: black;
+  cursor: pointer;
 }
 
 .point-interest-component {
@@ -344,14 +422,12 @@ body {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-title-component {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-text-component {
@@ -364,16 +440,32 @@ body {
 
 .button-interest {
   position: absolute;
-  bottom: 24vh;
+  bottom: 25vh;
   left: 2vw;
   z-index: 11;
 }
 
-#container-subTitle {
+.wrapper-subTitle {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   left: 7vw;
-  bottom: 25vh;
+  bottom: 20vh;
   width: 30vw;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 11;
+}
+
+.wrapper-subTitle.hidden {
+  opacity: 0;
+  transform: translateY(20);
+}
+
+#container-subTitle {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   z-index: 11;
@@ -384,6 +476,33 @@ body {
   font-size: 45px;
   font-weight: 400;
   line-height: 58px;
+}
+
+.subTitle-next {
+  align-self: flex-end;
+  margin-top: 22px;
+
+  text-decoration: none;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 21px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 46px;
+
+  color: white;
+  background: #00000080;
+  border: none;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.subTitle-next.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .finger-rotation {
