@@ -1,4 +1,4 @@
-export const period = [
+export const periods = [
   {
     title: "La Création du Musée",
     date: "1801",
@@ -108,4 +108,21 @@ export const period = [
     ],
   },
   // {title : 'Lorem Ipsum5', date: '1963', position: {x: 4, y: 3, z: 2}, description: [ "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.", "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret."]}
+];
+
+export const onboardingContent = [
+  {
+    subTitle: "Onboarding 1 Text",
+    mainTitle: "Bienvenue dans l’histoire du musée",
+  },
+  {
+    title: "2024",
+    subTitle: "Onboarding 2 Text",
+    mainTitle: "De sa première installation jusqu'à la construction",
+  },
+  {
+    title: "1801",
+    subTitle: "Onboarding 3 Text",
+    mainTitle: "De sa première installation jusqu'à la construction",
+  },
 ];
