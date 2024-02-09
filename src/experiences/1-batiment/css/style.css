@@ -380,6 +380,7 @@ body {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
+  z-index: 11;
 }
 
 #poi-title-component {

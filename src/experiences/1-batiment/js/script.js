@@ -115,7 +115,6 @@ const sceneSetUp = async () => {
   const endMenu = document.getElementById("end-menu");
   const lastStep = document.getElementById("last-step");
   const component = document.getElementById("poi-component");
-  // const containerSubTitle = document.getElementById("container-subTitle");
 
   const restart = () => {
     index = 0;
@@ -125,13 +124,11 @@ const sceneSetUp = async () => {
   const showText = () => {
     isShowingText = true;
     component.style.display = "flex";
-    // containerSubTitle.style.display = "flex";
   };
 
   const hideText = () => {
     isShowingText = false;
     component.style.display = "none";
-    // containerSubTitle.style.display = "none";
   };
   window.addEventListener("click", poiClick, false);
   window.addEventListener("mousedown", hideText(), false);
