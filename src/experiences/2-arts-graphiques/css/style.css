@@ -154,6 +154,7 @@ body {
 }
 
 .pieces-ref {
+  transition: stroke 0.3s;
   position: relative;
   z-index: 1;
 }
@@ -194,6 +195,6 @@ body {
   color: var(--primary-1-color);
 }
 
-.btn-primary:disabled{
+.btn-primary:disabled {
   display: none;
 }
