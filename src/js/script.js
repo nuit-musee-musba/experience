@@ -6,8 +6,10 @@ import "./rotationSystem";
 
 window.experience = window.experience || {};
 
+// Set initial values
 window.experience.canRotate = true;
 window.experience.autoRotate = true;
+window.experience.clickedOnExperience = false;
 
 // Capture DOM elements
 
@@ -16,6 +18,8 @@ const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
 const startButton = document.getElementById("startButton");
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box userData
   // TODO: make random
@@ -23,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   infoDescription.innerHTML = data[0].description;
   startButton.href = data[0].path;
 });
+
 
 // Create scene
 const scene = new THREE.Scene();
@@ -40,6 +45,7 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(0, 1.2, -4.5);
 camera.lookAt(0, 0, 0);
 
+
 // Create Renderer
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
@@ -55,8 +61,6 @@ const light = new THREE.SpotLight(0xffffff, 1, 1, Math.PI);
 light.position.set(0, 0.5, -0.6);
 scene.add(light);
 
-const axesHelper = new THREE.AxesHelper(10);
-axesHelper.setColors("red", "green", "blue");
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
@@ -80,7 +84,6 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       window.experience.islands.push(island);
-      island.add(axesHelper);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -140,6 +143,7 @@ const animate = () => {
       return island.userData.id !== window.experience.index + 1;
     }
   );
+
   // Render the scene
   renderer.render(scene, camera);
 };

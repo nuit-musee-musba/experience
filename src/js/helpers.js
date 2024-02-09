@@ -129,3 +129,4 @@ export function handleScaleClick(carousel, index) {
   }
   scaleModel(model, 0.0315, 100);
 }
+
