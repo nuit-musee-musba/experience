@@ -14,6 +14,7 @@ html {
 html,
 body {
   overflow: hidden;
+  font-family: Montserrat;
 }
 
 .vignette {
@@ -158,6 +159,15 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 11;
+  transition: all 0.3s ease-in-out;
+  transition-delay: 200ms;
+
+  transform: translateY(0);
+}
+
+.chronology.hidden {
+  opacity: 0;
+  transform: translateY(100%);
 }
 
 .left-arrow {
@@ -368,6 +378,16 @@ body {
   left: 7vw;
   bottom: 20vh;
   width: 30vw;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wrapper-subTitle.hidden {
+  opacity: 0;
+  transform: translateY(20);
 }
 
 #container-subTitle {
@@ -399,6 +419,14 @@ body {
   color: white;
   background: #00000080;
   border: none;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.subTitle-next.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1508px) {
