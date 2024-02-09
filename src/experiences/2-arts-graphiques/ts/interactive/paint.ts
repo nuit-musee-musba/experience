@@ -44,9 +44,13 @@ const Paint = async (
   // const line = new PIXI.Graphics();
 
   let brushTexture = await PIXI.Texture.from(`/2-arts-graphiques/images/textures/${brushImageFile}`);
-  // Créez un sprite PIXI à partir de l'image de pinceau
   const brush = new PIXI.Sprite(brushTexture);
-  brush.anchor.set(0.5);
+  brush.anchor.set(0.7);
+
+  if (brushImageFile == "texture.png") {
+    const brushScale = 0.5;
+    brush.scale.set(brushScale);
+  }
 
   let t1 = await PIXI.Assets.load(
     `/2-arts-graphiques/canvas/${backgroundFile}`
