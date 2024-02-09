@@ -360,10 +360,12 @@ body {
   gap: 20px;
 }
 
-#restart-button button {
+#restart-button {
   border-color: black;
   color: black;
   cursor: pointer;
+
+  --accent: #000000;
 }
 
 .point-interest-component {

@@ -32,6 +32,11 @@ const loaderElm = document.querySelector(".loader")
 const loaderIconElm = document.querySelector(".loader-icon")
 
 let currentStep = 0;
+let currentSubtitleIndex = 0;
+let currentEpoch = 0;
+export const globalModalState = {
+  isMenuModalOpened: false
+}
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -131,8 +136,8 @@ const sceneSetUp = async () => {
 
 
   const restart = () => {
-    index = 0;
-    handleFocusPeriod(periods[index]);
+    endMenu.classList.add('hidden')
+    globalModalState.isMenuModalOpened = false
   };
 
   const showText = () => {
@@ -182,7 +187,10 @@ const sceneSetUp = async () => {
       index++;
       handleFocusPeriod(periods[index]);
     } else {
+      wrapperSubTitleElm.classList.add('hidden')
+
       endMenu.classList.remove('hidden')
+      globalModalState.isMenuModalOpened = true
       lastStep.style.display = "none";
     }
   };
@@ -200,39 +208,68 @@ const sceneSetUp = async () => {
       });
   }
 
+
+
   const handleNext = async () => {
-
-    titleElm.classList.add("date-title-hidden");
-    if (currentStep === 3) {
-      loaderElm.classList.remove('loader-hidden')
-      loaderIconElm.classList.remove('loader-hidden')
-
-
-      titleElm.classList.remove("date-title-hidden");
-      isOnboarded = true;
-      subTitleNextButton.classList.add("hidden");
-
-      wrapperSubTitleElm.classList.add("hidden");
-
-      await wait(2000)
+    if (!isOnboarded) {
+      titleElm.classList.add("date-title-hidden");
+      if (currentStep === 3) {
+        console.log("a", loaderElm.classList)
+        loaderElm.classList.remove('loader-hidden')
+        loaderIconElm.classList.remove('loader-hidden')
 
 
-      handleFocusPeriod(periods[0]);
-
-
-    } else if (currentStep >= 0 && currentStep <= 2) {
-      subTitleElm.textContent = onboardingContent[currentStep].subTitle;
-      mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
-
-      if (onboardingContent[currentStep].title) {
         titleElm.classList.remove("date-title-hidden");
-        titleElm.textContent = onboardingContent[currentStep].title;
+        isOnboarded = true;
+        subTitleNextButton.classList.add("hidden");
+
+        wrapperSubTitleElm.classList.add("hidden");
+
+        await wait(2000)
+
+        console.log("b", loaderElm.classList)
+
+        handleFocusPeriod(periods[0]);
+
+
+      } else if (currentStep >= 0 && currentStep <= 2) {
+        subTitleElm.textContent = onboardingContent[currentStep].subTitle;
+        mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
+
+        if (currentStep == 0) {
+          wrapperSubTitleElm.classList.remove("hidden");
+        }
+
+        if (onboardingContent[currentStep].title) {
+          titleElm.classList.remove("date-title-hidden");
+          titleElm.textContent = onboardingContent[currentStep].title;
+        }
+
+
+        currentStep++;
       }
+    } else {
 
 
-      currentStep++;
+      const currentPeriod = currentEpoch
+
+      console.log('pass because onboarded', { periods, currentPeriod, currentSubtitleIndex })
+      console.log(currentSubtitleIndex, currentPeriod.subTitle.length)
+      if (currentSubtitleIndex >= currentPeriod.subTitle.length - 1) {
+        console.log('hey');
+        nextStep()
+        currentSubtitleIndex = 0
+        subTitleNextButton.classList.add("hidden");
+      } else {
+        subTitleElm.textContent = currentPeriod.subTitle[currentSubtitleIndex + 1];
+        currentSubtitleIndex++;
+      }
     }
+
+
   };
+
+
 
   const handleStart = async () => {
     titleElm.classList.add("date-title-hidden");
@@ -258,6 +295,9 @@ const sceneSetUp = async () => {
     if (!step) {
       return;
     }
+    currentEpoch = step
+
+
     await loadModels();
     displayPOI(index);
 
@@ -325,6 +365,8 @@ const sceneSetUp = async () => {
     const cameraPosition = targetPosition;
 
     document.getElementById("subTitle").textContent = step.subTitle[0];
+
+    subTitleNextButton.classList.remove("hidden");
 
     gsap.to(controls.target, {
       duration: 1,

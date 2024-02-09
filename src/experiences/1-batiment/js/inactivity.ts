@@ -1,3 +1,4 @@
+import { globalModalState } from "@/experiences/1-batiment/js/script";
 import gsap from "gsap";
 
 export const enableInactivityAnimation = () => {
@@ -15,7 +16,7 @@ export const enableInactivityAnimation = () => {
   };
 
   const displayAnimation = () => {
-    if (!animation) {
+    if (!animation || globalModalState.isMenuModalOpened) {
       return;
     }
     animateOpacity(100);
