@@ -82,7 +82,7 @@ export function recipeGeneration() {
         thisItem.category +
         '" id="recipe-' +
         element.name +
-        `"><span class="item-category ${thisItem.category}"></span><div class="item-stuff">` +
+        `"><span class="item-stuff">` +
         thisItem.recipe_text +
         //' <span id="actual-' +
         //element.name +
@@ -90,7 +90,7 @@ export function recipeGeneration() {
         //actualNumber +
         //"</span>/" +
         //thisItem.number_needed +
-        "</div><span class='item-checkbox'><img id='img-check-" +
+        "</span><span class='item-checkbox'><img id='img-check-" +
         element.name +
         "' src='/6-peinture/images/misc/checked.svg'></span></li>";
     }

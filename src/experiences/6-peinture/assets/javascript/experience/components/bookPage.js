@@ -33,6 +33,10 @@ class BookPage {
       this.animation(false);
     });
     this.item.addEventListener("touchmove", () => {
+      if (this.item.classList.contains('disabled')) {
+        this.animation(false);
+        return;
+      }
       this.animation(false);
       this.displayData(this.selectedItem);
       this.item.style.zIndex = "99";

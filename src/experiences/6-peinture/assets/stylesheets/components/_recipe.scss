@@ -17,7 +17,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 5px solid $color-border;
     margin-top: -1vh;
     margin-bottom: 4rem;
     margin-right: 4rem;
@@ -60,7 +60,9 @@
 
       &.checked {
         color: grey;
-        text-decoration: line-through;
+        .item-stuff {
+          text-decoration: line-through;
+        }
         .item-checkbox {
           img {
             display: block;

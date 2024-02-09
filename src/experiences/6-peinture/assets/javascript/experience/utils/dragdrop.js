@@ -67,6 +67,9 @@ function handleDragInteraction(
   });
 
   dragElement.addEventListener("touchmove", (e) => {
+    if (dragElement.classList.contains('disabled')) {
+      return;
+    }
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
@@ -104,7 +107,7 @@ function handleDragInteraction(
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
               recipeResolve(dialog.id);
-              dragElement.classList.add('disabled-item')
+              dragElement.classList.add('disabled');
             }
 
             // if (howManyDrags < dialog.number_needed) {
@@ -134,7 +137,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -147,7 +150,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me paraît judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);

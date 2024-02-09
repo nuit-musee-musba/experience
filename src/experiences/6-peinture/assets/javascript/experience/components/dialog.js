@@ -1,12 +1,26 @@
+import lottie from 'lottie-web';
+
 class Dialog {
   constructor(element) {
     this.element = element;
     this.dialogs = this.element.querySelectorAll(".dialog-content");
+    this.animationContent = document.querySelector(".chef-animation");
 
     this.buttonNext = this.element.querySelector(".btn-next");
     this.buttonPrev = this.element.querySelector(".btn-prev");
     this.buttonPlay = this.element.querySelector(".btn-game");
 
+    const animationPath = '/6-peinture/animations/anim-jeff-full-iddle.json';
+
+    var chefFullanimation = lottie.loadAnimation({
+      container: this.animationContent,
+      path: animationPath,
+      renderer: 'svg',
+      loop: true,
+      autoplay: false
+    });
+
+    chefFullanimation.play();
     this.listen();
   }
 
