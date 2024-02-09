@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (helpButton && closeButton && helpPopup) {
     helpButton.addEventListener("click", toggleHelpPopup);
     closeButton.addEventListener("click", toggleHelpPopup);
-    document.addEventListener("click", closeOnOutsideClick);
+    // document.addEventListener("click", closeOnOutsideClick);
   }
 
   function toggleHelpPopup() {
@@ -24,9 +24,4 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("helpPopup.style.display", helpPopup.style.display);
   }
 
-  function closeOnOutsideClick(event) {
-    if (!helpPopup.contains(event.target) && event.target !== helpButton) {
-      helpPopup.style.display = "none";
-    }
-  }
 });

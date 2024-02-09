@@ -277,4 +277,5 @@ i.i-check::before {
 }
 i.i-info::before {
   content: "\ee07";
+  pointer-events: all;
 }
