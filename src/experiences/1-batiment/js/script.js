@@ -2,9 +2,8 @@ import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound.ts";
 import gsap from "gsap";
 import * as THREE from "three";
-import { enableInactivityAnimation } from "./inactivity.ts";
-import { period } from "./period";
 import { onboardingContent, periods } from "./constants";
+import { enableInactivityAnimation } from "./inactivity.ts";
 
 import {
   allPOI,
