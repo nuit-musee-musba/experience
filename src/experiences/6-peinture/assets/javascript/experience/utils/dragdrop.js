@@ -104,6 +104,7 @@ function handleDragInteraction(
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
               recipeResolve(dialog.id);
+              dragElement.classList.add('disabled-item')
             }
 
             // if (howManyDrags < dialog.number_needed) {
@@ -125,6 +126,7 @@ function handleDragInteraction(
               placedEl.style.display = "block";
               print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
               recipeResolve(dialog.id);
+              dragElement.classList.add('disabled-item')
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
               howManyDrags++;
