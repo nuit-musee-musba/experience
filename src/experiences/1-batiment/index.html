@@ -61,7 +61,6 @@
         direction="1"
         mode="normal"
         loop
-        controls
         autoplay
       ></lottie-player>
     </div>
@@ -106,7 +105,7 @@
       </svg>
     </div>
 
-    <div class="wrapper-subTitle">
+    <div class="wrapper-subTitle hidden">
       <div id="container-subTitle">
         <p id="subTitle"></p>
       </div>
@@ -123,11 +122,13 @@
           principal.
         </p>
         <div class="end-menu-buttons">
-          <a href="index.html" id="restart-button">
-            <button class="btn-small-secondary">Explorer le MusBA en 3D</button>
-          </a>
+          <div>
+            <button class="btn-small-secondary" id="restart-button">
+              Explorer le MusBA en 3D
+            </button>
+          </div>
           <a href="/" id="restart-button">
-            <button class="btn-small-secondary">Retourner au hub</button>
+            <button class="btn-small-secondary">Retourner au menu</button>
           </a>
         </div>
       </div>
@@ -136,6 +137,10 @@
     <article id="component" class="interest-component">
       <h2 id="title-component"></h2>
       <div id="text-component"></div>
+    </article>
+
+    <article id="image-point-component" class="image-point-interest-component">
+      <img id="image-poi" src="" alt="" />
     </article>
 
     <article id="poi-component" class="point-interest-component">

@@ -1,6 +1,9 @@
 .page__game {
   background-image: url("/6-peinture/images/scenery/background.svg");
   background-size: cover;
+  .game-chef__speech {
+    max-width: 1400px;
+  }
 }
 
 .game-top {
@@ -86,4 +89,24 @@
 
 .shepherd-button {
   pointer-events: all;
+}
+
+@keyframes scintillation {
+  0%,
+  100% {
+    opacity: 1;
+    color: black;
+  }
+  50% {
+    opacity: 1;
+    color: $food;
+  }
+}
+
+#recipe-1 .item-stuff {
+  //   animation: scintillation 1s infinite;
+}
+
+.scintillating-text {
+  animation: scintillation 1s infinite;
 }

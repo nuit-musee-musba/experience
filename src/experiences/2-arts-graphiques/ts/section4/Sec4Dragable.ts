@@ -32,6 +32,13 @@ const initialPlace = {
 };
 type refId = keyof typeof initialPlace;
 
+const screenBounding = {
+  screenTop: 60,
+  screenLeft: 60,
+  screenRight: 3780,
+  screenBottom: 2100,
+};
+
 export class Sec4Dragable extends Dragable {
   refData: RefData;
   refElmt: HTMLElement;
@@ -70,6 +77,23 @@ export class Sec4Dragable extends Dragable {
   }
 
   isDraging(e: TouchEvent) {
+    const elmtBoundindRect = this.element.getBoundingClientRect();
+
+    const { screenTop, screenLeft, screenBottom, screenRight } = screenBounding;
+
+    const isInscreen = !(
+      elmtBoundindRect.top > screenBottom ||
+      elmtBoundindRect.right < screenLeft ||
+      elmtBoundindRect.bottom < screenTop ||
+      elmtBoundindRect.left > screenRight
+    );
+
+    if (!isInscreen) {
+      this.element.style.top = `${initialPlace[this.id as refId].top}px`;
+      this.element.style.left = `${initialPlace[this.id as refId].left}px`;
+      return;
+    }
+
     super.isDraging(e);
 
     const refDataBoundindRect = this.refElmt.getBoundingClientRect();
@@ -87,7 +111,6 @@ export class Sec4Dragable extends Dragable {
       avgZoneBottom: bottom + bottom * tolerance,
     };
 
-    const elmtBoundindRect = this.element.getBoundingClientRect();
     this.element.style.zIndex = "10";
     this.isInside = !(
       elmtBoundindRect.top > this.refData.avgZoneBottom ||
@@ -96,7 +119,7 @@ export class Sec4Dragable extends Dragable {
       elmtBoundindRect.left > this.refData.avgZoneRight
     );
 
-    console.log("target top : ", this.refData.top, this.refData.avgZoneTop);
+    // console.log("target top : ", this.refData.top, this.refData.avgZoneTop);
 
     if (this.isInside) {
       this.refElmt.style.zIndex = "10";

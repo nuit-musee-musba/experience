@@ -53,3 +53,10 @@
   transform: translate(-50%, 50%);
   gap: 2rem;
 }
+
+.left-qrcode{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}

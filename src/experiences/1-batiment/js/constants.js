@@ -21,6 +21,7 @@ export const periods = [
         text: "Plan de l’hôtel de l’ancienne Académie royale, devenu entre-temps bibliothèque publique depuis le 1er mars 1796. Une galerie des peintures fut aménagée et ouverte à la visite. Elle constituait surtout un complément aux élèves de l'École de dessin.",
       },
     ],
+    imagePath: ["/1-batiment/images/1801.jpg"],
   },
   {
     title: "Déplacements Successifs et Incendies",
@@ -43,6 +44,8 @@ export const periods = [
         text: "Le musée des Beaux-Arts a subi deux incendies au XIXe siècle. Le premier en 1862 a endommagé des peintures, dont celles de Luca Giordano, nécessitant des restaurations. La reconstruction a contraint le déplacement de la collection vers une structure provisoire. En 1870, un second incendie pendant l'occupation militaire a endommagé le fonds ancien, entraînant la perte de dix-sept tableaux...",
       },
     ],
+    imagePath: ["/1-batiment/images/1832-incendie.png"],
+
   },
   {
     title: "Construction du Musée Actuel",
@@ -78,6 +81,8 @@ export const periods = [
         text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil de bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
       },
     ],
+    imagePath: ["/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg", "/1-batiment/images/1875-3.jpg"],
+
   },
   {
     title: "Aujourd'hui",
@@ -106,8 +111,9 @@ export const periods = [
         text: "Le bâtiment est constitué de deux ailes parallèles avec des pavillons donnant sur les jardins.",
       },
     ],
+    imagePath: ["/1-batiment/images/2024.jpg"],
+
   },
-  // {title : 'Lorem Ipsum5', date: '1963', position: {x: 4, y: 3, z: 2}, description: [ "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.", "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret."]}
 ];
 
 export const onboardingContent = [

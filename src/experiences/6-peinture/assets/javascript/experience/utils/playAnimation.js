@@ -15,7 +15,8 @@ export function playAnimation(anim) {
         animJeffNope: '/6-peinture/animations/anim-jeff-nope.json',
         animJeffCringe: '/6-peinture/animations/anim-jeff-cringe.json',
         animJeffPensive: '/6-peinture/animations/anim-jeff-pensive.json',
-        animJeffDrama: '/6-peinture/animations/anim-jeff-drama.json'
+        animJeffDrama: '/6-peinture/animations/anim-jeff-drama.json',
+        animJeffIddle: '/6-peinture/animations/anim-jeff-iddle.json',
     };
     const animPath = animationPaths[anim];
 
@@ -37,5 +38,14 @@ export function playAnimation(anim) {
             animatedElement.remove();
         }
         container.classList.remove('is-playing');
+
+        var iddleAnimation = lottie.loadAnimation({
+            container: container,
+            path: animationPaths["animJeffIddle"],
+            renderer: 'svg',
+            loop: true,
+            autoplay: false
+        });
+        iddleAnimation.play();
     });
 }
