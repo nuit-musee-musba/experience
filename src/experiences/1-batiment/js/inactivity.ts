@@ -3,7 +3,7 @@ import gsap from "gsap";
 export const enableInactivityAnimation = () => {
   let time: NodeJS.Timeout;
 
-  const timeInMs = 5_000;
+  const timeInMs = 30_000;
   const animation = document.getElementById("animation-video");
 
   const animateOpacity = (opacity: number) => {
