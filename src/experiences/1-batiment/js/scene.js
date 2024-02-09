@@ -3,16 +3,19 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
-import { ObjectLoader } from "/experiences/1-batiment/js/objectLoader";
 import { updateAllMaterials } from "./utils";
-import { period } from "/experiences/1-batiment/js/period";
 import gsap from "gsap";
 
+import { periods } from "./constants.js";
+import { ObjectLoader } from "./objectLoader.js";
 
 const gui = new GUI();
 
 export const config = {
   envMapIntensity: 3,
+  // 1 = 75 fps on MBP M1PRO
+  // .7 = 100 fps on MBP M1PRO
+  scalePixelRatioFactor: .7,
 };
 
 const canvas = document.querySelector("canvas.webgl");
@@ -49,7 +52,7 @@ sunLight.shadow.camera.left = -26;
 sunLight.shadow.camera.right = 45;
 sunLight.shadow.camera.top = 13;
 sunLight.shadow.camera.bottom = -3;
-sunLight.intensity = 5.5;
+sunLight.intensity = 4.5;
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
 sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
@@ -57,7 +60,7 @@ sunLight.shadow.radius = 4.2;
 sunLight.shadow.blurSamples = 25;
 sunLight.shadow.bias = -0.0002;
 
-// GUI for Light Controls
+// // GUI for Light Controls
 // const lightControls = gui.addFolder("Light Controls");
 
 // lightControls
@@ -163,24 +166,26 @@ sunLight.shadow.bias = -0.0002;
 //   .step(0.0001)
 //   .name("Shadow Bias");
 
-// lightControls.open();
+// lightControls.close();
 
 
 // const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
 // const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
-
-// gui.onFinishChange(() => {
-//   sunLight.shadow.camera.updateProjectionMatrix();
-//   sunLight.shadow.updateMatrices();
-//   sunLightCameraHelper.update();
-//   updateAllMaterials();
-// });
 
 // scene.add(sunLightHelper);
 // scene.add(sunLightCameraHelper);
 
 // const axesHelper = new THREE.AxesHelper(5);
 // scene.add(axesHelper);
+
+gui.onFinishChange(() => {
+  sunLight.shadow.camera.updateProjectionMatrix();
+  sunLight.shadow.updateMatrices();
+  sunLightCameraHelper.update();
+  updateAllMaterials();
+});
+
+
 
 
 // ENVIRONMENT
@@ -223,7 +228,7 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 
   renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 });
 
 // CAMERA
@@ -249,8 +254,8 @@ const poi2 = [];
 const poi3 = [];
 const poi4 = [];
 
-for (let i = 0; i < period.length; i++) {
-  for (let j = 0; j < period[i].poiPosition.length; j++) {
+for (let i = 0; i < periods.length; i++) {
+  for (let j = 0; j < periods[i].poiPosition.length; j++) {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/1-batiment/assets/icons/poi.png");
 
@@ -261,7 +266,8 @@ for (let i = 0; i < period.length; i++) {
     });
     const geometry = new THREE.PlaneGeometry(0.4, 0.4);
     const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+
+    cube.position.setY(-10);
     cube.name = `${i + j}`;
 
     if (i === 0) {
@@ -333,13 +339,21 @@ const loadModels = async () => {
   }
 };
 
+gui.onFinishChange(() => {
+  sunLight.shadow.camera.updateProjectionMatrix();
+  sunLight.shadow.updateMatrices();
+  sunLightCameraHelper.update();
+  updateAllMaterials();
+});
+
 //RENDERER
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  powerPreference: "high-performance",
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 renderer.setClearColor("#FFF6ED");
 renderer.shadowMap.enabled = true;
 

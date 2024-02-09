@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import Button from "../class/button";
 import Div from "../class/div";
+import { revealInfosContainer } from "../animation/infos";
 
 let totalPixels: number;
 let remainingPixels: number;
@@ -48,7 +49,7 @@ const Paint = async (
   brush.anchor.set(0.7);
 
   if (brushImageFile == "texture.png") {
-    const brushScale = 0.5;
+    const brushScale = 0.7;
     brush.scale.set(brushScale);
   }
 
@@ -88,6 +89,8 @@ const Paint = async (
     // let lastDrawnPoint: PIXI.Point | null = null;
 
     totalPixels = background.width * background.height;
+    let isRevealInfo = false;
+    console.log(isRevealInfo);
 
     function pointerMove({
       global: { x, y },
@@ -142,6 +145,10 @@ const Paint = async (
     }
 
     function pointerDown(event: any) {
+      if (!isRevealInfo) {
+        revealInfosContainer();
+        isRevealInfo = true;
+      }
       dragging = true;
       pointerMove(event);
     }

@@ -45,6 +45,7 @@ export default defineConfig({
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
         "6-peinture": "./src/experiences/6-peinture/index.html",
         "6-peinture/game": "./src/experiences/6-peinture/game.html",
+        "6-peinture/ending": "./src/experiences/6-peinture/ending.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
         "4-lumiere": "./src/experiences/4-lumiere/index.html",
         "4-lumiere/first-painting":
@@ -54,6 +55,7 @@ export default defineConfig({
         "4-lumiere/third-painting":
           "./src/experiences/4-lumiere/third-painting.html",
         "4-lumiere/results": "./src/experiences/4-lumiere/results.html",
+        "4-lumiere/end": "./src/experiences/4-lumiere/end.html",
       },
     },
   },

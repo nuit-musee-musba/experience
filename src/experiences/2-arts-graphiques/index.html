@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script defer type="module" src="./ts/script.ts"></script>
     <script defer type="module" src="./ts/interactive/debug.ts"></script>
+    <script
+      defer
+      src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+    ></script>
   </head>
   <body>
     <div class="loading__container active"></div>
-
-
 
     <div class="wrapper">
       <header>
@@ -23,10 +25,13 @@
       </header>
       <section id="section-0">
         <dialog id="modal">
-          <h1>Odysée d'une œuvre</h1>
+          <h1>Odyssée d'une oeuvre</h1>
           <div class="line"></div>
           <p>
-            Au cœur des collections du musée, un sanctuaire secret se dévoile... Préparez-vous à plonger dans les mystères d'une expérience envoûtante, où les secrets de conservation et de restauration de l'œuvre
+            Au cœur des collections du musée, un sanctuaire secret se dévoile...
+            Préparez-vous à plonger dans les mystères d'une expérience
+            envoûtante, où les secrets de conservation et de restauration de
+            l'œuvre
             <span class="bold">"Saint Sébastien”</span>
             d'Odilon Redon sont révélés.
           </p>
@@ -48,13 +53,27 @@
                 <div class="hSeparator"></div>
                 <div class="paragraph">
                   <p>
-                    <span class="italic">Désemballage : </span><br />Après l'acquisition du chef-d'œuvre, il est soigneusement emballé pour prévenir tout dommage lors de la réception.
+                    <span class="italic">Désemballage : </span><br />Après
+                    l'acquisition du chef-d'œuvre, il est soigneusement emballé
+                    pour prévenir tout dommage lors de la réception.
                   </p>
                 </div>
               </div>
             </div>
           </div>
           <div class="center">
+            <lottie-player
+              id="animation-video"
+              class="sec1-hand-tool"
+              src="/global/lottie/finger_rotation_animation.json"
+              background="transparent"
+              speed="1"
+              direction="1"
+              mode="normal"
+              loop
+              autoplay
+            ></lottie-player>
+
             <img
               src="/2-arts-graphiques/images/pieces/tableau-clean.png"
               class="sec1-painting"
@@ -80,7 +99,7 @@
               class="sec1-dragable"
             />
             <button class="btn-next sec1-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
           </div>
           <div class="right"></div>
@@ -101,23 +120,21 @@
 
                 <div class="paragraph">
                   <p>
-                    Par un étrange tour du destin, vous vous retrouvez
-                    transporté un siècle en arrière, en 1910.
+                    Retour un siècle en arrière dans le passé, en 1919, lors de
+                    la création de l’œuvre “Saint Sébastien” d’Odilon Redon.
                   </p>
-                  <p>Pour une raison inexpliquée, l'artise est absent.</p>
-                  <p>Mais vous, vous êtes là.</p>
                 </div>
               </div>
             </div>
             <div class="infosContainer hide to-reveal">
-              <div class="info">
+              <div class="info per-10">
                 <h2>Dimensions</h2>
                 <p class="text-p-small">
                   Cette œuvre mesure 70.8 cm de hauteur et 55.3 cm de largeur
                   sans cadre.
                 </p>
               </div>
-              <div class="info">
+              <div class="info per-40">
                 <div class="tooltip ttright ttFlowers">
                   <div class="tooltip-circle"></div>
                 </div>
@@ -127,7 +144,7 @@
                   à l'arbre dénudé.
                 </p>
               </div>
-              <div class="info">
+              <div class="info per-60">
                 <h2>Source d'inspiration</h2>
                 <p class="text-p-small">
                   Pour créer ce paysage, Redon s’est inspiré des paysages de
@@ -137,10 +154,8 @@
             </div>
           </div>
           <div class="center">
-
-
             <button class="btn-next sec2-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
             <div
               class="canvas__container active"
@@ -158,29 +173,29 @@
                   Artiste bordelais, appartenant au mouvement du symbolisme.
                 </p>
               </div>
-              <div class="info hide to-reveal">
+              <div class="info hide to-reveal per-20">
                 <div class="tooltip ttleft ttHead">
                   <div class="tooltip-circle"></div>
                 </div>
-                <h2>Martyre biblique</h2>
+                <h2>Martyr biblique</h2>
                 <p class="text-p-small">
                   Ce chef-d'œuvre représente une scène biblique où
                   Saint-Sébastien, le martyr, est attaché à un arbre, percé de
                   deux flèches.
                 </p>
               </div>
-              <div class="info hide to-reveal">
+              <div class="info hide to-reveal per-70">
                 <h2>Acquisition de l’œuvre</h2>
                 <p class="text-p-small">
                   Acquise par la commune de Bordeaux et le Musée des Beaux-Arts
                   en 1980, l'œuvre repose aujourd'hui dans la réserve du musée.
                 </p>
               </div>
-              <div class="info hide to-reveal">
+              <div class="info hide to-reveal per-85">
                 <div class="tooltip ttleft ttSignature">
                   <div class="tooltip-circle"></div>
                 </div>
-                <h2>Signature discrete</h2>
+                <h2>Signature discrète</h2>
               </div>
             </div>
           </div>
@@ -189,17 +204,24 @@
 
       <section id="section-3">
         <div class="container row">
-          <div class="left">
-          </div>
+          <div class="left"></div>
           <div class="center timelapse">
             <p class="timelapse__context">De retour en</p>
-            <h1>
-              <span id="date-anim__year" data-from="1910" data-to="2024"
-                >1910</span
-              >
-            </h1>
+            <!--            <h1>-->
+            <!--              <span id="date-anim__year" data-from="1910" data-to="2024"-->
+            <!--                >1910</span-->
+            <!--              >-->
+            <!--            </h1>-->
+            <lottie-player
+                class="timelapse-lotti"
+                src="/2-arts-graphiques/lottie/timeline.json"
+                background="transparent"
+                speed="1"
+                direction="1"
+                mode="normal"
+            ></lottie-player>
             <button class="btn-next sec3-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
           </div>
           <div class="right"></div>
@@ -219,14 +241,19 @@
                 <div class="hSeparator"></div>
                 <div class="text-left">
                   <p class="italic">Reconstitution:</p>
-                  <p>La restauration d'une œuvre implique parfois de recoller ou de rassembler les morceaux déchirés, ce qui nécessite une attention minutieuse pour préserver l'intégrité et l'histoire de l'œuvre.</p>
+                  <p>
+                    La restauration d'une œuvre implique parfois de recoller ou
+                    de rassembler les morceaux déchirés, ce qui nécessite une
+                    attention minutieuse pour préserver l'intégrité et
+                    l'histoire de l'œuvre.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
           <div class="center">
             <button class="btn-next sec4-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
             <svg
               id="dragable-hautGauche"
@@ -599,9 +626,9 @@
                       d="M349.05,483.91h-18.74l-4.03,3.89-4.76-1.94v6.7h-10.25v4.03l-6.59,2.56-2.93,5.86-4.03,2.93v8.29l-10.25,3.79-3.66-3.79v3.79l-5.86,6.59-7.32-2.93v7.32l-21.49-12.08h-12.17l-4.39-2.69-4.03,5.98v13.91l-13.91,5.86-1.46-6.22-5.86,1.83v7.69l-12.44-.73v4.76l-6.59,4.03v4.76l-7.19,13.32-9.92,3.5v4.67l1.75,6.71-8.46,7.3,4.38,4.67-5.84,2.63v4.96l-4.96,5.25v2.92l2.92,8.75-7,1.75v5.54l1.46,7.59-1.46,3.79v4.67l5.45,7.15-5.45,4.67,3.7,3.5-7,2.62-10.5-2.33v10.79l-5.83,1.75v3.21l-7.58,1.17v2.62l-7.58-1.75v3.79l-6.42-2.92-4.08,2.92s-5.54-.29-7.87,0-10.5,0-10.5,0l-2.92,7.58-6.71,10.5,2.62,2.04.58,6.42-4.96,2.62s-1.75,5.83,0,6.71,1.17,7,1.17,7c-1.46,3.21,1.17,11.96,1.17,11.96l-3.11,5.25-3.89,7.29,2.33,4.96-3.79,5.83-4.03,1.59H1v-401.5l4.59-2.96,2.35-2.45,4.19-2.04,3.47-3.58,4.29-1.53v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s9.31-8.64,17.82-6.25,15.43-6.41,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.23,9.18,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03Z"
                     />
                   </g>
-                  <g id="ref-centre" class="ref-centre-centre pieces-ref">
+                  <g id="ref-centre">
                     <path
-                      class="ref-1"
+                      class="ref-1 ref-centre-centre pieces-ref"
                       d="M19.89,348.94v15.78l10.02,10.58-5.22,6.7,9.12,6.67v11.14l18.94,6.68h16.71l9.47-17.27,7.8-20.61,10.58,9.1,2.78-10.21,11.14,1.11,12.25-7.12s8.91-8.48,17.82-6.25,12.81-4.28,16.71-6.32,25.62-9.84,25.62-9.84c0,0,10.03,9.47,11.7,9.47s17.37.56,17.37.56l13.82-10.03h10.03v6.68l17.27-4.46,13.92,6.68,8.91,10.03,13.37,21.16-6.68,11.7,8.91,15.6-6.68,7.24,3.34,16.71h18.38l11.7,12.25v21.72h16.71l13.37,9.47v10.03l25.62-5.57,7.8-11.14,4.46,8.35s.56,19.49,2.78,21.72,4.46,18.94,4.46,18.94l24.51-2.78,6.68-30.63,3.34-23.39,12.81-15.04,11.7-5.01,12.81-11.7v-13.37l16.71-6.68v-18.38l-15.04-7.23s3.9-15.61.56-16.72-15.6-29.52-15.6-29.52h-16.71l8.35-10.58h-7.8l-2.23-8.91h-5.57l-3.34-9.47h-7.8l-5.01-12.81h11.14l-7.8-9.47-8.91-8.35,8.35-8.35,8.91-2.23v-11.14l10.58-2.78-6.13-9.47,3.34-10.58h-8.35l1.67-11.14-10.03-2.23,8.35-13.92h-12.81l2.78-13.91h-12.94l4.03-12.83-4.03-6.68h-10.45l5.57-8.35-14.65-3.61h-41.37l-11.92,8.71-6.5,11.38h5.42v5.96h-18.97l-7.59-3.74-1.08,9.16-2.93-16.26-9.54-4.34-2.17,8.13-11.92,3.31-.54-14.69h-7.05l-2.71,10.84-6.5-13.01-8.13-11.92-4.34,4.88-11.92,1.08v-9.21l-4.28,3.09-4.51-4.28v4.99l-6.42,3.56-8.55-9.5-2.85,6.42-6.18,4.99,2.14,5.47-5.94-.24-.24-7.37-3.8,1.9-.24,4.28-5.47-2.38-5.47,2.38-2.38,9.27-3.56.24-3.33-5.94-3.09,4.75-4.28,5.47-4.04-1.66v-5.47l-5.7,3.8-3.8-3.8-3.8,2.61-4.75-5.23,2.85-12.12-7.37,4.28-4.28,3.56-4.57-1-8.75,6.16-3.82,6.41-2.96-1.97-.12,3.94-3.23.55-3.18-1.51-.71,4.64-6,1.46v3.43l-2.67.45-3.28-4.08-2.47,1.26-1.21,2.37-2.92,1.92-2.32-1.76v3.63l-4.13,2.87-2.17.6-2.02-1.66.54,2.72-4.06-1.31.66,2.87-4.33-.4.59,3.06-2.63,1.61.08,1.61-2.63,3.06h2.97l-3.31,2.12.51,3.99h-2.04v2.21l1.78.59-2.97,1.19,1.36,3.48h-3.23l.42,3.65-3.74,2.38h2.29l-1.78,2.38-2.97,1.27,2.63,2.72-7.14,2.72,2.29,1.53-2.38,2.46h2.63l-1.87,2.46-4.75,1.56.91,3.98h-1.63l-.72,1.99-.36,3.62-5.25,2.53,3.26,1.81-1.99,4.35-.91,5.61,3.98,2.17-1.09,2.72-3.8,4.35,2.35,2.53h2.72v3.08l-4.53,2.9,2.69,2.54-3.17,5.52,2.96.51-2.45,4.5,2.35,2.35-5.11,5.52,2.25,2.66-3.27,1.23-.41,3.88,1.23.92-1.94,2.76h1.53l-.92,4.39-2.04,2.55,2.45,1.23-1.02,3.78-4.9,2.15-4.29.82v4.19l-3.58.92v3.98l-4.19,1.84,3.47,3.98.82,5.11Z"
                     />
                   </g>
@@ -637,14 +664,19 @@
                 <div class="hSeparator"></div>
                 <div class="text-left">
                   <p class="italic">Retouche:</p>
-                  <p>L'étape de "retouche" dans la restauration d'une œuvre d'art implique l'utilisation de matériaux artistiques spécifiques et de techniques délicates pour dissimuler les déchirures tout en préservant l'intégrité esthétique de l'œuvre.</p>
+                  <p>
+                    L'étape de "retouche" dans la restauration d'une œuvre d'art
+                    implique l'utilisation de matériaux artistiques spécifiques
+                    et de techniques délicates pour dissimuler les déchirures
+                    tout en préservant l'intégrité esthétique de l'œuvre.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
           <div class="center">
             <button class="btn-next sec5-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
             <div class="canvas__container active" data-interaction="seal"></div>
           </div>
@@ -665,27 +697,28 @@
                 <div class="hSeparator"></div>
                 <div class="text-left">
                   <p class="italic">Décrassage :</p>
-                  <p>La restauration d'une œuvre implique de nettoyer minutieusement l'œuvre pour éliminer les impuretés telles que l'humidité, la nicotine, la poussièr et les dépôts d'insectes . Ce processus vise à restaurer la beauté originelle de l'œuvre.</p>
+                  <p>La restauration d'une œuvre implique de nettoyer minutieusement l'œuvre pour éliminer les impuretés telles que l'humidité, la nicotine, la poussière et les dépôts d'insectes . Ce processus vise à restaurer la beauté originelle de l'œuvre.</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="center">
             <button class="btn-next sec6-button btn-primary">
-              Etape suivante
+              Étape suivante
             </button>
             <div
               class="canvas__container active"
               data-interaction="cleaning"
             ></div>
           </div>
-          <div class="right">
-          </div>
+          <div class="right"></div>
         </div>
       </section>
 
       <section id="section-7" class="painting-frame">
-        <h3 class="frame-step" id="painting-frame__confirmation">Êtes vous sûr·e de votre choix ?</h3>
+        <h3 class="frame-step" id="painting-frame__confirmation">
+          Êtes vous sûr·e de votre choix ?
+        </h3>
         <div class="container row">
           <div class="left">
             <div class="frame" id="frame-1">
@@ -696,7 +729,9 @@
             </div>
           </div>
           <div class="center">
-            <button class="btn-next sec7-button btn-primary">Exposer l'œuvre au MusBA</button>
+            <button class="btn-next sec7-button btn-primary">
+              Exposer l'œuvre au MusBA
+            </button>
             <div class="frame" id="frame-2">
               <img
                 src="/2-arts-graphiques/images/painting-frames/painting-frame-2.webp"
@@ -727,37 +762,52 @@
                 <h2>Galerie des collections</h2>
                 <div class="hSeparator"></div>
                 <div class="paragraph">
-                  <p>L'exposition est à son apogée, mettant en vedette au cœur de celle-ci la peinture au pastel "Saint-Sébastien" d'Odilon Redon.</p>
+                  <p>
+                    L'exposition est à son apogée, mettant en vedette au cœur de
+                    celle-ci la peinture au pastel "Saint-Sébastien" d'Odilon
+                    Redon.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
           <div class="center">
-            <button class="btn-next sec8-button btn-primary">Terminer l'odysée</button>
-            <img src="" alt="peinture" class="selected-painting">
+            <button class="btn-next sec8-button btn-primary">Terminer l'Odyssée</button>
+            <img src="" alt="peinture" class="selected-painting" />
           </div>
           <div class="right"></div>
         </div>
-        <img class="crowd" src="/2-arts-graphiques/images/expo/crowd.webp" alt="">
+        <img
+          class="crowd"
+          src="/2-arts-graphiques/images/expo/crowd.webp"
+          alt=""
+        />
       </section>
 
       <section id="section-9">
         <div class="result row">
           <div class="left">
-            <img src="" alt="peinture" class="selected-painting">
+            <img src="" alt="peinture" class="selected-painting" />
           </div>
           <div class="right">
             <h1>Exposition réussie au MusBA !</h1>
             <div class="line"></div>
             <p>
-              Votre œuvre restaurée peut maintenant être exposée pendant quelques mois seulement au MusBA. Cela permettra aux collaborateurs du musée de l'étudier et, si nécessaire, de procéder à d'éventuelles restaurations.
+              Votre œuvre restaurée peut maintenant être exposée pendant
+              quelques mois seulement au MusBA. Cela permettra aux
+              collaborateurs du musée de l'étudier et, si nécessaire, de
+              procéder à d'éventuelles restaurations.
             </p>
             <p>
-              Les œuvres graphiques, telles que celles de Redon, sont connues pour leur grande fragilité, justifiant ainsi une exposition restreinte.
+              Les œuvres graphiques, telles que celles de Redon, sont connues
+              pour leur grande fragilité, justifiant ainsi une exposition
+              restreinte.
             </p>
           </div>
           <div class="btn-row">
-            <button class="btn-small-primary sec9-button">Recommencer la restauration</button>
+            <button class="btn-small-primary sec9-button">
+              Recommencer la restauration
+            </button>
             <a href="/" class="btn-small-secondary">Retourner à l’accueil</a>
           </div>
         </div>
@@ -775,6 +825,7 @@
           <h2 id="hint"></h2>
         </div>
       </footer>
+      <audio id="audio" src="/2-arts-graphiques/musics/g2.mp3" style="display: none;" loop></audio>
     </div>
   </body>
 </html>

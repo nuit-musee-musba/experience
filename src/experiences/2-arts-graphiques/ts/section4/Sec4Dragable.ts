@@ -6,7 +6,7 @@ const initialPlace = {
     left: 3337,
   },
   basDroite: {
-    top: 1085,
+    top: 867,
     left: 820,
   },
   basCentre: {
@@ -18,8 +18,8 @@ const initialPlace = {
     left: 3040,
   },
   centre: {
-    top: 521.2,
-    left: 5.79,
+    top: 715.2,
+    left: 2605,
   },
   hautCentre: {
     top: 1392,

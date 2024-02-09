@@ -1,6 +1,6 @@
-import Transition from "./transition";
-import Button from "./button";
 import { ExperienceType } from "../script";
+import Button from "./button";
+import Transition from "./transition";
 
 export default class Modal {
   modal: HTMLDialogElement;
