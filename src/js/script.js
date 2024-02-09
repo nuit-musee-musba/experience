@@ -29,6 +29,7 @@ const scene = new THREE.Scene();
 
 // Target canvas
 var canvas = document.getElementById("webgl");
+window.experience.canvas = canvas;
 
 // Create camera
 const camera = new THREE.PerspectiveCamera(
@@ -39,14 +40,13 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 1.2, -4.5);
 camera.lookAt(0, 0, 0);
-
-// Create Renderer
+window.experience.camera = camera;
+// Create Rendererx@
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
   canvas: canvas,
 });
 renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensions
-
 // // Add renderer to DOM
 document.body.appendChild(renderer.domElement);
 
@@ -140,8 +140,10 @@ const animate = () => {
       return island.userData.id !== window.experience.index + 1;
     }
   );
+  //console.log(window.experience.canRotate);
   // Render the scene
   renderer.render(scene, camera);
 };
 
 animate();
+
