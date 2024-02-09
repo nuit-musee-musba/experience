@@ -98,6 +98,13 @@ p {
     opacity 3s ease-in-out;
 }
 
+#popin-welcome .popin-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 #popin-welcome {
   z-index: 1001;
   padding-left: 0;
@@ -111,6 +118,16 @@ p {
     opacity 2s ease-in-out;
 }
 
+#popin-consignes .popin-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#popin-consignes .popin-body .popin-btn{
+  margin-top: 5rem;
+}
 #popin-consignes {
   z-index: 1000;
   transition: opacity 2s ease-in-out;
@@ -164,6 +181,9 @@ p {
   justify-content: center;
   text-align: center;
 }
+#popin-end .popin-body h1 {
+  margin-bottom: 5rem;
+}
 
 .btn-end {
   margin-top: 5rem;
@@ -176,12 +196,26 @@ p {
   margin-right: 5rem;
 }
 
+#popin-info .popin-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#popin-info .popin-body .popin-btn{
+  margin-top: 5rem;
+}
+
+.congrats h1 {
+  margin-bottom: 5rem;
+}
 
 /* ----- Consignes ----- */
 
 .consignes {
   font-size: 46px;
-  padding: 5rem;
+  padding: 9rem;
   width: 3036px;
   position: relative;
   color: var(--white);
