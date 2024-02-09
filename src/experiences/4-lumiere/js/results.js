@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   switch (paintingOrigin) {
     case "first":
-      console.log("first painting");
       localStorage.setItem("4-first", true);
       document
         .querySelector(`#result-first-painting`)
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       break;
 
     case "second":
-      console.log("second painting");
       localStorage.setItem("4-second", true);
       document
         .querySelector(`#result-second-painting`)
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       break;
 
     case "third":
-      console.log("third painting");
       localStorage.setItem("4-third", true);
       document
         .querySelector(`#result-third-painting`)
@@ -79,7 +76,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     third: localStorage.getItem("4-third"),
   }
 
-  console.log("visitedPaintings:", visitedPaintings)
   if (visitedPaintings.first && visitedPaintings.second && visitedPaintings.third) {
     let endResultBtns = document.querySelectorAll(".btn-wrapper .btn-small-primary")
 
@@ -88,10 +84,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       btn.href = "./end.html";
     });
     clearLocalStorage();
-  } else {
-    console.log("not true")
   }
-
 });
 
 

@@ -3,8 +3,7 @@ nav {
     position: fixed;
     left: $nav-position;
     z-index: 99;
-    .link-hub {
-        @include global-btn;
-        @include icon(home);
+    .bottom-menu {
+        flex-direction: column-reverse;
     }
 }

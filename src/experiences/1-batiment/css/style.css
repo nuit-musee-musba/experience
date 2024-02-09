@@ -422,6 +422,7 @@ body {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
+  z-index: 11;
 }
 
 #poi-title-component {
@@ -436,6 +437,27 @@ body {
   gap: 1vh;
   font-size: 2.5rem;
   font-weight: 100;
+}
+
+.image-point-interest-component {
+  position: absolute;
+  bottom: 65%;
+  transform: translate(0%, 50%);
+  left: 0;
+  width: 25vw;
+  display: none;
+  flex-direction: column;
+  gap: 2vh;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 2vh 3vw 4vh 2vw;
+  border-left: 5px solid white;
+  pointer-events: none;
+  z-index: 11;
+}
+
+#image-poi {
+  width: 100%;
 }
 
 .button-interest {
