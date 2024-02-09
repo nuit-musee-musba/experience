@@ -5,14 +5,19 @@ import { playAnimation } from "./playAnimation.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
-var stepsEl = document.getElementById("stepnum");
+var stepsEls = document.querySelectorAll("#stepnum");
 var stepTitleEl = document.getElementById("list-name")
+var recipeContainer = document.querySelector('.recipe');
 var winConditions = craftCont.length;
 var howManyDone = 0;
 export var current_step = 1;
 var current_step_done = 0;
 var current_step_win = 3;
-stepsEl.innerHTML = current_step;
+
+stepsEls.forEach((element) => {
+  element.innerHTML = current_step;
+});
+
 var stepTitle = ["La mort", "Le temps qui passe", "Les symboles du Christ"];
 stepTitleEl.innerHTML = stepTitle[current_step - 1]
 var step_success = false;
@@ -137,7 +142,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre"
+                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre."
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -173,13 +178,23 @@ function handleDragInteraction(
             }, 2000);
           } else {
             step_success = true;
+            recipeContainer.style.opacity = "0";
             setTimeout(() => {
               current_step++;
               recipeGeneration();
-              stepsEl.innerHTML = current_step;
+
+              stepsEls.forEach((element) => {
+                element.innerHTML = current_step;
+              });
               howManyDone = 0;
               step_success = false;
-              print_chef_speech("Passons à l'étape " + current_step + "/3 !");
+              if (current_step == 2) {
+                print_chef_speech("Passons au ticket n°2 sur : Le temps qui passe.");
+              }
+              if (current_step == 3) {
+                print_chef_speech("Finissons avec le ticket n°3 sur : Les symboles du Christ.");
+              }
+              recipeContainer.style.opacity = "1";
               stepTitleEl.innerHTML = stepTitle[current_step - 1]
             }, 5000);
           }

@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { createIsland } from "./helpers";
 import data from "./data";
+import { updateAllMaterials } from "./helpers";
 
 import "./rotationSystem";
 
@@ -26,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create scene
 const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xf8f4f4, 3, 6.5);
+window.experience.scene = scene;
+updateAllMaterials();
 
 // Target canvas
 var canvas = document.getElementById("webgl");
@@ -51,9 +55,21 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 1, 1, Math.PI);
-light.position.set(0, 0.5, -0.6);
-scene.add(light);
+
+// const ambientLight = new THREE.AmbientLight(0x404040);
+// ambientLight.intensity = 1;
+// ambientLight.position.set(0, 2, 0);
+// scene.add(ambientLight);
+
+// const spotLight = new THREE.SpotLight(0xffffff, 1, 1);
+// spotLight.position.set(0, 0.6, -0.6);
+// spotLight.castShadow = true;
+// scene.add(spotLight);
+
+const mainLight = new THREE.DirectionalLight(0x404040, 30);
+mainLight.position.set(0, 0.2, 0);
+mainLight.castShadow = true;
+scene.add(mainLight);
 
 const axesHelper = new THREE.AxesHelper(10);
 axesHelper.setColors("red", "green", "blue");

@@ -1,6 +1,9 @@
 .page__game {
   background-image: url("/6-peinture/images/scenery/background.svg");
   background-size: cover;
+  .game-chef__speech {
+    max-width: 1400px;
+  }
 }
 
 .game-top {
