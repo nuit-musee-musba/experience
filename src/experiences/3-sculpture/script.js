@@ -10,6 +10,7 @@ import "./component/1-IntroPart/IntroPart.scss";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
+import GUI from "lil-gui";
 
 enableInactivityRedirection();
 
@@ -50,7 +51,7 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x000000, 0, 15);
+scene.fog = new THREE.FogExp2(0x000000, 0.1);
 
 // TextureLoader
 
@@ -79,25 +80,45 @@ let workshop;
 let socle;
 
 let quantity;
+const gui = new GUI();
 
-gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
-  gltf.scene.position.set(0, -1, -1.5);
+
+const light = new THREE.AmbientLight(0x404040);
+light.intensity = 25;
+scene.add(light);
+
+
+gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
+  gltf.scene.position.set(-0.1, -0.8, -1.2);
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
   for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
-      workshop.children[i].intensity = 20;
+
+      console.log(workshop.children[i].intensity);
+      workshop.children[i].intensity = 113;
+
     } else if (workshop.children[i].name === "LSpot") {
-      workshop.children[i].intensity = 5;
+
+      workshop.children[i].intensity = 0;
+
     } else if (workshop.children[i].name === "Area002_1") {
-      workshop.children[i].intensity = 800;
+
+      workshop.children[i].intensity = 1000;
+      workshop.children[i].angle = 0.281;
+
     } else if (workshop.children[i].name === "Spot") {
-      workshop.children[i].intensity = 350;
+
+      workshop.children[i].intensity = 250;
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
+
+
+
+
     } else if (workshop.children[i].name === "Socle") {
       socle = workshop.children[i];
     }
@@ -170,9 +191,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
   });
 });
 
-const light = new THREE.AmbientLight(0x404040);
-light.intensity = 20;
-scene.add(light);
+
 
 //
 // EVENT
@@ -357,6 +376,8 @@ controls.rotateSpeed = 0.1;
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
+  powerPreference: "low-power",
+  physicallyCorrectLights: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
