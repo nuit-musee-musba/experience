@@ -5,7 +5,7 @@ const Date = {
 
   init(button: Button) {
     if (this.year) {
-      this.scrollingNumber(this.year, false, button);
+      this.scrollingNumber(this.year, true, button);
     }
   },
 
@@ -33,7 +33,7 @@ const Date = {
 
     setTimeout(() => {
       button.button.disabled = false;
-    }, 3000);
+    }, 1950);
   },
 };
 
