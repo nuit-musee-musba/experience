@@ -20,48 +20,14 @@ const titleElm = document.querySelector("#date-title");
 const subTitleElm = document.querySelector("#subTitle");
 const mainTitleElm = document.querySelector(".main-title");
 const subTitleNextButton = document.querySelector(".subTitle-next");
+const wrapperSubTitleElm = document.querySelector(".wrapper-subTitle");
+
+const loaderElm = document.querySelector(".loader")
+const loaderIconElm = document.querySelector(".loader-icon")
 
 let currentStep = 0;
 
-const handleNext = () => {
-  titleElm.classList.add("date-title-hidden");
-  if (currentStep >= 0 && currentStep <= 2) {
-    subTitleElm.textContent = onboardingContent[currentStep].subTitle;
-    mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
-
-    if (onboardingContent[currentStep].title) {
-      titleElm.classList.remove("date-title-hidden");
-      titleElm.textContent = onboardingContent[currentStep].title;
-    }
-
-    currentStep++;
-  }
-};
-
-const handleStart = async () => {
-  titleElm.classList.add("date-title-hidden");
-
-  await loadModels();
-
-  animatedScenes.forEach((animatedScene) => {
-    animatedScene.finalState();
-  });
-
-  updateAllMaterials();
-
-  controls.object.position.set(0, 6, 0);
-  controls.target.set(2, 2, 0);
-
-  subTitleNextButton.addEventListener("click", handleNext);
-
-  handleNext();
-};
-
-const handleStartExperience = () => {
-  animatedScenes.forEach((animatedScene) => {
-    animatedScene.setup();
-  });
-};
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const sceneSetUp = async () => {
   document.oncontextmenu = function () {
@@ -72,6 +38,7 @@ const sceneSetUp = async () => {
   let index = 0;
   let previousTime = 0;
   let isShowingText = false;
+  let isOnboarded = false
   const raycaster = new THREE.Raycaster();
 
   //MOUSE
@@ -208,7 +175,65 @@ const sceneSetUp = async () => {
       });
   }
 
+  const handleNext = async () => {
+
+    console.log({ currentStep })
+    titleElm.classList.add("date-title-hidden");
+    if (currentStep === 3) {
+      // debugger
+      console.log("a", loaderElm.classList)
+      loaderElm.classList.remove('loader-hidden')
+      loaderIconElm.classList.remove('loader-hidden')
+
+
+      titleElm.classList.remove("date-title-hidden");
+      isOnboarded = true;
+      subTitleNextButton.classList.add("hidden");
+
+      wrapperSubTitleElm.classList.add("hidden");
+
+      await wait(2000)
+
+      console.log("b", loaderElm.classList)
+
+      handleFocusPeriod(periods[0]);
+
+
+    } else if (currentStep >= 0 && currentStep <= 2) {
+      subTitleElm.textContent = onboardingContent[currentStep].subTitle;
+      mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
+
+      if (onboardingContent[currentStep].title) {
+        titleElm.classList.remove("date-title-hidden");
+        titleElm.textContent = onboardingContent[currentStep].title;
+      }
+
+
+      currentStep++;
+    }
+  };
+
+  const handleStart = async () => {
+    titleElm.classList.add("date-title-hidden");
+
+    await loadModels();
+
+    animatedScenes.forEach((animatedScene) => {
+      animatedScene.finalState();
+    });
+
+    updateAllMaterials();
+
+    controls.object.position.set(0, 6, 0);
+    controls.target.set(2, 2, 0);
+
+    await handleNext();
+  };
+
+
   const handleFocusPeriod = async (step) => {
+
+
     if (!step) {
       return;
     }
@@ -220,6 +245,10 @@ const sceneSetUp = async () => {
     animatedScenes[index].play();
 
     const dateTitleElement = document.getElementById("date-title");
+    document.querySelector('.chronology').classList.remove("hidden")
+    wrapperSubTitleElm.classList.remove("hidden");
+
+
     dateTitleElement.textContent = "";
 
     dateTitleElement.appendChild(document.createTextNode(step.date));
@@ -275,6 +304,9 @@ const sceneSetUp = async () => {
       x: step.target.x,
       y: step.target.y,
       z: step.target.z,
+      onComplete: () => {
+        firstMovementFinished = true
+      },
     });
 
     gsap.to(controls.object.position, {
@@ -282,11 +314,23 @@ const sceneSetUp = async () => {
       x: cameraPosition.x,
       y: cameraPosition.y,
       z: cameraPosition.z,
+      onComplete: () => {
+        firstMovementFinished = true
+      },
     });
   };
-  await handleStart();
-  // handleFocusPeriod(period[index]);
 
+  if (!isOnboarded) {
+    await handleStart();
+  } else {
+    animatedScenes.forEach((animatedScene) => {
+      animatedScene.setup();
+      animatedScene.resetAnimations();
+    });
+    handleFocusPeriod(periods[index]);
+  }
+
+  subTitleNextButton.addEventListener("click", handleNext);
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);
   document.getElementById("nextButton").addEventListener("click", nextStep);
