@@ -5,4 +5,6 @@ enableInactivityRedirection().beforeRedirect(() =>
   console.log("log before redirect to home")
 );
 
-ambiantSound("/global/sounds/g1.mp3").playOnFirstInteraction();
+ambiantSound("/global/sounds/g1.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
