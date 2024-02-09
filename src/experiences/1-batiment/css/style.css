@@ -15,7 +15,64 @@ html,
 body {
   overflow: hidden;
 }
-.title-component {
+
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    99.91% 99.91% at 50% 50%,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.01) 6.67%,
+    rgba(0, 0, 0, 0.03) 13.33%,
+    rgba(0, 0, 0, 0.06) 20%,
+    rgba(0, 0, 0, 0.11) 26.67%,
+    rgba(0, 0, 0, 0.17) 33.33%,
+    rgba(0, 0, 0, 0.25) 40%,
+    rgba(0, 0, 0, 0.33) 46.67%,
+    rgba(0, 0, 0, 0.42) 53.33%,
+    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.58) 66.67%,
+    rgba(0, 0, 0, 0.64) 73.33%,
+    rgba(0, 0, 0, 0.69) 80%,
+    rgba(0, 0, 0, 0.72) 86.67%,
+    rgba(0, 0, 0, 0.74) 93.33%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2a2a2a;
+  z-index: 100;
+  transition: opacity 0.6s ease-in-out;
+  transition-delay: 200ms;
+}
+
+.loader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-icon {
+  width: 172px;
+  height: 172px;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.poi-title-component {
+  pointer-events: none;
   position: absolute;
   top: 6rem;
   left: 6rem;
@@ -33,6 +90,7 @@ body {
 }
 
 .main-title {
+  pointer-events: none;
   width: calc(100% / 2);
   color: white;
   font-size: 4rem;
@@ -41,8 +99,7 @@ body {
 
 .parameter-buttons {
   position: absolute;
-  left: 4rem;
-  bottom: 4rem;
+  left: 3vw;
   display: flex;
   gap: 1.5rem;
 }
@@ -89,11 +146,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 7;
+  z-index: 11;
+}
+
+.left-arrow {
+  display: none;
+  left: 33vw;
+}
+
+.right-arrow {
+  right: 33vw;
 }
 
 .left-arrow,
 .right-arrow {
+  position: absolute;
   background-color: transparent;
   border: none;
 }
@@ -102,6 +169,14 @@ body {
 .right-arrow svg {
   height: 5rem;
   width: 5rem;
+}
+
+#last-step {
+  display: none;
+  position: absolute;
+  right: 3vw;
+  border: 5px solid black;
+  color: black;
 }
 
 .chronology-container {
@@ -224,9 +299,10 @@ body {
   color: black;
 }
 
-.interest-component {
+.point-interest-component {
   position: absolute;
-  bottom: 25%;
+  bottom: 50%;
+  transform: translate(0%, 50%);
   right: 0;
   width: 25vw;
   display: none;
@@ -239,17 +315,27 @@ body {
   pointer-events: none;
 }
 
-.interest-component img {
+.point-interest-component img {
   position: absolute;
   top: -177px;
   left: -0.15vw;
 }
+
 #title-component {
+  font-family: Montserrat;
+  font-weight: bold;
   font-size: 4rem;
   pointer-events: none;
 }
 
-#text-component {
+#poi-title-component {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 4rem;
+  pointer-events: none;
+}
+
+#poi-text-component {
   display: flex;
   flex-direction: column;
   gap: 1vh;
@@ -257,18 +343,27 @@ body {
   font-weight: 100;
 }
 
-.audio-content {
+.button-interest {
   position: absolute;
-  bottom: 2vh;
-  right: 2vh;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
+  bottom: 24vh;
+  left: 2vw;
+  z-index: 11;
 }
 
-.audio {
-  width: 56px;
+#container-subTitle {
+  position: absolute;
+  left: 7vw;
+  bottom: 25vh;
+  width: 30vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+#subTitle {
+  padding: 2.5rem;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 58px;
 }
 
 @media screen and (max-width: 1508px) {
@@ -276,11 +371,11 @@ body {
     font-size: 1rem;
   }
 
-  #text-component {
+  #poi-text-component {
     font-size: 1rem;
   }
 
-  #title-component {
+  #poi-title-component {
     font-size: 2rem;
   }
 }

@@ -10,23 +10,25 @@
     <title>Document</title>
     <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
   </head>
-  <nav>
-    <div class="bottom-menu">
-      <a href="/" class="btn-icon">
-        <i class="i-home">
-          <span>Accueil</span>
-        </i>
-      </a>
-    </div>
-  </nav>
   <body class="page__game">
+    <nav>
+      <div class="bottom-menu">
+        <a href="/" class="btn-icon">
+          <i class="i-home">
+            <span>Accueil</span>
+          </i>
+        </a>
+      </div>
+    </nav>
     <main>
       <div id="game-top" class="game-top">
         <div class="game-chef">
           <div class="game-chef__illustration">
             <img src="/6-peinture/images/scenery/chef-neutral.svg" alt="" />
           </div>
-          <div id="dialog" class="game-chef__speech">Placez les éléments de la recette sur la table de composition !</div>
+          <div id="dialog" class="game-chef__speech">
+            Aidez-vous de l' encyclopédie “l’iconologia” pour placer les éléments de la liste sur la table. Je compte sur vous pour faire une belle composition !
+          </div>
         </div>
         <div class="composition" id="targetCraftZone">
           <img
@@ -170,7 +172,7 @@
             </li>
           </ul>
           <div class="category-items active" id="food">
-            <div class="item item-peach" id="1">
+            <div class="item item-peach selected-item" id="1">
               <img
                 src="/6-peinture/images/ingredients/food/peach.svg"
                 alt="pêche"
@@ -301,14 +303,34 @@
         <div class="recipe">
           <img src="/6-peinture/images/scenery/recipe.svg" alt="" />
           <hgroup>
-            <h2>Memento mori</h2>
-            <p>Liste <span id="stepnum"></span>/3</p>
+            <h2>Liste <span id="stepnum"></span>/3</h2>
+            <p>Memento mori</p>
           </hgroup>
           <ul class="list-items"></ul>
         </div>
       </div>
 
-      <div class="ending-screen">Bravo !</div>
+      <div class="ending-screen">
+        <img src="/6-peinture/images/scenery/ending/jeff-1.svg" alt="" />
+        <div class="dialog">
+          <div class="dialog-nav">
+            <button class="btn-ending">Suivant</button>
+          </div>
+          <div class="dialog-content active">
+            <p>
+              Parfait ! Nous avons tous les ingrédients qu’il nous faut.
+              <br><br>
+              Permettez moi d’y apporter la cerise sur le gâteau !
+            </p>
+          </div>
+        </div>
+        <div class="player-video">
+          <video id="cinematic" width="640" height="360" controls>
+            <source src="/6-peinture/videos/cutscene.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
     </main>
   </body>
   <script

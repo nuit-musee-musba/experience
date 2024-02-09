@@ -1,16 +1,18 @@
-import * as THREE from "three";
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
+import * as THREE from "three";
 import { period } from "./period";
-import { enableInactivityRedirection } from "/global/js/inactivity.ts";
+
+enableInactivityRedirection();
 
 import {
-  renderer,
+  animatedScenes,
   camera,
   controls,
-  scene,
-  animatedScenes,
-  cube,
   loadModels,
+  allPOI,
+  renderer,
+  scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
 
@@ -25,39 +27,59 @@ const sceneSetUp = async () => {
   let isShowingText = false;
   const raycaster = new THREE.Raycaster();
 
-  enableInactivityRedirection();
-
-  const getCameraPositionForTarget = (position) => {
-    return { x: position.x + 0, y: position.y + 3, z: position.z + 1 };
-  };
-
   //MOUSE
 
   const mouse = new THREE.Vector2();
-
-  function onMouseClick(event) {
+  let intersectedObjectName;
+  function poiClick(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
 
-    const intersects = raycaster.intersectObjects(scene.children);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    let poiClicked = false;
 
     for (let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object === cube) {
+      const intersectedObject = intersects[i].object;
+
+      if (allPOI.flat().includes(intersectedObject)) {
+        intersectedObjectName = intersectedObject.name;
+        displayPOI(index);
         showText();
+        poiClicked = true;
         break;
-      } else {
-        hideText();
       }
+    }
+
+    if (!poiClicked) {
+      hideText();
     }
   }
 
-  // let restetDeltaTime = false;
+  const displayPOI = (index) => {
+    for (let i = 0; i < allPOI.length; i++) {
+      if (i !== index) {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[i][j].visible = false;
+        }
+      } else {
+        for (let j = 0; j < allPOI[i].length; j++) {
+          allPOI[index][j].visible = true;
+          if (intersectedObjectName === (i + j).toString()) {
+            document.getElementById("poi-title-component").textContent =
+              period[i].poiText[j].title;
+            document.getElementById("poi-text-component").innerHTML =
+              period[i].poiText[j].text;
+          }
 
-  // window.addEventListener("click", (event) => {
-  //   restetDeltaTime = true;
-  // });
+          const position = period[i].poiPosition[j];
+          allPOI[i][j].position.set(position.x, position.y, position.z);
+        }
+      }
+    }
+  };
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
@@ -75,40 +97,28 @@ const sceneSetUp = async () => {
   tick();
 
   const endMenu = document.getElementById("end-menu");
-  const component = document.getElementById("component");
-
-  // const audioContent = document.getElementById("audio-content");
-  // const audio = document.getElementById("audio");
-
-  // let isAudioPlaying = false;
-
-  // audioContent.addEventListener("click", () => {
-  //   if (isAudioPlaying) {
-  //     audio.src = "./assets/icons/audio.svg";
-  //   } else {
-  //     audio.src = "./assets/icons/audioNone.svg";
-  //   }
-
-  //   isAudioPlaying = !isAudioPlaying;
-  // });
+  const lastStep = document.getElementById("last-step");
+  const component = document.getElementById("poi-component");
+  // const containerSubTitle = document.getElementById("container-subTitle");
 
   const restart = () => {
     index = 0;
     handleFocusPeriod(period[index]);
-    endMenu.style.display = "none";
   };
 
   const showText = () => {
     isShowingText = true;
     component.style.display = "flex";
+    // containerSubTitle.style.display = "flex";
   };
 
   const hideText = () => {
     isShowingText = false;
     component.style.display = "none";
+    // containerSubTitle.style.display = "none";
   };
-  window.addEventListener("click", onMouseClick, false);
-  window.addEventListener("mousedown", hideText(), false); // Doesnt work wtf
+  window.addEventListener("click", poiClick, false);
+  window.addEventListener("mousedown", hideText(), false);
 
   const toggleInfo = () => {
     if (!isShowingText) {
@@ -134,6 +144,7 @@ const sceneSetUp = async () => {
       handleFocusPeriod(period[index]);
     } else {
       endMenu.style.display = "flex";
+      lastStep.style.display = "none";
     }
   };
 
@@ -154,8 +165,8 @@ const sceneSetUp = async () => {
     if (!step) {
       return;
     }
-
     await loadModels();
+    displayPOI(index);
 
     updateAllMaterials();
 
@@ -170,6 +181,19 @@ const sceneSetUp = async () => {
     const selectedPeriodButtonId = `periodButton${index + 1}`;
     const selectedButtonActive = `periodActive${index + 1}`;
     const selectedDashedButton = `dashed-border${index + 1}`;
+
+    if (index === 0) {
+      document.getElementById("prevButton").style.display = "none";
+    } else {
+      document.getElementById("prevButton").style.display = "block";
+    }
+    if (index === period.length - 1) {
+      document.getElementById("nextButton").style.display = "none";
+      document.getElementById("last-step").style.display = "flex";
+    } else {
+      document.getElementById("nextButton").style.display = "block";
+      document.getElementById("last-step").style.display = "none";
+    }
 
     document.getElementById(selectedButtonId).style.fontSize = "8rem";
     document.getElementById(selectedButtonId).style.top = "-12rem";
@@ -195,38 +219,16 @@ const sceneSetUp = async () => {
 
     const targetPosition = step.position;
 
-    const cameraPosition = getCameraPositionForTarget(targetPosition);
+    const cameraPosition = targetPosition;
 
-    document.getElementById("title-component").textContent = step.title;
-    document.getElementById("text-component").innerHTML = step.description
-      .map((paragraph) => `<p>${paragraph}</p>`)
-      .join("");
+    document.getElementById("subTitle").textContent = step.subTitle[0];
 
-    cube.position.set(
-      step.cubePosition.x,
-      step.cubePosition.y,
-      step.cubePosition.z
-    );
-
-    cube.cursor = "pointer";
-
-    const rayOrigin = new THREE.Vector3(camera.position);
-    const rayDirection = new THREE.Vector3(cube.position);
-    raycaster.set(rayOrigin, rayDirection);
-    rayDirection.normalize();
-
-    raycaster.setFromCamera(mouse, camera);
-
-    cube.material.color.set("#0000ff");
-
-    gsap.to(controls.step, {
+    gsap.to(controls.target, {
       duration: 1,
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
+      x: step.target.x,
+      y: step.target.y,
+      z: step.target.z,
     });
-
-    // controls.target = cube.position;
 
     gsap.to(controls.object.position, {
       duration: 1,
@@ -240,6 +242,7 @@ const sceneSetUp = async () => {
   document.getElementById("restart-button").addEventListener("click", restart);
   document.getElementById("prevButton").addEventListener("click", prevStep);
   document.getElementById("nextButton").addEventListener("click", nextStep);
+  document.getElementById("last-step").addEventListener("click", nextStep);
   document
     .getElementById("interestButton")
     .addEventListener("click", toggleInfo);

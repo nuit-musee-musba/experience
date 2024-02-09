@@ -7,6 +7,7 @@ import "./rotationSystem";
 window.experience = window.experience || {};
 
 window.experience.canRotate = true;
+window.experience.autoRotate = true;
 
 // Capture DOM elements
 
@@ -50,14 +51,18 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 2);
+const light = new THREE.SpotLight(0xffffff, 1);
 light.position.set(0, 0.5, -0.85);
 scene.add(light);
+
+const axesHelper = new THREE.AxesHelper(10);
+axesHelper.setColors("red", "green", "blue");
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
 // Calibrate rotation to set carousel in good position
-carousel.rotation.set(0, 0, 0); //
+carousel.rotation.set(0, 0, 0);
+carousel.position.set(0, 0, 0);
 
 // Create an array to store promises for each world creation
 const islandPromises = [];
@@ -75,6 +80,7 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       window.experience.islands.push(island);
+      island.add(axesHelper);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -124,6 +130,7 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   window.experience.updateCarouselRotation();
+
   // Get current island
   window.experience.currentIsland = window.experience.islands.find((island) => {
     return island.userData.id === window.experience.index + 1;

@@ -1,3 +1,16 @@
+// SELECTED ITEM ANIMATION
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0); // Position de départ et d'arrivée
+    }
+    40% {
+      transform: translateY(-40px); // Point le plus haut
+    }
+    60% {
+      transform: translateY(-10px); // Point intermédiaire
+    }
+}
+
 // TABS BUTTON
 .categories-tabs {
   @include list-reset;
@@ -65,7 +78,27 @@
   gap: 20px;
 
   .item {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     position: absolute;
+    &.selected-item {
+        img {
+            animation: bounce 1.8s infinite;
+        }
+        &::before {
+            aspect-ratio: 1;
+            content: '';
+            position: absolute;
+            height: 160%;
+            width: 160%;
+            background-image: url('/6-peinture/images/ingredients/selection.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: -1;
+        }
+    }
     // TAB FOOD
     &-peach {
       left: 320px;

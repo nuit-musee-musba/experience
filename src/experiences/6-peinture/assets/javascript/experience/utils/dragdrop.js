@@ -48,8 +48,6 @@ function handleDragInteraction(
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
-  console.log(dragElementId + ":" + initialX + "," + initialY);
-
   let dragElWidth = dragElement.offsetWidth;
   let dragElheight = dragElement.offsetHeight;
 
@@ -57,12 +55,12 @@ function handleDragInteraction(
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
   dragElement.addEventListener("touchstart", (e) => {
-    let selectedElement = parentElement.querySelector('.selected-item');
+    let selectedElement = parentElement.querySelector(".selected-item");
     if (selectedElement) {
-      selectedElement.classList.remove('selected-item');
+      selectedElement.classList.remove("selected-item");
     }
     const targetZoneRect = targetZone.getBoundingClientRect();
-    dragElement.classList.add('selected-item');
+    dragElement.classList.add("selected-item");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
@@ -71,7 +69,6 @@ function handleDragInteraction(
     const touch = e.touches[0];
     const currentX = touch.clientX - initialX + realInitialX - dragElWidth / 2;
     const currentY = touch.clientY - initialY + realInitialY - dragElheight / 2;
-    console.log(touch.clientX + "," + touch.clientY);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -100,8 +97,6 @@ function handleDragInteraction(
               howManyDone++;
               howManyDrags++;
             }
-
-            console.log(dialog);
 
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
@@ -147,7 +142,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "Mmh, gardez-le sous votre établi, il nous sera peut-être utile plus tard."
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
@@ -157,7 +152,7 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        numberUpdater.innerHTML = howManyDrags;
+        //numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 
@@ -165,7 +160,9 @@ function handleDragInteraction(
           //win the game
 
           if (current_step >= current_step_win) {
-            document.body.classList.add("has-ending-opened");
+            setTimeout(() => {
+              document.body.classList.add("has-ending-opened");
+            }, 2000);
           } else {
             step_success = true;
             setTimeout(() => {
