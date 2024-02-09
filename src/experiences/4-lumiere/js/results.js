@@ -81,11 +81,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
       btn.textContent = "Terminer l'expérience";
       btn.href = "./end.html";
     });
-
+    clearLocalStorage();
   } else {
     console.log("not true")
   }
+
 });
+
 
 /**
  * Base
