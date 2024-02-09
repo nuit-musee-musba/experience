@@ -27,14 +27,14 @@ body {
 .title-line {
   width: 5px;
   background-color: white;
-  animation: slide-down 1s 3s ease-out forwards;
+  animation: slide-down 2s 4s cubic-bezier(0.2, 0, 0.25, 1.0) forwards;
 }
 
 @keyframes slide-down{
 
   0%
   {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
   }
 
   100%
@@ -55,24 +55,24 @@ body {
   font-size: 4rem;
   font-weight: 100;
   overflow: hidden;
-  animation: slide2 1s 4s ease-out forwards;
+  animation: slide2 2s 5s cubic-bezier(0.2, 0, 0.25, 1.0) forwards;
 }
 
 @keyframes slide2{
   0%
   {
-    width: 0%;
-    white-space: nowrap;
+    transform: translateX(-100%);
+    opacity: 0;
   }
 
-  80%{
-    white-space: nowrap;
+  70%{
+    opacity: 0;
   }
 
   100%
   {
-    width: calc(100% / 2);
-    white-space: wrap;
+    transform: translateX(0%);
+    opacity: 1;
   }
 }
 
