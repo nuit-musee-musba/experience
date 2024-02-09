@@ -34,13 +34,10 @@ export class ObjectLoader {
     });
   }
 
-  // method to have the final state of the animation
   finalState() {
     this.actions.forEach((action) => {
-      // Start the animation
       action.play();
 
-      // Skip to the end of the animation
       action.time = action.getClip().duration;
     });
   }

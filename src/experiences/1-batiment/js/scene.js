@@ -263,7 +263,6 @@ for (let i = 0; i < periods.length; i++) {
     const cube = new THREE.Mesh(geometry, material);
 
     cube.position.setY(-10);
-    // scene.add(cube);
     cube.name = `${i + j}`;
 
     if (i === 0) {
