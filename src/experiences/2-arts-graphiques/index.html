@@ -58,10 +58,20 @@
             </div>
           </div>
           <div class="center">
-            <img
-              class="sec1-hand-tool"
-              src="/global/svg/gestures/swipe-left.svg"
-            />
+            <div class="animation">
+              <lottie-player
+                id="animation-video"
+                class="finger-rotation"
+                src="/global/lottie/finger_rotation_animation.json"
+                background="transparent"
+                speed="1"
+                direction="1"
+                mode="normal"
+                loop
+                controls
+                autoplay
+              ></lottie-player>
+            </div>
             <img
               src="/2-arts-graphiques/images/pieces/tableau-clean.png"
               class="sec1-painting"
@@ -108,7 +118,8 @@
 
                 <div class="paragraph">
                   <p>
-                    Retour un siècle en arrière dans le passé, en 1919, lors de la création de l’œuvre “Saint Sébastien” d’Odilon Redon.
+                    Retour un siècle en arrière dans le passé, en 1919, lors de
+                    la création de l’œuvre “Saint Sébastien” d’Odilon Redon.
                   </p>
                 </div>
               </div>
@@ -812,7 +823,11 @@
           <h2 id="hint"></h2>
         </div>
       </footer>
-      <audio id="audio" src="/2-arts-graphiques/musics/g2.mp3" style="display: none;"></audio>
+      <audio
+        id="audio"
+        src="/2-arts-graphiques/musics/g2.mp3"
+        style="display: none"
+      ></audio>
     </div>
   </body>
 </html>
