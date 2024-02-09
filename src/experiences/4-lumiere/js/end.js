@@ -1,6 +1,20 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
+import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
+import GUI from 'lil-gui';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+/**
+ * Ambiant Sound
+ */
+ambiantSound("/global/sounds/g4.mp3")
+    .tryToPlayDirectly()
+    .playOnFirstInteraction();
+
+/**
+* Inactivity
+*/
+enableInactivityRedirection();
 
 /**
  * Base
