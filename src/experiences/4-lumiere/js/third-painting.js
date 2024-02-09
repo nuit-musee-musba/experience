@@ -1,8 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -14,36 +12,33 @@ enableInactivityRedirection();
 /**
  * Popins
  */
+const popin = document.querySelector("#popin-info");
+let events = true;
 
-// Hide popin
 const popinHide = (targetPopin) => {
   targetPopin.classList.add("hidden");
+  document.querySelector("body").classList.add("popin-visible");
   document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
 };
 
-// Show popin
 const popinShow = (targetPopin) => {
   targetPopin.classList.remove("hidden");
+  document.querySelector("body").classList.remove("popin-visible");
   document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
 };
 
-// Popin close buttons
+document.addEventListener("DOMContentLoaded", (event) => {
+  popinShow(popin);
+});
+
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
   const targetPopin = document.querySelector(popinBtn.dataset.target);
   popinBtn.addEventListener("click", (event) => {
     event.preventDefault();
     popinHide(targetPopin);
-  });
-}
-
-// Popin open buttons
-const popinOpenBtns = document.querySelectorAll(".popin-btn.popin-open");
-for (const popinOpenBtn of popinOpenBtns) {
-  const targetPopin = document.querySelector(popinOpenBtn.dataset.target);
-  popinOpenBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    popinShow(targetPopin);
   });
 }
 
@@ -57,15 +52,23 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 let globalParameters = {
   lightAngleStrength: 0.5,
   lightRadius: 1.3,
   planDistance: 0.5,
   white: "#f5f5f5",
-  ambientIntensity: 4.5,
+  ambientIntensity: 3,
   rectAreaIntensity: 1,
-  changeValue: 0,
+  changeValue: 1,
+  lineDefaultOpacity: 0.5,
+  lineTouchOpacity: 0.2,
+  resultValue: 0.3,
+  resultDelta: 0.05,
+  step1: 0.1,
+  step2: 0.3,
+  step3: 0.6,
 };
 
 // Canvas
@@ -93,6 +96,7 @@ loadingManager.onError = (error) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
+// Third painting
 const firstPlanTexture = textureLoader.load(
   "/4-lumiere/third-painting/third-painting-plan-1.png"
 );
@@ -107,6 +111,11 @@ const thirdPlanTexture = textureLoader.load(
   "/4-lumiere/third-painting/third-painting-plan-3.png"
 );
 thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
+
+// Light object
+const lightObjectTexture = textureLoader.load(
+  "/4-lumiere/third-painting/third-light-object.png"
+);
 
 /**
  * Loader
@@ -151,54 +160,78 @@ thirdPainting3.position.z = -globalParameters.planDistance;
 // Third painting | Add to scene
 scene.add(thirdPainting1, thirdPainting2, thirdPainting3);
 
-const paintingTweaks = gui.addFolder("Painting parameters");
-paintingTweaks
-  .add(globalParameters, "planDistance")
-  .min(0)
-  .max(1)
-  .step(0.01)
-  .name("Plan distance")
-  .onChange(() => {
-    secondPainting1.position.z = 2 * globalParameters.planDistance;
-    secondPainting3.position.z = -globalParameters.planDistance;
-  });
-
 // Frame
-// gltfLoader.load(
-//   "/4-lumiere/third-painting/third-painting-frame.glb",
-//   (gltf) => {
-//     // gltf.scene.scale.set(6.0625, 6.0625, 6.0625);
-//     gltf.scene.position.z = 0.5;
-//     gltf.scene.position.x = -0.05;
-//     // gltf.scene.rotation.z = Math.PI;
-//     scene.add(gltf.scene);
-//   },
-//   () => {
-//     console.log("progress");
-//   },
-//   (error) => {
-//     console.log("error:", error);
-//   }
-// );
+gltfLoader.load(
+  "/4-lumiere/third-painting/third-painting-frame.glb",
+  (gltf) => {
+    gltf.scene.scale.set(7.5, 7.5, 7.5);
+    gltf.scene.position.z = 1;
+    scene.add(gltf.scene);
+  },
+  () => {
+    console.log("progress");
+  },
+  (error) => {
+    console.log("error:", error);
+  }
+);
 
 // line
 var lineGeometry = new THREE.CylinderGeometry(
-  0.005, // radiusTop
-  0.005, // radiusBottom
-  3, // height
+  0.01, // radiusTop
+  0.01, // radiusBottom
+  4, // height
   32, // radialSegments
   1 // heightSegments
 );
 var lineMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
-  // opacity: 0,
-  // wireframe: true,
+  opacity: globalParameters.lineDefaultOpacity,
 });
 var line = new THREE.Mesh(lineGeometry, lineMaterial);
 line.position.z = globalParameters.planDistance;
-line.position.y = -0.5;
-scene.add(line);
+line.position.y = 0;
+
+// line 2
+var line2Geometry = new THREE.CylinderGeometry(
+  0.01, // radiusTop
+  0.01, // radiusBottom
+  1.825, // height
+  32, // radialSegments
+  1 // heightSegments
+);
+var line2 = new THREE.Mesh(line2Geometry, lineMaterial);
+line2.position.z = 1.3;
+line2.position.y = -1.4;
+
+// line 3
+var line3Geometry = new THREE.CylinderGeometry(
+  0.01, // radiusTop
+  0.01, // radiusBottom
+  0.45, // height
+  32, // radialSegments
+  1 // heightSegments
+);
+var line3 = new THREE.Mesh(line3Geometry, lineMaterial);
+line3.position.z = 1.3;
+line3.position.y = 2.1125;
+
+scene.add(line, line2, line3);
+
+// Light object
+const lightObjectGeometry = new THREE.PlaneGeometry(
+  0.75, // width
+  0.75, // height
+  3, //widthSegments
+  3 //heightSegments
+);
+const lightObjectMaterial = new THREE.MeshBasicMaterial({
+  map: lightObjectTexture,
+  transparent: true,
+  opacity: 1,
+});
+const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
 
 /**
  * Lights
@@ -206,87 +239,108 @@ scene.add(line);
 
 // Light colors
 const lightColors = {
-  blue: new THREE.Color("#9FB2FF"),
-  yellow: new THREE.Color("#FFD79E"),
+  blue: new THREE.Color("#2277aa"),
+  yellow: new THREE.Color("#f8d181"),
   red: new THREE.Color("#FF000C"),
 };
 
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  "#d1dbff", // color
+  lightColors.ambientYellow, // color
   globalParameters.ambientIntensity // intensity
 );
 scene.add(ambientLight);
-
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
 
 // Second painting point light
 const rectAreaLight = new THREE.RectAreaLight(
   "#9FB2FF", // color
   globalParameters.rectAreaIntensity, // intensity
   8, // width
-  2.5 // height
+  5 // height
 );
 // pointLight.position.x = globalParameters.lightRadius;
 scene.add(rectAreaLight);
 line.add(rectAreaLight);
+rectAreaLight.add(lightObject);
+lightObject.position.z = 0.1;
 
 const lightMaxPos = line.geometry.parameters.height / 2;
 const lightMinPos = -(line.geometry.parameters.height / 2);
 
 rectAreaLight.position.y = lightMaxPos / 2;
 
-console.log("rectAreaLight: ", rectAreaLight);
-const rectAreaLightTweaks = gui.addFolder("Rectangle area light parameters");
-rectAreaLightTweaks.add(rectAreaLight, "visible");
-rectAreaLightTweaks.addColor(rectAreaLight, "color").onChange((value) => {
-  console.log(value.getHexString());
+gui.addColor(lightColors, "blue").onChange((value) => {
+  // console.log("blue", value.getHexString())
+  rectAreaLight.color.set(lightColors.blue);
 });
-rectAreaLightTweaks.add(rectAreaLight, "intensity").min(0).max(15).step(1);
+gui.addColor(lightColors, "yellow").onChange((value) => {
+  // console.log("yellow", value.getHexString())
+  rectAreaLight.color.set(lightColors.yellow);
+});
+gui.addColor(lightColors, "red").onChange((value) => {
+  // console.log("red", value.getHexString())
+  rectAreaLight.color.set(lightColors.red);
+});
 
 // RectAreaLight color change
 changeMainLightColor();
 
 function changeMainLightColor() {
-  const framePosY = globalParameters.changeValue >= 0.5 ? "top" : "bottom";
+  // Update the change value depending on the light position
+  globalParameters.changeValue =
+    (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
 
-  const colorFrom = framePosY === "top" ? lightColors.yellow : lightColors.red;
-  const colorTo = framePosY === "top" ? lightColors.blue : lightColors.yellow;
-  const alphaInterpolation =
-    framePosY === "top"
-      ? globalParameters.changeValue - 0.5
-      : globalParameters.changeValue;
+  // Frame light colors
+  let colorFrom = null;
+  let colorTo = null;
+  let alphaInterpolation = null;
+
+  if (globalParameters.changeValue <= globalParameters.step1) {
+    colorFrom = lightColors.red;
+    colorTo = lightColors.red;
+    alphaInterpolation = globalParameters.changeValue / globalParameters.step1;
+  } else if (
+    globalParameters.changeValue > globalParameters.step1 &&
+    globalParameters.changeValue <= globalParameters.step2
+  ) {
+    colorFrom = lightColors.red;
+    colorTo = lightColors.yellow;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step1) /
+      (globalParameters.step2 - globalParameters.step1);
+  } else if (
+    globalParameters.changeValue > globalParameters.step2 &&
+    globalParameters.changeValue <= globalParameters.step3
+  ) {
+    colorFrom = lightColors.yellow;
+    colorTo = lightColors.blue;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step2) /
+      (globalParameters.step3 - globalParameters.step2);
+  } else {
+    colorFrom = lightColors.blue;
+    colorTo = lightColors.blue;
+    alphaInterpolation =
+      (globalParameters.changeValue - globalParameters.step3) /
+      (1 - globalParameters.step3);
+  }
   rectAreaLight.color.lerpColors(colorFrom, colorTo, alphaInterpolation);
+
+  if (globalParameters.changeValue <= globalParameters.step2) {
+    // Change ambient light intensity
+    ambientLight.intensity =
+      globalParameters.ambientIntensity *
+      (globalParameters.changeValue / globalParameters.step2) + 0.5;
+
+    // Change rectarea light intensity
+    rectAreaLight.intensity =
+      globalParameters.rectAreaIntensity *
+      (globalParameters.changeValue / globalParameters.step2);
+  } else {
+    ambientLight.intensity =
+      globalParameters.ambientIntensity + ((globalParameters.changeValue - globalParameters.step2) / (1 - globalParameters.step2)) + 0.5;
+  }
 }
-
-// Helper
-const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-// rectAreaLightHelper.visible = false;
-scene.add(rectAreaLightHelper);
-rectAreaLightTweaks.add(rectAreaLightHelper, "visible").name("Repère visuel");
-
-const rectAreaLightPosition = rectAreaLightTweaks.addFolder(
-  "Spot light position"
-);
-
-rectAreaLightPosition
-  .add(rectAreaLight.position, "x")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "y")
-  .min(-10)
-  .max(10)
-  .step(0.01);
-rectAreaLightPosition
-  .add(rectAreaLight.position, "z")
-  .min(-10)
-  .max(10)
-  .step(0.01);
 
 /**
  * Sizes
@@ -324,14 +378,6 @@ camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 30;
 scene.add(camera);
-
-const cameraTweaks = gui.addFolder("Camera parameters");
-cameraTweaks
-  .add(camera.position, "z")
-  .min(-10)
-  .max(200)
-  .step(0.1)
-  .name("Camera z pos");
 
 /**
  * Pointer
@@ -374,6 +420,7 @@ canvas.addEventListener("touchstart", (event) => {
   pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
+  line.material.opacity = globalParameters.lineTouchOpacity;
   // Record the starting Y position of the touch
   touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
@@ -403,9 +450,14 @@ canvas.addEventListener(
           ? (rectAreaLight.position.y = lightMinPos)
           : (rectAreaLight.position.y = rectAreaLight.position.y);
       }
-      changeLights();
       changeMainLightColor();
       checkResult();
+
+      const proximityPercentage = calculatePercentage(
+        globalParameters.changeValue,
+        globalParameters.resultValue
+      );
+      resultBtn.style.setProperty("--4-percentage", proximityPercentage + "%");
       // Update the starting Y position for the next frame
       touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
 
@@ -416,24 +468,20 @@ canvas.addEventListener(
   { passive: false }
 );
 
-window.addEventListener("touchend", function () {
+canvas.addEventListener("touchend", function () {
+  line.material.opacity = globalParameters.lineDefaultOpacity;
+
   // Reset the swipe tracking variables
   isSwiping = false;
 });
 
-// Change day time
-function changeLights() {
-  // Update the change value depending on the light position
-  globalParameters.changeValue =
-    (rectAreaLight.position.y - lightMinPos) / line.geometry.parameters.height;
+function calculatePercentage(currentPosition, targetPosition) {
 
-  // Update ambientLight intensity
-  ambientLight.intensity =
-    globalParameters.ambientIntensity * globalParameters.changeValue + 0.5;
+  const proximity =
+    currentPosition < targetPosition ? currentPosition / targetPosition : 1 - ((currentPosition - targetPosition) * 2);
+  const positionPercentage = (proximity * 100);
 
-  // Update rectAreaLight intensity
-  rectAreaLight.intensity =
-    globalParameters.rectAreaIntensity * globalParameters.changeValue;
+  return positionPercentage;
 }
 
 // // Result button
@@ -444,8 +492,10 @@ let resultState = false;
 function checkResult() {
   // // Check result
   if (
-    globalParameters.changeValue < 0.55 &&
-    globalParameters.changeValue > 0.45
+    globalParameters.changeValue <
+    globalParameters.resultValue + globalParameters.resultDelta &&
+    globalParameters.changeValue >
+    globalParameters.resultValue - globalParameters.resultDelta
   ) {
     resultState = true;
     resultBtn.disabled = false;
@@ -463,11 +513,6 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = line.position;
-// controls.enableDamping = true;
-
 /**
  * Renderer
  */
@@ -482,9 +527,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Update controls
-  // controls.update();
-
   // Render
   renderer.render(scene, camera);
 

@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
@@ -9,7 +8,17 @@ import { enableInactivityRedirection } from "/global/js/inactivity";
 enableInactivityRedirection();
 
 /**
- * Popins
+ * Visited paintings
+ */
+
+let visitedPaintings = {
+  first: localStorage.getItem("4-first"),
+  second: localStorage.getItem("4-second"),
+  third: localStorage.getItem("4-third"),
+}
+
+/**
+ * Result texts
  */
 
 const queryString = window.location.search;
@@ -17,11 +26,11 @@ const urlParams = new URLSearchParams(queryString);
 const paintingOrigin = urlParams.get("painting");
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
 
   switch (paintingOrigin) {
     case "first":
       console.log("first painting");
+      localStorage.setItem("4-first", true);
       document
         .querySelector(`#result-first-painting`)
         .classList.remove("hidden");
@@ -29,6 +38,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     case "second":
       console.log("second painting");
+      localStorage.setItem("4-second", true);
       document
         .querySelector(`#result-second-painting`)
         .classList.remove("hidden");
@@ -36,6 +46,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     case "third":
       console.log("third painting");
+      localStorage.setItem("4-third", true);
       document
         .querySelector(`#result-third-painting`)
         .classList.remove("hidden");
@@ -45,3 +56,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
       break;
   }
 });
+

@@ -3,12 +3,45 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 /**
  * Inactivity
  */
 enableInactivityRedirection();
+
+/**
+ * Popins
+ */
+const popin = document.querySelector("#popin-info");
+let events = true;
+
+const popinHide = (targetPopin) => {
+  targetPopin.classList.add("hidden");
+  document.querySelector("body").classList.add("popin-visible");
+  document.querySelector(".popin-overlay").classList.add("hidden");
+  events = true;
+};
+
+const popinShow = (targetPopin) => {
+  targetPopin.classList.remove("hidden");
+  document.querySelector("body").classList.remove("popin-visible");
+  document.querySelector(".popin-overlay").classList.remove("hidden");
+  events = false;
+};
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  popinShow(popin);
+});
+
+const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
+for (const popinBtn of popinBtns) {
+  const targetPopin = document.querySelector(popinBtn.dataset.target);
+  popinBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    popinHide(targetPopin);
+  });
+}
 
 /**
  * Threejs
@@ -20,6 +53,7 @@ const gui = new GUI({
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
 // Global parameters
 let globalParameters = {
@@ -29,6 +63,8 @@ let globalParameters = {
   white: "#f5f5f5",
   ellipseDefaultOpacity: 0.5,
   ellipseTouchOpacity: 0.2,
+  resultValue: 1.74,
+  resultDelta: 0.1,
 };
 
 // Canvas
@@ -90,12 +126,12 @@ gltfLoader.setDRACOLoader(dracoLoader);
  */
 
 // Wallpaper
-const wallpaperGeometry = new THREE.PlaneGeometry(15, 15, 1, 1);
+const wallpaperGeometry = new THREE.PlaneGeometry(47.2, 28, 1, 1);
 const wallpaperMaterial = new THREE.MeshStandardMaterial({
   color: "#242424",
-  // map: wallpaperHeightTexture,
   metalnessMap: wallpaperHeightTexture,
-  metalness: 0.5,
+  metalness: 1,
+  roughness: 0,
 });
 const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
 scene.add(wallpaper);
@@ -113,20 +149,6 @@ const firstPaintingMaterial = new THREE.MeshStandardMaterial({
 });
 const firstPainting = new THREE.Mesh(planeGeometry, firstPaintingMaterial);
 scene.add(firstPainting);
-
-const paintingTweaks = gui.addFolder("Painting parameters");
-paintingTweaks
-  .add(firstPainting.material, "roughness")
-  .min(0)
-  .max(1)
-  .step(0.001)
-  .name("Painting roughness");
-paintingTweaks
-  .add(firstPainting.material, "metalness")
-  .min(0)
-  .max(1)
-  .step(0.001)
-  .name("Painting metalness");
 
 // Frame
 gltfLoader.load(
@@ -155,7 +177,6 @@ const ellipseMaterial = new THREE.MeshBasicMaterial({
   color: globalParameters.white,
   transparent: true,
   opacity: globalParameters.ellipseDefaultOpacity,
-  // wireframe: true,
 });
 const ellipse = new THREE.Mesh(ellipseGeometry, ellipseMaterial);
 ellipse.position.z = globalParameters.lightDistance;
@@ -186,11 +207,6 @@ const ambientLight = new THREE.AmbientLight(
 );
 scene.add(ambientLight);
 
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
-
 // firstPainting point light
 const pointLight = new THREE.PointLight(
   "#ede2b9", // color
@@ -202,53 +218,19 @@ pointLight.position.x = globalParameters.lightRadius;
 scene.add(pointLight);
 ellipse.add(pointLight);
 lightObject.position.z = globalParameters.lightDistance + 0.1;
-const pointLightTweaks = gui.addFolder("Spot light parameters");
-pointLightTweaks.add(pointLight, "visible");
-pointLightTweaks.addColor(pointLight, "color");
-pointLightTweaks.add(pointLight, "intensity").min(0).max(50).step(0.001);
-pointLightTweaks.add(pointLight, "distance").min(0).max(10).step(0.001);
-pointLightTweaks
-  .add(pointLight.shadow, "blurSamples")
-  .min(-20)
-  .max(20)
-  .step(0.001);
 
 // Spotlight
 const spotLight = new THREE.SpotLight(
   "#ede2b9", // color
   3, // intensity
-  2, // distance
-  3, // angle
+  1.75, // distance
+  8, // angle
   0, // penumbra
-  2 // decay
+  0 // decay
 );
 
 pointLight.add(spotLight);
 spotLight.position.z = -0.75;
-// Helper
-const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-pointLightHelper.visible = false;
-pointLightHelper.color = "#ffffff";
-scene.add(pointLightHelper);
-pointLightTweaks.add(pointLightHelper, "visible").name("Repère visuel");
-pointLightTweaks
-  .add(globalParameters, "lightAngleStrength")
-  .min(0)
-  .max(10)
-  .step(0.01)
-  .name("Light movement strength");
-pointLightTweaks
-  .add(globalParameters, "lightRadius")
-  .min(0)
-  .max(10)
-  .step(0.01)
-  .name("Light circle radius");
-
-const pointLightPosition = pointLightTweaks.addFolder("Spot light position");
-
-pointLightPosition.add(pointLight.position, "x").min(-10).max(10).step(0.01);
-pointLightPosition.add(pointLight.position, "y").min(-10).max(10).step(0.01);
-pointLightPosition.add(pointLight.position, "z").min(-10).max(10).step(0.01);
 
 /**
  * Sizes
@@ -344,6 +326,20 @@ function calculateAngle() {
   return normalizedAngle;
 }
 
+function calculatePercentage(baseCurrentAngle, baseTargetAngle) {
+  // Calculate the angular difference between currentAngle and targetAngle
+  let currentAngle = (baseCurrentAngle - baseTargetAngle) % (Math.PI * 2);
+  if (currentAngle < 0) {
+    currentAngle += Math.PI * 2;
+  }
+
+  const proximity =
+    currentAngle > Math.PI ? currentAngle - Math.PI : Math.PI - currentAngle;
+  const anglePercentage = (proximity * 100) / Math.PI;
+
+  return anglePercentage;
+}
+
 // Result button
 const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
@@ -360,9 +356,17 @@ function updateRotation() {
     Math.sin(angle) * radius,
     globalParameters.lightDistance + 0.1
   );
+  const proximityPercentage = calculatePercentage(
+    angle,
+    globalParameters.resultValue
+  );
+  resultBtn.style.setProperty("--4-percentage", proximityPercentage + "%");
 
   // Check result
-  if (angle > 1.64 && angle < 1.84) {
+  if (
+    angle > globalParameters.resultValue - globalParameters.resultDelta &&
+    angle < globalParameters.resultValue + globalParameters.resultDelta
+  ) {
     resultState = true;
     resultBtn.disabled = false;
   } else {
@@ -379,11 +383,6 @@ resultBtn.addEventListener("click", (event) => {
   }
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = ellipse.position;
-// controls.enableDamping = true;
-
 /**
  * Renderer
  */
@@ -398,12 +397,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const tick = () => {
-  // Update controls
-  // controls.update();
-
-  // Light controls
-  pointLightHelper.update();
-
   // Render
   renderer.render(scene, camera);
 

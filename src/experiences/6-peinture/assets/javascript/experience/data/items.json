@@ -50,7 +50,7 @@
     },
     {
       "id": "5",
-      "name": "Ananas",
+      "name": "L'ananas",
       "category": "food",
       "description": "Il illustre <b>la perfection</b> car il est beau, bon et odorant.",
       "dialog": "Attention ! Ne vous faites pas avoir par sa beauté, il n’a pas sa place ici !",
@@ -88,7 +88,7 @@
       "id": "8",
       "name": "Le citron pelé",
       "category": "food",
-      "description": "Pelé en spirale, le citron peut représenter <b>le déroulement de la vie terrestre</b>.",
+      "description": "Pelé en spirale, le citron incarne l’amertume de <b>la chute</b>. De ce fait, il peut représenter <b>le déroulement de la vie terrestre</b>.",
       "dialog": "Vous en avez dans le citron ! Bravo !",
       "wrong_step_dialog": "",
       "recipe_text": "La représentation du déroulement de la vie terrestre",
@@ -134,13 +134,13 @@
     },
     {
       "id": "12",
-      "name": "Le vase",
+      "name": "Le calice",
       "category": "objects",
-      "description": "Objet de luxe car il ne sert pas aux besoins quotidiens, il représente <b>la vanité</b> des biens de ce monde. <b>Rempli à moitié d’eau</b>, il exprime <b>la vie qui s’écoule inexorablement</b>.",
+      "description": "Le calice de vin représente <b>le sang versé par le Christ</b>.",
       "dialog": "Oh oui ! Vous êtes amphore(me) !",
       "wrong_step_dialog": "",
-      "recipe_text": "Écoulement inexorable de la vie",
-      "recipe_step": 2,
+      "recipe_text": "Le sang versé par le Christ",
+      "recipe_step": 3,
       "number_needed": 1,
       "animation": "animJeffAdorable"
     },
@@ -190,7 +190,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffNope"
     },
     {
       "id": "17",
@@ -220,7 +220,7 @@
       "id": "19",
       "name": "La chenille",
       "category": "animals",
-      "description": "Elle représente la fragilité de la vie.",
+      "description": "Elle représente la <b>fragilité de la vie</b>.",
       "dialog": "Chenille crois pas ! Vous êtes formidable !",
       "wrong_step_dialog": "",
       "recipe_text": "La fragilité de la vie",
@@ -232,7 +232,7 @@
       "id": "20",
       "name": "L'ail",
       "category": "food",
-      "description": "Au Moyen  ge, l'ail était vu comme un talisman contre le diable, symbole de <b>protection</b>. Il incarne <b>la vie austère</b> et, dans la symbolique biblique, la <b>corruption de l'esprit</b> et le <b>péché</b>.",
+      "description": "Au Moyen Âge, l'ail était vu comme un talisman contre le diable, symbole de <b>protection</b>. Il incarne <b>la vie austère</b> et, dans la symbolique biblique, la <b>corruption de l'esprit</b> et le <b>péché</b>.",
       "dialog": "On éloigne le mauvais goût ici, pas le diable !",
       "wrong_step_dialog": "",
       "recipe_text": "",

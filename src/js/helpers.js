@@ -4,23 +4,22 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
+import data from "./data";
+window.experience = window.experience || {};
+window.experience.meshScale = 0.025;
+
+const meshScale = window.experience.meshScale;
+
 // World creation
 export async function createIsland(i, count, color) {
   try {
-    let url;
-    // For a loaded GLTF model
-    if (i % 2 !== 0) {
-      url = "/assets/hub/Batiment.glb";
-    } else {
-      url = "/assets/hub/vanite.glb";
-    }
-
+    const url = data[i].modelPath;
     const island = await createGLTFModel(
       i,
       url, // url
       [0, 0, 0], // position
       [0, i === 0 ? 0 : -(Math.PI * 2) / (count / i), 0], // rotation to set the plane upright
-      [0.035, 0.035, 0.035], // scale
+      [meshScale, meshScale, meshScale], // scale
       color
     );
 
@@ -43,21 +42,6 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
         gltf.scene.position.set(...position);
         gltf.scene.rotation.set(...rotation);
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
-        // If you need to perform additional actions after loading, resolve the promise
-        // Traverse through the scene to update materials
-        // gltf.scene.traverse((child) => {
-        //   if (child.isMesh) {
-        //     // Check if the material has a color property (for Lambert or Phong materials)
-        //     if (child.material.color) {
-        //       child.material.color.set(color);
-        //     }
-        //     // Check if the material has an emissive property (for Standard materials)
-        //     if (child.material.emissive) {
-        //       child.material.emissive.set(color);
-        //     }
-        //     // You may need to add more checks based on the material type used in your model
-        //   }
-        // });
         resolve(gltf);
       },
       undefined,

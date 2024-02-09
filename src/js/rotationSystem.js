@@ -12,25 +12,22 @@ window.experience.rotation = 0;
 window.experience.isRotating = false;
 window.experience.canRotate = true;
 
-////////////////////////////SCROLL LOGIC////////////
+// Constants
 const rotationFactor = 0.001;
-const powerFactor = 0.5;
+const powerFactor = 0.8;
 const parts = 5;
 const circle = Math.PI * 2;
 const deceleration = 1;
 const maxVelocity = 100;
 
-// let rotation = 0;
-// let window.experience.index = 0;
+// Variables
 let direction = 1;
 let velocity = 0;
-
 let lastX = 0;
 let moveX = 0;
 let isTouching = false;
 
 function updateRotation(delta) {
-  console.log("delta", delta);
   window.experience.rotation = (window.experience.rotation + delta) % circle;
   window.experience.index = Math.floor(
     ((window.experience.rotation + circle / (2 * parts)) / circle) * parts
@@ -39,8 +36,14 @@ function updateRotation(delta) {
 }
 
 window.addEventListener("touchstart", (event) => {
+  // Stop aurto rotation when the user starts touch
+  window.experience.autoRotate = false;
+
   // Add this line to prevent rotation when the user is not allowed to rotate (i.e. when the user is in the first scene and the carousel is not visible)
-  // if (!window.experience.canRotate) return;
+  if (!window.experience.canRotate) {
+    return;
+  }
+  window.experience.autoRotate = false;
   const touch = event.touches[0];
   if (!touch) return;
   isTouching = true;
@@ -52,6 +55,11 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener("touchmove", (event) => {
   isTouching = true;
   window.experience.isRotating = true;
+  window.experience.autoRotate = false;
+
+  if (!window.experience.canRotate) {
+    return;
+  }
   const touch = event.touches[0];
   if (!touch) return;
 
@@ -81,10 +89,14 @@ window.experience.updateCarouselRotation = function () {
     : (window.experience.isRotating = true);
 
   if (!isTouching) {
-    updateRotation(velocity * direction * rotationFactor);
+    if (window.experience.autoRotate) {
+      updateRotation(0.002);
+    } else {
+      updateRotation(velocity * direction * rotationFactor);
+    }
   }
-
   window.experience.carousel.rotation.y = window.experience.rotation;
+
   updateIslandInformation(
     window.experience.index,
     data,

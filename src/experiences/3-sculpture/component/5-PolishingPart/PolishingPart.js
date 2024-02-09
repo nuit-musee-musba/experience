@@ -6,14 +6,10 @@ const PolishingPart = () => {
   refiningPart.classList.remove("show");
 
   const polishingPart = document.getElementById("PolishingPart");
-
   polishingPart.classList.add("show");
 
-  const polishingButton = document.getElementById("PolishingButton");
-
-  polishingButton.addEventListener("click", function () {
-    OutroPart();
-  });
+  const steps1InPolishingPart = document.getElementById("steps1InPolishingPart");
+  steps1InPolishingPart.classList.add("show");
 };
 
 export default PolishingPart;
