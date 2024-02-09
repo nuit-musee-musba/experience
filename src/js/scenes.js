@@ -146,6 +146,8 @@ backButton.addEventListener("click", () => {
   // Define the target scale for the elements
   const targetScale = MESHSCALE;
   canvas.classList.remove("activated");
+  canvas.classList.add("deactivated");
+
 
   function descale() {
     // Interpolate the scale smoothly
