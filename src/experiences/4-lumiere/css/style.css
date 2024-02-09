@@ -115,6 +115,7 @@ p {
   z-index: 1000;
   transition: opacity 2s ease-in-out;
 }
+
 #popin-consignes .popin-body {
   opacity: 0;
   visibility: hidden;
@@ -122,10 +123,12 @@ p {
     visibility 3.5s,
     opacity 3.5s ease-in-out;
 }
+
 #popin-consignes.textshow .popin-body {
   opacity: 1;
   visibility: visible;
 }
+
 #popin-consignes.hidden {
   visibility: hidden;
   opacity: 0;
@@ -176,7 +179,6 @@ p {
   margin-right: 5rem;
 }
 
-
 /* ----- Consignes ----- */
 
 .consignes {
@@ -199,6 +201,7 @@ p {
   display: flex;
   justify-content: center;
 }
+
 .legende-ecriteau {
   position: relative;
   display: flex;
@@ -208,6 +211,7 @@ p {
   height: 70px;
   padding: 8px 175px;
 }
+
 .legende-ecriteau::before,
 .legende-ecriteau::after {
   content: "";

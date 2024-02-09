@@ -61,12 +61,11 @@ const popinShow = (targetPopin) => {
   if (targetPopin === popin2) {
     setTimeout(() => {
       targetPopin.classList.add("textshow");
-    }, 7000);
+    }, 4500);
   }
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
 
   if (urlOrigin == "false") {
     popinHide(popin1);
@@ -332,33 +331,22 @@ canvas.addEventListener("click", () => {
   const intersects = raycaster.intersectObjects(objectsToTest);
 
   if (intersects.length && intersects[0].point.z > 0) {
-    if (currentIntersect === null) {
-      console.log("mouse enter");
-    }
-    console.log("intersect", intersects[0]);
     currentIntersect = intersects[0];
   } else {
-    if (currentIntersect) {
-      console.log("mouse leave");
-    }
-
     currentIntersect = null;
   }
 
   if (currentIntersect) {
     switch (currentIntersect.object) {
       case firstPainting:
-        console.log("click on first painting");
         window.location.href = "./first-painting.html";
         break;
 
       case secondPainting:
-        console.log("click on second painting");
         window.location.href = "./second-painting.html";
         break;
 
       case thirdPainting:
-        console.log("click on second painting");
         window.location.href = "./third-painting.html";
         break;
 
@@ -368,14 +356,14 @@ canvas.addEventListener("click", () => {
 });
 
 // Rotate paintings
-function checkUserInteractions() {
-  if (globalParameters.userInteract) {
-    console.log("stop rotate paintings");
-  } else {
-    console.log("Rotate paintings");
-  }
-  globalParameters.userInteract = false;
-}
+// function checkUserInteractions() {
+//   if (globalParameters.userInteract) {
+//     console.log("stop rotate paintings");
+//   } else {
+//     console.log("Rotate paintings");
+//   }
+//   globalParameters.userInteract = false;
+// }
 
 /**
  * Camera
@@ -447,7 +435,7 @@ window.addEventListener("touchend", function () {
  */
 
 // Function
-setInterval(checkUserInteractions, 2000);
+// setInterval(checkUserInteractions, 2000);
 
 /**
  * Renderer
