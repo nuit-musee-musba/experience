@@ -245,15 +245,17 @@ body {
   background-color: transparent;
   border: none;
   color: white;
+  padding: 1rem 4rem 6rem 4rem;
 }
 
 .chronology-timeline .button {
   position: relative;
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.3);
   border: 5px solid white;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 .chronology-timeline .button div {
@@ -378,14 +380,12 @@ body {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-title-component {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-text-component {
