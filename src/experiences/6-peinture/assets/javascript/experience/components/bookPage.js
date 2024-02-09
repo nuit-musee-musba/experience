@@ -9,7 +9,7 @@ class BookPage {
     this.bookContainer = document.querySelector(".book");
     this.bookTitle = this.bookContainer.querySelector(".book-title");
     this.bookText = this.bookContainer.querySelector(".book-description");
-    
+
     this.selectedItem = items.items.find((item) => item.id === "1");
     this.displayData(this.selectedItem);
 
@@ -45,8 +45,9 @@ class BookPage {
 
   animation(status) {
     if (status && !this.item.classList.contains('selected-item')) {
+      document.querySelector('.selected-item').classList.remove('selected-item');
       this.item.classList.add('selected-item');
-    } 
+    }
     else if (this.item.classList.contains('selected-item')) {
       this.item.classList.remove('selected-item');
     }
@@ -54,7 +55,7 @@ class BookPage {
 
   closeBook() {
     let hasSelectedItem = false;
-  
+
     this.items.forEach(item => {
       if (item.classList.contains('selected-item')) {
         this.bookContainer.classList.remove('is-closed');
@@ -67,7 +68,7 @@ class BookPage {
       this.bookTitle.textContent = "";
       this.bookText.innerHTML = "";
     }
-  }  
+  }
 }
 
 
