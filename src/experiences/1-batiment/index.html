@@ -13,6 +13,33 @@
     ></script>
   </head>
   <body onselectstart="return false">
+    <div class="loader">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="38"
+        height="38"
+        class="loader-icon"
+        viewBox="0 0 38 38"
+        stroke="#fff"
+      >
+        <g fill="none" fill-rule="evenodd">
+          <g transform="translate(1 1)" stroke-width="2">
+            <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+            <path d="M36 18c0-9.94-8.06-18-18-18">
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 18 18"
+                to="360 18 18"
+                dur="1s"
+                repeatCount="indefinite"
+              />
+            </path>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="vignette"></div>
     <canvas class="webgl"></canvas>
 
     <section class="title-component">
@@ -66,13 +93,12 @@
           eget consequat diam volutpat in. Magna etiam tortor.
         </p>
         <div class="end-menu-buttons">
-          <div>
-            <a href="index.html" id="restart-button">
-              <button class="btn-small-secondary">
-                Explorer le MusBA en 3D
-              </button>
-            </a>
-          </div>
+          <a href="index.html" id="restart-button">
+            <button class="btn-small-secondary">Explorer le MusBA en 3D</button>
+          </a>
+          <a href="/" id="restart-button">
+            <button class="btn-small-secondary">Retourner au hub</button>
+          </a>
         </div>
       </div>
     </div>
@@ -80,6 +106,11 @@
     <article id="component" class="interest-component">
       <h2 id="title-component"></h2>
       <div id="text-component"></div>
+    </article>
+
+    <article id="poi-component" class="point-interest-component">
+      <h2 id="poi-title-component"></h2>
+      <div id="poi-text-component"></div>
     </article>
 
     <!-- change style button  -->

@@ -10,6 +10,7 @@ import "./component/1-IntroPart/IntroPart.scss";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
+import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 
 enableInactivityRedirection();
 
@@ -115,7 +116,7 @@ const statueScale = new THREE.Vector3(0.25, 0.25, 0.25);
 const statuePosition = new THREE.Vector3(1, -0.8, 0.6);
 const statueRotation = Math.PI / 2;
 
-gltfLoader.load("/3-sculpture/models/Bloc_Degrossi.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_bloc.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
@@ -124,7 +125,7 @@ gltfLoader.load("/3-sculpture/models/Bloc_Degrossi.glb", (gltf) => {
   scene.add(statueV1);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_degrossiV1.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_degrossi.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
@@ -133,7 +134,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_degrossiV1.glb", (gltf) => {
   scene.add(statueV2);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_sculptV1.glb", (gltf) => {
+gltfLoader.load("/3-sculpture/models/Mozart_sculpt.glb", (gltf) => {
   gltf.scene.scale.set(statueScale.x, statueScale.y, statueScale.z);
   gltf.scene.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
   gltf.scene.rotation.y = statueRotation;
@@ -142,28 +143,31 @@ gltfLoader.load("/3-sculpture/models/Mozart_sculptV1.glb", (gltf) => {
   scene.add(statueV3);
 });
 
-gltfLoader.load("/3-sculpture/models/Mozart_affinageV1.glb", async (gltf) => {
-  statueV4 = gltf.scene.children[0];
-  statueV4.scale.set(1.4, 1.4, 1.4);
-  statueV4.position.set(0.5, -1, -0.5);
-  statueV4.rotation.y = Math.PI + 0.6;
+gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
+  statueV5 = gltf.scene.children[0];
+  statueV5.scale.set(statueScale.x, statueScale.y, statueScale.z);
+  statueV5.position.set(statuePosition.x, statuePosition.y, statuePosition.z);
+  statueV5.rotation.y = statueRotation;
 
   const loader = new THREE.TextureLoader();
-  loader.load("/3-sculpture/assets/croquis.png", (texture) => {
-    statueV5 = statueV4.clone();
-    statueV5.geometry = statueV4.geometry.clone();
-    statueV5.scale.multiplyScalar(1.002);
-    statueV5.position.z += 0.01;
+  loader.load("/3-sculpture/textures/Mozart_affinage_texture.png", (texture) => {
+    statueV4 = statueV5.clone();
+    statueV4.geometry = statueV5.geometry.clone();
+    statueV4.scale.multiplyScalar(1.002);
+    statueV4.position.z += 0.01;
 
-    statueV5.material = statueV5.material.clone();
-    statueV5.material.color = new THREE.Color(0x000000);
-    statueV5.material.opacity = 1;
-    statueV5.material.transparent = true;
+    statueV4.material = statueV5.material.clone();
+    statueV4.material.map = texture;
+    statueV4.material.opacity = 1;
+    statueV4.material.transparent = true;
+
+    scene.add(statueV4)
+    scene.add(statueV5)
 
     const polishRange = document.getElementById("PolishRange");
     polishRange.addEventListener("input", (event) => {
       quantity = 1 - parseFloat(event.target.value);
-      statueV5.material.opacity = quantity;
+      statueV4.material.opacity = quantity;
     });
   });
 });
@@ -314,7 +318,6 @@ function stepsFunction() {
 
         if (intersects.length > 0 && raycasterActive) {
           const clickedBlock = intersects[0].object;
-          console.log(clickedBlock);
           statueV3.remove(clickedBlock);
 
           if (statueV3.children.length === 0) {
@@ -323,12 +326,16 @@ function stepsFunction() {
             mouse.y = -1;
             steps++;
             raycasterActive = false;
+
             PolishingPart();
             stepsFunction();
           }
         }
       }
       break;
+    case 4:
+      if (statueV4) {
+      }
   }
 }
 
@@ -372,10 +379,24 @@ let outlinePass = new OutlinePass(
 );
 composer.addPass(outlinePass);
 
+const params = {
+  edgeStrength: 10,
+  edgeGlow: 3,
+  edgeThickness: 9,
+};
+
+outlinePass.edgeStrength = params.edgeStrength;
+outlinePass.edgeGlow = params.edgeGlow;
+outlinePass.edgeThickness = params.edgeThickness;
+outlinePass.visibleEdgeColor.set("#dfa62a");
+outlinePass.hiddenEdgeColor.set("#dfa62a");
+
 const clock = new THREE.Clock();
 let previousTime = 0;
 
+
 const tick = () => {
+
   //Time
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
@@ -389,12 +410,48 @@ const tick = () => {
   const rotateSpeed = currentTouch - touchBefore;
 
   //if (statueV1 && statueV2 && isPolished == false) {
-  if (statueV1 && statueV2 && statueV3 && statueV4) {
+  if (statueV1 && statueV2 && statueV3 && statueV4 && statueV5) {
     statueV1.rotation.y = statueV1.rotation.y + rotateSpeed * 0.3;
     statueV2.rotation.y = statueV2.rotation.y + rotateSpeed * 0.3;
     statueV3.rotation.y = statueV3.rotation.y + rotateSpeed * 0.3;
-    outlinePass.selectedObjects = [statueV1, statueV2];
+    statueV4.rotation.y = statueV4.rotation.y + rotateSpeed * 0.3;
+    statueV5.rotation.y = statueV5.rotation.y + rotateSpeed * 0.3;
+
+    switch (steps) {
+      case 1:
+
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV1.children.length > 0) {
+            outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+      case 2:
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV2.children.length > 0) {
+            outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+      case 3:
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+          if (statueV3.children.length > 0) {
+            outlinePass.selectedObjects = [statueV3.children[Math.floor(Math.random() * statueV3.children.length)]];
+          }
+        }
+
+        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        break;
+
+    }
+
   }
+
+
 
   if (socle) {
     socle.rotation.y = socle.rotation.y - rotateSpeed * 0.3;
@@ -403,7 +460,9 @@ const tick = () => {
   touchBefore = currentTouch;
 
   // Render
-  renderer.render(scene, camera);
+  composer.render(scene, camera);
+
+  //renderer.render(scene, camera);
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);

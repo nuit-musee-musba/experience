@@ -63,6 +63,8 @@ let globalParameters = {
   white: "#f5f5f5",
   ellipseDefaultOpacity: 0.5,
   ellipseTouchOpacity: 0.2,
+  resultValue: 1.74,
+  resultDelta: 0.1,
 };
 
 // Canvas
@@ -324,6 +326,20 @@ function calculateAngle() {
   return normalizedAngle;
 }
 
+function calculatePercentage(baseCurrentAngle, baseTargetAngle) {
+  // Calculate the angular difference between currentAngle and targetAngle
+  let currentAngle = (baseCurrentAngle - baseTargetAngle) % (Math.PI * 2);
+  if (currentAngle < 0) {
+    currentAngle += Math.PI * 2;
+  }
+
+  const proximity =
+    currentAngle > Math.PI ? currentAngle - Math.PI : Math.PI - currentAngle;
+  const anglePercentage = (proximity * 100) / Math.PI;
+
+  return anglePercentage;
+}
+
 // Result button
 const resultBtn = document.querySelector("#btn-validate");
 let resultState = false;
@@ -340,9 +356,17 @@ function updateRotation() {
     Math.sin(angle) * radius,
     globalParameters.lightDistance + 0.1
   );
+  const proximityPercentage = calculatePercentage(
+    angle,
+    globalParameters.resultValue
+  );
+  resultBtn.style.setProperty("--4-percentage", proximityPercentage + "%");
 
   // Check result
-  if (angle > 1.64 && angle < 1.84) {
+  if (
+    angle > globalParameters.resultValue - globalParameters.resultDelta &&
+    angle < globalParameters.resultValue + globalParameters.resultDelta
+  ) {
     resultState = true;
     resultBtn.disabled = false;
   } else {

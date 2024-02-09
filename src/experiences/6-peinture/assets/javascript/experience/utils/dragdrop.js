@@ -48,8 +48,6 @@ function handleDragInteraction(
   initialX = dragElementRect.left; //position X selon le navigateur
   initialY = dragElementRect.top; //position Y selon le navigateur
 
-  console.log(dragElementId + ":" + initialX + "," + initialY);
-
   let dragElWidth = dragElement.offsetWidth;
   let dragElheight = dragElement.offsetHeight;
 
@@ -69,9 +67,8 @@ function handleDragInteraction(
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + realInitialX - dragElWidth / 2;
-    const currentY = touch.clientY - initialY + realInitialY - dragElheight / 2;
-    console.log(touch.clientX + "," + touch.clientY);
+    const currentX = touch.clientX - initialX + realInitialX - (dragElWidth / 2);
+    const currentY = touch.clientY - initialY + realInitialY - (dragElheight / 2);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -100,8 +97,6 @@ function handleDragInteraction(
               howManyDone++;
               howManyDrags++;
             }
-
-            console.log(dialog);
 
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
@@ -157,7 +152,7 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        numberUpdater.innerHTML = howManyDrags;
+        //numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 
@@ -165,7 +160,9 @@ function handleDragInteraction(
           //win the game
 
           if (current_step >= current_step_win) {
-            document.body.classList.add("has-ending-opened");
+            setTimeout(() => {
+              document.body.classList.add("has-ending-opened");
+            }, 2000);
           } else {
             step_success = true;
             setTimeout(() => {

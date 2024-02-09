@@ -50,7 +50,7 @@
     },
     {
       "id": "5",
-      "name": "Ananas",
+      "name": "L'ananas",
       "category": "food",
       "description": "Il illustre <b>la perfection</b> car il est beau, bon et odorant.",
       "dialog": "Attention ! Ne vous faites pas avoir par sa beauté, il n’a pas sa place ici !",
@@ -190,7 +190,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffNope"
     },
     {
       "id": "17",
@@ -220,7 +220,7 @@
       "id": "19",
       "name": "La chenille",
       "category": "animals",
-      "description": "Elle représente la fragilité de la vie.",
+      "description": "Elle représente la <b>fragilité de la vie</b>.",
       "dialog": "Chenille crois pas ! Vous êtes formidable !",
       "wrong_step_dialog": "",
       "recipe_text": "La fragilité de la vie",

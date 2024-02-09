@@ -15,7 +15,64 @@ html,
 body {
   overflow: hidden;
 }
-.title-component {
+
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    99.91% 99.91% at 50% 50%,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.01) 6.67%,
+    rgba(0, 0, 0, 0.03) 13.33%,
+    rgba(0, 0, 0, 0.06) 20%,
+    rgba(0, 0, 0, 0.11) 26.67%,
+    rgba(0, 0, 0, 0.17) 33.33%,
+    rgba(0, 0, 0, 0.25) 40%,
+    rgba(0, 0, 0, 0.33) 46.67%,
+    rgba(0, 0, 0, 0.42) 53.33%,
+    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.58) 66.67%,
+    rgba(0, 0, 0, 0.64) 73.33%,
+    rgba(0, 0, 0, 0.69) 80%,
+    rgba(0, 0, 0, 0.72) 86.67%,
+    rgba(0, 0, 0, 0.74) 93.33%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2a2a2a;
+  z-index: 100;
+  transition: opacity 0.6s ease-in-out;
+  transition-delay: 200ms;
+}
+
+.loader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-icon {
+  width: 172px;
+  height: 172px;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.poi-title-component {
+  pointer-events: none;
   position: absolute;
   top: 6rem;
   left: 6rem;
@@ -33,6 +90,7 @@ body {
 }
 
 .main-title {
+  pointer-events: none;
   width: calc(100% / 2);
   color: white;
   font-size: 4rem;
@@ -88,7 +146,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 7;
+  z-index: 11;
 }
 
 .left-arrow {
@@ -232,6 +290,7 @@ body {
 
 .end-menu-buttons {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
 }
@@ -241,7 +300,7 @@ body {
   color: black;
 }
 
-.interest-component {
+.point-interest-component {
   position: absolute;
   bottom: 50%;
   transform: translate(0%, 50%);
@@ -257,7 +316,7 @@ body {
   pointer-events: none;
 }
 
-.interest-component img {
+.point-interest-component img {
   position: absolute;
   top: -177px;
   left: -0.15vw;
@@ -270,7 +329,14 @@ body {
   pointer-events: none;
 }
 
-#text-component {
+#poi-title-component {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 4rem;
+  pointer-events: none;
+}
+
+#poi-text-component {
   display: flex;
   flex-direction: column;
   gap: 1vh;
@@ -282,6 +348,7 @@ body {
   position: absolute;
   bottom: 24vh;
   left: 2vw;
+  z-index: 11;
 }
 
 #container-subTitle {
@@ -305,11 +372,11 @@ body {
     font-size: 1rem;
   }
 
-  #text-component {
+  #poi-text-component {
     font-size: 1rem;
   }
 
-  #title-component {
+  #poi-title-component {
     font-size: 2rem;
   }
 }

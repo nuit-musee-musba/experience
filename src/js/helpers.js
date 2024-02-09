@@ -5,8 +5,10 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import * as THREE from "three";
 
 import data from "./data";
+window.experience = window.experience || {};
+window.experience.meshScale = 0.025;
 
-const meshScale = 0.025;
+const meshScale = window.experience.meshScale;
 
 // World creation
 export async function createIsland(i, count, color) {
@@ -40,21 +42,6 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
         gltf.scene.position.set(...position);
         gltf.scene.rotation.set(...rotation);
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
-        // If you need to perform additional actions after loading, resolve the promise
-        // Traverse through the scene to update materials
-        // gltf.scene.traverse((child) => {
-        //   if (child.isMesh) {
-        //     // Check if the material has a color property (for Lambert or Phong materials)
-        //     if (child.material.color) {
-        //       child.material.color.set(color);
-        //     }
-        //     // Check if the material has an emissive property (for Standard materials)
-        //     if (child.material.emissive) {
-        //       child.material.emissive.set(color);
-        //     }
-        //     // You may need to add more checks based on the material type used in your model
-        //   }
-        // });
         resolve(gltf);
       },
       undefined,

@@ -21,6 +21,14 @@ body {
 }
 
 #app {
+  background: rgb(152, 152, 152);
+  background: radial-gradient(
+    circle,
+    rgba(152, 152, 152, 1) 0%,
+    rgba(200, 200, 200, 1) 34%,
+    rgba(228, 228, 228, 1) 60%,
+    rgba(230, 230, 230, 1) 100%
+  );
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -141,10 +149,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  gap: 2rem;
-  pointer-events: all;
-  margin-bottom: 5rem;
+  gap: 4rem;
 }
 
 .buttonContainer {
@@ -265,8 +270,7 @@ body {
 .experience-infos {
   width: 750px;
   position: absolute;
-  right: 20rem;
-  bottom: 10rem;
+  left: 5rem;
   flex-direction: column;
   justify-content: left;
   z-index: 3;
@@ -274,4 +278,24 @@ body {
 
 .transition-opacity {
   transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
+}
+
+.transition-move {
+  transition: transform 1s ease; /* Adjust the duration and timing function as needed */
+  transform: translateX(-100%);
+}
+
+.scroll-infos {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  top: 5rem;
+}
+
+.absolute-bottom {
+  position: absolute;
+  bottom: 5rem;
+  z-index: 100;
 }
