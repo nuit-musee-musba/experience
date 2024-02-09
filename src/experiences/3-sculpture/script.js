@@ -81,7 +81,6 @@ let workshop;
 let socle;
 
 let quantity;
-const gui = new GUI();
 
 
 const light = new THREE.AmbientLight(0x404040);
