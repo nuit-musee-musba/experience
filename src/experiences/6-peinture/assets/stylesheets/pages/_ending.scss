@@ -16,6 +16,9 @@
 .page__ending {
     background-image: url("/6-peinture/images/scenery/ending/background-2.svg");
     background-size: cover;
+    main {
+        @include blur-filter;
+    }
     .chef-illustration {
         > img {
             bottom: -2%;
