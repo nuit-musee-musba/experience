@@ -1,4 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -14,6 +15,9 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
+ambiantSound("/global/sounds/g3.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 const sizes = {
   width: window.innerWidth,
@@ -333,13 +337,15 @@ function stepsFunction() {
         const nextText4 = document.getElementById("nextText4");
 
         nextText3.addEventListener("click", function () {
-          changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
-          isNextText3 = true;
+          steps1InRefiningPart.classList.remove("show");
+          steps2InRefiningPart.classList.add("show");
 
         });
 
         nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
+          isNextText3 = true;
+
         });
 
         if (statueV3.children.length <= 6) {
@@ -372,7 +378,9 @@ function stepsFunction() {
         const nextText5 = document.getElementById("nextText5");
         const nextText6 = document.getElementById("nextText6");
         const nextText7 = document.getElementById("nextText7");
-        const polishControler = document.getElementById("polishControler");
+        const polishText = document.getElementById("polishText");
+
+
 
         nextText5.addEventListener("click", function () {
           changeTextInSteps(steps1InPolishingPart, steps2InPolishingPart);
@@ -380,14 +388,14 @@ function stepsFunction() {
 
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
-          polishControler.classList.add("show")
+          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
         });
 
-        if (quantity <= 0.8) {
-          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
+        if (quantity <= 0.5) {
+          polishText.innerHTML = "Nous-y sommes presque, mais ce n’est pas encore assez poli..."
         }
         if (quantity <= 0) {
-          changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
+          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
         }
 
         nextText7.addEventListener("click", function () {
