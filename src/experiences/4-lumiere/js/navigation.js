@@ -136,17 +136,17 @@ loadingManager.onError = (error) => {
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const firstPaintingTexture = textureLoader.load(
-  "/4-lumiere/first-painting/first-painting-color.jpg"
+  "/4-lumiere/first-painting/first-painting-color.webp"
 );
 firstPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 
 const secondPaintingTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-3.png"
+  "/4-lumiere/second-painting/second-painting-plan-3.webp"
 );
 secondPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 
 const thirdPaintingTexture = textureLoader.load(
-  "/4-lumiere/third-painting/third-painting-plan-3.png"
+  "/4-lumiere/third-painting/third-painting-plan-3.webp"
 );
 thirdPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 
