@@ -24,6 +24,7 @@ body {
   left: 6rem;
   display: flex;
   gap: 3rem;
+  z-index: 20;
 }
 .animation {
   position: absolute;
