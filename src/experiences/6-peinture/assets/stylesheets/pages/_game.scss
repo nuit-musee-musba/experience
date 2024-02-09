@@ -1,6 +1,9 @@
 .page__game {
   background-image: url("/6-peinture/images/scenery/background.svg");
   background-size: cover;
+  .game-chef__speech {
+    max-width: 1400px;
+  }
 }
 
 .game-top {
@@ -86,4 +89,46 @@
 
 .shepherd-button {
   pointer-events: all;
+}
+
+@keyframes scintillation {
+  0%,
+  100% {
+    opacity: 1;
+    color: black;
+  }
+  50% {
+    opacity: 1;
+    color: $food;
+  }
+}
+
+#recipe-1 .item-stuff {
+  //   animation: scintillation 1s infinite;
+}
+
+.scintillating-text {
+  animation: scintillation 1s infinite;
+}
+
+.shepherd-button.btn-small-primary {
+  height: 7.5rem !important;
+  padding: 2rem 4rem !important;
+  background-color: var(--accent) !important;
+  color: var(--white) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  gap: 1rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 21px !important;
+  font-family: Montserrat !important;
+  font-weight: 600 !important;
+  font-size: 56px !important;
+  border: var(--stroke-width) solid var(--accent) !important;
+}
+
+.shepherd-button:not(:disabled):hover {
+  background: white !important;
+  color: black !important;
 }

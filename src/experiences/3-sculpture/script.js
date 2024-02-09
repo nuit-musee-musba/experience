@@ -67,6 +67,8 @@ const textureLoader = new THREE.TextureLoader();
 
 const gltfLoader = new GLTFLoader();
 
+
+
 //Camera
 
 const camera = new THREE.PerspectiveCamera(
@@ -101,7 +103,6 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
 
-      console.log(workshop.children[i].intensity);
       workshop.children[i].intensity = 113;
 
     } else if (workshop.children[i].name === "LSpot") {
@@ -126,6 +127,9 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
 
     } else if (workshop.children[i].name === "Socle") {
       socle = workshop.children[i];
+    } else if (workshop.children[i].name === "Point") {
+
+      workshop.children[i].intensity = 15;
     }
   }
   scene.add(workshop);
@@ -192,6 +196,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
     polishRange.addEventListener("input", (event) => {
       quantity = 1 - parseFloat(event.target.value);
       statueV4.material.opacity = quantity;
+      stepsFunction();
     });
   });
 });
@@ -272,7 +277,9 @@ function stepsFunction() {
 
         nextText.addEventListener('click', function () {
           changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
-          isNextText1 = true;
+          setTimeout(() => {
+            isNextText1 = true;
+          }, 10000);
         });
 
         if (statueV1.children.length <= 4) {
@@ -301,7 +308,9 @@ function stepsFunction() {
         const nextText2 = document.getElementById("nextText2");
         nextText2.addEventListener("click", function () {
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
-          isNextText2 = true;
+          setTimeout(() => {
+            isNextText2 = true;
+          }, 10000);
 
         });
 
@@ -344,7 +353,9 @@ function stepsFunction() {
 
         nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
-          isNextText3 = true;
+          setTimeout(() => {
+            isNextText3 = true;
+          }, 10000);
 
         });
 
@@ -434,12 +445,17 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+
+
 
 let composer = new EffectComposer(renderer);
 
+
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
+
+
 
 let outlinePass = new OutlinePass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -496,7 +512,7 @@ const tick = () => {
           }
         }
 
-        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        outlinePass.edgeStrength = Math.sin(elapsedTime) * params.edgeStrength;
         break;
       case 2:
         if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText2) {
@@ -505,7 +521,7 @@ const tick = () => {
           }
         }
 
-        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        outlinePass.edgeStrength = Math.sin(elapsedTime) * params.edgeStrength;
         break;
       case 3:
         if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText3) {
@@ -514,13 +530,10 @@ const tick = () => {
           }
         }
 
-        outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
+        outlinePass.edgeStrength = Math.sin(elapsedTime) * params.edgeStrength;
         break;
-
     }
-
   }
-
 
 
   if (socle) {
@@ -530,9 +543,11 @@ const tick = () => {
   touchBefore = currentTouch;
 
   // Render
+
+
+  renderer.render(scene, camera);
   composer.render(scene, camera);
 
-  //renderer.render(scene, camera);
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);

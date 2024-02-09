@@ -58,7 +58,6 @@ const popinShow = (targetPopin) => {
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
   popinShow(popin);
 });
 
@@ -122,27 +121,32 @@ const textureLoader = new THREE.TextureLoader(loadingManager);
 
 // Second painting
 const firstPlanTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-1-2.png"
+  "/4-lumiere/second-painting/second-painting-plan-1.webp"
 );
 firstPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const secondPlanTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-2.png"
+  "/4-lumiere/second-painting/second-painting-plan-2.webp"
 );
 secondPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const thirdPlanTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-3.png"
+  "/4-lumiere/second-painting/second-painting-plan-3.webp"
 );
 thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const thirdPlanNormalTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-painting-plan-3-normal.png"
+  "/4-lumiere/second-painting/second-painting-plan-3-normal.webp"
+);
+
+// Wallpaper
+const wallpaperHeightTexture = textureLoader.load(
+  "/4-lumiere/second-painting/second-painting-background.webp"
 );
 
 // Light object
 const lightObjectTexture = textureLoader.load(
-  "/4-lumiere/second-painting/second-light-object.png"
+  "/4-lumiere/second-painting/second-light-object.webp"
 );
 
 /**
@@ -157,6 +161,17 @@ gltfLoader.setDRACOLoader(dracoLoader);
 /**
  * Scene objects
  */
+// Wallpaper
+const wallpaperGeometry = new THREE.PlaneGeometry(47.2, 28, 1, 1);
+const wallpaperMaterial = new THREE.MeshStandardMaterial({
+  color: "#242424",
+  metalnessMap: wallpaperHeightTexture,
+  metalness: 1,
+  roughness: 0,
+});
+const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
+scene.add(wallpaper);
+wallpaper.position.z = -2;
 
 // Second painting
 const planeGeometry = new THREE.PlaneGeometry(9.23, 4, 150, 100);
@@ -243,16 +258,16 @@ const lightObject = new THREE.Mesh(lightObjectGeometry, lightObjectMaterial);
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(
-  0xffffff, // color
-  1 // intensity
+  0xCAEFFF, // color
+  1.5 // intensity
 );
 scene.add(ambientLight);
 
 // Second painting point light
 const pointLight = new THREE.PointLight(
-  "#f09647", // color
-  25, // intensity
-  50, // distance
+  "#E4A56D", // color
+  20, // intensity
+  70, // distance
   1 // decay
 );
 pointLight.position.x = globalParameters.lightRadius;

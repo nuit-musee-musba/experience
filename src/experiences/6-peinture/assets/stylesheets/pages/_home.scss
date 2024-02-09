@@ -12,5 +12,10 @@
   }
   .dialog {
     position: relative;
+    ul {
+      li {
+        font-weight: bold;
+      }
+    }
   }
 }

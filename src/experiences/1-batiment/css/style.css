@@ -111,25 +111,12 @@ body {
 .title-line {
   width: 5px;
   background-color: white;
-  animation: slide-down 2s 4s cubic-bezier(0.2, 0, 0.25, 1) forwards;
-}
-
-@keyframes slide-down {
-  0% {
-    transform: translateY(-200%);
-  }
-
-  100% {
-    transform: translateY(0%);
-  }
 }
 
 #date-title {
   color: white;
   font-size: 8rem;
   font-weight: 100;
-  transition: opacity 0.6s ease-in-out;
-  transition-delay: 200ms;
 }
 .date-title-hidden {
   color: white;
@@ -146,23 +133,6 @@ body {
   font-size: 4rem;
   font-weight: 100;
   overflow: hidden;
-  animation: slide2 2s 5s cubic-bezier(0.2, 0, 0.25, 1) forwards;
-}
-
-@keyframes slide2 {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  70% {
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
 }
 
 .parameter-buttons {
@@ -390,10 +360,12 @@ body {
   gap: 20px;
 }
 
-#restart-button button {
+#restart-button {
   border-color: black;
   color: black;
   cursor: pointer;
+
+  --accent: #000000;
 }
 
 .point-interest-component {
@@ -437,6 +409,27 @@ body {
   gap: 1vh;
   font-size: 2.5rem;
   font-weight: 100;
+}
+
+.image-point-interest-component {
+  position: absolute;
+  bottom: 65%;
+  transform: translate(0%, 50%);
+  left: 0;
+  width: 25vw;
+  display: none;
+  flex-direction: column;
+  gap: 2vh;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 2vh 3vw 4vh 2vw;
+  border-left: 5px solid white;
+  pointer-events: none;
+  z-index: 11;
+}
+
+#image-poi {
+  width: 100%;
 }
 
 .button-interest {
