@@ -145,6 +145,62 @@ thirdPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 /**
  * Object
  */
+
+// Geometry
+function generateParticles() {
+  const particlesGeometry = new THREE.BufferGeometry()
+  const count = 70
+
+  const positions = new Float32Array(count * 3) // Multiply by 3 because each position is composed of 3 values (x, y, z)
+
+  for (let i = 0; i < count * 3; i++) // Multiply by 3 for same reason
+  {
+    positions[i] = (Math.random() - 0.5) * 10 // Math.random() - 0.5 to have a random value between -0.5 and +0.5
+  }
+
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)) // Create the Three.js BufferAttribute and specify that each information is composed of 3 values
+
+  // Material
+  const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.105,
+    sizeAttenuation: true
+  })
+
+  // color 
+  particlesMaterial.color = new THREE.Color('#FFF7E2')
+
+  // Texture
+  const textureLoader = new THREE.TextureLoader()
+  const particleTexture = textureLoader.load('/4-lumiere/particles/particle.png')
+  particlesMaterial.map = particleTexture
+  particlesMaterial.alphaTest = 0.001
+  particlesMaterial.depthTest = false
+  particlesMaterial.depthWrite = false
+  particlesMaterial.blending = THREE.AdditiveBlending
+
+  // Points
+  return new THREE.Points(particlesGeometry, particlesMaterial)
+
+}
+
+// GENERATE 4 groups of particles
+
+const particles1 = generateParticles();
+particles1.position.z = 9
+scene.add(particles1)
+
+const particles2 = generateParticles();
+particles2.position.z = 9
+scene.add(particles2)
+
+const particles3 = generateParticles();
+particles3.position.z = 9
+scene.add(particles3)
+
+const particles4 = generateParticles();
+particles4.position.z = 9
+scene.add(particles4)
+
 // First painting
 const firstPaintingGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
 const firstPaintingMaterial = new THREE.MeshStandardMaterial({
@@ -407,6 +463,7 @@ scene.add(ambientLight);
  * Animate
  */
 let currentIntersect = null;
+const clock = new THREE.Clock()
 
 const tick = () => {
   // Update paintings positions based on ellipse rotation
@@ -429,11 +486,35 @@ const tick = () => {
     Math.cos(angle - (2 * Math.PI) / 3) * radius
   );
 
-  // Render
-  renderer.render(scene, camera);
+  //Particles move
+  const elapsedTime = clock.getElapsedTime()
 
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
+  // __Update particles__
+  particles1.position.x = Math.cos(elapsedTime / 2) * 0.05
+  particles1.position.y = Math.sin(elapsedTime / 2) * 0.05
+  particles1.position.z = Math.sin(elapsedTime / 2) * 0.05 + 9
+
+  particles2.position.x = Math.cos(elapsedTime / 2) * -0.05
+  particles2.position.y = Math.sin(elapsedTime / 2) * -0.05
+  particles2.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
+
+  particles3.position.x = Math.sin(elapsedTime / 2) * 0.05
+  particles3.position.y = Math.cos(elapsedTime / 2) * -0.05
+  particles3.position.z = Math.cos(elapsedTime / 2) * 0.05 + 9
+
+  particles4.position.x = Math.sin(elapsedTime / 2) * -0.05
+  particles4.position.y = Math.cos(elapsedTime / 2) * 0.05
+  particles4.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
+
+  // __Update controls__
+  // controls.update()
+
+  // __Render__
+  renderer.render(scene, camera)
+
+  // __Call tick again on the next frame__
+  window.requestAnimationFrame(tick)
+
 };
 
 tick();
