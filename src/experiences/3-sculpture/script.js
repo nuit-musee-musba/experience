@@ -116,7 +116,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
       workshop.children[i].penumbra = 1;
       workshop.children[i].decay = 2;
 
-
+      workshop.children[i].position.set(2, 0.5, -2.5);
 
 
     } else if (workshop.children[i].name === "Socle") {
