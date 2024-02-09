@@ -14,14 +14,14 @@ window.experience.autoRotate = true;
 // Constants
 const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
-const infoButton = document.getElementById("startButton");
+const startButton = document.getElementById("startButton");
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box userData
   // TODO: make random
   frontTitle.innerHTML = data[0].title;
   infoDescription.innerHTML = data[0].description;
-  infoButton.href = data[0].path;
+  startButton.href = data[0].path;
 });
 
 // Create scene
@@ -51,8 +51,8 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 1);
-light.position.set(0, 0.5, -0.85);
+const light = new THREE.SpotLight(0xffffff, 1, 1, Math.PI);
+light.position.set(0, 0.5, -0.6);
 scene.add(light);
 
 const axesHelper = new THREE.AxesHelper(10);
