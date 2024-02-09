@@ -126,7 +126,7 @@ body {
 }
 
 .activated {
-  left: 15% !important;
+  left: 560px !important;
   transition: left 2s ease; /* Add smooth transition */
 }
 
@@ -153,6 +153,15 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+.inZoomDiv {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: all;
 }
 #infoText {
   line-height: 200%;
@@ -277,18 +286,15 @@ body {
 }
 
 #backButton {
-  position: absolute;
-  bottom: 5rem;
-  left: 15%;
-  cursor: pointer;
-  pointer-events: all;
-  z-index: 2;
+  position: relative;
+  height: 10rem;
+  width: 10rem;
 }
 
 .experience-infos {
-  width: 900px;
+  width: 1150px;
   position: absolute;
-  left: 15% !important;
+  left: 330px !important;
   flex-direction: column;
   justify-content: space-around;
   z-index: 3;

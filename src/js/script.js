@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Create scene
 const scene = new THREE.Scene();
 
+
 // Target canvas
 var canvas = document.getElementById("webgl");
 window.experience.canvas = canvas;
@@ -113,6 +114,9 @@ scene.add(carousel);
 
 window.experience.carousel = carousel;
 
+// We set this here once all promises are resolved
+window.experience.scene = scene;
+
 // Handle window resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -126,6 +130,7 @@ canvas.addEventListener("wheel", (event) => {
   const scrollPosition = event.deltaX % window.innerWidth; // Use deltaX for horizontal scrolling
   carousel.rotation.y += (-scrollPosition * Math.PI) / window.innerWidth;
 });
+
 
 // Render loop
 const animate = () => {

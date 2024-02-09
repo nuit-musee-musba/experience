@@ -30,6 +30,9 @@ showButton.addEventListener("click", () => {
   if (!window.experience.isRotating) {
     // Stop aurto rotation when the user clicks the button
     window.experience.autoRotate = false;
+    window.experience.canRotate = false;
+    window.experience.clickedOnExperience = false;
+
 
     canvas.classList.add("activated");
     console.log(canvas.classList)
@@ -43,7 +46,7 @@ showButton.addEventListener("click", () => {
     } else if (Math.abs(currentRotation) > CIRCLE - CIRCLE / PARTS / 2) {
       targetRotation = targetRotation + CIRCLE;
     }
-    function animate() {
+    window.experience.animate = function animate() {
       // This is a positive number always based on the current index
 
       // Check if animation is complete
@@ -109,8 +112,7 @@ showButton.addEventListener("click", () => {
       }
     }
 
-    animate();
-
+    window.experience.animate();
     // Loop through all elements with the class 'first-scene' and set display to 'none'
     firstSceneElements.forEach((element) => {
       element.classList.add("transition-opacity");
@@ -156,6 +158,8 @@ backButton.addEventListener("click", async () => {
   };
 
   await executeAnimation();
+  window.experience.onZoom = false;
+
 
   const targetScale = MESHSCALE;
   canvas.classList.remove("activated");
@@ -199,6 +203,7 @@ backButton.addEventListener("click", async () => {
     } else {
       window.experience.canRotate = true;
       window.experience.autoRotate = true;
+
     }
   }
 
@@ -244,6 +249,134 @@ const tik = () => {
   } else {
     showButton.style.opacity = "1";
   }
+  if (window.experience.clickedOnExperience) {
+    window.experience.onZoom = true;
+
+    console.log("Experience  clicked")
+    if (!window.experience.isRotating) {
+      // Stop aurto rotation when the user clicks the button
+      window.experience.autoRotate = false;
+      window.experience.canRotate = false;
+
+      canvas.classList.add("activated");
+      console.log(canvas.classList)
+
+      // set current rotation
+      let currentRotation = window.experience.rotation;
+
+
+      let targetRotation = window.experience.clickedIndex * (CIRCLE / PARTS);
+      // Adjust the target rotation based on the real current rotation
+      if (currentRotation < -(CIRCLE / PARTS / 2)) {
+        targetRotation = targetRotation - CIRCLE;
+      } else if (Math.abs(currentRotation) > CIRCLE - CIRCLE / PARTS / 2) {
+        targetRotation = targetRotation + CIRCLE;
+      }
+      window.experience.animate = function animate() {
+        // This is a positive number always based on the current index
+
+        // Check if animation is complete
+        window.experience.rotation +=
+          (targetRotation - window.experience.rotation) *
+          FACTOR *
+          Math.cos(FACTOR);
+
+        rotationComplete =
+          Math.abs(targetRotation - window.experience.rotation) < 0.001;
+
+        window.experience.currentIsland.position.y += POSITIONFACTOR; // as the camera is at negative z
+
+        if (window.experience.currentIsland.position.y >= TARGETYPOSITION) {
+          window.experience.currentIsland.position.y = TARGETYPOSITION;
+          positionYComplete = true;
+        } else {
+          positionYComplete =
+            Math.abs(
+              TARGETYPOSITION - window.experience.currentIsland.position.y
+            ) < 0.001;
+        }
+
+        // // Set the current scale
+
+        let currentScale = window.experience.currentIsland.scale.x;
+        let newScale = currentScale + SCALEFACTOR;
+
+        window.experience.currentIsland.scale.set(newScale, newScale, newScale);
+        if (newScale > TARGETSCALE) {
+          window.experience.currentIsland.scale.x = TARGETSCALE;
+          scaleComplete = true;
+        } else {
+          scaleComplete =
+            Math.abs(TARGETSCALE - window.experience.currentIsland.scale.x) <
+            0.001;
+        }
+
+        // // Move other islands to the back
+        window.experience.otherIslands.forEach((island) => {
+          island.position.y -= POSITIONFACTOR;
+          // Stop the animation if the position is reached
+          if (island.position.y <= POSITIONY) {
+            island.position.y = island.position.y;
+            otherPositionYComplete = true;
+          } else {
+            otherPositionYComplete =
+              Math.abs(island.position.y - POSITIONY) < 0.001;
+          }
+        });
+
+        if (
+          !rotationComplete ||
+          !scaleComplete ||
+          !positionYComplete ||
+          !otherPositionYComplete
+        ) {
+          window.experience.isRotating = true;
+          requestAnimationFrame(animate); // Continue the animation if not finished
+        } else {
+          window.experience.isRotating = false;
+          window.experience.canRotate = false;
+        }
+      }
+
+      window.experience.animate();
+
+      console.log("FINISHED ANIMATION FROM CLICKED EXPERIENCE")
+
+      console.log("firstSceneElements", firstSceneElements)
+      console.log("secondSceneElements", secondSceneElements)
+      // Loop through all elements with the class 'first-scene' and set display to 'none'
+      firstSceneElements.forEach((element) => {
+        element.classList.add("transition-opacity");
+        element.style.opacity = "0";
+      });
+      firstSceneElements.forEach((element) => {
+        element.style.display = "none";
+      });
+
+      secondSceneElements.forEach((element) => {
+        element.classList.add("transition-opacity");
+        element.style.display = "flex";
+        element.style.opacity = "0";
+      });
+
+      setTimeout(() => {
+        secondSceneElements.forEach((element) => {
+          element.classList.add("transition-opacity");
+          element.style.opacity = "1";
+        });
+      }, 300);
+
+      firstSceneElements.forEach((element) => {
+        element.classList.remove("transition-opacity");
+      });
+      secondSceneElements.forEach((element) => {
+        element.classList.remove("transition-opacity");
+      });
+    }
+    // Reset the clickedOnExperience flag
+    window.experience.clickedOnExperience = false;
+  }
+
 };
 
 tik();
