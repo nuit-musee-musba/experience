@@ -129,6 +129,11 @@ body {
   left: 15% !important;
   transition: left 2s ease; /* Add smooth transition */
 }
+
+.deactivated {
+  left: inherit;
+  transition: left 2s ease; /* Add smooth transition */
+}
 #infoTitle,
 #frontTitle {
   font-size: 110px;
