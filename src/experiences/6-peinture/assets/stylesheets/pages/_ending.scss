@@ -16,11 +16,28 @@
 .page__ending {
     background-image: url("/6-peinture/images/scenery/ending/background-2.svg");
     background-size: cover;
+    main {
+        @include blur-filter;
+    }
     .chef-illustration {
-        bottom: -2%;
-        position: absolute;
-        right: 2%;
-        z-index: 1;
+        > img {
+            bottom: -2%;
+            position: absolute;
+            right: 2%;
+            z-index: 1;
+        }
+        .illustration-end {
+            display: none;
+            position: absolute;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            width: 100%;
+            height: 100vh;
+            padding-left: 14%;
+            img:first-of-type {
+                margin-right: 5%;
+            }
+        }
     }
     .popup-animation {
         background-image: url("/6-peinture/images/scenery/ending/background-4.svg");
@@ -39,6 +56,25 @@
         position: relative;
         .btn-prev {
             display: none !important;
+        }
+        .dialog-content {
+            width: 45%;
+        }
+    }
+    &.last-scene {
+        .chef-illustration {
+            > img {
+                display: none;
+            }
+            .illustration-end {
+                display: flex;
+            }
+        }
+        .dialog {
+            justify-content: flex-start;
+            padding-bottom: 3%;
+            align-items: flex-end;
+            padding-right: 6.5%;
         }
     }
 }

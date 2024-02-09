@@ -44,18 +44,18 @@ scene.add(sunLight);
 
 // gui.add(sunLight, "intensity").min(0).max(10).step(0.001).name("Sun");
 
-// sunLight.position.set(63.9, 22.2, 100);
-// sunLight.shadow.camera.left = -26;
-// sunLight.shadow.camera.right = 45;
-// sunLight.shadow.camera.top = 13;
-// sunLight.shadow.camera.bottom = -3;
-// sunLight.intensity = 5.5;
-// sunLight.castShadow = true;
-// sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
-// sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
-// sunLight.shadow.radius = 4.2;
-// sunLight.shadow.blurSamples = 25;
-// sunLight.shadow.bias = -0.0002;
+sunLight.position.set(63.9, 22.2, 100);
+sunLight.shadow.camera.left = -26;
+sunLight.shadow.camera.right = 45;
+sunLight.shadow.camera.top = 13;
+sunLight.shadow.camera.bottom = -3;
+sunLight.intensity = 5.5;
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
+sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
+sunLight.shadow.radius = 4.2;
+sunLight.shadow.blurSamples = 25;
+sunLight.shadow.bias = -0.0002;
 
 // GUI for Light Controls
 // const lightControls = gui.addFolder("Light Controls");
@@ -252,7 +252,7 @@ const poi4 = [];
 for (let i = 0; i < period.length; i++) {
   for (let j = 0; j < period[i].poiPosition.length; j++) {
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load("./assets/icons/poi.png");
+    const texture = textureLoader.load("/1-batiment/assets/icons/poi.png");
 
     const material = new THREE.MeshBasicMaterial({
       map: texture,
