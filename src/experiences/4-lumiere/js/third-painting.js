@@ -126,23 +126,28 @@ const textureLoader = new THREE.TextureLoader(loadingManager);
 
 // Third painting
 const firstPlanTexture = textureLoader.load(
-  "/4-lumiere/third-painting/third-painting-plan-1.png"
+  "/4-lumiere/third-painting/third-painting-plan-1.webp"
 );
 firstPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const secondPlanTexture = textureLoader.load(
-  "/4-lumiere/third-painting/third-painting-plan-2.png"
+  "/4-lumiere/third-painting/third-painting-plan-2.webp"
 );
 secondPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
 const thirdPlanTexture = textureLoader.load(
-  "/4-lumiere/third-painting/third-painting-plan-3.png"
+  "/4-lumiere/third-painting/third-painting-plan-3.webp"
 );
 thirdPlanTexture.colorSpace = THREE.SRGBColorSpace;
 
+// Wallpaper
+const wallpaperHeightTexture = textureLoader.load(
+  "/4-lumiere/third-painting/third-painting-background.webp"
+);
+
 // Light object
 const lightObjectTexture = textureLoader.load(
-  "/4-lumiere/third-painting/third-light-object.png"
+  "/4-lumiere/third-painting/third-light-object.webp"
 );
 
 /**
@@ -157,6 +162,17 @@ gltfLoader.setDRACOLoader(dracoLoader);
 /**
  * Scene objects
  */
+// Wallpaper
+const wallpaperGeometry = new THREE.PlaneGeometry(47.2, 28, 1, 1);
+const wallpaperMaterial = new THREE.MeshStandardMaterial({
+  color: "#242424",
+  metalnessMap: wallpaperHeightTexture,
+  metalness: 1,
+  roughness: 0,
+});
+const wallpaper = new THREE.Mesh(wallpaperGeometry, wallpaperMaterial);
+scene.add(wallpaper);
+wallpaper.position.z = -2;
 
 // Third painting
 const planeGeometry = new THREE.PlaneGeometry(5.64, 4, 150, 100);
