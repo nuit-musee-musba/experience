@@ -112,17 +112,17 @@ export const periods = [
 
 export const onboardingContent = [
   {
-    subTitle: "Onboarding 1 Text",
+    subTitle: "Bienvenue aux musées des beaux-arts de Bordeaux, connaissez-vous l’histoire de ce bâtiment ?",
     mainTitle: "Bienvenue dans l’histoire du musée",
   },
   {
     title: "2024",
-    subTitle: "Onboarding 2 Text",
+    subTitle: "Cette expérience vous permet de naviguer à travers les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
   {
     title: "1801",
-    subTitle: "Onboarding 3 Text",
+    subTitle: "Pour cela, faisons un saut dans le passé… je vous prie de bien vouloir lancer l’expérience",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
 ];
