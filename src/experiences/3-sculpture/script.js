@@ -11,6 +11,7 @@ import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
 import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
 import PolishingPart from "./component/5-PolishingPart/PolishingPart";
+import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
 
@@ -86,7 +87,7 @@ gltfLoader.load("/3-sculpture/Mozart_sceneV3.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0; i < workshop.children.length; i++) {
+  for (let i = 0;i < workshop.children.length;i++) {
     if (workshop.children[i].name === "RSpot") {
       workshop.children[i].intensity = 20;
     } else if (workshop.children[i].name === "LSpot") {
@@ -198,6 +199,10 @@ let touchBefore = 0;
 let currentTouch = 0;
 
 const mouse = new THREE.Vector2();
+window.addEventListener("touchstart", (event) => {
+  currentTouch = event.touches[0].clientX / 100;
+  touchBefore = currentTouch;
+});
 
 window.addEventListener("touchmove", (event) => {
   // } else {
@@ -335,6 +340,40 @@ function stepsFunction() {
       break;
     case 4:
       if (statueV4) {
+        const intersects = raycaster.intersectObject(statueV4);
+        const nextText5 = document.getElementById("nextText5");
+        const nextText6 = document.getElementById("nextText6");
+
+        nextText5.addEventListener("touchstart", function () {
+          changeTextInSteps(steps1InPolishingPart, steps2InRPolishingPart);
+        });
+
+        nextText6.addEventListener("touchstart", function () {
+          changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
+        });
+
+        if (statueV4.children.length <= 6) {
+          changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
+        }
+        if (statueV4.children.length <= 4) {
+          changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
+        }
+
+        if (intersects.length > 0 && raycasterActive) {
+          const clickedBlock = intersects[0].object;
+          statueV4.remove(clickedBlock);
+
+          if (statueV4.children.length === 0) {
+            mouse.x = -1;
+            mouse.y = -1;
+            mouse.y = -1;
+            steps++;
+            raycasterActive = false;
+
+            OutroPart();
+            stepsFunction();
+          }
+        }
       }
   }
 }
