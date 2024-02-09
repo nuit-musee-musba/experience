@@ -90,3 +90,23 @@
 .shepherd-button {
   pointer-events: all;
 }
+
+@keyframes scintillation {
+  0%,
+  100% {
+    opacity: 1;
+    color: black;
+  }
+  50% {
+    opacity: 1;
+    color: $food;
+  }
+}
+
+#recipe-1 .item-stuff {
+  //   animation: scintillation 1s infinite;
+}
+
+.scintillating-text {
+  animation: scintillation 1s infinite;
+}

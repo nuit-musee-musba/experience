@@ -4,7 +4,7 @@
       "id": "1",
       "name": "Les fruits abîmés",
       "category": "food",
-      "description": "Ils évoquent la <b>corruption du corps</b>.",
+      "description": "Ils évoquent la <b id='first-desc'>corruption du corps</b>.",
       "dialog": "C’est tout à fait jus(te) !",
       "wrong_step_dialog": "",
       "recipe_text": "La corruption du corps",
