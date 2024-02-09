@@ -9,6 +9,7 @@ class BookPage {
     this.bookContainer = document.querySelector(".book");
     this.bookTitle = this.bookContainer.querySelector(".book-title");
     this.bookText = this.bookContainer.querySelector(".book-description");
+    this.hasSelectedItem = false;
 
     this.selectedItem = items.items.find((item) => item.id === "1");
     this.displayData(this.selectedItem);
@@ -19,17 +20,17 @@ class BookPage {
   listen() {
     this.item.addEventListener("touchstart", () => {
       this.selectedItem = items.items.find((item) => item.id === this.id);
-      this.closeBook();
       this.animation(true);
       this.displayData(this.selectedItem);
+      this.hasSelectedItem = true;
     });
     this.item.addEventListener("click", () => {
       this.selectedItem = items.items.find((item) => item.id === this.id);
       this.animation(true);
       this.displayData(this.selectedItem);
+      this.hasSelectedItem = true;
     });
     this.item.addEventListener("touchend", () => {
-      this.closeBook();
       this.animation(false);
     });
     this.item.addEventListener("touchmove", () => {
@@ -46,7 +47,8 @@ class BookPage {
   displayData(item) {
     this.bookTitle.textContent = item.name;
     this.bookText.innerHTML = item.description;
-    this.bookText.classList.add(item.category)
+    this.bookText.classList.add(item.category);
+    this.closeBook();
   }
 
   animation(status) {
@@ -63,16 +65,15 @@ class BookPage {
   }
 
   closeBook() {
-    let hasSelectedItem = false;
 
     this.items.forEach(item => {
       if (item.classList.contains('selected-item')) {
-        hasSelectedItem = true;
+        this.hasSelectedItem = true;
       }
     });
-    console.log(hasSelectedItem)
+    console.log(this.hasSelectedItem)
 
-    if (!hasSelectedItem) {
+    if (!this.hasSelectedItem) {
       this.bookContainer.classList.add('is-closed');
       this.bookTitle.textContent = "";
       this.bookText.innerHTML = "";
