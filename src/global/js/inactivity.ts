@@ -3,7 +3,7 @@ type EventHook = () => any;
 export const enableInactivityRedirection = () => {
   let time: NodeJS.Timeout;
 
-  const timeInMs = 60_000;
+  const timeInMs = 5 * 60_000;
 
   let beforeRedirectFn: EventHook = () => {};
 
