@@ -6,7 +6,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import LoadPart from "./LoadPart";
 import "./component/1-IntroPart/IntroPart.scss";
 import RoughHewingPart from "./component/2-RoughHewingPart/RoughHewingPart";
@@ -14,7 +13,6 @@ import DetailsPart from "./component/3-DetailsPart/DetailsPart";
 import RefiningPart from "./component/4-RefiningPart/RefiningPart";
 import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
-import GUI from "lil-gui";
 
 enableInactivityRedirection();
 ambiantSound("/global/sounds/g3.mp3")
@@ -198,6 +196,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
     polishRange.addEventListener("input", (event) => {
       quantity = 1 - parseFloat(event.target.value);
       statueV4.material.opacity = quantity;
+      stepsFunction();
     });
   });
 });
