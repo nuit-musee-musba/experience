@@ -337,13 +337,15 @@ function stepsFunction() {
         const nextText4 = document.getElementById("nextText4");
 
         nextText3.addEventListener("click", function () {
-          changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
-          isNextText3 = true;
+          steps1InRefiningPart.classList.remove("show");
+          steps2InRefiningPart.classList.add("show");
 
         });
 
         nextText4.addEventListener("click", function () {
           changeTextInSteps(steps2InRefiningPart, steps3InRefiningPart);
+          isNextText3 = true;
+
         });
 
         if (statueV3.children.length <= 6) {
