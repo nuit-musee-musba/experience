@@ -158,13 +158,10 @@ backButton.addEventListener("click", async () => {
   await executeAnimation();
 
   const targetScale = MESHSCALE;
-<<<<<<< HEAD
   canvas.classList.remove("activated");
   canvas.classList.add("deactivated");
 
 
-=======
->>>>>>> 1c76dd6 (orbig control default set)
   function descale() {
     let newScale = window.experience.currentIsland.scale.x - SCALEFACTOR;
     window.experience.currentIsland.scale.set(newScale, newScale, newScale);
