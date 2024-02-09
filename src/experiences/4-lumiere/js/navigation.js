@@ -3,9 +3,29 @@ import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * Inactivity
+ * Global settings
  */
-enableInactivityRedirection();
+// Clear local storage
+const clearLocalStorage = () => {
+  localStorage.removeItem("4-first");
+  localStorage.removeItem("4-second");
+  localStorage.removeItem("4-third");
+}
+// leave button
+const leaveBtns = document.querySelectorAll(".btn-back-hub")
+for (const leaveBtn of leaveBtns) {
+  leaveBtn.addEventListener("click",
+    () => {
+      clearLocalStorage();
+      window.location.href = "/";
+    }
+  )
+}
+
+// Inactivity
+enableInactivityRedirection().beforeRedirect(() => {
+  clearLocalStorage;
+});
 
 /**
  * Popins
@@ -264,21 +284,20 @@ canvas.addEventListener("click", () => {
     switch (currentIntersect.object) {
       case firstPainting:
         console.log("click on first painting");
-        window.location.replace("./first-painting.html");
+        window.location.href = "./first-painting.html";
         break;
 
       case secondPainting:
         console.log("click on second painting");
-        window.location.replace("./second-painting.html");
+        window.location.href = "./second-painting.html";
         break;
 
       case thirdPainting:
         console.log("click on second painting");
-        window.location.replace("./third-painting.html");
+        window.location.href = "./third-painting.html";
         break;
 
       default:
-        console.log("no link");
     }
   }
 });

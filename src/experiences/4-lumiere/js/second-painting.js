@@ -5,9 +5,29 @@ import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * Inactivity
+ * Global settings
  */
-enableInactivityRedirection();
+// Clear local storage
+const clearLocalStorage = () => {
+  localStorage.removeItem("4-first");
+  localStorage.removeItem("4-second");
+  localStorage.removeItem("4-third");
+}
+// leave button
+const leaveBtns = document.querySelectorAll(".btn-back-hub")
+for (const leaveBtn of leaveBtns) {
+  leaveBtn.addEventListener("click",
+    () => {
+      clearLocalStorage();
+      window.location.href = "/";
+    }
+  )
+}
+
+// Inactivity
+enableInactivityRedirection().beforeRedirect(() => {
+  clearLocalStorage;
+});
 
 /**
  * Popins
@@ -374,7 +394,7 @@ function updateRotation() {
 resultBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (resultState == true) {
-    window.location.replace("./results.html?painting=second");
+    window.location.href = "./results.html?painting=second";
   }
 });
 
