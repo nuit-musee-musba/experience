@@ -1,3 +1,5 @@
+@import url(/global/style.css);
+
 // UTILS
 @import "abstracts/variables";
 @import "abstracts/mixins";
@@ -18,3 +20,4 @@
 // PAGES
 @import "pages/home";
 @import "pages/game";
+@import "pages/ending";

@@ -1,12 +1,12 @@
 .book {
   pointer-events: none;
   width: 29vw;
-  background-image: url(/6-peinture/images/scenery/book-cover.svg);
+  background-image: url("/6-peinture/images/scenery/book-content.svg");
   background-repeat: no-repeat;
   margin-top: -10vh;
   background-size: cover;
-  &.is-opened {
-    background-image: url("/6-peinture/images/scenery/book-content.svg");
+  &.is-closed {
+    background-image: url("/6-peinture/images/scenery/book-cover.svg");
   }
   &-content {
     margin: 6rem 8rem 0 11rem;
@@ -16,8 +16,20 @@
     }
     .book-description {
       margin-left: 3rem;
-      b {
-        font-weight: 700;
+      &.food {
+        b {
+          color: $food;
+        }
+      }
+      &.animals {
+        b {
+          color: $animals;
+        }
+      }
+      &.objects {
+        b {
+          color: $objects;
+        }
       }
     }
   }

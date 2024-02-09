@@ -10,7 +10,8 @@
 
 .dialog-nav, 
 .dialog-content {
-    width: 35%;
+    width: 39%;
+    min-width: 1370px;
 }
 
 .dialog-nav {
@@ -48,7 +49,7 @@
     background: $color-bg;
     border-radius: $global-btn-padding;
     display: none;
-    padding: 6.25rem 5rem;
+    padding: $dialog-padding-y $dialog-padding-x;
     &.active{
         display: block;
     }

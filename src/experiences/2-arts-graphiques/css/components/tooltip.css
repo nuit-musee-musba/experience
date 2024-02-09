@@ -1,0 +1,62 @@
+.tooltip-circle {
+  width: 130px;
+  height: 130px;
+  border: 4px solid var(--white);
+  border-radius: 50%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  left: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
+}
+.tooltip-circle::after {
+  content: "";
+  width: 120%;
+  height: 120%;
+  border: 4px dotted var(--white);
+  border-radius: 50%;
+}
+
+.tooltip.ttHead {
+  width: 700px;
+  transform: translateX(-100%) rotate(-4deg);
+}
+.tooltip.ttSignature {
+  width: 338px;
+  transform: translateX(-100%) rotate(0deg);
+}
+.tooltip.ttFlowers {
+  width: 638px;
+  transform: translateX(0) rotate(194deg);
+}
+
+.tooltip {
+  height: 4px;
+  background: var(--white);
+  position: absolute;
+
+  top: 50%;
+  transform-origin: center right;
+}
+
+.ttleft {
+  left: 0;
+}
+.ttright {
+  right: 0;
+}
+
+.sec1-hand-tool {
+  position: absolute;
+  left: 2031px;
+  top: -182px;
+  width: 800px;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.sec1-hand-tool.hidden {
+  opacity: 0;
+}

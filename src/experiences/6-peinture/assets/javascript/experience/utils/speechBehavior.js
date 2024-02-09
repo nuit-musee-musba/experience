@@ -13,7 +13,6 @@ speech_area__parent.addEventListener("touchstart", (e) => {
 
 function fadeOut(thisLoopId) {
   if (!active_bulle) {
-    console.log(thisLoopId + "==" + loopId);
     if (thisLoopId == loopId) {
       speech_area.style.opacity = 0;
       textSpeed = 15;

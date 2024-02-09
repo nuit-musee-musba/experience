@@ -1,17 +1,35 @@
 import * as THREE from "three";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
- * Inactivity
+ * Global settings
  */
-enableInactivityRedirection();
+// Clear local storage
+const clearLocalStorage = () => {
+  localStorage.removeItem("4-first");
+  localStorage.removeItem("4-second");
+  localStorage.removeItem("4-third");
+}
+// leave button
+const leaveBtns = document.querySelectorAll(".btn-back-hub")
+for (const leaveBtn of leaveBtns) {
+  leaveBtn.addEventListener("click",
+    () => {
+      clearLocalStorage();
+      window.location.href = "/";
+    }
+  )
+}
+
+// Inactivity
+enableInactivityRedirection().beforeRedirect(() => {
+  clearLocalStorage;
+});
 
 /**
  * Popins
  */
-
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlOrigin = urlParams.get("home-popin");
@@ -31,15 +49,12 @@ const popinShow = (targetPopin) => {
   document.querySelector("body").classList.remove("popin-visible");
   document.querySelector(".popin-overlay").classList.remove("hidden");
   events = false;
+  if (targetPopin === popin2) {
+    setTimeout(() => {
+      targetPopin.classList.add("textshow");
+    }, 7000);
+  }
 };
-
-// test const qui n'est pas un hide direct mais une animation
-// const popinFadeOut = (targetPopin) => {
-//   targetPopin.classList.add("fadeout");
-//   document.querySelector("body").classList.add("popin-fadeout");
-//   document.querySelector(".popin-overlay").classList.add("hidden");
-//   events = true;
-// };
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
@@ -48,16 +63,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     popinHide(popin1);
     popinHide(popin2);
   } else {
-    popinShow(popin1)
-    popinShow(popin2)
-    setTimeout(() => { popinHide(popin1); }, 1000)
+    popinShow(popin1);
+    setTimeout(() => {
+      popinHide(popin1);
+    }, 3000);
+    popinShow(popin2);
   }
 });
-
-// function FadeOut() {
-//   alert("On attend");
-// };
-
 
 const popinBtns = document.querySelectorAll(".popin-btn.popin-close");
 for (const popinBtn of popinBtns) {
@@ -68,17 +80,21 @@ for (const popinBtn of popinBtns) {
   });
 }
 
-
 /**
- * Base
+ * Threejs
  */
+
 // Debug
 const gui = new GUI({
   width: 300,
   title: "Debugger",
   closeFolders: true,
 });
+gui.hide();
 
+/**
+ * Base
+ */
 let globalParameters = {
   lightAngleStrength: 0.5,
   ellipseRadius: 4,
@@ -129,6 +145,62 @@ thirdPaintingTexture.colorSpace = THREE.SRGBColorSpace;
 /**
  * Object
  */
+
+// Geometry
+function generateParticles() {
+  const particlesGeometry = new THREE.BufferGeometry()
+  const count = 70
+
+  const positions = new Float32Array(count * 3) // Multiply by 3 because each position is composed of 3 values (x, y, z)
+
+  for (let i = 0; i < count * 3; i++) // Multiply by 3 for same reason
+  {
+    positions[i] = (Math.random() - 0.5) * 10 // Math.random() - 0.5 to have a random value between -0.5 and +0.5
+  }
+
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)) // Create the Three.js BufferAttribute and specify that each information is composed of 3 values
+
+  // Material
+  const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.105,
+    sizeAttenuation: true
+  })
+
+  // color 
+  particlesMaterial.color = new THREE.Color('#FFF7E2')
+
+  // Texture
+  const textureLoader = new THREE.TextureLoader()
+  const particleTexture = textureLoader.load('/4-lumiere/particles/particle.png')
+  particlesMaterial.map = particleTexture
+  particlesMaterial.alphaTest = 0.001
+  particlesMaterial.depthTest = false
+  particlesMaterial.depthWrite = false
+  particlesMaterial.blending = THREE.AdditiveBlending
+
+  // Points
+  return new THREE.Points(particlesGeometry, particlesMaterial)
+
+}
+
+// GENERATE 4 groups of particles
+
+const particles1 = generateParticles();
+particles1.position.z = 9
+scene.add(particles1)
+
+const particles2 = generateParticles();
+particles2.position.z = 9
+scene.add(particles2)
+
+const particles3 = generateParticles();
+particles3.position.z = 9
+scene.add(particles3)
+
+const particles4 = generateParticles();
+particles4.position.z = 9
+scene.add(particles4)
+
 // First painting
 const firstPaintingGeometry = new THREE.PlaneGeometry(5.3, 4, 150, 100);
 const firstPaintingMaterial = new THREE.MeshStandardMaterial({
@@ -250,11 +322,11 @@ canvas.addEventListener("click", () => {
   const objectsToTest = [firstPainting, secondPainting, thirdPainting];
   const intersects = raycaster.intersectObjects(objectsToTest);
 
-  if (intersects.length) {
+  if (intersects.length && intersects[0].point.z > 0) {
     if (currentIntersect === null) {
       console.log("mouse enter");
     }
-
+    console.log("intersect", intersects[0]);
     currentIntersect = intersects[0];
   } else {
     if (currentIntersect) {
@@ -268,21 +340,20 @@ canvas.addEventListener("click", () => {
     switch (currentIntersect.object) {
       case firstPainting:
         console.log("click on first painting");
-        window.location.replace("./first-painting.html");
+        window.location.href = "./first-painting.html";
         break;
 
       case secondPainting:
         console.log("click on second painting");
-        window.location.replace("./second-painting.html");
+        window.location.href = "./second-painting.html";
         break;
 
       case thirdPainting:
         console.log("click on second painting");
-        window.location.replace("./third-painting.html");
+        window.location.href = "./third-painting.html";
         break;
 
       default:
-        console.log("no link");
     }
   }
 });
@@ -362,22 +433,12 @@ window.addEventListener("touchend", function () {
   isSwiping = false;
 });
 
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = ellipse.position;
-// controls.enableDamping = true;
-
 /**
  * SetInterval
  */
 
 // Function
 setInterval(checkUserInteractions, 2000);
-
-// Controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target = ellipse.position;
-// controls.enableDamping = true;
 
 /**
  * Renderer
@@ -398,28 +459,13 @@ const ambientLight = new THREE.AmbientLight(
 );
 scene.add(ambientLight);
 
-const ambientLightTweaks = gui.addFolder("Ambient light parameters");
-ambientLightTweaks.add(ambientLight, "visible");
-ambientLightTweaks.addColor(ambientLight, "color");
-ambientLightTweaks.add(ambientLight, "intensity").min(0).max(3).step(0.001);
-
 /**
  * Animate
  */
-const clock = new THREE.Clock();
-
 let currentIntersect = null;
-let previousTime = 0;
-let deltaTime = 0;
+const clock = new THREE.Clock()
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
-  deltaTime = elapsedTime - previousTime;
-  previousTime = elapsedTime;
-
-  // Update controls
-  // controls.update();
-
   // Update paintings positions based on ellipse rotation
   const angle = ellipse.rotation.z;
   const radius = globalParameters.ellipseRadius;
@@ -440,11 +486,35 @@ const tick = () => {
     Math.cos(angle - (2 * Math.PI) / 3) * radius
   );
 
-  // Render
-  renderer.render(scene, camera);
+  //Particles move
+  const elapsedTime = clock.getElapsedTime()
 
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
+  // __Update particles__
+  particles1.position.x = Math.cos(elapsedTime / 2) * 0.05
+  particles1.position.y = Math.sin(elapsedTime / 2) * 0.05
+  particles1.position.z = Math.sin(elapsedTime / 2) * 0.05 + 9
+
+  particles2.position.x = Math.cos(elapsedTime / 2) * -0.05
+  particles2.position.y = Math.sin(elapsedTime / 2) * -0.05
+  particles2.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
+
+  particles3.position.x = Math.sin(elapsedTime / 2) * 0.05
+  particles3.position.y = Math.cos(elapsedTime / 2) * -0.05
+  particles3.position.z = Math.cos(elapsedTime / 2) * 0.05 + 9
+
+  particles4.position.x = Math.sin(elapsedTime / 2) * -0.05
+  particles4.position.y = Math.cos(elapsedTime / 2) * 0.05
+  particles4.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
+
+  // __Update controls__
+  // controls.update()
+
+  // __Render__
+  renderer.render(scene, camera)
+
+  // __Call tick again on the next frame__
+  window.requestAnimationFrame(tick)
+
 };
 
 tick();

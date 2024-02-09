@@ -1,17 +1,20 @@
 import items from "../data/items.json" assert { type: "json" };
 import { recipeResolve, recipeGeneration } from "./recipeManager.js";
 import { print_chef_speech } from "./speechBehavior.js";
-import { playAnimation } from './playAnimation.js';
+import { playAnimation } from "./playAnimation.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
 var stepsEl = document.getElementById("stepnum");
+var stepTitleEl = document.getElementById("list-name")
 var winConditions = craftCont.length;
 var howManyDone = 0;
 export var current_step = 1;
 var current_step_done = 0;
 var current_step_win = 3;
 stepsEl.innerHTML = current_step;
+var stepTitle = ["La mort", "Le temps qui passe", "Les symboles du Christ"];
+stepTitleEl.innerHTML = stepTitle[current_step - 1]
 var step_success = false;
 
 function countDuplicatesNbMovesNeeded(strings) {
@@ -31,9 +34,7 @@ function handleDragInteraction(
   dragElementId,
   isMultiple,
   placedEl,
-  marginTopPlacement,
   isCorrect,
-  padLeft,
   targetZoneId,
   successPosX = null,
   successPosY = null
@@ -51,22 +52,29 @@ function handleDragInteraction(
   initialY = dragElementRect.top; //position Y selon le navigateur
 
   let dragElWidth = dragElement.offsetWidth;
+  let dragElheight = dragElement.offsetHeight;
 
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
   dragElement.addEventListener("touchstart", (e) => {
+    let selectedElement = parentElement.querySelector(".selected-item");
+    if (selectedElement) {
+      selectedElement.classList.remove("selected-item");
+    }
     const targetZoneRect = targetZone.getBoundingClientRect();
-    console.log("touchstart");
+    dragElement.classList.add("selected-item");
   });
 
   dragElement.addEventListener("touchmove", (e) => {
+    if (dragElement.classList.contains('disabled')) {
+      return;
+    }
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + padLeft - dragElWidth / 2;
-    const currentY =
-      touch.clientY - initialY - dragElWidth / 2 + marginTopPlacement;
+    const currentX = touch.clientX - initialX + realInitialX - (dragElWidth / 2);
+    const currentY = touch.clientY - initialY + realInitialY - (dragElheight / 2);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
     //}
@@ -90,25 +98,38 @@ function handleDragInteraction(
           playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
-            if (howManyDrags < dialog.number_needed) {
-              placedEl[howManyDrags].style.display = "block";
+            for (let index = 0; index < dialog.number_needed; index++) {
+              placedEl[index].style.display = "block";
               howManyDone++;
               howManyDrags++;
-
-              print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
-              recipeResolve(dialog.id);
-              //alert("Chef : " + dialog.dialog);
-            } else {
-              print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
-              ); //definie dans speechBehavior.js
-              //alert("tu as mis tout les elements requis pour cet aliment");
             }
+
+            print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            if (dialog.number_needed == howManyDrags) {
+              recipeResolve(dialog.id);
+              dragElement.classList.add('disabled');
+            }
+
+            // if (howManyDrags < dialog.number_needed) {
+            //   placedEl[howManyDrags].style.display = "block";
+            //   howManyDone++;
+            //   howManyDrags++;
+
+            //   print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
+            //   recipeResolve(dialog.id);
+            //   //alert("Chef : " + dialog.dialog);
+            // } else {
+            //   print_chef_speech(
+            //     "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+            //   ); //definie dans speechBehavior.js
+            //   //alert("tu as mis tout les elements requis pour cet aliment");
+            // }
           } else {
             if (!success) {
               placedEl.style.display = "block";
               print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
               recipeResolve(dialog.id);
+              dragElement.classList.add('disabled-item')
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
               howManyDrags++;
@@ -116,7 +137,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -129,7 +150,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me paraît judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
@@ -139,7 +160,7 @@ function handleDragInteraction(
         dragElement.style.left = realInitialX + "px";
         dragElement.style.top = realInitialY + "px";
 
-        numberUpdater.innerHTML = howManyDrags;
+        //numberUpdater.innerHTML = howManyDrags;
 
         // -- win a step --
 
@@ -147,7 +168,9 @@ function handleDragInteraction(
           //win the game
 
           if (current_step >= current_step_win) {
-            document.body.classList.add("has-ending-opened");
+            setTimeout(() => {
+              document.body.classList.add("has-ending-opened");
+            }, 2000);
           } else {
             step_success = true;
             setTimeout(() => {
@@ -157,6 +180,7 @@ function handleDragInteraction(
               howManyDone = 0;
               step_success = false;
               print_chef_speech("Passons à l'étape " + current_step + "/3 !");
+              stepTitleEl.innerHTML = stepTitle[current_step - 1]
             }, 5000);
           }
         }
@@ -217,80 +241,8 @@ let category = 0; //0=Aliments, 1=Objets, 2=Animaux
 items.items.forEach((element) => {
   let placedEl = document.getElementById(element.id + "-placed");
   var elementsWithId = document.querySelectorAll(".multiple-" + element.id);
-
-  let ElementList = document.getElementById(element.id);
-
-  let leftPosition;
-
-  if (numberItemsPerCategory[category]["count"] > max_item_per_stage) {
-    staged[category] =
-      numberItemsPerCategory[category]["count"] - max_item_per_stage; //number of items on top (stage 1)
-
-    if (cur_stage != 1) {
-      cur_stage = 0;
-    }
-  } else {
-    staged[category] = 0;
-    cur_stage = -1;
-  }
-
-  if (staged[category] == 0) {
-    leftPosition = // pour centrer les absolute on va faire ce calcul
-      (parentElement.offsetWidth / //la width du parent divisé par...
-        (numberItemsPerCategory[category]["count"] + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-        324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-      i[category]; //multiplié par le nombre d'occurence en cours
-    ElementList.style.left = leftPosition + "px"; // on applique
-  } else {
-    //cur_stage = 0;
-    if (cur_stage == 1) {
-      //stage 1
-
-      leftPosition = // pour centrer les absolute on va faire ce calcul
-        (parentElement.offsetWidth / //la width du parent divisé par...
-          (numberItemsPerCategory[category]["count"] -
-            max_item_per_stage +
-            0.5) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-          324 / 3) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-        i[category]; //multiplié par le nombre d'occurence en cours
-      ElementList.style.left = leftPosition + "px"; // on applique
-    } else if (cur_stage == 0) {
-      //stage 0 (forcement égal à max_item_per_stage)
-
-      leftPosition = // pour centrer les absolute on va faire ce calcul
-        (parentElement.offsetWidth / //la width du parent divisé par...
-          (max_item_per_stage + 1) - //on prend le nombre d'item de la catégorie (category) (en gros combien d'item il y a dans cette catégorie) et on lui ajoute un (ça permet de centrer le tout en fonction du nombre d'items)
-          324 / 7) * //324 = la width de chaque div des aliments divisé par 3 (pour les centrer par rapport à leur propre centre et non aligné à sur leur gauche)
-        i[category]; //multiplié par le nombre d'occurence en cours
-      ElementList.style.left = leftPosition + "px"; // on applique
-    }
-  }
-
-  if (cur_stage == 1) {
-    ElementList.style.top = "90px"; //top position
-    marginTopPlacement = 90;
-  } else if (cur_stage == 0) {
-    ElementList.style.top = "400px"; //bot position
-    marginTopPlacement = 470;
-  } else if (cur_stage == -1) {
-    ElementList.style.top = "250px"; //top position
-    marginTopPlacement = 250;
-  }
-
-  if (
-    i_overall[category] >= numberItemsPerCategory[category]["count"] ||
-    (i[category] == staged[category] && cur_stage == 1)
-  ) {
-    category++;
-    i_overall[category] = 1;
-    cur_stage = -1;
-  } else if (i[category] >= max_item_per_stage) {
-    cur_stage++;
-    i[category] = 1;
-  } else {
-    i[category]++;
-    i_overall[category]++;
-  }
+  let leftPosition,
+    marginTopPlacement = 0;
 
   //ce code implique donc que les items dans items.json soient bien rangés par catégorie
 
@@ -300,9 +252,7 @@ items.items.forEach((element) => {
         element.id,
         false,
         placedEl,
-        marginTopPlacement,
         true,
-        leftPosition,
         "targetCraftZone"
       );
     } else {
@@ -310,9 +260,7 @@ items.items.forEach((element) => {
         element.id,
         false,
         placedEl,
-        marginTopPlacement,
         false,
-        leftPosition,
         "targetCraftZone"
       );
     }
@@ -321,9 +269,7 @@ items.items.forEach((element) => {
       element.id,
       true,
       elementsWithId,
-      marginTopPlacement,
       true,
-      leftPosition,
       "targetCraftZone"
     );
   }

@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import { join, resolve } from "path";
 import { defineConfig } from "vite";
+import viteTsconfigPaths from "vite-tsconfig-paths";
+
 const root = resolve(__dirname, "src");
 const outDir = resolve(__dirname, "dist");
 
@@ -29,7 +31,7 @@ const redirectToDir = ({ root }) => ({
 export default defineConfig({
   root,
   publicDir: "../static/",
-  plugins: [redirectToDir({ root })],
+  plugins: [redirectToDir({ root }), viteTsconfigPaths()],
   base: "./",
   build: {
     outDir,
@@ -43,6 +45,7 @@ export default defineConfig({
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
         "6-peinture": "./src/experiences/6-peinture/index.html",
         "6-peinture/game": "./src/experiences/6-peinture/game.html",
+        "6-peinture/ending": "./src/experiences/6-peinture/ending.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
         "4-lumiere": "./src/experiences/4-lumiere/index.html",
         "4-lumiere/first-painting":

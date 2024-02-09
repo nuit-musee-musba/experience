@@ -17,7 +17,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 5px solid $color-border;
     margin-top: -1vh;
     margin-bottom: 4rem;
     margin-right: 4rem;
@@ -25,35 +25,44 @@
   .list-items {
     .item {
       display: flex;
-      gap: 0.5vw;
+      gap: 0.2vw;
       align-items: center;
       justify-content: space-between;
       width: 94%;
       + .item {
         margin-top: 2.5rem;
       }
+      &::before {
+        padding: 1rem;
+        border-radius: 12px;
+      }
       &.food {
         @include icon(food);
         &::before {
+          background: rgba($food, 0.3);
           color: $food;
         }
       }
       &.animals {
         @include icon(animals);
         &::before {
+          background: rgba($animals, 0.3);
           color: $animals;
         }
       }
       &.objects {
         @include icon(objects);
         &::before {
+          background: rgba($objects, 0.3);
           color: $objects;
         }
       }
 
       &.checked {
         color: grey;
-        text-decoration: line-through;
+        .item-stuff {
+          text-decoration: line-through;
+        }
         .item-checkbox {
           img {
             display: block;
