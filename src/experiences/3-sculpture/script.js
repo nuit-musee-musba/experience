@@ -93,7 +93,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0;i < workshop.children.length;i++) {
+  for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
 
       console.log(workshop.children[i].intensity);
@@ -252,6 +252,10 @@ function changeTextInSteps(removeText, addText) {
   raycasterActive = true;
 }
 
+let isNextText1 = false;
+let isNextText2 = false;
+let isNextText3 = false;
+
 function stepsFunction() {
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, camera);
@@ -264,6 +268,7 @@ function stepsFunction() {
 
         nextText.addEventListener("touchstart", function () {
           changeTextInSteps(steps1InRoughPart, steps2InRoughPart);
+          isNextText1 = true;
         });
 
         if (statueV1.children.length <= 4) {
@@ -292,6 +297,8 @@ function stepsFunction() {
         const nextText2 = document.getElementById("nextText2");
         nextText2.addEventListener("touchstart", function () {
           changeTextInSteps(steps1InDetailsPart, steps2InDetailsPart);
+          isNextText2 = true;
+
         });
 
         if (statueV2.children.length <= 6) {
@@ -325,6 +332,8 @@ function stepsFunction() {
 
         nextText3.addEventListener("touchstart", function () {
           changeTextInSteps(steps1InRefiningPart, steps2InRefiningPart);
+          isNextText3 = true;
+
         });
 
         nextText4.addEventListener("touchstart", function () {
@@ -478,7 +487,8 @@ const tick = () => {
     switch (steps) {
       case 1:
 
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText1) {
           if (statueV1.children.length > 0) {
             outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
           }
@@ -487,7 +497,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 2:
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText2) {
           if (statueV2.children.length > 0) {
             outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
           }
@@ -496,7 +506,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime * 2) * params.edgeStrength;
         break;
       case 3:
-        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5) {
+        if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText3) {
           if (statueV3.children.length > 0) {
             outlinePass.selectedObjects = [statueV3.children[Math.floor(Math.random() * statueV3.children.length)]];
           }
