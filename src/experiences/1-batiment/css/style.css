@@ -60,7 +60,7 @@ body {
     rgba(0, 0, 0, 0.74) 93.33%,
     rgba(0, 0, 0, 0.75) 100%
   );
-  z-index: 10;
+  z-index: 5;
   pointer-events: none;
 }
 
@@ -187,6 +187,10 @@ body {
   transform: translateY(100%);
 }
 
+.btn-icon {
+  cursor: pointer;
+}
+
 .left-arrow {
   display: none;
   left: 33vw;
@@ -241,15 +245,17 @@ body {
   background-color: transparent;
   border: none;
   color: white;
+  padding: 1rem 4rem 6rem 4rem;
 }
 
 .chronology-timeline .button {
   position: relative;
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.3);
   border: 5px solid white;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 .chronology-timeline .button div {
@@ -343,8 +349,9 @@ body {
 }
 
 #restart-button button {
-  border: none;
+  border-color: black;
   color: black;
+  cursor: pointer;
 }
 
 .point-interest-component {
@@ -373,14 +380,12 @@ body {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-title-component {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 4rem;
-  pointer-events: none;
 }
 
 #poi-text-component {
@@ -410,6 +415,7 @@ body {
     transform 0.3s ease-in-out;
   opacity: 1;
   transform: translateY(0);
+  z-index: 11;
 }
 
 .wrapper-subTitle.hidden {
