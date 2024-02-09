@@ -23,6 +23,7 @@ let steps = 0;
 let raycasterActive = false;
 const steps1InRoughPart = document.getElementById("steps1InRoughPart");
 const steps2InRoughPart = document.getElementById("steps2InRoughPart");
+
 //
 // INITIALIZATION
 //
@@ -93,7 +94,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0;i < workshop.children.length;i++) {
+  for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
 
       console.log(workshop.children[i].intensity);
@@ -181,8 +182,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_polissage.glb", async (gltf) => {
     statueV4.material.opacity = 1;
     statueV4.material.transparent = true;
 
-    scene.add(statueV4)
-    scene.add(statueV5)
+
 
     const polishRange = document.getElementById("PolishRange");
     polishRange.addEventListener("input", (event) => {
@@ -313,6 +313,8 @@ function stepsFunction() {
             raycasterActive = false;
             RefiningPart();
             stepsFunction();
+            scene.add(statueV4)
+            scene.add(statueV5)
           }
         }
       }
@@ -360,37 +362,29 @@ function stepsFunction() {
         const intersects = raycaster.intersectObject(statueV4);
         const nextText5 = document.getElementById("nextText5");
         const nextText6 = document.getElementById("nextText6");
+        const nextText7 = document.getElementById("nextText7");
+        const polishControler = document.getElementById("polishControler");
 
         nextText5.addEventListener("click", function () {
-          changeTextInSteps(steps1InPolishingPart, steps2InRPolishingPart);
+          changeTextInSteps(steps1InPolishingPart, steps2InPolishingPart);
         });
 
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
+          polishControler.classList.add("show")
         });
 
-        if (statueV4.children.length <= 6) {
+        if (quantity <= 0.8) {
           changeTextInSteps(steps3InPolishingPart, steps4InPolishingPart);
         }
-        if (statueV4.children.length <= 4) {
+        if (quantity <= 0) {
           changeTextInSteps(steps4InPolishingPart, steps5InPolishingPart);
         }
 
-        if (intersects.length > 0 && raycasterActive) {
-          const clickedBlock = intersects[0].object;
-          statueV4.remove(clickedBlock);
+        nextText7.addEventListener("click", function () {
+          OutroPart();
+        });
 
-          if (statueV4.children.length === 0) {
-            mouse.x = -1;
-            mouse.y = -1;
-            mouse.y = -1;
-            steps++;
-            raycasterActive = false;
-
-            OutroPart();
-            stepsFunction();
-          }
-        }
       }
   }
 }
