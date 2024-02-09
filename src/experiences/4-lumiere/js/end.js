@@ -38,7 +38,7 @@ function generateParticles (){
 
     // Material
     const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.09,
+        size: 0.105,
         sizeAttenuation: true
     })
 
