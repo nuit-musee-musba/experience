@@ -146,7 +146,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 7;
+  z-index: 11;
 }
 
 .left-arrow {
@@ -347,6 +347,7 @@ body {
   position: absolute;
   bottom: 24vh;
   left: 2vw;
+  z-index: 11;
 }
 
 #container-subTitle {
