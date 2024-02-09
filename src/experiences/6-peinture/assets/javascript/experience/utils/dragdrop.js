@@ -142,7 +142,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "Mmh, gardez-le sous votre établi, il nous sera peut-être utile plus tard."
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
