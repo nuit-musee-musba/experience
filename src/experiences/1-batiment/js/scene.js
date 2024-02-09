@@ -350,6 +350,7 @@ gui.onFinishChange(() => {
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  powerPreference: "high-performance",
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
