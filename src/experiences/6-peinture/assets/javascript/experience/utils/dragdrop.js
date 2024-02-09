@@ -6,12 +6,15 @@ import { playAnimation } from "./playAnimation.js";
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
 var stepsEl = document.getElementById("stepnum");
+var stepTitleEl = document.getElementById("list-name")
 var winConditions = craftCont.length;
 var howManyDone = 0;
 export var current_step = 1;
 var current_step_done = 0;
 var current_step_win = 3;
 stepsEl.innerHTML = current_step;
+var stepTitle = ["La mort", "Le temps qui passe", "Les symboles du Christ"];
+stepTitleEl.innerHTML = stepTitle[current_step - 1]
 var step_success = false;
 
 function countDuplicatesNbMovesNeeded(strings) {
@@ -64,6 +67,9 @@ function handleDragInteraction(
   });
 
   dragElement.addEventListener("touchmove", (e) => {
+    if (dragElement.classList.contains('disabled')) {
+      return;
+    }
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
@@ -101,6 +107,7 @@ function handleDragInteraction(
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
               recipeResolve(dialog.id);
+              dragElement.classList.add('disabled');
             }
 
             // if (howManyDrags < dialog.number_needed) {
@@ -122,6 +129,7 @@ function handleDragInteraction(
               placedEl.style.display = "block";
               print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
               recipeResolve(dialog.id);
+              dragElement.classList.add('disabled-item')
               //alert("Chef : " + dialog.dialog);
               howManyDone++;
               howManyDrags++;
@@ -129,7 +137,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }
@@ -142,7 +150,7 @@ function handleDragInteraction(
           if (dialog.wrong_step_dialog == "") {
             playAnimation("animJeffPensive");
             print_chef_speech(
-              "C'est un choix qui me parait judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
+              "C'est un choix qui me paraît judicieux, mais pas pour l'instant. Gardez-le en mémoire !"
             );
           } else {
             print_chef_speech(dialog.wrong_step_dialog);
@@ -172,6 +180,7 @@ function handleDragInteraction(
               howManyDone = 0;
               step_success = false;
               print_chef_speech("Passons à l'étape " + current_step + "/3 !");
+              stepTitleEl.innerHTML = stepTitle[current_step - 1]
             }, 5000);
           }
         }

@@ -7,8 +7,14 @@
 
 .timelapse__context{
   margin-bottom: 10rem;
+  margin-top: 10rem;
 }
 
 #date-anim__year{
   font-size: 25rem;
+}
+
+.timelapse-lotti{
+  height: 1500px;
+  width: 3000px;
 }
