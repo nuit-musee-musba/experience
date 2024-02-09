@@ -2,9 +2,10 @@ import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import gsap from "gsap";
 import * as THREE from "three";
 import { period } from "./period";
+import { enableInactivityAnimation } from "./inactivity.ts";
 
-enableInactivityRedirection();
-
+// enableInactivityRedirection();
+enableInactivityAnimation()
 import {
   animatedScenes,
   camera,
