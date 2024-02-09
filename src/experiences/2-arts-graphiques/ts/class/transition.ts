@@ -11,6 +11,7 @@ import Paragraph from "./paragraph";
 import Div from "./div";
 import { Section2 } from "../section2/Section2";
 import { Section8 } from "../section8/Section8";
+import { LottiePlayer } from "lottie-web";
 
 export default class Transition {
   currentSection: Section;
@@ -40,6 +41,7 @@ export default class Transition {
   hintText: Paragraph;
 
   landmark: Div;
+  lottiePlayer: any;
 
   constructor() {
     this.buttonSection2 = new Button("sec2-button", () => this.next());
@@ -79,6 +81,11 @@ export default class Transition {
 
     this.hintText = new Paragraph("hint");
     this.landmark = new Div(".landmark");
+    const lottiePlayer = document.querySelector(".timelapse-lotti");
+
+    if (lottiePlayer) {
+      this.lottiePlayer = lottiePlayer;
+    }
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -190,6 +197,9 @@ export default class Transition {
       previousSection = this.sections[this.sections.length - 1];
     } else {
       previousSection = this.sections[this.currentSectionNumber - 1];
+    }
+    if (this.currentSectionNumber === 3) {
+      this.lottiePlayer.play();
     }
     if (this.currentSectionNumber === 9) {
       this.landmark.div.style.display = "none";
