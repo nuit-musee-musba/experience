@@ -30,5 +30,7 @@ export default class Modal {
   close() {
     this.transition.next();
     this.modal.close();
+    const audio : HTMLAudioElement | null = document.querySelector<HTMLAudioElement>('audio');
+    audio!.play()
   }
 }
