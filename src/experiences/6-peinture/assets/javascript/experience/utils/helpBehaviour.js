@@ -13,11 +13,11 @@ export function demarrerTour() {
   });
 
   tour.addStep({
-    id: "book-step",
-    text: "Ici vous pouvez retrouver la signification de l’élément que vous avez sélectionné.",
+    id: "recipe-step",
+    text: "Voici la liste des éléments que tu dois trouver pour faire ta composition !",
     attachTo: {
-      element: ".book",
-      on: "right",
+      element: ".img-recipe",
+      on: "left",
     },
     classes: "heyyy",
     buttons: [
@@ -54,6 +54,24 @@ export function demarrerTour() {
     attachTo: {
       element: ".categories-tabs",
       on: "top",
+    },
+    classes: "heyyy",
+    buttons: [
+      {
+        text: "Suivant",
+        defaultStepOptions: false,
+        classes: "btn-small-primary",
+        action: tour.next,
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: "book-step",
+    text: "Ici vous pouvez retrouver la signification de l’élément que vous avez sélectionné.",
+    attachTo: {
+      element: ".book",
+      on: "right",
     },
     classes: "heyyy",
     buttons: [
