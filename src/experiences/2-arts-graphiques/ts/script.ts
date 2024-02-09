@@ -1,10 +1,14 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
 import landmark from "./animation/landmark";
 import Modal from "./class/modal";
 import Transition from "./class/transition";
 import Frames from "./interactive/paintingFrame";
 
 enableInactivityRedirection();
+ambiantSound("/global/sounds/g2.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 export type ExperienceType = {
   transition?: Transition;

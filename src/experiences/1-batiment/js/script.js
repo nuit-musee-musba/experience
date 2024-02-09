@@ -1,21 +1,26 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound.ts";
 import gsap from "gsap";
 import * as THREE from "three";
 import { onboardingContent, periods } from "./constants";
 import { enableInactivityAnimation } from "./inactivity.ts";
 
-enableInactivityRedirection();
-enableInactivityAnimation()
 import {
+  allPOI,
   animatedScenes,
   camera,
   controls,
   loadModels,
-  allPOI,
   renderer,
   scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
+
+ambiantSound("/global/sounds/g1.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
+enableInactivityRedirection();
+enableInactivityAnimation()
 
 const titleElm = document.querySelector("#date-title");
 const subTitleElm = document.querySelector("#subTitle");
@@ -310,9 +315,6 @@ const sceneSetUp = async () => {
       x: step.target.x,
       y: step.target.y,
       z: step.target.z,
-      onComplete: () => {
-        firstMovementFinished = true
-      },
     });
 
     gsap.to(controls.object.position, {
@@ -320,9 +322,6 @@ const sceneSetUp = async () => {
       x: cameraPosition.x,
       y: cameraPosition.y,
       z: cameraPosition.z,
-      onComplete: () => {
-        firstMovementFinished = true
-      },
     });
   };
 

@@ -13,6 +13,9 @@ const gui = new GUI();
 
 export const config = {
   envMapIntensity: 3,
+  // 1 = 75 fps on MBP M1PRO
+  // .7 = 100 fps on MBP M1PRO
+  scalePixelRatioFactor: .7,
 };
 
 const canvas = document.querySelector("canvas.webgl");
@@ -57,117 +60,123 @@ sunLight.shadow.radius = 4.2;
 sunLight.shadow.blurSamples = 25;
 sunLight.shadow.bias = -0.0002;
 
-// GUI for Light Controls
-const lightControls = gui.addFolder("Light Controls");
+// // GUI for Light Controls
+// const lightControls = gui.addFolder("Light Controls");
 
-lightControls
-  .add(sunLight.position, "x")
-  .min(-100)
-  .max(100)
-  .step(0.1)
-  .name("Light X");
-lightControls
-  .add(sunLight.position, "y")
-  .min(-100)
-  .max(100)
-  .step(0.1)
-  .name("Light Y");
-lightControls
-  .add(sunLight.position, "z")
-  .min(-100)
-  .max(100)
-  .step(0.1)
-  .name("Light Z");
+// lightControls
+//   .add(sunLight.position, "x")
+//   .min(-100)
+//   .max(100)
+//   .step(0.1)
+//   .name("Light X");
+// lightControls
+//   .add(sunLight.position, "y")
+//   .min(-100)
+//   .max(100)
+//   .step(0.1)
+//   .name("Light Y");
+// lightControls
+//   .add(sunLight.position, "z")
+//   .min(-100)
+//   .max(100)
+//   .step(0.1)
+//   .name("Light Z");
 
-lightControls
-  .add(sunLight.rotation, "x")
-  .min(-Math.PI)
-  .max(Math.PI)
-  .step(0.01)
-  .name("Light Rotation X");
-lightControls
-  .add(sunLight.rotation, "y")
-  .min(-Math.PI)
-  .max(Math.PI)
-  .step(0.01)
-  .name("Light Rotation Y");
-lightControls
-  .add(sunLight.rotation, "z")
-  .min(-Math.PI)
-  .max(Math.PI)
-  .step(0.01)
-  .name("Light Rotation Z");
+// lightControls
+//   .add(sunLight.rotation, "x")
+//   .min(-Math.PI)
+//   .max(Math.PI)
+//   .step(0.01)
+//   .name("Light Rotation X");
+// lightControls
+//   .add(sunLight.rotation, "y")
+//   .min(-Math.PI)
+//   .max(Math.PI)
+//   .step(0.01)
+//   .name("Light Rotation Y");
+// lightControls
+//   .add(sunLight.rotation, "z")
+//   .min(-Math.PI)
+//   .max(Math.PI)
+//   .step(0.01)
+//   .name("Light Rotation Z");
 
-lightControls.add(sunLight, "castShadow").name("Cast Shadow");
+// lightControls.add(sunLight, "castShadow").name("Cast Shadow");
 
-lightControls
-  .add(sunLight.shadow.camera, "left")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Left");
-lightControls
-  .add(sunLight.shadow.camera, "right")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Right");
+// lightControls
+//   .add(sunLight.shadow.camera, "left")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Left");
+// lightControls
+//   .add(sunLight.shadow.camera, "right")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Right");
 
-lightControls
-  .add(sunLight.shadow.camera, "top")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Top");
+// lightControls
+//   .add(sunLight.shadow.camera, "top")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Top");
 
-lightControls
-  .add(sunLight.shadow.camera, "bottom")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Bottom");
+// lightControls
+//   .add(sunLight.shadow.camera, "bottom")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Bottom");
 
-lightControls
-  .add(sunLight.shadow.camera, "near")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Near");
+// lightControls
+//   .add(sunLight.shadow.camera, "near")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Near");
 
-lightControls
-  .add(sunLight.shadow.camera, "far")
-  .min(-100)
-  .max(100)
-  .name("Shadow Camera Far");
+// lightControls
+//   .add(sunLight.shadow.camera, "far")
+//   .min(-100)
+//   .max(100)
+//   .name("Shadow Camera Far");
 
-lightControls
-  .add(sunLight, "intensity")
-  .min(0)
-  .max(10)
-  .step(0.001)
-  .name("Light Intensity");
+// lightControls
+//   .add(sunLight, "intensity")
+//   .min(0)
+//   .max(10)
+//   .step(0.001)
+//   .name("Light Intensity");
 
-lightControls
-  .add(sunLight.shadow, "radius")
-  .min(0)
-  .max(10)
-  .step(0.001)
-  .name("Shadow Radius");
+// lightControls
+//   .add(sunLight.shadow, "radius")
+//   .min(0)
+//   .max(10)
+//   .step(0.001)
+//   .name("Shadow Radius");
 
-lightControls
-  .add(sunLight.shadow, "blurSamples")
-  .min(0)
-  .max(100)
-  .step(1)
-  .name("Shadow Blur Samples");
+// lightControls
+//   .add(sunLight.shadow, "blurSamples")
+//   .min(0)
+//   .max(100)
+//   .step(1)
+//   .name("Shadow Blur Samples");
 
-lightControls
-  .add(sunLight.shadow, "bias")
-  .min(-0.01)
-  .max(0.01)
-  .step(0.0001)
-  .name("Shadow Bias");
+// lightControls
+//   .add(sunLight.shadow, "bias")
+//   .min(-0.01)
+//   .max(0.01)
+//   .step(0.0001)
+//   .name("Shadow Bias");
 
-lightControls.open();
+// lightControls.close();
 
 
-const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
-const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
+// const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
+// const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
+
+// scene.add(sunLightHelper);
+// scene.add(sunLightCameraHelper);
+
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 gui.onFinishChange(() => {
   sunLight.shadow.camera.updateProjectionMatrix();
@@ -176,11 +185,7 @@ gui.onFinishChange(() => {
   updateAllMaterials();
 });
 
-scene.add(sunLightHelper);
-scene.add(sunLightCameraHelper);
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
 
 
 // ENVIRONMENT
@@ -223,7 +228,7 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 
   renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 });
 
 // CAMERA
@@ -345,9 +350,10 @@ gui.onFinishChange(() => {
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  powerPreference: "high-performance",
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2) * config.scalePixelRatioFactor);
 renderer.setClearColor("#FFF6ED");
 renderer.shadowMap.enabled = true;
 
