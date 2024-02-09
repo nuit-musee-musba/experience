@@ -64,6 +64,9 @@ function handleDragInteraction(
   });
 
   dragElement.addEventListener("touchmove", (e) => {
+    if (dragElement.classList.contains('disabled')) {
+      return;
+    }
     //if (!success) {
     e.preventDefault();
     const touch = e.touches[0];
@@ -89,6 +92,7 @@ function handleDragInteraction(
 
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
+          dragElement.classList.add('disabled');
           playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
@@ -129,7 +133,7 @@ function handleDragInteraction(
               success = true;
             } else {
               print_chef_speech(
-                "Vous en avez assez mis ! Cherchez quelque chose d'autre"
+                "Vous en avez déjà placé cet élément ! Cherchez quelque chose d'autre"
               ); //definie dans speechBehavior.js
               //alert("tu as mis tout les elements requis pour cet aliment");
             }

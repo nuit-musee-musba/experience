@@ -98,6 +98,13 @@
             z-index: -1;
         }
     }
+    &.disabled {
+      filter: saturate(0);
+      opacity: .5;
+      img {
+        animation: none;
+      }
+    }
     // TAB FOOD
     &-peach {
       left: 320px;

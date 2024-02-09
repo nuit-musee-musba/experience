@@ -60,7 +60,9 @@
 
       &.checked {
         color: grey;
-        text-decoration: line-through;
+        .item-stuff {
+          text-decoration: line-through;
+        }
         .item-checkbox {
           img {
             display: block;
