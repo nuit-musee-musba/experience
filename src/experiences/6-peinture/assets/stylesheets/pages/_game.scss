@@ -107,3 +107,19 @@
 .scintillating-text {
   animation: scintillation 1s infinite;
 }
+
+.shepherd-button:not(:disabled):hover {
+  background: unset !important;
+  color: unset !important;
+}
+
+.shepherd-button {
+  background: unset !important;
+  border: unset !important;
+  border-radius: unset !important;
+  color: unset !important;
+  cursor: unset !important;
+  margin-right: unset !important;
+  padding: unset !important;
+  transition: unset !important;
+}
