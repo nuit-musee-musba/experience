@@ -9,6 +9,13 @@
     />
     <title>Document</title>
     <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
+
+    <script type="module">
+      import { demarrerTour } from "./assets/javascript/experience/utils/helpBehaviour.js";
+
+      // Rend la fonction accessible globalement pour être utilisée dans l'attribut onclick
+      window.demarrerTour = demarrerTour;
+    </script>
   </head>
   <nav>
     <div class="bottom-menu">
@@ -17,7 +24,7 @@
           <span>Accueil</span>
         </i>
       </a>
-      <a onclick="" class="btn-icon">
+      <a onclick="demarrerTour()" class="btn-icon" id="helpbtn">
         <i class="">
           <span>?</span>
         </i>
