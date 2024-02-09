@@ -95,7 +95,6 @@ function handleDragInteraction(
 
       if (isCorrect) {
         if (dialog.recipe_step == current_step) {
-          dragElement.classList.add('disabled');
           playAnimation(dialog.animation);
           //l'item doit etre dans le step actuel
           if (isMultiple) {
@@ -108,7 +107,7 @@ function handleDragInteraction(
             print_chef_speech(dialog.dialog); //definie dans speechBehavior.js
             if (dialog.number_needed == howManyDrags) {
               recipeResolve(dialog.id);
-              dragElement.classList.add('disabled-item')
+              dragElement.classList.add('disabled');
             }
 
             // if (howManyDrags < dialog.number_needed) {
