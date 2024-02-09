@@ -27,9 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create scene
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0xf8f4f4, 3, 6.5);
+scene.fog = new THREE.Fog(0xf8f4f4, 3, 5.3);
 window.experience.scene = scene;
-updateAllMaterials();
 
 // Target canvas
 var canvas = document.getElementById("webgl");
@@ -56,10 +55,10 @@ document.body.appendChild(renderer.domElement);
 
 // Add light
 
-// const ambientLight = new THREE.AmbientLight(0x404040);
-// ambientLight.intensity = 1;
-// ambientLight.position.set(0, 2, 0);
-// scene.add(ambientLight);
+const ambientLight = new THREE.AmbientLight(0x404040);
+ambientLight.intensity = 1;
+ambientLight.position.set(0, 2, 0);
+scene.add(ambientLight);
 
 // const spotLight = new THREE.SpotLight(0xffffff, 1, 1);
 // spotLight.position.set(0, 0.6, -0.6);
@@ -124,6 +123,7 @@ loaderElement.style.display = "flex";
 
 // Add carousel to scene once all worlds are added
 scene.add(carousel);
+updateAllMaterials();
 
 window.experience.carousel = carousel;
 
