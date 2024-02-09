@@ -65,6 +65,27 @@ p {
   pointer-events: none;
 }
 
+/* ----- Painting description ----- */
+.painting-desc {
+  position: absolute;
+  right: 124px;
+  padding: 2rem 3rem;
+  width: 894px;
+  color: var(--4-white);
+  border-left: 5px solid var(--4-white);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.painting-desc.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.painting-desc .painting-title,
+.painting-desc .painting-author {
+  margin-bottom: 2.5rem;
+}
+
 /* ----- Popins ----- */
 
 .popin-overlay {

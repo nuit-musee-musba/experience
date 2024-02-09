@@ -219,6 +219,7 @@ const firstPainting = new THREE.Mesh(
   firstPaintingMaterial
 );
 
+firstPainting.name = "first";
 firstPainting.position.x = globalParameters.ellipseRadius;
 
 // Second painting
@@ -231,6 +232,7 @@ const secondPainting = new THREE.Mesh(
   secondPaintingMaterial
 );
 
+secondPainting.name = "second";
 secondPainting.position.y = globalParameters.ellipseRadius;
 
 // Third painting
@@ -243,6 +245,7 @@ const thirdPainting = new THREE.Mesh(
   thirdPaintingMaterial
 );
 
+thirdPainting.name = "third";
 thirdPainting.position.x = -globalParameters.ellipseRadius;
 
 // Add paintings to scene
@@ -321,39 +324,78 @@ window.addEventListener(
     event.preventDefault();
   },
   { passive: false }
-); // Use { passive: false } to enable preventDefault
+);
 
-canvas.addEventListener("click", () => {
-  // Cast a ray
-  raycaster.setFromCamera(mouse, camera);
+/**
+ * Toggle painting desc
+ */
+const objectsToTest = [firstPainting, secondPainting, thirdPainting];
+const descsToToggle = [
+  document.querySelector("#first-desc"),
+  document.querySelector("#second-desc"),
+  document.querySelector("#third-desc")
+]
+// const firstDesc = document.querySelector("#first-desc")
+// const secondDesc = document.querySelector("#second-desc")
+// const thirdDesc = document.querySelector("#third-desc")
 
-  const objectsToTest = [firstPainting, secondPainting, thirdPainting];
-  const intersects = raycaster.intersectObjects(objectsToTest);
+const checkCurrentPainting = () => {
 
-  if (intersects.length && intersects[0].point.z > 0) {
-    currentIntersect = intersects[0];
-  } else {
-    currentIntersect = null;
-  }
-
-  if (currentIntersect) {
-    switch (currentIntersect.object) {
-      case firstPainting:
-        window.location.href = "./first-painting.html";
-        break;
-
-      case secondPainting:
-        window.location.href = "./second-painting.html";
-        break;
-
-      case thirdPainting:
-        window.location.href = "./third-painting.html";
-        break;
-
-      default:
+  let nearestPos = -4;
+  let nearestPainting = null;
+  for (let i = 0; i < objectsToTest.length; i++) {
+    if (objectsToTest[i].position.z > nearestPos) {
+      nearestPos = objectsToTest[i].position.z;
+      nearestPainting = objectsToTest[i].name
     }
   }
-});
+  return nearestPainting;
+}
+
+const togglePaintingDesc = () => {
+  const currentPainting = checkCurrentPainting()
+
+  for (let i = 0; i < objectsToTest.length; i++) {
+    if (objectsToTest[i].name === currentPainting) {
+      descsToToggle[i].classList.remove("hidden")
+    } else {
+      descsToToggle[i].classList.add("hidden")
+    }
+  }
+}
+
+togglePaintingDesc()
+// canvas.addEventListener("click", () => {
+//   // Cast a ray
+//   raycaster.setFromCamera(mouse, camera);
+
+//   const objectsToTest = [firstPainting, secondPainting, thirdPainting];
+//   const intersects = raycaster.intersectObjects(objectsToTest);
+
+//   if (intersects.length && intersects[0].point.z > 0) {
+//     currentIntersect = intersects[0];
+//   } else {
+//     currentIntersect = null;
+//   }
+
+//   if (currentIntersect) {
+//     switch (currentIntersect.object) {
+//       case firstPainting:
+//         window.location.href = "./first-painting.html";
+//         break;
+
+//       case secondPainting:
+//         window.location.href = "./second-painting.html";
+//         break;
+
+//       case thirdPainting:
+//         window.location.href = "./third-painting.html";
+//         break;
+
+//       default:
+//     }
+//   }
+// });
 
 // Rotate paintings
 // function checkUserInteractions() {
@@ -421,6 +463,7 @@ window.addEventListener(
       // Render
       renderer.render(scene, camera);
     }
+    togglePaintingDesc()
   },
   { passive: false }
 );
@@ -459,7 +502,7 @@ scene.add(ambientLight);
 /**
  * Animate
  */
-let currentIntersect = null;
+// let currentIntersect = null;
 const clock = new THREE.Clock()
 
 const tick = () => {
@@ -486,7 +529,7 @@ const tick = () => {
   //Particles move
   const elapsedTime = clock.getElapsedTime()
 
-  // __Update particles__
+  // Update particles
   particles1.position.x = Math.cos(elapsedTime / 2) * 0.05
   particles1.position.y = Math.sin(elapsedTime / 2) * 0.05
   particles1.position.z = Math.sin(elapsedTime / 2) * 0.05 + 9
@@ -503,13 +546,11 @@ const tick = () => {
   particles4.position.y = Math.cos(elapsedTime / 2) * 0.05
   particles4.position.z = Math.sin(elapsedTime / 2) * -0.05 + 9
 
-  // __Update controls__
-  // controls.update()
 
-  // __Render__
+  // Render
   renderer.render(scene, camera)
 
-  // __Call tick again on the next frame__
+  // Call tick again on the next frame
   window.requestAnimationFrame(tick)
 
 };
