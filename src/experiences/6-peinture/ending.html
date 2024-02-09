@@ -1,52 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta
-    name="viewport"
-    content="user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
-  />
-  <title>Document</title>
-  <link rel="stylesheet" href="./assets/stylesheets/main.scss">
-</head>
-<body class="page__ending">
-  <main>
-    <div class="chef-illustration">
-      <img src="/6-peinture/images/scenery/ending/jeff-1.svg" alt="">
-      <div class="illustration-end">
-        <img src="/6-peinture/images/scenery/ending/easel.svg" alt="">
-        <img src="/6-peinture/images/scenery/intro-chef.svg" alt="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/stylesheets/main.scss" />
+  </head>
+  <body class="page__ending">
+    <main>
+      <div class="chef-illustration">
+        <img src="/6-peinture/images/scenery/ending/jeff-1.svg" alt="" />
+        <div class="illustration-end">
+          <img src="/6-peinture/images/scenery/ending/easel.svg" alt="" />
+          <img src="/6-peinture/images/scenery/intro-chef.svg" alt="" />
+        </div>
       </div>
-    </div>
-    <div class="dialog">
-      <div class="dialog-nav">
-        <button class="btn-prev">Précédent</button>
-        <button class="btn-next">Suivant</button>
-        <a class="btn-game" href="/">Retour à l'accueil</a>
+      <div class="dialog">
+        <div class="dialog-nav">
+          <button class="btn-prev">Précédent</button>
+          <button class="btn-next">Suivant</button>
+          <a class="btn-game" href="/">Retour à l'accueil</a>
+        </div>
+        <div class="dialog-content active" data-background="background-2">
+          <p>
+            La sémantique et la composition ne font pas tout dans une vanité !
+            <br />
+            Il faut aussi prendre en compte la répartition des couleurs et de la
+            lumière !
+          </p>
+        </div>
+        <div
+          class="dialog-content"
+          data-background="background-3"
+          data-anim="true"
+        >
+          <p>
+            Toutes mes félicitations ! Vous venez de réaliser
+            <b>votre première vanité sous mon œil d’expert</b>. L’artiste en
+            vous est en train de naître, peut-être qu’un jour vous dépasserez le
+            maître ! Jan Brueghel de Velours ne pourra que l’adorer !
+          </p>
+        </div>
       </div>
-      <div class="dialog-content active" data-background="background-2">
-        <p>La sémantique et la composition ne font pas tout dans une vanité !
-          <br>
-          Il faut aussi prendre en compte la répartition des couleurs et de la lumière !</p>
+      <div class="popup-animation"></div>
+    </main>
+    <nav>
+      <div class="bottom-menu">
+        <a href="/" class="btn-icon">
+          <i class="i-home">
+            <span>Accueil</span>
+          </i>
+        </a>
       </div>
-      <div class="dialog-content" data-background="background-3" data-anim="true">
-        <p>
-          Toutes mes félicitations ! Vous venez de réaliser <b>votre première vanité sous mon œil d’expert</b>. L’artiste en vous est en train de naître, peut-être qu’un jour vous dépasserez le maître ! XXX ne pourra que l’adorer !
-        </p>
-      </div>
-    </div>
-    <div class="popup-animation"></div>
-  </main>
-  <nav>
-    <div class="bottom-menu">
-      <a href="/" class="btn-icon">
-        <i class="i-home">
-          <span>Accueil</span>
-        </i>
-      </a>
-    </div>
-  </nav>
-</body>
-<script type="module" src="./assets/javascript/main.js"></script>
+    </nav>
+  </body>
+  <script type="module" src="./assets/javascript/main.js"></script>
 </html>

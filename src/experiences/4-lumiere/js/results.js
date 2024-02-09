@@ -4,19 +4,29 @@ import { enableInactivityRedirection } from "/global/js/inactivity";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
- * Inactivity
+ * Global settings
  */
-enableInactivityRedirection();
-
-/**
- * Visited paintings
- */
-
-let visitedPaintings = {
-  first: localStorage.getItem("4-first"),
-  second: localStorage.getItem("4-second"),
-  third: localStorage.getItem("4-third"),
+// Clear local storage
+const clearLocalStorage = () => {
+  localStorage.removeItem("4-first");
+  localStorage.removeItem("4-second");
+  localStorage.removeItem("4-third");
 }
+// leave button
+const leaveBtns = document.querySelectorAll(".btn-back-hub")
+for (const leaveBtn of leaveBtns) {
+  leaveBtn.addEventListener("click",
+    () => {
+      clearLocalStorage();
+      window.location.href = "/";
+    }
+  )
+}
+
+// Inactivity
+enableInactivityRedirection().beforeRedirect(() => {
+  clearLocalStorage();
+});
 
 /**
  * Result texts
@@ -55,6 +65,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     default:
       break;
+  }
+
+  let visitedPaintings = {
+    first: localStorage.getItem("4-first"),
+    second: localStorage.getItem("4-second"),
+    third: localStorage.getItem("4-third"),
+  }
+
+  console.log("visitedPaintings:", visitedPaintings)
+  if (visitedPaintings.first && visitedPaintings.second && visitedPaintings.third) {
+    let endResultBtns = document.querySelectorAll(".btn-wrapper .btn-small-primary")
+
+    endResultBtns.forEach(btn => {
+      btn.textContent = "Terminer l'expérience";
+      btn.href = "./end.html";
+    });
+
+  } else {
+    console.log("not true")
   }
 });
 
