@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { onboardingContent, periods } from "./constants";
 import { enableInactivityAnimation } from "./inactivity.ts";
 
-// enableInactivityRedirection();
+enableInactivityRedirection();
 enableInactivityAnimation()
 import {
   animatedScenes,
