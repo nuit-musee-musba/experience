@@ -20,6 +20,7 @@ class BookPage {
     this.item.addEventListener("touchstart", () => {
       this.selectedItem = items.items.find((item) => item.id === this.id);
       this.closeBook();
+      this.animation(true);
       this.displayData(this.selectedItem);
     });
     this.item.addEventListener("click", () => {
@@ -27,9 +28,6 @@ class BookPage {
       this.animation(true);
       this.displayData(this.selectedItem);
     });
-    // this.item.addEventListener("touchstart", () => {
-    //   this.animation(true);
-    // });
     this.item.addEventListener("touchend", () => {
       this.closeBook();
       this.animation(false);
@@ -37,6 +35,7 @@ class BookPage {
     this.item.addEventListener("touchmove", () => {
       this.animation(false);
       this.displayData(this.selectedItem);
+      this.item.style.zIndex = "99";
     });
   }
 

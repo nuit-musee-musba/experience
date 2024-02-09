@@ -7,6 +7,9 @@ const PolishingPart = () => {
 
   const polishingPart = document.getElementById("PolishingPart");
   polishingPart.classList.add("show");
+
+  const steps1InPolishingPart = document.getElementById("steps1InPolishingPart");
+  steps1InPolishingPart.classList.add("show");
 };
 
 export default PolishingPart;
