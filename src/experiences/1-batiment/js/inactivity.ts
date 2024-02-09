@@ -19,7 +19,6 @@ export const enableInactivityAnimation = () => {
       return;
     }
     animateOpacity(100);
-    console.log("display animation");
   };
 
   const resetTimer = () => {

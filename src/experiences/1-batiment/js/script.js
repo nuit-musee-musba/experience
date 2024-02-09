@@ -179,7 +179,6 @@ const sceneSetUp = async () => {
 
   const handleNext = async () => {
 
-    console.log({ currentStep })
     titleElm.classList.add("date-title-hidden");
     if (currentStep === 3) {
       console.log("a", loaderElm.classList)
