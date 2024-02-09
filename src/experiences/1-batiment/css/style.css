@@ -107,7 +107,6 @@ body {
   color: white;
   font-size: 8rem;
   font-weight: 100;
-  /* Existing styles */
   transition: opacity 0.6s ease-in-out;
   transition-delay: 200ms;
 }
