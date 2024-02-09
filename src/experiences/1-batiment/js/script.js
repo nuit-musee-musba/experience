@@ -310,9 +310,6 @@ const sceneSetUp = async () => {
       x: step.target.x,
       y: step.target.y,
       z: step.target.z,
-      onComplete: () => {
-        firstMovementFinished = true
-      },
     });
 
     gsap.to(controls.object.position, {
@@ -320,9 +317,6 @@ const sceneSetUp = async () => {
       x: cameraPosition.x,
       y: cameraPosition.y,
       z: cameraPosition.z,
-      onComplete: () => {
-        firstMovementFinished = true
-      },
     });
   };
 
