@@ -79,6 +79,14 @@ const sceneSetUp = async () => {
     }
   }
 
+  const imagePointComponent = document.getElementById("image-point-component");
+  const imagePoint = document.getElementById("image-poi");
+
+  const endMenu = document.getElementById("end-menu");
+  const lastStep = document.getElementById("last-step");
+  const component = document.getElementById("poi-component");
+
+
   const displayPOI = (index) => {
     for (let i = 0; i < allPOI.length; i++) {
       if (i !== index) {
@@ -93,6 +101,10 @@ const sceneSetUp = async () => {
               periods[i].poiText[j].title;
             document.getElementById("poi-text-component").innerHTML =
               periods[i].poiText[j].text;
+
+            document.getElementById("image-poi").src = periods[i].imagePath[j];
+
+
           }
 
           const position = periods[i].poiPosition[j];
@@ -117,9 +129,6 @@ const sceneSetUp = async () => {
   };
   tick();
 
-  const endMenu = document.getElementById("end-menu");
-  const lastStep = document.getElementById("last-step");
-  const component = document.getElementById("poi-component");
 
   const restart = () => {
     index = 0;
@@ -129,11 +138,23 @@ const sceneSetUp = async () => {
   const showText = () => {
     isShowingText = true;
     component.style.display = "flex";
+
+
+    if (imagePoint.src.includes("undefined")) {
+      imagePointComponent.style.display = "none";
+      return;
+    }
+
+    imagePointComponent.style.display = "flex";
+
+
   };
 
   const hideText = () => {
     isShowingText = false;
     component.style.display = "none";
+    imagePointComponent.style.display = "none";
+
   };
   window.addEventListener("click", poiClick, false);
   window.addEventListener("mousedown", hideText(), false);
@@ -183,7 +204,6 @@ const sceneSetUp = async () => {
 
     titleElm.classList.add("date-title-hidden");
     if (currentStep === 3) {
-      console.log("a", loaderElm.classList)
       loaderElm.classList.remove('loader-hidden')
       loaderIconElm.classList.remove('loader-hidden')
 
@@ -196,7 +216,6 @@ const sceneSetUp = async () => {
 
       await wait(2000)
 
-      console.log("b", loaderElm.classList)
 
       handleFocusPeriod(periods[0]);
 
