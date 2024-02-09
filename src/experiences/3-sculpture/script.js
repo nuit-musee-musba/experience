@@ -1,4 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -14,6 +15,9 @@ import PolishingPart from "./component/5-PolishingPart/PolishingPart";
 import OutroPart from "./component/6-OutroPart/OutroPart";
 
 enableInactivityRedirection();
+ambiantSound("/global/sounds/g3.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 const sizes = {
   width: window.innerWidth,

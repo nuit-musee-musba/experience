@@ -1,21 +1,25 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
+import { ambiantSound } from "@/global/js/sound.ts";
 import gsap from "gsap";
 import * as THREE from "three";
-import { period } from "./period";
 import { enableInactivityAnimation } from "./inactivity.ts";
-
-enableInactivityRedirection();
-enableInactivityAnimation()
+import { period } from "./period";
 import {
+  allPOI,
   animatedScenes,
   camera,
   controls,
   loadModels,
-  allPOI,
   renderer,
   scene,
 } from "./scene.js";
 import { updateAllMaterials } from "./utils";
+
+ambiantSound("/global/sounds/g1.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
+enableInactivityRedirection();
+enableInactivityAnimation()
 
 const sceneSetUp = async () => {
   document.oncontextmenu = function () {

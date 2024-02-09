@@ -1,11 +1,20 @@
 import * as THREE from "three";
 import GUI from "lil-gui";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+import { ambiantSound } from "@/global/js/sound";
+
+/**
+ * Ambiant Sound
+ */
+ambiantSound("/global/sounds/g4.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 
 /**
  * Inactivity
  */
 enableInactivityRedirection();
+
 
 /**
  * Popins
