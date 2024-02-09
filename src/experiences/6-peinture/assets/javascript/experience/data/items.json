@@ -41,7 +41,7 @@
       "name": "La carotte",
       "category": "food",
       "description": "Elle est un symbole fort <b>érotique</b> qui cherche à prévenir et à avertir contre tout excès.",
-      "dialog": "Hop hop hop ! Ne vous précipitez pas, on a le temps. Et rangez-moi ces idées de votre tête… ",
+      "dialog": "Hop hop hop ! Ne vous précipitez pas, on a le temps. Sortez-moi ces idées lubriques de votre tête.",
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
@@ -113,7 +113,7 @@
       "name": "Le crâne",
       "category": "objects",
       "description": "Support de réflexion sur le passage de la mort à la résurrection, l’abandon de l’enveloppe charnelle et le dépouillement des biens de ce monde. Il signifie le <b>dépassement vers le salut éternel</b>.",
-      "dialog": "Crânez pas, c’est la mauvaise réponse…",
+      "dialog": "Ne crânez pas trop, il n'est pas dans la liste ! ",
       "wrong_step_dialog": "",
       "recipe_text": "",
       "recipe_step": 0,
@@ -160,7 +160,7 @@
       "id": "14",
       "name": "Le poisson",
       "category": "animals",
-      "description": "Il représente <b>Jésus-Christ</b> mais aussi le <b>baptême</b> car tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême (sacrement réalisé avec de l’eau).",
+      "description": "Il représente <b>Jésus-Christ</b> mais aussi <b>le baptême</b> car «tout comme le poisson ne peut pas vivre sans eau, le croyant ne peut pas être chrétien sans baptême» (sacrement réalisé avec de l’eau).",
       "dialog": "Vous me faites un poisson d’avril là ?",
       "wrong_step_dialog": "",
       "recipe_text": "",
@@ -190,7 +190,7 @@
       "recipe_text": "",
       "recipe_step": 0,
       "number_needed": 0,
-      "animation": "animJeffHappy"
+      "animation": "animJeffNope"
     },
     {
       "id": "17",

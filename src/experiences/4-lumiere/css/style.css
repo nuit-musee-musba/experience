@@ -119,8 +119,8 @@ p {
   opacity: 0;
   visibility: hidden;
   transition:
-    visibility 0s,
-    opacity 2s ease-in-out;
+    visibility 3.5s,
+    opacity 3.5s ease-in-out;
 }
 #popin-consignes.textshow .popin-body {
   opacity: 1;
@@ -130,8 +130,8 @@ p {
   visibility: hidden;
   opacity: 0;
   transition:
-    visibility 0s,
-    opacity 2s ease-in-out;
+    visibility 3.5s,
+    opacity 3.5s ease-in-out;
 }
 
 .popin.hidden,
@@ -149,6 +149,33 @@ p {
   color: var(--white);
   box-sizing: border-box;
 }
+
+#popin-end {
+  background-color: transparent;
+}
+
+#popin-end .popin-body {
+  background-color: #000000;
+  width: 65%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-end {
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-end .btn-small-primary {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
 
 /* ----- Consignes ----- */
 

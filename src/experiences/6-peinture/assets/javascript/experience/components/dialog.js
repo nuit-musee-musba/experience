@@ -1,18 +1,32 @@
+import lottie from 'lottie-web';
+
 class Dialog {
   constructor(element) {
     this.element = element;
     this.dialogs = this.element.querySelectorAll(".dialog-content");
+    this.animationContent = document.querySelector(".chef-animation");
 
     this.buttonNext = this.element.querySelector(".btn-next");
     this.buttonPrev = this.element.querySelector(".btn-prev");
     this.buttonPlay = this.element.querySelector(".btn-game");
 
+    const animationPath = '/6-peinture/animations/anim-jeff-full-iddle.json';
+
+    var chefFullanimation = lottie.loadAnimation({
+      container: this.animationContent,
+      path: animationPath,
+      renderer: 'svg',
+      loop: true,
+      autoplay: false
+    });
+
+    chefFullanimation.play();
     this.listen();
   }
 
   listen() {
     let i = 0;
-    
+
     if (this.buttonPrev) {
       this.buttonPrev.addEventListener("click", () => {
         if (i == 1) {
@@ -31,18 +45,18 @@ class Dialog {
 
     if (this.buttonNext) {
       this.buttonNext.addEventListener("click", () => {
-      if (i == 0) {
-        this.buttonPrev.style.display = "flex";
-      }
-      if (i < this.dialogs.length - 1) {
-        i++;
-        this.updateCurrent(this.dialogs[i]);
-      }
-      if (i == this.dialogs.length - 1) {
-        this.buttonNext.style.display = "none";
-        this.buttonPlay.style.display = "flex";
-      }
-    });
+        if (i == 0) {
+          this.buttonPrev.style.display = "flex";
+        }
+        if (i < this.dialogs.length - 1) {
+          i++;
+          this.updateCurrent(this.dialogs[i]);
+        }
+        if (i == this.dialogs.length - 1) {
+          this.buttonNext.style.display = "none";
+          this.buttonPlay.style.display = "flex";
+        }
+      });
     }
   }
 
@@ -51,17 +65,19 @@ class Dialog {
     this.animation = dialog.getAttribute(["data-anim"]);
     if (this.animation) {
       this.animContent = document.querySelector('.popup-animation');
+
       this.animContent.style.display = 'block';
+      document.body.classList.add('last-scene');
 
       setTimeout(() => {
         this.animContent.style.display = 'none';
-      }, 2500); 
+      }, 2500);
     }
     if (this.background) {
       const backgroundPath = `/6-peinture/images/scenery/ending/${this.background}.svg`;
       setTimeout(() => {
         document.body.style.backgroundImage = `url(${backgroundPath})`;
-      }, 1000); 
+      }, 1000);
     }
 
     this.currentDialog = this.element.querySelector(".active");

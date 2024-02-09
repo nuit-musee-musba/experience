@@ -45,9 +45,11 @@
 }
 
 .result .btn-row{
+  display: flex;
   position: absolute;
   bottom: 0;
   left: 50%;
   width: max-content;
   transform: translate(-50%, 50%);
+  gap: 2rem;
 }

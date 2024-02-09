@@ -18,6 +18,7 @@
 @import url("./components/infos/infoTimelineContainer.css");
 
 @import url("./components/result.css");
+@import url("./components/timelapse.css");
 
 @import url("../../../global/style.css");
 
@@ -154,6 +155,7 @@ body {
 }
 
 .pieces-ref {
+  transition: stroke 0.3s;
   position: relative;
   z-index: 1;
 }
@@ -194,6 +196,6 @@ body {
   color: var(--primary-1-color);
 }
 
-.btn-primary:disabled{
+.btn-primary:disabled {
   display: none;
 }
