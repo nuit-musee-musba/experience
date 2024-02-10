@@ -28,6 +28,9 @@ const mainTitleElm = document.querySelector(".main-title");
 const subTitleNextButton = document.querySelector(".subTitle-next");
 const wrapperSubTitleElm = document.querySelector(".wrapper-subTitle");
 
+const fingerRotation = document.getElementById("animation-video");
+const fingerTouch = document.getElementById("animation-video-touch");
+const poiFingerTouch = document.getElementById("poi-finger-touch");
 const loaderElm = document.querySelector(".loader")
 const loaderIconElm = document.querySelector(".loader-icon")
 
@@ -108,7 +111,6 @@ const sceneSetUp = async () => {
               periods[i].poiText[j].text;
 
             document.getElementById("image-poi").src = periods[i].imagePath[j];
-
 
           }
 
@@ -212,8 +214,18 @@ const sceneSetUp = async () => {
 
   const handleNext = async () => {
     if (!isOnboarded) {
-      titleElm.classList.add("date-title-hidden");
+      titleElm.classList.add("date-title-hidden"); //TODO: fix
       if (currentStep === 3) {
+        const animationTouch = document.getElementById("animation-video-touch");
+
+        gsap.to(animationTouch, {
+          duration: 1.5,
+          opacity: 0,
+          ease: "power2.inOut",
+        });
+
+        poiFingerTouch.style.display = "none";
+
         console.log("a", loaderElm.classList)
         loaderElm.classList.remove('loader-hidden')
         loaderIconElm.classList.remove('loader-hidden')
@@ -231,13 +243,34 @@ const sceneSetUp = async () => {
 
         handleFocusPeriod(periods[0]);
 
-
       } else if (currentStep >= 0 && currentStep <= 2) {
         subTitleElm.textContent = onboardingContent[currentStep].subTitle;
         mainTitleElm.textContent = onboardingContent[currentStep].mainTitle;
 
         if (currentStep == 0) {
           wrapperSubTitleElm.classList.remove("hidden");
+        }
+
+        if (currentStep == 1) {
+          gsap.to(fingerRotation, {
+            duration: 1.5,
+            opacity: 1,
+            ease: "power2.inOut",
+          });
+        }
+
+        if (currentStep == 2) {
+          subTitleNextButton.classList.add("hidden");
+          poiFingerTouch.style.display = "block";
+          poiFingerTouch.addEventListener("click", () => {
+            handleNext();
+          });
+
+          gsap.to(fingerTouch, {
+            duration: 1.5,
+            opacity: 1,
+            ease: "power2.inOut",
+          });
         }
 
         if (onboardingContent[currentStep].title) {
@@ -266,10 +299,7 @@ const sceneSetUp = async () => {
       }
     }
 
-
   };
-
-
 
   const handleStart = async () => {
     titleElm.classList.add("date-title-hidden");
