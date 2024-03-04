@@ -30,6 +30,14 @@ $widthBox: 30%;
 .controlContainer {
   position: absolute;
 }
+.partTitle {
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 2rem;
+  display: none;
+}
 
 .loadPart {
   position: absolute;

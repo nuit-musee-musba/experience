@@ -28,6 +28,11 @@ let raycasterActive = false;
 const steps1InRoughPart = document.getElementById("steps1InRoughPart");
 const steps2InRoughPart = document.getElementById("steps2InRoughPart");
 
+const detailsPartTitle = document.getElementById("DetailsPartTitle");
+const refiningPartTitle = document.getElementById("RefiningPartTitle");
+const polishingPartTitle = document.getElementById("PolishingPartTitle");
+
+
 //
 // INITIALIZATION
 //
@@ -312,6 +317,7 @@ function stepsFunction() {
             isNextText2 = true;
           }, 10000);
 
+          detailsPartTitle.classList.add('show')
         });
 
         if (statueV2.children.length <= 6) {
@@ -356,6 +362,7 @@ function stepsFunction() {
           setTimeout(() => {
             isNextText3 = true;
           }, 10000);
+          refiningPartTitle.classList.add('show')
 
         });
 
@@ -391,14 +398,14 @@ function stepsFunction() {
         const nextText7 = document.getElementById("nextText7");
         const polishText = document.getElementById("polishText");
 
-
-
         nextText5.addEventListener("click", function () {
           changeTextInSteps(steps1InPolishingPart, steps2InPolishingPart);
+
         });
 
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
+          polishingPartTitle.classList.add('show')
           polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
         });
 
@@ -505,7 +512,6 @@ const tick = () => {
     switch (steps) {
       case 1:
 
-
         if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText1) {
           if (statueV1.children.length > 0) {
             outlinePass.selectedObjects = [statueV1.children[Math.floor(Math.random() * statueV1.children.length)]];
@@ -515,6 +521,7 @@ const tick = () => {
         outlinePass.edgeStrength = Math.sin(elapsedTime) * params.edgeStrength;
         break;
       case 2:
+
         if (-0.5 < outlinePass.edgeStrength && outlinePass.edgeStrength < 0.5 && isNextText2) {
           if (statueV2.children.length > 0) {
             outlinePass.selectedObjects = [statueV2.children[Math.floor(Math.random() * statueV2.children.length)]];
