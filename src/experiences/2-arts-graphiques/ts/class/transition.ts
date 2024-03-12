@@ -172,8 +172,6 @@ export default class Transition {
               getPercentage: true,
               getPercentageAt: 60,
             };
-            console.log("seal !!");
-
             paint(
               canvas,
               currentSectionNumber,
@@ -220,7 +218,7 @@ export default class Transition {
         break;
       case 2:
         this.hintText.changeText(
-          "Dessinez l’œuvre “Saint Sébastien” pour lui donner vie."
+          "Dessinez l’œuvre pour lui donner vie."
         );
         break;
       case 3:
