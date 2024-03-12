@@ -90,8 +90,6 @@ const Paint = async (
 
     totalPixels = background.width * background.height;
     let isRevealInfo = false;
-    console.log(isRevealInfo);
-
     function pointerMove({
       global: { x, y },
     }: {
