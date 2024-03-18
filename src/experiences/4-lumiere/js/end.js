@@ -1,6 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound";
-import GUI from 'lil-gui';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -39,8 +38,6 @@ enableInactivityRedirection().beforeRedirect(() => {
 /**
  * Base
  */
-// Debug
-const gui = new GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
