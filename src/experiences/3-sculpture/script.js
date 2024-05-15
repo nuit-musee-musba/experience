@@ -116,12 +116,12 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
 
     } else if (workshop.children[i].name === "Area002_1") {
 
-      workshop.children[i].intensity = 1000;
+      workshop.children[i].intensity = 0; // Original = 1000
       workshop.children[i].angle = 0.281;
 
     } else if (workshop.children[i].name === "Spot") {
 
-      workshop.children[i].intensity = 250;
+      workshop.children[i].intensity = 0; // Original = 250
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
@@ -134,7 +134,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
       socle = workshop.children[i];
     } else if (workshop.children[i].name === "Point") {
 
-      workshop.children[i].intensity = 15;
+      workshop.children[i].intensity = 0;
     }
   }
   scene.add(workshop);
