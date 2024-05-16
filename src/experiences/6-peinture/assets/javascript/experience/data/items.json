@@ -29,7 +29,7 @@
       "name": "Le raisin",
       "category": "food",
       "description": "Le raisin est le symbole de <b>la Passion de Jésus-Christ</b>. En raison de sa couleur rouge, il peut aussi représenter <b>son sang.</b>",
-      "dialog": "Bravo ! Un sang faute !",
+      "dialog": "Bravo ! Un san(g) faute !",
       "wrong_step_dialog": "",
       "recipe_text": "La passion et le sang du Christ",
       "recipe_step": 3,
