@@ -42,6 +42,7 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
         gltf.scene.position.set(...position);
         gltf.scene.rotation.set(...rotation);
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
+        gltf.scene.userData.islandName = data[i].title;
         resolve(gltf);
       },
       undefined,

@@ -39,9 +39,18 @@ body {
   pointer-events: none;
 }
 
-#animation-video {
+#animation-video,
+#animation-video-touch {
   opacity: 0;
   font-size: 62px;
+}
+
+#poi-finger-touch {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 47.5%;
+  pointer-events: all !important;
 }
 
 .vignette {
@@ -486,9 +495,9 @@ body {
   font-weight: 600;
   font-size: 46px;
 
-  color: white;
-  background: #00000080;
-  border: none;
+  color: white !important;
+  background: #00000080 !important;
+  border: none !important;
 
   opacity: 1;
   transition: opacity 0.3s ease;

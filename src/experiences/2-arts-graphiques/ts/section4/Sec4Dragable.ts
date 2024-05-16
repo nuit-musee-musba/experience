@@ -138,7 +138,6 @@ export class Sec4Dragable extends Dragable {
       super.unable();
 
       const succeeded = this.onSucceed(this.id);
-      console.log({ succeeded });
 
       if (!succeeded) {
         this.element.style.zIndex = "0";
