@@ -306,9 +306,9 @@ const sceneSetUp = async () => {
 
     await loadModels();
 
-    animatedScenes.forEach((animatedScene) => {
-      animatedScene.finalState();
-    });
+    // animatedScenes.forEach((animatedScene) => {
+    animatedScenes[0].finalState();
+    // });
 
     updateAllMaterials();
 
