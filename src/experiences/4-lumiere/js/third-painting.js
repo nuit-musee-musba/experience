@@ -478,7 +478,7 @@ canvas.addEventListener(
       touchMoveY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
       const deltaY = touchMoveY - touchStartY;
       // Adjust the rotation of the ellipse based on the swipe distance
-      const movementSpeed = 0.5; // Adjust this value for desired sensitivity
+      const movementSpeed = 1.5; // Adjust this value for desired sensitivity
       if (rectAreaLight.position.y < lightMaxPos && deltaY > 0) {
         rectAreaLight.position.y += deltaY * movementSpeed;
         rectAreaLight.position.y > lightMaxPos
