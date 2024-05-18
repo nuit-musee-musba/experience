@@ -33,8 +33,8 @@ export const periods = [
       "Incendies en 1862 et 1870 obligent à des travaux de réfection, déplaçant temporairement la collection dans des structures vulnérables.",
     ],
     subTitle: [
-      "Manque de place, c’est en 1832, qu’il est alors décidé de transférer la collection complète dans les grands salons du rez-de-chaussée du palais Royal.",
-      "L’architecte municipal élabora en 1858 un projet de musée situé à l’arrière du palais. Aucun des projets n’avança à cette époque puis un premier incendie ravagea ce dernier le 13 juin 1862, endommageant quelques peintures.",
+      "Par manque de place, il est décidé en 1832 de transférer la collection complète dans les grands salons du rez-de-chaussée du Palais Royal.",
+      "L’architecte municipal élabora en 1858 un projet de musée situé à l’arrière du palais. Aucun des projets n’avança à cette époque puis un premier incendie ravagea le Palais Royal le 13 juin 1862, endommageant quelques peintures.",
       "Les travaux nécessitèrent le déplacement de la collection dans un « local en planches » installé dans le jardin. Provisoire à l’origine, cette structure, vulnérable aux incendies et aux inondations, demeura 8 années !",
     ],
     poiPosition: [{ x: 0.7, y: 0.7, z: -0.7 }],
@@ -57,10 +57,10 @@ export const periods = [
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
     ],
     subTitle: [
-      "Le chantier du musée actuel a débuté en avril 1875 avec la pose de la première pierre par le cardinal Donnet  et a été achevé en 1881. Un projet d'agrandissement en 1897 n'a pas abouti.",
-      "En parallèle, la galerie des Beaux-Arts a été conçue dans les années 1930 et supervisée par l'architecte Jacques Boistel d’Welle.",
-      " Les travaux ont débuté en 1936 et se sont achevés en mars 1939 malgré des retards dus à la Seconde Guerre mondiale. Après avoir été utilisée pendant la guerre, elle a repris ses activités artistiques en 1947.",
-      "C’est en 2001, qu’elle a été restaurée pour se conformer aux normes de sécurité et d'accessibilité.",
+      "Le chantier du musée actuel a débuté en avril 1875 avec la pose de la première pierre par le cardinal Donnet et a été achevé en 1881. Un projet d'agrandissement en 1897 n'a pas abouti.",
+      "En parallèle, la galerie des Beaux-Arts a été conçue dans les années 1930 et supervisée par l'architecte Jacques Boistel d’Welles.",
+      "Les travaux ont débuté en 1936 et se sont achevés en mars 1939 malgré des retards dus à la Seconde Guerre mondiale. Après avoir été utilisée pendant la guerre, la galerie a repris ses activités artistiques en 1947.",
+      "C’est en 2001 qu’elle a été restaurée pour se conformer aux normes de sécurité et d'accessibilité.",
     ],
     poiPosition: [
       { x: -2.4, y: 0.7, z: 4.5 },
@@ -69,8 +69,8 @@ export const periods = [
     ],
     poiText: [
       {
-        title: "Façade de la galerie des beaux-arts",
-        text: "Le maire Adrien Marquet décida la construction de cette galerie. Elle fut réalisée par l'architecte D'Welles de 1936 à 1939. Sa façade est composée d'une porte monumentale surmontée des armes de la Ville. Vous pourrez admirer à l'intérieur un très bel escalier dont la rampe du XVIIIe siècle fut offerte par la Chambre de Commerce et d'Industrie de Bordeaux.",
+        title: "Façade de la galerie des Beaux-Arts",
+        text: "Le maire Adrien Marquet décida la construction de cette galerie. Elle fut réalisée par l'architecte d'Welles de 1936 à 1939. Sa façade est composée d'une porte monumentale surmontée des armes de la Ville. Vous pourrez admirer à l'intérieur un très bel escalier dont la rampe du XVIIIe siècle fut offerte par la Chambre de Commerce et d'Industrie de Bordeaux.",
       },
       {
         title: "Les façades des pavillons du côté du cours d’Albret",
@@ -78,7 +78,7 @@ export const periods = [
       },
       {
         title: "Façades côté jardin",
-        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil de bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
+        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
       },
     ],
     imagePath: ["/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg", "/1-batiment/images/1875-3.jpg"],
@@ -91,11 +91,11 @@ export const periods = [
     position: { x: 6, y: 2, z: 6 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes dans les ailes construites par Burguet.",
-      "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
+      "La galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
     ],
     subTitle: [
-      "Le Musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes.",
-      "La Galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
+      "Le musée des Beaux-Arts de Bordeaux continue de jouer un rôle majeur dans la vie culturelle de la ville, présentant des collections permanentes.",
+      "La galerie des Beaux-Arts continue d'accueillir des expositions temporaires, maintenant conformes aux normes de sécurité et d'accessibilité contemporaines.",
     ],
     poiPosition: [
       { x: 0.9, y: 0.7, z: 2.7 },
@@ -118,7 +118,7 @@ export const periods = [
 
 export const onboardingContent = [
   {
-    subTitle: "Bienvenue aux musées des beaux-arts de Bordeaux, connaissez-vous l’histoire de ce bâtiment ?",
+    subTitle: "Bienvenue au musée des Beaux-Arts de Bordeaux, connaissez-vous l’histoire de ce bâtiment ?",
     mainTitle: "Bienvenue dans l’histoire du musée",
   },
   {
