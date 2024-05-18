@@ -406,7 +406,7 @@ function stepsFunction() {
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
           polishingPartTitle.classList.add('show')
-          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
+          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat."
         });
 
         if (quantity <= 0.5) {
