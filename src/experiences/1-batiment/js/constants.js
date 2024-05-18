@@ -107,7 +107,7 @@ export const periods = [
         text: "Les trois portails qui s'ouvrent sur le cours d'Albret forment un ensemble, avec le portail central qui se distingue par son élaboration particulière. Ce dernier présente les éléments suivants : Une couronne comtale. L'écusson de la ville. Une abondance de motifs variés tels que des dauphins, des coquillages, des lions, des guirlandes de raisins, etc.",
       },
       {
-        title: "3- Bâtiment",
+        title: "2- Bâtiment",
         text: "Le bâtiment est constitué de deux ailes parallèles avec des pavillons donnant sur les jardins.",
       },
     ],
