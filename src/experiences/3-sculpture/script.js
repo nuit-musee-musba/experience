@@ -105,7 +105,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0; i < workshop.children.length; i++) {
+  for (let i = 0;i < workshop.children.length;i++) {
     if (workshop.children[i].name === "RSpot") {
 
       workshop.children[i].intensity = 113;
@@ -116,12 +116,12 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
 
     } else if (workshop.children[i].name === "Area002_1") {
 
-      workshop.children[i].intensity = 1000;
+      workshop.children[i].intensity = 1000; // Original = 1000
       workshop.children[i].angle = 0.281;
 
     } else if (workshop.children[i].name === "Spot") {
 
-      workshop.children[i].intensity = 250;
+      workshop.children[i].intensity = 250; // Original = 250
       workshop.children[i].distance = 6;
       workshop.children[i].angle = 0.821;
       workshop.children[i].penumbra = 1;
@@ -406,7 +406,7 @@ function stepsFunction() {
         nextText6.addEventListener("click", function () {
           changeTextInSteps(steps2InPolishingPart, steps3InPolishingPart);
           polishingPartTitle.classList.add('show')
-          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat"
+          polishText.innerHTML = "Maintenant, c’est à votre tour d’utiliser le polissoir pour rendre la surface lisse et brillante. Servez-vous de la jauge pour lui donner tout son éclat."
         });
 
         if (quantity <= 0.5) {
@@ -431,7 +431,7 @@ function stepsFunction() {
 const controls = new OrbitControls(camera, canvas);
 
 controls.maxDistance = 6;
-controls.minDistance = 3;
+controls.minDistance = 4.5;
 controls.enablePan = false;
 
 controls.minPolarAngle = Math.PI / 3.5;

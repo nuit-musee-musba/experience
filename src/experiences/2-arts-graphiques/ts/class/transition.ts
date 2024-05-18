@@ -157,6 +157,10 @@ export default class Transition {
             );
             break;
           case "cleaning":
+            const optionCleaning = {
+              getPercentage: true,
+              getPercentageAt: 60,
+            };
             paint(
               canvas,
               currentSectionNumber,
@@ -164,13 +168,13 @@ export default class Transition {
               "painting-clean.webp",
               "eraser.png",
               this.buttonSection6,
-              options
+              optionCleaning
             );
             break;
           case "seal":
             const optionsSeal = {
               getPercentage: true,
-              getPercentageAt: 60,
+              getPercentageAt: 40,
             };
             paint(
               canvas,
@@ -217,9 +221,7 @@ export default class Transition {
         );
         break;
       case 2:
-        this.hintText.changeText(
-          "Dessinez l’œuvre pour lui donner vie."
-        );
+        this.hintText.changeText("Dessinez l’œuvre pour lui donner vie.");
         break;
       case 3:
         this.hintText.changeText("");
