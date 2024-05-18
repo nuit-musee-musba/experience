@@ -42,6 +42,7 @@ function createGLTFModel(i, url, position, rotation, scale, color) {
         gltf.scene.position.set(...position);
         gltf.scene.rotation.set(...rotation);
         gltf.scene.userData.id = i + 1; // set unique id for future redirection
+        gltf.scene.userData.islandName = data[i].title;
         resolve(gltf);
       },
       undefined,
@@ -129,3 +130,13 @@ export function handleScaleClick(carousel, index) {
   }
   scaleModel(model, 0.0315, 100);
 }
+
+export const updateAllMaterials = () => {
+  window.experience.scene.traverse((child) => {
+    if (child.isMesh && child.material.isMeshStandardMaterial) {
+      child.material.envMapIntensity = config.envMapIntensity;
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+};

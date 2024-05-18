@@ -21,13 +21,12 @@ body {
 }
 
 #app {
-  background: rgb(152, 152, 152);
+  background: rgb(255, 255, 255);
   background: radial-gradient(
     circle,
-    rgba(152, 152, 152, 1) 0%,
-    rgba(200, 200, 200, 1) 34%,
-    rgba(228, 228, 228, 1) 45%,
-    rgba(255, 255, 255, 1) 100%
+    rgba(255, 255, 255, 1) 58%,
+    rgba(236, 236, 236, 1) 84%,
+    rgba(177, 177, 177, 1) 100%
   );
   width: 100vw;
   height: 100vh;
@@ -126,7 +125,7 @@ body {
 }
 
 .activated {
-  left: 15% !important;
+  left: 560px !important;
   transition: left 2s ease; /* Add smooth transition */
 }
 
@@ -153,6 +152,15 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+.inZoomDiv {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: all;
 }
 #infoText {
   line-height: 200%;
@@ -277,18 +285,15 @@ body {
 }
 
 #backButton {
-  position: absolute;
-  bottom: 5rem;
-  left: 15%;
-  cursor: pointer;
-  pointer-events: all;
-  z-index: 2;
+  position: relative;
+  height: 10rem;
+  width: 10rem;
 }
 
 .experience-infos {
-  width: 900px;
+  width: 1150px;
   position: absolute;
-  left: 15% !important;
+  left: 330px !important;
   flex-direction: column;
   justify-content: space-around;
   z-index: 3;

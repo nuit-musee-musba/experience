@@ -1,13 +1,16 @@
 import * as THREE from "three";
 import { createIsland } from "./helpers";
 import data from "./data";
+import { updateAllMaterials } from "./helpers";
 
 import "./rotationSystem";
 
 window.experience = window.experience || {};
 
+// Set initial values
 window.experience.canRotate = true;
 window.experience.autoRotate = true;
+window.experience.clickedOnExperience = false;
 
 // Capture DOM elements
 
@@ -15,6 +18,8 @@ window.experience.autoRotate = true;
 const frontTitle = document.getElementById("frontTitle");
 const infoDescription = document.getElementById("infoText");
 const startButton = document.getElementById("startButton");
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set initial info box userData
@@ -24,8 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
   startButton.href = data[0].path;
 });
 
+
 // Create scene
 const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xf8f4f4, 3, 5.3);
+window.experience.scene = scene;
+
 
 // Target canvas
 var canvas = document.getElementById("webgl");
@@ -51,12 +60,22 @@ renderer.setSize(canvas.clientWidth, canvas.clientHeight); // Use canvas dimensi
 document.body.appendChild(renderer.domElement);
 
 // Add light
-const light = new THREE.SpotLight(0xffffff, 1, 1, Math.PI);
-light.position.set(0, 0.5, -0.6);
-scene.add(light);
 
-const axesHelper = new THREE.AxesHelper(10);
-axesHelper.setColors("red", "green", "blue");
+const ambientLight = new THREE.AmbientLight(0x404040);
+ambientLight.intensity = 1;
+ambientLight.position.set(0, 2, 0);
+scene.add(ambientLight);
+
+// const spotLight = new THREE.SpotLight(0xffffff, 1, 1);
+// spotLight.position.set(0, 0.6, -0.6);
+// spotLight.castShadow = true;
+// scene.add(spotLight);
+
+const mainLight = new THREE.DirectionalLight(0x404040, 30);
+mainLight.position.set(0, 0.2, 0);
+mainLight.castShadow = true;
+scene.add(mainLight);
+
 
 // Carousel : Group of islands
 const carousel = new THREE.Group();
@@ -80,7 +99,6 @@ for (let i = 0; i < count; i++) {
       // Add axes helper to the island
       carousel.add(island);
       window.experience.islands.push(island);
-      island.add(axesHelper);
     })
     .catch((error) => {
       console.error("Error creating island:", error);
@@ -108,8 +126,12 @@ loaderElement.style.display = "flex";
 
 // Add carousel to scene once all worlds are added
 scene.add(carousel);
+updateAllMaterials();
 
 window.experience.carousel = carousel;
+
+// We set this here once all promises are resolved
+window.experience.scene = scene;
 
 // Handle window resize
 window.addEventListener("resize", () => {
@@ -124,6 +146,7 @@ canvas.addEventListener("wheel", (event) => {
   const scrollPosition = event.deltaX % window.innerWidth; // Use deltaX for horizontal scrolling
   carousel.rotation.y += (-scrollPosition * Math.PI) / window.innerWidth;
 });
+
 
 // Render loop
 const animate = () => {

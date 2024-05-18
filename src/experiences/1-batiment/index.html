@@ -61,9 +61,26 @@
         direction="1"
         mode="normal"
         loop
-        controls
         autoplay
       ></lottie-player>
+    </div>
+    <div class="animation">
+      <lottie-player
+        id="animation-video-touch"
+        class="finger-rotation"
+        src="/global/lottie/finger_touch_animation.json"
+        background="transparent"
+        speed="1"
+        direction="1"
+        mode="normal"
+        loop
+        autoplay
+      ></lottie-player>
+      <img
+        id="poi-finger-touch"
+        src="/1-batiment/assets/icons/poi.png"
+        alt=""
+      />
     </div>
 
     <div class="vignette"></div>
@@ -106,7 +123,7 @@
       </svg>
     </div>
 
-    <div class="wrapper-subTitle">
+    <div class="wrapper-subTitle hidden">
       <div id="container-subTitle">
         <p id="subTitle"></p>
       </div>
@@ -115,7 +132,7 @@
 
     <div id="end-menu" class="hidden">
       <div class="end-menu-content">
-        <h1>Merci de votre visite !</h1>
+        <h1>Merci de votre visite!</h1>
         <p>
           Vous avez maintenant une connaissance approfondie de l'histoire des
           bâtiments du MusBA !Impressionnant, n'est-ce pas ? Vous pouvez
@@ -123,11 +140,13 @@
           principal.
         </p>
         <div class="end-menu-buttons">
-          <a href="index.html" id="restart-button">
-            <button class="btn-small-secondary">Explorer le MusBA en 3D</button>
-          </a>
+          <div>
+            <button class="btn-small-secondary" id="restart-button">
+              Explorer le MusBA en 3D
+            </button>
+          </div>
           <a href="/" id="restart-button">
-            <button class="btn-small-secondary">Retourner au hub</button>
+            <button class="btn-small-secondary">Retourner au menu</button>
           </a>
         </div>
       </div>
@@ -136,6 +155,10 @@
     <article id="component" class="interest-component">
       <h2 id="title-component"></h2>
       <div id="text-component"></div>
+    </article>
+
+    <article id="image-point-component" class="image-point-interest-component">
+      <img id="image-poi" src="" alt="" />
     </article>
 
     <article id="poi-component" class="point-interest-component">

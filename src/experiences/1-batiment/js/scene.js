@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { periods } from "./constants.js";
 import { ObjectLoader } from "./objectLoader.js";
 
-const gui = new GUI();
+// const gui = new GUI();
 
 export const config = {
   envMapIntensity: 3,
@@ -178,12 +178,12 @@ sunLight.shadow.bias = -0.0002;
 // const axesHelper = new THREE.AxesHelper(5);
 // scene.add(axesHelper);
 
-gui.onFinishChange(() => {
-  sunLight.shadow.camera.updateProjectionMatrix();
-  sunLight.shadow.updateMatrices();
-  sunLightCameraHelper.update();
-  updateAllMaterials();
-});
+// gui.onFinishChange(() => {
+//   sunLight.shadow.camera.updateProjectionMatrix();
+//   sunLight.shadow.updateMatrices();
+//   sunLightCameraHelper.update();
+//   updateAllMaterials();
+// });
 
 
 
@@ -205,14 +205,14 @@ scene.environment = texture;
 scene.backgroundBlurriness = 0.2;
 scene.backgroundIntensity = 5;
 
-gui.add(scene, "backgroundBlurriness").min(0).max(1).step(0.001);
-gui.add(scene, "backgroundIntensity").min(0).max(10).step(0.001);
-gui
-  .add(config, "envMapIntensity")
-  .min(0)
-  .max(10)
-  .step(0.001)
-  .onChange(updateAllMaterials);
+// gui.add(scene, "backgroundBlurriness").min(0).max(1).step(0.001);
+// gui.add(scene, "backgroundIntensity").min(0).max(10).step(0.001);
+// gui
+//   .add(config, "envMapIntensity")
+//   .min(0)
+//   .max(10)
+//   .step(0.001)
+//   .onChange(updateAllMaterials);
 
 // SIZES
 const sizes = {
@@ -238,7 +238,7 @@ const camera = new THREE.PerspectiveCamera(
   0.2,
   300
 );
-camera.position.set(0, 0, 3);
+camera.position.set(0, 0, 0);
 scene.add(camera);
 
 // CONTROLS CAMERA
@@ -339,12 +339,12 @@ const loadModels = async () => {
   }
 };
 
-gui.onFinishChange(() => {
-  sunLight.shadow.camera.updateProjectionMatrix();
-  sunLight.shadow.updateMatrices();
-  sunLightCameraHelper.update();
-  updateAllMaterials();
-});
+// gui.onFinishChange(() => {
+//   sunLight.shadow.camera.updateProjectionMatrix();
+//   sunLight.shadow.updateMatrices();
+//   sunLightCameraHelper.update();
+//   updateAllMaterials();
+// });
 
 //RENDERER
 

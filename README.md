@@ -1,5 +1,16 @@
 # Nuit des Musées au MUSBA
 
+## C'est quoi ?
+
+Une expérience interactive sur l'écran tactile du Musba qui aura lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
+Réalisé par la promotion 2024 du MMI Bordeaux.
+
+## Simulation de l'écran tactile du Musba
+
+Vous n'avez peut-être pas d'écran 4k de 1m50 x 1m.
+Vous pouvez simuler cette qualité sur chrome en ouvrant l'inspecteur d'élément et en définissant une taille d'écran personnalisée: 3840 x 2160 pixels
+Tuto vidéo: [tuto-custom-screen.mp4](https://drive.google.com/file/d/13nn7Nf9MTph6T_OHQdIMjQydiNKbts94/view?usp=sharing)
+
 ## Dévelopment
 
 ```bash
@@ -38,8 +49,7 @@ C'est le hub qui amène aux expériences (accessible sur http://localhost:5173/)
 ### Dans `/src/experiences`
 
 Les expériences, chacune dans son dossier.
-Vous avez un exemple dans `experience-template` pour voir comment s'architecture une expérience (accessible sur http://localhost:5173/experiences/experience-template).
-**Pensez à ajouter votre dossier dans le fichier `vite.config.js`**
+**Pensez à ajouter vos fichiers index.html dans la config `vite.config.js` pour qu'ils soient dans le build**
 
 ### Dans `/static`
 

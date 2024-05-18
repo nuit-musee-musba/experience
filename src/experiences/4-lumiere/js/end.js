@@ -1,6 +1,5 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound";
-import GUI from 'lil-gui';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -12,15 +11,33 @@ ambiantSound("/global/sounds/g4.mp3")
     .playOnFirstInteraction();
 
 /**
-* Inactivity
-*/
-enableInactivityRedirection();
+ * Global settings
+ */
+// Clear local storage
+const clearLocalStorage = () => {
+    localStorage.removeItem("4-first");
+    localStorage.removeItem("4-second");
+    localStorage.removeItem("4-third");
+}
+// leave button
+const leaveBtns = document.querySelectorAll(".btn-back-hub")
+for (const leaveBtn of leaveBtns) {
+    leaveBtn.addEventListener("click",
+        () => {
+            clearLocalStorage();
+            window.location.href = "/";
+        }
+    )
+}
+
+// Inactivity
+enableInactivityRedirection().beforeRedirect(() => {
+    clearLocalStorage();
+});
 
 /**
  * Base
  */
-// Debug
-const gui = new GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -37,13 +54,13 @@ const textureLoader = new THREE.TextureLoader()
  * Particles
  */
 // Geometry
-function generateParticles (){
+function generateParticles() {
     const particlesGeometry = new THREE.BufferGeometry()
     const count = 70
 
     const positions = new Float32Array(count * 3) // Multiply by 3 because each position is composed of 3 values (x, y, z)
 
-    for(let i = 0; i < count * 3; i++) // Multiply by 3 for same reason
+    for (let i = 0; i < count * 3; i++) // Multiply by 3 for same reason
     {
         positions[i] = (Math.random() - 0.5) * 10 // Math.random() - 0.5 to have a random value between -0.5 and +0.5
     }
@@ -93,8 +110,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -135,27 +151,26 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const clock = new THREE.Clock()
 
 
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
     // __Update particles__
-    particles1.position.x = Math.cos(elapsedTime/2) * 0.05
-    particles1.position.y = Math.sin(elapsedTime/2) * 0.05
-    particles1.position.z = Math.sin(elapsedTime/2) * 0.05
+    particles1.position.x = Math.cos(elapsedTime / 2) * 0.05
+    particles1.position.y = Math.sin(elapsedTime / 2) * 0.05
+    particles1.position.z = Math.sin(elapsedTime / 2) * 0.05
 
-    particles2.position.x = Math.cos(elapsedTime/2) * -0.05
-    particles2.position.y = Math.sin(elapsedTime/2) * -0.05
-    particles2.position.z = Math.sin(elapsedTime/2) * -0.05
+    particles2.position.x = Math.cos(elapsedTime / 2) * -0.05
+    particles2.position.y = Math.sin(elapsedTime / 2) * -0.05
+    particles2.position.z = Math.sin(elapsedTime / 2) * -0.05
 
-    particles3.position.x = Math.sin(elapsedTime/2) * 0.05
-    particles3.position.y = Math.cos(elapsedTime/2) * -0.05
-    particles3.position.z = Math.cos(elapsedTime/2) * 0.05
+    particles3.position.x = Math.sin(elapsedTime / 2) * 0.05
+    particles3.position.y = Math.cos(elapsedTime / 2) * -0.05
+    particles3.position.z = Math.cos(elapsedTime / 2) * 0.05
 
-    particles4.position.x = Math.sin(elapsedTime/2) * -0.05
-    particles4.position.y = Math.cos(elapsedTime/2) * 0.05
-    particles4.position.z = Math.sin(elapsedTime/2) * -0.05
-        
+    particles4.position.x = Math.sin(elapsedTime / 2) * -0.05
+    particles4.position.y = Math.cos(elapsedTime / 2) * 0.05
+    particles4.position.z = Math.sin(elapsedTime / 2) * -0.05
+
     // __Update controls__
     controls.update()
 
