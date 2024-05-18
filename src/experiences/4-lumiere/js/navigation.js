@@ -454,7 +454,7 @@ window.addEventListener(
       const deltaY = touchMoveY - touchStartY;
 
       // Adjust the rotation of the ellipse based on the swipe distance
-      const rotationSpeed = 1; // Adjust this value for desired sensitivity
+      const rotationSpeed = 2; // Adjust this value for desired sensitivity
       ellipse.rotation.z += deltaY * rotationSpeed;
 
       // Update the starting Y position for the next frame
