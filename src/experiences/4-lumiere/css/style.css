@@ -69,6 +69,8 @@ p {
 .painting-desc {
   position: absolute;
   right: 124px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 2rem 3rem;
   width: 894px;
   color: var(--4-white);
@@ -151,7 +153,7 @@ p {
 }
 #popin-consignes {
   z-index: 1000;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 #popin-consignes .popin-body {
@@ -171,8 +173,8 @@ p {
   visibility: hidden;
   opacity: 0;
   transition:
-    visibility 3.5s,
-    opacity 3.5s ease-in-out;
+    visibility 1s,
+    opacity 1s ease-in-out;
 }
 
 .popin.hidden,
@@ -238,15 +240,21 @@ p {
 /* ----- Consignes ----- */
 
 .consignes {
-  font-size: 46px;
+  width: 3000px;
   padding: 9rem;
-  width: 3036px;
+  font-size: 46px;
   position: relative;
   color: var(--white);
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   pointer-events: none;
+}
+
+.home .consignes { 
+  bottom: 0;
+  width: 100dvw;
+  position: absolute;
 }
 
 /* Ecriteaux */
