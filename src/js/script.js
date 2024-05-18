@@ -1,10 +1,13 @@
 import * as THREE from "three";
-import { createIsland } from "./helpers";
 import data from "./data";
-import { updateAllMaterials } from "./helpers";
+import { createIsland, updateAllMaterials } from "./helpers";
 
+import { ambiantSound } from "@/global/js/sound";
 import "./rotationSystem";
 
+ambiantSound("/global/sounds/g2.mp3")
+  .tryToPlayDirectly()
+  .playOnFirstInteraction();
 window.experience = window.experience || {};
 
 // Set initial values
