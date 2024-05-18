@@ -34,7 +34,7 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 // LIGHTS
-const ambientLight = new THREE.AmbientLight("#FFFFFF", 1);
+// const ambientLight = new THREE.AmbientLight("#FFFFFF", 1);
 // gui
 //   .add(ambientLight, "intensity")
 //   .min(0)
@@ -42,7 +42,7 @@ const ambientLight = new THREE.AmbientLight("#FFFFFF", 1);
 //   .step(0.001)
 //   .name("Ambient Light");
 
-const sunLight = new THREE.DirectionalLight("#F5F0E8");
+const sunLight = new THREE.DirectionalLight("#FFFCF7");
 scene.add(sunLight);
 
 // gui.add(sunLight, "intensity").min(0).max(10).step(0.001).name("Sun");
@@ -50,15 +50,12 @@ scene.add(sunLight);
 sunLight.position.set(63.9, 22.2, 100);
 sunLight.shadow.camera.left = -26;
 sunLight.shadow.camera.right = 45;
-sunLight.shadow.camera.top = 13;
-sunLight.shadow.camera.bottom = -3;
-sunLight.intensity = 4.5;
-sunLight.castShadow = true;
-sunLight.shadow.mapSize.width = 1024 * 2 * 2 * 2;
-sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
-sunLight.shadow.radius = 4.2;
-sunLight.shadow.blurSamples = 25;
-sunLight.shadow.bias = -0.0002;
+// sunLight.shadow.camera.top = 13;
+// sunLight.shadow.camera.bottom = -3;
+sunLight.intensity = 4;
+sunLight.castShadow = false;
+sunLight.shadow.mapSize.width = 512;
+sunLight.shadow.mapSize.height = 512;
 
 // // GUI for Light Controls
 // const lightControls = gui.addFolder("Light Controls");
@@ -202,8 +199,6 @@ const texture = loader.load([
 scene.background = texture;
 scene.environment = texture;
 
-scene.backgroundBlurriness = 0.2;
-scene.backgroundIntensity = 5;
 
 // gui.add(scene, "backgroundBlurriness").min(0).max(1).step(0.001);
 // gui.add(scene, "backgroundIntensity").min(0).max(10).step(0.001);
