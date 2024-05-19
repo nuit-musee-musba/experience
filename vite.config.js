@@ -40,6 +40,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "./src/index.html",
+        "run": "./src/run/index.html",
         "ui-demo": "./src/ui-demo/index.html",
         "1-batiment": "./src/experiences/1-batiment/index.html",
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
