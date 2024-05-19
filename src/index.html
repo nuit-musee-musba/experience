@@ -7,22 +7,15 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <div id="app">
-      <div class="second-scene experience-infos ">
-        <h2 id="infoTitle"></h2>
-        <p class="text-p-mini" id="infoText"></p>
-        <div class="inZoomDiv">
-          <button class="btn-icon second-scene" id="backButton">
-            <i class="i-left"> </i>
-          </button>
-          <a class="btn-primary" id="startButton">
-            Commencer l'expérience
-           </a>
-        </div>
+    <main id="app">
+      <div id="loader">
+        <div id="loader__spinner"></div>
+        <img id="loaded__musbaLogo" src="/assets/hub/logo_musba.png" />
       </div>
-      <div class="scroll-infos first-scene">
-        <h3>SÉLECTIONNEZ LE MONDE DE VOTRE CHOIX</h3>
-        <svg id="scrollXIcon"
+
+      <section id="selectExperienceInfo">
+        <h3>Sélectionnez l'expérience de votre choix</h3>
+        <svg
           width="63"
           height="63"
           viewBox="0 0 63 63"
@@ -44,49 +37,58 @@
             stroke-linejoin="round"
           />
         </svg>
-      </div>
+      </section>
 
-      <div id="loader" class="loader-wrapper">
-        <div class="loader"></div>
-        <img src="/assets/hub/logo_musba.png" />
-      </div>
-      <div class="heroWrapper">
-        <div id="scrollBox">
-          <canvas id="webgl"></canvas>
-        </div>
-        <div id="infoBox">
+      <section id="xpDetails" class="hidden">
+        <h2 id="xpDetails__title"></h2>
+        <p id="xpDetails__description" class="text-p-mini"></p>
 
-          <button id="helpButton" class="btn-icon first-scene">
-            <i class="i-info"></i>
+        <div>
+          <button id="xpDetails__backBtn" class="btn-icon">
+            <i class="i-left"> </i>
           </button>
-          <div id="helpPopup">
-            <p class="text-p-mini">
-              Cette expérience interactive a été réalisée par la promotion 2024 -
-              3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
-              Bordeaux Montaigne.</br></br> Ce projet a vu le jour dans le cadre de la Nuit
-              Européenne des Musées, en partenariat avec le musée des Beaux-Arts de
-              Bordeaux.</br></br> Les quelque 50 étudiants de la promotion se sont liés pour
-              créer une production commune via cinq modules distincts que nous vous
-              invitons à découvrir.
-            </p>
-            <button id="closeButton" class="btn-icon">
-              <i class="i-close"></i>
-            </button>
-          </div>
-          <div class="absolute-bottom flex-col first-scene">
-            <h2 id="frontTitle"></h2>
-            <button class="btn-primary transition-opacity" id="showButton">
-              Voir l'expérience
-            </button>
-          </div>
-          
-          
+          <a id="xpDetails__startBtn" class="btn-primary">
+            Commencer l'expérience
+          </a>
         </div>
-      </div>
-    </div>
-    <script type="module" src="./js/script.js"></script>
-    <script type="module" src="./js/popUp.js"></script>
-    <script type="module" src="./js/scenes.js"></script>
-    <script type="module" src="./js/orbitControl.js"></script>
+      </section>
+
+      <section id="xpIntro">
+        <h2 id="xpIntro__title"></h2>
+        <button id="xpIntro__showBtn" class="btn-primary">
+          Voir l'expérience
+        </button>
+      </section>
+
+      <canvas id="webgl"></canvas>
+
+      <button id="helpOpenBtn" class="btn-icon">
+        <i class="i-info"></i>
+      </button>
+
+      <dialog id="helpDialog">
+        <div id="helpDialog__inner">
+          <p class="text-p-mini">
+            Cette expérience interactive a été réalisée par la promotion 2024 -
+            3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
+            Bordeaux Montaigne.
+          </p>
+          <p class="text-p-mini">
+            Ce projet a vu le jour dans le cadre de la Nuit Européenne des
+            Musées, en partenariat avec le musée des Beaux-Arts de Bordeaux.
+          </p>
+          <p class="text-p-mini">
+            Les quelque 50 étudiants de la promotion se sont liés pour créer une
+            production commune via cinq modules distincts que nous vous invitons
+            à découvrir.
+          </p>
+          <button id="helpCloseBtn" class="btn-icon">
+            <i class="i-close"></i>
+          </button>
+        </div>
+      </dialog>
+    </main>
+    <script type="module" src="./js/script.ts"></script>
+    <script type="module" src="./js/popUp.ts"></script>
   </body>
 </html>
