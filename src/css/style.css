@@ -13,13 +13,6 @@ body {
   --accent: #242424 !important;
 }
 
-.absolute {
-  width: 700px;
-  position: absolute;
-  left: 5rem;
-  bottom: 8rem;
-}
-
 #app {
   background: rgb(255, 255, 255);
   background: radial-gradient(
@@ -39,8 +32,8 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* Add this to your CSS file or within a style tag in your HTML */
-.loader-wrapper {
+
+#loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -51,65 +44,102 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 5;
-  color: white;
+  gap: 2rem;
+  z-index: 999;
+  transition: opacity 0.3s ease;
 }
-
-.hub-text {
-  font-family: Montserrat-Regular;
-  font-size: 46px;
-  text-transform: uppercase;
+#loader.hidden {
+  pointer-events: none;
+  opacity: 0;
 }
-
-.loader {
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
+#loader__spinner {
+  --border-width: 10px;
+  --size: 8rem;
+  border: var(--border-width) solid #f3f3f3;
+  border-top: var(--border-width) solid var(--accent);
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: var(--size);
+  height: var(--size);
   animation: spin 1s linear infinite;
   margin-bottom: 3rem;
-  z-index: 5;
+}
+#loaded__musbaLogo {
+  height: 12rem;
 }
 
-.button-loader {
+#selectExperienceInfo {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  top: 5rem;
+}
+#selectExperienceInfo > h3 {
+  text-transform: uppercase;
+}
+#selectExperienceInfo > svg {
+  width: 100px;
+  height: 100px;
+}
+
+#xpDetails {
+  display: flex;
+  width: 1150px;
+  position: absolute;
+  left: 330px !important;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 3;
+  gap: 5rem;
+}
+#xpDetails.hidden {
   display: none;
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  animation: spin 1s linear infinite;
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+#xpDetails__title {
+  font-size: 110px;
+  line-height: 150%;
 }
-/* HERO */
-.heroWrapper {
+#xpDetails__description {
+  line-height: 200%;
+}
+#xpDetails > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   width: 100%;
   height: 100%;
   position: relative;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  pointer-events: none;
+  pointer-events: all;
+}
+#xpDetails__backBtn {
+  position: relative;
+  height: 10rem;
+  width: 10rem;
+}
+
+#xpIntro {
+  position: absolute;
+  bottom: 5rem;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 4rem;
 }
-#scrollBox {
-  flex: 3;
-  width: 100%;
-  height: 100%;
-  position: relative; /* Make sure to set it as a positioned element */
+#xpIntro.hidden {
+  display: none;
+}
+#xpIntro__title {
+  font-size: 110px;
+  line-height: 150%;
+}
+#xpIntro__showBtn {
+  transition: opacity 0.3s ease;
+}
+#xpIntro__showBtn.hidden {
+  opacity: 0;
 }
 
 #webgl {
@@ -124,216 +154,43 @@ body {
   width: 100%;
 }
 
-.activated {
-  left: 560px !important;
-  transition: left 2s ease; /* Add smooth transition */
-}
-
-.deactivated {
-  left: inherit;
-  transition: left 2s ease; /* Add smooth transition */
-}
-#infoTitle,
-#frontTitle {
-  font-size: 110px;
-  line-height: 150%;
-}
-
-#infoBox {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  pointer-events: all;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-.inZoomDiv {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  pointer-events: all;
-}
-#infoText {
-  line-height: 200%;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem;
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: auto;
-  margin: 1rem 0;
-}
-
-.buttonBg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 165px;
-  width: 165px;
-  background-color: black;
-  color: white;
-  border-radius: 21px;
-  cursor: pointer;
-  pointer-events: all;
-  margin-bottom: 40px;
-}
-
-.listBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 1rem 0;
-  padding: 0;
-  list-style: none;
-  width: 80%;
-  height: fit-content;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  z-index: 3;
-}
-.colorList {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 1rem 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-  height: 100%;
-  font-size: 1.5rem;
-}
-.colorList li {
-  flex-basis: auto;
-  height: auto;
-  border-radius: 50%;
-  margin: 0 0.5rem;
-  cursor: pointer;
-}
-
-.popup-text {
-  font-size: 1.8rem;
-  line-height: 1.6;
-  font-family: Montserrat-Regular;
-  text-transform: uppercase;
-  color: black;
-  margin: 0;
-  padding: 0;
-}
-
-/* Additional styles for the popup */
-#helpPopup {
-  width: 30%;
-  display: none;
-  position: fixed;
-  bottom: 3rem;
-  right: 3rem;
-  background-color: white;
-  padding: 5rem;
-  border-radius: 21px;
-  border: 3px solid #242424;
-  pointer-events: all;
-}
-#helpButton {
-  height: auto;
+#helpOpenBtn {
   position: absolute;
   bottom: 5rem;
   right: 5rem;
-  cursor: pointer;
   pointer-events: all;
   z-index: 4;
-  padding: 2rem;
 }
-
-.i-info {
-  pointer-events: none;
+#helpDialog {
+  height: min-content;
+  width: 70rem;
+  margin: auto 5rem 5rem auto;
+  background: none;
+  border: none;
 }
-#closeButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  pointer-events: all;
-}
-.first-scene {
-  display: flex;
-}
-
-.second-scene {
-  display: none;
-}
-
-#backButton {
-  position: relative;
-  height: 10rem;
-  width: 10rem;
-}
-
-.experience-infos {
-  width: 1150px;
-  position: absolute;
-  left: 330px !important;
-  flex-direction: column;
-  justify-content: space-around;
-  z-index: 3;
-  gap: 5rem;
-}
-.experience-scroll {
-  width: 850px;
-  position: absolute;
-  right: 5rem;
-  flex-direction: column;
-  z-index: 3;
-  align-items: center;
-}
-#scrollText {
-  color: #b7b7b7;
-}
-.transition-opacity {
-  transition: opacity 0.3s ease; /* Adjust the duration and timing function as needed */
-}
-
-.transition-move {
-  transition: transform 1s ease; /* Adjust the duration and timing function as needed */
-  transform: translateX(-100%);
-}
-
-.scroll-infos {
-  position: absolute;
+#helpDialog__inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2rem;
-  top: 5rem;
+  padding: 5rem;
+  background: white;
+  pointer-events: all;
+  border-radius: 21px;
+  border: 3px solid #242424;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-#scrollXIcon {
-  width: 100px;
-  height: 100px;
+#helpCloseBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: none;
 }
 
-.absolute-bottom {
-  position: absolute;
-  bottom: 5rem;
-  z-index: 100;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

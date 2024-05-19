@@ -1,4 +1,4 @@
-const router = [
+export const experiences = [
   {
     id: 1,
     name: "Expérience bâtiment",
@@ -50,6 +50,21 @@ const router = [
       "Plongez dans une aventure artistique captivante en devenant notre disciple. Recevez une commande exclusive du renommé Jan Brueghel de Velours et explorez un univers d'ingrédients, sous la direction de votre maître d'art, Jeff Deuvre. Ensemble, créez une vanité unique et puissante, invitant à méditer sur la beauté éphémère de la vie !",
     modelPath: "/assets/hub/peinture.glb",
   },
-];
+] as const;
 
-export default router;
+export type Experience = (typeof experiences)[number];
+export const indexFromExperience = (experience: Experience): number => {
+  return experiences.findIndex((xp) => xp.id === experience.id);
+};
+export const experienceFromId = (experienceId: number): Experience => {
+  const xp = experiences.find((experience) => experience.id === experienceId);
+
+  if (!xp) {
+    throw new Error("Unkown experience");
+  }
+
+  return xp;
+};
+
+export const toObjectName = (experience: Experience) =>
+  `experience-${experience.id}`;
