@@ -27,8 +27,13 @@ const focusExperience = (experience: Experience) => {
 carousel.onExperienceClick((experience) => focusExperience(experience));
 ui.onShowBtnClick(() => focusExperience(currentExperience()));
 ui.onStartBtnClick(() => {
-  window.open(currentExperience().path);
-  window.close();
+  const canOpenNewTab = window.opener != null || window.history.length == 1;
+  if (canOpenNewTab) {
+    window.open(currentExperience().path);
+    window.close();
+  } else {
+    window.location.href = currentExperience().path;
+  }
 });
 ui.onBackBtnClick((e) => {
   ui.hideDetails();
