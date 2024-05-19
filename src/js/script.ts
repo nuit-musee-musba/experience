@@ -26,6 +26,10 @@ const focusExperience = (experience: Experience) => {
 
 carousel.onExperienceClick((experience) => focusExperience(experience));
 ui.onShowBtnClick(() => focusExperience(currentExperience()));
+ui.onStartBtnClick(() => {
+  window.open(currentExperience().path);
+  window.close();
+});
 ui.onBackBtnClick((e) => {
   ui.hideDetails();
   carousel.unFocusExperience();

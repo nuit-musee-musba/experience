@@ -6,8 +6,8 @@ const detailsEls = {
   description: document.getElementById(
     "xpDetails__description"
   ) as HTMLParagraphElement,
-  startBtn: document.getElementById("xpDetails__startBtn") as HTMLAnchorElement,
-  backBtn: document.getElementById("xpDetails__backBtn") as HTMLAnchorElement,
+  startBtn: document.getElementById("xpDetails__startBtn") as HTMLButtonElement,
+  backBtn: document.getElementById("xpDetails__backBtn") as HTMLButtonElement,
 };
 
 const introEls = {
@@ -19,11 +19,17 @@ const introEls = {
 type OnClickFn = (e: MouseEvent) => any;
 let onShowBtnClickFn: OnClickFn = (e) =>
   console.warn("showBtn clicked but no action defined");
+let onStartBtnClickFn: OnClickFn = (e) =>
+  console.warn("startBtn clicked but no action defined");
 let onBackBtnClickFn: OnClickFn = (e) =>
   console.warn("backBtn clicked but no action defined");
 introEls.showBtn.addEventListener("click", (e) => {
   if (!onShowBtnClickFn) return;
   onShowBtnClickFn(e);
+});
+detailsEls.startBtn.addEventListener("click", (e) => {
+  if (!onStartBtnClickFn) return;
+  onStartBtnClickFn(e);
 });
 detailsEls.backBtn.addEventListener("click", (e) => {
   if (!onBackBtnClickFn) return;
@@ -33,7 +39,6 @@ detailsEls.backBtn.addEventListener("click", (e) => {
 export const updateExperienceInfos = (experience: Experience) => {
   detailsEls.title.innerText = experience.title;
   detailsEls.description.innerText = experience.description;
-  detailsEls.startBtn.href = experience.path;
 
   introEls.title.innerText = experience.title;
 };
@@ -51,6 +56,9 @@ export const displayDetails = () => toggleDetails(true);
 export const hideDetails = () => toggleDetails(false);
 export const onShowBtnClick = (cb: OnClickFn) => {
   onShowBtnClickFn = cb;
+};
+export const onStartBtnClick = (cb: OnClickFn) => {
+  onStartBtnClickFn = cb;
 };
 export const onBackBtnClick = (cb: OnClickFn) => {
   onBackBtnClickFn = cb;
