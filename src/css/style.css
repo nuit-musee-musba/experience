@@ -11,6 +11,8 @@ body {
 
 :root {
   --accent: #242424 !important;
+  --title-font-size: 110px;
+  --title-line-height: 150%;
 }
 
 #app {
@@ -97,8 +99,8 @@ body {
   display: none;
 }
 #xpDetails__title {
-  font-size: 110px;
-  line-height: 150%;
+  font-size: var(--title-font-size);
+  line-height: var(--title-line-height);
 }
 #xpDetails__description {
   line-height: 200%;
@@ -132,8 +134,8 @@ body {
   display: none;
 }
 #xpIntro__title {
-  font-size: 110px;
-  line-height: 150%;
+  font-size: var(--title-font-size);
+  line-height: var(--title-line-height);
 }
 #xpIntro__showBtn {
   transition: opacity 0.3s ease;
