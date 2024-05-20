@@ -220,50 +220,47 @@ export const makeCarousel = ({
     state.onClickExperienceFn = cb;
   };
 
-  window.addEventListener("touchstart", (event) => {
+  type Coordinate = { x: number; y: number };
+
+  const handleToucheStart = ({ x, y }: Coordinate) => {
     if (state.experienceFocused) {
       return;
     }
     cancelSnap();
 
-    const touch = event.touches[0];
-    if (!touch) return;
-    pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+    pointer.x = (x / window.innerWidth) * 2 - 1;
+    pointer.y = -(y / window.innerHeight) * 2 + 1;
     state.inititalPointerX = pointer.x;
-    state.lastX = touch.clientX;
+    state.lastX = x;
 
     state.isTouching = true;
     state.hasMoved = false;
     state.autoRotate = false;
     state.velocity = 0;
-  });
+  };
 
-  window.addEventListener("touchmove", (event) => {
-    if (state.experienceFocused) {
+  const handleToucheMove = ({ x, y }: Coordinate) => {
+    if (!state.isTouching || state.experienceFocused) {
       return;
     }
     state.isTouching = true;
     state.hasMoved = true;
 
-    const touch = event.touches[0];
-    if (!touch) return;
+    state.velocity = Math.abs(state.lastX - x) * POWER_FACTOR;
+    state.direction = state.lastX < x ? 1 : -1;
+    state.moveX = state.lastX - x;
 
-    state.velocity = Math.abs(state.lastX - touch.clientX) * POWER_FACTOR;
-    state.direction = state.lastX < touch.clientX ? 1 : -1;
-    state.moveX = state.lastX - touch.clientX;
-
-    if (touch.clientY < window.innerHeight / 4) {
+    if (y < window.innerHeight / 4) {
       state.direction *= -1;
       state.moveX *= -1;
     }
 
     updateRotation(-state.moveX * ROTATION_FACTOR);
 
-    state.lastX = touch.clientX;
-  });
+    state.lastX = x;
+  };
 
-  window.addEventListener("touchend", () => {
+  const handleToucheEnd = () => {
     if (state.experienceFocused) {
       return;
     }
@@ -280,6 +277,46 @@ export const makeCarousel = ({
     if (experience?.id === experienceInFrontOfCarousel().id) {
       state.onClickExperienceFn(experience);
     }
+  };
+
+  window.addEventListener("touchstart", (event) => {
+    if (!event.touches[0]) return;
+
+    handleToucheStart({
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+    });
+  });
+
+  window.addEventListener("mousedown", (event) => {
+    handleToucheStart({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  });
+
+  window.addEventListener("touchmove", (event) => {
+    if (!event.touches[0]) return;
+
+    handleToucheMove({
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+    });
+  });
+
+  window.addEventListener("mousemove", (event) => {
+    handleToucheMove({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  });
+
+  window.addEventListener("touchend", () => {
+    handleToucheEnd();
+  });
+
+  window.addEventListener("mouseup", (event) => {
+    handleToucheEnd();
   });
 
   return {
