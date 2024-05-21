@@ -1,5 +1,9 @@
 import { Experience } from "./experiences";
 
+const selectExperienceInfo = document.getElementById(
+  "selectExperienceInfo"
+) as HTMLElement;
+
 const detailsEls = {
   section: document.getElementById("xpDetails") as HTMLElement,
   title: document.getElementById("xpDetails__title") as HTMLHeadingElement,
@@ -49,6 +53,7 @@ export const toggleShowBtnVisibility = (hide: boolean) => {
 
 const toggleDetails = (show: boolean) => {
   detailsEls.section.classList.toggle("hidden", !show);
+  selectExperienceInfo.classList.toggle("hidden", show);
   introEls.section.classList.toggle("hidden", show);
 };
 

@@ -76,6 +76,11 @@ body {
   align-items: center;
   gap: 2rem;
   top: 5rem;
+  transition: opacity 0.3s ease;
+}
+#selectExperienceInfo.hidden {
+  pointer-events: none;
+  opacity: 0;
 }
 #selectExperienceInfo > h3 {
   text-transform: uppercase;
@@ -94,9 +99,11 @@ body {
   justify-content: space-around;
   z-index: 3;
   gap: 5rem;
+  transition: opacity 0.3s ease;
 }
 #xpDetails.hidden {
-  display: none;
+  pointer-events: none;
+  opacity: 0;
 }
 #xpDetails__title {
   font-size: var(--title-font-size);
@@ -129,9 +136,11 @@ body {
   justify-content: center;
   align-items: center;
   gap: 4rem;
+  transition: opacity 0.3s ease;
 }
 #xpIntro.hidden {
-  display: none;
+  pointer-events: none;
+  opacity: 0;
 }
 #xpIntro__title {
   font-size: var(--title-font-size);

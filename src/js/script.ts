@@ -59,8 +59,6 @@ const animate = () => {
     ui.updateExperienceInfos(currentExperience());
   }
 
-  ui.toggleShowBtnVisibility(carousel.isMoving());
-
   renderer.render(scene, camera);
 };
 
