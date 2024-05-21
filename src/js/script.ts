@@ -1,8 +1,10 @@
+import "@lottiefiles/lottie-player";
 import { makeCarousel } from "./carousel/carousel";
 import { Experience, experiences } from "./carousel/experiences";
 import { indexFromYRotation } from "./carousel/rotation";
 import { makeScene } from "./carousel/scene";
 import * as ui from "./carousel/ui";
+import { enableInactivityAnimation } from "./inactivity";
 
 let currentExperienceIndex = 0;
 const currentExperience = () => experiences[currentExperienceIndex];
@@ -38,6 +40,10 @@ ui.onStartBtnClick(() => {
 ui.onBackBtnClick((e) => {
   ui.hideDetails();
   carousel.unFocusExperience();
+});
+
+enableInactivityAnimation({
+  isFocusingExperience: carousel.isFocusingExperience,
 });
 
 const animate = () => {

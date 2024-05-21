@@ -39,7 +39,7 @@ const DECELERATION = 1;
 const MIN_VELOCITY = 0;
 const MAX_VELOCITY = 100;
 const RESTART_AUTO_ROTATE_AFTER_MS = 5_000;
-const SNAP_TIME_MS = 1000;
+const SNAP_TIME_SECOND = 1;
 
 export const makeCarousel = ({
   scene,
@@ -72,7 +72,7 @@ export const makeCarousel = ({
 
   const isMoving = () => state.velocity > 5;
 
-  const msToS = (ms: number) => ms / 1000;
+  const isFocusingExperience = () => !!state.experienceFocused;
 
   const boundVelocity = (velocity: number): number =>
     Math.min(MAX_VELOCITY, Math.max(MIN_VELOCITY, velocity));
@@ -150,7 +150,7 @@ export const makeCarousel = ({
 
     state.snappingAnimation = gsap.to(state, {
       rotation: yRotationTarget,
-      duration: msToS(SNAP_TIME_MS),
+      duration: SNAP_TIME_SECOND,
       onComplete() {
         state.snappingAnimation = null;
       },
@@ -321,6 +321,7 @@ export const makeCarousel = ({
 
   return {
     isMoving,
+    isFocusingExperience,
     experienceInFrontOfCarousel,
     updateGroupRotation,
     focusExperience,
