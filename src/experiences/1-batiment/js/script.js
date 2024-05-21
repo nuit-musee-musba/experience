@@ -1,5 +1,6 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound.ts";
+import "@lottiefiles/lottie-player";
 import gsap from "gsap";
 import * as THREE from "three";
 import { onboardingContent, periods } from "./constants";
