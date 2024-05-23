@@ -29,6 +29,6 @@ export const eventFingers = (event: TouchEvent) => {
   return fingers;
 };
 
-export const firstFinger = (event: TouchEvent): Touch | undefined => {
+export const firstFingerOfEvent = (event: TouchEvent): Touch | undefined => {
   return eventFingers(event)[0];
 };

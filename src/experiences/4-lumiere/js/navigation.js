@@ -1,7 +1,8 @@
-import * as THREE from "three";
-import GUI from "lil-gui";
-import { enableInactivityRedirection } from "/global/js/inactivity";
 import { ambiantSound } from "@/global/js/sound";
+import { firstFingerOfEvent } from "@/global/js/touch";
+import GUI from "lil-gui";
+import * as THREE from "three";
+import { enableInactivityRedirection } from "/global/js/inactivity";
 
 /**
  * Ambiant Sound
@@ -428,8 +429,14 @@ scene.add(camera);
 const pointer = new THREE.Vector2();
 
 canvas.addEventListener("touchmove", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 });
 
 // Variables to track touch events
@@ -439,8 +446,14 @@ let isSwiping = false;
 
 // Add event listeners for touch events on the window
 window.addEventListener("touchstart", function (event) {
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
   // Record the starting Y position of the touch
-  touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  touchStartY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
   globalParameters.userInteract = true;
 });
@@ -448,8 +461,14 @@ window.addEventListener("touchstart", function (event) {
 window.addEventListener(
   "touchmove",
   function (event) {
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) {
+      return
+    }
+
     if (isSwiping) {
-      touchMoveY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+      touchMoveY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
       // Calculate the vertical distance swiped
       const deltaY = touchMoveY - touchStartY;
 
@@ -458,7 +477,7 @@ window.addEventListener(
       ellipse.rotation.z += deltaY * rotationSpeed;
 
       // Update the starting Y position for the next frame
-      touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+      touchStartY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
       // Render
       renderer.render(scene, camera);

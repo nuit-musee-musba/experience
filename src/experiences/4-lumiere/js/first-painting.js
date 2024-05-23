@@ -1,4 +1,5 @@
 import { ambiantSound } from "@/global/js/sound";
+import { firstFingerOfEvent } from "@/global/js/touch";
 import GUI from "lil-gui";
 import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -324,8 +325,14 @@ window.addEventListener(
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
   ellipse.material.opacity = globalParameters.ellipseTouchOpacity;
 
   // Update firstPainting light position
@@ -333,14 +340,20 @@ canvas.addEventListener("touchstart", (event) => {
 });
 
 canvas.addEventListener("touchmove", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
   // Update firstPainting light position
   updateRotation();
 });
 
-canvas.addEventListener("touchend", (event) => {
+canvas.addEventListener("touchend", () => {
   ellipse.material.opacity = globalParameters.ellipseDefaultOpacity;
 });
 

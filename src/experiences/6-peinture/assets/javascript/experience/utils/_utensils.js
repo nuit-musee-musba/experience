@@ -25,14 +25,15 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
   let realInitialX = initialX - parentElementRect.left; //position X selon la div parente
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
-  dragElement.addEventListener("touchstart", (e) => {
-    const targetZoneRect = targetZone.getBoundingClientRect(); //ne sert pas à grand chose mais fait acte de présence
-  });
-
   dragElement.addEventListener("touchmove", (e) => {
+    const firstFinger = firstFingerOfEvent(e);
+
+    if (!firstFinger) {
+      return
+    }
+
     e.preventDefault();
-    const touch = e.touches[0];
-    const currentX = touch.clientX - initialX - dragElWidth / 2;
+    const currentX = firstFinger.clientX - initialX - dragElWidth / 2;
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
 
@@ -69,12 +70,12 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
     }
 
     //comportement quand le couteau est en train de bouger
-    const currentY = touch.clientY - initialY - dragElWidth / 2;
+    const currentY = firstFinger.clientY - initialY - dragElWidth / 2;
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
   });
 
-  dragElement.addEventListener("touchend", (e) => {
+  dragElement.addEventListener("touchend", () => {
     //comportement quand il est relaché
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();

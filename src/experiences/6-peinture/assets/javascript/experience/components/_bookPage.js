@@ -1,3 +1,4 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
 import items from "../data/items.json" assert { type: "json" };
 
 class BookPage {
@@ -18,7 +19,13 @@ class BookPage {
   }
 
   listen() {
-    this.item.addEventListener("touchstart", () => {
+    this.item.addEventListener("touchstart", (event) => {
+      const firstFinger = firstFingerOfEvent(event);
+
+      if (!firstFinger) {
+        return
+      }
+
       this.selectedItem = items.items.find((item) => item.id === this.id);
       this.animation(true);
       this.displayData(this.selectedItem);
@@ -33,7 +40,13 @@ class BookPage {
     this.item.addEventListener("touchend", () => {
       this.animation(false);
     });
-    this.item.addEventListener("touchmove", () => {
+    this.item.addEventListener("touchmove", (event) => {
+      const firstFinger = firstFingerOfEvent(event);
+
+      if (!firstFinger) {
+        return
+      }
+
       if (this.item.classList.contains('disabled')) {
         this.animation(false);
         return;

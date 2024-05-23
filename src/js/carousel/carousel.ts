@@ -1,3 +1,4 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
 import gsap from "gsap";
 import * as THREE from "three";
 import {
@@ -280,11 +281,13 @@ export const makeCarousel = ({
   };
 
   window.addEventListener("touchstart", (event) => {
-    if (!event.touches[0]) return;
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) return;
 
     handleToucheStart({
-      x: event.touches[0].clientX,
-      y: event.touches[0].clientY,
+      x: firstFinger.clientX,
+      y: firstFinger.clientY,
     });
   });
 
@@ -296,11 +299,15 @@ export const makeCarousel = ({
   });
 
   window.addEventListener("touchmove", (event) => {
-    if (!event.touches[0]) return;
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) {
+      return;
+    }
 
     handleToucheMove({
-      x: event.touches[0].clientX,
-      y: event.touches[0].clientY,
+      x: firstFinger.clientX,
+      y: firstFinger.clientY,
     });
   });
 
@@ -315,7 +322,7 @@ export const makeCarousel = ({
     handleToucheEnd();
   });
 
-  window.addEventListener("mouseup", (event) => {
+  window.addEventListener("mouseup", () => {
     handleToucheEnd();
   });
 

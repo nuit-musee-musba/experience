@@ -1,5 +1,6 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound";
+import { firstFingerOfEvent } from "@/global/js/touch";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -105,7 +106,7 @@ gltfLoader.load("/3-sculpture/models/Mozart_scene.glb", (gltf) => {
   gltf.scene.rotation.y = Math.PI / 2;
   workshop = gltf.scene;
 
-  for (let i = 0;i < workshop.children.length;i++) {
+  for (let i = 0; i < workshop.children.length; i++) {
     if (workshop.children[i].name === "RSpot") {
 
       workshop.children[i].intensity = 113;
@@ -231,16 +232,27 @@ let currentTouch = 0;
 
 const mouse = new THREE.Vector2();
 window.addEventListener("touchstart", (event) => {
-  currentTouch = event.touches[0].clientX / 100;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  currentTouch = firstFinger.clientX / 100;
   touchBefore = currentTouch;
 });
 
 window.addEventListener("touchmove", (event) => {
-  // } else {
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
   if (event.target.id === "PolishRange") {
     isPolished = true;
   } else {
-    currentTouch = event.touches[0].clientX / 100;
+    currentTouch = firstFinger.clientX / 100;
     isPolished = false;
   }
 });

@@ -1,3 +1,5 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
+
 export class Dragable {
   element: HTMLElement;
   top: number;
@@ -36,6 +38,12 @@ export class Dragable {
     this.element.classList.add("drag-unable");
   }
   isDraging(e: TouchEvent) {
+    const firstFinger = firstFingerOfEvent(e);
+
+    if (!firstFinger) {
+      return;
+    }
+
     //console.log("%c handleMove", "background-color: #AA3DAA;");
     e.preventDefault();
     e.stopPropagation();
@@ -45,8 +53,8 @@ export class Dragable {
     const elementHeight = elementBounding.height;
     const elementWidth = elementBounding.width;
 
-    this.top = e.touches[0].clientY - elementHeight / 2;
-    this.left = e.touches[0].clientX - elementWidth / 2;
+    this.top = firstFinger.clientY - elementHeight / 2;
+    this.left = firstFinger.clientX - elementWidth / 2;
 
     this.element.style.top = `${this.top}px`;
     this.element.style.left = `${this.left}px`;
