@@ -1,16 +1,19 @@
 const MIN_TOUCH_FORCE = 0.4;
 
+const minTouchForce = () =>
+  // Getting value from localstorage permit edition after bundling
+  Number.parseFloat(
+    localStorage.getItem("MIN_TOUCH_FORCE") ?? MIN_TOUCH_FORCE.toString()
+  );
+
 export const isFingerTouch = (touch: Touch): boolean => {
   if (!touch || !(touch instanceof Touch)) {
     return false;
   }
 
-  // Getting value from localstorage permit edition after bundling
-  const minTouchForce = Number.parseFloat(
-    localStorage.getItem("MIN_TOUCH_FORCE") ?? MIN_TOUCH_FORCE.toString()
-  );
+  console.log(touch.force);
 
-  return touch.force >= minTouchForce;
+  return touch.force >= minTouchForce();
 };
 
 export const eventFingers = (event: TouchEvent) => {
