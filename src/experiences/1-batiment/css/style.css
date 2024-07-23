@@ -211,11 +211,11 @@ body {
 
 .left-arrow {
   display: none;
-  left: 33vw;
+  left: 30vw;
 }
 
 .right-arrow {
-  right: 33vw;
+  right: 30vw;
 }
 
 .left-arrow,
@@ -236,7 +236,7 @@ body {
   display: none;
   position: absolute;
   right: 3vw;
-  border: 5px solid black;
+  border: 5px solid white;
   color: black;
 }
 
@@ -370,11 +370,17 @@ body {
 }
 
 #restart-button {
-  border-color: black;
+  border-color: white;
   color: black;
   cursor: pointer;
 
   --accent: #000000;
+}
+
+.btn-small-secondary {
+  border-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 .point-interest-component {

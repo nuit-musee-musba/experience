@@ -18,6 +18,14 @@
     ></script>
   </head>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const date = new Date();
+      const actualYear = date.getFullYear();
+      document.getElementById("period5").innerText = actualYear;
+    });
+  </script>
+
   <body onselectstart="return false">
     <div class="loader">
       <svg
@@ -124,7 +132,6 @@
       </div>
       <button class="subTitle-next btn-small-secondary">Suivant</button>
     </div>
-
     <div id="end-menu" class="hidden">
       <div class="end-menu-content">
         <h1>Merci de votre visite!</h1>
@@ -135,14 +142,16 @@
           principal.
         </p>
         <div class="end-menu-buttons">
-          <div>
-            <button class="btn-small-secondary" id="restart-button">
-              Explorer le MusBA en 3D
-            </button>
-          </div>
-          <a href="/" id="restart-button">
-            <button class="btn-small-secondary">Retourner au menu</button>
+          <a href="/" class="btn-small-secondary">
+            <i class="i-home">
+              <span>Accueil</span>
+            </i>
+            Retourner au menu
           </a>
+
+          <button class="btn-small-secondary" id="restart-button">
+            Explorer le MusBA en 3D
+          </button>
         </div>
       </div>
     </div>
@@ -219,9 +228,16 @@
           </div>
           <div class="chronology-line"></div>
           <div class="buttons" id="dashed-border4">
-            <button id="period4" class="date">2024</button>
+            <button id="period4" class="date">1939</button>
             <button id="periodButton4" class="button">
               <div id="periodActive4"></div>
+            </button>
+          </div>
+          <div class="chronology-line"></div>
+          <div class="buttons" id="dashed-border5">
+            <button id="period5" class="date"></button>
+            <button id="periodButton5" class="button">
+              <div id="periodActive5"></div>
             </button>
           </div>
           <!-- <button id="period5">1963</button> -->

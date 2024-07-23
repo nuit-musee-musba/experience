@@ -1,3 +1,5 @@
+const date = new Date();
+const actualYear = date.getFullYear();
 export const periods = [
   {
     title: "La Création du Musée",
@@ -50,8 +52,41 @@ export const periods = [
   {
     title: "Construction du Musée Actuel",
     date: "1875",
-    target: { x: -1.35, y: 0.7, z: 3.3 },
-    position: { x: 2.5, y: 2, z: 8.5 },
+    target: { x: 0, y: 1, z: 3.3 },
+    position: { x: 1, y: 2, z: 6 },
+    description: [
+      "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
+      "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
+    ],
+    subTitle: [
+      "Le chantier du musée actuel a débuté en avril 1875 avec la pose de la première pierre par le cardinal Donnet et a été achevé en 1881. Un projet d'agrandissement en 1897 n'a pas abouti.",
+      "En parallèle, la galerie des Beaux-Arts a été conçue dans les années 1930 et supervisée par l'architecte Jacques Boistel d’Welles.",
+      "Les travaux ont débuté en 1936 et se sont achevés en mars 1939 malgré des retards dus à la Seconde Guerre mondiale. Après avoir été utilisée pendant la guerre, la galerie a repris ses activités artistiques en 1947.",
+      "C’est en 2001 qu’elle a été restaurée pour se conformer aux normes de sécurité et d'accessibilité.",
+    ],
+    poiPosition: [
+      { x: -0.2, y: 0.7, z: 2.7 },
+      { x: 0.1, y: 0.7, z: 2.1 },
+    ],
+    poiText: [
+
+      {
+        title: "Les façades des pavillons du côté du cours d’Albret",
+        text: "Les pavillons du cours d'Albret arborent un décor sculpté composé de quatre bustes et deux statues. Louis Coëffard, élève de Maggesi, a créé deux bustes rue Elisée Reclus : l'un représentant Pierre Lacour fils, fondateur du musée, et l'autre dédié à Doucet, ami de Lacour fils et bienfaiteur du musée. De plus, Edmond Prévot, élève de Coëffard, a sculpté deux bustes rue Montbazon : l'un dépeignant Dufour-Dubergier, maire de Bordeaux de 1842 à 1848 et donateur d'une collection de tableaux à la ville, et l'autre représentant Charles-Jean-Pierre Fieffé, fils d'un ancien maire de Bordeaux, impliqué dans la création de la société des amis des arts.",
+      },
+      {
+        title: "Façades côté jardin",
+        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
+      },
+    ],
+    imagePath: ["/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg"],
+
+  },
+  {
+    title: "Construction du Musée Actuel",
+    date: "1939",
+    target: { x: -2, y: 1, z: 4.2 },
+    position: { x: 1, y: 1, z: 2 },
     description: [
       "Le musée des Beaux-Arts de Bordeaux est fondé en 1801, devenant le premier musée de la ville.",
       "La Galerie des Beaux-Arts, espace d'exposition temporaire, est intégrée de part et d'autre du jardin du palais Rohan et du cours d'Albret.",
@@ -64,29 +99,21 @@ export const periods = [
     ],
     poiPosition: [
       { x: -2.4, y: 0.7, z: 4.5 },
-      { x: -0.2, y: 0.7, z: 2.7 },
-      { x: 0.1, y: 0.7, z: 2.1 },
+
     ],
     poiText: [
       {
         title: "Façade de la galerie des Beaux-Arts",
         text: "Le maire Adrien Marquet décida la construction de cette galerie. Elle fut réalisée par l'architecte d'Welles de 1936 à 1939. Sa façade est composée d'une porte monumentale surmontée des armes de la Ville. Vous pourrez admirer à l'intérieur un très bel escalier dont la rampe du XVIIIe siècle fut offerte par la Chambre de Commerce et d'Industrie de Bordeaux.",
       },
-      {
-        title: "Les façades des pavillons du côté du cours d’Albret",
-        text: "Les pavillons du cours d'Albret arborent un décor sculpté composé de quatre bustes et deux statues. Louis Coëffard, élève de Maggesi, a créé deux bustes rue Elisée Reclus : l'un représentant Pierre Lacour fils, fondateur du musée, et l'autre dédié à Doucet, ami de Lacour fils et bienfaiteur du musée. De plus, Edmond Prévot, élève de Coëffard, a sculpté deux bustes rue Montbazon : l'un dépeignant Dufour-Dubergier, maire de Bordeaux de 1842 à 1848 et donateur d'une collection de tableaux à la ville, et l'autre représentant Charles-Jean-Pierre Fieffé, fils d'un ancien maire de Bordeaux, impliqué dans la création de la société des amis des arts.",
-      },
-      {
-        title: "Façades côté jardin",
-        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
-      },
+
     ],
-    imagePath: ["/1-batiment/images/1875-3.jpg", "/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg"],
+    imagePath: ["/1-batiment/images/1875-3.jpg"],
 
   },
   {
     title: "Aujourd'hui",
-    date: "2024",
+    date: actualYear.toString(),
     target: { x: 0.9, y: 0.7, z: 0.9 },
     position: { x: 6, y: 2, z: 6 },
     description: [
