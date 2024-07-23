@@ -170,7 +170,7 @@ export const makeCarousel = ({
     const island = carouselGroup.getObjectByName(toObjectName(experience));
     if (!island) {
       throw new Error(
-        `Unable to find island of experience ${experience.name} (${experience.id})`
+        `Unable to find island of experience ${experience.title} (${experience.id})`
       );
     }
     return island;
