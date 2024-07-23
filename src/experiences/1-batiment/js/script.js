@@ -227,7 +227,6 @@ const sceneSetUp = async () => {
 
         poiFingerTouch.style.display = "none";
 
-        console.log("a", loaderElm.classList)
         loaderElm.classList.remove('loader-hidden')
         loaderIconElm.classList.remove('loader-hidden')
 
@@ -240,7 +239,6 @@ const sceneSetUp = async () => {
 
         await wait(2000)
 
-        console.log("b", loaderElm.classList)
 
         handleFocusPeriod(periods[0]);
 
@@ -287,10 +285,8 @@ const sceneSetUp = async () => {
 
       const currentPeriod = currentEpoch
 
-      console.log('pass because onboarded', { periods, currentPeriod, currentSubtitleIndex })
-      console.log(currentSubtitleIndex, currentPeriod.subTitle.length)
+
       if (currentSubtitleIndex >= currentPeriod.subTitle.length - 1) {
-        console.log('hey');
         nextStep()
         currentSubtitleIndex = 0
         subTitleNextButton.classList.add("hidden");
@@ -415,7 +411,6 @@ const sceneSetUp = async () => {
 
   async function startExperience() {
     await loadModels();
-    console.log(periods[index])
     handleFocusPeriod(periods[index]);
   }
 
