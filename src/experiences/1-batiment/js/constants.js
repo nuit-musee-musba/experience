@@ -1,3 +1,5 @@
+const date = new Date();
+const actualYear = date.getFullYear();
 export const periods = [
   {
     title: "La Création du Musée",
@@ -111,7 +113,7 @@ export const periods = [
   },
   {
     title: "Aujourd'hui",
-    date: "2024",
+    date: actualYear.toString(),
     target: { x: 0.9, y: 0.7, z: 0.9 },
     position: { x: 6, y: 2, z: 6 },
     description: [
