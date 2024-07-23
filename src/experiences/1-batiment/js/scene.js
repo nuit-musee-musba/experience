@@ -253,6 +253,8 @@ const poi1 = [];
 const poi2 = [];
 const poi3 = [];
 const poi4 = [];
+const poi5 = [];
+
 
 for (let i = 0; i < periods.length; i++) {
   for (let j = 0; j < periods[i].poiPosition.length; j++) {
@@ -279,14 +281,17 @@ for (let i = 0; i < periods.length; i++) {
     } else if (i === 3) {
       poi4.push(cube);
     }
+    else if (i === 4) {
+      poi5.push(cube);
+    }
 
     cube.lookAt(camera.position);
   }
 }
 
-const allPOI = [poi1, poi2, poi3, poi4];
+const allPOI = [poi1, poi2, poi3, poi4, poi5];
 
-scene.add(...poi1, ...poi2, ...poi3, ...poi4);
+scene.add(...poi1, ...poi2, ...poi3, ...poi4, ...poi5);
 gltfLoader.load("/1-batiment/assets/0/plane.glb", (gltf) => {
   scene.add(gltf.scene);
 });
@@ -322,8 +327,11 @@ controls.addEventListener("change", updateCubeOrientation);
 
 const modelsPath = [
   "/1-batiment/assets/0/ANIM_Bordeaux-bat0.glb", // tout bordeaux
-  "/1-batiment/assets/0/ANIM_mairie0.glb", //mairie, mettre animation flamme après
-  "/1-batiment/assets/0/ANIM_musba0.glb",
+  "/1-batiment/assets/0/ANIM_mairie0.glb",
+
+  "/1-batiment/assets/0/new_mairie.glb",
+
+  "/1-batiment/assets/0/gallerie_beaux_arts.glb",
 ];
 
 let animatedScenes = [];

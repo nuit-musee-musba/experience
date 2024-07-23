@@ -198,7 +198,7 @@ const sceneSetUp = async () => {
     }
   };
 
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 5; i++) {
     document.getElementById(`period${i}`).addEventListener("click", () => {
       index = i - 1;
       handleFocusPeriod(periods[i - 1]);
@@ -321,7 +321,7 @@ const sceneSetUp = async () => {
 
 
   const handleFocusPeriod = async (step) => {
-
+    console.log('step', step)
 
     if (!step) {
       return;
@@ -416,6 +416,7 @@ const sceneSetUp = async () => {
 
   async function startExperience() {
     await loadModels();
+    console.log(periods[index])
     handleFocusPeriod(periods[index]);
   }
 

@@ -211,11 +211,11 @@ body {
 
 .left-arrow {
   display: none;
-  left: 33vw;
+  left: 30vw;
 }
 
 .right-arrow {
-  right: 33vw;
+  right: 30vw;
 }
 
 .left-arrow,
