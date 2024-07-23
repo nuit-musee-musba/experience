@@ -81,7 +81,7 @@ export const periods = [
         text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
       },
     ],
-    imagePath: ["/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg", "/1-batiment/images/1875-3.jpg"],
+    imagePath: ["/1-batiment/images/1875-3.jpg", "/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg"],
 
   },
   {
