@@ -18,6 +18,15 @@
     ></script>
   </head>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const date = new Date();
+      const actualYear = date.getFullYear();
+      console.log(actualYear);
+      document.getElementById("period5").innerText = actualYear;
+    });
+  </script>
+
   <body onselectstart="return false">
     <div class="loader">
       <svg
@@ -226,7 +235,7 @@
           </div>
           <div class="chronology-line"></div>
           <div class="buttons" id="dashed-border5">
-            <button id="period5" class="date">2024</button>
+            <button id="period5" class="date"></button>
             <button id="periodButton5" class="button">
               <div id="periodActive5"></div>
             </button>

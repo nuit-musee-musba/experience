@@ -321,7 +321,6 @@ const sceneSetUp = async () => {
 
 
   const handleFocusPeriod = async (step) => {
-    console.log('step', step)
 
     if (!step) {
       return;
