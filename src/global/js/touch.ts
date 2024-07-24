@@ -1,19 +1,13 @@
-const MIN_TOUCH_FORCE = 0.4;
+import { isFingerTouchByRadius } from "./fingerTouchRecognition/byRadius";
 
-const minTouchForce = () =>
-  // Getting value from localstorage permit edition after bundling
-  Number.parseFloat(
-    localStorage.getItem("MIN_TOUCH_FORCE") ?? MIN_TOUCH_FORCE.toString()
-  );
+export type IsFingerTouchStrategy = (event: Touch) => boolean;
 
-export const isFingerTouch = (touch: Touch): boolean => {
+export const isFingerTouch: IsFingerTouchStrategy = (touch: Touch) => {
   if (!touch || !(touch instanceof Touch)) {
     return false;
   }
 
-  console.log(touch.force);
-
-  return touch.force >= minTouchForce();
+  return isFingerTouchByRadius(touch);
 };
 
 export const eventFingers = (event: TouchEvent) => {
