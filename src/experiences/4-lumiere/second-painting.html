@@ -1,47 +1,73 @@
 <!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Lyre Immortelle, Abel-Dominique Boyé | MusBA & MMI</title>
+    <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
+    <script
+      defer
+      type="module"
+      src="/experiences/4-lumiere/js/second-painting.js"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Lyre Immortelle, BOYE Abel-Dominique | MusBA & MMI</title>
-  <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
-  <script defer type="module" src="/experiences/4-lumiere/js/second-painting.js"></script>
-</head>
-
-<body>
-  <canvas class="webgl"></canvas>
-  <div class="popin" id="popin-info">
-    <div class="popin-body">
-      <p>Dans le <b>style académique</b> (un style dicté par l’Académie Royale de<br/> Peinture et Sculpture, en France durant l’Ancien Régime), les<br/> peintres recherchent la <b>perfection des traits</b>, plutôt que le<br/> <b>réalisme</b> des couleurs et des ombres.</p>
-      <button class="popin-btn popin-close btn-small-primary" data-target="#popin-info">J'ai compris</button>
+  <body>
+    <canvas class="webgl"></canvas>
+    <div class="popin" id="popin-info">
+      <div class="popin-body">
+        <p>
+          Dans le <b>style académique</b> (un style dicté par l’Académie Royale
+          de<br />
+          Peinture et Sculpture, en France durant l’Ancien Régime), les<br />
+          peintres recherchent la <b>perfection des traits</b>, plutôt que le<br />
+          <b>réalisme</b> des couleurs et des ombres.
+        </p>
+        <button
+          class="popin-btn popin-close btn-small-primary"
+          data-target="#popin-info"
+        >
+          J'ai compris
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="consignes">
-    <p>Retrouvez le bon emplacement de la lumière en déplaçant le soleil devant et derrière le tableau.</p>
-  </div>
-  <div class="legende">
-    <div class="legende-ecriteau">
-      <p><em>La Lyre Immortelle</em>, Abel-Dominique Boyé</p>
+    <div class="consignes">
+      <p>
+        Retrouvez le bon emplacement de la lumière en déplaçant le soleil devant
+        et derrière le tableau.
+      </p>
     </div>
-  </div>
-  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider</button>
-
-  <div class="popin-overlay hidden"></div>
-
-  <!-- Begin Global buttons -->
-  <div class="bottom-menu">
-    <button class="btn-icon btn-back-hub">
-      <i class="i-home">
-        <span>Accueil</span>
-      </i>
+    <div class="legende">
+      <div class="legende-ecriteau">
+        <p><em>La Lyre Immortelle</em>, Abel-Dominique Boyé</p>
+      </div>
+    </div>
+    <button
+      id="btn-validate"
+      class="btn-small-primary"
+      data-target="#popin-first-painting"
+      disabled
+    >
+      Valider
     </button>
-    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
-      <i class="i-left"> </i>
-      <span>Retour à la galerie</span>
-    </a>
-  </div>
-  <!-- End Global buttons -->
-</body>
 
+    <div class="popin-overlay hidden"></div>
+
+    <!-- Begin Global buttons -->
+    <div class="bottom-menu">
+      <button class="btn-icon btn-back-hub">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </button>
+      <a
+        href="/experiences/4-lumiere/index.html?home-popin=false"
+        class="btn-icon"
+      >
+        <i class="i-left"> </i>
+        <span>Retour à la galerie</span>
+      </a>
+    </div>
+    <!-- End Global buttons -->
+  </body>
 </html>

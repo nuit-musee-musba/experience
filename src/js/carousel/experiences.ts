@@ -5,7 +5,7 @@ export const experiences = [
     color: "red",
     title: "Expérience Bâtiment",
     description:
-      "Explorez l'histoire du Musée des Beaux-Arts de Bordeaux à travers une mini-carte interactive, depuis sa première installation jusqu'à la construction de son édifice actuel. Cette expérience relève les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
+      "Explorez l'histoire du musée des Beaux-Arts de Bordeaux à travers une mini-carte interactive, depuis sa première installation jusqu'à la construction de son édifice actuel. Cette expérience relève les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
     modelPath: "/5-hub/batiment.glb",
   },
   {
@@ -14,7 +14,7 @@ export const experiences = [
     color: "blue",
     title: "Expérience Arts Graphiques",
     description:
-      "Plongez dans un tourbillon d'aventures où l'art se met en marche sous vos doigts magiques ! Devenez le gardien intrépide des chefs-d'œuvre, naviguant à travers les époques pour les créer, les voir vieillir et les restaurer. Explorez le mystère de la réserve secrète, où les œuvres fatiguées retrouvent leur éclat d'antan.",
+      "Plongez dans un tourbillon d'aventures où l'art se met en marche sous vos doigts magiques ! Devenez le gardien intrépide des chefs-d'œuvre, naviguant à travers les époques pour les créer et les restaurer. Explorez le mystère de la réserve secrète, où les œuvres fatiguées retrouvent leur éclat d'antan.",
     modelPath: "/5-hub/reserve.glb",
   },
 
@@ -24,7 +24,7 @@ export const experiences = [
     color: "green",
     title: "Expérience Sculpture",
     description:
-      "Entrez dans l’atelier du célèbre sculpteur Rinaldo Carnielo, au cœur de la belle Florence en 1877 ! Votre mission ? Sculpter un bloc de marbre pour restaurer la sculpture “Mozart Expirant”. Dans cette expérience immersive, apprenez l’art de la sculpture et plongez dans l’histoire captivante de Carnielo.",
+      "Entrez dans l’atelier du célèbre sculpteur Rinaldo Carnielo, au cœur de la belle Florence en 1877 ! Votre mission ? Sculpter un bloc de marbre pour restaurer la sculpture <i>Mozart Expirant</i>. Dans cette expérience immersive, apprenez l’art de la sculpture et plongez dans l’histoire captivante de Carnielo.",
     modelPath: "/5-hub/sculpture.glb",
   },
   {

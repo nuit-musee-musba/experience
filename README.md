@@ -1,11 +1,11 @@
-# Nuit des Musées au MUSBA
+# Nuit des Musées au MusBA
 
 ## C'est quoi ?
 
-Une expérience interactive sur l'écran tactile du Musba qui a eu lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
+Une expérience interactive sur l'écran tactile du MusBA qui a eu lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
 Réalisé par la promotion 2024 du MMI Bordeaux.
 
-## Simulation de l'écran tactile du Musba
+## Simulation de l'écran tactile du MusBA
 
 Vous n'avez peut-être pas d'écran 4k de 1m50 x 1m.
 Vous pouvez simuler cette qualité sur chrome en ouvrant l'inspecteur d'élément et en définissant une taille d'écran personnalisée: 3840 x 2160 pixels
@@ -32,9 +32,11 @@ yarn dev
 4. Supprimez la branche
 
 ## Mettre en production
-Pour envoyer en production, créez une PR pour merger `develop` dans `main`. 
+
+Pour envoyer en production, créez une PR pour merger `develop` dans `main`.
 
 Une fois mergé, la CI lancera automatiquement :
+
 - le build du bundle
 - le déploiement sur Netlify
 

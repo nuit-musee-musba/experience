@@ -1,20 +1,15 @@
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import GUI from "lil-gui";
-import { updateAllMaterials } from "./utils";
 import gsap from "gsap";
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 import { periods } from "./constants.js";
 import { ObjectLoader } from "./objectLoader.js";
 
-// const gui = new GUI();
 
 export const config = {
   envMapIntensity: 3,
-  // 1 = 75 fps on MBP M1PRO
-  // .7 = 100 fps on MBP M1PRO
   scalePixelRatioFactor: .7,
 };
 
@@ -35,17 +30,9 @@ gltfLoader.setDRACOLoader(dracoLoader);
 
 // LIGHTS
 const ambientLight = new THREE.AmbientLight("#FFFFFF", 1);
-// gui
-//   .add(ambientLight, "intensity")
-//   .min(0)
-//   .max(1)
-//   .step(0.001)
-//   .name("Ambient Light");
 
 const sunLight = new THREE.DirectionalLight("#F5F0E8");
 scene.add(sunLight);
-
-// gui.add(sunLight, "intensity").min(0).max(10).step(0.001).name("Sun");
 
 sunLight.position.set(63.9, 22.2, 100);
 sunLight.shadow.camera.left = -26;
@@ -59,134 +46,6 @@ sunLight.shadow.mapSize.height = 1024 * 2 * 2 * 2;
 sunLight.shadow.radius = 4.2;
 sunLight.shadow.blurSamples = 25;
 sunLight.shadow.bias = -0.0002;
-
-// // GUI for Light Controls
-// const lightControls = gui.addFolder("Light Controls");
-
-// lightControls
-//   .add(sunLight.position, "x")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light X");
-// lightControls
-//   .add(sunLight.position, "y")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light Y");
-// lightControls
-//   .add(sunLight.position, "z")
-//   .min(-100)
-//   .max(100)
-//   .step(0.1)
-//   .name("Light Z");
-
-// lightControls
-//   .add(sunLight.rotation, "x")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation X");
-// lightControls
-//   .add(sunLight.rotation, "y")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation Y");
-// lightControls
-//   .add(sunLight.rotation, "z")
-//   .min(-Math.PI)
-//   .max(Math.PI)
-//   .step(0.01)
-//   .name("Light Rotation Z");
-
-// lightControls.add(sunLight, "castShadow").name("Cast Shadow");
-
-// lightControls
-//   .add(sunLight.shadow.camera, "left")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Left");
-// lightControls
-//   .add(sunLight.shadow.camera, "right")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Right");
-
-// lightControls
-//   .add(sunLight.shadow.camera, "top")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Top");
-
-// lightControls
-//   .add(sunLight.shadow.camera, "bottom")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Bottom");
-
-// lightControls
-//   .add(sunLight.shadow.camera, "near")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Near");
-
-// lightControls
-//   .add(sunLight.shadow.camera, "far")
-//   .min(-100)
-//   .max(100)
-//   .name("Shadow Camera Far");
-
-// lightControls
-//   .add(sunLight, "intensity")
-//   .min(0)
-//   .max(10)
-//   .step(0.001)
-//   .name("Light Intensity");
-
-// lightControls
-//   .add(sunLight.shadow, "radius")
-//   .min(0)
-//   .max(10)
-//   .step(0.001)
-//   .name("Shadow Radius");
-
-// lightControls
-//   .add(sunLight.shadow, "blurSamples")
-//   .min(0)
-//   .max(100)
-//   .step(1)
-//   .name("Shadow Blur Samples");
-
-// lightControls
-//   .add(sunLight.shadow, "bias")
-//   .min(-0.01)
-//   .max(0.01)
-//   .step(0.0001)
-//   .name("Shadow Bias");
-
-// lightControls.close();
-
-
-// const sunLightHelper = new THREE.DirectionalLightHelper(sunLight);
-// const sunLightCameraHelper = new THREE.CameraHelper(sunLight.shadow.camera);
-
-// scene.add(sunLightHelper);
-// scene.add(sunLightCameraHelper);
-
-// const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
-
-// gui.onFinishChange(() => {
-//   sunLight.shadow.camera.updateProjectionMatrix();
-//   sunLight.shadow.updateMatrices();
-//   sunLightCameraHelper.update();
-//   updateAllMaterials();
-// });
-
-
-
 
 // ENVIRONMENT
 
@@ -204,15 +63,6 @@ scene.environment = texture;
 
 scene.backgroundBlurriness = 0.2;
 scene.backgroundIntensity = 5;
-
-// gui.add(scene, "backgroundBlurriness").min(0).max(1).step(0.001);
-// gui.add(scene, "backgroundIntensity").min(0).max(10).step(0.001);
-// gui
-//   .add(config, "envMapIntensity")
-//   .min(0)
-//   .max(10)
-//   .step(0.001)
-//   .onChange(updateAllMaterials);
 
 // SIZES
 const sizes = {
@@ -366,11 +216,6 @@ renderer.setClearColor("#FFF6ED");
 renderer.shadowMap.enabled = true;
 
 export {
-  renderer,
-  camera,
-  controls,
-  scene,
-  animatedScenes,
-  loadModels,
-  allPOI,
+  allPOI, animatedScenes, camera,
+  controls, loadModels, renderer, scene
 };

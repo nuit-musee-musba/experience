@@ -72,11 +72,11 @@ export const periods = [
 
       {
         title: "Les façades des pavillons du côté du cours d’Albret",
-        text: "Les pavillons du cours d'Albret arborent un décor sculpté composé de quatre bustes et deux statues. Louis Coëffard, élève de Maggesi, a créé deux bustes rue Elisée Reclus : l'un représentant Pierre Lacour fils, fondateur du musée, et l'autre dédié à Doucet, ami de Lacour fils et bienfaiteur du musée. De plus, Edmond Prévot, élève de Coëffard, a sculpté deux bustes rue Montbazon : l'un dépeignant Dufour-Dubergier, maire de Bordeaux de 1842 à 1848 et donateur d'une collection de tableaux à la ville, et l'autre représentant Charles-Jean-Pierre Fieffé, fils d'un ancien maire de Bordeaux, impliqué dans la création de la société des amis des arts.",
+        text: "Les pavillons du cours d'Albret arborent un décor sculpté composé de quatre bustes et deux statues. Louis Coëffard, élève de Maggesi, a créé deux bustes rue Elisée Reclus : l'un représentant Pierre Lacour fils, fondateur du musée, et l'autre dédié à Doucet, ami de Lacour fils et bienfaiteur du musée.<br><br>De plus, Edmond Prévot, élève de Coëffard, a sculpté deux bustes rue Montbazon : l'un dépeignant Dufour-Dubergier, maire de Bordeaux de 1842 à 1848 et donateur d'une collection de tableaux à la ville, et l'autre représentant Charles-Jean-Pierre Fieffé, fils d'un ancien maire de Bordeaux, impliqué dans la création de la société des amis des arts.",
       },
       {
         title: "Façades côté jardin",
-        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches. Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques. De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol. À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
+        text: "Les pavillons, avec leurs façades côté jardin, offrent un accès majestueux par deux volées de marches.<br>Le soubassement, doté de soupiraux comme observé dans les ailes, soutient une porte d'entrée monumentale encadrée de doubles colonnes ioniques.<br><br>De chaque côté de cette porte, des fenêtres encadrées de pilastres ioniques éclairent l'entrée, tandis qu'un œil-de-bœuf surplombe l'entresol.<br><br>À l'étage, des doubles colonnes corinthiennes mettent en valeur une porte-fenêtre en plein cintre, entourée de fenêtres ornées de frontons triangulaires et de pilastres corinthiens. Contrairement aux ailes du musée, ces pavillons sont abondamment fenêtrés, exprimant ainsi avec solennité l'importance des collections hébergées par le musée.",
       },
     ],
     imagePath: ["/1-batiment/images/1875-1.jpg", "/1-batiment/images/1875-2.jpg"],
@@ -131,7 +131,7 @@ export const periods = [
     poiText: [
       {
         title: "1- Le portail",
-        text: "Les trois portails qui s'ouvrent sur le cours d'Albret forment un ensemble, avec le portail central qui se distingue par son élaboration particulière. Ce dernier présente les éléments suivants : Une couronne comtale. L'écusson de la ville. Une abondance de motifs variés tels que des dauphins, des coquillages, des lions, des guirlandes de raisins, etc.",
+        text: "Les trois portails qui s'ouvrent sur le cours d'Albret forment un ensemble, avec le portail central qui se distingue par son élaboration particulière. Ce dernier présente les éléments suivants : une couronne comtale, l'écusson de la ville, une abondance de motifs variés tels que des dauphins, des coquillages, des lions, des guirlandes de raisins, etc.",
       },
       {
         title: "2- Bâtiment",
@@ -150,12 +150,12 @@ export const onboardingContent = [
   },
   {
     title: "2024",
-    subTitle: "Cette expérience vous permet de naviguer à travers les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique",
+    subTitle: "Cette expérience vous permet de naviguer à travers les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
   {
     title: "1801",
-    subTitle: "Pour cela, faisons un saut dans le passé… je vous prie de bien vouloir lancer l’expérience",
+    subTitle: "Pour cela, faisons un saut dans le passé… je vous prie de bien vouloir lancer l’expérience.",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
 ];

@@ -1,50 +1,77 @@
 <!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Saint Sébastien soigné par Irène, le Maître à la chandelle | MusBA & MMI
+    </title>
+    <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
+    <script
+      defer
+      type="module"
+      src="/experiences/4-lumiere/js/first-painting.js"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saint Sébastien soigné par Irène, le Maître à la chandelle | MusBA & MMI</title>
-  <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
-  <script defer type="module" src="/experiences/4-lumiere/js/first-painting.js"></script>
-</head>
-
-<body>
-  <canvas class="webgl"></canvas>
-  <div class="popin" id="popin-info">
-    <div class="popin-body">
-      <p>Les peintres inspirés du <b>Caravage</b> aiment représenter leur sujet avec un <b>fort contraste</b> entre les zones de
-        <b>lumière</b> et les zones d’<b>ombre</b>.</p>
-      <button class="popin-btn popin-close btn-small-primary" data-target="#popin-info">J'ai compris</button>
+  <body>
+    <canvas class="webgl"></canvas>
+    <div class="popin" id="popin-info">
+      <div class="popin-body">
+        <p>
+          Les peintres inspirés du <b>Caravage</b> aiment représenter leur sujet
+          avec un <b>fort contraste</b> entre les zones de <b>lumière</b> et les
+          zones d’<b>ombre</b>.
+        </p>
+        <button
+          class="popin-btn popin-close btn-small-primary"
+          data-target="#popin-info"
+        >
+          J'ai compris
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="consignes">
-    <p>Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur le cercle.</p>
-  </div>
-  <div class="legende">
-    <div class="legende-ecriteau">
-      <p><em>Saint Sébastien soigné par Irène</em>, le Maître à la chandelle</p>
+    <div class="consignes">
+      <p>
+        Retrouvez le bon emplacement de la lumière en déplaçant la lanterne sur
+        le cercle.
+      </p>
     </div>
-  </div>
+    <div class="legende">
+      <div class="legende-ecriteau">
+        <p>
+          <span class="italic">Saint Sébastien soigné par Irène</span>, le
+          Maître à la chandelle
+        </p>
+      </div>
+    </div>
 
-  <button id="btn-validate" class="btn-small-primary" data-target="#popin-first-painting" disabled>Valider</button>
-
-  <div class="popin-overlay hidden"></div>
-
-  <!-- Begin Global buttons -->
-  <div class="bottom-menu">
-    <button class="btn-icon btn-back-hub">
-      <i class="i-home">
-        <span>Accueil</span>
-      </i>
+    <button
+      id="btn-validate"
+      class="btn-small-primary"
+      data-target="#popin-first-painting"
+      disabled
+    >
+      Valider
     </button>
-    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
-      <i class="i-left"> </i>
-      <span>Retour à la galerie</span>
-    </a>
-  </div>
-  <!-- End Global buttons -->
 
-</body>
+    <div class="popin-overlay hidden"></div>
 
+    <!-- Begin Global buttons -->
+    <div class="bottom-menu">
+      <button class="btn-icon btn-back-hub">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </button>
+      <a
+        href="/experiences/4-lumiere/index.html?home-popin=false"
+        class="btn-icon"
+      >
+        <i class="i-left"> </i>
+        <span>Retour à la galerie</span>
+      </a>
+    </div>
+    <!-- End Global buttons -->
+  </body>
 </html>

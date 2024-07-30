@@ -42,7 +42,7 @@ detailsEls.backBtn.addEventListener("click", (e) => {
 
 export const updateExperienceInfos = (experience: Experience) => {
   detailsEls.title.innerText = experience.title;
-  detailsEls.description.innerText = experience.description;
+  detailsEls.description.innerHTML = experience.description;
 
   introEls.title.innerText = experience.title;
 };
