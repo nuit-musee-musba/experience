@@ -64,7 +64,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
         isHorizontalCollision = false;
       }
     } else {
-      console.log("coupé");
       dragElement.style.left = realInitialX + "px";
       dragElement.style.top = realInitialY + "px";
     }
@@ -88,7 +87,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
       dragElementRect.bottom >= targetZoneRect.top &&
       dragElementRect.top <= targetZoneRect.bottom
     ) {
-      console.log("element dans la zone");
       if (dragElementId == "knife") {
         alert("tu coupes citron");
         targetImage.src = "./assets/images/ingredients/animals/cat.png";
@@ -101,8 +99,6 @@ function utensilsHandleDragInteraction(dragElementId, targetZoneId) {
     } else {
       dragElement.style.left = realInitialX + "px"; //permet de faire revenir le couteau à sa position initiale
       dragElement.style.top = realInitialY + "px";
-
-      console.log("element pas dans la zone");
     }
   });
 }

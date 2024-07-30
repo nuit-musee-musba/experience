@@ -44,7 +44,6 @@ export class Dragable {
       return;
     }
 
-    //console.log("%c handleMove", "background-color: #AA3DAA;");
     e.preventDefault();
     e.stopPropagation();
 

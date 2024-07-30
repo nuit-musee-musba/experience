@@ -59,7 +59,6 @@ const popinShow = (targetPopin) => {
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
   popinShow(popin);
 });
 
@@ -106,15 +105,6 @@ const scene = new THREE.Scene();
  * Textures
  */
 const loadingManager = new THREE.LoadingManager();
-loadingManager.onStart = () => {
-  console.log("onStart");
-};
-loadingManager.onLoaded = () => {
-  console.log("onLoaded");
-};
-loadingManager.onProgress = () => {
-  console.log("onProgress");
-};
 loadingManager.onError = (error) => {
   console.log("Error :", error);
 };
@@ -186,9 +176,7 @@ gltfLoader.load(
     gltf.scene.scale.set(1.75, 1.75, 1.75);
     scene.add(gltf.scene);
   },
-  () => {
-    console.log("progress");
-  },
+  () => { },
   (error) => {
     console.log("error:", error);
   }

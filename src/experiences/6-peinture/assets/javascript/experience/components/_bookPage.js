@@ -84,7 +84,6 @@ class BookPage {
         this.hasSelectedItem = true;
       }
     });
-    console.log(this.hasSelectedItem)
 
     if (!this.hasSelectedItem) {
       this.bookContainer.classList.add('is-closed');

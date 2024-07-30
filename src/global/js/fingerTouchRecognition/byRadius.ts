@@ -17,11 +17,5 @@ export const isFingerTouchByRadius: IsFingerTouchStrategy = (
   const isRadiusXInBounds = MIN_RADIUS <= radiusX && radiusX <= MAX_RADIUS;
   const isRadiusYInBounds = MIN_RADIUS <= radiusY && radiusY <= MAX_RADIUS;
 
-  const isOK = isRatioInBounds && isRadiusXInBounds && isRadiusYInBounds;
-
-  isOK
-    ? console.log(touch.radiusX, touch.radiusY, ratio)
-    : console.warn(touch.radiusX, touch.radiusY, ratio);
-
-  return isOK;
+  return isRatioInBounds && isRadiusXInBounds && isRadiusYInBounds;
 };

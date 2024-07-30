@@ -10,8 +10,4 @@ const minTouchForce = () =>
 
 export const isFingerTouchByPression: IsFingerTouchStrategy = (
   touch: Touch
-): boolean => {
-  console.log(touch);
-
-  return touch.force >= minTouchForce();
-};
+): boolean => touch.force >= minTouchForce();

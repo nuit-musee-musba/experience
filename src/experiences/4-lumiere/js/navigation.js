@@ -121,15 +121,6 @@ const scene = new THREE.Scene();
  * Textures
  */
 const loadingManager = new THREE.LoadingManager();
-loadingManager.onStart = () => {
-  console.log("onStart");
-};
-loadingManager.onLoaded = () => {
-  console.log("onLoaded");
-};
-loadingManager.onProgress = () => {
-  console.log("onProgress");
-};
 loadingManager.onError = (error) => {
   console.log("Error :", error);
 };

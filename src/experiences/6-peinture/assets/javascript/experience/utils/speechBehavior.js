@@ -32,7 +32,7 @@ function animateText(speech, thisLoopId) {
   if (old_text != speech) {
     if (thisLoopId == loopId - 1) {
       //permet de stopper la boucle n-1 lorsque un nouvelle est entamée pour éviter que les deux textes se melangent
-      console.log("different text detected while animation is on, aborted.");
+      console.warn("different text detected while animation is on, aborted.");
       return;
     }
   } else {
