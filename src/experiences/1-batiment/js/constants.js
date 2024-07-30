@@ -131,7 +131,7 @@ export const periods = [
     poiText: [
       {
         title: "1- Le portail",
-        text: "Les trois portails qui s'ouvrent sur le cours d'Albret forment un ensemble, avec le portail central qui se distingue par son élaboration particulière. Ce dernier présente les éléments suivants : Une couronne comtale. L'écusson de la ville. Une abondance de motifs variés tels que des dauphins, des coquillages, des lions, des guirlandes de raisins, etc.",
+        text: "Les trois portails qui s'ouvrent sur le cours d'Albret forment un ensemble, avec le portail central qui se distingue par son élaboration particulière. Ce dernier présente les éléments suivants : une couronne comtale, l'écusson de la ville, une abondance de motifs variés tels que des dauphins, des coquillages, des lions, des guirlandes de raisins, etc.",
       },
       {
         title: "2- Bâtiment",
@@ -150,12 +150,12 @@ export const onboardingContent = [
   },
   {
     title: "2024",
-    subTitle: "Cette expérience vous permet de naviguer à travers les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique",
+    subTitle: "Cette expérience vous permet de naviguer à travers les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
   {
     title: "1801",
-    subTitle: "Pour cela, faisons un saut dans le passé… je vous prie de bien vouloir lancer l’expérience",
+    subTitle: "Pour cela, faisons un saut dans le passé… je vous prie de bien vouloir lancer l’expérience.",
     mainTitle: "De sa première installation jusqu'à la construction",
   },
 ];

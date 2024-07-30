@@ -5,7 +5,7 @@ export const experiences = [
     color: "red",
     title: "Expérience Bâtiment",
     description:
-      "Explorez l'histoire du Musée des Beaux-Arts de Bordeaux à travers une mini-carte interactive, depuis sa première installation jusqu'à la construction de son édifice actuel. Cette expérience relève les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
+      "Explorez l'histoire du musée des Beaux-Arts de Bordeaux à travers une mini-carte interactive, depuis sa première installation jusqu'à la construction de son édifice actuel. Cette expérience relève les moments clés qui ont façonné la riche histoire artistique et architecturale de ce lieu emblématique.",
     modelPath: "/5-hub/batiment.glb",
   },
   {
