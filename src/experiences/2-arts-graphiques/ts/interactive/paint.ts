@@ -108,21 +108,9 @@ const Paint = async (
           skipUpdateTransform: false,
         });
 
-        // if (lastDrawnPoint) {
-        //   line
-        //     .clear()
-        //     .lineStyle({ width: 100, color: 0xffffff })
-        //     .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
-        //     .lineTo(x, y);
-        //   app.renderer.render(line, {
-        //     renderTexture,
-        //     clear: false,
-        //     skipUpdateTransform: false,
-        //   });
-        // }
-
-        // lastDrawnPoint = lastDrawnPoint || new PIXI.Point();
-        // lastDrawnPoint.set(x, y);
+        if (options && options!.getPercentage) {
+          percentage(options!.getPercentageAt);
+        }
       }
     }
 
