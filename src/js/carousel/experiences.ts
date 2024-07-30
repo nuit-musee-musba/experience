@@ -24,7 +24,7 @@ export const experiences = [
     color: "green",
     title: "Expérience Sculpture",
     description:
-      "Entrez dans l’atelier du célèbre sculpteur Rinaldo Carnielo, au cœur de la belle Florence en 1877 ! Votre mission ? Sculpter un bloc de marbre pour restaurer la sculpture “Mozart Expirant”. Dans cette expérience immersive, apprenez l’art de la sculpture et plongez dans l’histoire captivante de Carnielo.",
+      "Entrez dans l’atelier du célèbre sculpteur Rinaldo Carnielo, au cœur de la belle Florence en 1877 ! Votre mission ? Sculpter un bloc de marbre pour restaurer la sculpture <i>Mozart Expirant</i>. Dans cette expérience immersive, apprenez l’art de la sculpture et plongez dans l’histoire captivante de Carnielo.",
     modelPath: "/5-hub/sculpture.glb",
   },
   {
