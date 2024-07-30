@@ -14,7 +14,7 @@ export const experiences = [
     color: "blue",
     title: "Expérience Arts Graphiques",
     description:
-      "Plongez dans un tourbillon d'aventures où l'art se met en marche sous vos doigts magiques ! Devenez le gardien intrépide des chefs-d'œuvre, naviguant à travers les époques pour les créer, les voir vieillir et les restaurer. Explorez le mystère de la réserve secrète, où les œuvres fatiguées retrouvent leur éclat d'antan.",
+      "Plongez dans un tourbillon d'aventures où l'art se met en marche sous vos doigts magiques ! Devenez le gardien intrépide des chefs-d'œuvre, naviguant à travers les époques pour les créer et les restaurer. Explorez le mystère de la réserve secrète, où les œuvres fatiguées retrouvent leur éclat d'antan.",
     modelPath: "/5-hub/reserve.glb",
   },
 

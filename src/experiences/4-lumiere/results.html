@@ -1,132 +1,188 @@
 <!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Résultats & explications | MusBA & MMI</title>
+    <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
+    <script
+      defer
+      type="module"
+      src="/experiences/4-lumiere/js/results.js"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Résultats & explications | MusBA & MMI</title>
-  <link rel="stylesheet" href="/experiences/4-lumiere/css/style.css" />
-  <script defer type="module" src="/experiences/4-lumiere/js/results.js"></script>
-</head>
+  <body class="page-results">
+    <canvas class="webgl"></canvas>
 
-<body class="page-results">
-  <canvas class="webgl"></canvas>
-
-  <div class="wrapper">
-    <div id="result-first-painting" class="wrapper-container hidden">
-      <div class="wrapper-row">
-        <div class="col-demi">
-          <img src="/4-lumiere/first-painting/first-painting-original.webp" alt="">
+    <div class="wrapper">
+      <div id="result-first-painting" class="wrapper-container hidden">
+        <div class="wrapper-row">
+          <div class="col-demi">
+            <img
+              src="/4-lumiere/first-painting/first-painting-original.webp"
+              alt=""
+            />
+          </div>
+          <div class="col-demi congrats">
+            <h1>Bravo&nbsp;!</h1>
+            <p>
+              Vous avez réussi à replacer la lanterne du tableau
+              <span class="italic">Saint Sébastien soigné par Irène</span>, du
+              Maître à la chandelle&nbsp;!
+            </p>
+            <p>
+              Ce <b>fort contraste</b> entre les zones de lumières et les zones
+              d’ombres s'appelle le <b>clair-obscur</b>&nbsp;!
+            </p>
+          </div>
         </div>
-        <div class="col-demi congrats">
-          <h1>Bravo&nbsp;!</h1>
-          <p>Vous avez réussi à replacer la lanterne du tableau <em>Saint Sébastien soigné par Irène</em>, du Maître à
-            la chandelle&nbsp;!</p>
-          <p>Ce <b>fort contraste</b> entre les zones de lumières et les zones d’ombres s'appelle le
-            <b>clair-obscur</b>&nbsp;!
-          </p>
+        <div class="wrapper-row">
+          <div class="col-full description">
+            <p>
+              Celui-ci permet d’<b>accentuer le message</b> du peintre en
+              guidant l'œil du spectateur sur l’<b>essentiel</b>, tout en
+              donnant un <b>côté dramatique</b> à l'œuvre.
+            </p>
+          </div>
+        </div>
+        <div class="wrapper-row">
+          <div class="col-demi emplacement">
+            <p>
+              <b
+                >Découvrez ce chef-d'œuvre<br />
+                dans l’aile Lacour du musée&nbsp;!</b
+              >
+            </p>
+          </div>
+          <div class="col-demi btn-wrapper">
+            <a
+              class="btn-small-primary"
+              href="/experiences/4-lumiere/index.html?home-popin=false"
+              >Choisir un autre tableau</a
+            >
+          </div>
         </div>
       </div>
-      <div class="wrapper-row">
-        <div class="col-full description">
-          <p>Celui-ci permet d’<b>accentuer le message</b> du peintre en guidant l'œil du spectateur sur
-            l’<b>essentiel</b>, tout en
-            donnant un <b>côté dramatique</b> à l'œuvre.</p>
+
+      <div id="result-second-painting" class="wrapper-container hidden">
+        <div class="wrapper-row">
+          <div class="col-demi">
+            <img
+              src="/4-lumiere/second-painting/second-painting-original.webp"
+              alt=""
+            />
+          </div>
+          <div class="col-demi congrats">
+            <h1>Bravo&nbsp;!</h1>
+            <p>
+              Vous avez réussi à retrouver l’emplacement du soleil sur le
+              tableau <br /><em>La Lyre Immortelle</em>, de <br />Abel-Dominique
+              BOYE&nbsp;!
+            </p>
+          </div>
+        </div>
+        <div class="wrapper-row">
+          <div class="col-full description">
+            <p>
+              L’objectif est de <b>représenter le beau</b> et d’<b
+                >imiter une réalité idéalisée</b
+              >. Les scènes sont peintes en atelier, ce qui offre une lumière
+              limitée, plutôt froide et lissante.
+            </p>
+            <p>
+              Dans l’académisme, les peintres représentent des
+              <b>sujets</b> dits <b>nobles</b> comprenant la peinture
+              historique, les sujets religieux et mythologiques, les portraits,
+              les nus et les paysages.
+            </p>
+          </div>
+        </div>
+        <div class="wrapper-row">
+          <div class="col-demi emplacement">
+            <p>
+              <b
+                >Ce chef d'œuvre est gardé en réserve à l'abri de la lumière
+                dans des conditions de conservation idéales.</b
+              >
+            </p>
+          </div>
+          <div class="col-demi btn-wrapper">
+            <a
+              class="btn-small-primary"
+              href="/experiences/4-lumiere/index.html?home-popin=false"
+              >Choisir un autre tableau</a
+            >
+          </div>
         </div>
       </div>
-      <div class="wrapper-row">
-        <div class="col-demi emplacement">
-          <p><b>Découvrez ce chef-d'œuvre<br />
-              dans l’aile Lacour du musée&nbsp;!</b></p>
+
+      <div id="result-third-painting" class="wrapper-container hidden">
+        <div class="wrapper-row">
+          <div class="col-demi">
+            <img
+              src="/4-lumiere/third-painting/third-painting-original.webp"
+              alt=""
+            />
+          </div>
+          <div class="col-demi congrats">
+            <h1>Bravo&nbsp;!</h1>
+            <p>
+              Vous avez réussi à retrouver à quel moment de la journée a été
+              peint <em>Les Quais de Bordeaux</em>, par Alfred Smith&nbsp;!
+            </p>
+            <p>
+              Les peintres <b>impressionnistes</b> sont fascinés par les
+              <b>changements de couleurs</b> en fonction des heures de la
+              journée ainsi que des <b>reflets sur l’eau</b>.
+            </p>
+          </div>
         </div>
-        <div class="col-demi btn-wrapper">
-          <a class="btn-small-primary" href="/experiences/4-lumiere/index.html?home-popin=false">Choisir un autre
-            tableau</a>
+        <div class="wrapper-row">
+          <div class="col-full description">
+            <p>
+              La peinture apparaît comme <b>vague</b> et <b>floue</b>, grâce à
+              une palette de <b>couleurs claires</b>. Celle-ci symbolise la
+              lumière et est appliquée par des touches dynamiques <br />en forme
+              de virgule.
+            </p>
+          </div>
+        </div>
+        <div class="wrapper-row">
+          <div class="col-demi emplacement">
+            <p>
+              <b
+                >Découvrez ce chef-d'œuvre<br />
+                dans l’aile Bonheur du musée&nbsp;!</b
+              >
+            </p>
+          </div>
+          <div class="col-demi btn-wrapper">
+            <a
+              class="btn-small-primary"
+              href="/experiences/4-lumiere/index.html?home-popin=false"
+              >Choisir un autre tableau</a
+            >
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="result-second-painting" class="wrapper-container hidden">
-      <div class="wrapper-row">
-        <div class="col-demi">
-          <img src="/4-lumiere/second-painting/second-painting-original.webp" alt="">
-        </div>
-        <div class="col-demi congrats">
-          <h1>Bravo&nbsp;!</h1>
-          <p>Vous avez réussi à retrouver l’emplacement du soleil sur le tableau <br /><em>La Lyre Immortelle</em>,
-            de <br />Abel-Dominique BOYE&nbsp;!</p>
-        </div>
-      </div>
-      <div class="wrapper-row">
-        <div class="col-full description">
-          <p>L’objectif est de <b>représenter le beau</b> et d’<b>imiter une réalité idéalisée</b>. Les scènes sont
-            peintes en
-            atelier,
-            ce qui offre une lumière limitée, plutôt froide et lissante.</p>
-          <p>Dans l’académisme, les peintres représentent des <b>sujets</b> dits <b>nobles</b> comprenant la peinture
-            historique, les
-            sujets religieux et mythologiques, les portraits, les nus et les paysages.</p>
-        </div>
-      </div>
-      <div class="wrapper-row">
-        <div class="col-demi emplacement">
-          <p><b>Ce chef d'œuvre est gardé en réserve à l'abri de la lumière dans des conditions de conservation idéales.</b></p>
-        </div>
-        <div class="col-demi btn-wrapper">
-          <a class="btn-small-primary" href="/experiences/4-lumiere/index.html?home-popin=false">Choisir un autre
-            tableau</a>
-        </div>
-      </div>
+    <!-- Begin Global buttons -->
+    <div class="bottom-menu">
+      <button class="btn-icon btn-back-hub">
+        <i class="i-home">
+          <span>Accueil</span>
+        </i>
+      </button>
+      <a
+        href="/experiences/4-lumiere/index.html?home-popin=false"
+        class="btn-icon"
+      >
+        <i class="i-left"> </i>
+        <span>Retour à la galerie</span>
+      </a>
     </div>
-
-    <div id="result-third-painting" class="wrapper-container hidden">
-      <div class="wrapper-row">
-        <div class="col-demi">
-          <img src="/4-lumiere/third-painting/third-painting-original.webp" alt="">
-        </div>
-        <div class="col-demi congrats">
-          <h1>Bravo&nbsp;!</h1>
-          <p>Vous avez réussi à retrouver à quel moment de la journée a été peint <em>Les Quais de Bordeaux</em>, par
-            Alfred Smith&nbsp;!</p>
-          <p>Les peintres <b>impressionnistes</b> sont fascinés par les <b>changements de couleurs</b> en fonction des
-            heures de la
-            journée ainsi que des <b>reflets sur l’eau</b>.</p>
-        </div>
-      </div>
-      <div class="wrapper-row">
-        <div class="col-full description">
-          <p>La peinture apparaît comme <b>vague</b> et <b>floue</b>, grâce à une palette de <b>couleurs claires</b>.
-            Celle-ci symbolise la
-            lumière et est appliquée par des touches dynamiques <br />en forme de virgule.</p>
-        </div>
-      </div>
-      <div class="wrapper-row">
-        <div class="col-demi emplacement">
-          <p><b>Découvrez ce chef-d'œuvre<br />
-              dans l’aile Bonheur du musée&nbsp;!</b></p>
-        </div>
-        <div class="col-demi btn-wrapper">
-          <a class="btn-small-primary" href="/experiences/4-lumiere/index.html?home-popin=false">Choisir un autre
-            tableau</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Begin Global buttons -->
-  <div class="bottom-menu">
-    <button class="btn-icon btn-back-hub">
-      <i class="i-home">
-        <span>Accueil</span>
-      </i>
-    </button>
-    <a href="/experiences/4-lumiere/index.html?home-popin=false" class="btn-icon">
-      <i class="i-left"> </i>
-      <span>Retour à la galerie</span>
-    </a>
-  </div>
-  <!-- End Global buttons -->
-
-</body>
-
+    <!-- End Global buttons -->
+  </body>
 </html>
