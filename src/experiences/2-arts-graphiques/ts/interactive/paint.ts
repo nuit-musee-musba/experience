@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
+import { revealInfosContainer } from "../animation/infos";
 import Button from "../class/button";
 import Div from "../class/div";
-import { revealInfosContainer } from "../animation/infos";
 
 let totalPixels: number;
 let remainingPixels: number;
@@ -44,7 +44,9 @@ const Paint = async (
   // const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 200);
   // const line = new PIXI.Graphics();
 
-  let brushTexture = await PIXI.Texture.from(`/2-arts-graphiques/images/textures/${brushImageFile}`);
+  let brushTexture = await PIXI.Texture.from(
+    `/2-arts-graphiques/images/textures/${brushImageFile}`
+  );
   const brush = new PIXI.Sprite(brushTexture);
   brush.anchor.set(0.7);
 
@@ -97,6 +99,7 @@ const Paint = async (
     }) {
       paintingText.addClassHide();
       divToReveal.forEach((element) => element.classList.remove("hide"));
+
       if (dragging) {
         brush.position.set(x, y);
         app.renderer.render(brush, {
