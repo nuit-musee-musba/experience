@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { enableInactivityRedirection } from "/global/js/inactivity";
+import { firstFingerOfEvent } from "@/global/js/touch";
 
 /**
  * Ambiant Sound
@@ -104,15 +105,6 @@ const scene = new THREE.Scene();
  * Textures
  */
 const loadingManager = new THREE.LoadingManager();
-loadingManager.onStart = () => {
-  console.log("onStart");
-};
-loadingManager.onLoaded = () => {
-  console.log("onLoaded");
-};
-loadingManager.onProgress = () => {
-  console.log("onProgress");
-};
 loadingManager.onError = (error) => {
   console.log("Error :", error);
 };
@@ -212,9 +204,7 @@ gltfLoader.load(
     gltf.scene.scale.set(17.25, 17.0125, 16.75);
     scene.add(gltf.scene);
   },
-  () => {
-    console.log("progress");
-  },
+  () => { },
   (error) => {
     console.log("error:", error);
   }
@@ -340,8 +330,14 @@ window.addEventListener(
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
   ellipse.material.opacity = globalParameters.ellipseTouchOpacity;
 
   // Update firstPainting light position
@@ -349,14 +345,20 @@ canvas.addEventListener("touchstart", (event) => {
 });
 
 canvas.addEventListener("touchmove", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
   // Update firstPainting light position
   updateRotation();
 });
 
-canvas.addEventListener("touchend", (event) => {
+canvas.addEventListener("touchend", () => {
   ellipse.material.opacity = globalParameters.ellipseDefaultOpacity;
 });
 

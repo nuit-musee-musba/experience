@@ -1,3 +1,5 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
+
 var speech_area = document.getElementById("dialog");
 var speech_area__parent = document.getElementById("game-top");
 let currentIndex = 0;
@@ -7,7 +9,13 @@ let isAnimating = false;
 let old_text = "";
 let loopId = 0;
 
-speech_area__parent.addEventListener("touchstart", (e) => {
+speech_area__parent.addEventListener("touchstart", (event) => {
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
   textSpeed = 10;
 });
 
@@ -24,7 +32,7 @@ function animateText(speech, thisLoopId) {
   if (old_text != speech) {
     if (thisLoopId == loopId - 1) {
       //permet de stopper la boucle n-1 lorsque un nouvelle est entamée pour éviter que les deux textes se melangent
-      console.log("different text detected while animation is on, aborted.");
+      console.warn("different text detected while animation is on, aborted.");
       return;
     }
   } else {

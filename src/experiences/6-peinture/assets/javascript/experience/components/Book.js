@@ -1,3 +1,4 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
 import items from "../data/items.json" assert { type: "json" };
 
 class BookPage {
@@ -22,11 +23,23 @@ class BookPage {
                 this.animation(item, true);
                 this.displayData(item);
             });
-            item.addEventListener("touchstart", () => {
+            item.addEventListener("touchstart", (event) => {
+                const firstFinger = firstFingerOfEvent(event);
+
+                if (!firstFinger) {
+                    return
+                }
+
                 // this.hasSelectedItem = true;
                 this.displayData(item);
             });
-            item.addEventListener("touchmove", () => {
+            item.addEventListener("touchmove", (event) => {
+                const firstFinger = firstFingerOfEvent(event);
+
+                if (!firstFinger) {
+                    return
+                }
+
                 // this.hasSelectedItem = true;
                 this.animation(item, false);
             });

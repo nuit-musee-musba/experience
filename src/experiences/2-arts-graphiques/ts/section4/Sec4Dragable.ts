@@ -119,7 +119,6 @@ export class Sec4Dragable extends Dragable {
       elmtBoundindRect.left > this.refData.avgZoneRight
     );
 
-    // console.log("target top : ", this.refData.top, this.refData.avgZoneTop);
 
     if (this.isInside) {
       this.refElmt.style.zIndex = "10";

@@ -1,5 +1,6 @@
 import { enableInactivityRedirection } from "@/global/js/inactivity.ts";
 import { ambiantSound } from "@/global/js/sound";
+import "@lottiefiles/lottie-player";
 import landmark from "./animation/landmark";
 import Modal from "./class/modal";
 import Transition from "./class/transition";

@@ -1,7 +1,8 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
 import items from "../data/items.json" assert { type: "json" };
-import { recipeResolve, recipeGeneration } from "./recipeManager.js";
-import { print_chef_speech } from "./speechBehavior.js";
 import { playAnimation } from "./playAnimation.js";
+import { recipeGeneration, recipeResolve } from "./recipeManager.js";
+import { print_chef_speech } from "./speechBehavior.js";
 
 var craftCont = document.querySelectorAll("#targetCraftZone > div");
 let parentElement = document.getElementById("ingredients-container"); // parent
@@ -63,6 +64,12 @@ function handleDragInteraction(
   let realInitialY = initialY - parentElementRect.top; //position Y selon la div parente
 
   dragElement.addEventListener("touchstart", (e) => {
+    const firstFinger = firstFingerOfEvent(e);
+
+    if (!firstFinger) {
+      return
+    }
+
     let selectedElement = parentElement.querySelector(".selected-item");
     if (selectedElement) {
       selectedElement.classList.remove("selected-item");
@@ -72,20 +79,24 @@ function handleDragInteraction(
   });
 
   dragElement.addEventListener("touchmove", (e) => {
+    const firstFinger = firstFingerOfEvent(e);
+
+    if (!firstFinger) {
+      return
+    }
+
     if (dragElement.classList.contains('disabled')) {
       return;
     }
-    //if (!success) {
+
     e.preventDefault();
-    const touch = e.touches[0];
-    const currentX = touch.clientX - initialX + realInitialX - (dragElWidth / 2);
-    const currentY = touch.clientY - initialY + realInitialY - (dragElheight / 2);
+    const currentX = firstFinger.clientX - initialX + realInitialX - (dragElWidth / 2);
+    const currentY = firstFinger.clientY - initialY + realInitialY - (dragElheight / 2);
     dragElement.style.left = currentX + "px";
     dragElement.style.top = currentY + "px";
-    //}
   });
 
-  dragElement.addEventListener("touchend", (e) => {
+  dragElement.addEventListener("touchend", () => {
     const dragElementRect = dragElement.getBoundingClientRect();
     const targetZoneRect = targetZone.getBoundingClientRect();
 

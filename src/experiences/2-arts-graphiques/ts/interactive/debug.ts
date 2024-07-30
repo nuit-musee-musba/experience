@@ -28,23 +28,18 @@ class Square {
     parent.appendChild(this.square);
 
     this.square.addEventListener("touchstart", (e) => {
-      // console.log("%c handleStart", "background-color: #11FFAA;");
       this.changeColor("#11FFAA");
       e.preventDefault();
       e.stopPropagation();
     });
     this.square.addEventListener("touchend", () => {
-      // console.log("%c handleEnd", "background-color: #AAAAAA;");
       this.changeColor("#AAAAAA");
     });
-    this.square.addEventListener("touchcancel", () => {
-      // console.log("handleCancel");
-    });
+    this.square.addEventListener("touchcancel", () => {});
     this.square.addEventListener("touchmove", (e) => {
       e.preventDefault();
       e.stopPropagation();
       this.changeColor("#AA3DAA");
-      // console.log("%c handleMove", "background-color: #AA3DAA;");
 
       const elementBounding = this.square.getBoundingClientRect();
 

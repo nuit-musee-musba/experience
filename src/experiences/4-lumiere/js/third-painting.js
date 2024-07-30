@@ -1,4 +1,5 @@
 import { ambiantSound } from "@/global/js/sound";
+import { firstFingerOfEvent } from "@/global/js/touch";
 import GUI from "lil-gui";
 import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -109,15 +110,6 @@ const scene = new THREE.Scene();
  * Textures
  */
 const loadingManager = new THREE.LoadingManager();
-loadingManager.onStart = () => {
-  console.log("onStart");
-};
-loadingManager.onLoaded = () => {
-  console.log("onLoaded");
-};
-loadingManager.onProgress = () => {
-  console.log("onProgress");
-};
 loadingManager.onError = (error) => {
   console.log("Error :", error);
 };
@@ -212,9 +204,7 @@ gltfLoader.load(
     gltf.scene.position.z = 1;
     scene.add(gltf.scene);
   },
-  () => {
-    console.log("progress");
-  },
+  () => { },
   (error) => {
     console.log("error:", error);
   }
@@ -458,24 +448,36 @@ rectAreaLight.intensity =
 
 // Update pointer position
 canvas.addEventListener("touchstart", (event) => {
-  pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  const firstFinger = firstFingerOfEvent(event);
+
+  if (!firstFinger) {
+    return
+  }
+
+  pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
   line.material.opacity = globalParameters.lineTouchOpacity;
   // Record the starting Y position of the touch
-  touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  touchStartY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
   isSwiping = true;
 });
 
 canvas.addEventListener(
   "touchmove",
   (event) => {
-    pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) {
+      return
+    }
+
+    pointer.x = (firstFinger.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
     if (isSwiping) {
       // Calculate the vertical distance swiped
-      touchMoveY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+      touchMoveY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
       const deltaY = touchMoveY - touchStartY;
       // Adjust the rotation of the ellipse based on the swipe distance
       const movementSpeed = 1.5; // Adjust this value for desired sensitivity
@@ -500,7 +502,7 @@ canvas.addEventListener(
       );
       resultBtn.style.setProperty("--4-percentage", proximityPercentage + "%");
       // Update the starting Y position for the next frame
-      touchStartY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+      touchStartY = -(firstFinger.clientY / window.innerHeight) * 2 + 1;
 
       // Render
       renderer.render(scene, camera);

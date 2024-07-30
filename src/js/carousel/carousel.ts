@@ -1,3 +1,4 @@
+import { firstFingerOfEvent } from "@/global/js/touch";
 import gsap from "gsap";
 import * as THREE from "three";
 import {
@@ -39,7 +40,7 @@ const DECELERATION = 1;
 const MIN_VELOCITY = 0;
 const MAX_VELOCITY = 100;
 const RESTART_AUTO_ROTATE_AFTER_MS = 5_000;
-const SNAP_TIME_MS = 1000;
+const SNAP_TIME_SECOND = 1;
 
 export const makeCarousel = ({
   scene,
@@ -72,7 +73,7 @@ export const makeCarousel = ({
 
   const isMoving = () => state.velocity > 5;
 
-  const msToS = (ms: number) => ms / 1000;
+  const isFocusingExperience = () => !!state.experienceFocused;
 
   const boundVelocity = (velocity: number): number =>
     Math.min(MAX_VELOCITY, Math.max(MIN_VELOCITY, velocity));
@@ -150,7 +151,7 @@ export const makeCarousel = ({
 
     state.snappingAnimation = gsap.to(state, {
       rotation: yRotationTarget,
-      duration: msToS(SNAP_TIME_MS),
+      duration: SNAP_TIME_SECOND,
       onComplete() {
         state.snappingAnimation = null;
       },
@@ -169,7 +170,7 @@ export const makeCarousel = ({
     const island = carouselGroup.getObjectByName(toObjectName(experience));
     if (!island) {
       throw new Error(
-        `Unable to find island of experience ${experience.name} (${experience.id})`
+        `Unable to find island of experience ${experience.title} (${experience.id})`
       );
     }
     return island;
@@ -280,11 +281,13 @@ export const makeCarousel = ({
   };
 
   window.addEventListener("touchstart", (event) => {
-    if (!event.touches[0]) return;
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) return;
 
     handleToucheStart({
-      x: event.touches[0].clientX,
-      y: event.touches[0].clientY,
+      x: firstFinger.clientX,
+      y: firstFinger.clientY,
     });
   });
 
@@ -296,11 +299,15 @@ export const makeCarousel = ({
   });
 
   window.addEventListener("touchmove", (event) => {
-    if (!event.touches[0]) return;
+    const firstFinger = firstFingerOfEvent(event);
+
+    if (!firstFinger) {
+      return;
+    }
 
     handleToucheMove({
-      x: event.touches[0].clientX,
-      y: event.touches[0].clientY,
+      x: firstFinger.clientX,
+      y: firstFinger.clientY,
     });
   });
 
@@ -315,12 +322,13 @@ export const makeCarousel = ({
     handleToucheEnd();
   });
 
-  window.addEventListener("mouseup", (event) => {
+  window.addEventListener("mouseup", () => {
     handleToucheEnd();
   });
 
   return {
     isMoving,
+    isFocusingExperience,
     experienceInFrontOfCarousel,
     updateGroupRotation,
     focusExperience,

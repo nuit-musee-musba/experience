@@ -2,7 +2,7 @@
 
 ## C'est quoi ?
 
-Une expérience interactive sur l'écran tactile du Musba qui aura lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
+Une expérience interactive sur l'écran tactile du Musba qui a eu lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
 Réalisé par la promotion 2024 du MMI Bordeaux.
 
 ## Simulation de l'écran tactile du Musba
@@ -11,10 +11,10 @@ Vous n'avez peut-être pas d'écran 4k de 1m50 x 1m.
 Vous pouvez simuler cette qualité sur chrome en ouvrant l'inspecteur d'élément et en définissant une taille d'écran personnalisée: 3840 x 2160 pixels
 Tuto vidéo: [tuto-custom-screen.mp4](https://drive.google.com/file/d/13nn7Nf9MTph6T_OHQdIMjQydiNKbts94/view?usp=sharing)
 
-## Dévelopment
+## Développement
 
 ```bash
-# 1. Installer yarn, un meilleur package manager que npm
+# 1. Installer yarn si vous ne l'avez pas, un meilleur package manager que npm
 npm i -g yarn
 
 # 2. Installer les dépendances (à faire régulièrement car les packages peuvent êtres mis à jour)
@@ -26,14 +26,19 @@ yarn dev
 
 ## Comment travailler
 
-Pour développer une fonctionnalité, un fix etc, créez une branche depuis `develop`, faites des commits dessus, puis mergez la branche dans `develop`.
+1. Créez une branche `feature/*` (fonctionnalité) ou `fix/*` (correction de bug) depuis `develop`
+2. Faites des commits sur cette branche
+3. Mergez la branche dans `develop`
+4. Supprimez la branche
 
-Pour envoyer en production, créez une PR pour merger `develop` dans `main`. Une fois mergé, la ci lancera :
+## Mettre en production
+Pour envoyer en production, créez une PR pour merger `develop` dans `main`. 
 
+Une fois mergé, la CI lancera automatiquement :
 - le build du bundle
 - le déploiement sur Netlify
 
-**Ce qui est sur `develop` n'est pas en production, ce qui est sur `main` oui !**
+**Ce qui est sur `main` est en production, ce qui est sur `develop` non !**
 
 ### Pourquoi travailler sur develop puis merger sur main ?
 
