@@ -327,13 +327,11 @@ const descsToToggle = [
   document.querySelector("#second-desc"),
   document.querySelector("#third-desc")
 ]
-// const firstDesc = document.querySelector("#first-desc")
-// const secondDesc = document.querySelector("#second-desc")
-// const thirdDesc = document.querySelector("#third-desc")
+
+const NEAREST_POSITION = -4;
 
 const checkCurrentPainting = () => {
-
-  let nearestPos = -4;
+  let nearestPos = NEAREST_POSITION;
   let nearestPainting = null;
   for (let i = 0; i < objectsToTest.length; i++) {
     if (objectsToTest[i].position.z > nearestPos) {
@@ -357,47 +355,37 @@ const togglePaintingDesc = () => {
 }
 
 togglePaintingDesc()
-// canvas.addEventListener("click", () => {
-//   // Cast a ray
-//   raycaster.setFromCamera(mouse, camera);
 
-//   const objectsToTest = [firstPainting, secondPainting, thirdPainting];
-//   const intersects = raycaster.intersectObjects(objectsToTest);
+canvas.addEventListener("click", () => {
+  raycaster.setFromCamera(mouse, camera);
 
-//   if (intersects.length && intersects[0].point.z > 0) {
-//     currentIntersect = intersects[0];
-//   } else {
-//     currentIntersect = null;
-//   }
+  const objectsToTest = [firstPainting, secondPainting, thirdPainting];
+  const intersects = raycaster.intersectObjects(objectsToTest);
 
-//   if (currentIntersect) {
-//     switch (currentIntersect.object) {
-//       case firstPainting:
-//         window.location.href = "./first-painting.html";
-//         break;
+  const currentIntersect = intersects[0];
 
-//       case secondPainting:
-//         window.location.href = "./second-painting.html";
-//         break;
+  console.log(currentIntersect);
 
-//       case thirdPainting:
-//         window.location.href = "./third-painting.html";
-//         break;
+  if (!currentIntersect) {
+    return
+  }
 
-//       default:
-//     }
-//   }
-// });
+  switch (currentIntersect.object) {
+    case firstPainting:
+      window.location.href = "./first-painting.html";
+      break;
 
-// Rotate paintings
-// function checkUserInteractions() {
-//   if (globalParameters.userInteract) {
-//     console.log("stop rotate paintings");
-//   } else {
-//     console.log("Rotate paintings");
-//   }
-//   globalParameters.userInteract = false;
-// }
+    case secondPainting:
+      window.location.href = "./second-painting.html";
+      break;
+
+    case thirdPainting:
+      window.location.href = "./third-painting.html";
+      break;
+
+    default:
+  }
+});
 
 /**
  * Camera

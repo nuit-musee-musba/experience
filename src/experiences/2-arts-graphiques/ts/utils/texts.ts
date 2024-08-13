@@ -4,10 +4,10 @@ export const texts = {
     text: "L’œuvre en pastel Saint Sébastien de Odilon Redon va sortir de la réserve pour la prochaine exposition du MusBA. Il faudra avant que les restaurateurs en prennent soin !",
   },
   section1: {
-    timelineTitle: "2024 - Reserve du MusBA",
+    timelineTitle: "2024 - Réserve du MusBA",
     timelineText:
       "Désemballage : Action d’enlever de leur emballage des objets, des marchandises",
-    text: "Faites preuve de délicatesse en retirant l'emballge de l'oeuvre",
+    text: "Faites preuve de délicatesse en retirant l'emballage de l'oeuvre",
   },
   section2: {
     timelineTitle: "1910 - Atelier d'Odilon Redon",
