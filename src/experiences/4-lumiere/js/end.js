@@ -25,7 +25,7 @@ for (const leaveBtn of leaveBtns) {
     leaveBtn.addEventListener("click",
         () => {
             clearLocalStorage();
-            window.location.href = "/";
+            window.location.href = "/experiences/5-hub";
         }
     )
 }

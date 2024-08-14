@@ -1,6 +1,6 @@
 import { ambiantSound } from "@/global/js/sound";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { enableInactivityRedirection } from "/global/js/inactivity";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Ambiant Sound
@@ -24,7 +24,7 @@ for (const leaveBtn of leaveBtns) {
   leaveBtn.addEventListener("click",
     () => {
       clearLocalStorage();
-      window.location.href = "/";
+      window.location.href = "/experiences/5-hub";
     }
   )
 }

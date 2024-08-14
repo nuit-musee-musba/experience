@@ -1,21 +1,21 @@
 type EventHook = () => any;
+const HUB_URL = "/experiences/5-hub";
+const REDIRECT_AFTER_MS = 5 * 60_000;
 
 export const enableInactivityRedirection = () => {
   let time: NodeJS.Timeout;
-
-  const timeInMs = 5 * 60_000;
 
   let beforeRedirectFn: EventHook = () => {};
 
   const redirectToHome = () => {
     beforeRedirectFn();
 
-    window.location.href = "/";
+    window.location.href = HUB_URL;
   };
 
   const resetTimer = () => {
     clearTimeout(time);
-    time = setTimeout(redirectToHome, timeInMs);
+    time = setTimeout(redirectToHome, REDIRECT_AFTER_MS);
   };
 
   resetTimer();
