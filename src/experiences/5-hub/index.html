@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub</title>
+    <link rel="stylesheet" href="/experiences/5-hub/css/style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <div id="loader">
+        <div id="loader__spinner"></div>
+        <img id="loaded__musbaLogo" src="/5-hub/logo_musba.png" />
+      </div>
+
+      <section id="selectExperienceInfo">
+        <h3>Sélectionnez l'expérience de votre choix</h3>
+        <img src="/5-hub/rotation.svg" alt="" />
+      </section>
+
+      <section id="xpDetails" class="hidden">
+        <h2 id="xpDetails__title"></h2>
+        <p id="xpDetails__description" class="text-p-mini"></p>
+
+        <div>
+          <button id="xpDetails__backBtn" class="btn-icon">
+            <i class="i-left"> </i>
+          </button>
+          <button id="xpDetails__startBtn" class="btn-primary">
+            Commencer l'expérience
+          </button>
+        </div>
+      </section>
+
+      <section id="xpIntro">
+        <h2 id="xpIntro__title"></h2>
+        <button id="xpIntro__showBtn" class="btn-primary">
+          Voir l'expérience
+        </button>
+      </section>
+
+      <canvas id="webgl"></canvas>
+
+      <button id="helpOpenBtn" class="btn-icon">
+        <i class="i-info"></i>
+      </button>
+
+      <dialog id="helpDialog">
+        <div id="helpDialog__inner">
+          <p class="text-p-mini">
+            Cette expérience interactive a été réalisée par la promotion 2024 -
+            3ème année du BUT Métiers du Multimédia et de l’Internet de l’IUT
+            Bordeaux Montaigne.
+          </p>
+          <p class="text-p-mini">
+            Ce projet a vu le jour dans le cadre de la Nuit Européenne des
+            Musées, en partenariat avec le musée des Beaux-Arts de Bordeaux.
+          </p>
+          <p class="text-p-mini">
+            Les quelque 50 étudiants de la promotion se sont liés pour créer une
+            production commune via cinq modules distincts que nous vous invitons
+            à découvrir.
+          </p>
+          <button id="helpCloseBtn" class="btn-icon">
+            <i class="i-close"></i>
+          </button>
+        </div>
+      </dialog>
+
+      <div id="fingerRotationAnimation">
+        <lottie-player
+          src="/global/lottie/finger_rotation_animation.json"
+          background="transparent"
+          speed="1"
+          direction="1"
+          mode="normal"
+          loop
+          autoplay
+        ></lottie-player>
+      </div>
+    </main>
+    <script type="module" src="/experiences/5-hub//js/script.ts"></script>
+    <script type="module" src="/experiences/5-hub//js/popUp.ts"></script>
+  </body>
+</html>

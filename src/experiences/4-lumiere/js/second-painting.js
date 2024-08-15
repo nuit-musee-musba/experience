@@ -1,10 +1,10 @@
 import { ambiantSound } from "@/global/js/sound";
+import { firstFingerOfEvent } from "@/global/js/touch";
 import GUI from "lil-gui";
 import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { enableInactivityRedirection } from "/global/js/inactivity";
-import { firstFingerOfEvent } from "@/global/js/touch";
 
 /**
  * Ambiant Sound
@@ -28,7 +28,7 @@ for (const leaveBtn of leaveBtns) {
   leaveBtn.addEventListener("click",
     () => {
       clearLocalStorage();
-      window.location.href = "/";
+      window.location.href = "/experiences/5-hub";
     }
   )
 }

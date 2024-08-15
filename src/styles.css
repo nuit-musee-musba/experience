@@ -1,0 +1,71 @@
+@import url(/global/fonts.css);
+
+:root {
+  --black: #242424;
+  --white: #ffffff;
+  --gray: #a8a8a8;
+  --accent: rgb(40, 119, 164);
+
+  --stroke-width: 5px;
+}
+
+h1 {
+  font-family: musba;
+  font-weight: 400;
+  font-size: 4rem;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+* {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+main {
+  margin: 12rem auto;
+  max-width: 40rem;
+}
+section {
+  margin-top: 4rem;
+}
+iframe {
+  border-radius: 0.5rem;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+/* Buttons colors */
+.btn-primary {
+  text-decoration: none;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: var(--stroke-width) solid var(--accent);
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 0.5rem 1.2rem;
+}

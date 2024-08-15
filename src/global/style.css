@@ -1,30 +1,5 @@
-@font-face {
-  font-display: block;
-  font-family: "GlobalIcon";
-  font-style: normal;
-  font-weight: 400;
-  src:
-    url("/global/fonts/IconFont/IconFont.ttf") format("ttf"),
-    url("/global/fonts/IconFont/IconFont.woff") format("woff"),
-    url("/global/fonts/IconFont/IconFont.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: musba;
-  src: url(/global/fonts/MusBA-Regular.otf);
-}
-
-@font-face {
-  font-family: Montserrat;
-  font-weight: 400;
-  src: url(/global/fonts/Montserrat-Regular.ttf);
-}
-
-@font-face {
-  font-family: Montserrat;
-  font-weight: 600;
-  src: url(/global/fonts/Montserrat-SemiBold.ttf);
-}
+@import url(/global/fonts.css);
+@import url(/global/icons.css);
 
 :root {
   --black: #242424;
@@ -233,49 +208,5 @@ p,
   pointer-events: none;
 }
 .bottom-menu > * {
-  pointer-events: all;
-}
-
-/* Icons */
-i[class*="i-"] {
-  display: inline-flex;
-  align-items: center;
-}
-i[class*="i-"] span {
-  font-size: 0;
-}
-
-i[class*="i-"]::before {
-  display: inline-block;
-  font-family: "GlobalIcon";
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 1;
-  speak: never;
-  text-transform: none;
-  vertical-align: middle;
-}
-
-i.i-home::before {
-  content: "\ee01";
-}
-i.i-volume-on::before {
-  content: "\ee02";
-}
-i.i-volume-off::before {
-  content: "\ee03";
-}
-i.i-left::before {
-  content: "\ee04";
-}
-i.i-close::before {
-  content: "\ee05";
-}
-i.i-check::before {
-  content: "\ee06";
-}
-i.i-info::before {
-  content: "\ee07";
   pointer-events: all;
 }
