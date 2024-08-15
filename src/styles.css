@@ -1,4 +1,5 @@
 @import url(/global/fonts.css);
+@import url(/global/icons.css);
 
 :root {
   --black: #242424;
@@ -12,36 +13,31 @@
 h1 {
   font-family: musba;
   font-weight: 400;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 0.625rem + 6vw, 4rem);
 }
 
 h2 {
   font-family: Montserrat;
-  font-size: 2rem;
   font-weight: 600;
-}
-
-h2 {
-  font-family: Montserrat;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: clamp(1.5rem, 0.875rem + 2vw, 2rem);
 }
 
 h3 {
   font-family: Montserrat;
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 0.6rem + 1.6vw, 1.5rem);
 }
 
 * {
   font-family: Montserrat;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 0.875rem + 0.4vw, 1.1rem);
 }
 
 main {
   margin: 12rem auto;
   max-width: 40rem;
+  padding: 0 0.5rem;
 }
 section {
   margin-top: 4rem;
@@ -63,7 +59,6 @@ iframe {
   border-radius: 0.5rem;
   font-family: Montserrat;
   font-weight: 600;
-  font-size: 1.1rem;
   border: var(--stroke-width) solid var(--accent);
   background-color: var(--accent);
   color: var(--white);
