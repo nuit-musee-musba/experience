@@ -1,0 +1,46 @@
+@import url(/global/fonts.css);
+@import url(/global/fonts.css);
+
+h1 {
+  font-family: musba;
+  font-weight: 400;
+  font-size: 4rem;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+* {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+main {
+  margin: 12rem auto;
+  max-width: 40rem;
+}
+section {
+  margin-top: 4rem;
+}
+iframe {
+  border-radius: 0.5rem;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
