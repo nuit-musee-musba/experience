@@ -19,25 +19,48 @@ i[class*="i-"]::before {
   vertical-align: middle;
 }
 
-i.i-home::before {
-  content: "\ee01";
+i.i-info:before {
+  content: "\ee10";
 }
-i.i-volume-on::before {
-  content: "\ee02";
+i.i-check:before {
+  content: "\ee09";
 }
-i.i-volume-off::before {
-  content: "\ee03";
+i.i-close:before {
+  content: "\ee08";
 }
-i.i-left::before {
+i.i-left:before {
   content: "\ee04";
 }
-i.i-close::before {
+i.i-volume-off:before {
+  content: "\ee03";
+}
+i.i-volume-on:before {
+  content: "\ee02";
+}
+i.i-home:before {
+  content: "\ee01";
+}
+i.i-help:before {
+  content: "\ee11";
+}
+i.i-right:before {
   content: "\ee05";
 }
-i.i-check::before {
+i.i-up:before {
   content: "\ee06";
 }
-i.i-info::before {
+i.i-down:before {
   content: "\ee07";
-  pointer-events: all;
+}
+i.i-arrow-right:before {
+  content: "\ee13";
+}
+i.i-arrow-left:before {
+  content: "\ee12";
+}
+i.i-arrow-up:before {
+  content: "\ee14";
+}
+i.i-arrow-down:before {
+  content: "\ee15";
 }

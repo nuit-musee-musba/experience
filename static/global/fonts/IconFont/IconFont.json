@@ -1,18 +1,18 @@
 [
     {
-        "name": "home",
-        "className": "home",
-        "unicode": "ee01"
+        "name": "info",
+        "className": "info",
+        "unicode": "ee10"
     },
     {
-        "name": "volume-on",
-        "className": "volume-on",
-        "unicode": "ee02"
+        "name": "check",
+        "className": "check",
+        "unicode": "ee09"
     },
     {
-        "name": "volume-off",
-        "className": "volume-off",
-        "unicode": "ee03"
+        "name": "close",
+        "className": "close",
+        "unicode": "ee08"
     },
     {
         "name": "left",
@@ -20,18 +20,58 @@
         "unicode": "ee04"
     },
     {
-        "name": "close",
-        "className": "close",
+        "name": "volume-off",
+        "className": "volume-off",
+        "unicode": "ee03"
+    },
+    {
+        "name": "volume-on",
+        "className": "volume-on",
+        "unicode": "ee02"
+    },
+    {
+        "name": "home",
+        "className": "home",
+        "unicode": "ee01"
+    },
+    {
+        "name": "help",
+        "className": "help",
+        "unicode": "ee11"
+    },
+    {
+        "name": "right",
+        "className": "right",
         "unicode": "ee05"
     },
     {
-        "name": "check",
-        "className": "check",
+        "name": "up",
+        "className": "up",
         "unicode": "ee06"
     },
     {
-        "name": "info",
-        "className": "info",
+        "name": "down",
+        "className": "down",
         "unicode": "ee07"
+    },
+    {
+        "name": "arrow-right",
+        "className": "arrow-right",
+        "unicode": "ee13"
+    },
+    {
+        "name": "arrow-left",
+        "className": "arrow-left",
+        "unicode": "ee12"
+    },
+    {
+        "name": "arrow-up",
+        "className": "arrow-up",
+        "unicode": "ee14"
+    },
+    {
+        "name": "arrow-down",
+        "className": "arrow-down",
+        "unicode": "ee15"
     }
 ]

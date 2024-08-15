@@ -1,8 +1,8 @@
 @font-face {
     font-family: "IconFont";
-    src: url('IconFont.woff2?t=1707254562952') format('woff2'),
-        url('IconFont.woff?t=1707254562952') format('woff'),
-        url('IconFont.ttf?t=1707254562952') format('truetype');
+    src: url('IconFont.woff2?t=1723723340677') format('woff2'),
+        url('IconFont.woff?t=1723723340677') format('woff'),
+        url('IconFont.ttf?t=1723723340677') format('truetype');
 }
 
 .iconfont {
@@ -13,13 +13,21 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-home:before { content: "\ee01"; }
-.icon-volume-on:before { content: "\ee02"; }
-.icon-volume-off:before { content: "\ee03"; }
+.icon-info:before { content: "\ee10"; }
+.icon-check:before { content: "\ee09"; }
+.icon-close:before { content: "\ee08"; }
 .icon-left:before { content: "\ee04"; }
-.icon-close:before { content: "\ee05"; }
-.icon-check:before { content: "\ee06"; }
-.icon-info:before { content: "\ee07"; }
+.icon-volume-off:before { content: "\ee03"; }
+.icon-volume-on:before { content: "\ee02"; }
+.icon-home:before { content: "\ee01"; }
+.icon-help:before { content: "\ee11"; }
+.icon-right:before { content: "\ee05"; }
+.icon-up:before { content: "\ee06"; }
+.icon-down:before { content: "\ee07"; }
+.icon-arrow-right:before { content: "\ee13"; }
+.icon-arrow-left:before { content: "\ee12"; }
+.icon-arrow-up:before { content: "\ee14"; }
+.icon-arrow-down:before { content: "\ee15"; }
 
 
 /**
