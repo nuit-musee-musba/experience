@@ -39,14 +39,11 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: "./src/index.html",
+        "root": "./src/index.html",
         "run": "./src/run/index.html",
         "ui-demo": "./src/ui-demo/index.html",
         "1-batiment": "./src/experiences/1-batiment/index.html",
         "2-arts-graphiques": "./src/experiences/2-arts-graphiques/index.html",
-        "6-peinture": "./src/experiences/6-peinture/index.html",
-        "6-peinture/game": "./src/experiences/6-peinture/game.html",
-        "6-peinture/ending": "./src/experiences/6-peinture/ending.html",
         "3-sculpture": "./src/experiences/3-sculpture/index.html",
         "4-lumiere": "./src/experiences/4-lumiere/index.html",
         "4-lumiere/first-painting":
@@ -57,6 +54,11 @@ export default defineConfig({
           "./src/experiences/4-lumiere/third-painting.html",
         "4-lumiere/results": "./src/experiences/4-lumiere/results.html",
         "4-lumiere/end": "./src/experiences/4-lumiere/end.html",
+        "5-hub": "./src/experiences/5-hub/index.html",
+        "6-peinture": "./src/experiences/6-peinture/index.html",
+        "6-peinture/game": "./src/experiences/6-peinture/game.html",
+        "6-peinture/ending": "./src/experiences/6-peinture/ending.html",
+
       },
     },
   },
