@@ -5,6 +5,11 @@
 Une expérience interactive sur l'écran tactile du MusBA qui a eu lieu lors de la **Nuit Européenne des Musées le samedi 18 mai 2024.**
 Réalisé par la promotion 2024 du MMI Bordeaux.
 
+## Accéder à l'expérience
+> [!NOTE] Le site est fait pour un écran 4k de 1m50 x 1m, lisez #Simulation de l'écran tactile du MusBA ci-dessous
+
+Aller sur https://nuit-du-musba.mmibordeaux.com/run
+
 ## Simulation de l'écran tactile du MusBA
 
 Vous n'avez peut-être pas d'écran 4k de 1m50 x 1m.
@@ -71,7 +76,7 @@ Les fichiers de config
 
 ### Sur le build en production
 
-- hébergement distant : aller sur https://nuit-du-musba.mmibordeaux.com/
+- hébergement distant : aller sur https://nuit-du-musba.mmibordeaux.com/run
 - hébergement local : récupérer le [dernier bundle.zip de la dernière release](https://github.com/nuit-musee-musba/experience/releases/latest/download/bundle.zip)
 
 ### Sur votre propre build
@@ -94,7 +99,7 @@ yarn bundle:zip
 1. Récupérer ou build le bundle.zip
 2. Unziper le fichier
 3. Dans le dossier, éxécuter le script de démarrage correspondant à l'OS (double clic par exemple)
-4. Aller sur http://localhost:3000
+4. Aller sur http://localhost:3000/run
 
 ### Protocoles de tests
 
